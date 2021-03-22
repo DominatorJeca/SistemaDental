@@ -6,6 +6,12 @@ use clinicaDental
 create schema Clinica
 go
 
+create table Clinica.puesto(
+id_puesto int identity(1,1) not null,
+nombrePuesto varchar(50)
+constraint pk_id primary key(id_puesto)
+)
+
 create table Clinica.empleado(
 id_e varchar(50),
 nombre varchar(50),
@@ -77,6 +83,11 @@ dinero_dispobible int,
 constraint pk_idtrans primary key(id_trans)
 )
 
+create table Clinica.citas(
+id_empleado varchar(15),
+id_paciente varchar(15),
+fechaCita datetime,
+)
 -----PROCEDIMIENTOS
 -----TABLA EMPLEADOS
 create proc IngresoEmpleados
