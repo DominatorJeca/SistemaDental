@@ -6,6 +6,7 @@ use clinicaDental
 create schema Clinica
 go
 
+--Creación de tablas
 create table Clinica.puesto(
 id_puesto int identity(1,1) not null,
 nombrePuesto varchar(50)
@@ -18,11 +19,12 @@ nombre varchar(50),
 apellido varchar(50),
 telefono bigint,
 correo varchar(50),
-puesto varchar(30),
+idpuesto int,
 genero varchar(20),
 contraseña varchar(20),
 estado bit
-constraint pk_id primary key(id_e)  
+constraint pk_idempleado primary key(id_e),
+constraint fk_Empleado_Puesto foreign key(idpuesto) references Clinica.puesto(id_puesto) 
 )
 
 
@@ -45,7 +47,6 @@ precio int,
 constraint pk_idt primary key(id_t)
 )
 
-select * from inventario
 
 create table Clinica.inventario(
 id_material int IDENTITY(1,1) not null,
@@ -84,10 +85,35 @@ constraint pk_idtrans primary key(id_trans)
 )
 
 create table Clinica.citas(
-id_empleado varchar(15),
-id_paciente varchar(15),
+id_empleado varchar(50),
+id_paciente varchar(50),
 fechaCita datetime,
+id_tratamiento int,
+constraint pk_idEmpleadoCita primary key(id_empleado,id_paciente),
+constraint fk_Empleado_Citas foreign key(id_empleado) references Clinica.empleado(id_e),
+constraint fk_Paciente_Citas foreign key(id_paciente) references Clinica.pacientes(id_p),
 )
+
+--Constraints
+
+ALTER TABLE Clinica.historial with check
+add constraint CHK_Clinica_Historial$VerificarFechaTratamiento
+Check (fecha>= GETDATE())
+GO
+
+ALTER TABLE Clinica.citas with check
+add constraint CHK_Clinica_Citas$VerificarFechaCita
+check (fechaCita>GETDATE())
+GO
+
+Alter table Clinica.inventario with check
+add constraint CHK_Clinica_Inventario$VerificaQueLaCantidadNoSeaMenorACero
+check (cantidad)
+
+
+
+
+
 -----PROCEDIMIENTOS
 -----TABLA EMPLEADOS
 create proc IngresoEmpleados
@@ -149,8 +175,6 @@ as
 insert into pacientes values(@id,@nombre,@apellido,@telefono,@edad,@genero)
 go
 
-/*insert into pacientes values(0501200102204,'Alejandra','Reyes',98755424,19,'F')*/
-
 
 create proc Mostrarpacientes
 as
@@ -185,18 +209,18 @@ create proc IngresoTratamiento
 @nombre varchar(50),
 @precio int
 as
-insert into tratamiento values(@nombre,@precio)
+insert into Clinica.tratamiento values(@nombre,@precio)
 go
 
 create proc MostrarTratamiento
 as
-select *from tratamiento
+select *from Clinica.tratamiento
 go
 
-create proc mostrarT
+create proc mostrartratamientoSeleccionado
 @name varchar(50)
 as
-select *from tratamiento where @name=nombre
+select *from Clinica.tratamiento where @name=nombre
 go
 
 create proc EditarTratamiento
@@ -204,7 +228,7 @@ create proc EditarTratamiento
 @precio int,
 @id int
 as
-update tratamiento set nombre=@nombre,precio=@precio where id_t=@id
+update Clinica.tratamiento set nombre=@nombre,precio=@precio where id_t=@id
 go
 
 -----TABLA INVENTARIO
@@ -212,12 +236,12 @@ create proc IngresoMaterial
 @nombre varchar(50),
 @cantidad int
 as
-insert into inventario values(@nombre,@cantidad)
+insert into Clinica.inventario values(@nombre,@cantidad)
 go
 
 create proc MostrarInventario
 as
-select *from inventario
+select *from Clinica.inventario
 go
 
 create proc EditarInventario
@@ -225,7 +249,7 @@ create proc EditarInventario
 @cantidad int,
 @id int
 as
-update inventario set nombre=@nombre,cantidad=@cantidad where id_material=@id
+update Clinica.inventario set nombre=@nombre,cantidad=@cantidad where id_material=@id
 go
 
 ---------TABLA TRANSACCION
@@ -235,14 +259,14 @@ create proc IngresoTransaccion
 @fecha date,
 @dd int
 as
-insert into transaccion values(@tipo,@cantidad,@fecha,@dd)
+insert into Clinica.transaccion values(@tipo,@cantidad,@fecha,@dd)
 go
 
 
 
 create proc MostrarTransaccion
 as
-select *from transaccion
+select *from Clinica.transaccion
 go
 
 ------TABLA HISTORIAL
@@ -251,13 +275,13 @@ create proc IngresoHistorial
 @fecha date,
 @idtratamiento int
 as
-insert into historial values(@idpaciente,@fecha,@idtratamiento)
+insert into Clinica.historial values(@idpaciente,@fecha,@idtratamiento)
 go
 
 create proc MostrarHistorial
 @idpac varchar(50)
 as
-select id_paciente,tratamiento.nombre,fecha from historial inner join tratamiento on historial.id_t2=tratamiento.id_t where @idpac=id_paciente
+select id_paciente,tratamiento.nombre,fecha from Clinica.historial inner join Clinica.tratamiento on historial.id_t2=tratamiento.id_t where @idpac=id_paciente
 go
  
 
@@ -269,23 +293,28 @@ create proc EditarHistorial
 @idtratamiento int,
 @id int
 as
-update historial set id_paciente=@idpaciente, id_t2=@idtratamiento, fecha=@fecha where id_h=@id
+update Clinica.historial set id_paciente=@idpaciente, id_t2=@idtratamiento, fecha=@fecha where id_h=@id
 go
 
 create proc MostrarUso
 @id int
 as
-select tratamiento.nombre,tratamiento.precio,tratamiento_inventario.cantidad from tratamiento_inventario inner join tratamiento on tratamiento_inventario.id_t1=tratamiento.id_t inner join inventario on tratamiento_inventario.id_material1=inventario.id_material where @id=id_material;
+select tratamiento.nombre,tratamiento.precio,tratamiento_inventario.cantidad from Clinica.tratamiento_inventario inner join Clinica.tratamiento on tratamiento_inventario.id_t1=tratamiento.id_t inner join Clinica.inventario on tratamiento_inventario.id_material1=inventario.id_material where @id=id_material;
 go
 
 
 create proc matnec
 @id bigint
 as
-select inventario.nombre, tratamiento_inventario.cantidad from tratamiento_inventario inner join tratamiento on tratamiento_inventario.id_t1=tratamiento.id_t inner join inventario on tratamiento_inventario.id_material1=inventario.id_material where @id=tratamiento.id_t
+select inventario.nombre, tratamiento_inventario.cantidad from Clinica.tratamiento_inventario inner join Clinica.tratamiento on tratamiento_inventario.id_t1=tratamiento.id_t inner join Clinica.inventario on tratamiento_inventario.id_material1=inventario.id_material where @id=tratamiento.id_t
 go
 
-
+create proc actCantidad
+@cantidad int,
+@mat varchar(50)
+as
+update Clinica.inventario set cantidad=cantidad-@cantidad where nombre=@mat
+go
 
 /*Ingreso de empleados*/
 insert into empleado values('050120020224','Nallely','Reyes',98756824,'nalle@gmail.com','Dr','Femenino','123')
@@ -314,7 +343,7 @@ insert into inventario values('Acido',50)
 select * from inventario 
 select * from tratamiento
 
-/*Ingreso de relacion tratamiento y material*/
+/*Ingreso de relacion tratamiento y material
 delete from tratamiento_inventario where id_material1 = 3
 
 select * from tratamiento_inventario
@@ -334,15 +363,9 @@ insert into tratamiento_inventario values(3,1,1)
 insert into tratamiento_inventario values(4,2,1)
 insert into tratamiento_inventario values(4,1,1)
 
+*/
 
 
- 
-create proc actCantidad
-@cantidad int,
-@mat varchar(50)
-as
-update inventario set cantidad=cantidad-@cantidad where nombre=@mat
-go
 
 
 
