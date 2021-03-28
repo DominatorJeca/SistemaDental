@@ -1,0 +1,19 @@
+﻿<Window x:Class="SistemaDental.Menu"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:SistemaDental"
+        mc:Ignorable="d"
+        Title="Menu" Height="555" Width="1050" ResizeMode="NoResize" BorderBrush="#FF5EAAA8">
+    <Grid>
+        <Grid.Background>
+            <ImageBrush ImageSource="menu .png"/>
+        </Grid.Background>
+        <Button Content="Tratamiento" Height="41" VerticalAlignment="Top" Margin="327,242,566,0" Background="{x:Null}" RenderTransformOrigin="0.496,2.246" FontFamily="Bahnschrift" FontSize="20" BorderBrush="{x:Null}"/>
+        <Button Content="Pacientes" Height="45" VerticalAlignment="Top" Margin="327,316,560,0" Background="{x:Null}" RenderTransformOrigin="0.496,2.246" FontFamily="Bahnschrift" FontSize="20" BorderBrush="{x:Null}"/>
+        <Button Content="Inventario" Height="44" VerticalAlignment="Top" Margin="548,172,340,0" Background="{x:Null}" RenderTransformOrigin="0.496,2.246" FontFamily="Bahnschrift" FontSize="20" BorderBrush="{x:Null}"/>
+        <Button Content="Caja" Height="41" VerticalAlignment="Top" Margin="564,242,363,0" Background="{x:Null}" RenderTransformOrigin="0.496,2.246" FontFamily="Bahnschrift" FontSize="20" BorderBrush="{x:Null}"/>
+        <Button Content="Ajustes" Height="45" VerticalAlignment="Top" Margin="572,315,352,0" Background="{x:Null}" RenderTransformOrigin="0.496,2.246" FontFamily="Bahnschrift" FontSize="20" BorderBrush="{x:Null}"/>
+    </Grid>
+</Window>
