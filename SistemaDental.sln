@@ -5,6 +5,14 @@ VisualStudioVersion = 16.0.30104.148
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SistemaDental", "SistemaDental.csproj", "{541781B5-A339-48DA-966D-B19B6A66EE7F}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{D0049ABE-FEDA-4A4B-ACEB-853F9AF839B6}"
+	ProjectSection(SolutionItems) = preProject
+		..\..\..\..\..\Downloads\bienvenida.png = ..\..\..\..\..\Downloads\bienvenida.png
+		..\..\..\..\Fotos Proyecto\LoginCirculos.jpg = ..\..\..\..\Fotos Proyecto\LoginCirculos.jpg
+		..\..\..\..\..\Downloads\menu .png = ..\..\..\..\..\Downloads\menu .png
+		..\..\..\..\Fotos Proyecto\TeethPattern.jpg = ..\..\..\..\Fotos Proyecto\TeethPattern.jpg
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
