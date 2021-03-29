@@ -189,6 +189,10 @@ add constraint CHK_Clinica_Transaccion$FechaCorrecta
 check (fecha>=GETDATE())
 go
 
+alter table Clinica.puesto with check
+add constraint CHK_Clinica_Puesto$NombrePuestoCorrecto
+check (nombrePuesto Like 'Doctor' or nombrePuesto Like 'Asistente' or nombrePuesto Like 'Secretaria' or nombrePuesto Like 'Secretario')
+go
 
 -----PROCEDIMIENTOS
 -----TABLA EMPLEADOS
@@ -420,49 +424,41 @@ go
 
 
 /*Ingreso de empleados*/
-insert into Clinica.puesto values ('Doctor')
-insert into Clinica.empleado values('0501200010557','Nallely','Reyes','87654329','nalle@gmail.com',1,'Femenino','123',1)
+insert into Clinica.puesto values ('Secretaria')
+insert into Clinica.empleado values('0501200010558','Andrea','Murillo','33986418','andrea@gmail.com',3,'Femenino','andrealomaximo',1)
 
 
-insert into empleado values('2020','Javier','Castro',98756845,'Javi@gmail.com','Dr','Masculino','123')
-insert into empleado values('2007','Andres','Martinez',98934532,'andres@gmail.com','Dr','Masculino','123')
-insert into empleado values ('admin','Admin','Admin',00000000,'admin@admin.com','Dr','No binario','admin')
+
 /*Ingreso de tratamiento*/
-insert into tratamiento values('Restauración',500)
-insert into tratamiento values('Extracción',300)
-insert into tratamiento values('Ortodoncia',1000)
-
-select *from tratamiento
+insert into Clinica.tratamiento values('Restauración',500)
+insert into Clinica.tratamiento values('Extracción',300)
+insert into Clinica.tratamiento values('Ortodoncia',1000)
 
 /*Ingreso de material*/
 
-insert into inventario values('Recinas',100)
-insert into inventario values('Gazas',80)
-insert into inventario values('Anestecia',50)
-insert into inventario values('Agujas',100)
-insert into inventario values('Brackets',300)
-insert into inventario values('Alambre',100)
-insert into inventario values('Ules',500)
-insert into inventario values('adhesivo',40)
-insert into inventario values('Acido',50)
+insert into Clinica.inventario values('Recinas',100),('Gazas',80),('Anestecia',50)
+,('Agujas',100)
+,('Brackets',300)
+,('Alambre',100)
+,('Ules',500)
+,('adhesivo',40)
+,('Acido',50)
 
-select * from inventario 
-select * from tratamiento
 
-/*Ingreso de relacion tratamiento y material
-delete from tratamiento_inventario where id_material1 = 3
-select * from tratamiento_inventario
-insert into tratamiento_inventario values(1,1,2)
-insert into tratamiento_inventario values(2,2,3)
-insert into tratamiento_inventario values(4,3,1)
-insert into tratamiento_inventario values(5,3,28)
-insert into tratamiento_inventario values(6,3,2)
-insert into tratamiento_inventario values(7,3,28)
-insert into tratamiento_inventario values(8,3,4)
-insert into tratamiento_inventario values(9,3,1)
-insert into tratamiento_inventario values(3,3,1)
-insert into tratamiento_inventario values(3,2,1)
-insert into tratamiento_inventario values(3,1,1)
-insert into tratamiento_inventario values(4,2,1)
-insert into tratamiento_inventario values(4,1,1)
-*/
+
+--Ingreso de relacion tratamiento y material
+
+
+insert into Clinica.tratamiento_inventario values(1,1,2)
+,(2,2,3)
+,(4,3,1)
+,(5,3,28)
+,(6,3,2)
+,(7,3,28)
+,(8,3,4)
+,(9,3,1)
+,(3,3,1)
+,(3,2,1)
+,(3,1,1)
+,(4,2,1)
+,(4,1,1)
