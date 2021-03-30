@@ -31,7 +31,7 @@ namespace SistemaDental
 
         private void btnLogin_Click(object sender, RoutedEventArgs e)
         {
-            int varible = 0;
+            
             Menu menu = new Menu();
             menu.Show();
         }
