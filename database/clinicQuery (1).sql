@@ -22,7 +22,6 @@ idpuesto int,
 genero varchar(20),
 contraseña varchar(20),
 estado bit
-constraint pk_idempleado primary key(id_e),
 constraint pk_idempleado primary key(id_empleado),
 constraint fk_Empleado_Puesto foreign key(idpuesto) references Clinica.puesto(id_puesto) 
 )
@@ -60,7 +59,6 @@ id_material1 int,
 id_tratamiento1 int,
 cantidad int,
 constraint fk_idm foreign key(id_material1) references Clinica.inventario(id_material),
-constraint fk_idt foreign key(id_t1) references Clinica.tratamiento(id_t)
 constraint fk_idt foreign key(id_tratamiento1) references Clinica.tratamiento(id_tratamiento)
 on update no action
 on delete no action
@@ -71,10 +69,10 @@ create table Clinica.historial(
 id_historial int IDENTITY(1,1) not null,
 id_paciente varchar(50),
 fecha date,
-id_t2 int,
+id_tratamiento2 int,
 constraint pk_idh primary key(id_historial),
 constraint fk_idp foreign key(id_paciente) references Clinica.pacientes(id_paciente),
-constraint fk_idt2 foreign key(id_t2) references Clinica.tratamiento(id_tratamiento)
+constraint fk_idt2 foreign key(id_tratamiento2) references Clinica.tratamiento(id_tratamiento)
 )
 
 create table Clinica.transaccion(
@@ -83,7 +81,6 @@ tipo_transacción varchar(15),
 cantidad int,
 fecha date,
 dinero_disponible int,
-constraint pk_idtrans primary key(id_trans)
 constraint pk_idtrans primary key(id_transaccion)
 )
 
@@ -92,8 +89,6 @@ id_empleado varchar(50),
 id_paciente varchar(50),
 fechaCita datetime,
 id_tratamiento int,
-constraint fk_Empleado_Citas foreign key(id_empleado) references Clinica.empleado(id_e),
-constraint fk_Paciente_Citas foreign key(id_paciente) references Clinica.pacientes(id_p),
 constraint fk_Empleado_Citas foreign key(id_empleado) references Clinica.empleado(id_empleado),
 constraint fk_Paciente_Citas foreign key(id_paciente) references Clinica.pacientes(id_paciente),
 )
