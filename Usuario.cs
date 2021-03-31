@@ -14,7 +14,7 @@ namespace SistemaDental
     public class Usuario
     {
         //variable miembro
-        private static string connectionString = ConfigurationManager.ConnectionStrings["SistemaDental.Properties.Setting.SistemaDentalConnectionString"].ConnectionString;
+        private static string connectionString = ConfigurationManager.ConnectionStrings["SistemaDental.Properties.Settings.SistemaDentalConnectionString"].ConnectionString;
         private SqlConnection sqlConnection = new SqlConnection(connectionString);
 
         //Propiedades
@@ -25,8 +25,6 @@ namespace SistemaDental
         public string Contraseña { get; set; }
 
         public bool Estado { get; set; }
-
-
 
 
 
@@ -54,18 +52,20 @@ namespace SistemaDental
             Usuario usuario = new Usuario();
             try
             {
-               
+                sqlConnection.Open();
                 //crear el comando SQL
                 SqlCommand sqlCommand = new SqlCommand("VerificarExistenciaEmpleado",sqlConnection);
                 //sqlCommand.CommandText = "VerificarExistenciaEmpleado";
                 sqlCommand.CommandType = CommandType.StoredProcedure;
+                //Establecer los valores de parametros
+                sqlCommand.Parameters.AddWithValue("@user",id);
 
                 using (SqlDataReader LeeUsuario= sqlCommand.ExecuteReader())
                 {
                     while (LeeUsuario.Read())
                     { 
                         //Obtener valores del usuario
-                        usuario.Id = Convert.ToString(LeeUsuario["idempleado"]);
+                        usuario.Id = Convert.ToString(LeeUsuario["id_empleado"]);
                         usuario.Nombre = Convert.ToString(LeeUsuario["nombre"]);
                         usuario.Contraseña = Convert.ToString(LeeUsuario["contraseña"]);
                         usuario.Estado = Convert.ToBoolean(LeeUsuario["estado"]);
@@ -78,6 +78,7 @@ namespace SistemaDental
             {
 
                 throw e;
+
             }
             finally
             {    //Cerrar conexion 

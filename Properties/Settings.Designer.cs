@@ -26,8 +26,8 @@ namespace SistemaDental.Properties {
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
-        [global::System.Configuration.DefaultSettingValueAttribute("Data Source = (local)\\sqlexpress; Initial Catalog = clinicaDental; Integrated Sec" +
-            "urity= true;")]
+        [global::System.Configuration.DefaultSettingValueAttribute("Data Source = (local)\\sqlexpress; Initial Catalog =clinicaDental; Integrated Secu" +
+            "rity= true;")]
         public string SistemaDentalConnectionString {
             get {
                 return ((string)(this["SistemaDentalConnectionString"]));
