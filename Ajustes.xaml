@@ -10,9 +10,9 @@
         <Grid.Background>
             <ImageBrush ImageSource="bienvenida.png"/>
         </Grid.Background>
-        <Button x:Name="btnEditarUsuario" Content="Editar Usuario" HorizontalAlignment="Left" Margin="306,125,0,0" VerticalAlignment="Top" Width="224" Background="#FF056676" BorderBrush="{x:Null}"/>
-        <Button x:Name="btnAgregarNuevoUsuario" Content="Agregar Nuevo Usuario" HorizontalAlignment="Left" Margin="306,178,0,0" VerticalAlignment="Top" Width="224" Background="#FF056676" BorderBrush="{x:Null}"/>
-        <Button x:Name="btnManejarUsuarios" Content="Manejar Usuarios" HorizontalAlignment="Left" Margin="306,229,0,0" VerticalAlignment="Top" Width="224" Background="#FF056676" BorderBrush="{x:Null}"/>
-        <Button x:Name="btnRegresar" Content="Regresar" HorizontalAlignment="Left" Margin="306,280,0,0" VerticalAlignment="Top" Width="224" Background="#FF056676" BorderBrush="{x:Null}"/>
+        <Button x:Name="btnEditarUsuario" Content="Editar Usuario" HorizontalAlignment="Left" Margin="306,125,0,0" VerticalAlignment="Top" Width="224" Background="#FF056676" BorderBrush="{x:Null}" Click="btnEditarUsuario_Click_1"/>
+        <Button x:Name="btnAgregarNuevoUsuario" Content="Agregar Nuevo Usuario" HorizontalAlignment="Left" Margin="306,178,0,0" VerticalAlignment="Top" Width="224" Background="#FF056676" BorderBrush="{x:Null}" Click="btnAgregarNuevoUsuario_Click"/>
+        <Button x:Name="btnManejarUsuarios" Content="Manejar Usuarios" HorizontalAlignment="Left" Margin="306,229,0,0" VerticalAlignment="Top" Width="224" Background="#FF056676" BorderBrush="{x:Null}" Click="btnManejarUsuarios_Click"/>
+        <Button x:Name="btnRegresar" Content="Regresar" HorizontalAlignment="Left" Margin="306,280,0,0" VerticalAlignment="Top" Width="224" Background="#FF056676" BorderBrush="{x:Null}" Click="btnRegresar_Click"/>
     </Grid>
 </Window>
