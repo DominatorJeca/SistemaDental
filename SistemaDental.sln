@@ -9,7 +9,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 	ProjectSection(SolutionItems) = preProject
 		..\..\..\..\..\Downloads\bienvenida.png = ..\..\..\..\..\Downloads\bienvenida.png
 		..\..\..\..\..\Downloads\Happy_Sm.png = ..\..\..\..\..\Downloads\Happy_Sm.png
-		..\..\..\..\Fotos Proyecto\LoginCirculos.jpg = ..\..\..\..\Fotos Proyecto\LoginCirculos.jpg
+		..\..\..\Downloads\Login Background.jpg = ..\..\..\Downloads\Login Background.jpg
 		..\..\..\..\..\Downloads\menu .png = ..\..\..\..\..\Downloads\menu .png
 		..\..\..\..\Fotos Proyecto\TeethPattern.jpg = ..\..\..\..\Fotos Proyecto\TeethPattern.jpg
 	EndProjectSection

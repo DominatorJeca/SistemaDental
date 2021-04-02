@@ -208,9 +208,6 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="LoginCirculos.jpg" />
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="bienvenida.png" />
   </ItemGroup>
   <ItemGroup>
@@ -224,6 +221,9 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Happy_Sm.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Login Background.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="packages\MaterialDesignThemes.4.0.0\build\MaterialDesignThemes.targets" Condition="Exists('packages\MaterialDesignThemes.4.0.0\build\MaterialDesignThemes.targets')" />
