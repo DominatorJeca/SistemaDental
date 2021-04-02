@@ -93,6 +93,29 @@ namespace SistemaDental
 
         }
 
+        public void actualizarCantidad(ClaseInventario inventario)
+        {
+           
+            try
+            {
+                sqlConnection.Open();
+                SqlCommand command = new SqlCommand("EditarInventario", sqlConnection);
+                command.CommandType = CommandType.StoredProcedure;
+                command.Parameters.AddWithValue("@nombre", inventario.NombreMaterial);
+                command.Parameters.AddWithValue("@cantidad", inventario.Cantidad);
+                command.Parameters.AddWithValue("@id",inventario.IdMaterial);
+                command.ExecuteNonQuery();
+            }
+            catch
+            {
+                throw;
+            }
+            finally
+            {
+                sqlConnection.Close();
+            }
+        }
+
 
 
     }

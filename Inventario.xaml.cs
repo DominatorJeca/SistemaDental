@@ -30,7 +30,7 @@ namespace SistemaDental
     public partial class Inventario : Window
     {
         ClaseInventario inventario = new ClaseInventario();
-        int num = 1;
+       
         public Inventario()
         {
             InitializeComponent();
@@ -49,7 +49,67 @@ namespace SistemaDental
    
         private void dgv_Materiales_SelectionChanged_1(object sender, SelectionChangedEventArgs e)
         {
+   
             dgv_Tratamiento.ItemsSource = inventario.mostrarUsoTratamiento(Convert.ToInt32(dgv_Materiales.SelectedValue)).DefaultView;
+  
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            txtCantidadInventario.IsEnabled = true;
+            txtMaterialInventario.IsEnabled= true;
+            btnGuardar.IsEnabled = true;
+            btnEditar.IsEnabled = false;
+            OcultarMostrarBotones(Visibility.Visible);
+        }
+
+        private void ObtenerValores()
+        {
+            inventario.NombreMaterial = txtMaterialInventario.Text;
+            inventario.Cantidad = Convert.ToInt32(txtCantidadInventario.Text);
+            inventario.IdMaterial = Convert.ToInt32(dgv_Materiales.SelectedValue);
+        }
+
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+            
+            if (Convert.ToInt32(dgv_Materiales.SelectedValue) > 0)
+            {
+
+                try
+                {
+                    ObtenerValores();
+                    inventario.actualizarCantidad(inventario);
+                }
+                catch(Exception ex)
+                {
+                    MessageBox.Show("Asegurese de ingresar una cantidad mayor a 0..."+ex);
+                }
+                finally
+                {
+                    MostrarMaterial();
+                    btnEditar.IsEnabled = true;
+                    OcultarMostrarBotones(Visibility.Hidden);
+                }
+            }
+            else
+            {
+                MessageBox.Show("Para editar ocupa seleccionar una casilla");
+            }
+        }
+
+        private void OcultarMostrarBotones(Visibility ocultar)
+        {
+            btnCancelarCambios.Visibility = ocultar;
+        }
+
+        private void Button_Cancelar(object sender, RoutedEventArgs e)
+        {
+            txtCantidadInventario.IsEnabled = false;
+            txtMaterialInventario.IsEnabled = false;
+            btnGuardar.IsEnabled = false;
+            btnEditar.IsEnabled = true;
+            OcultarMostrarBotones(Visibility.Hidden);
         }
     }
 }
