@@ -11,7 +11,7 @@
         <Grid.Background>
             <ImageBrush ImageSource="TeethPattern.jpg" Stretch="UniformToFill"/>
         </Grid.Background>
-        <Button x:Name="btnRegresar" Content="Regresar" HorizontalAlignment="Left" Margin="17,10,0,0" VerticalAlignment="Top" Width="103" FontFamily="Bahnschrift" FontSize="16" Background="#FF056676" Click="btnRegresar_Click"/>
+        <Button x:Name="btnRegresar" Content="Regresar" HorizontalAlignment="Left" Margin="17,10,0,0" VerticalAlignment="Top" Width="103" FontFamily="Bahnschrift" FontSize="16" Background="#FF056676" Click="btnRegresar_Click" BorderBrush="{x:Null}"/>
         <TextBox x:Name="txtAgregarNombre" Margin="68,179,444,206" materialDesign:HintAssist.Hint="Nombre" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontFamily="Bahnschrift" FontSize="12" Background="#7FFFFFFF"/>
         <TextBox x:Name="txtAgregarApellido" Margin="68,218,444,167" materialDesign:HintAssist.Hint="Apellido" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontFamily="Bahnschrift" FontSize="12" Background="#7FFFFFFF"/>
         <TextBox x:Name="txtAgregarTelefono" Margin="68,252,444,131" materialDesign:HintAssist.Hint="Telefóno" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontFamily="Bahnschrift" FontSize="12" Background="#7FFFFFFF"/>
@@ -24,5 +24,7 @@
         <Label Content="Sexo" HorizontalAlignment="Left" Margin="73,357,0,0" VerticalAlignment="Top" FontSize="12" FontFamily="Bahnschrift"/>
         <Button x:Name="btnAgregarUsuario" Content="Agregar" HorizontalAlignment="Center" Margin="467,351,45,0" VerticalAlignment="Top" Width="280" Background="#FF056676" BorderBrush="{x:Null}"/>
         <Image Source="Happy_Sm.png" RenderTransformOrigin="0.4,0.334" Margin="300,19,288,225" />
+        <Label Content="Puesto" HorizontalAlignment="Left" Margin="73,329,0,0" VerticalAlignment="Top" FontSize="12" FontFamily="Bahnschrift"/>
+        <ComboBox x:Name="cmbPuesto" HorizontalAlignment="Left" Margin="228,329,0,0" VerticalAlignment="Top" Width="120"/>
     </Grid>
 </Window>

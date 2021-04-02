@@ -47,5 +47,11 @@ namespace SistemaDental
             Pacientes pacientes = new Pacientes();
             pacientes.Show();
         }
+
+        private void btnAjustes_Click(object sender, RoutedEventArgs e)
+        {
+            Ajustes ajustes = new Ajustes();
+            ajustes.Show();
+        }
     }
 }
