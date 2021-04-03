@@ -24,6 +24,7 @@ namespace SistemaDental
         {
             InitializeComponent();
             MostrarTratamientos();
+            MostrarPacientes();
         }
 
         public void MostrarTratamientos()
@@ -31,6 +32,23 @@ namespace SistemaDental
             cmbTratamiento.ItemsSource = tratamiento.mostrarTratamientos();
             cmbTratamiento.DisplayMemberPath = "NombreTratamiento";
             cmbTratamiento.SelectedValuePath = "IdTratamiento";
+        }
+
+        public void MostrarPacientes()
+        {
+            cmbPaciente.ItemsSource = tratamiento.mostrarIdPacientes();
+            cmbPaciente.DisplayMemberPath = "IdPaciente";
+            cmbPaciente.SelectedValuePath = "IdPaciente";
+        }
+
+        public void MostrarMateriales()
+        {
+            dg_materiales.ItemsSource = tratamiento.mostrarMateriales(Convert.ToInt32(cmbTratamiento.SelectedValue));
+        }
+
+        private void cmbTratamiento_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            MostrarMateriales();
         }
     }
 }

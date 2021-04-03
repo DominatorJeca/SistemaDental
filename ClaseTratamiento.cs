@@ -15,7 +15,7 @@ namespace SistemaDental
         private static string connectionString = System.Configuration.ConfigurationManager.ConnectionStrings["SistemaDental.Properties.Settings.ClinicaBDConnection"].ConnectionString;
         private SqlConnection sqlConnection = new SqlConnection(connectionString);
 
-        public int IdPaciente { get; set; }
+        public string IdPaciente { get; set; }
         public int IdTratamiento { get; set; }
         public int IdMaterial { get; set; }
         public string NombreTratamiento { get; set; }
@@ -54,6 +54,73 @@ namespace SistemaDental
             {
                 sqlConnection.Close();
             }
+        }
+
+        public List<ClaseTratamiento> mostrarIdPacientes()
+        {
+            sqlConnection.Open();
+            try
+            {
+                SqlCommand command = new SqlCommand("MostrarPacientes", sqlConnection);
+                command.CommandType = CommandType.StoredProcedure;
+                SqlDataReader reader = command.ExecuteReader();
+
+                List<ClaseTratamiento> pacientes = new List<ClaseTratamiento>();
+                ClaseTratamiento paciente = null;
+
+                while (reader.Read())
+                {
+                    paciente = new ClaseTratamiento();
+                    paciente.IdPaciente = reader["id_paciente"].ToString();
+                    pacientes.Add(paciente);
+                }
+                return pacientes;
+            }
+            catch
+            {
+                throw;
+            }
+            finally
+            {
+                sqlConnection.Close();
+            }
+        }
+
+        public List<ClaseTratamiento> mostrarMateriales(int idtratamiento)
+        {
+            sqlConnection.Open();
+            try
+            {
+                SqlCommand command = new SqlCommand("materialnecesario", sqlConnection);
+                command.CommandType = CommandType.StoredProcedure;
+                command.Parameters.AddWithValue("@id", idtratamiento);
+                SqlDataReader reader = command.ExecuteReader();
+
+                List<ClaseTratamiento> materiales = new List<ClaseTratamiento>();
+                ClaseTratamiento material = null;
+
+                while (reader.Read())
+                {
+                    material = new ClaseTratamiento();
+                    material.NombreMaterial = reader["nombre"].ToString();
+                    material.Cantidad = Convert.ToInt32(reader["cantidad"].ToString());
+                    materiales.Add(material);
+                }
+                return materiales;
+            }
+            catch
+            {
+                throw;
+            }
+            finally
+            {
+                sqlConnection.Close();
+            }
+        }
+
+        public void IngresarAlHistorial(ClaseTratamiento tratamiento)
+        {
+
         }
     }
 }
