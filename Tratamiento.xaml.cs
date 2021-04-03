@@ -19,9 +19,18 @@ namespace SistemaDental
     /// </summary>
     public partial class Tratamiento : Window
     {
+        ClaseTratamiento tratamiento = new ClaseTratamiento();
         public Tratamiento()
         {
             InitializeComponent();
+            MostrarTratamientos();
+        }
+
+        public void MostrarTratamientos()
+        {
+            cmbTratamiento.ItemsSource = tratamiento.mostrarTratamientos();
+            cmbTratamiento.DisplayMemberPath = "NombreTratamiento";
+            cmbTratamiento.SelectedValuePath = "IdTratamiento";
         }
     }
 }

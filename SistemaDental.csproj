@@ -95,6 +95,7 @@
     <Compile Include="Caja.xaml.cs">
       <DependentUpon>Caja.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ClaseTratamiento.cs" />
     <Compile Include="EditarUsuario.xaml.cs">
       <DependentUpon>EditarUsuario.xaml</DependentUpon>
     </Compile>

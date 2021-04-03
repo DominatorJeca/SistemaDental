@@ -459,9 +459,9 @@ insert into Clinica.empleado values('0501200010558','Andrea','Murillo','33986418
 
 
 /*Ingreso de tratamiento*/
-insert into Clinica.tratamiento values('Restauración',500)
-insert into Clinica.tratamiento values('Extracción',300)
-insert into Clinica.tratamiento values('Ortodoncia',1000)
+insert into Clinica.tratamiento values('Restauración',500,1)
+insert into Clinica.tratamiento values('Extracción',300,1)
+insert into Clinica.tratamiento values('Ortodoncia',1000,1)
 
 /*Ingreso de material*/
 insert into Clinica.inventario values('Recinas',100),('Gazas',80),('Anestecia',50)
@@ -492,3 +492,5 @@ insert into Clinica.tratamiento_inventario values(1,1,2)
 ,(4,2,1)
 ,(4,1,1)
 
+
+SELECT *FROM Clinica.inventario
