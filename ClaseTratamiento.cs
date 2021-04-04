@@ -120,7 +120,7 @@ namespace SistemaDental
 
         public void IngresarAlHistorial(ClaseTratamiento tratamiento)
         {
-
+            sqlConnection.Open();
         }
     }
 }
