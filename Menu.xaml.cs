@@ -24,7 +24,7 @@ namespace SistemaDental
             InitializeComponent();
         }
 
-        private void btnInventario_Click(object sender, RoutedEventArgs e)
+        public void btnInventario_Click(object sender, RoutedEventArgs e)
         {
             Inventario inventario = new Inventario();
             inventario.Show();

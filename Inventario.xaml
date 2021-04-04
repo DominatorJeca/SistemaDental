@@ -13,12 +13,27 @@
         </Grid.Background>
         <Label Content="Materiales:" HorizontalAlignment="Left" Margin="29,47,0,0" VerticalAlignment="Top" FontSize="20" Foreground="Black" Background="#7F056676" FontFamily="Bahnschrift"/>
         <Label Content="Tratamientos:" HorizontalAlignment="Left" Margin="29,363,0,0" VerticalAlignment="Top" FontSize="20" Foreground="Black" Background="#7F056676" FontFamily="Bahnschrift"/>
-        <ListBox HorizontalAlignment="Left" Height="100" Margin="29,395,0,0" VerticalAlignment="Top" Width="446" Background="#FF056676" Foreground="White" FontFamily="Bahnschrift"/>
-        <TextBox x:Name="txtMaterialInventario" Margin="503,79,91,414" materialDesign:HintAssist.Hint="Material" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontFamily="Bahnschrift" FontSize="18" Background="#7FFFFFFF" Height="44"/>
-        <TextBox x:Name="txtCantidadInventario" Margin="503,128,91,350" materialDesign:HintAssist.Hint="Cantidad" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontFamily="Bahnschrift" FontSize="18" Background="#7FFFFFFF"/>
-        <Button Content="Editar" HorizontalAlignment="Left" Margin="578,284,0,0" VerticalAlignment="Top" Width="123" Height="45" Background="#FF056676" FontFamily="Bahnschrift" BorderBrush="{x:Null}" />
-        <Button Content="Guardar" HorizontalAlignment="Left" Margin="578,395,0,0" VerticalAlignment="Top" Width="123" Height="45" Background="#FF056676" FontFamily="Bahnschrift" BorderBrush="{x:Null}"/>
-        <DataGrid HorizontalAlignment="Left" Height="250" Margin="29,79,0,0" VerticalAlignment="Top" Width="446" Background="#FF056676"/>
+        <DataGrid HorizontalAlignment="Left" Height="127" Margin="29,395,0,0" VerticalAlignment="Top" Width="450" Background="#FF056676" Name="dgv_Tratamiento" AutoGenerateColumns="False" HorizontalContentAlignment="Center">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Nombre" Binding="{Binding nombre}" Width="150" IsReadOnly="True"/>
+                <DataGridTextColumn Header="Precio" Binding="{Binding precio}" Width="150" IsReadOnly="True"/>
+                <DataGridTextColumn Header="Cantidad" Binding="{Binding cantidad}" Width="150" IsReadOnly="True"/>
+            </DataGrid.Columns>
+        </DataGrid>
+        <TextBox IsEnabled="False" Text="{Binding ElementName=dgv_Materiales, Path=SelectedItem.NombreMaterial}" Name="txtMaterialInventario"   Margin="503,79,91,414" materialDesign:HintAssist.Hint="Material" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontFamily="Bahnschrift" FontSize="18" Background="#7FFFFFFF" Height="44" />
+        <TextBox IsEnabled="False" Text="{Binding ElementName=dgv_Materiales, Path=SelectedItem.Cantidad}" Name="txtCantidadInventario" Margin="503,146,91,332" materialDesign:HintAssist.Hint="Cantidad" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontFamily="Bahnschrift" FontSize="18" Background="#7FFFFFFF"/>
+        <Button Name="btnEditar" Content="Editar" HorizontalAlignment="Left" Margin="578,284,0,0" VerticalAlignment="Top" Width="123" Height="45" Background="#FF056676" FontFamily="Bahnschrift" BorderBrush="{x:Null}" Click="Button_Click" />
+        <Button IsEnabled="False" Content="Guardar" HorizontalAlignment="Left" Margin="578,395,0,0" VerticalAlignment="Top" Width="123" Height="45" Background="#FF056676" FontFamily="Bahnschrift" BorderBrush="{x:Null}" Click="Button_Click_1" Name="btnGuardar"/>
+        <DataGrid HorizontalAlignment="Left" Height="250" Margin="29,79,0,0" VerticalAlignment="Top" Width="450" Background="#FF056676" x:Name="dgv_Materiales" HorizontalContentAlignment="Center" SelectionChanged="dgv_Materiales_SelectionChanged_1" IsReadOnly="True" AutoGenerateColumns="False">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Código" Binding="{Binding IdMaterial}" Width="150"></DataGridTextColumn>
+                <DataGridTextColumn Header="Nombre" Binding="{Binding NombreMaterial}" Width="150"></DataGridTextColumn>
+                <DataGridTextColumn Header="Cantidad" Binding="{Binding Cantidad}" Width="150"></DataGridTextColumn>
+
+
+            </DataGrid.Columns>
+        </DataGrid>
+        <Button  x:Name="btnCancelarCambios" Content="Cancelar" HorizontalAlignment="Left" Margin="578,445,0,0" VerticalAlignment="Top" Width="123" Height="45" Background="#FF056676" FontFamily="Bahnschrift" BorderBrush="{x:Null}" Click="Button_Cancelar" />
 
     </Grid>
 </Window>
