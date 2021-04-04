@@ -31,9 +31,42 @@ namespace SistemaDental
 
         private void btnLogin_Click(object sender, RoutedEventArgs e)
         {
-            int varible = 0;
-            Menu menu = new Menu();
-            menu.Show();
+            try
+            {
+                //buscar usuario
+                Usuario elUsuario = Usuario.BuscarUsuario(txtUsuario.Text);
+
+
+                //Verificar si el usuario existe
+                if (elUsuario.Id == null)
+                {
+                    MessageBox.Show("El usuario o contraseña es incorrecto");
+                }
+                else
+                {
+                    if ((elUsuario.Contraseña == txtPassword.Password) && (elUsuario.Estado == true))
+                    {
+                        //Abrir formulario Menu
+                        Menu menu = new Menu();
+                        menu.Show();
+                    }
+                    else if (!elUsuario.Estado)
+                    {
+                        MessageBox.Show("Su usuario se encuentra deshabilitado, por favor comunicarse con ");
+                    }
+                    else
+                    {
+                        MessageBox.Show("El usuario o contraseña es incorrecto");
+                    }
+                }
+
+            }
+            catch (Exception ex)
+            {
+
+                MessageBox.Show("Ocurrio un error al momento de realizar la consulta");
+                Console.WriteLine(ex.Message);
+            }
         }
     }
 }
