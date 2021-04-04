@@ -13,37 +13,40 @@ constraint pk_id primary key(id_puesto)
 )
 
 create table Clinica.empleado(
-id_e varchar(50),
-nombre varchar(50),
-apellido varchar(50),
-telefono varchar(15),
+id_empleado varchar(50),
+nombre varchar(50) not null,
+apellido varchar(50) not null,
+telefono varchar(15) not null,
 correo varchar(50),
-idpuesto int,
-genero varchar(20),
-contraseña varchar(20),
-estado bit
-constraint pk_idempleado primary key(id_e),
+idpuesto int not null,
+genero varchar(20) not null,
+contraseña varchar(20)not null,
+estado bit default 1,
+administrador bit default 0
+constraint pk_idempleado primary key(id_empleado),
 constraint fk_Empleado_Puesto foreign key(idpuesto) references Clinica.puesto(id_puesto) 
 )
 
 
 create table Clinica.pacientes(
-id_p varchar(50),
+id_paciente varchar(50),
 nombre varchar(50),
 apellido varchar(50),
 telefono varchar(15),
 edad int,
 genero varchar(20),
-constraint pk_idp primary key(id_p)
+estado bit default 1,
+constraint pk_idp primary key(id_paciente)
 )
 
 
 
 create table Clinica.tratamiento(
-id_t int IDENTITY(1,1) not null,
-nombre varchar(50),
-precio int,
-constraint pk_idt primary key(id_t)
+id_tratamiento int IDENTITY(1,1) not null,
+nombre varchar(50) not null,
+precio int not null,
+estado bit default 1,
+constraint pk_idt primary key(id_tratamiento)
 )
 
 
@@ -56,32 +59,32 @@ constraint pk_idm primary key(id_material)
 
 create table Clinica.tratamiento_inventario(
 id_material1 int,
-id_t1 int,
+id_tratamiento1 int,
 cantidad int,
 constraint fk_idm foreign key(id_material1) references Clinica.inventario(id_material),
-constraint fk_idt foreign key(id_t1) references Clinica.tratamiento(id_t)
+constraint fk_idt foreign key(id_tratamiento1) references Clinica.tratamiento(id_tratamiento)
 on update no action
 on delete no action
 )
 
 
 create table Clinica.historial(
-id_h int IDENTITY(1,1) not null,
+id_historial int IDENTITY(1,1) not null,
 id_paciente varchar(50),
 fecha date,
-id_t2 int,
-constraint pk_idh primary key(id_h),
-constraint fk_idp foreign key(id_paciente) references Clinica.pacientes(id_p),
-constraint fk_idt2 foreign key(id_t2) references Clinica.tratamiento(id_t)
+id_tratamiento2 int,
+constraint pk_idh primary key(id_historial),
+constraint fk_idp foreign key(id_paciente) references Clinica.pacientes(id_paciente),
+constraint fk_idt2 foreign key(id_tratamiento2) references Clinica.tratamiento(id_tratamiento)
 )
 
 create table Clinica.transaccion(
-id_trans int IDENTITY(1,1) not null,
+id_transaccion int IDENTITY(1,1) not null,
 tipo_transacción varchar(15),
 cantidad int,
 fecha date,
 dinero_disponible int,
-constraint pk_idtrans primary key(id_trans)
+constraint pk_idtrans primary key(id_transaccion)
 )
 
 create table Clinica.citas(
@@ -89,8 +92,8 @@ id_empleado varchar(50),
 id_paciente varchar(50),
 fechaCita datetime,
 id_tratamiento int,
-constraint fk_Empleado_Citas foreign key(id_empleado) references Clinica.empleado(id_e),
-constraint fk_Paciente_Citas foreign key(id_paciente) references Clinica.pacientes(id_p),
+constraint fk_Empleado_Citas foreign key(id_empleado) references Clinica.empleado(id_empleado),
+constraint fk_Paciente_Citas foreign key(id_paciente) references Clinica.pacientes(id_paciente),
 )
 
 --Constraints
@@ -130,12 +133,12 @@ GO
 
 Alter table Clinica.empleado WITH CHECK
 add constraint CHK_Clinica_Empleados$FormatoIdentidad
-check ([id_e] LIKE '[0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9]')
+check ([id_empleado] LIKE '[0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9]')
 GO
 
 Alter table Clinica.pacientes WITH CHECK
 add constraint CHK_Clinica_Pacientes$FormatoIdentidad
-check ([id_p] LIKE '[0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9]')
+check ([id_paciente] LIKE '[0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9]')
 GO
 
 alter table Clinica.empleado with check
@@ -188,6 +191,10 @@ add constraint CHK_Clinica_Transaccion$FechaCorrecta
 check (fecha>=GETDATE())
 go
 
+alter table Clinica.puesto with check
+add constraint CHK_Clinica_Puesto$NombrePuestoCorrecto
+check (nombrePuesto Like 'Doctor' or nombrePuesto Like 'Asistente' or nombrePuesto Like 'Secretaria' or nombrePuesto Like 'Secretario')
+go
 
 -----PROCEDIMIENTOS
 -----TABLA EMPLEADOS
@@ -200,16 +207,17 @@ create proc IngresoEmpleados
 @puesto int,
 @genero varchar(20),
 @contraseña varchar(20),
-@estado bit=1
+@estado bit=1,
+@administrador bit=0
 as
-insert into Clinica.empleado values(@id,@nombre,@apellido,@telefono,@correo,@puesto,@genero,@contraseña,@estado)
+insert into Clinica.empleado values(@id,@nombre,@apellido,@telefono,@correo,@puesto,@genero,@contraseña,@estado,@administrador)
 go
 
 
 create proc	VerificarExistenciaEmpleado
 @user varchar(50)
 as 
-select * from Clinica.empleado where id_e=@user
+select * from Clinica.empleado where id_empleado=@user
 go
 
 
@@ -227,11 +235,23 @@ create proc EditarEmpleados
 @puesto int,
 @genero varchar(20),
 @contraseña varchar(20),
-@estado bit
+@estado bit=1,
+@administrador bit=0
 as
-update Clinica.empleado set nombre=@nombre,apellido=@apellido,telefono=@telefono,correo=@correo,idpuesto=@puesto,genero=@genero,contraseña=@contraseña, estado=@estado where id_e=@id
+update Clinica.empleado set nombre=@nombre,apellido=@apellido,telefono=@telefono,correo=@correo,idpuesto=@puesto,genero=@genero,contraseña=@contraseña where id_empleado=@id
 go
 
+create proc EliminarUsuario
+@id varchar(50)
+as
+update Clinica.empleado set estado=0 where id_empleado=@id
+go
+
+create proc PrivilegioAdministrador
+@id varchar(50)
+as
+update Clinica.empleado set [administrador]=1
+go
 
 ----TABLA PACIENTES
 
@@ -241,9 +261,10 @@ create proc IngresoPacientes
 @apellido varchar(50),
 @telefono varchar(15),
 @edad int,
-@genero varchar(20)
+@genero varchar(20),
+@estado bit=1
 as
-insert into Clinica.pacientes values(@id,@nombre,@apellido,@telefono,@edad,@genero)
+insert into Clinica.pacientes values(@id,@nombre,@apellido,@telefono,@edad,@genero,@estado)
 go
 
 
@@ -256,7 +277,7 @@ go
 create proc MostrarPacienteEspecifico
 @id varchar(50)
 as
-select *from Clinica.pacientes where id_p=@id
+select *from Clinica.pacientes where id_paciente=@id
 go
 
 
@@ -268,19 +289,24 @@ create proc EditarPacientes
 @edad int,
 @genero varchar(20)
 as
-update Clinica.pacientes set nombre=@nombre,apellido=@apellido,telefono=@telefono,edad=@edad,genero=@genero where id_p=@id
+update Clinica.pacientes set nombre=@nombre,apellido=@apellido,telefono=@telefono,edad=@edad,genero=@genero where id_paciente=@id
 go
 
-
+create proc EliminarPaciente
+@id varchar(50)
+as
+update Clinica.pacientes set estado=0
+go
 
 
 
 ----TABLA TRATAMIENTO
 create proc IngresoTratamiento
 @nombre varchar(50),
-@precio int
+@precio int,
+@estado bit=1
 as
-insert into Clinica.tratamiento values(@nombre,@precio)
+insert into Clinica.tratamiento values(@nombre,@precio,@estado)
 go
 
 create proc MostrarTratamiento
@@ -299,7 +325,13 @@ create proc EditarTratamiento
 @precio int,
 @id int
 as
-update Clinica.tratamiento set nombre=@nombre,precio=@precio where id_t=@id
+update Clinica.tratamiento set nombre=@nombre,precio=@precio where id_tratamiento=@id
+go
+
+create proc EliminarTratamiento
+@nombre varchar(50)
+as
+update Clinica.tratamiento set estado=0 where nombre=@nombre
 go
 
 -----TABLA INVENTARIO
@@ -350,9 +382,9 @@ insert into Clinica.historial values(@idpaciente,@fecha,@idtratamiento)
 go
 
 create proc MostrarHistorial
-@idpac varchar(50)
+@idpaciente varchar(50)
 as
-select id_paciente,tratamiento.nombre,fecha from Clinica.historial inner join Clinica.tratamiento on historial.id_t2=tratamiento.id_t where @idpac=id_paciente
+select id_paciente,tratamiento.nombre,fecha from Clinica.historial inner join Clinica.tratamiento on historial.id_tratamiento2=tratamiento.id_tratamiento where @idpaciente=id_paciente
 go
  
 
@@ -362,28 +394,29 @@ create proc EditarHistorial
 @idtratamiento int,
 @id int
 as
-update Clinica.historial set id_paciente=@idpaciente, id_t2=@idtratamiento, fecha=@fecha where id_h=@id
+update Clinica.historial set id_paciente=@idpaciente, id_tratamiento2=@idtratamiento, fecha=@fecha where id_historial=@id
 go
 
 create proc MostrarUso
 @id int
 as
-select tratamiento.nombre,tratamiento.precio,tratamiento_inventario.cantidad from Clinica.tratamiento_inventario inner join Clinica.tratamiento on tratamiento_inventario.id_t1=tratamiento.id_t inner join Clinica.inventario on tratamiento_inventario.id_material1=inventario.id_material where @id=id_material;
+select tratamiento.nombre,tratamiento.precio,tratamiento_inventario.cantidad from Clinica.tratamiento_inventario inner join Clinica.tratamiento on tratamiento_inventario.id_tratamiento1=tratamiento.id_tratamiento inner join Clinica.inventario on tratamiento_inventario.id_material1=inventario.id_material where @id=id_material;
 go
 
 
 create proc materialnecesario
 @id bigint
 as
-select inventario.nombre, tratamiento_inventario.cantidad from Clinica.tratamiento_inventario inner join Clinica.tratamiento on tratamiento_inventario.id_t1=tratamiento.id_t inner join Clinica.inventario on tratamiento_inventario.id_material1=inventario.id_material where @id=tratamiento.id_t
+select inventario.nombre, tratamiento_inventario.cantidad from Clinica.tratamiento_inventario inner join Clinica.tratamiento on tratamiento_inventario.id_tratamiento1=tratamiento.id_tratamiento inner join Clinica.inventario on tratamiento_inventario.id_material1=inventario.id_material where @id=tratamiento.id_tratamiento
 go
 
-create proc actCantidad
+create proc actualizarCantidad
 @cantidad int,
 @material varchar(50)
 as
 update Clinica.inventario set cantidad=cantidad-@cantidad where nombre=@material
 go
+
 
 /*Tabla Citas*/
 create proc IngresoCitas
@@ -394,6 +427,7 @@ create proc IngresoCitas
 as
 insert into Clinica.citas values (@idempleado,@idpaciente,@fecha,@idtratamiento)
 go
+
 
 create proc EditarCitas
 @idempleado varchar(50),
@@ -419,61 +453,42 @@ go
 
 
 /*Ingreso de empleados*/
-insert into Clinica.puesto values ('Doctor')
-insert into Clinica.empleado values('0501200010557','Nallely','Reyes','87654329','nalle@gmail.com',1,'Femenino','123',1)
+insert into Clinica.puesto values ('Secretaria')
+insert into Clinica.empleado values('0501200010558','Andrea','Murillo','33986418','andrea@gmail.com',3,'Femenino','andrealomaximo',1)
 
 
-insert into empleado values('2020','Javier','Castro',98756845,'Javi@gmail.com','Dr','Masculino','123')
-insert into empleado values('2007','Andres','Martinez',98934532,'andres@gmail.com','Dr','Masculino','123')
-insert into empleado values ('admin','Admin','Admin',00000000,'admin@admin.com','Dr','No binario','admin')
+
 /*Ingreso de tratamiento*/
-insert into tratamiento values('Restauración',500)
-insert into tratamiento values('Extracción',300)
-insert into tratamiento values('Ortodoncia',1000)
-
-select *from tratamiento
+insert into Clinica.tratamiento values('Restauración',500)
+insert into Clinica.tratamiento values('Extracción',300)
+insert into Clinica.tratamiento values('Ortodoncia',1000)
 
 /*Ingreso de material*/
-
-insert into inventario values('Recinas',100)
-insert into inventario values('Gazas',80)
-insert into inventario values('Anestecia',50)
-insert into inventario values('Agujas',100)
-insert into inventario values('Brackets',300)
-insert into inventario values('Alambre',100)
-insert into inventario values('Ules',500)
-insert into inventario values('adhesivo',40)
-insert into inventario values('Acido',50)
-
-select * from inventario 
-select * from tratamiento
-
-/*Ingreso de relacion tratamiento y material
-delete from tratamiento_inventario where id_material1 = 3
-
-select * from tratamiento_inventario
-
-insert into tratamiento_inventario values(1,1,2)
-insert into tratamiento_inventario values(2,2,3)
-
-insert into tratamiento_inventario values(4,3,1)
-insert into tratamiento_inventario values(5,3,28)
-insert into tratamiento_inventario values(6,3,2)
-insert into tratamiento_inventario values(7,3,28)
-insert into tratamiento_inventario values(8,3,4)
-insert into tratamiento_inventario values(9,3,1)
-insert into tratamiento_inventario values(3,3,1)
-insert into tratamiento_inventario values(3,2,1)
-insert into tratamiento_inventario values(3,1,1)
-insert into tratamiento_inventario values(4,2,1)
-insert into tratamiento_inventario values(4,1,1)
-
-*/
+insert into Clinica.inventario values('Recinas',100),('Gazas',80),('Anestecia',50)
+,('Agujas',100)
+,('Brackets',300)
+,('Alambre',100)
+,('Ules',500)
+,('adhesivo',40)
+,('Acido',50)
 
 
 
 
 
+--Ingreso de relacion tratamiento y material
 
-
+insert into Clinica.tratamiento_inventario values(1,1,2)
+,(2,2,3)
+,(4,3,1)
+,(5,3,28)
+,(6,3,2)
+,(7,3,28)
+,(8,3,4)
+,(9,3,1)
+,(3,3,1)
+,(3,2,1)
+,(3,1,1)
+,(4,2,1)
+,(4,1,1)
 

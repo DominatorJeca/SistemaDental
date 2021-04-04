@@ -8,12 +8,14 @@
         Title="Menu" Height="555" Width="1050" ResizeMode="NoResize" BorderBrush="#FF5EAAA8">
     <Grid>
         <Grid.Background>
-            <ImageBrush ImageSource="menu .png"/>
+            <ImageBrush ImageSource="/SistemaDental;component/Menu Background.png"/>
         </Grid.Background>
-        <Button Content="Tratamiento" Height="41" VerticalAlignment="Top" Margin="327,242,566,0" Background="{x:Null}" RenderTransformOrigin="0.496,2.246" FontFamily="Bahnschrift" FontSize="20" BorderBrush="{x:Null}"/>
-        <Button Content="Pacientes" Height="45" VerticalAlignment="Top" Margin="327,316,560,0" Background="{x:Null}" RenderTransformOrigin="0.496,2.246" FontFamily="Bahnschrift" FontSize="20" BorderBrush="{x:Null}"/>
-        <Button Content="Inventario" Height="44" VerticalAlignment="Top" Margin="548,172,340,0" Background="{x:Null}" RenderTransformOrigin="0.496,2.246" FontFamily="Bahnschrift" FontSize="20" BorderBrush="{x:Null}"/>
-        <Button Content="Caja" Height="41" VerticalAlignment="Top" Margin="564,242,363,0" Background="{x:Null}" RenderTransformOrigin="0.496,2.246" FontFamily="Bahnschrift" FontSize="20" BorderBrush="{x:Null}"/>
-        <Button Content="Ajustes" Height="45" VerticalAlignment="Top" Margin="572,315,352,0" Background="{x:Null}" RenderTransformOrigin="0.496,2.246" FontFamily="Bahnschrift" FontSize="20" BorderBrush="{x:Null}"/>
+        <Button x:Name="btnTratamiento" Content="Tratamiento" Height="26" VerticalAlignment="Top" Margin="347,256,545,0" Background="{x:Null}" RenderTransformOrigin="0.496,2.246" FontFamily="Bahnschrift" FontSize="20" BorderBrush="{x:Null}" Click="btnTratamiento_Click"/>
+        <Button x:Name="btnPacientes" Content="Pacientes" Height="45" VerticalAlignment="Top" Margin="346,321,541,0" Background="{x:Null}" RenderTransformOrigin="0.496,2.246" FontFamily="Bahnschrift" FontSize="20" BorderBrush="{x:Null}" Click="Button_Click"/>
+        <Button x:Name="btnInventario" Content="Inventario" Height="33" VerticalAlignment="Top" Margin="451,195,450,0" Background="{x:Null}" RenderTransformOrigin="0.496,2.246" FontFamily="Bahnschrift" FontSize="20" BorderBrush="{x:Null}" Click="btnInventario_Click"/>
+        <Button x:Name="btnCaja" Content="Caja" Height="41" VerticalAlignment="Top" Margin="564,251,363,0" Background="{x:Null}" RenderTransformOrigin="0.496,2.246" FontFamily="Bahnschrift" FontSize="20" BorderBrush="{x:Null}" Click="btnCaja_Click"/>
+        <Button x:Name="btnAjustes" Content="Ajustes" Height="45" VerticalAlignment="Top" Margin="568,320,356,0" Background="{x:Null}" RenderTransformOrigin="0.496,2.246" FontFamily="Bahnschrift" FontSize="20" BorderBrush="{x:Null}" Click="btnAjustes_Click"/>
+        <Label Content="¿Que desea realizar?" HorizontalAlignment="Left" Margin="270,101,0,0" VerticalAlignment="Top" FontSize="32" FontFamily="Bahnschrift"/>
+        <Label x:Name="lblUsuario" Content="Usuario" HorizontalAlignment="Left" Margin="580,101,0,0" VerticalAlignment="Top" FontSize="32" FontFamily="Bahnschrift"/>
     </Grid>
 </Window>

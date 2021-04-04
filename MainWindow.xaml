@@ -12,6 +12,8 @@
     </Window.Background>
     <Grid Margin="10,10,0,0">
         <Button Content="Iniciar" HorizontalAlignment="Left" Margin="265,163,0,0" VerticalAlignment="Top" Width="75" Click="Button_Click" Background="#FF056676" Foreground="White" BorderBrush="{x:Null}"/>
-        <Label Content="Bienvenidos" HorizontalAlignment="Left" Margin="215,110,0,0" VerticalAlignment="Top" FontSize="32" FontFamily="Bahnschrift"/>
+        <Label Content="Bienvenido" HorizontalAlignment="Left" Margin="163,110,0,0" VerticalAlignment="Top" FontSize="32" FontFamily="Bahnschrift"/>
+        <Label x:Name="lblUsuario" Content="Usuario" HorizontalAlignment="Left" Margin="328,110,0,0" VerticalAlignment="Top" FontSize="32" FontFamily="Bahnschrift"/>
+        <Label x:Name="lblFecha" Content="Fecha" HorizontalAlignment="Left" Margin="540,-6,0,0" VerticalAlignment="Top" FontSize="16" FontFamily="Bahnschrift" Height="33"/>
     </Grid>
 </Window>

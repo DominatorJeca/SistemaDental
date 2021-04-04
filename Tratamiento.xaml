@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:SistemaDental"
         mc:Ignorable="d"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-        Title="Tratamiento" Height="450" Width="800">
+        Title="Tratamiento" Height="450" Width="800" WindowStartupLocation="CenterScreen">
     <Grid>
         <Grid.Background>
             <ImageBrush ImageSource="TeethPattern.jpg" Stretch="UniformToFill"/>
@@ -19,10 +19,10 @@
         <Label Content="Materiales a utilizar:" HorizontalAlignment="Left" Margin="62,164,0,0" VerticalAlignment="Top" FontSize="18" Foreground="Black" Background="#7F056676" FontFamily="Bahnschrift"/>
         <TextBox x:Name="txtMaterial" Margin="492,189,102,186" materialDesign:HintAssist.Hint="Material" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontFamily="Bahnschrift" FontSize="18" Background="White" Height="44" />
         <TextBox x:Name="txtCantidad" Margin="492,233,102,133" materialDesign:HintAssist.Hint="Cantidad" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontFamily="Bahnschrift" FontSize="18" Background="White"/>
-        <Button x:Name="btnEditar" Content="Editar" HorizontalAlignment="Left" Margin="492,291,0,0" VerticalAlignment="Top" Width="120" Background="#FF056676" FontFamily="Bahnschrift"/>
-        <Button x:Name="btnGuardar" Content="Cancelar" HorizontalAlignment="Left" Margin="492,352,0,0" VerticalAlignment="Top" Width="120" Background="#FF056676" FontFamily="Bahnschrift"/>
-        <Button x:Name="btnCancelar" Content="Realizar" HorizontalAlignment="Left" Margin="635,352,0,0" VerticalAlignment="Top" Width="120" Background="#FF056676" FontFamily="Bahnschrift"/>
-        <Button x:Name="btnRealizar" Content="Guardar" HorizontalAlignment="Left" Margin="635,291,0,0" VerticalAlignment="Top" Width="120" RenderTransformOrigin="0.5,-2.204" Background="#FF056676" FontFamily="Bahnschrift"/>
+        <Button x:Name="btnEditar" Content="Editar" HorizontalAlignment="Left" Margin="492,291,0,0" VerticalAlignment="Top" Width="120" Background="#FF056676" FontFamily="Bahnschrift" BorderBrush="{x:Null}"/>
+        <Button x:Name="btnGuardar" Content="Cancelar" HorizontalAlignment="Left" Margin="492,352,0,0" VerticalAlignment="Top" Width="120" Background="#FF056676" FontFamily="Bahnschrift" BorderBrush="{x:Null}"/>
+        <Button x:Name="btnCancelar" Content="Realizar" HorizontalAlignment="Left" Margin="635,352,0,0" VerticalAlignment="Top" Width="120" Background="#FF056676" FontFamily="Bahnschrift" BorderBrush="{x:Null}"/>
+        <Button x:Name="btnRealizar" Content="Guardar" HorizontalAlignment="Left" Margin="635,291,0,0" VerticalAlignment="Top" Width="120" RenderTransformOrigin="0.5,-2.204" Background="#FF056676" FontFamily="Bahnschrift" BorderBrush="{x:Null}"/>
 
 
     </Grid>

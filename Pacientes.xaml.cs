@@ -23,5 +23,23 @@ namespace SistemaDental
         {
             InitializeComponent();
         }
+
+        private void btnVerPaciente_Click(object sender, RoutedEventArgs e)
+        {
+            VerPaciente verpaciente = new VerPaciente();
+            verpaciente.Show();
+        }
+
+        private void btnAgregarPaciente_Click(object sender, RoutedEventArgs e)
+        {
+            AgregarPaciente agregarPaciente = new AgregarPaciente();
+            agregarPaciente.Show();
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            Menu menu = new Menu();
+            menu.Show();
+        }
     }
 }

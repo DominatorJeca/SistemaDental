@@ -23,5 +23,35 @@ namespace SistemaDental
         {
             InitializeComponent();
         }
+
+        private void btnInventario_Click(object sender, RoutedEventArgs e)
+        {
+            Inventario inventario = new Inventario();
+            inventario.Show();
+        }
+
+        private void btnTratamiento_Click(object sender, RoutedEventArgs e)
+        {
+            Tratamiento tratamiento = new Tratamiento();
+            tratamiento.Show();
+        }
+
+        private void btnCaja_Click(object sender, RoutedEventArgs e)
+        {
+            Caja caja = new Caja();
+            caja.Show();
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            Pacientes pacientes = new Pacientes();
+            pacientes.Show();
+        }
+
+        private void btnAjustes_Click(object sender, RoutedEventArgs e)
+        {
+            Ajustes ajustes = new Ajustes();
+            ajustes.Show();
+        }
     }
 }

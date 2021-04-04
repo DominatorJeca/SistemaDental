@@ -1,0 +1,30 @@
+﻿<Window x:Class="SistemaDental.AgregarUsuario"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:SistemaDental"
+        mc:Ignorable="d"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        Title="AgregarUsuario" Height="450" Width="800">
+    <Grid>
+        <Grid.Background>
+            <ImageBrush ImageSource="TeethPattern.jpg" Stretch="UniformToFill"/>
+        </Grid.Background>
+        <Button x:Name="btnRegresar" Content="Regresar" HorizontalAlignment="Left" Margin="17,10,0,0" VerticalAlignment="Top" Width="103" FontFamily="Bahnschrift" FontSize="16" Background="#FF056676" Click="btnRegresar_Click" BorderBrush="{x:Null}"/>
+        <TextBox x:Name="txtAgregarNombre" Margin="68,179,444,206" materialDesign:HintAssist.Hint="Nombre" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontFamily="Bahnschrift" FontSize="12" Background="#7FFFFFFF"/>
+        <TextBox x:Name="txtAgregarApellido" Margin="68,218,444,167" materialDesign:HintAssist.Hint="Apellido" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontFamily="Bahnschrift" FontSize="12" Background="#7FFFFFFF"/>
+        <TextBox x:Name="txtAgregarTelefono" Margin="68,252,444,131" materialDesign:HintAssist.Hint="Telefóno" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontFamily="Bahnschrift" FontSize="12" Background="#7FFFFFFF"/>
+        <TextBox x:Name="txtAgregarIdentidad" Margin="68,288,444,95" materialDesign:HintAssist.Hint="Identidad" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontFamily="Bahnschrift" FontSize="12" Background="#7FFFFFFF"/>
+        <TextBox x:Name="txtAgregarCorreo" Margin="467,177,45,206" materialDesign:HintAssist.Hint="Correo" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontFamily="Bahnschrift" FontSize="12" Background="#7FFFFFFF"/>
+        <TextBox x:Name="txtConfirmarCorreo" Margin="467,218,45,167" materialDesign:HintAssist.Hint="Confirmar Correo" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontFamily="Bahnschrift" FontSize="12" Background="#7FFFFFFF"/>
+        <TextBox x:Name="txtAgregarContra" Margin="467,252,45,131" materialDesign:HintAssist.Hint="Contraseña" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontFamily="Bahnschrift" FontSize="12" Background="#7FFFFFFF"/>
+        <TextBox x:Name="txtConfirmarContra" Margin="467,288,45,95" materialDesign:HintAssist.Hint="Confirmar Contraseña" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontFamily="Bahnschrift" FontSize="12" Background="#7FFFFFFF"/>
+        <ComboBox x:Name="cmbSexo" HorizontalAlignment="Left" Margin="228,354,0,0" VerticalAlignment="Top" Width="120"/>
+        <Label Content="Sexo" HorizontalAlignment="Left" Margin="73,357,0,0" VerticalAlignment="Top" FontSize="12" FontFamily="Bahnschrift"/>
+        <Button x:Name="btnAgregarUsuario" Content="Agregar" HorizontalAlignment="Center" Margin="467,351,45,0" VerticalAlignment="Top" Width="280" Background="#FF056676" BorderBrush="{x:Null}"/>
+        <Image Source="Happy_Sm.png" RenderTransformOrigin="0.4,0.334" Margin="300,19,288,225" />
+        <Label Content="Puesto" HorizontalAlignment="Left" Margin="73,329,0,0" VerticalAlignment="Top" FontSize="12" FontFamily="Bahnschrift"/>
+        <ComboBox x:Name="cmbPuesto" HorizontalAlignment="Left" Margin="228,329,0,0" VerticalAlignment="Top" Width="120"/>
+    </Grid>
+</Window>
