@@ -19,6 +19,7 @@ namespace SistemaDental
     /// </summary>
     public partial class Login : Window
     {
+        private Usuario usuario = new Usuario();
         public Login()
         {
             InitializeComponent();
@@ -34,7 +35,7 @@ namespace SistemaDental
             try
             {
                 //buscar usuario
-                Usuario elUsuario = Usuario.BuscarUsuario(txtUsuario.Text);
+                Usuario elUsuario = usuario.BuscarUsuario(txtUsuario.Text);
 
 
                 //Verificar si el usuario existe
