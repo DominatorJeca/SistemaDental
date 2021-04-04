@@ -153,7 +153,7 @@
     <Compile Include="Tratamiento.xaml.cs">
       <DependentUpon>Tratamiento.xaml</DependentUpon>
     </Compile>
-<<<<<<< HEAD
+
     <Compile Include="VerPaciente.xaml.cs">
       <DependentUpon>VerPaciente.xaml</DependentUpon>
     </Compile>
@@ -165,9 +165,9 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-=======
+
     <Compile Include="Usuario.cs" />
->>>>>>> feature-login
+
     <Page Include="Ajustes.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
