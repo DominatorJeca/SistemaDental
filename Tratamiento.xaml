@@ -14,7 +14,7 @@
         <ComboBox x:Name="cmbPaciente" HorizontalAlignment="Left" Margin="62,54,0,0" VerticalAlignment="Top" Width="643"/>
         <Label Content="Paciente" HorizontalAlignment="Left" Margin="60,26,0,0" VerticalAlignment="Top" FontSize="20" Foreground="Black" Background="#7F056676" FontFamily="Bahnschrift"/>
         <Label Content="Tratamiento" HorizontalAlignment="Left" Margin="62,88,0,0" VerticalAlignment="Top" FontSize="20" Foreground="Black" Background="#7F056676" FontFamily="Bahnschrift"/>
-        <ComboBox x:Name="cmbTratamiento" HorizontalAlignment="Left" Margin="62,129,0,0" VerticalAlignment="Top" Width="643" FontFamily="Bahnschrift" SelectionChanged="cmbTratamiento_SelectionChanged"/>
+        <ComboBox x:Name="cmbTratamiento" HorizontalAlignment="Left" Margin="62,129,0,0" VerticalAlignment="Top" Width="643" FontFamily="Bahnschrift" SelectionChanged="cmbTratamiento_SelectionChanged" IsReadOnly="False"/>
         <DataGrid HorizontalAlignment="Left" Height="206" Margin="62,194,0,0" VerticalAlignment="Top" Width="415" Background="#FF056676" Foreground="#DDFFFFFF" FontFamily="Bahnschrift" x:Name="dg_materiales" AutoGenerateColumns="False" IsReadOnly="True">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Nombre" Binding="{Binding NombreMaterial}" Width="150"/>
