@@ -14,14 +14,15 @@ constraint pk_id primary key(id_puesto)
 
 create table Clinica.empleado(
 id_empleado varchar(50),
-nombre varchar(50),
-apellido varchar(50),
-telefono varchar(15),
+nombre varchar(50) not null,
+apellido varchar(50) not null,
+telefono varchar(15) not null,
 correo varchar(50),
-idpuesto int,
-genero varchar(20),
-contraseña varchar(20),
-estado bit
+idpuesto int not null,
+genero varchar(20) not null,
+contraseña varchar(20)not null,
+estado bit default 1,
+administrador bit default 0
 constraint pk_idempleado primary key(id_empleado),
 constraint fk_Empleado_Puesto foreign key(idpuesto) references Clinica.puesto(id_puesto) 
 )
@@ -34,6 +35,7 @@ apellido varchar(50),
 telefono varchar(15),
 edad int,
 genero varchar(20),
+estado bit default 1,
 constraint pk_idp primary key(id_paciente)
 )
 
@@ -41,8 +43,9 @@ constraint pk_idp primary key(id_paciente)
 
 create table Clinica.tratamiento(
 id_tratamiento int IDENTITY(1,1) not null,
-nombre varchar(50),
-precio int,
+nombre varchar(50) not null,
+precio int not null,
+estado bit default 1,
 constraint pk_idt primary key(id_tratamiento)
 )
 
@@ -204,9 +207,10 @@ create proc IngresoEmpleados
 @puesto int,
 @genero varchar(20),
 @contraseña varchar(20),
-@estado bit=1
+@estado bit=1,
+@administrador bit=0
 as
-insert into Clinica.empleado values(@id,@nombre,@apellido,@telefono,@correo,@puesto,@genero,@contraseña,@estado)
+insert into Clinica.empleado values(@id,@nombre,@apellido,@telefono,@correo,@puesto,@genero,@contraseña,@estado,@administrador)
 go
 
 
@@ -231,11 +235,23 @@ create proc EditarEmpleados
 @puesto int,
 @genero varchar(20),
 @contraseña varchar(20),
-@estado bit
+@estado bit=1,
+@administrador bit=0
 as
-update Clinica.empleado set nombre=@nombre,apellido=@apellido,telefono=@telefono,correo=@correo,idpuesto=@puesto,genero=@genero,contraseña=@contraseña, estado=@estado where id_empleado=@id
+update Clinica.empleado set nombre=@nombre,apellido=@apellido,telefono=@telefono,correo=@correo,idpuesto=@puesto,genero=@genero,contraseña=@contraseña where id_empleado=@id
 go
 
+create proc EliminarUsuario
+@id varchar(50)
+as
+update Clinica.empleado set estado=0 where id_empleado=@id
+go
+
+create proc PrivilegioAdministrador
+@id varchar(50)
+as
+update Clinica.empleado set [administrador]=1
+go
 
 ----TABLA PACIENTES
 
@@ -245,9 +261,10 @@ create proc IngresoPacientes
 @apellido varchar(50),
 @telefono varchar(15),
 @edad int,
-@genero varchar(20)
+@genero varchar(20),
+@estado bit=1
 as
-insert into Clinica.pacientes values(@id,@nombre,@apellido,@telefono,@edad,@genero)
+insert into Clinica.pacientes values(@id,@nombre,@apellido,@telefono,@edad,@genero,@estado)
 go
 
 
@@ -275,16 +292,21 @@ as
 update Clinica.pacientes set nombre=@nombre,apellido=@apellido,telefono=@telefono,edad=@edad,genero=@genero where id_paciente=@id
 go
 
-
+create proc EliminarPaciente
+@id varchar(50)
+as
+update Clinica.pacientes set estado=0
+go
 
 
 
 ----TABLA TRATAMIENTO
 create proc IngresoTratamiento
 @nombre varchar(50),
-@precio int
+@precio int,
+@estado bit=1
 as
-insert into Clinica.tratamiento values(@nombre,@precio)
+insert into Clinica.tratamiento values(@nombre,@precio,@estado)
 go
 
 create proc MostrarTratamiento
@@ -304,6 +326,12 @@ create proc EditarTratamiento
 @id int
 as
 update Clinica.tratamiento set nombre=@nombre,precio=@precio where id_tratamiento=@id
+go
+
+create proc EliminarTratamiento
+@nombre varchar(50)
+as
+update Clinica.tratamiento set estado=0 where nombre=@nombre
 go
 
 -----TABLA INVENTARIO
@@ -356,7 +384,7 @@ go
 create proc MostrarHistorial
 @idpaciente varchar(50)
 as
-select id_paciente,tratamiento.nombre,fecha from Clinica.historial inner join Clinica.tratamiento on historial.id_t2=tratamiento.id_tratamiento where @idpaciente=id_paciente
+select id_paciente,tratamiento.nombre,fecha from Clinica.historial inner join Clinica.tratamiento on historial.id_tratamiento2=tratamiento.id_tratamiento where @idpaciente=id_paciente
 go
  
 
@@ -366,7 +394,7 @@ create proc EditarHistorial
 @idtratamiento int,
 @id int
 as
-update Clinica.historial set id_paciente=@idpaciente, id_t2=@idtratamiento, fecha=@fecha where id_historial=@id
+update Clinica.historial set id_paciente=@idpaciente, id_tratamiento2=@idtratamiento, fecha=@fecha where id_historial=@id
 go
 
 create proc MostrarUso
@@ -382,32 +410,13 @@ as
 select inventario.nombre, tratamiento_inventario.cantidad from Clinica.tratamiento_inventario inner join Clinica.tratamiento on tratamiento_inventario.id_tratamiento1=tratamiento.id_tratamiento inner join Clinica.inventario on tratamiento_inventario.id_material1=inventario.id_material where @id=tratamiento.id_tratamiento
 go
 
-create proc actCantidad
+create proc actualizarCantidad
 @cantidad int,
 @material varchar(50)
 as
 update Clinica.inventario set cantidad=cantidad-@cantidad where nombre=@material
 go
 
-/*Tabla Citas*/
-create proc IngresoCitas
-@idempleado varchar(50),
-@idpaciente varchar(50),
-@fecha datetime,
-@idtratamiento int
-as
-insert into Clinica.citas values (@idempleado,@idpaciente,@fecha,@idtratamiento)
-go
-
-
-
-
-create proc actCantidad
-@cantidad int,
-@material varchar(50)
-as
-update Clinica.inventario set cantidad=cantidad-@cantidad where nombre=@material
-go
 
 /*Tabla Citas*/
 create proc IngresoCitas

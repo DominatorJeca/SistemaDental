@@ -19,7 +19,6 @@ namespace SistemaDental
     /// </summary>
     public partial class Login : Window
     {
-        private Usuario usuario = new Usuario();
         public Login()
         {
             InitializeComponent();
@@ -32,44 +31,9 @@ namespace SistemaDental
 
         private void btnLogin_Click(object sender, RoutedEventArgs e)
         {
-            try
-            {
-                //buscar usuario
-                Usuario elUsuario = usuario.BuscarUsuario(txtUsuario.Text);
-                
-
-                //Verificar si el usuario existe
-                if (elUsuario.Id== null)
-                {
-                    MessageBox.Show("El usuario o contraseña es incorrecto");
-                }
-                else
-                {
-                    if(elUsuario.Contraseña== txtPassword.Password)
-                    { 
-                        //Abrir formulario Menu
-                        Menu menu = new Menu();
-                        menu.Show();
-                    }
-                    else
-                    {
-                        MessageBox.Show("El usuario o contraseña es incorrecto");
-                    }
-                }
-
-            }
-            catch (Exception ex)
-            {
-
-                MessageBox.Show("Ocurrio un error al momento de realizar la consulta");
-                Console.WriteLine(ex.Message);
-            }
-           
-        }
-
-        private void btnSalir_Click(object sender, RoutedEventArgs e)
-        {
-            Close();
+            int varible = 0;
+            Menu menu = new Menu();
+            menu.Show();
         }
     }
 }
