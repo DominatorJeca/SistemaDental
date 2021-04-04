@@ -45,11 +45,15 @@ namespace SistemaDental
                 }
                 else
                 {
-                    if(elUsuario.Contraseña== txtPassword.Password)
+                    if((elUsuario.Contraseña== txtPassword.Password)&&(elUsuario.Estado==true))
                     { 
                         //Abrir formulario Menu
                         Menu menu = new Menu();
                         menu.Show();
+                    }
+                    else if(!elUsuario.Estado)
+                    {
+                        MessageBox.Show("Su usuario se encuentra deshabilitado, por favor comunicarse con ");
                     }
                     else
                     {
