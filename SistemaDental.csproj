@@ -98,6 +98,9 @@
     <Compile Include="Caja.xaml.cs">
       <DependentUpon>Caja.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Citas.xaml.cs">
+      <DependentUpon>Citas.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ClaseInventario.cs" />
     <Compile Include="EditarUsuario.xaml.cs">
       <DependentUpon>EditarUsuario.xaml</DependentUpon>
@@ -130,6 +133,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Caja.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Citas.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
