@@ -21,6 +21,7 @@ namespace SistemaDental
         public string NombreTratamiento { get; set; }
         public string NombreMaterial { get; set; }
         public int Cantidad { get; set; }
+        public DateTime fecha { get; set; }
        
         public ClaseTratamiento() { }
 
@@ -121,6 +122,45 @@ namespace SistemaDental
         public void IngresarAlHistorial(ClaseTratamiento tratamiento)
         {
             sqlConnection.Open();
+
+            try
+            {
+                SqlCommand command = new SqlCommand("IngresoHistorial", sqlConnection);
+                command.CommandType = CommandType.StoredProcedure;
+                command.Parameters.AddWithValue("@idpaciente", tratamiento.IdPaciente);
+                command.Parameters.AddWithValue("@fecha", tratamiento.fecha);
+                command.Parameters.AddWithValue("@idtratamiento", tratamiento.IdTratamiento);
+                command.ExecuteNonQuery();
+            }
+            catch
+            {
+                throw;
+            }
+            finally
+            {
+                sqlConnection.Close();
+            }
+        }
+
+        public void ActualizarMaterialDisponible(ClaseTratamiento tratamiento)
+        {
+            sqlConnection.Open();
+            try
+            {
+                SqlCommand command = new SqlCommand("actualizarCantidad", sqlConnection);
+                command.CommandType = CommandType.StoredProcedure;
+                command.Parameters.AddWithValue("@cantidad", tratamiento.Cantidad);
+                command.Parameters.AddWithValue("@nombre", tratamiento.NombreMaterial);
+                command.ExecuteNonQuery();
+            }
+            catch
+            {
+                throw;
+            }
+            finally
+            {
+                sqlConnection.Close();
+            }
         }
     }
 }
