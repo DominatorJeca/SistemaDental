@@ -100,7 +100,7 @@ constraint fk_Paciente_Citas foreign key(id_paciente) references Clinica.pacient
 
 ALTER TABLE Clinica.historial with check
 add constraint CHK_Clinica_Historial$VerificarFechaTratamiento
-Check (fecha>= GETDATE())
+Check (fecha<GETDATE())
 GO
 
 ALTER TABLE Clinica.citas with check
@@ -412,9 +412,9 @@ go
 
 create proc actualizarCantidad
 @cantidad int,
-@material varchar(50)
+@nombre varchar(50)
 as
-update Clinica.inventario set cantidad=cantidad-@cantidad where nombre=@material
+update Clinica.inventario set cantidad=cantidad-@cantidad where nombre=@nombre
 go
 
 
