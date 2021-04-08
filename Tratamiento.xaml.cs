@@ -47,7 +47,7 @@ namespace SistemaDental
         public void MostrarMateriales()
         {
             dg_materiales.ItemsSource = tratamiento.mostrarMateriales(Convert.ToInt32(cmbTratamiento.SelectedValue));
-            dg_materiales.SelectedValuePath = "IdMaterial";
+            dg_materiales.SelectedValuePath = "NombreMaterial";
         }
 
         private void cmbTratamiento_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -60,7 +60,6 @@ namespace SistemaDental
             tratamiento.fecha = DateTime.Now;
             tratamiento.IdPaciente = Convert.ToString(cmbPaciente.SelectedValue);
             tratamiento.IdTratamiento = Convert.ToInt32(cmbTratamiento.SelectedValue);
-            //tratamiento.IdMaterial = Convert.ToInt32(dg_materiales.SelectedValue);
         }
 
         private void btnRealizar_Click(object sender, RoutedEventArgs e)
@@ -95,6 +94,69 @@ namespace SistemaDental
                 cmbTratamiento.SelectedItem = null;
             }
             
+        }
+
+        private void btnEditar_Click(object sender, RoutedEventArgs e)
+        {
+
+            try
+            {
+                if (dg_materiales.SelectedValue == null || cmbTratamiento.SelectedValue == null)
+                {
+                    MessageBox.Show("Seleccione un tratamiento y un material para poder ser editado");
+                }
+                else
+                {
+
+                    txtCantidad.IsEnabled = true;
+                    btnGuardar.IsEnabled = true;
+                    btnCancelar.IsEnabled = true;
+                    btnEditar.IsEnabled = false;
+                    btnRealizar.IsEnabled = false;
+                    cmbTratamiento.IsEnabled = false;
+                }
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show(""+ ex);
+            }
+        }
+
+        private void btnGuardar_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+
+
+                foreach (ClaseTratamiento tratamientos in dg_materiales.ItemsSource)
+                {
+                    if (tratamiento.NombreMaterial == dg_materiales.SelectedValue.ToString())
+                        tratamiento.Cantidad = Convert.ToInt32(tratamientos.Cantidad.ToString());
+                }
+            }
+            catch
+            {
+                throw;
+            }
+            finally
+            {
+                btnGuardar.IsEnabled = false;
+                txtCantidad.IsEnabled = false;
+                btnEditar.IsEnabled = true;
+                btnRealizar.IsEnabled = true;
+                cmbTratamiento.IsEnabled = true;
+                btnCancelar.IsEnabled = false;
+            }
+        }
+
+        private void btnCancelar_Click(object sender, RoutedEventArgs e)
+        {
+            btnGuardar.IsEnabled = false;
+            txtCantidad.IsEnabled = false;
+            btnEditar.IsEnabled = true;
+            btnRealizar.IsEnabled = true;
+            cmbTratamiento.IsEnabled = true;
+            btnCancelar.IsEnabled = false;
         }
     }
 }
