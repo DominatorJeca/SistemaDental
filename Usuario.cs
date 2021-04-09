@@ -20,10 +20,19 @@ namespace SistemaDental
 
         public string Nombre { get; set; }
 
-        public string Contraseña { get; set; }
+        public string Apellido { get; set; }
 
+        public string Telefono{ get; set; }
+
+        public string Correo{get; set;}
+
+        public int Puesto { get; set; }
+
+        public string Genero{ get; set; }
+        public string Contraseña { get; set; }
         public bool Estado { get; set; }
 
+        public bool Administrador{ get; set; }
 
 
         //Contructores
