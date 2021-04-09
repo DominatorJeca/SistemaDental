@@ -47,8 +47,7 @@ namespace SistemaDental
 
         private void btnAgregarUsuario_Click(object sender, RoutedEventArgs e)
         {
-          
-
+            ObtenerValores();
       
         }
     }
