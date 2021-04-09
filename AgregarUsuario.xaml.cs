@@ -19,6 +19,7 @@ namespace SistemaDental
     /// </summary>
     public partial class AgregarUsuario : Window
     {
+        private Usuario usuario = new Usuario();
         public AgregarUsuario()
         {
             InitializeComponent();
@@ -28,6 +29,27 @@ namespace SistemaDental
         {
             Ajustes ajustes = new Ajustes();
             ajustes.Show();
+        }
+
+        public void ObtenerValores()
+        {
+            usuario.Id=Convert.ToString(txtAgregarIdentidad.Text);
+            usuario.Nombre = Convert.ToString(txtAgregarNombre.Text);
+            usuario.Apellido = Convert.ToString(txtAgregarApellido.Text);
+            usuario.Telefono = Convert.ToString(txtAgregarTelefono.Text);
+            usuario.Correo = Convert.ToString(txtAgregarCorreo.Text);
+            usuario.Puesto = Convert.ToInt32(cmbPuesto.SelectedValue);
+            usuario.Genero = Convert.ToString(cmbSexo.SelectedValue);
+            usuario.Contraseña = Convert.ToString(txtAgregarContra.Text);
+            usuario.Estado = true;
+            usuario.Administrador = false;
+        }
+
+        private void btnAgregarUsuario_Click(object sender, RoutedEventArgs e)
+        {
+          
+
+      
         }
     }
 }
