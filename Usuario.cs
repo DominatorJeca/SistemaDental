@@ -62,7 +62,7 @@ namespace SistemaDental
                 sqlConnection.Open();
                 //crear el comando SQL
                 SqlCommand sqlCommand = new SqlCommand("VerificarExistenciaEmpleado", sqlConnection);
-                //sqlCommand.CommandText = "VerificarExistenciaEmpleado";
+                
                 sqlCommand.CommandType = CommandType.StoredProcedure;
                 //Establecer los valores de parametros
                 sqlCommand.Parameters.AddWithValue("@user", id);
@@ -92,6 +92,43 @@ namespace SistemaDental
                 sqlConnection.Close();
             }
 
+        }
+
+        /// <summary>
+        /// Ingresar usuario a la tabla empleados
+        /// </summary>
+        /// <param name="usuario">Datos del usuario</param>
+
+        public void IngresarUsuario(Usuario usuario)
+        {
+            sqlConnection.Open();
+
+            try
+            {
+                SqlCommand sqlCommand = new SqlCommand("IngresoEmpleados", sqlConnection);
+                sqlCommand.CommandType = CommandType.StoredProcedure;
+                //Establecer los valores de parametros
+                sqlCommand.Parameters.AddWithValue("@id",usuario.Id);
+                sqlCommand.Parameters.AddWithValue("@nombre", usuario.Nombre);
+                sqlCommand.Parameters.AddWithValue("@apellido", usuario.Apellido);
+                sqlCommand.Parameters.AddWithValue("@telefono", usuario.Telefono);
+                sqlCommand.Parameters.AddWithValue("@correo", usuario.Correo);
+                sqlCommand.Parameters.AddWithValue("@puesto", usuario.Puesto);
+                sqlCommand.Parameters.AddWithValue("@genero", usuario.Genero);
+                sqlCommand.Parameters.AddWithValue("@contraseña", usuario.Contraseña);
+                sqlCommand.Parameters.AddWithValue("@estado", usuario.Estado);
+                sqlCommand.Parameters.AddWithValue("@administrador", usuario.Administrador);
+                sqlCommand.ExecuteNonQuery();
+
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+            finally
+            {    //Cerrar conexion 
+                sqlConnection.Close();
+            }
         }
     }
 }
