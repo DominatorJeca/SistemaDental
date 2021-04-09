@@ -39,12 +39,18 @@ namespace SistemaDental
 
         public Usuario() { }
 
-        public Usuario(string id, string nombre, string contraseña, bool estado)
+        public Usuario(string id, string nombre, string apellido, string telefono, string correo,int puesto,string genero, string contraseña, bool estado, bool administrador)
         {
             Id = id;
             Nombre = nombre;
+            Apellido = apellido;
+            Telefono = telefono;
+            Correo = correo;
+            Puesto = puesto;
+            Genero = genero;
             Contraseña = contraseña;
             Estado = estado;
+            Administrador = administrador;
         }
 
         //Metodos
