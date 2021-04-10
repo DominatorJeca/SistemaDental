@@ -30,6 +30,8 @@ namespace SistemaDental
 
         //Constructores
 
+
+
         public AgregarPaciente()
         {
             
@@ -54,7 +56,7 @@ namespace SistemaDental
         {
 
             //Comprueba que todos los campos estén llenos
-            if (txtAgregarApellido.Text == String.Empty || txtAgregarNombre.Text == String.Empty || txtAgregarIdentidad.Text == String.Empty || txtAgregarTelefono.Text == String.Empty || cmbSexo.SelectedItem == null)
+            if (txtAgregarApellido.Text == String.Empty || txtAgregarNombre.Text == String.Empty || txtAgregarIdentidad.Text == String.Empty || txtAgregarTelefono.Text == String.Empty || txtAgregarEdad.Text == String.Empty || cmbSexo.SelectedItem == null)
             {
                 MessageBox.Show("¡Por favor llena todos los campos!");
                 txtAgregarNombre.Focus();
@@ -64,6 +66,32 @@ namespace SistemaDental
             {
                 try
                 {
+
+                    // Query de inserción con procedimientos almacenados
+                    string query = @"EXECUTE IngresoPacientes @id,@nombre,@apellido,@telefono,@edad,@genero,@estado";
+
+                    // Establecer la conexión con la base de datos
+                    sqlConnection.Open();
+
+                    // Definir un SqlCommand para modificar el valor del parámetro
+                    SqlCommand sqlCommand = new SqlCommand(query, sqlConnection);
+
+                    // Reemplazar el parámetro por su valor actual
+                    sqlCommand.Parameters.AddWithValue("@nombre", txtAgregarNombre.Text);
+                    sqlCommand.Parameters.AddWithValue("@apellido", txtAgregarApellido.Text);
+                    sqlCommand.Parameters.AddWithValue("@telefono", txtAgregarTelefono.Text);
+                    sqlCommand.Parameters.AddWithValue("@id", txtAgregarIdentidad.Text);
+                    sqlCommand.Parameters.AddWithValue("@edad", txtAgregarEdad.Text);
+                    sqlCommand.Parameters.AddWithValue("@genero", cmbSexo.SelectedItem);
+                    sqlCommand.Parameters.AddWithValue("@estado", 1);
+
+                    // Limpiar el valor del texto en txtInformación
+                    txtAgregarNombre.Text = String.Empty;
+                    txtAgregarApellido.Text = String.Empty;
+                    txtAgregarTelefono.Text = String.Empty;
+                    txtAgregarIdentidad.Text = String.Empty;
+                    txtAgregarEdad.Text = String.Empty;
+                    cmbSexo.SelectedItem = null;
 
                 }
                 //Lanza una excepcion si ocurre un fallo
