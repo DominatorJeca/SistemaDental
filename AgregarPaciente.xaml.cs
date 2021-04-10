@@ -46,8 +46,37 @@ namespace SistemaDental
             pacientes.Show();
         }
 
+
+        /// <summary>
+        /// Ingresa los valores a la base de datos al presionar el botón
+        /// </summary>
         private void btnAgregarPaciente_Click(object sender, RoutedEventArgs e)
         {
+
+            //Comprueba que todos los campos estén llenos
+            if (txtAgregarApellido.Text == String.Empty || txtAgregarNombre.Text == String.Empty || txtAgregarIdentidad.Text == String.Empty || txtAgregarTelefono.Text == String.Empty || cmbSexo.SelectedItem == null)
+            {
+                MessageBox.Show("¡Por favor llena todos los campos!");
+                txtAgregarNombre.Focus();
+            }
+            //Intenta ingresar datos a la BD
+            else
+            {
+                try
+                {
+
+                }
+                //Lanza una excepcion si ocurre un fallo
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message.ToString());
+                }
+                // Cierra la Conexión a la Base de Datos
+                finally
+                {
+                    sqlConnection.Close();
+                }
+            }
 
         }
     }
