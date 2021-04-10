@@ -18,7 +18,7 @@
             <TextBox x:Name="txtAgregarIdentidad" Margin="180,191,332,192" materialDesign:HintAssist.Hint="Identidad" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontFamily="Bahnschrift" FontSize="12" Background="#7FFFFFFF"/>
             <ComboBox x:Name="cmbSexo" HorizontalAlignment="Left" Margin="340,257,0,0" VerticalAlignment="Top" Width="120"/>
             <Label Content="Sexo" HorizontalAlignment="Left" Margin="185,260,0,0" VerticalAlignment="Top" FontSize="12" FontFamily="Bahnschrift"/>
-            <Button x:Name="btnAgregarPaciente" Content="Agregar" HorizontalAlignment="Center" Margin="180,315,325,0" VerticalAlignment="Top" Width="287" Background="#FF056676" BorderBrush="{x:Null}"/>
+            <Button x:Name="btnAgregarPaciente" Content="Agregar" HorizontalAlignment="Center" Margin="180,315,325,0" VerticalAlignment="Top" Width="287" Background="#FF056676" BorderBrush="{x:Null}" Click="btnAgregarPaciente_Click"/>
         <Image Source="Happy_Sm.png" RenderTransformOrigin="0.4,0.334" Margin="467,63,45,83" />
     </Grid>
 </Window>
