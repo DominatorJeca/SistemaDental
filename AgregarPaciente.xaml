@@ -18,7 +18,7 @@
         <TextBox x:Name="txtAgregarIdentidad" Margin="180,178,332,199" materialDesign:HintAssist.Hint="Identidad" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontFamily="Bahnschrift" FontSize="12" Background="#7FFFFFFF"/>
         <TextBox x:Name="txtAgregarEdad" Margin="180,227,332,150" materialDesign:HintAssist.Hint="Edad" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontFamily="Bahnschrift" FontSize="12" Background="#7FFFFFFF"/>
 
-        <StackPanel Margin="319,193,329,80">
+        <StackPanel Margin="169,193,479,80">
             <RadioButton x:Name="rbFemenino" Margin="57,86,-22,-76" Checked="RadioButton_Checked_1" Height="20" FontFamily="Bahnschrift" IsChecked="True">
                 <WrapPanel>
                     <TextBlock Text="Femenino" Foreground="Black" Margin="5,0,0,0"/>

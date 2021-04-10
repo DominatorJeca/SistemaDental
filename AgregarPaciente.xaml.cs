@@ -98,11 +98,14 @@ namespace SistemaDental
                     txtAgregarTelefono.Text = String.Empty;
                     txtAgregarIdentidad.Text = String.Empty;
                     txtAgregarEdad.Text = String.Empty;
+
+                    MessageBox.Show("Datos ingresados correctamente.");
+
                 }
                 //Lanza una excepcion si ocurre un fallo
-                catch (Exception ex)
+                catch (Exception)
                 {
-                    MessageBox.Show(ex.Message.ToString());
+                    MessageBox.Show("Ha ocurrido un error al momento del ingreso.");
                 }
                 // Cierra la Conexión a la Base de Datos
                 finally
