@@ -27,16 +27,16 @@ namespace SistemaDental
         
         //Variables Miembro
         private SqlConnection sqlConnection;
+        private string genero;
 
         //Constructores
-
-
 
         public AgregarPaciente()
         {
             
             //Creacion de Conexion con la Base de Datos
             InitializeComponent();
+
             string connectionString = ConfigurationManager.ConnectionStrings["SistemaDental.Properties.Settings.ClinicaBDConnection"].ConnectionString;
             sqlConnection = new SqlConnection(connectionString);
 
@@ -56,7 +56,7 @@ namespace SistemaDental
         {
 
             //Comprueba que todos los campos estén llenos
-            if (txtAgregarApellido.Text == String.Empty || txtAgregarNombre.Text == String.Empty || txtAgregarIdentidad.Text == String.Empty || txtAgregarTelefono.Text == String.Empty || txtAgregarEdad.Text == String.Empty || cmbSexo.SelectedItem == null)
+            if (txtAgregarApellido.Text == String.Empty || txtAgregarNombre.Text == String.Empty || txtAgregarIdentidad.Text == String.Empty || txtAgregarTelefono.Text == String.Empty || txtAgregarEdad.Text == String.Empty)
             {
                 MessageBox.Show("¡Por favor llena todos los campos!");
                 txtAgregarNombre.Focus();
@@ -69,7 +69,6 @@ namespace SistemaDental
 
                     // Query de inserción con procedimientos almacenados
                     string query = @"EXECUTE IngresoPacientes @id,@nombre,@apellido,@telefono,@edad,@genero,@estado";
-
                     // Establecer la conexión con la base de datos
                     sqlConnection.Open();
 
@@ -82,8 +81,11 @@ namespace SistemaDental
                     sqlCommand.Parameters.AddWithValue("@telefono", txtAgregarTelefono.Text);
                     sqlCommand.Parameters.AddWithValue("@id", txtAgregarIdentidad.Text);
                     sqlCommand.Parameters.AddWithValue("@edad", txtAgregarEdad.Text);
-                    sqlCommand.Parameters.AddWithValue("@genero", cmbSexo.SelectedItem);
+                    sqlCommand.Parameters.AddWithValue("@genero", genero);
                     sqlCommand.Parameters.AddWithValue("@estado", 1);
+
+                    // Ejecutar un non query (Insertar, actualizar y eliminar)
+                    sqlCommand.ExecuteNonQuery();
 
                     // Limpiar el valor del texto en txtInformación
                     txtAgregarNombre.Text = String.Empty;
@@ -91,7 +93,7 @@ namespace SistemaDental
                     txtAgregarTelefono.Text = String.Empty;
                     txtAgregarIdentidad.Text = String.Empty;
                     txtAgregarEdad.Text = String.Empty;
-                    cmbSexo.SelectedItem = null;
+                    
 
                 }
                 //Lanza una excepcion si ocurre un fallo
@@ -106,6 +108,24 @@ namespace SistemaDental
                 }
             }
 
+        }
+
+        //Asignación de la variable genero dependiendo del Radio Boton Seleccionado
+
+        /// <summary>
+        /// Asigna Masculino si el Radio Boton Masculino está seleccionado
+        /// </summary>
+        private void RadioButton_Checked(object sender, RoutedEventArgs e)
+        {
+            genero = "Masculino";
+        }
+
+        /// <summary>
+        /// Asigna Femenino si el Radio Boton Femenino está seleccionado
+        /// </summary>
+        private void RadioButton_Checked_1(object sender, RoutedEventArgs e)
+        {
+            genero = "Femenino";
         }
     }
 }
