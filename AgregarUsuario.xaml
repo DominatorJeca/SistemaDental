@@ -20,7 +20,10 @@
         <TextBox x:Name="txtConfirmarCorreo" Margin="467,218,45,167" materialDesign:HintAssist.Hint="Confirmar Correo" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontFamily="Bahnschrift" FontSize="12" Background="#7FFFFFFF"/>
         <TextBox x:Name="txtAgregarContra" Margin="467,252,45,131" materialDesign:HintAssist.Hint="Contraseña" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontFamily="Bahnschrift" FontSize="12" Background="#7FFFFFFF"/>
         <TextBox x:Name="txtConfirmarContra" Margin="467,288,45,95" materialDesign:HintAssist.Hint="Confirmar Contraseña" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontFamily="Bahnschrift" FontSize="12" Background="#7FFFFFFF"/>
-        <ComboBox x:Name="cmbSexo" HorizontalAlignment="Left" Margin="228,354,0,0" VerticalAlignment="Top" Width="120"/>
+        <ComboBox x:Name="cmbSexo" HorizontalAlignment="Left" Margin="228,354,0,0" VerticalAlignment="Top" Width="120">
+            <ComboBoxItem Content="Femenino" HorizontalAlignment="Left" Width="118.4"/>
+            <ComboBoxItem Content="Masculino" HorizontalAlignment="Left" Width="118.4"/>
+        </ComboBox>
         <Label Content="Sexo" HorizontalAlignment="Left" Margin="73,357,0,0" VerticalAlignment="Top" FontSize="12" FontFamily="Bahnschrift"/>
         <Button x:Name="btnAgregarUsuario" Content="Agregar" HorizontalAlignment="Center" Margin="467,351,45,0" VerticalAlignment="Top" Width="280" Background="#FF056676" BorderBrush="{x:Null}"/>
         <Image Source="Happy_Sm.png" RenderTransformOrigin="0.4,0.334" Margin="300,19,288,225" />
