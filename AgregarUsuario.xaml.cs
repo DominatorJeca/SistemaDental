@@ -20,9 +20,11 @@ namespace SistemaDental
     public partial class AgregarUsuario : Window
     {
         private Usuario usuario = new Usuario();
+        private Puesto puesto = new Puesto();
         public AgregarUsuario()
         {
             InitializeComponent();
+            cmbPuesto.ItemsSource = puesto.MostrarPuestos();
         }
 
         private void btnRegresar_Click(object sender, RoutedEventArgs e)
