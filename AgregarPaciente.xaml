@@ -18,13 +18,13 @@
         <TextBox x:Name="txtAgregarIdentidad" Margin="180,178,332,199" materialDesign:HintAssist.Hint="Identidad" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontFamily="Bahnschrift" FontSize="12" Background="#7FFFFFFF"/>
         <TextBox x:Name="txtAgregarEdad" Margin="180,227,332,150" materialDesign:HintAssist.Hint="Edad" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontFamily="Bahnschrift" FontSize="12" Background="#7FFFFFFF"/>
 
-        <StackPanel Margin="318,193,329,81">
-            <RadioButton x:Name="rbFemenino" Margin="57,86,-228,-76" Checked="RadioButton_Checked_1" Height="20" FontFamily="Bahnschrift" IsChecked="True">
+        <StackPanel Margin="319,193,329,80">
+            <RadioButton x:Name="rbFemenino" Margin="57,86,-22,-76" Checked="RadioButton_Checked_1" Height="20" FontFamily="Bahnschrift" IsChecked="True">
                 <WrapPanel>
                     <TextBlock Text="Femenino" Foreground="Black" Margin="5,0,0,0"/>
                 </WrapPanel>
             </RadioButton>
-            <RadioButton x:Name="rbMasculino" Margin="57,86,-330,-76" Checked="RadioButton_Checked" Height="22" FontFamily="Bahnschrift">
+            <RadioButton x:Name="rbMasculino" Margin="57,86,-22,-76" Checked="RadioButton_Checked" Height="22" FontFamily="Bahnschrift">
                 <WrapPanel>
                     <TextBlock Text="Masculino" Foreground="Black" Margin="5,0,0,0"/>
                 </WrapPanel>

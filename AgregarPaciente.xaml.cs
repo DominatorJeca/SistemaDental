@@ -25,27 +25,32 @@ namespace SistemaDental
     public partial class AgregarPaciente : Window
     {
         
-        //Variables Miembro
+        //Variable para la conexion con la base de datos
         private SqlConnection sqlConnection;
+
+        //Variable para definir el genero seleccionado por el radio boton
         private string genero;
 
         //Constructores
-
         public AgregarPaciente()
         {
             
-            //Creacion de Conexion con la Base de Datos
             InitializeComponent();
 
+            //Creacion de Conexion con la Base de Datos
             string connectionString = ConfigurationManager.ConnectionStrings["SistemaDental.Properties.Settings.ClinicaBDConnection"].ConnectionString;
             sqlConnection = new SqlConnection(connectionString);
 
         }
 
+        /// <summary>
+        /// Boton para regresar a la ventana anterior
+        /// </summary>
         private void btnRegresar_Click(object sender, RoutedEventArgs e)
         {
             Pacientes pacientes = new Pacientes();
             pacientes.Show();
+
         }
 
 
@@ -84,17 +89,15 @@ namespace SistemaDental
                     sqlCommand.Parameters.AddWithValue("@genero", genero);
                     sqlCommand.Parameters.AddWithValue("@estado", 1);
 
-                    // Ejecutar un non query (Insertar, actualizar y eliminar)
+                    // Ejecuta el NonQuery para utilizar el procedimiento almacenado escrito arriba
                     sqlCommand.ExecuteNonQuery();
 
-                    // Limpiar el valor del texto en txtInformación
+                    // Limpa todos los textbox del formulario
                     txtAgregarNombre.Text = String.Empty;
                     txtAgregarApellido.Text = String.Empty;
                     txtAgregarTelefono.Text = String.Empty;
                     txtAgregarIdentidad.Text = String.Empty;
                     txtAgregarEdad.Text = String.Empty;
-                    
-
                 }
                 //Lanza una excepcion si ocurre un fallo
                 catch (Exception ex)
