@@ -347,6 +347,11 @@ as
 select *from Clinica.inventario
 go
 
+create proc MostrarPuesto
+as
+select *from Clinica.puesto
+go
+
 create proc EditarInventario
 @nombre varchar(50),
 @cantidad int,
