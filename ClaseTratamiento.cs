@@ -36,14 +36,14 @@ namespace SistemaDental
                 SqlDataReader reader = command.ExecuteReader();
 
                 List<ClaseTratamiento> tratamientos = new List<ClaseTratamiento>();
-                ClaseTratamiento tratamiento = null;
+                //ClaseTratamiento tratamiento = null;
 
                 while (reader.Read())
                 {
-                    tratamiento = new ClaseTratamiento();
+                    /*tratamiento = new ClaseTratamiento();
                     tratamiento.NombreTratamiento = reader["nombre"].ToString();
-                    tratamiento.IdTratamiento = Convert.ToInt32(reader["id_tratamiento"].ToString());
-                    tratamientos.Add(tratamiento);
+                    tratamiento.IdTratamiento = Convert.ToInt32(reader["id_tratamiento"].ToString());*/
+                    tratamientos.Add(new ClaseTratamiento {NombreTratamiento=reader["nombre"].ToString(), IdTratamiento=Convert.ToInt32(reader["id_tratamiento"].ToString()) });
                 }
                 return tratamientos;
             }

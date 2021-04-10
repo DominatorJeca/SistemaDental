@@ -77,6 +77,7 @@ namespace SistemaDental
                         tratamiento.NombreMaterial = tratamientos.NombreMaterial.ToString();
                         tratamiento.ActualizarMaterialDisponible(tratamiento);
                     }
+                    MessageBox.Show("Ingreso al historial fue un éxito");
                 }
                 else
                 {
@@ -89,7 +90,6 @@ namespace SistemaDental
             }
             finally
             {
-                MessageBox.Show("Ingreso al historial fue un éxito");
                 cmbPaciente.SelectedItem = null;
                 cmbTratamiento.SelectedItem = null;
             }
