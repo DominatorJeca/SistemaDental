@@ -45,6 +45,8 @@ namespace SistemaDental
             usuario.Administrador = false;
         }
 
+
+
         private bool VerificarValores()
         {
             if (txtAgregarApellido.Text == string.Empty || txtAgregarNombre.Text == string.Empty || txtAgregarCorreo.Text == string.Empty
