@@ -56,7 +56,10 @@ namespace SistemaDental
         }
 
 
-
+        /// <summary>
+        /// Verifica que los valores de los textbox y combobox no esten vacios
+        /// </summary>
+        /// <returns>Verificacion de valores</returns>
         private bool VerificarValores()
         {
             if (txtAgregarApellido.Text == string.Empty || txtAgregarNombre.Text == string.Empty || txtAgregarCorreo.Text == string.Empty
@@ -90,7 +93,9 @@ namespace SistemaDental
             return true;
         }
 
-
+        /// <summary>
+        /// Funcion para limpiar los textbox y combobox del formulario
+        /// </summary>
         private void LimpiarFormulario()
         {
             txtAgregarApellido.Text = string.Empty;

@@ -28,7 +28,10 @@ namespace SistemaDental
             NombrePuesto = nombrePuesto;
         }
 
-
+        /// <summary>
+        /// Mostrar los puestos
+        /// </summary>
+        /// <returns>Lista de tipo puesto</returns>
         public List<Puesto> MostrarPuestos()
         {
             // Inicializar una lista vacía de puestos
