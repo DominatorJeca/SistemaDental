@@ -24,13 +24,21 @@ namespace SistemaDental
         public AgregarUsuario()
         {
             InitializeComponent();
-            cmbPuesto.ItemsSource = puesto.MostrarPuestos();
+            MostrarPuesto();
+           
         }
 
         private void btnRegresar_Click(object sender, RoutedEventArgs e)
         {
             Ajustes ajustes = new Ajustes();
             ajustes.Show();
+        }
+
+        public void MostrarPuesto()
+        {
+            cmbPuesto.ItemsSource = puesto.MostrarPuestos();
+            cmbPuesto.SelectedValuePath = "Id";
+            cmbPuesto.DisplayMemberPath = "NombrePuesto";
         }
 
         public void ObtenerValores()
@@ -41,7 +49,7 @@ namespace SistemaDental
             usuario.Telefono = Convert.ToString(txtAgregarTelefono.Text);
             usuario.Correo = Convert.ToString(txtAgregarCorreo.Text);
             usuario.Puesto = Convert.ToInt32(cmbPuesto.SelectedValue);
-            usuario.Genero = Convert.ToString(cmbSexo.SelectedValue);
+            usuario.Genero = ((ComboBoxItem)cmbSexo.SelectedItem).Content.ToString();
             usuario.Contraseña = Convert.ToString(txtAgregarContra.Text);
             usuario.Estado = true;
             usuario.Administrador = false;
@@ -67,12 +75,12 @@ namespace SistemaDental
                 MessageBox.Show("Por favor selecciona el puesto del nuevo empleado");
                 return false;
             }
-            else if (txtConfirmarContra != txtAgregarContra)
+            else if (txtConfirmarContra.Text != txtAgregarContra.Text)
             {
-                MessageBox.Show("La confirmaciónn de contraseña no coincide");
+                MessageBox.Show("La confirmación de contraseña no coincide");
                 return false;
             }
-            else if (txtConfirmarCorreo != txtAgregarContra)
+            else if (txtConfirmarCorreo.Text != txtAgregarCorreo.Text)
             {
                 MessageBox.Show("La confirmaciónn de correo no coincide");
                 return false;
@@ -82,35 +90,6 @@ namespace SistemaDental
             return true;
         }
 
-        private void btnAgregarUsuario_Click(object sender, RoutedEventArgs e)
-        {
-            // Verificar que se ingresaron los valores requeridos
-            if (VerificarValores())
-            {
-                try
-                {
-                    // Obtener los valores para el empleado
-                    ObtenerValores();
-
-                    // Insertar los datos del usuario 
-                    usuario.IngresarUsuario(usuario);
-
-                    // Mensaje de inserción exitosa
-                    MessageBox.Show("¡Datos insertados correctamente!");
-
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show("Ha ocurrido un error al momento de insertar el empleado...");
-                    Console.WriteLine(ex.Message);
-                }
-                finally
-                {
-                    LimpiarFormulario();
-                }
-            }
-
-        }
 
         private void LimpiarFormulario()
         {
@@ -126,5 +105,34 @@ namespace SistemaDental
             cmbSexo.SelectedValue = null;
 
         }
+
+        private void btnAgregarUsuario_Click_1(object sender, RoutedEventArgs e)
+        {
+            // Verificar que se ingresaron los valores requeridos
+            if (VerificarValores() == true)
+            {
+                try
+                {
+                    // Obtener los valores para el empleado
+                    ObtenerValores();
+
+                    // Insertar los datos del usuario 
+                    usuario.IngresarUsuario(usuario);
+
+                    // Mensaje de inserción exitosa
+                    MessageBox.Show("¡Datos insertados correctamente!");
+                    LimpiarFormulario();
+
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Ha ocurrido un error al momento de insertar el empleado...");
+                    Console.WriteLine(ex.Message);
+                }
+              
+            }
+
+        }
+
     }
 }

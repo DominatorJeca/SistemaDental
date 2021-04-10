@@ -31,8 +31,9 @@ namespace SistemaDental
 
         public List<Puesto> MostrarPuestos()
         {
-            // Inicializar una lista vacía de habitaciones
+            // Inicializar una lista vacía de puestos
             List<Puesto> puestos = new List<Puesto>();
+           
 
             try
             {
