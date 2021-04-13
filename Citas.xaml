@@ -21,13 +21,26 @@
             <Button x:Name="btnEditar" Content="Editar" HorizontalAlignment="Left" Margin="89,301,0,0" VerticalAlignment="Top" Width="202" Background="#FF056676" BorderBrush="{x:Null}" Grid.Column="1"/>
             <Button x:Name="btnBorrar" Content="Borrar" HorizontalAlignment="Left" Margin="76,347,0,0" VerticalAlignment="Top" Width="202" Background="#FF056676" BorderBrush="{x:Null}" Grid.ColumnSpan="2"/>
             <Button x:Name="btnCancelar" Content="Cancelar" HorizontalAlignment="Left" Margin="89,347,0,0" VerticalAlignment="Top" Width="202" RenderTransformOrigin="0.463,1.027" Background="#FF056676" BorderBrush="{x:Null}" Grid.Column="1"/>
-            <ComboBox x:Name="cmbEmpleado" HorizontalAlignment="Left" Margin="432,138,0,0" VerticalAlignment="Top" Width="216" Grid.Column="1"/>
-            <ComboBox x:Name="cmbPaciente" HorizontalAlignment="Left" Margin="432,90,0,0" VerticalAlignment="Top" Width="216" RenderTransformOrigin="0.603,0.358" Grid.Column="1"/>
+        <ComboBox x:Name="cmbEmpleado" HorizontalAlignment="Left" Margin="432,138,0,0" VerticalAlignment="Top" Width="216" Grid.Column="1">
+            <ComboBox.ItemTemplate>
+                <DataTemplate>
+                    <TextBlock>
+                        <TextBlock.Text>
+                            <MultiBinding StringFormat="{}{0} {1}">
+                                <Binding Path="NombreDoctor"/>
+                                <Binding Path="ApellidoDoctor"/>
+                            </MultiBinding>
+                        </TextBlock.Text>
+                    </TextBlock>
+                </DataTemplate>
+            </ComboBox.ItemTemplate>
+        </ComboBox>
+        <ComboBox Name="cmbPaciente" HorizontalAlignment="Left" Margin="432,90,0,0" VerticalAlignment="Top" Width="216" RenderTransformOrigin="0.603,0.358" Grid.Column="1"/>
             <Label Content="Id Paciente" HorizontalAlignment="Left" Margin="317,94,0,0" VerticalAlignment="Top"  FontSize="15" Foreground="Black" Background="White" FontFamily="Bahnschrift" Grid.Column="1"/>
-            <Label Content="Id Empleado" HorizontalAlignment="Left" Margin="317,138,0,0" VerticalAlignment="Top"  FontSize="15" Foreground="Black" Background="White" FontFamily="Bahnschrift" Grid.Column="1"/>
-            <ComboBox x:Name="cmbTratamiento" HorizontalAlignment="Left" Margin="432,179,0,0" VerticalAlignment="Top" Width="216" Grid.Column="1"/>
-            <Label Content="Id Tratamiento" HorizontalAlignment="Left" Margin="317,179,0,0" VerticalAlignment="Top"  FontSize="15" Foreground="Black" Background="White" FontFamily="Bahnschrift" Grid.Column="1"/>
-            <Button x:Name="btnRegresar" Content="Regresar" HorizontalAlignment="Left" Margin="17,10,0,0" VerticalAlignment="Top" Width="103" FontFamily="Bahnschrift" FontSize="16" Background="#FF056676" Click="btnRegresar_Click" BorderBrush="{x:Null}"/>
-            <Calendar x:Name="cdCitas" Grid.Column="1" HorizontalAlignment="Left" Margin="317,243,0,0" VerticalAlignment="Top" Height="314" Width="331"/>
+            <Label Content="Doctor" HorizontalAlignment="Left" Margin="317,138,0,0" VerticalAlignment="Top"  FontSize="15" Foreground="Black" Background="White" FontFamily="Bahnschrift" Grid.Column="1"/>
+            <ComboBox Name="cmbTratamiento" HorizontalAlignment="Left" Margin="432,179,0,0" VerticalAlignment="Top" Width="216" Grid.Column="1"/>
+            <Label Content="Tratamiento" HorizontalAlignment="Left" Margin="317,179,0,0" VerticalAlignment="Top"  FontSize="15" Foreground="Black" Background="White" FontFamily="Bahnschrift" Grid.Column="1"/>
+            <Button Name="btnRegresar" Content="Regresar" HorizontalAlignment="Left" Margin="17,10,0,0" VerticalAlignment="Top" Width="103" FontFamily="Bahnschrift" FontSize="16" Background="#FF056676"  BorderBrush="{x:Null}"/>
+            <Calendar Name="cdCitas" Grid.Column="1" HorizontalAlignment="Left" Margin="317,243,0,0" VerticalAlignment="Top" Height="314" Width="331"/>
         </Grid>
 </Window>

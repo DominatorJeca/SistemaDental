@@ -19,9 +19,29 @@ namespace SistemaDental
     /// </summary>
     public partial class Citas : Window
     {
+        ClaseCitas citas = new ClaseCitas();
         public Citas()
         {
             InitializeComponent();
+            MostrarDatos();
+        }
+        
+        private void MostrarDatos()
+        {
+            cmbPaciente.ItemsSource = citas.mostrarIdPacientes();
+            cmbPaciente.DisplayMemberPath = "IdPacientes";
+            cmbPaciente.SelectedValuePath = "IdPacientes";
+            cmbEmpleado.ItemsSource = citas.MostrarEmpleado();
+            cmbEmpleado.SelectedValuePath = "IdDoctor";
+            cmbTratamiento.ItemsSource = citas.MostrarTratamiento();
+            cmbTratamiento.DisplayMemberPath = "NombreTratamiento";
+            cmbTratamiento.SelectedValuePath = "IdTratamiento";
+        }
+
+        private void ObtenerValores()
+        {
+            citas.IdDoctor = cmbEmpleado.SelectedValue.ToString();
+            citas.IdPacientes = cmbPaciente.SelectedValue.ToString();
         }
     }
 }
