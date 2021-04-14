@@ -19,15 +19,29 @@ namespace SistemaDental
     /// </summary>
     public partial class ManejarUsuario : Window
     {
+        private Usuario usuario = new Usuario();
         public ManejarUsuario()
         {
             InitializeComponent();
+            MostrarUsuario();
         }
 
         private void btnRegresar_Click(object sender, RoutedEventArgs e)
         {
             Ajustes ajustes = new Ajustes();
             ajustes.Show();
+        }
+
+        public void MostrarUsuario()
+        {
+            cmbUsuario.ItemsSource = usuario.MostrarUsuarios();
+            cmbUsuario.SelectedValuePath = "Id";
+            cmbUsuario.DisplayMemberPath = "Id";
+        }
+
+        private void btnEliminarUsuario_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }
