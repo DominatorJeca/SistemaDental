@@ -137,6 +137,31 @@ namespace SistemaDental
             }
         }
 
+        public void EliminarUsuario(string idUsuario)
+        {
+            sqlConnection.Open();
+
+            try
+            {
+                SqlCommand sqlCommand = new SqlCommand("EliminarUsuario", sqlConnection);
+                sqlCommand.CommandType = CommandType.StoredProcedure;
+                //Establecer los valores de parametros
+                sqlCommand.Parameters.AddWithValue("@id", idUsuario);
+                
+                sqlCommand.ExecuteNonQuery();
+
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+            finally
+            {    //Cerrar conexion 
+                sqlConnection.Close();
+            }
+
+        }
+
         /// <summary>
         /// Mostrar los usuarios que se encuentran en la BD activos
         /// </summary>
