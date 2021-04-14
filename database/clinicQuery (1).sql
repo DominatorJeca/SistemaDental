@@ -226,6 +226,12 @@ as
 select *from Clinica.empleado
 go
 
+create proc MostrarEmpleadosActivos
+as
+select *from Clinica.empleado
+where estado=1
+go
+
 create proc EditarEmpleados
 @id varchar(50),
 @nombre varchar(50),
