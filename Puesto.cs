@@ -31,7 +31,7 @@ namespace SistemaDental
         /// <summary>
         /// Mostrar los puestos
         /// </summary>
-        /// <returns>Lista de tipo puesto</returns>
+        /// <returns>Lista de todos los datos de los puestos</returns>
         public List<Puesto> MostrarPuestos()
         {
             // Inicializar una lista vacía de puestos
