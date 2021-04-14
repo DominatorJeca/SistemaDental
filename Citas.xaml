@@ -17,7 +17,7 @@
             </Grid.Background>
             <Label Content="Citas" HorizontalAlignment="Left" Margin="76,58,0,0" VerticalAlignment="Top" FontSize="20" Foreground="Black" Background="#7F056676" FontFamily="Bahnschrift" />
             <DataGrid x:Name="dtg_Citas" HorizontalAlignment="Left" Height="187" Margin="76,90,0,0" VerticalAlignment="Top" Width="422" Background="#FF056676" Foreground="#DDFFFFFF" Grid.ColumnSpan="2"/>
-            <Button x:Name="btnAgregar" Content="Agregar" HorizontalAlignment="Left" Margin="76,301,0,0" VerticalAlignment="Top" Width="202" Background="#FF056676" BorderBrush="{x:Null}" Grid.ColumnSpan="2"/>
+            <Button x:Name="btnAgregar" Content="Agregar" HorizontalAlignment="Left" Margin="76,301,0,0" VerticalAlignment="Top" Width="202" Background="#FF056676" BorderBrush="{x:Null}" Grid.ColumnSpan="2" Click="btnAgregar_Click"/>
             <Button x:Name="btnEditar" Content="Editar" HorizontalAlignment="Left" Margin="89,301,0,0" VerticalAlignment="Top" Width="202" Background="#FF056676" BorderBrush="{x:Null}" Grid.Column="1"/>
             <Button x:Name="btnBorrar" Content="Borrar" HorizontalAlignment="Left" Margin="76,347,0,0" VerticalAlignment="Top" Width="202" Background="#FF056676" BorderBrush="{x:Null}" Grid.ColumnSpan="2"/>
             <Button x:Name="btnCancelar" Content="Cancelar" HorizontalAlignment="Left" Margin="89,347,0,0" VerticalAlignment="Top" Width="202" RenderTransformOrigin="0.463,1.027" Background="#FF056676" BorderBrush="{x:Null}" Grid.Column="1"/>

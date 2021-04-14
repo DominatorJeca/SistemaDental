@@ -107,5 +107,28 @@ namespace SistemaDental
                 sqlConnection.Close();
             }
         }
+
+        public void AgendarCita(ClaseCitas cita)
+        {
+            sqlConnection.Open();
+            try
+            {
+                SqlCommand command = new SqlCommand("IngresoCitas", sqlConnection);
+                command.CommandType = CommandType.StoredProcedure;
+                command.Parameters.AddWithValue("@idempleado", IdDoctor);
+                command.Parameters.AddWithValue("@idpaciente", IdPacientes);
+                command.Parameters.AddWithValue("@fecha", fechaCita);
+                command.Parameters.AddWithValue("@idtratamiento", IdTratamiento);
+                command.ExecuteNonQuery();
+            }
+            catch
+            {
+                throw;
+            }
+            finally
+            {
+                sqlConnection.Close();
+            }
+        }
     }
 }

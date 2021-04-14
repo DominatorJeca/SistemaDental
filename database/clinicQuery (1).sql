@@ -449,12 +449,17 @@ as
 delete Clinica.citas where id_paciente=@idpaciente
 go
 
---inserts--
+create proc MostrarDoctores
+as
+select id_empleado,nombre,apellido from Clinica.empleado where idpuesto=2
+go
 
+--inserts--
+select * from Clinica.puesto
 
 /*Ingreso de empleados*/
-insert into Clinica.puesto values ('Secretaria')
-insert into Clinica.empleado values('0501200010558','Andrea','Murillo','33986418','andrea@gmail.com',3,'Femenino','andrealomaximo',1)
+insert into Clinica.puesto values ('Doctor')
+insert into Clinica.empleado values('0501200010558','Andrea','Murillo','33986418','andrea@gmail.com',2,'Femenino','andrealomaximo',1,0)
 
 
 

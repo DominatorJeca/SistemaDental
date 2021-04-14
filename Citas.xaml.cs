@@ -42,6 +42,33 @@ namespace SistemaDental
         {
             citas.IdDoctor = cmbEmpleado.SelectedValue.ToString();
             citas.IdPacientes = cmbPaciente.SelectedValue.ToString();
+            citas.IdTratamiento =Convert.ToInt32(cmbTratamiento.SelectedValue.ToString());
+            citas.fechaCita = cdCitas.SelectedDate.Value;
+        }
+
+        private void btnAgregar_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                if (cmbEmpleado.SelectedValue.ToString() != null && cmbPaciente.SelectedValue.ToString() != null && Convert.ToInt32(cmbTratamiento.SelectedValue) > 0)
+                {
+                    ObtenerValores();
+                    citas.AgendarCita(citas);
+                    MessageBox.Show("Cita agendada con éxito");
+                }
+                else
+                {
+                    MessageBox.Show("Debe seleccionar todos los elementos necesarios para agendar una cita y debe revisar que su fecha sea la correcta");
+                }
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show("La fecha no es correcta" + ex);
+            }
+            finally
+            {
+
+            }
         }
     }
 }
