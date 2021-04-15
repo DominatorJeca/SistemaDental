@@ -103,13 +103,24 @@ namespace SistemaDental
             
             }
             catch
-            { }
+            {MessageBox.Show("Ha ocurrido un error en el sistema.");}
         }
 
+        /// <summary>
+        /// Boton para cancelar los cambios hechos y para limpiar la pantalla
+        /// </summary>
         private void btnCancelar_Click(object sender, RoutedEventArgs e)
         {
-            HabilitacionDeshabilitacion(false, true);
-            LimpiarPantalla();
+            try
+            {
+                //llama la funcion para deshabilitar los textbox y botones
+                HabilitacionDeshabilitacion(false, true);
+                //llama la funcion para limpiar pantalla
+                LimpiarPantalla();
+                MessageBox.Show("Se han cancelado los cambios.");
+            }
+
+            catch { MessageBox.Show("Ha ocurrido un error en el sistema."); }
         }
     }
 }
