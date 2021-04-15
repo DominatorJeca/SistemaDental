@@ -67,5 +67,22 @@ namespace SistemaDental
                 sqlConnection.Close();
             }
         }
+
+
+        public void LlenarDatosPaciente()
+        {
+
+            sqlConnection.Open();
+
+            //crear el comando SQL
+            SqlCommand sqlCommand = new SqlCommand("MostrarPacienteEspecifico", sqlConnection);
+
+            sqlCommand.CommandType = CommandType.StoredProcedure;
+
+        }
+
+
+
+
     }
 }

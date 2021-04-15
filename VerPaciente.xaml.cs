@@ -50,6 +50,23 @@ namespace SistemaDental
             cmbPaciente.ItemsSource = unPaciente.MostrarPacientes();
             cmbPaciente.SelectedValuePath = "id_paciente";
             cmbPaciente.DisplayMemberPath = "id_paciente";
+            
+            txtNombre.Text = unPaciente.LlenarDatosPaciente();
+            cmbPaciente.SelectedValuePath = "id_paciente";
+            cmbPaciente.DisplayMemberPath = "nombre";
+
+            txtApellido.Text = unPaciente.LlenarDatosPaciente();
+            cmbPaciente.SelectedValuePath = "id_paciente";
+            cmbPaciente.DisplayMemberPath = "apellido";
+
+            txtIdentidad = unPaciente.LlenarDatosPaciente();
+            cmbPaciente.SelectedValuePath = "id_paciente";
+            cmbPaciente.DisplayMemberPath = "id_paciente";
+
+            txtTelefono = unPaciente.LlenarDatosPaciente();
+            cmbPaciente.SelectedValuePath = "id_paciente";
+            cmbPaciente.DisplayMemberPath = "telefono";
+
         }
 
         /// <summary>
@@ -63,6 +80,7 @@ namespace SistemaDental
             txtApellido.IsEnabled = habilitacionGrupoA;
             txtTelefono.IsEnabled = habilitacionGrupoA;
             txtIdentidad.IsEnabled = habilitacionGrupoA;
+            txtEdad.IsEnabled = habilitacionGrupoA;
             cmbSexo.IsEnabled = habilitacionGrupoA;
 
             btnEditarPaciente.IsEnabled = habilitacionGrupoB;
@@ -78,6 +96,7 @@ namespace SistemaDental
             txtApellido.Text = null;
             txtIdentidad.Text = null;
             txtTelefono.Text = null;
+            txtEdad.Text = null;
             cmbSexo.SelectedItem = null;
             cmbPaciente.SelectedItem = null;
             dtgHistorial = null;
