@@ -68,5 +68,35 @@ namespace SistemaDental
                 MostrarUsuario();
             }
         }
+
+        private void btnPrivilegios_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                if (cmbUsuario.SelectedValue == null)
+                    MessageBox.Show("Por favor selecciona un empleado");
+                else
+                {
+                    // Mostrar un mensaje de confirmación
+                    MessageBoxResult result = MessageBox.Show("¿Deseas dar privilegios de administrador al empleado?", "Confirmar", MessageBoxButton.YesNo, MessageBoxImage.Warning);
+
+                    if (result == MessageBoxResult.Yes)
+                    {
+                        // Eliminar el empleado
+                        usuario.PrivilegioUsuario(Convert.ToString(cmbUsuario.SelectedValue));
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Ha ocurrido un error al momento de dar privilegio al empleado...");
+                Console.WriteLine(ex.Message);
+            }
+            finally
+            {
+                // Actualizar el combobox de empleados
+                MostrarUsuario();
+            }
+        }
     }
 }
