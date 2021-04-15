@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
+
 namespace SistemaDental
 {
     /// <summary>
@@ -55,6 +56,11 @@ namespace SistemaDental
             
         }
 
+        private void obtenerCita()
+        {
+            citas.IdCita = Convert.ToInt32(dtg_Citas.SelectedValue.ToString());
+        }
+
         private void btnAgregar_Click(object sender, RoutedEventArgs e)
         {
             try
@@ -87,12 +93,20 @@ namespace SistemaDental
         {
             try
             {
-                btnGuardar.IsEnabled = true;
-                btnEditar.IsEnabled = false;
-                btnAgregar.IsEnabled = false;
-                btnCancelar.IsEnabled = true;
-                btnBorrar.IsEnabled = false;
-                dtg_Citas.IsEnabled = false;
+                
+                if (dtg_Citas.SelectedValue !=null)
+                {
+                    btnGuardar.IsEnabled = true;
+                    btnEditar.IsEnabled = false;
+                    btnAgregar.IsEnabled = false;
+                    btnCancelar.IsEnabled = true;
+                    btnBorrar.IsEnabled = false;
+                    dtg_Citas.IsEnabled = false;
+                }
+                else
+                {
+                    MessageBox.Show("Seleccione una cita agendada");
+                }
             }
             catch
             {
@@ -108,7 +122,7 @@ namespace SistemaDental
         {
             try
             {
-                citas.IdCita = Convert.ToInt32(dtg_Citas.SelectedValue.ToString());
+                obtenerCita();
                 ObtenerValores();
                 citas.EditarCita(citas);
                 MessageBox.Show("Exito al editar");
@@ -132,6 +146,39 @@ namespace SistemaDental
         private void cdCitas_SelectedDatesChanged(object sender, SelectionChangedEventArgs e)
         {
             SelectedDateTextBox.Text = cdCitas.SelectedDate.ToString();
+        }
+
+        private void dtg_Citas_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+           
+        }
+
+        private void btnBorrar_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                if (dtg_Citas.SelectedValue != null)
+                {
+                    MessageBoxResult dialogResult = MessageBox.Show("¿Seguro que desea eliminar la cita?", "Eliminar Cita", MessageBoxButton.YesNo);
+                    if (dialogResult == MessageBoxResult.Yes)
+                    {
+                        obtenerCita();
+                        citas.EliminarCita();
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Seleccione una cita para poder eliminarla");
+                }
+            }
+            catch
+            {
+                throw;
+            }
+            finally
+            {
+                mostrarCitas();
+            }
         }
     }
 }

@@ -187,5 +187,25 @@ namespace SistemaDental
                 sqlConnection.Close();
             }
         }
+
+        public void EliminarCita()
+        {
+            sqlConnection.Open();
+            try
+            {
+                SqlCommand command = new SqlCommand("EliminarCitas", sqlConnection);
+                command.CommandType = CommandType.StoredProcedure;
+                command.Parameters.AddWithValue("@idcita", IdCita);
+                command.ExecuteNonQuery();
+            }
+            catch
+            {
+                throw;
+            }
+            finally
+            {
+                sqlConnection.Close();
+            }
+        }
     }
 }

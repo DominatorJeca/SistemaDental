@@ -16,7 +16,7 @@
             <ImageBrush ImageSource="TeethPattern.jpg" Stretch="UniformToFill"/>
         </Grid.Background>
         <Label Content="Citas" HorizontalAlignment="Left" Margin="12,58,0,0" VerticalAlignment="Top" FontSize="20" Foreground="Black" Background="#7F056676" FontFamily="Bahnschrift" />
-        <DataGrid x:Name="dtg_Citas" HorizontalAlignment="Left" Height="187" Margin="12,90,0,0" VerticalAlignment="Top" Width="545" Background="#FF056676" Foreground="#DDFFFFFF" Grid.ColumnSpan="2" RenderTransformOrigin="0.45,0.505" AutoGenerateColumns="False" IsReadOnly="True">
+        <DataGrid x:Name="dtg_Citas" HorizontalAlignment="Left" Height="187" Margin="12,90,0,0" VerticalAlignment="Top" Width="545" Background="#FF056676" Foreground="#DDFFFFFF" Grid.ColumnSpan="2" RenderTransformOrigin="0.45,0.505" AutoGenerateColumns="False" IsReadOnly="True" SelectionChanged="dtg_Citas_SelectionChanged">
             <DataGrid.Columns >
                 <DataGridTextColumn Header="Paciente">
                     <DataGridTextColumn.Binding>
@@ -33,7 +33,7 @@
         </DataGrid>
         <Button x:Name="btnAgregar" Content="Agregar" HorizontalAlignment="Left" Margin="12,301,0,0" VerticalAlignment="Top" Width="202" Background="#FF056676" BorderBrush="{x:Null}" Grid.ColumnSpan="2" Click="btnAgregar_Click"/>
         <Button Name="btnEditar" Content="Editar" HorizontalAlignment="Left" Margin="24,301,0,0" VerticalAlignment="Top" Width="202" Background="#FF056676" BorderBrush="{x:Null}" Grid.Column="1" Click="btnEditar_Click"/>
-        <Button x:Name="btnBorrar" Content="Borrar" HorizontalAlignment="Left" Margin="12,347,0,0" VerticalAlignment="Top" Width="202" Background="#FF056676" BorderBrush="{x:Null}" Grid.ColumnSpan="2"/>
+        <Button x:Name="btnBorrar" Content="Borrar" HorizontalAlignment="Left" Margin="12,347,0,0" VerticalAlignment="Top" Width="202" Background="#FF056676" BorderBrush="{x:Null}" Grid.ColumnSpan="2" Click="btnBorrar_Click"/>
         <Button Name="btnCancelar" Content="Cancelar" HorizontalAlignment="Left" Margin="108,404,0,0" VerticalAlignment="Top" Width="202" RenderTransformOrigin="0.463,1.027" Background="#FF056676" BorderBrush="{x:Null}" IsEnabled="False" Grid.ColumnSpan="2"/>
         <ComboBox Name="cmbEmpleado" HorizontalAlignment="Left" Margin="468,144,0,0" VerticalAlignment="Top" Width="216" Grid.Column="1" RenderTransformOrigin="0.603,0.358" Text="{Binding ElementName=dtg_Citas,Path=SelectedItem.NombreDoctor, Mode=OneWay}"/>
         <ComboBox Name="cmbPaciente" HorizontalAlignment="Left" Margin="468,96,0,0" VerticalAlignment="Top" Width="216" RenderTransformOrigin="0.603,0.358" Grid.Column="1" Text="{Binding ElementName=dtg_Citas, Path=SelectedItem.IdPacientes}"/>
