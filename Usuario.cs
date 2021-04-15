@@ -82,6 +82,7 @@ namespace SistemaDental
                         usuario.Nombre = Convert.ToString(LeeUsuario["nombre"]);
                         usuario.Contraseña = Convert.ToString(LeeUsuario["contraseña"]);
                         usuario.Estado = Convert.ToBoolean(LeeUsuario["estado"]);
+                        usuario.Administrador = Convert.ToBoolean(LeeUsuario["administrador"]);
                     }
                 }
 
