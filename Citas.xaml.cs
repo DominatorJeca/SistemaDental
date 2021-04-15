@@ -21,6 +21,7 @@ namespace SistemaDental
     public partial class Citas : Window
     {
         ClaseCitas citas = new ClaseCitas();
+        int bandera = 0;
         public Citas()
         {
             InitializeComponent();
@@ -61,6 +62,11 @@ namespace SistemaDental
             citas.IdCita = Convert.ToInt32(dtg_Citas.SelectedValue.ToString());
         }
 
+        /// <summary>
+        /// Con esta función del botón agregar se agendan las citas dentro del sistema
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnAgregar_Click(object sender, RoutedEventArgs e)
         {
             try
@@ -68,8 +74,28 @@ namespace SistemaDental
                 if (cmbEmpleado.SelectedValue.ToString() != null && cmbPaciente.SelectedValue.ToString() != null && Convert.ToInt32(cmbTratamiento.SelectedValue) > 0)
                 {
                     ObtenerValores();
-                    citas.AgendarCita(citas);
-                    MessageBox.Show("Cita agendada con éxito");
+                    
+                    //Se valida que no haya una cita registrada con detalles iguales
+                    foreach(ClaseCitas citas in dtg_Citas.ItemsSource)
+                    {
+                        if (citas.IdPacientes == cmbPaciente.SelectedValue.ToString() && citas.fechaCita==Convert.ToDateTime(SelectedDateTextBox.Text) || citas.IdDoctor== cmbEmpleado.SelectedValue.ToString() && citas.fechaCita == Convert.ToDateTime(SelectedDateTextBox.Text))
+                        {
+                            bandera = 1;
+                        }
+                        else
+                        {
+                            bandera = 0;
+                        }
+                    }
+                    if (bandera == 0)
+                    {
+                        citas.AgendarCita(citas);
+                        MessageBox.Show("Cita agendada con éxito");
+                    }
+                    else
+                    {
+                        MessageBox.Show("Al parecer ya hay una cita agendada con ciertos parámetros iguales");
+                    }
                 }
                 else
                 {
@@ -88,6 +114,12 @@ namespace SistemaDental
                 mostrarCitas();
             }
         }
+
+        /// <summary>
+        /// Con esta función del botón editar se bloquean o desbloquean objetos para editar una cita
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
 
         private void btnEditar_Click(object sender, RoutedEventArgs e)
         {
@@ -118,14 +150,40 @@ namespace SistemaDental
             }
         }
 
+        /// <summary>
+        /// Con el botón guardar se registra la edición de una cita al sistema
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnGuardar_Click(object sender, RoutedEventArgs e)
         {
             try
             {
+
+
                 obtenerCita();
                 ObtenerValores();
-                citas.EditarCita(citas);
-                MessageBox.Show("Exito al editar");
+                //Se valida que no haya una cita registrada con detalles iguales
+                foreach (ClaseCitas citas in dtg_Citas.ItemsSource)
+                {
+                    if (citas.IdPacientes == cmbPaciente.SelectedValue.ToString() && citas.fechaCita == Convert.ToDateTime(SelectedDateTextBox.Text) || citas.IdDoctor == cmbEmpleado.SelectedValue.ToString() && citas.fechaCita == Convert.ToDateTime(SelectedDateTextBox.Text))
+                    {
+                        bandera = 1;
+                    }
+                    else
+                    {
+                        bandera = 0;
+                    }
+                }
+                if (bandera == 0)
+                {
+                    citas.EditarCita(citas);
+                    MessageBox.Show("Exito al editar");
+                }
+                else
+                {
+                    MessageBox.Show("Al parecer ya hay una cita agendada con ciertos parámetros iguales");
+                }
             }
             catch
             {
@@ -143,6 +201,11 @@ namespace SistemaDental
             }
         }
 
+        /// <summary>
+        /// COn esta función el textbox para la fecha obtiene su valor basado en la selección del calendario
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void cdCitas_SelectedDatesChanged(object sender, SelectionChangedEventArgs e)
         {
             SelectedDateTextBox.Text = cdCitas.SelectedDate.ToString();
@@ -152,6 +215,12 @@ namespace SistemaDental
         {
            
         }
+
+        /// <summary>
+        /// COn el botón borrar se elimina del registro la cita agendada
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
 
         private void btnBorrar_Click(object sender, RoutedEventArgs e)
         {
