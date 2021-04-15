@@ -443,8 +443,12 @@ go
 
 create proc MostrarCitas
 as
-select *from Clinica.citas
-go
+select c.id_cita as idcita, c.id_paciente as idpaciente,P.nombre as paciente, P.apellido AS apepac, CONCAT(E.nombre,' ',E.apellido)AS nombredoc, T.nombre as tratamiento, c.fechaCita as fecha from Clinica.citas AS C
+inner join Clinica.pacientes as P on C.id_paciente=P.id_paciente
+inner join Clinica.empleado as E on C.id_empleado=e.id_empleado
+inner join Clinica.tratamiento as T on c.id_tratamiento=t.id_tratamiento where fechaCita>=GETDATE()
+ORDER BY fecha
+GO
 
 create proc EliminarCitas
 @idcita int
