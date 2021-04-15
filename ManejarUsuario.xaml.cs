@@ -73,8 +73,18 @@ namespace SistemaDental
         {
             try
             {
-                if (cmbUsuario.SelectedValue == null)
+                Usuario elUsuario = usuario.BuscarUsuario(Convert.ToString(cmbUsuario.SelectedValue));
+
+
+                //Verificar si el usuario existe
+                
+                if (cmbUsuario.SelectedValue == null) {
                     MessageBox.Show("Por favor selecciona un empleado");
+                }
+                else if(elUsuario.Administrador == true)
+                {
+                    MessageBox.Show("El usuario ya tiene permisos de administrador");
+                }
                 else
                 {
                     // Mostrar un mensaje de confirmación
@@ -84,6 +94,7 @@ namespace SistemaDental
                     {
                         // Eliminar el empleado
                         usuario.PrivilegioUsuario(Convert.ToString(cmbUsuario.SelectedValue));
+                        MessageBox.Show("Permisos asignados correctamente");
                     }
                 }
             }
