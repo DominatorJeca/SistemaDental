@@ -32,7 +32,7 @@
         <Button Name="btnAgregarUsuario" Content="Agregar" HorizontalAlignment="Center" Margin="468,351,45.6,0" VerticalAlignment="Top" Width="280" Background="#FF056676" BorderBrush="{x:Null}" Click="btnAgregarUsuario_Click_1" Grid.ColumnSpan="2"/>
         <Image Source="Happy_Sm.png" RenderTransformOrigin="0.4,0.334" Margin="300,19,113,225" />
         <Label Content="Puesto" HorizontalAlignment="Left" Margin="73,329,0,0" VerticalAlignment="Top" FontSize="12" FontFamily="Bahnschrift"/>
-        <ComboBox x:Name="cmbPuesto" HorizontalAlignment="Left" Margin="228,329,0,0" VerticalAlignment="Top" Width="120">
+        <ComboBox Name="cmbPuesto" HorizontalAlignment="Left" Margin="228,329,0,0" VerticalAlignment="Top" Width="120">
 
         </ComboBox>
     </Grid>

@@ -20,10 +20,12 @@ namespace SistemaDental
     public partial class EditarUsuario : Window
     {
         private Usuario usuario = new Usuario();
+        private Puesto puesto = new Puesto();
         public EditarUsuario()
         {
             InitializeComponent();
             MostrarUsuario();
+            MostrarPuesto();
         }
 
         private void btnRegresar_Click(object sender, RoutedEventArgs e)
@@ -31,12 +33,26 @@ namespace SistemaDental
             Ajustes ajustes = new Ajustes();
             ajustes.Show();
         }
+        public void MostrarPuesto()
+        {
+            cmbPuesto.ItemsSource = puesto.MostrarPuestos();
+            cmbPuesto.SelectedValuePath = "Id";
+            cmbPuesto.DisplayMemberPath = "NombrePuesto";
+        }
 
         public void MostrarUsuario()
         {
             cmbUsuario.ItemsSource = usuario.MostrarUsuarios();
             cmbUsuario.SelectedValuePath = "Id";
             cmbUsuario.DisplayMemberPath = "Id";
+        }
+
+        
+
+        private void cmbUsuario_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            
+            cmbPuesto.Text = puesto.MostrarPuesto(Convert.ToInt32(cmbPuesto.Text));
         }
     }
 }

@@ -64,6 +64,44 @@ namespace SistemaDental
                 // Cerrar la conexión
                 sqlConnection.Close();
             }
+
+        }
+
+        public string MostrarPuesto(int id)
+        {
+            // Inicializar una lista vacía de puestos
+            string puesto;
+
+
+            try
+            {
+                sqlConnection.Open();
+                //crear el comando SQL
+                SqlCommand sqlCommand = new SqlCommand("MostrarUnPuesto", sqlConnection);
+
+                sqlCommand.CommandType = CommandType.StoredProcedure;
+                sqlCommand.Parameters.AddWithValue("@id", id);
+
+                // Obtener los datos de los puestos
+                using (SqlDataReader rdr = sqlCommand.ExecuteReader())
+                {
+                    rdr.Read();
+                      
+                    puesto = rdr["nombrePuesto"].ToString();
+                }
+
+                return puesto;
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+            finally
+            {
+                // Cerrar la conexión
+                sqlConnection.Close();
+            }
+
         }
     }
 }

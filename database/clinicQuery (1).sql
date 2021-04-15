@@ -358,6 +358,13 @@ as
 select *from Clinica.puesto
 go
 
+create proc MostrarUnPuesto
+@id int
+as
+select nombrePuesto from Clinica.puesto
+where id_puesto=@id
+go
+
 create proc EditarInventario
 @nombre varchar(50),
 @cantidad int,
