@@ -32,10 +32,12 @@ namespace SistemaDental
             cmbPaciente.DisplayMemberPath = "IdPacientes";
             cmbPaciente.SelectedValuePath = "IdPacientes";
             cmbEmpleado.ItemsSource = citas.MostrarEmpleado();
+            cmbEmpleado.DisplayMemberPath = "NombreDoctor";
             cmbEmpleado.SelectedValuePath = "IdDoctor";
             cmbTratamiento.ItemsSource = citas.MostrarTratamiento();
             cmbTratamiento.DisplayMemberPath = "NombreTratamiento";
             cmbTratamiento.SelectedValuePath = "IdTratamiento";
+            dtg_Citas.ItemsSource = citas.MostrarCitas();
         }
 
         private void ObtenerValores()
@@ -43,7 +45,7 @@ namespace SistemaDental
             citas.IdDoctor = cmbEmpleado.SelectedValue.ToString();
             citas.IdPacientes = cmbPaciente.SelectedValue.ToString();
             citas.IdTratamiento =Convert.ToInt32(cmbTratamiento.SelectedValue.ToString());
-            citas.fechaCita = cdCitas.SelectedDate.Value;
+            citas.fechaCita = Convert.ToDateTime(SelectedDateTextBox.Text);
         }
 
         private void btnAgregar_Click(object sender, RoutedEventArgs e)
@@ -63,12 +65,53 @@ namespace SistemaDental
             }
             catch(Exception ex)
             {
-                MessageBox.Show("La fecha no es correcta" + ex);
+                MessageBox.Show("Asegurese de ingresar una fecha correcta" + ex);
+            }
+            finally
+            {
+                cmbEmpleado.SelectedValue = null;
+                cmbPaciente.SelectedValue = null;
+                cmbTratamiento.SelectedValue = 0;
+            }
+        }
+
+        private void btnEditar_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                btnGuardar.IsEnabled = true;
+            }
+            catch
+            {
+
             }
             finally
             {
 
             }
+        }
+
+        private void btnGuardar_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                ObtenerValores();
+                citas.EditarCita(citas);
+                MessageBox.Show("Exito al editar");
+            }
+            catch
+            {
+
+            }
+            finally
+            {
+                MostrarDatos();
+            }
+        }
+
+        private void cdCitas_SelectedDatesChanged(object sender, SelectionChangedEventArgs e)
+        {
+            SelectedDateTextBox.Text = cdCitas.SelectedDate.ToString();
         }
     }
 }
