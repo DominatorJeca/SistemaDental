@@ -48,7 +48,7 @@ namespace SistemaDental
                     if ((elUsuario.Contraseña == txtPassword.Password) && (elUsuario.Estado == true))
                     {
                         //Abrir formulario Menu
-                        Menu menu = new Menu();
+                        Menu menu = new Menu(elUsuario.Administrador,elUsuario.Nombre);
                         menu.Show();
                     }
                     else if (!elUsuario.Estado)

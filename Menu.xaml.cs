@@ -19,9 +19,17 @@ namespace SistemaDental
     /// </summary>
     public partial class Menu : Window
     {
+        bool Admin;
         public Menu()
         {
             InitializeComponent();
+        }
+
+        public Menu(bool admin,string name)
+        {
+            Admin = admin;
+            InitializeComponent();
+            lblUsuario.Content = name;
         }
 
         public void btnInventario_Click(object sender, RoutedEventArgs e)
