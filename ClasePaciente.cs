@@ -17,22 +17,23 @@ namespace SistemaDental
         private static string connectionString = System.Configuration.ConfigurationManager.ConnectionStrings["SistemaDental.Properties.Settings.ClinicaBDConnection"].ConnectionString;
         private SqlConnection sqlConnection = new SqlConnection(connectionString);
 
-
-
         public ClasePaciente()
-        {
+        { }
 
-        }
+        public int Id { get; set; }
 
-        public elPaciente(int id, string nombrePaciente) {
+        public string NombrePaciente { get; set; }
+
+
+        public ClasePaciente(int id, string nombrePaciente) {
             Id = id;
             NombrePaciente = nombrePaciente;
         }
 
-        public List<elPaciente> MostrarPacientes()
+        public List<ClasePaciente> MostrarPacientes()
         {
             //Inicializar una lista vacia de pacientes
-            List<elPaciente> paciente = new List<elPaciente>();
+            List<ClasePaciente> paciente = new List<ClasePaciente>();
 
             try
             {
@@ -46,12 +47,23 @@ namespace SistemaDental
                 //Obtener los datos de los pacientes
                 using (SqlDataReader rdr = sqlCommand.ExecuteReader())
                 {
-                    while (())
+                    while ((rdr.Read()))
                         paciente.Add(new ClasePaciente(Id = Convert.ToInt32(rdr["id_paciente"]), NombrePaciente = rdr["nombre"].ToString()));
 
                 }
 
                 return paciente;
+            }
+
+            catch (Exception e)
+            {
+                throw e;
+            }
+
+            finally
+            {
+                // Cerrar la conexión
+                sqlConnection.Close();
             }
 
         }
