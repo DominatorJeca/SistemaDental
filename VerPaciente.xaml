@@ -18,7 +18,7 @@
         <TextBox x:Name="txtIdentidad" Margin="84,171,428,212" materialDesign:HintAssist.Hint="Identidad" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontFamily="Bahnschrift" FontSize="12" Background="#7FFFFFFF" IsEnabled="False"/>
         <ComboBox x:Name="cmbSexo" HorizontalAlignment="Left" Margin="488,125,0,0" VerticalAlignment="Top" Width="120" IsEnabled="False"/>
         <Label Content="Sexo" HorizontalAlignment="Left" Margin="427,128,0,0" VerticalAlignment="Top" FontSize="12" FontFamily="Bahnschrift" RenderTransformOrigin="10.888,-6.676"/>
-        <Button x:Name="btnEditarPaciente" Content="Editar" HorizontalAlignment="Center" Margin="559,234,30,0" VerticalAlignment="Top" Width="203" Background="#FF056676" BorderBrush="{x:Null}"/>
+        <Button x:Name="btnEditarPaciente" Content="Editar" HorizontalAlignment="Center" Margin="559,234,30,0" VerticalAlignment="Top" Width="203" Background="#FF056676" BorderBrush="{x:Null}" Click="btnEditarPaciente_Click"/>
         <Label Content="Historial Clínico" HorizontalAlignment="Left" Margin="84,212,0,0" VerticalAlignment="Top" FontSize="12" FontFamily="Bahnschrift" Background="#7F056676"/>
         <DataGrid x:Name="dtgHistorial" HorizontalAlignment="Left" Height="170" Margin="84,234,0,0" VerticalAlignment="Top" Width="447" Background="#FF056676" Foreground="#DDFFFFFF"/>
         <Button x:Name="btnGuardarPaciente" Content="Guardar" HorizontalAlignment="Center" Margin="559,287,30,0" VerticalAlignment="Top" Width="203" Background="#FF056676" BorderBrush="{x:Null}" IsEnabled="False"/>

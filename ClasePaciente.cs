@@ -3,71 +3,69 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
-//Agregar Namespaces Necesarios para Conexion SQL
-using System.Data.Sql;
+using System.Data;
 using System.Data.SqlClient;
 using System.Configuration;
-using System.Data;
 
 namespace SistemaDental
 {
-    class ClasePaciente
+    public class ClasePaciente
     {
-        private static string connectionString = System.Configuration.ConfigurationManager.ConnectionStrings["SistemaDental.Properties.Settings.ClinicaBDConnection"].ConnectionString;
+
+        //variable miembro
+        private static string connectionString = ConfigurationManager.ConnectionStrings["SistemaDental.Properties.Settings.ClinicaBDConnection"].ConnectionString;
         private SqlConnection sqlConnection = new SqlConnection(connectionString);
 
-        public ClasePaciente()
-        { }
-
-        public int Id { get; set; }
+        //Propiedades
+        public string id_paciente { get; set; }
 
         public string NombrePaciente { get; set; }
 
+        public ClasePaciente() { }
 
-        public ClasePaciente(int id, string nombrePaciente) {
-            Id = id;
+        public ClasePaciente(string id, string nombrePaciente)
+        {
+            id_paciente = id;
             NombrePaciente = nombrePaciente;
         }
 
+        /// <summary>
+        /// Mostrar los pacientes
+        /// </summary>
+        /// <returns>Lista de todos los datos de los pacientes</returns>
         public List<ClasePaciente> MostrarPacientes()
         {
-            //Inicializar una lista vacia de pacientes
+
             List<ClasePaciente> paciente = new List<ClasePaciente>();
+
 
             try
             {
                 sqlConnection.Open();
 
-                //Crear el comando SQL
+                //crear el comando SQL
                 SqlCommand sqlCommand = new SqlCommand("Mostrarpacientes", sqlConnection);
 
                 sqlCommand.CommandType = CommandType.StoredProcedure;
 
-                //Obtener los datos de los pacientes
+                // Obtener los datos de los puestos
                 using (SqlDataReader rdr = sqlCommand.ExecuteReader())
                 {
-                    while ((rdr.Read()))
-                        paciente.Add(new ClasePaciente(Id = Convert.ToInt32(rdr["id_paciente"]), NombrePaciente = rdr["nombre"].ToString()));
-
+                    while (rdr.Read())
+                        paciente.Add(new ClasePaciente { id_paciente = Convert.ToString(rdr["id_paciente"]), NombrePaciente = rdr["nombre"].ToString() });
                 }
 
                 return paciente;
             }
-
             catch (Exception e)
             {
                 throw e;
             }
-
             finally
             {
                 // Cerrar la conexión
                 sqlConnection.Close();
             }
-
         }
-
-
     }
 }
