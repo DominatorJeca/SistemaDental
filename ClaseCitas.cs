@@ -15,6 +15,8 @@ namespace SistemaDental
         private static string connectionString = System.Configuration.ConfigurationManager.ConnectionStrings["SistemaDental.Properties.Settings.ClinicaBDConnection"].ConnectionString;
         private SqlConnection sqlConnection = new SqlConnection(connectionString);
 
+        public int IdCita { get; set; }
+
         public string IdPacientes{get; set;}
         public string NombreDoctor { get; set; }
 
@@ -135,12 +137,13 @@ namespace SistemaDental
 
         public void EditarCita(ClaseCitas cita)
         {
-            
+            sqlConnection.Open();
+
             try
             {
-                sqlConnection.Open();
-                SqlCommand command = new SqlCommand("IngresoCitas", sqlConnection);
+                SqlCommand command = new SqlCommand("EditarCitas", sqlConnection);
                 command.CommandType = CommandType.StoredProcedure;
+                command.Parameters.AddWithValue("@idcita", IdCita);
                 command.Parameters.AddWithValue("@idempleado", IdDoctor);
                 command.Parameters.AddWithValue("@idpaciente", IdPacientes);
                 command.Parameters.AddWithValue("@fecha", fechaCita);
@@ -170,7 +173,7 @@ namespace SistemaDental
 
                 while (reader.Read())
                 {
-                    citas.Add(new ClaseCitas { IdPacientes = reader["idpaciente"].ToString(), NombrePaciente=reader["paciente"].ToString(),ApellidoPaciente=reader["apepac"].ToString(),NombreDoctor=reader["nombredoc"].ToString(),NombreTratamiento = reader["tratamiento"].ToString(), fechaCita=Convert.ToDateTime(reader["fecha"].ToString()) });
+                    citas.Add(new ClaseCitas {IdCita=Convert.ToInt32(reader["idcita"].ToString()), IdPacientes = reader["idpaciente"].ToString(), NombrePaciente=reader["paciente"].ToString(),ApellidoPaciente=reader["apepac"].ToString(),NombreDoctor=reader["nombredoc"].ToString(),NombreTratamiento = reader["tratamiento"].ToString(), fechaCita=Convert.ToDateTime(reader["fecha"].ToString()) });
                 }
 
                 return citas;

@@ -28,23 +28,23 @@
                 </DataGridTextColumn>
                 <DataGridTextColumn Header="Doctor" Width="125" Binding="{Binding NombreDoctor}"/>
                 <DataGridTextColumn Header="Tratamiento" Binding="{Binding NombreTratamiento}" Width="120"/>
-                <DataGridTextColumn Header="Fecha" Binding="{Binding fechaCita}" Width="150"/>
+                <DataGridTextColumn Header="Fecha" Binding="{Binding fechaCita}" Width="175"/>
             </DataGrid.Columns>
         </DataGrid>
         <Button x:Name="btnAgregar" Content="Agregar" HorizontalAlignment="Left" Margin="12,301,0,0" VerticalAlignment="Top" Width="202" Background="#FF056676" BorderBrush="{x:Null}" Grid.ColumnSpan="2" Click="btnAgregar_Click"/>
         <Button Name="btnEditar" Content="Editar" HorizontalAlignment="Left" Margin="24,301,0,0" VerticalAlignment="Top" Width="202" Background="#FF056676" BorderBrush="{x:Null}" Grid.Column="1" Click="btnEditar_Click"/>
         <Button x:Name="btnBorrar" Content="Borrar" HorizontalAlignment="Left" Margin="12,347,0,0" VerticalAlignment="Top" Width="202" Background="#FF056676" BorderBrush="{x:Null}" Grid.ColumnSpan="2"/>
         <Button Name="btnCancelar" Content="Cancelar" HorizontalAlignment="Left" Margin="108,404,0,0" VerticalAlignment="Top" Width="202" RenderTransformOrigin="0.463,1.027" Background="#FF056676" BorderBrush="{x:Null}" IsEnabled="False" Grid.ColumnSpan="2"/>
-        <ComboBox Name="cmbEmpleado" HorizontalAlignment="Left" Margin="468,144,0,0" VerticalAlignment="Top" Width="216" Grid.Column="1" RenderTransformOrigin="0.603,0.358" Text="{Binding ElementName=dtg_Citas,Path=SelectedItem.NombreDoctor}"/>
+        <ComboBox Name="cmbEmpleado" HorizontalAlignment="Left" Margin="468,144,0,0" VerticalAlignment="Top" Width="216" Grid.Column="1" RenderTransformOrigin="0.603,0.358" Text="{Binding ElementName=dtg_Citas,Path=SelectedItem.NombreDoctor, Mode=OneWay}"/>
         <ComboBox Name="cmbPaciente" HorizontalAlignment="Left" Margin="468,96,0,0" VerticalAlignment="Top" Width="216" RenderTransformOrigin="0.603,0.358" Grid.Column="1" Text="{Binding ElementName=dtg_Citas, Path=SelectedItem.IdPacientes}"/>
         <Label Content="Id Paciente" HorizontalAlignment="Left" Margin="350,103,0,0" VerticalAlignment="Top"  FontSize="15" Foreground="Black" Background="White" FontFamily="Bahnschrift" Grid.Column="1"/>
         <Label Content="Doctor" HorizontalAlignment="Left" Margin="350,152,0,0" VerticalAlignment="Top"  FontSize="15" Foreground="Black" Background="White" FontFamily="Bahnschrift" Grid.Column="1" RenderTransformOrigin="1.349,0.404"/>
         <ComboBox Name="cmbTratamiento" HorizontalAlignment="Left" Margin="468,185,0,0" VerticalAlignment="Top" Width="216" Grid.Column="1" Text="{Binding ElementName=dtg_Citas,Path=SelectedItem.NombreTratamiento, Mode=OneWay}"/>
         <Label Content="Tratamiento" HorizontalAlignment="Left" Margin="350,193,0,0" VerticalAlignment="Top"  FontSize="15" Foreground="Black" Background="White" FontFamily="Bahnschrift" Grid.Column="1" />
         <Button Name="btnRegresar" Content="Regresar" HorizontalAlignment="Left" Margin="12,10,0,0" VerticalAlignment="Top" Width="103" FontFamily="Bahnschrift" FontSize="16" Background="#FF056676"  BorderBrush="{x:Null}"/>
-        <Calendar Name="cdCitas" Grid.Column="1" HorizontalAlignment="Left" Margin="380,243,0,0" VerticalAlignment="Top" Height="323" Width="305" SelectedDatesChanged="cdCitas_SelectedDatesChanged"/>
-        <Button Name="btnGuardar" Content="Guardar" HorizontalAlignment="Left" Margin="24,347,0,0" VerticalAlignment="Top" Width="202" Background="#FF056676" BorderBrush="{x:Null}" Grid.Column="1" Click="btnGuardar_Click" IsEnabled="False"/>
-        <TextBox Width="143" Height="30" VerticalAlignment="Bottom" HorizontalAlignment="Left" Margin="232,0,0,73" Name="SelectedDateTextBox" Grid.Column="1"/>
+        <Calendar Name="cdCitas" Grid.Column="1" HorizontalAlignment="Left" Margin="380,243,0,0" VerticalAlignment="Top" Height="323" Width="305" SelectedDatesChanged="cdCitas_SelectedDatesChanged" SelectedDate="{Binding ElementName=dtg_Citas,Path=SelectedItem.fechaCita,Mode=OneWay}"/>
+        <Button x:Name="btnGuardar" Content="Guardar" HorizontalAlignment="Left" Margin="24,347,0,0" VerticalAlignment="Top" Width="202" Background="#FF056676" BorderBrush="{x:Null}" Grid.Column="1" Click="btnGuardar_Click" IsEnabled="False"/>
+        <TextBox Width="143" Height="30" VerticalAlignment="Bottom" HorizontalAlignment="Left" Margin="232,0,0,73" Name="SelectedDateTextBox" Grid.Column="1" Text="{Binding ElementName=dtg_Citas,Path=SelectedItem.fechaCita, Mode=OneWay}"/>
 
     </Grid>
 </Window>

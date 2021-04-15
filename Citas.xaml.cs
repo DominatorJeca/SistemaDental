@@ -24,6 +24,7 @@ namespace SistemaDental
         {
             InitializeComponent();
             MostrarDatos();
+            mostrarCitas();
         }
         
         private void MostrarDatos()
@@ -37,7 +38,12 @@ namespace SistemaDental
             cmbTratamiento.ItemsSource = citas.MostrarTratamiento();
             cmbTratamiento.DisplayMemberPath = "NombreTratamiento";
             cmbTratamiento.SelectedValuePath = "IdTratamiento";
+        }
+
+        private void mostrarCitas()
+        {
             dtg_Citas.ItemsSource = citas.MostrarCitas();
+            dtg_Citas.SelectedValuePath = "IdCita";
         }
 
         private void ObtenerValores()
@@ -46,6 +52,7 @@ namespace SistemaDental
             citas.IdPacientes = cmbPaciente.SelectedValue.ToString();
             citas.IdTratamiento =Convert.ToInt32(cmbTratamiento.SelectedValue.ToString());
             citas.fechaCita = Convert.ToDateTime(SelectedDateTextBox.Text);
+            
         }
 
         private void btnAgregar_Click(object sender, RoutedEventArgs e)
@@ -72,6 +79,7 @@ namespace SistemaDental
                 cmbEmpleado.SelectedValue = null;
                 cmbPaciente.SelectedValue = null;
                 cmbTratamiento.SelectedValue = 0;
+                mostrarCitas();
             }
         }
 
@@ -80,6 +88,11 @@ namespace SistemaDental
             try
             {
                 btnGuardar.IsEnabled = true;
+                btnEditar.IsEnabled = false;
+                btnAgregar.IsEnabled = false;
+                btnCancelar.IsEnabled = true;
+                btnBorrar.IsEnabled = false;
+                dtg_Citas.IsEnabled = false;
             }
             catch
             {
@@ -95,17 +108,24 @@ namespace SistemaDental
         {
             try
             {
+                citas.IdCita = Convert.ToInt32(dtg_Citas.SelectedValue.ToString());
                 ObtenerValores();
                 citas.EditarCita(citas);
                 MessageBox.Show("Exito al editar");
             }
             catch
             {
-
+                throw;
             }
             finally
             {
-                MostrarDatos();
+                mostrarCitas();
+                btnGuardar.IsEnabled = false;
+                btnEditar.IsEnabled = true;
+                btnAgregar.IsEnabled = true;
+                btnCancelar.IsEnabled = false;
+                btnBorrar.IsEnabled = true;
+                dtg_Citas.IsEnabled = true;
             }
         }
 

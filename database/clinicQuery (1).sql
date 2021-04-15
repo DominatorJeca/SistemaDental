@@ -88,10 +88,12 @@ constraint pk_idtrans primary key(id_transaccion)
 )
 
 create table Clinica.citas(
+id_cita int identity(1,1) not null,
 id_empleado varchar(50),
 id_paciente varchar(50),
 fechaCita datetime,
 id_tratamiento int,
+constraint pk_idcitas primary key(id_cita),
 constraint fk_Empleado_Citas foreign key(id_empleado) references Clinica.empleado(id_empleado),
 constraint fk_Paciente_Citas foreign key(id_paciente) references Clinica.pacientes(id_paciente),
 )
@@ -429,13 +431,14 @@ insert into Clinica.citas values (@idempleado,@idpaciente,@fecha,@idtratamiento)
 go
 
 
-create proc EditarCitas
+CREATE proc EditarCitas
+@idcita int,
 @idempleado varchar(50),
 @idpaciente varchar(50),
 @fecha datetime,
 @idtratamiento int
 as
-update Clinica.citas set id_empleado=@idempleado,id_tratamiento=@idtratamiento,fechaCita=@fecha where id_paciente=@idpaciente
+update Clinica.citas set id_empleado=@idempleado,id_paciente=@idpaciente,id_tratamiento=@idtratamiento,fechaCita=@fecha where id_cita=@idcita
 go
 
 create proc MostrarCitas
@@ -444,9 +447,9 @@ select *from Clinica.citas
 go
 
 create proc EliminarCitas
-@idpaciente varchar(50)
+@idcita int
 as
-delete Clinica.citas where id_paciente=@idpaciente
+delete Clinica.citas where id_cita=@idcita
 go
 
 create proc MostrarDoctores
@@ -496,4 +499,5 @@ insert into Clinica.tratamiento_inventario values(1,1,2)
 ,(3,1,1)
 ,(4,2,1)
 ,(4,1,1)
+
 
