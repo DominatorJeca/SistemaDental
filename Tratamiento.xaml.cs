@@ -57,7 +57,7 @@ namespace SistemaDental
 
         public void ObtenerValores()
         {
-            tratamiento.fecha = DateTime.Now;
+            tratamiento.fecha = DateTime.Now.ToString("dddd , MMM dd yyyy,hh:mm:ss");
             tratamiento.IdPaciente = Convert.ToString(cmbPaciente.SelectedValue);
             tratamiento.IdTratamiento = Convert.ToInt32(cmbTratamiento.SelectedValue);
         }

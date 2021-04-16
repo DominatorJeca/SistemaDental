@@ -29,5 +29,10 @@ namespace SistemaDental
             Pacientes pacientes = new Pacientes();
             pacientes.Show();
         }
+
+        private void btnGuardarPaciente_Click()
+        {
+
+        }
     }
 }
