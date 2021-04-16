@@ -19,14 +19,23 @@ namespace SistemaDental
         //Propiedades
         public string id_paciente { get; set; }
 
-        public string NombrePaciente { get; set; }
+        public string ApellidoPaciente { get; set; }
+
+        public string TelefonoPaciente { get; set; }
+
+        public string EdadPaciente { get; set; }
+
+        public string GeneroPaciente { get; set; }
+
+        string[] datosPaciente = new string[10];
+
 
         public ClasePaciente() { }
 
-        public ClasePaciente(string id, string nombrePaciente)
+        public ClasePaciente(string id)
         {
             id_paciente = id;
-            NombrePaciente = nombrePaciente;
+
         }
 
         /// <summary>
@@ -52,7 +61,7 @@ namespace SistemaDental
                 using (SqlDataReader rdr = sqlCommand.ExecuteReader())
                 {
                     while (rdr.Read())
-                        paciente.Add(new ClasePaciente { id_paciente = Convert.ToString(rdr["id_paciente"]), NombrePaciente = rdr["nombre"].ToString() });
+                        paciente.Add(new ClasePaciente { id_paciente = Convert.ToString(rdr["id_paciente"])});
                 }
 
                 return paciente;
@@ -68,16 +77,38 @@ namespace SistemaDental
             }
         }
 
-
-        public void LlenarDatosPaciente()
+        //public List<ClasePaciente> LlenarDatosPaciente(string idPaciente)
+        public string[] LlenarDatosPaciente(string idPaciente)
         {
 
-            sqlConnection.Open();
+            try {
 
-            //crear el comando SQL
-            SqlCommand sqlCommand = new SqlCommand("MostrarPacienteEspecifico", sqlConnection);
+                sqlConnection.Open();
+                //crear el comando SQL
+                SqlCommand sqlCommand = new SqlCommand("MostrarPacienteEspecifico", sqlConnection);
 
-            sqlCommand.CommandType = CommandType.StoredProcedure;
+                sqlCommand.CommandType = CommandType.StoredProcedure;
+                sqlCommand.Parameters.AddWithValue("@id", idPaciente);
+                SqlDataReader reader = sqlCommand.ExecuteReader();
+
+                while (reader.Read())
+                {
+                    datosPaciente[0] = reader["id_paciente"].ToString();
+                    datosPaciente[1] = reader["nombre"].ToString();
+                    datosPaciente[2] = (reader["apellido"].ToString());
+                    datosPaciente[3] = (reader["genero"].ToString());
+                    datosPaciente[4] = (reader["telefono"].ToString());
+                    datosPaciente[5] = (reader["edad"].ToString());
+
+                }
+
+                return (datosPaciente);
+
+
+            }
+            catch (Exception e) { throw e; }
+            finally { sqlConnection.Close(); }
+
 
         }
 

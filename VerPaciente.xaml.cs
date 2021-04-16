@@ -50,23 +50,16 @@ namespace SistemaDental
             cmbPaciente.ItemsSource = unPaciente.MostrarPacientes();
             cmbPaciente.SelectedValuePath = "id_paciente";
             cmbPaciente.DisplayMemberPath = "id_paciente";
-            
-            txtNombre.Text = unPaciente.LlenarDatosPaciente();
-            cmbPaciente.SelectedValuePath = "id_paciente";
-            cmbPaciente.DisplayMemberPath = "nombre";
+        }
 
-            txtApellido.Text = unPaciente.LlenarDatosPaciente();
-            cmbPaciente.SelectedValuePath = "id_paciente";
-            cmbPaciente.DisplayMemberPath = "apellido";
-
-            txtIdentidad = unPaciente.LlenarDatosPaciente();
-            cmbPaciente.SelectedValuePath = "id_paciente";
-            cmbPaciente.DisplayMemberPath = "id_paciente";
-
-            txtTelefono = unPaciente.LlenarDatosPaciente();
-            cmbPaciente.SelectedValuePath = "id_paciente";
-            cmbPaciente.DisplayMemberPath = "telefono";
-
+        public void LlenarTextBox()
+        {
+            string[] datosPaciente = unPaciente.LlenarDatosPaciente(cmbPaciente.Text);
+            txtIdentidad.Text = datosPaciente[0];
+            txtNombre.Text = datosPaciente[1];
+            txtApellido.Text = datosPaciente[2];
+            txtTelefono.Text = datosPaciente[4];
+            txtEdad.Text = datosPaciente[5];
         }
 
         /// <summary>
@@ -84,6 +77,7 @@ namespace SistemaDental
             cmbSexo.IsEnabled = habilitacionGrupoA;
 
             btnEditarPaciente.IsEnabled = habilitacionGrupoB;
+            btnVerPaciente.IsEnabled = habilitacionGrupoB;
             cmbPaciente.IsEnabled = habilitacionGrupoB;
         }
 
@@ -118,6 +112,8 @@ namespace SistemaDental
                     //Deshabilita el combobox paciente y el boton editar
                     //Habilita los demás botones y textbox para poder editar los datos
                     HabilitacionDeshabilitacion(true, false);
+                    LlenarTextBox();
+
                 }
             
             }
@@ -141,5 +137,31 @@ namespace SistemaDental
 
             catch { MessageBox.Show("Ha ocurrido un error en el sistema."); }
         }
+
+        /// <summary>
+        /// Boton para cancelar los cambios hechos y para limpiar la pantalla
+        /// </summary>
+        private void btnVerPaciente_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                if (cmbPaciente.SelectedItem == null)
+                {
+                    MessageBox.Show("Por favor seleccione un paciente.");
+                }
+                else
+                {
+                    //Deshabilita el combobox paciente y el boton editar
+                    //Habilita los demás botones y textbox para poder editar los datos
+                    LlenarTextBox();
+                }
+
+
+
+            }
+
+            catch { MessageBox.Show("Ha ocurrido un error en el sistema."); }
+        }
+
     }
 }
