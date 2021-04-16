@@ -86,14 +86,15 @@ namespace SistemaDental
 
             try
             {
+                DateTime laFecha = System.DateTime.Now;
                 SqlCommand sqlCommand = new SqlCommand("IngresoTransaccion", sqlConnection);
                 sqlCommand.CommandType = CommandType.StoredProcedure;
                 //Establecer los valores de parametros
                 // sqlCommand.Parameters.AddWithValue("@id_transaccion", caja.Id_transaccion);
-                sqlCommand.Parameters.AddWithValue("@tipo_transacción", transaccion);
+                sqlCommand.Parameters.AddWithValue("@tipotransacción", transaccion);
                 sqlCommand.Parameters.AddWithValue("@cantidad", caja.Cantidad);
-                sqlCommand.Parameters.AddWithValue("@fecha", caja.Fecha);
-                sqlCommand.Parameters.AddWithValue("@dinero_disponible", caja.Dinero_disponible);
+                sqlCommand.Parameters.AddWithValue("@fecha", laFecha);
+                sqlCommand.Parameters.AddWithValue("@dinerodisponible", caja.Dinero_disponible);
                 sqlCommand.ExecuteNonQuery();
 
             }
