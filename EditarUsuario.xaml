@@ -23,8 +23,8 @@
         </ComboBox>
         <Label Content="Sexo" HorizontalAlignment="Left" Margin="426,277,0,0" VerticalAlignment="Top" FontSize="12" FontFamily="Bahnschrift"/>
         <TextBox Text="{Binding SelectedItem.Contraseña, ElementName=cmbUsuario}" Name="txtNuevaContra" Margin="54,316,458,69" materialDesign:HintAssist.Hint="Contraseña" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontFamily="Bahnschrift" FontSize="12" Background="#7FFFFFFF"/>
-        <Button x:Name="btnActualizarUsuario" Content="Actualizar" HorizontalAlignment="Left" Margin="209,364,0,0" VerticalAlignment="Top" Width="150" FontFamily="Bahnschrift" FontSize="16" Background="#FF056676" BorderBrush="{x:Null}"/>
-        <Button x:Name="btnCancelar" Content="Cancelar" HorizontalAlignment="Left" Margin="424,364,0,0" VerticalAlignment="Top" Width="103" FontFamily="Bahnschrift" FontSize="16" Background="#FF056676" BorderBrush="{x:Null}"/>
+        <Button x:Name="btnActualizarUsuario" Content="Actualizar" HorizontalAlignment="Left" Margin="209,364,0,0" VerticalAlignment="Top" Width="150" FontFamily="Bahnschrift" FontSize="16" Background="#FF056676" BorderBrush="{x:Null}" Click="btnActualizarUsuario_Click"/>
+        <Button x:Name="btnCancelar" Content="Cancelar" HorizontalAlignment="Left" Margin="424,364,0,0" VerticalAlignment="Top" Width="103" FontFamily="Bahnschrift" FontSize="16" Background="#FF056676" BorderBrush="{x:Null}" Click="btnCancelar_Click"/>
         <Image Source="Happy_Sm.png" RenderTransformOrigin="0.735,0.5" Margin="54,51,433,168"/>
         <Label Content="Puesto" HorizontalAlignment="Left" Margin="426,316,0,0" VerticalAlignment="Top" FontFamily="Bahnschrift" FontSize="12"/>
         <ComboBox Text="{Binding SelectedItem.PuestoNombre, ElementName=cmbUsuario}" Name="cmbPuesto" HorizontalAlignment="Left" Margin="584,316,0,0" VerticalAlignment="Top" Width="120"/>
