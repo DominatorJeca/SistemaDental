@@ -130,7 +130,7 @@ namespace SistemaDental
                 {
 
                     MessageBox.Show("Ha occurido un error al momento de insertar.");
-                    Console.WriteLine(ex.Message);
+                    MessageBox.Show(ex.Message);
                 }
                 
             }
