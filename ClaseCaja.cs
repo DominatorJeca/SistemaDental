@@ -25,7 +25,7 @@ namespace SistemaDental
 
         public int Cantidad { get; set; }
 
-        public int Fecha { get; set; }
+        public DateTime Fecha  { get; set; }
 
         public double Dinero_disponible { get; set; }
 
@@ -34,7 +34,7 @@ namespace SistemaDental
         public ClaseCaja() { }
         
 
-        public ClaseCaja(int id_transaccion, string tipo_transaccion, int cantidad, int fecha, double dinero_disponible)
+        public ClaseCaja(int id_transaccion, string tipo_transaccion, int cantidad, DateTime fecha, double dinero_disponible)
         {
             Id_transaccion = id_transaccion;
             Tipo_transacción = tipo_transaccion;
@@ -47,32 +47,31 @@ namespace SistemaDental
        
         public List<ClaseCaja> MostrarCaja()
         {
-            sqlConnection.Open();
+            List<ClaseCaja> list = new List<ClaseCaja>();
 
             try
             {
-                SqlCommand command = new SqlCommand("MostrarTransaccion", sqlConnection);
-                command.CommandType = CommandType.StoredProcedure;
-                SqlDataReader reader = command.ExecuteReader();
+                sqlConnection.Open();
+                SqlCommand sqlCommand = new SqlCommand("MostrarTransaccion", sqlConnection);
+                sqlCommand.CommandType = CommandType.StoredProcedure;
 
-                List<ClaseCaja> TestList = new List<ClaseCaja>();
-                ClaseCaja test = null;
 
-                while (reader.Read())
+                // Obtener los datos de Caja
+                using (SqlDataReader rdr = sqlCommand.ExecuteReader())
                 {
-                    test = new ClaseCaja();
-                    test.id_transaccion = int.Parse(reader["id_transaccion"].ToString());
-                    test.tipo_transacción = reader["MostrarTransaccion"].ToString();
-                    test.cantidad = int.Parse(reader["cantidad"].ToString());
-                    TestList.Add(test);
+                    while (rdr.Read())
+                    {
+                        list.Add(new ClaseCaja { Id_transaccion = Convert.ToInt32(rdr["id_transaccion"]), Tipo_transacción = Convert.ToString(rdr["tipo_transacción"]), Cantidad = Convert.ToInt32(rdr["cantidad"]), Dinero_disponible = Convert.ToInt32(rdr["dinero_disponible"]), Fecha = Convert.ToDateTime(rdr["fecha"])});
+                    }
                 }
 
-                return TestList;
+                return list;
+                    
             }
-            catch
+            catch (Exception e)
             {
 
-                throw;
+                throw e;
             }
             finally
             {
