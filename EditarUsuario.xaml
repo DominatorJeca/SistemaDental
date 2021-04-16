@@ -11,12 +11,21 @@
         <Grid.Background>
             <ImageBrush ImageSource="TeethPattern.jpg" Stretch="UniformToFill"/>
         </Grid.Background>
+<<<<<<< HEAD
+        <Button x:Name="btnRegresar" Content="Regresar" HorizontalAlignment="Left" Margin="17,10,0,0" VerticalAlignment="Top" Width="103" FontFamily="Bahnschrift" FontSize="16" Background="#FF056676" BorderBrush="{x:Null}" Click="btnRegresar_Click_1"/>
+        <TextBox Text="{Binding SelectedItem.Nombre, ElementName=cmbUsuario}" Name="txtEditarNombre" Margin="426,98,85.6,278" materialDesign:HintAssist.Hint="Nombre" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontFamily="Bahnschrift" FontSize="12" Background="#7FFFFFFF"/>
+        <TextBox Text="{Binding SelectedItem.Apellido, ElementName=cmbUsuario}" Name="txtEditarApellido" Margin="426,142,85.6,234" materialDesign:HintAssist.Hint="Apellido" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontFamily="Bahnschrift" FontSize="12" Background="#7FFFFFFF"/>
+        <TextBox Text="{Binding SelectedItem.Id, ElementName=cmbUsuario}" Name="txtEditarIdentidad" Margin="426,186,85.6,193" materialDesign:HintAssist.Hint="Identidad" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontFamily="Bahnschrift" FontSize="12" Background="#7FFFFFFF"/>
+        <TextBox Text="{Binding SelectedItem.Telefono, ElementName=cmbUsuario}" Name="txtEditarTelefono" Margin="426,232,85.6,146" materialDesign:HintAssist.Hint="Telefono" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontFamily="Bahnschrift" FontSize="12" Background="#7FFFFFFF"/>
+        <TextBox Text="{Binding SelectedItem.Correo, ElementName=cmbUsuario}" Name="txtEditarCorreo" Margin="54,257,457.6,121" materialDesign:HintAssist.Hint="Correo" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontFamily="Bahnschrift" FontSize="12" Background="#7FFFFFFF"/>
+=======
         <Button x:Name="btnRegresar" Content="Regresar" HorizontalAlignment="Left" Margin="17,10,0,0" VerticalAlignment="Top" Width="103" FontFamily="Bahnschrift" FontSize="16" Background="#FF056676" BorderBrush="{x:Null}"/>
         <TextBox Text="{Binding SelectedItem.Nombre, ElementName=cmbUsuario}" Name="txtEditarNombre" Margin="426,98,86,287" materialDesign:HintAssist.Hint="Nombre" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontFamily="Bahnschrift" FontSize="12" Background="#7FFFFFFF"/>
         <TextBox Text="{Binding SelectedItem.Apellido, ElementName=cmbUsuario}" Name="txtEditarApellido" Margin="426,137,86,248" materialDesign:HintAssist.Hint="Apellido" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontFamily="Bahnschrift" FontSize="12" Background="#7FFFFFFF"/>
-        <TextBox Text="{Binding SelectedItem.Id, ElementName=cmbUsuario}" Name="txtEditarIdentidad" Margin="424,176,88,209" materialDesign:HintAssist.Hint="Identidad" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontFamily="Bahnschrift" FontSize="12" Background="#7FFFFFFF"/>
+        <TextBox Text="{Binding SelectedItem.Id, ElementName=cmbUsuario}" Name="txtEditarIdentidad" IsEnabled="False" Margin="424,176,88,209" materialDesign:HintAssist.Hint="Identidad" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontFamily="Bahnschrift" FontSize="12" Background="#7FFFFFFF"/>
         <TextBox Text="{Binding SelectedItem.Telefono, ElementName=cmbUsuario}" Name="txtEditarTelefono" Margin="426,217,86,168" materialDesign:HintAssist.Hint="Telefono" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontFamily="Bahnschrift" FontSize="12" Background="#7FFFFFFF"/>
         <TextBox Text="{Binding SelectedItem.Correo, ElementName=cmbUsuario}" Name="txtEditarCorreo" Margin="54,271,458,114" materialDesign:HintAssist.Hint="Correo" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontFamily="Bahnschrift" FontSize="12" Background="#7FFFFFFF"/>
+>>>>>>> feature-usuario
         <ComboBox Text="{Binding SelectedItem.Genero, ElementName=cmbUsuario}" Name="cmbSexo" HorizontalAlignment="Left" Margin="584,274,0,0" VerticalAlignment="Top" Width="120">
             <ComboBoxItem Content="Femenino" HorizontalAlignment="Left" Width="118.4"/>
             <ComboBoxItem Content="Masculino" HorizontalAlignment="Left" Width="118.4"/>
