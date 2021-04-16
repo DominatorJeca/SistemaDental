@@ -7,9 +7,6 @@
         mc:Ignorable="d"
         Title="Ajustes" Height="450" Width="800">
     <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition/>
-        </Grid.ColumnDefinitions>
         <Grid.Background>
             <ImageBrush ImageSource="bienvenida.png"/>
         </Grid.Background>

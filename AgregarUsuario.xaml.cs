@@ -21,8 +21,6 @@ namespace SistemaDental
     {
         private Usuario usuario = new Usuario();
         private Puesto puesto = new Puesto();
-        bool Admin;
-        string Nombree;
         public AgregarUsuario()
         {
             InitializeComponent();
@@ -30,20 +28,10 @@ namespace SistemaDental
            
         }
 
-        public AgregarUsuario(bool admin,string name)
-        {
-            InitializeComponent();
-            MostrarPuesto();
-            Admin = admin;
-            Nombree = name;
-
-        }
-
         private void btnRegresar_Click(object sender, RoutedEventArgs e)
         {
-            Ajustes ajustes = new Ajustes(Admin, Nombree);
+            Ajustes ajustes = new Ajustes();
             ajustes.Show();
-            this.Hide();
         }
 
         public void MostrarPuesto()
