@@ -12,42 +12,29 @@
     </Window.Background>
     <Grid>
         <Button x:Name="btnRegresar" Content="Regresar" HorizontalAlignment="Left" Margin="17,10,0,0" VerticalAlignment="Top" Width="103" FontFamily="Bahnschrift" FontSize="16" Background="#FF056676" Click="btnRegresar_Click" BorderBrush="{x:Null}"/>
-        <TextBox x:Name="txtNombre" Margin="84,66,428,309" materialDesign:HintAssist.Hint="Nombre" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontFamily="Bahnschrift" FontSize="12" Background="#7FFFFFFF"/>
-        <TextBox x:Name="txtApellido" Margin="84,116,428,259" materialDesign:HintAssist.Hint="Apellido" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontFamily="Bahnschrift" FontSize="12" Background="#7FFFFFFF"/>
-        <TextBox x:Name="txtTelefono" Margin="427,64,85,309" materialDesign:HintAssist.Hint="Telefóno" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontFamily="Bahnschrift" FontSize="12" Background="#7FFFFFFF"/>
-        <TextBox x:Name="txtEdad" Margin="427,114,85,259" materialDesign:HintAssist.Hint="Edad" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontFamily="Bahnschrift" FontSize="12" Background="#7FFFFFFF"/>
-        <TextBox x:Name="txtIdentidad" Margin="84,165,428,212" materialDesign:HintAssist.Hint="Identidad" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontFamily="Bahnschrift" FontSize="12" Background="#7FFFFFFF"/>
-        <Label Content="Sexo" HorizontalAlignment="Left" Margin="425,175,0,0" VerticalAlignment="Top" FontSize="12" FontFamily="Bahnschrift" RenderTransformOrigin="10.888,-6.676"/>
+        <TextBox x:Name="txtNombre" Margin="84,66,428,309" materialDesign:HintAssist.Hint="Nombre" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontFamily="Bahnschrift" FontSize="12" Background="#7FFFFFFF" Text="{Binding ElementName=cmbPaciente,Path=SelectedItem.NombrePaciente}"/>
+        <TextBox x:Name="txtApellido" Margin="84,116,428,259" materialDesign:HintAssist.Hint="Apellido" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontFamily="Bahnschrift" FontSize="12" Background="#7FFFFFFF" Text="{Binding ElementName=cmbPaciente,Path=SelectedItem.ApellidoPaciente}"/>
+        <TextBox x:Name="txtTelefono" Margin="427,64,85,309" materialDesign:HintAssist.Hint="Telefóno" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontFamily="Bahnschrift" FontSize="12" Background="#7FFFFFFF" Text="{Binding ElementName=cmbPaciente,Path=SelectedItem.Telefono}"/>
+        <TextBox x:Name="txtEdad" Margin="427,114,85,259" materialDesign:HintAssist.Hint="Edad" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontFamily="Bahnschrift" FontSize="12" Background="#7FFFFFFF" Text="{Binding ElementName=cmbPaciente,Path=SelectedItem.Edad}"/>
+        <TextBox x:Name="txtIdentidad" Margin="84,165,428,212" materialDesign:HintAssist.Hint="Identidad" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontFamily="Bahnschrift" FontSize="12" Background="#7FFFFFFF" Text="{Binding ElementName=cmbPaciente,Path=SelectedItem.Id_paciente}"/>
+        <Label Content="Sexo" HorizontalAlignment="Left" Margin="427,185,0,0" VerticalAlignment="Top" FontSize="12" FontFamily="Bahnschrift" RenderTransformOrigin="10.888,-6.676"/>
         <Button x:Name="btnEditarPaciente" Content="Editar" HorizontalAlignment="Center" Margin="559,234,30,0" VerticalAlignment="Top" Width="203" Background="#FF056676" BorderBrush="{x:Null}" Click="btnEditarPaciente_Click"/>
-        <Button x:Name="btnVerPaciente" Content="Ver" HorizontalAlignment="Center" Margin="677,17,30,0" VerticalAlignment="Top" Width="85" Background="#FF056676" BorderBrush="{x:Null}" Click="btnVerPaciente_Click"/>
         <Label Content="Historial Clínico" HorizontalAlignment="Left" Margin="84,212,0,0" VerticalAlignment="Top" FontSize="12" FontFamily="Bahnschrift" Background="#7F056676"/>
         
-        <DataGrid x:Name="dtgHistorial" HorizontalAlignment="Left" Height="170" Margin="84,234,0,0" VerticalAlignment="Top" Width="447" Background="#FF056676" Foreground="#DDFFFFFF">
+        <DataGrid x:Name="dtgHistorial" HorizontalAlignment="Left" Height="170" Margin="84,234,0,0" VerticalAlignment="Top" Width="447" Background="#FF056676" Foreground="#DDFFFFFF" AutoGenerateColumns="False">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="ID Historial" Binding="{Binding id_historial}" Width="100"></DataGridTextColumn>
-                <DataGridTextColumn Header="ID Paciente" Binding="{Binding id_paciente}" Width="130"></DataGridTextColumn>
-                <DataGridTextColumn Header="Fecha" Binding="{Binding fecha}" Width="90"></DataGridTextColumn>
-                <DataGridTextColumn Header="ID Tratamiento" Binding="{Binding id_tratamiento}" Width="150"></DataGridTextColumn>
+                <DataGridTextColumn Header="Fecha" Binding="{Binding Fecha}" Width="200"></DataGridTextColumn>
+                <DataGridTextColumn Header="Tratamiento" Binding="{Binding NombreTratamiento}" Width="200"></DataGridTextColumn>
             </DataGrid.Columns>    
             
         </DataGrid>
         <Button x:Name="btnGuardarPaciente" Content="Guardar" HorizontalAlignment="Center" Margin="559,287,30,0" VerticalAlignment="Top" Width="203" Background="#FF056676" BorderBrush="{x:Null}" Click="btnGuardarPaciente_Click" />
         <Button x:Name="btnCancelar" Content="Cancelar" HorizontalAlignment="Center" Margin="559,339,30,0" VerticalAlignment="Top" Width="203" Background="#FF056676" BorderBrush="{x:Null}" Click="btnCancelar_Click"/>
         <Label Content="Paciente" HorizontalAlignment="Left" Margin="133,32,0,0" VerticalAlignment="Top" FontSize="12" FontFamily="Bahnschrift"/>
-        <ComboBox x:Name="cmbPaciente" HorizontalAlignment="Left" Margin="203,24,0,0" VerticalAlignment="Top" Width="460"/>
-
-        <StackPanel Margin="410,90,238,183">
-            <RadioButton x:Name="rbFemenino" Margin="57,86,-22,-76" Height="20" FontFamily="Bahnschrift">
-                <WrapPanel>
-                    <TextBlock Text="Femenino" Foreground="Black" Margin="5,0,0,0"/>
-                </WrapPanel>
-            </RadioButton>
-            <RadioButton x:Name="rbMasculino" Margin="57,86,-22,-76" Height="22" FontFamily="Bahnschrift">
-                <WrapPanel>
-                    <TextBlock Text="Masculino" Foreground="Black" Margin="5,0,0,0"/>
-                </WrapPanel>
-            </RadioButton>
-        </StackPanel>
-
+        <ComboBox x:Name="cmbPaciente" HorizontalAlignment="Left" Margin="203,24,0,0" VerticalAlignment="Top" Width="460" SelectionChanged="cmbPaciente_SelectionChanged"/>
+        <ComboBox Name="cmbGenero" HorizontalAlignment="Left" Margin="468,185,0,0" VerticalAlignment="Top" Width="216" Grid.Column="1" Text="{Binding ElementName=cmbPaciente,Path=SelectedItem.Genero}">
+            <ComboBoxItem Content="Femenino"/>
+            <ComboBoxItem Content="Masculino"/>
+        </ComboBox>
     </Grid>
 </Window>

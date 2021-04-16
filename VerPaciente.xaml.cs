@@ -49,27 +49,11 @@ namespace SistemaDental
         public void MostrarPacientes()
         {
             cmbPaciente.ItemsSource = unPaciente.MostrarPacientes();
-            cmbPaciente.SelectedValuePath = "id_paciente";
-            cmbPaciente.DisplayMemberPath = "id_paciente";
+            cmbPaciente.SelectedValuePath = "Id_paciente";
+            cmbPaciente.DisplayMemberPath = "Id_paciente";
         }
 
-        /// <summary>
-        /// Funcion para llenar los textbox y radio botones con respecto al id seleccionado
-        /// </summary>
-        public void LlenarTextBox()
-        {
-            string[] datosPaciente = unPaciente.LlenarDatosPaciente(cmbPaciente.Text);
-            txtIdentidad.Text = datosPaciente[0];
-            txtNombre.Text = datosPaciente[1];
-            txtApellido.Text = datosPaciente[2];
-            txtTelefono.Text = datosPaciente[4];
-            txtEdad.Text = datosPaciente[5];
-
-            if (datosPaciente[3] == "Masculino")
-            { rbMasculino.IsChecked = true; }
-            else { rbFemenino.IsChecked = true; }
-
-        }
+   
 
         /// <summary>
         /// Funcion para habilitar o deshabilitar los botones, textbox y combobox del formulario
@@ -83,11 +67,9 @@ namespace SistemaDental
             txtTelefono.IsEnabled = habilitacionGrupoA;
             txtIdentidad.IsEnabled = habilitacionGrupoA;
             txtEdad.IsEnabled = habilitacionGrupoA;
-            rbFemenino.IsEnabled = habilitacionGrupoA;
-            rbMasculino.IsEnabled = habilitacionGrupoA;
 
             btnEditarPaciente.IsEnabled = habilitacionGrupoB;
-            btnVerPaciente.IsEnabled = habilitacionGrupoB;
+           
             cmbPaciente.IsEnabled = habilitacionGrupoB;
         }
 
@@ -103,8 +85,7 @@ namespace SistemaDental
             txtEdad.Text = null;
             cmbPaciente.SelectedItem = null;
             dtgHistorial = null;
-            rbMasculino.IsChecked = false;
-            rbFemenino.IsChecked = false;
+
         }
 
         /// <summary>
@@ -123,7 +104,6 @@ namespace SistemaDental
                     //Deshabilita el combobox paciente, el boton editar y ver
                     //Habilita los demás botones y textbox para poder editar los datos
                     HabilitacionDeshabilitacion(true, false);
-                    LlenarTextBox();
 
                 }
             
@@ -152,70 +132,20 @@ namespace SistemaDental
         /// <summary>
         /// Boton Ver el historial del paciente seleccionado en el combobox
         /// </summary>
-        private void btnVerPaciente_Click(object sender, RoutedEventArgs e)
-        {
-            try
-            {
-                if (cmbPaciente.SelectedItem == null)
-                {
-                    MessageBox.Show("Por favor seleccione un paciente.");
-                }
-                else
-                {
-                    LlenarTextBox();
-                    string identidad = txtIdentidad.Text;
-                    dtgHistorial.ItemsSource = unPaciente.MostrarHistorial(identidad);
-                    dtgHistorial.SelectedValuePath = "id_paciente";
-                }
-
-
-
-            }
-
-            catch {
-                throw;
-                //MessageBox.Show("Ha ocurrido un error en el sistema.");
-            }
-        }
+       
 
         private void btnGuardarPaciente_Click(object sender, RoutedEventArgs e)
         {
 
-            try
-            {
-                //Validacion que todos los campos esten completos
-                if (txtIdentidad.Text == null || txtNombre.Text == null || txtTelefono.Text == null
-                    || txtApellido.Text == null || txtEdad.Text == null || 
-                    (rbFemenino.IsChecked == false && rbMasculino.IsChecked == false))
-                { MessageBox.Show("Por favor complete todos los campos."); }
-                else {
-
-                    //asignacion de valores de textbox a variables
-                    string id = txtIdentidad.Text;
-                    string nombre = txtNombre.Text;
-                    string apellido = txtApellido.Text;
-                    string telefono = txtTelefono.Text;
-                    int edad = Convert.ToInt32(txtEdad.Text);
-
-                    //asignacion de radio boton a variable
-                    string genero;
-                    if (rbFemenino.IsChecked == true)
-                        { genero = "Femenino"; }
-                    else { genero = "Masculino"; }
-
-                    //Enviar paramateros al metodo para poder actualizar los datos
-                    unPaciente.ActualizarDatosPaciente(id, nombre, apellido, genero, telefono, edad);
-                    LlenarTextBox();
-                    HabilitacionDeshabilitacion(false, true);
-                    MessageBox.Show("Datos actualizados correctamente.");
-                }
-            }
-
-            catch { MessageBox.Show ("Ha ocurrido un error en el sistema."); }
+          
 
 
         }
 
-
+        private void cmbPaciente_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            unPaciente.Id_paciente=cmbPaciente.SelectedValue.ToString();
+            dtgHistorial.ItemsSource = unPaciente.MostrarHistorial(unPaciente);
+        }
     }
 }

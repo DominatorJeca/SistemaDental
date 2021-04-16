@@ -17,25 +17,32 @@ namespace SistemaDental
         private SqlConnection sqlConnection = new SqlConnection(connectionString);
 
         //Propiedad para extraer todos los ID almacenados en la BD
-        public string id_paciente { get; set; }
+        public string Id_paciente { get; set; }
+
+        public string NombrePaciente { get; set; }
+
+        public string ApellidoPaciente { get; set; }
+
+        public string Telefono { get; set; }
+
+        public int Edad { get; set; }
+
+        public string Genero { get; set; }
+
 
         public DateTime Fecha { get; set; }
         public int IdHistorial { get; set; }
-        public string IdPaciente { get; set; }
-        public string IdTratamiento { get; set; }
+
+        public string NombreTratamiento { get; set; }
 
 
         //Arreglo tipo string para almacenar los datos extraidos de la BD
-        string[] datosPaciente = new string[10];
-
+        
 
         public ClasePaciente() { }
 
         //propiedad con el parámetro id_paciente
-        public ClasePaciente(string id)
-        {
-            id_paciente = id;
-        }
+        
 
         /// <summary>
         /// Metodo para mostrar los pacientes existentes
@@ -60,7 +67,7 @@ namespace SistemaDental
                 using (SqlDataReader rdr = sqlCommand.ExecuteReader())
                 {
                     while (rdr.Read())
-                        paciente.Add(new ClasePaciente { id_paciente = Convert.ToString(rdr["id_paciente"])});
+                        paciente.Add(new ClasePaciente { Id_paciente = rdr["id_paciente"].ToString(), NombrePaciente=rdr["nombre"].ToString(), ApellidoPaciente=rdr["apellido"].ToString(), Edad=Convert.ToInt32(rdr["edad"].ToString()), Telefono=rdr["telefono"].ToString(), Genero=rdr["genero"].ToString()});
                 }
 
                 return paciente;
@@ -80,7 +87,7 @@ namespace SistemaDental
         /// Metodo para almacenar en un arreglo los datos del paciente seleccionado
         /// </summary>
         /// <returns>Lista de todos los datos de los pacientes</returns>
-        public string[] LlenarDatosPaciente(string idPaciente)
+      /*  public List<ClasePaciente> LlenarDatosPaciente()
         {
 
             try {
@@ -90,29 +97,29 @@ namespace SistemaDental
                 SqlCommand sqlCommand = new SqlCommand("MostrarPacienteEspecifico", sqlConnection);
 
                 sqlCommand.CommandType = CommandType.StoredProcedure;
-                sqlCommand.Parameters.AddWithValue("@id", idPaciente);
+                sqlCommand.Parameters.AddWithValue("@id", Id_paciente);
                 SqlDataReader reader = sqlCommand.ExecuteReader();
 
                 while (reader.Read())
                 {
-                    datosPaciente[0] = reader["id_paciente"].ToString();
-                    datosPaciente[1] = reader["nombre"].ToString();
-                    datosPaciente[2] = (reader["apellido"].ToString());
-                    datosPaciente[3] = (reader["genero"].ToString());
-                    datosPaciente[4] = (reader["telefono"].ToString());
-                    datosPaciente[5] = (reader["edad"].ToString());
-
+                   
                 }
 
-                return (datosPaciente);
+                
 
 
             }
-            catch (Exception e) { throw e; }
-            finally { sqlConnection.Close(); }
+            catch (Exception e) 
+            { 
+                throw e; 
+            }
+            finally 
+            { 
+                sqlConnection.Close(); 
+            }
 
 
-        }
+        }*/
 
         /// <summary>
         /// Metodo para actualizar los datos del paciente seleccionado
@@ -147,7 +154,7 @@ namespace SistemaDental
             
         }
 
-        public List<ClasePaciente> MostrarHistorial(string id)
+        public List<ClasePaciente> MostrarHistorial(ClasePaciente paciente)
         {
             sqlConnection.Open();
 
@@ -156,23 +163,17 @@ namespace SistemaDental
 
                 SqlCommand sqlCommand = new SqlCommand("MostrarHistorial", sqlConnection);
                 sqlCommand.CommandType = CommandType.StoredProcedure;
-                sqlCommand.Parameters.AddWithValue("@idpaciente", id);
+                sqlCommand.Parameters.AddWithValue("@idpaciente", paciente.Id_paciente);
                 SqlDataReader reader = sqlCommand.ExecuteReader();
 
-                List<ClasePaciente> TestList = new List<ClasePaciente>();
-                ClasePaciente test = null;
+                List<ClasePaciente> pacientes = new List<ClasePaciente>();
 
                 while (reader.Read())
                 {
-                    test = new ClasePaciente();
-                    test.IdHistorial = int.Parse(reader["id_historial"].ToString());
-                    test.IdPaciente = reader["id_paciente"].ToString();
-                    test.Fecha = DateTime.Parse(reader["fecha"].ToString());
-                    test.IdTratamiento = reader["id_tratamiento"].ToString();
-                    TestList.Add(test);
+                    pacientes.Add(new ClasePaciente { Fecha = Convert.ToDateTime(reader["fecha"].ToString()), NombreTratamiento = reader["tratamiento"].ToString() });
                 }
 
-                return TestList;
+                return pacientes;
             }
             catch
             {
