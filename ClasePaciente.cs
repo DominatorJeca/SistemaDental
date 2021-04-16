@@ -152,5 +152,31 @@ namespace SistemaDental
             }
         }
 
+        public void AgregarPaciente( ClasePaciente paciente)
+        {
+            sqlConnection.Open();
+            try
+            {
+                SqlCommand sqlCommand = new SqlCommand("IngresoPacientes", sqlConnection);
+                sqlCommand.CommandType = CommandType.StoredProcedure;
+                sqlCommand.Parameters.AddWithValue("@id", paciente.Id_paciente);
+                sqlCommand.Parameters.AddWithValue("@nombre", paciente.NombrePaciente);
+                sqlCommand.Parameters.AddWithValue("@apellido", paciente.ApellidoPaciente);
+                sqlCommand.Parameters.AddWithValue("@telefono", paciente.Telefono);
+                sqlCommand.Parameters.AddWithValue("@edad", paciente.Edad);
+                sqlCommand.Parameters.AddWithValue("@genero", paciente.Genero);
+                sqlCommand.Parameters.AddWithValue("@estado", 1);
+                sqlCommand.ExecuteNonQuery();
+            }
+            catch
+            {
+                throw;
+            }
+            finally
+            {
+                sqlConnection.Close();
+            }
+        }
+
     }
 }
