@@ -156,7 +156,7 @@ namespace SistemaDental
 
                 SqlCommand sqlCommand = new SqlCommand("MostrarHistorial", sqlConnection);
                 sqlCommand.CommandType = CommandType.StoredProcedure;
-                sqlCommand.Parameters.AddWithValue("@id", id);
+                sqlCommand.Parameters.AddWithValue("@idpaciente", id);
                 SqlDataReader reader = sqlCommand.ExecuteReader();
 
                 List<ClasePaciente> TestList = new List<ClasePaciente>();

@@ -172,7 +172,10 @@ namespace SistemaDental
 
             }
 
-            catch { MessageBox.Show("Ha ocurrido un error en el sistema."); }
+            catch {
+                throw;
+                //MessageBox.Show("Ha ocurrido un error en el sistema.");
+            }
         }
 
         private void btnGuardarPaciente_Click(object sender, RoutedEventArgs e)
