@@ -29,7 +29,9 @@ namespace SistemaDental
         
         private ClaseCaja caja = new ClaseCaja();
 
-        private SqlConnection sqlConnection;
+        int resultado = 0;
+        int cantidad = 0;
+        int dinero = 0;
         public Caja()
         {
             InitializeComponent();
@@ -37,11 +39,26 @@ namespace SistemaDental
             
         }
 
+
+        public void DineroDisponible()
+        {
+            if (rbEgreso.IsChecked == true)
+            {
+                
+                cantidad = Convert.ToInt32(txtCantidadCaja);
+                dinero = Convert.ToInt32(txtDineroCaja);
+                resultado = dinero - cantidad;
+            }
+            else if (rbIngreso.IsChecked == true)
+                {
+                resultado = dinero + cantidad;
+                }
+        }
         public void MostrarCaja()
         {
             dgvCaja.ItemsSource = caja.MostrarCaja();
-            dgvCaja.SelectedValuePath = "id_transaccion";
-            dgvCaja.DisplayMemberPath = "tipo_transacción";
+            dgvCaja.SelectedValuePath = "Id_transaccion";
+            dgvCaja.DisplayMemberPath = "Tipo_transacción";
         }
 
         private void ObtenerValues()
