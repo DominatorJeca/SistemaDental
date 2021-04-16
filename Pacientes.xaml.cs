@@ -28,21 +28,21 @@ namespace SistemaDental
         {
             VerPaciente verpaciente = new VerPaciente();
             verpaciente.Show();
-            this.Close();
+            this.Hide();
         }
 
         private void btnAgregarPaciente_Click(object sender, RoutedEventArgs e)
         {
             AgregarPaciente agregarPaciente = new AgregarPaciente();
             agregarPaciente.Show();
-            this.Close();
+            this.Hide();
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             Menu menu = new Menu();
             menu.Show();
-            this.Close();
+            this.Hide();
         }
     }
 }

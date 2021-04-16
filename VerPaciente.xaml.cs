@@ -40,7 +40,7 @@ namespace SistemaDental
         {
             Pacientes pacientes = new Pacientes();
             pacientes.Show();
-            this.Close();
+            this.Hide();
         }
 
         /// <summary>
