@@ -25,7 +25,7 @@ namespace SistemaDental
 
         public int Cantidad { get; set; }
 
-        public DateTime Fecha  { get; set; }
+        public string Fecha  { get; set; }
 
         public double Dinero_disponible { get; set; }
 
@@ -34,7 +34,7 @@ namespace SistemaDental
         public ClaseCaja() { }
         
 
-        public ClaseCaja(int id_transaccion, string tipo_transaccion, int cantidad, DateTime fecha, double dinero_disponible)
+        public ClaseCaja(int id_transaccion, string tipo_transaccion, int cantidad, string fecha, double dinero_disponible)
         {
             Id_transaccion = id_transaccion;
             Tipo_transacción = tipo_transaccion;
@@ -61,7 +61,7 @@ namespace SistemaDental
                 {
                     while (rdr.Read())
                     {
-                        list.Add(new ClaseCaja { Id_transaccion = Convert.ToInt32(rdr["id_transaccion"]), Tipo_transacción = Convert.ToString(rdr["tipo_transacción"]), Cantidad = Convert.ToInt32(rdr["cantidad"]), Dinero_disponible = Convert.ToInt32(rdr["dinero_disponible"]), Fecha = Convert.ToDateTime(rdr["fecha"])});
+                        list.Add(new ClaseCaja { Id_transaccion = Convert.ToInt32(rdr["id_transaccion"]), Tipo_transacción = Convert.ToString(rdr["tipo_transacción"]), Cantidad = Convert.ToInt32(rdr["cantidad"]), Dinero_disponible = Convert.ToInt32(rdr["dinero_disponible"]), Fecha = System.DateTime.Now.ToShortDateString()});
                     }
                 }
 
@@ -80,7 +80,7 @@ namespace SistemaDental
         }
 
 
-        public void IngresarCaja(ClaseCaja caja)
+        public void IngresarCaja(ClaseCaja caja, string transaccion)
         {
             sqlConnection.Open();
 
@@ -89,8 +89,8 @@ namespace SistemaDental
                 SqlCommand sqlCommand = new SqlCommand("IngresoTransaccion", sqlConnection);
                 sqlCommand.CommandType = CommandType.StoredProcedure;
                 //Establecer los valores de parametros
-                sqlCommand.Parameters.AddWithValue("@id_transaccion", caja.Id_transaccion);
-                sqlCommand.Parameters.AddWithValue("@tipo_transacción", caja.Tipo_transacción);
+                // sqlCommand.Parameters.AddWithValue("@id_transaccion", caja.Id_transaccion);
+                sqlCommand.Parameters.AddWithValue("@tipo_transacción", transaccion);
                 sqlCommand.Parameters.AddWithValue("@cantidad", caja.Cantidad);
                 sqlCommand.Parameters.AddWithValue("@fecha", caja.Fecha);
                 sqlCommand.Parameters.AddWithValue("@dinero_disponible", caja.Dinero_disponible);

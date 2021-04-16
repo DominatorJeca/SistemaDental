@@ -107,19 +107,29 @@ namespace SistemaDental
 
                 try
                 {
+
+                    //asignacion de valores de txt a variables
+                    string cantidad = txtCantidadCaja.Text;
+                    string dinero_disponible = txtDineroCaja.Text;
+
+                    string transaccion;
+                    if (rbEgreso.IsChecked == true)
+                    {
+                        { transaccion = "Egreso";  }
+                    } else { transaccion = "Ingreso";  }
                     //Obtener los valores de caja
                     ObtenerValues();
 
                     //Insertar datos de Caja
-                    caja.IngresarCaja(caja);
+                    caja.IngresarCaja(caja, transaccion);
 
                     // Mensaje de insercion exitosa a la base
-                    MessageBox.Show("Datos insertaos correctamente");
+                    MessageBox.Show("Datos insertados correctamente");
                 }
                 catch (Exception ex)
                 {
 
-                    MessageBox.Show("Ha occurido un error al momento de insertar el empleado");
+                    MessageBox.Show("Ha occurido un error al momento de insertar.");
                     Console.WriteLine(ex.Message);
                 }
                 
