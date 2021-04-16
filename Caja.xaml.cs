@@ -81,16 +81,11 @@ namespace SistemaDental
                     MessageBox.Show("Por favor ingrese todos los valores en las cajas de texto");
                     return false;
                 } 
-                else if(rbIngreso.IsChecked == false)
+                else if(rbIngreso.IsChecked == false && rbEgreso.IsChecked == false)
                 {
                     MessageBox.Show("Por favor escoga una opcion de transaccion.");
                     return false;
                 }   
-                else if(rbEgreso.IsChecked == false)
-                {
-                    MessageBox.Show("Por favor escoga una opcion de transaccion.");
-                    return false;
-                }
 
             return true;
             }
