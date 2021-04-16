@@ -116,14 +116,11 @@
     <Compile Include="Caja.xaml.cs">
       <DependentUpon>Caja.xaml</DependentUpon>
     </Compile>
-<<<<<<< HEAD
     <Compile Include="Citas.xaml.cs">
       <DependentUpon>Citas.xaml</DependentUpon>
     </Compile>
     <Compile Include="ClaseCitas.cs" />
-=======
     <Compile Include="ClaseCaja.cs" />
->>>>>>> feature_Caja
     <Compile Include="ClaseInventario.cs" />
     <Compile Include="ClasePaciente.cs" />
     <Compile Include="ClaseTratamiento.cs" />
