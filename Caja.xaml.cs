@@ -26,6 +26,7 @@ namespace SistemaDental
     public partial class Caja : Window
     {
 
+
         ClaseCaja caja = new ClaseCaja();
 
         private SqlConnection sqlConnection;
