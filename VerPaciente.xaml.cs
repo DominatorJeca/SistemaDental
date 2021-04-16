@@ -40,6 +40,7 @@ namespace SistemaDental
         {
             Pacientes pacientes = new Pacientes();
             pacientes.Show();
+            this.Close();
         }
 
         /// <summary>
@@ -52,6 +53,9 @@ namespace SistemaDental
             cmbPaciente.DisplayMemberPath = "id_paciente";
         }
 
+        /// <summary>
+        /// Funcion para llenar los textbox y radio botones con respecto al id seleccionado
+        /// </summary>
         public void LlenarTextBox()
         {
             string[] datosPaciente = unPaciente.LlenarDatosPaciente(cmbPaciente.Text);
@@ -60,6 +64,11 @@ namespace SistemaDental
             txtApellido.Text = datosPaciente[2];
             txtTelefono.Text = datosPaciente[4];
             txtEdad.Text = datosPaciente[5];
+
+            if (datosPaciente[3] == "Masculino")
+            { rbMasculino.IsChecked = true; }
+            else { rbFemenino.IsChecked = true; }
+
         }
 
         /// <summary>
@@ -74,7 +83,8 @@ namespace SistemaDental
             txtTelefono.IsEnabled = habilitacionGrupoA;
             txtIdentidad.IsEnabled = habilitacionGrupoA;
             txtEdad.IsEnabled = habilitacionGrupoA;
-            cmbSexo.IsEnabled = habilitacionGrupoA;
+            rbFemenino.IsEnabled = habilitacionGrupoA;
+            rbMasculino.IsEnabled = habilitacionGrupoA;
 
             btnEditarPaciente.IsEnabled = habilitacionGrupoB;
             btnVerPaciente.IsEnabled = habilitacionGrupoB;
@@ -91,9 +101,10 @@ namespace SistemaDental
             txtIdentidad.Text = null;
             txtTelefono.Text = null;
             txtEdad.Text = null;
-            cmbSexo.SelectedItem = null;
             cmbPaciente.SelectedItem = null;
             dtgHistorial = null;
+            rbMasculino.IsChecked = false;
+            rbFemenino.IsChecked = false;
         }
 
         /// <summary>
@@ -109,7 +120,7 @@ namespace SistemaDental
                     MessageBox.Show("Por favor seleccione un paciente.");
                 }
                 else {
-                    //Deshabilita el combobox paciente y el boton editar
+                    //Deshabilita el combobox paciente, el boton editar y ver
                     //Habilita los demás botones y textbox para poder editar los datos
                     HabilitacionDeshabilitacion(true, false);
                     LlenarTextBox();
@@ -139,7 +150,7 @@ namespace SistemaDental
         }
 
         /// <summary>
-        /// Boton para cancelar los cambios hechos y para limpiar la pantalla
+        /// Boton Ver el paciente seleccionado en el combobox
         /// </summary>
         private void btnVerPaciente_Click(object sender, RoutedEventArgs e)
         {
@@ -151,8 +162,6 @@ namespace SistemaDental
                 }
                 else
                 {
-                    //Deshabilita el combobox paciente y el boton editar
-                    //Habilita los demás botones y textbox para poder editar los datos
                     LlenarTextBox();
                 }
 
