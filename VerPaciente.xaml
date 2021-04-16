@@ -21,7 +21,7 @@
         <Button x:Name="btnEditarPaciente" Content="Editar" HorizontalAlignment="Center" Margin="559,234,30,0" VerticalAlignment="Top" Width="203" Background="#FF056676" BorderBrush="{x:Null}" Click="btnEditarPaciente_Click"/>
         <Label Content="Historial Clínico" HorizontalAlignment="Left" Margin="84,212,0,0" VerticalAlignment="Top" FontSize="12" FontFamily="Bahnschrift" Background="#7F056676"/>
         
-        <DataGrid x:Name="dtgHistorial" HorizontalAlignment="Left" Height="170" Margin="84,234,0,0" VerticalAlignment="Top" Width="447" Background="#FF056676" Foreground="#DDFFFFFF" AutoGenerateColumns="False">
+        <DataGrid x:Name="dtgHistorial" HorizontalAlignment="Left" Height="170" Margin="84,234,0,0" VerticalAlignment="Top" Width="447" Background="#FF056676" Foreground="#DDFFFFFF" AutoGenerateColumns="False" IsReadOnly="True">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Fecha" Binding="{Binding Fecha}" Width="200"></DataGridTextColumn>
                 <DataGridTextColumn Header="Tratamiento" Binding="{Binding NombreTratamiento}" Width="200"></DataGridTextColumn>

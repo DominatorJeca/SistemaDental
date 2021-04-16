@@ -67,9 +67,8 @@ namespace SistemaDental
             txtTelefono.IsEnabled = habilitacionGrupoA;
             txtIdentidad.IsEnabled = habilitacionGrupoA;
             txtEdad.IsEnabled = habilitacionGrupoA;
-
+            cmbGenero.IsEnabled = habilitacionGrupoA;
             btnEditarPaciente.IsEnabled = habilitacionGrupoB;
-           
             cmbPaciente.IsEnabled = habilitacionGrupoB;
         }
 
@@ -85,6 +84,17 @@ namespace SistemaDental
             txtEdad.Text = null;
             cmbPaciente.SelectedItem = null;
             dtgHistorial = null;
+
+        }
+
+        public void obtenerValores()
+        {
+            unPaciente.NombrePaciente = txtNombre.Text;
+            unPaciente.ApellidoPaciente = txtApellido.Text;
+            unPaciente.Edad = Convert.ToInt32(txtEdad.Text);
+            unPaciente.Genero = cmbGenero.Text;
+            unPaciente.Telefono = txtTelefono.Text;
+            unPaciente.Id_paciente = txtIdentidad.Text;
 
         }
 
@@ -104,6 +114,7 @@ namespace SistemaDental
                     //Deshabilita el combobox paciente, el boton editar y ver
                     //Habilita los demás botones y textbox para poder editar los datos
                     HabilitacionDeshabilitacion(true, false);
+                    
 
                 }
             
@@ -136,7 +147,21 @@ namespace SistemaDental
 
         private void btnGuardarPaciente_Click(object sender, RoutedEventArgs e)
         {
-
+            try
+            {
+                obtenerValores();
+                unPaciente.ActualizarDatosPaciente(unPaciente);
+                MessageBox.Show("Éxito alactualizar los datos");
+                LimpiarPantalla();
+            }
+            catch
+            {
+                throw;
+            }
+            finally
+            {
+                MostrarPacientes();
+            }
           
 
 

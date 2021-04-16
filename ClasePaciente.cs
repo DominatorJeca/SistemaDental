@@ -83,49 +83,12 @@ namespace SistemaDental
             }
         }
 
-        /// <summary>
-        /// Metodo para almacenar en un arreglo los datos del paciente seleccionado
-        /// </summary>
-        /// <returns>Lista de todos los datos de los pacientes</returns>
-      /*  public List<ClasePaciente> LlenarDatosPaciente()
-        {
-
-            try {
-
-                sqlConnection.Open();
-                //crear el comando SQL
-                SqlCommand sqlCommand = new SqlCommand("MostrarPacienteEspecifico", sqlConnection);
-
-                sqlCommand.CommandType = CommandType.StoredProcedure;
-                sqlCommand.Parameters.AddWithValue("@id", Id_paciente);
-                SqlDataReader reader = sqlCommand.ExecuteReader();
-
-                while (reader.Read())
-                {
-                   
-                }
-
-                
-
-
-            }
-            catch (Exception e) 
-            { 
-                throw e; 
-            }
-            finally 
-            { 
-                sqlConnection.Close(); 
-            }
-
-
-        }*/
 
         /// <summary>
         /// Metodo para actualizar los datos del paciente seleccionado
         /// </summary>
         /// <returns>Lista de todos los datos de los pacientes</returns>
-        public void ActualizarDatosPaciente(string id, string nombre, string apellido, string genero, string telefono, int edad)
+        public void ActualizarDatosPaciente(ClasePaciente paciente)
         {
 
             try
@@ -136,20 +99,24 @@ namespace SistemaDental
                 sqlCommand.CommandType = CommandType.StoredProcedure;
 
                 //Definir las variables del procedimiento mediante los parametros obtenidos
-                sqlCommand.Parameters.AddWithValue("@id", id);
-                sqlCommand.Parameters.AddWithValue("@nombre", nombre);
-                sqlCommand.Parameters.AddWithValue("@apellido", apellido);
-                sqlCommand.Parameters.AddWithValue("@telefono", telefono);
-                sqlCommand.Parameters.AddWithValue("@edad", edad);
-                sqlCommand.Parameters.AddWithValue("@genero", genero);
-
-                //Ejecucion del comando
-                SqlDataReader reader = sqlCommand.ExecuteReader();
+                sqlCommand.Parameters.AddWithValue("@id", paciente.Id_paciente);
+                sqlCommand.Parameters.AddWithValue("@nombre", paciente.NombrePaciente);
+                sqlCommand.Parameters.AddWithValue("@apellido", paciente.ApellidoPaciente);
+                sqlCommand.Parameters.AddWithValue("@telefono",paciente.Telefono);
+                sqlCommand.Parameters.AddWithValue("@edad", paciente.Edad);
+                sqlCommand.Parameters.AddWithValue("@genero", paciente.Genero);
+                sqlCommand.ExecuteNonQuery();
             }
 
-            catch (Exception e) { throw e; }
+            catch (Exception e)
+            {
+                throw e; 
+            }
 
-            finally { sqlConnection.Close(); }
+            finally 
+            { 
+                sqlConnection.Close(); 
+            }
 
             
         }
