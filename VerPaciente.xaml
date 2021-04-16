@@ -11,6 +11,7 @@
         <ImageBrush ImageSource="TeethPattern.jpg" Stretch="UniformToFill"/>
     </Window.Background>
     <Grid>
+<<<<<<< HEAD
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="7*"/>
             <ColumnDefinition Width="65*"/>
@@ -40,5 +41,21 @@
             <ComboBoxItem Content="Femenino"/>
             <ComboBoxItem Content="Masculino"/>
         </ComboBox>
+=======
+        <Button x:Name="btnRegresar" Content="Regresar" HorizontalAlignment="Left" Margin="17,10,0,0" VerticalAlignment="Top" Width="103" FontFamily="Bahnschrift" FontSize="16" Background="#FF056676" Click="btnRegresar_Click" BorderBrush="{x:Null}"/>
+        <TextBox x:Name="txtNombre" Margin="84,66,428,319" materialDesign:HintAssist.Hint="Nombre" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontFamily="Bahnschrift" FontSize="12" Background="#7FFFFFFF"/>
+        <TextBox x:Name="txtApellido" Margin="84,116,428,269" materialDesign:HintAssist.Hint="Apellido" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontFamily="Bahnschrift" FontSize="12" Background="#7FFFFFFF"/>
+        <TextBox x:Name="txtTelefono" Margin="427,64,85,319" materialDesign:HintAssist.Hint="Telefóno" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontFamily="Bahnschrift" FontSize="12" Background="#7FFFFFFF"/>
+        <TextBox x:Name="txtIdentidad" Margin="84,171,428,212" materialDesign:HintAssist.Hint="Identidad" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontFamily="Bahnschrift" FontSize="12" Background="#7FFFFFFF"/>
+        <ComboBox x:Name="cmbSexo" HorizontalAlignment="Left" Margin="488,125,0,0" VerticalAlignment="Top" Width="120"/>
+        <Label Content="Sexo" HorizontalAlignment="Left" Margin="427,128,0,0" VerticalAlignment="Top" FontSize="12" FontFamily="Bahnschrift" RenderTransformOrigin="10.888,-6.676"/>
+        <Button x:Name="btnEditarPaciente" Content="Editar" HorizontalAlignment="Center" Margin="559,234,30,0" VerticalAlignment="Top" Width="203" Background="#FF056676" BorderBrush="{x:Null}"/>
+        <Label Content="Historial Clínico" HorizontalAlignment="Left" Margin="84,212,0,0" VerticalAlignment="Top" FontSize="12" FontFamily="Bahnschrift" Background="#7F056676"/>
+        <DataGrid x:Name="dtgHistorial" HorizontalAlignment="Left" Height="170" Margin="84,234,0,0" VerticalAlignment="Top" Width="447" Background="#FF056676" Foreground="#DDFFFFFF"/>
+        <Button x:Name="btnGuardarPaciente" Content="Guardar" HorizontalAlignment="Center" Margin="559,287,30,0" VerticalAlignment="Top" Width="203" Background="#FF056676" BorderBrush="{x:Null}" />
+        <Button x:Name="btnCancelar" Content="Cancelar" HorizontalAlignment="Center" Margin="559,339,30,0" VerticalAlignment="Top" Width="203" Background="#FF056676" BorderBrush="{x:Null}"/>
+        <Label Content="Paciente" HorizontalAlignment="Left" Margin="177,32,0,0" VerticalAlignment="Top" FontSize="12" FontFamily="Bahnschrift"/>
+        <ComboBox x:Name="cmbPaciente" HorizontalAlignment="Left" Margin="247,24,0,0" VerticalAlignment="Top" Width="460"/>
+>>>>>>> feature-Tratamiento
     </Grid>
 </Window>

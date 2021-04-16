@@ -116,8 +116,12 @@
     <Compile Include="Caja.xaml.cs">
       <DependentUpon>Caja.xaml</DependentUpon>
     </Compile>
+<<<<<<< HEAD
     <Compile Include="ClaseInventario.cs" />
     <Compile Include="ClasePaciente.cs" />
+=======
+    <Compile Include="ClaseTratamiento.cs" />
+>>>>>>> feature-Tratamiento
     <Compile Include="EditarUsuario.xaml.cs">
       <DependentUpon>EditarUsuario.xaml</DependentUpon>
     </Compile>

@@ -178,5 +178,10 @@ namespace SistemaDental
             }
             
         }
+
+        private void btnGuardarPaciente_Click()
+        {
+
+        }
     }
 }
