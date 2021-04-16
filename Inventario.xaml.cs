@@ -113,6 +113,13 @@ namespace SistemaDental
             OcultarMostrarBotones(Visibility.Hidden);
             MostrarMaterial();
         }
+
+        private void btnRegresar_Click(object sender, RoutedEventArgs e)
+        {
+            Menu menu = new Menu();
+            menu.Show();
+            this.Hide();
+        }
     }
 }
 
