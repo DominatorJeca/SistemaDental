@@ -88,10 +88,12 @@ constraint pk_idtrans primary key(id_transaccion)
 )
 
 create table Clinica.citas(
+id_cita int identity(1,1) not null,
 id_empleado varchar(50),
 id_paciente varchar(50),
 fechaCita datetime,
 id_tratamiento int,
+constraint pk_idcitas primary key(id_cita),
 constraint fk_Empleado_Citas foreign key(id_empleado) references Clinica.empleado(id_empleado),
 constraint fk_Paciente_Citas foreign key(id_paciente) references Clinica.pacientes(id_paciente),
 )
@@ -447,32 +449,42 @@ insert into Clinica.citas values (@idempleado,@idpaciente,@fecha,@idtratamiento)
 go
 
 
-create proc EditarCitas
+CREATE proc EditarCitas
+@idcita int,
 @idempleado varchar(50),
 @idpaciente varchar(50),
 @fecha datetime,
 @idtratamiento int
 as
-update Clinica.citas set id_empleado=@idempleado,id_tratamiento=@idtratamiento,fechaCita=@fecha where id_paciente=@idpaciente
+update Clinica.citas set id_empleado=@idempleado,id_paciente=@idpaciente,id_tratamiento=@idtratamiento,fechaCita=@fecha where id_cita=@idcita
 go
 
 create proc MostrarCitas
 as
-select *from Clinica.citas
-go
+select c.id_cita as idcita, c.id_paciente as idpaciente,P.nombre as paciente, P.apellido AS apepac, CONCAT(E.nombre,' ',E.apellido)AS nombredoc, T.nombre as tratamiento, c.fechaCita as fecha from Clinica.citas AS C
+inner join Clinica.pacientes as P on C.id_paciente=P.id_paciente
+inner join Clinica.empleado as E on C.id_empleado=e.id_empleado
+inner join Clinica.tratamiento as T on c.id_tratamiento=t.id_tratamiento where fechaCita>=GETDATE()
+ORDER BY fecha
+GO
 
 create proc EliminarCitas
-@idpaciente varchar(50)
+@idcita int
 as
-delete Clinica.citas where id_paciente=@idpaciente
+delete Clinica.citas where id_cita=@idcita
+go
+
+create proc MostrarDoctores
+as
+select id_empleado,nombre,apellido from Clinica.empleado where idpuesto=2
 go
 
 --inserts--
-
+select * from Clinica.puesto
 
 /*Ingreso de empleados*/
-insert into Clinica.puesto values ('Secretaria')
-insert into Clinica.empleado values('0501200010558','Andrea','Murillo','33986418','andrea@gmail.com',3,'Femenino','andrealomaximo',1)
+insert into Clinica.puesto values ('Doctor')
+insert into Clinica.empleado values('0501200010558','Andrea','Murillo','33986418','andrea@gmail.com',2,'Femenino','andrealomaximo',1,0)
 
 
 
@@ -511,4 +523,7 @@ insert into Clinica.tratamiento_inventario values(1,1,2)
 ,(4,1,1)
 
 
+<<<<<<< HEAD
 SELECT *FROM Clinica.inventario
+=======
+>>>>>>> feature-designf
