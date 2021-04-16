@@ -19,7 +19,7 @@ namespace SistemaDental
     /// </summary>
     public partial class Menu : Window
     {
-        bool Admin;
+        
         public Menu()
         {
             InitializeComponent();
@@ -27,11 +27,24 @@ namespace SistemaDental
 
         public Menu(bool admin,string name)
         {
-            Admin = admin;
+           
             InitializeComponent();
             lblUsuario.Content = name;
+            PermisosAdministrador(admin);
         }
 
+        public void PermisosAdministrador(bool admin)
+        {
+            if (admin)
+            {
+                btnAjustes.IsEnabled = true;
+            }
+            else
+            {
+                btnAjustes.IsEnabled = false;
+            }
+
+        }
         public void btnInventario_Click(object sender, RoutedEventArgs e)
         {
             Inventario inventario = new Inventario();
