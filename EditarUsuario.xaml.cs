@@ -28,6 +28,7 @@ namespace SistemaDental
             InitializeComponent();
             MostrarUsuario();
             MostrarPuesto();
+
         }
 
         public EditarUsuario(bool admin, string name)
