@@ -141,5 +141,12 @@ namespace SistemaDental
             MostrarUsuario();
 
         }
+
+        private void btnRegresar_Click_1(object sender, RoutedEventArgs e)
+        {
+            this.Hide();
+            Ajustes ajustes = new Ajustes();
+            ajustes.Show();
+        }
     }
 }

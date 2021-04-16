@@ -35,15 +35,7 @@ namespace SistemaDental
 
             try
             {
-<<<<<<< HEAD
-                /*DataTable tabla = new DataTable();
-                SqlCommand command = new SqlCommand("MostrarInventario", sqlConnection);
-                command.CommandType=CommandType.StoredProcedure;
-                tabla.Load(command.ExecuteReader());
-                return tabla;*/
 
-=======
->>>>>>> feature-Tratamiento
                 SqlCommand command = new SqlCommand("MostrarInventario", sqlConnection);
                 command.CommandType = CommandType.StoredProcedure;
                 SqlDataReader reader = command.ExecuteReader();
