@@ -82,9 +82,8 @@ namespace SistemaDental
             txtIdentidad.Text = null;
             txtTelefono.Text = null;
             txtEdad.Text = null;
-            cmbPaciente.SelectedItem = null;
-            dtgHistorial = null;
-
+            dtgHistorial.ItemsSource = null;
+            cmbPaciente.SelectedValue = null;
         }
 
         public void obtenerValores()
@@ -95,7 +94,7 @@ namespace SistemaDental
             unPaciente.Genero = cmbGenero.Text;
             unPaciente.Telefono = txtTelefono.Text;
             unPaciente.Id_paciente = txtIdentidad.Text;
-
+            
         }
 
         /// <summary>
@@ -149,10 +148,12 @@ namespace SistemaDental
         {
             try
             {
-                obtenerValores();
-                unPaciente.ActualizarDatosPaciente(unPaciente);
-                MessageBox.Show("Éxito alactualizar los datos");
-                LimpiarPantalla();
+                
+                    obtenerValores();
+                    unPaciente.ActualizarDatosPaciente(unPaciente);
+                    MessageBox.Show("Éxito al actualizar los datos");
+                    LimpiarPantalla();
+       
             }
             catch
             {
@@ -161,6 +162,7 @@ namespace SistemaDental
             finally
             {
                 MostrarPacientes();
+                HabilitacionDeshabilitacion(false, true);
             }
           
 
@@ -169,8 +171,12 @@ namespace SistemaDental
 
         private void cmbPaciente_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            unPaciente.Id_paciente=cmbPaciente.SelectedValue.ToString();
-            dtgHistorial.ItemsSource = unPaciente.MostrarHistorial(unPaciente);
+            if (cmbPaciente.SelectedValue != null)
+            {
+                unPaciente.Id_paciente = cmbPaciente.SelectedValue.ToString();
+                dtgHistorial.ItemsSource = unPaciente.MostrarHistorial(unPaciente);
+            }
+            
         }
     }
 }
