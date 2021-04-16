@@ -226,6 +226,12 @@ as
 select *from Clinica.empleado
 go
 
+create proc MostrarEmpleadosActivos
+as
+select * from Clinica.empleado
+where estado=1
+go
+
 create proc EditarEmpleados
 @id varchar(50),
 @nombre varchar(50),
@@ -238,7 +244,7 @@ create proc EditarEmpleados
 @estado bit=1,
 @administrador bit=0
 as
-update Clinica.empleado set nombre=@nombre,apellido=@apellido,telefono=@telefono,correo=@correo,idpuesto=@puesto,genero=@genero,contraseña=@contraseña where id_empleado=@id
+update Clinica.empleado set id_empleado=@id,nombre=@nombre,apellido=@apellido,telefono=@telefono,correo=@correo,idpuesto=@puesto,genero=@genero,contraseña=@contraseña where id_empleado=@id
 go
 
 create proc EliminarUsuario
@@ -345,6 +351,18 @@ go
 create proc MostrarInventario
 as
 select *from Clinica.inventario
+go
+
+create proc MostrarPuesto
+as
+select *from Clinica.puesto
+go
+
+create proc MostrarUnPuesto
+@id int
+as
+select nombrePuesto from Clinica.puesto
+where id_puesto=@id
 go
 
 create proc EditarInventario
