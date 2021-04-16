@@ -24,7 +24,8 @@ namespace SistemaDental
     /// </summary>
     public partial class AgregarPaciente : Window
     {
-        
+        bool Admin;
+        string Nombree;
         //Variable para la conexion con la base de datos
         private SqlConnection sqlConnection;
 

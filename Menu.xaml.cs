@@ -19,7 +19,8 @@ namespace SistemaDental
     /// </summary>
     public partial class Menu : Window
     {
-        
+        bool Admin;
+        string Nombree;
         public Menu()
         {
             InitializeComponent();
@@ -31,6 +32,8 @@ namespace SistemaDental
             InitializeComponent();
             lblUsuario.Content = name;
             PermisosAdministrador(admin);
+            Nombree = name;
+            Admin = admin;
         }
 
         public void PermisosAdministrador(bool admin)
@@ -49,30 +52,36 @@ namespace SistemaDental
         {
             Inventario inventario = new Inventario();
             inventario.Show();
+            this.Hide();
         }
 
         private void btnTratamiento_Click(object sender, RoutedEventArgs e)
         {
             Tratamiento tratamiento = new Tratamiento();
             tratamiento.Show();
+            this.Hide();
         }
 
         private void btnCaja_Click(object sender, RoutedEventArgs e)
         {
             Caja caja = new Caja();
             caja.Show();
+            this.Hide();
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             Pacientes pacientes = new Pacientes();
             pacientes.Show();
+            this.Hide();
         }
 
         private void btnAjustes_Click(object sender, RoutedEventArgs e)
         {
-            Ajustes ajustes = new Ajustes();
+            Ajustes ajustes = new Ajustes(Admin,Nombree);
+            this.Hide();
             ajustes.Show();
+            
         }
     }
 }

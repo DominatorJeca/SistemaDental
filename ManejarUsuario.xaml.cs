@@ -20,16 +20,28 @@ namespace SistemaDental
     public partial class ManejarUsuario : Window
     {
         private Usuario usuario = new Usuario();
+        bool Admin;
+        string Nombree;
         public ManejarUsuario()
         {
             InitializeComponent();
             MostrarUsuario();
         }
 
+        public ManejarUsuario(bool admin, string name)
+        {
+            InitializeComponent();
+            MostrarUsuario();
+            Nombree = name;
+            Admin = admin;
+        }
+
         private void btnRegresar_Click(object sender, RoutedEventArgs e)
         {
-            Ajustes ajustes = new Ajustes();
+            Ajustes ajustes = new Ajustes(Admin, Nombree);
             ajustes.Show();
+           
+            this.Hide();
         }
 
         public void MostrarUsuario()

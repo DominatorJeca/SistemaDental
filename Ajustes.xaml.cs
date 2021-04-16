@@ -19,9 +19,18 @@ namespace SistemaDental
     /// </summary>
     public partial class Ajustes : Window
     {
+        bool Admin;
+        string Nombree;
         public Ajustes()
         {
             InitializeComponent();
+        }
+
+        public Ajustes(bool admin, string name)
+        {
+            InitializeComponent();
+            Nombree = name;
+            Admin = admin;
         }
 
         private void btnEditarUsuario_Click(object sender, RoutedEventArgs e)
@@ -31,26 +40,30 @@ namespace SistemaDental
 
         private void btnRegresar_Click(object sender, RoutedEventArgs e)
         {
-            Menu menu = new Menu();
+            Menu menu = new Menu(Admin,Nombree);
             menu.Show();
+            this.Hide();
         }
 
         private void btnEditarUsuario_Click_1(object sender, RoutedEventArgs e)
         {
-            EditarUsuario editarUsuario = new EditarUsuario();
+            EditarUsuario editarUsuario = new EditarUsuario(Admin, Nombree);
             editarUsuario.Show();
+            this.Hide();
         }
 
         private void btnAgregarNuevoUsuario_Click(object sender, RoutedEventArgs e)
         {
-            AgregarUsuario agregarUsuario = new AgregarUsuario();
+            AgregarUsuario agregarUsuario = new AgregarUsuario(Admin, Nombree);
             agregarUsuario.Show();
+            this.Hide();
         }
 
         private void btnManejarUsuarios_Click(object sender, RoutedEventArgs e)
         {
-            ManejarUsuario manejarUsuario = new ManejarUsuario();
+            ManejarUsuario manejarUsuario = new ManejarUsuario(Admin, Nombree);
             manejarUsuario.Show();
+            this.Hide();
         }
     }
 }

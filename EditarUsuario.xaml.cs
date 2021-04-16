@@ -21,6 +21,8 @@ namespace SistemaDental
     {
         private Usuario usuario = new Usuario();
         private Puesto puesto = new Puesto();
+        bool Admin;
+        string Nombree;
         public EditarUsuario()
         {
             InitializeComponent();
@@ -28,11 +30,16 @@ namespace SistemaDental
             MostrarPuesto();
         }
 
-        private void btnRegresar_Click(object sender, RoutedEventArgs e)
+        public EditarUsuario(bool admin, string name)
         {
-            Ajustes ajustes = new Ajustes();
-            ajustes.Show();
+            InitializeComponent();
+            MostrarUsuario();
+            MostrarPuesto();
+            Nombree = name;
+            Admin = admin;
         }
+
+       
         public void MostrarPuesto()
         {
             cmbPuesto.ItemsSource = puesto.MostrarPuestos();
@@ -139,6 +146,13 @@ namespace SistemaDental
             LimpiarFormulario();
             MostrarUsuario();
 
+        }
+
+        private void btnRegresar_Click_1(object sender, RoutedEventArgs e)
+        {
+            Ajustes ajustes = new Ajustes(Admin, Nombree);
+            ajustes.Show();
+            this.Hide();
         }
     }
 }
