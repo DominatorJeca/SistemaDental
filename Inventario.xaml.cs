@@ -89,6 +89,7 @@ namespace SistemaDental
                 {
                     MostrarMaterial();
                     btnEditar.IsEnabled = true;
+                    txtCantidadInventario.IsEnabled = false;
                     OcultarMostrarBotones(Visibility.Hidden);
                 }
             }
@@ -110,6 +111,14 @@ namespace SistemaDental
             btnGuardar.IsEnabled = false;
             btnEditar.IsEnabled = true;
             OcultarMostrarBotones(Visibility.Hidden);
+            MostrarMaterial();
+        }
+
+        private void btnRegresar_Click(object sender, RoutedEventArgs e)
+        {
+            Menu menu = new Menu();
+            menu.Show();
+            this.Hide();
         }
     }
 }
