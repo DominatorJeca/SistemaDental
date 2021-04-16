@@ -244,7 +244,7 @@ create proc EditarEmpleados
 @estado bit=1,
 @administrador bit=0
 as
-update Clinica.empleado set id_empleado=@id,nombre=@nombre,apellido=@apellido,telefono=@telefono,correo=@correo,idpuesto=@puesto,genero=@genero,contraseña=@contraseña where id_empleado=@id
+update Clinica.empleado set nombre=@nombre,apellido=@apellido,telefono=@telefono,correo=@correo,idpuesto=@puesto,genero=@genero,contraseña=@contraseña where id_empleado=@id
 go
 
 create proc EliminarUsuario
