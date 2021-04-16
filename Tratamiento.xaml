@@ -28,6 +28,7 @@
         <Button IsEnabled="False" x:Name="btnCancelar" Content="Cancelar" HorizontalAlignment="Left" Margin="492,352,0,0" VerticalAlignment="Top" Width="120" Background="#FF056676" FontFamily="Bahnschrift" BorderBrush="{x:Null}" Click="btnCancelar_Click"/>
         <Button x:Name="btnRealizar" Content="Realizar" HorizontalAlignment="Left" Margin="635,352,0,0" VerticalAlignment="Top" Width="120" Background="#FF056676" FontFamily="Bahnschrift" BorderBrush="{x:Null}" Click="btnRealizar_Click"/>
         <Button x:Name="btnGuardar" Content="Guardar" HorizontalAlignment="Left" Margin="635,291,0,0" VerticalAlignment="Top" Width="120" RenderTransformOrigin="0.5,-2.204" Background="#FF056676" FontFamily="Bahnschrift" BorderBrush="{x:Null}" IsEnabled="False" Click="btnGuardar_Click"/>
+        <Button x:Name="btnRegresar" Content="Regresar" HorizontalAlignment="Left" Margin="672,10,0,0" VerticalAlignment="Top" Width="110" Background="#FF056676" FontFamily="Bahnschrift" BorderBrush="{x:Null}" Click="btnRegresar_Click" Height="27"/>
 
 
     </Grid>

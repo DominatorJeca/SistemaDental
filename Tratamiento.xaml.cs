@@ -158,5 +158,12 @@ namespace SistemaDental
             cmbTratamiento.IsEnabled = true;
             btnCancelar.IsEnabled = false;
         }
+
+        private void btnRegresar_Click(object sender, RoutedEventArgs e)
+        {
+            Menu menu = new Menu();
+            menu.Show();
+            this.Hide();
+        }
     }
 }
