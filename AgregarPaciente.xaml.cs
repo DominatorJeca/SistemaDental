@@ -30,7 +30,7 @@ namespace SistemaDental
         private SqlConnection sqlConnection;
 
         //Variable para definir el genero seleccionado por el radio boton
-        private string genero;
+        ClasePaciente paciente = new ClasePaciente();
 
         //Constructores
         public AgregarPaciente()
@@ -51,10 +51,24 @@ namespace SistemaDental
         {
             Pacientes pacientes = new Pacientes();
             pacientes.Show();
-            this.Close();
+            this.Hide();
         }
 
-
+        private void ObtenerValores()
+        {
+            paciente.NombrePaciente = txtAgregarNombre.Text;
+            paciente.ApellidoPaciente = txtAgregarApellido.Text;
+            paciente.Edad = Convert.ToInt32(txtAgregarEdad.Text);
+            paciente.Telefono = txtAgregarTelefono.Text;
+            paciente.Id_paciente = txtAgregarIdentidad.Text;
+            if (rbFemenino.IsChecked == true)
+            {
+                paciente.Genero = "Femenino";
+            }else if(rbMasculino.IsChecked == true)
+            {
+                paciente.Genero = "Masculino";
+            }
+        }
         /// <summary>
         /// Ingresa los valores a la base de datos al presionar el botón
         /// </summary>
@@ -62,7 +76,7 @@ namespace SistemaDental
         {
 
             //Comprueba que todos los campos estén llenos
-            if (txtAgregarApellido.Text == String.Empty || txtAgregarNombre.Text == String.Empty || txtAgregarIdentidad.Text == String.Empty || txtAgregarTelefono.Text == String.Empty || txtAgregarEdad.Text == String.Empty)
+            if (txtAgregarApellido.Text == String.Empty || txtAgregarNombre.Text == String.Empty || txtAgregarIdentidad.Text == String.Empty || txtAgregarTelefono.Text == String.Empty || txtAgregarEdad.Text == String.Empty ||rbMasculino.IsChecked==false && rbFemenino.IsChecked==false)
             {
                 MessageBox.Show("¡Por favor llena todos los campos!");
                 txtAgregarNombre.Focus();
@@ -72,41 +86,16 @@ namespace SistemaDental
             {
                 try
                 {
-
-                    // Query de inserción con procedimientos almacenados
-                    string query = @"EXECUTE IngresoPacientes @id,@nombre,@apellido,@telefono,@edad,@genero,@estado";
-                    // Establecer la conexión con la base de datos
-                    sqlConnection.Open();
-
-                    // Definir un SqlCommand para modificar el valor del parámetro
-                    SqlCommand sqlCommand = new SqlCommand(query, sqlConnection);
-
-                    // Reemplazar el parámetro por su valor actual
-                    sqlCommand.Parameters.AddWithValue("@nombre", txtAgregarNombre.Text);
-                    sqlCommand.Parameters.AddWithValue("@apellido", txtAgregarApellido.Text);
-                    sqlCommand.Parameters.AddWithValue("@telefono", txtAgregarTelefono.Text);
-                    sqlCommand.Parameters.AddWithValue("@id", txtAgregarIdentidad.Text);
-                    sqlCommand.Parameters.AddWithValue("@edad", txtAgregarEdad.Text);
-                    sqlCommand.Parameters.AddWithValue("@genero", genero);
-                    sqlCommand.Parameters.AddWithValue("@estado", 1);
-
-                    // Ejecuta el NonQuery para utilizar el procedimiento almacenado escrito arriba
-                    sqlCommand.ExecuteNonQuery();
-
-                    // Limpa todos los textbox del formulario
-                    txtAgregarNombre.Text = String.Empty;
-                    txtAgregarApellido.Text = String.Empty;
-                    txtAgregarTelefono.Text = String.Empty;
-                    txtAgregarIdentidad.Text = String.Empty;
-                    txtAgregarEdad.Text = String.Empty;
-
+                    ObtenerValores();
+                    paciente.AgregarPaciente(paciente);
                     MessageBox.Show("Datos ingresados correctamente.");
+                    Limpiar();
 
                 }
                 //Lanza una excepcion si ocurre un fallo
-                catch (Exception)
+                catch(Exception)
                 {
-                    MessageBox.Show("Ha ocurrido un error al momento del ingreso.");
+                    MessageBox.Show("Ha ocurrido un error, revise sus datos e intente de nuevo");
                 }
                 // Cierra la Conexión a la Base de Datos
                 finally
@@ -117,22 +106,15 @@ namespace SistemaDental
 
         }
 
-        //Asignación de la variable genero dependiendo del Radio Boton Seleccionado
-
-        /// <summary>
-        /// Asigna Masculino si el Radio Boton Masculino está seleccionado
-        /// </summary>
-        private void RadioButton_Checked(object sender, RoutedEventArgs e)
+        private void Limpiar()
         {
-            genero = "Masculino";
-        }
-
-        /// <summary>
-        /// Asigna Femenino si el Radio Boton Femenino está seleccionado
-        /// </summary>
-        private void RadioButton_Checked_1(object sender, RoutedEventArgs e)
-        {
-            genero = "Femenino";
+            txtAgregarApellido.Text = "";
+            txtAgregarNombre.Text = "";
+            txtAgregarEdad.Text = "";
+            txtAgregarIdentidad.Text = "";
+            txtAgregarTelefono.Text = "";
+            rbFemenino.IsChecked = false;
+            rbMasculino.IsChecked = false;
         }
     }
 }
