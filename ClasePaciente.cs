@@ -16,30 +16,23 @@ namespace SistemaDental
         private static string connectionString = ConfigurationManager.ConnectionStrings["SistemaDental.Properties.Settings.ClinicaBDConnection"].ConnectionString;
         private SqlConnection sqlConnection = new SqlConnection(connectionString);
 
-        //Propiedades
+        //Propiedad para extraer todos los ID almacenados en la BD
         public string id_paciente { get; set; }
 
-        public string ApellidoPaciente { get; set; }
-
-        public string TelefonoPaciente { get; set; }
-
-        public string EdadPaciente { get; set; }
-
-        public string GeneroPaciente { get; set; }
-
+        //Arreglo tipo string para almacenar los datos extraidos de la BD
         string[] datosPaciente = new string[10];
 
 
         public ClasePaciente() { }
 
+        //propiedad con el parámetro id_paciente
         public ClasePaciente(string id)
         {
             id_paciente = id;
-
         }
 
         /// <summary>
-        /// Mostrar los pacientes
+        /// Metodo para mostrar los pacientes existentes
         /// </summary>
         /// <returns>Lista de todos los datos de los pacientes</returns>
         public List<ClasePaciente> MostrarPacientes()
@@ -77,7 +70,10 @@ namespace SistemaDental
             }
         }
 
-        //public List<ClasePaciente> LlenarDatosPaciente(string idPaciente)
+        /// <summary>
+        /// Metodo para almacenar en un arreglo los datos del paciente seleccionado
+        /// </summary>
+        /// <returns>Lista de todos los datos de los pacientes</returns>
         public string[] LlenarDatosPaciente(string idPaciente)
         {
 
@@ -112,6 +108,38 @@ namespace SistemaDental
 
         }
 
+        /// <summary>
+        /// Metodo para actualizar los datos del paciente seleccionado
+        /// </summary>
+        /// <returns>Lista de todos los datos de los pacientes</returns>
+        public void ActualizarDatosPaciente(string id, string nombre, string apellido, string genero, string telefono, int edad)
+        {
+
+            try
+            {//Abrir la conexion sql
+                sqlConnection.Open();
+                //crear el comando SQL
+                SqlCommand sqlCommand = new SqlCommand("EditarPacientes", sqlConnection);
+                sqlCommand.CommandType = CommandType.StoredProcedure;
+
+                //Definir las variables del procedimiento mediante los parametros obtenidos
+                sqlCommand.Parameters.AddWithValue("@id", id);
+                sqlCommand.Parameters.AddWithValue("@nombre", nombre);
+                sqlCommand.Parameters.AddWithValue("@apellido", apellido);
+                sqlCommand.Parameters.AddWithValue("@telefono", telefono);
+                sqlCommand.Parameters.AddWithValue("@edad", edad);
+                sqlCommand.Parameters.AddWithValue("@genero", genero);
+
+                //Ejecucion del comando
+                SqlDataReader reader = sqlCommand.ExecuteReader();
+            }
+
+            catch (Exception e) { throw e; }
+
+            finally { sqlConnection.Close(); }
+
+            
+        }
 
 
 

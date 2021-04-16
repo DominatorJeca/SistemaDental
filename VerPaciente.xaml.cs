@@ -172,5 +172,44 @@ namespace SistemaDental
             catch { MessageBox.Show("Ha ocurrido un error en el sistema."); }
         }
 
+        private void btnGuardarPaciente_Click(object sender, RoutedEventArgs e)
+        {
+
+            try
+            {
+                //Validacion que todos los campos esten completos
+                if (txtIdentidad.Text == null || txtNombre.Text == null || txtTelefono.Text == null
+                    || txtApellido.Text == null || txtEdad.Text == null || 
+                    (rbFemenino.IsChecked == false && rbMasculino.IsChecked == false))
+                { MessageBox.Show("Por favor complete todos los campos."); }
+                else {
+
+                    //asignacion de valores de textbox a variables
+                    string id = txtIdentidad.Text;
+                    string nombre = txtNombre.Text;
+                    string apellido = txtApellido.Text;
+                    string telefono = txtTelefono.Text;
+                    int edad = Convert.ToInt32(txtEdad.Text);
+
+                    //asignacion de radio boton a variable
+                    string genero;
+                    if (rbFemenino.IsChecked == true)
+                        { genero = "Femenino"; }
+                    else { genero = "Masculino"; }
+
+                    //Enviar paramateros al metodo para poder actualizar los datos
+                    unPaciente.ActualizarDatosPaciente(id, nombre, apellido, genero, telefono, edad);
+                    LlenarTextBox();
+                    HabilitacionDeshabilitacion(false, true);
+                    MessageBox.Show("Datos actualizados correctamente.");
+                }
+            }
+
+            catch { MessageBox.Show ("Ha ocurrido un error en el sistema."); }
+
+
+        }
+
+
     }
 }

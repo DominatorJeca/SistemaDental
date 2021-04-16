@@ -22,7 +22,7 @@
         <Button x:Name="btnVerPaciente" Content="Ver" HorizontalAlignment="Center" Margin="677,17,30,0" VerticalAlignment="Top" Width="85" Background="#FF056676" BorderBrush="{x:Null}" Click="btnVerPaciente_Click"/>
         <Label Content="Historial Clínico" HorizontalAlignment="Left" Margin="84,212,0,0" VerticalAlignment="Top" FontSize="12" FontFamily="Bahnschrift" Background="#7F056676"/>
         <DataGrid x:Name="dtgHistorial" HorizontalAlignment="Left" Height="170" Margin="84,234,0,0" VerticalAlignment="Top" Width="447" Background="#FF056676" Foreground="#DDFFFFFF"/>
-        <Button x:Name="btnGuardarPaciente" Content="Guardar" HorizontalAlignment="Center" Margin="559,287,30,0" VerticalAlignment="Top" Width="203" Background="#FF056676" BorderBrush="{x:Null}"/>
+        <Button x:Name="btnGuardarPaciente" Content="Guardar" HorizontalAlignment="Center" Margin="559,287,30,0" VerticalAlignment="Top" Width="203" Background="#FF056676" BorderBrush="{x:Null}" Click="btnGuardarPaciente_Click" />
         <Button x:Name="btnCancelar" Content="Cancelar" HorizontalAlignment="Center" Margin="559,339,30,0" VerticalAlignment="Top" Width="203" Background="#FF056676" BorderBrush="{x:Null}" Click="btnCancelar_Click"/>
         <Label Content="Paciente" HorizontalAlignment="Left" Margin="133,32,0,0" VerticalAlignment="Top" FontSize="12" FontFamily="Bahnschrift"/>
         <ComboBox x:Name="cmbPaciente" HorizontalAlignment="Left" Margin="203,24,0,0" VerticalAlignment="Top" Width="460"/>
