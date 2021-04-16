@@ -249,5 +249,15 @@ namespace SistemaDental
                 mostrarCitas();
             }
         }
+
+        private void btnCancelar_Click(object sender, RoutedEventArgs e)
+        {
+            dtg_Citas.IsEnabled = true;
+            mostrarCitas();
+            btnAgregar.IsEnabled = true;
+            btnEditar.IsEnabled = true;
+            btnBorrar.IsEnabled = true;
+            btnCancelar.IsEnabled = false;
+        }
     }
 }
