@@ -6,8 +6,8 @@
         xmlns:local="clr-namespace:SistemaDental"
         mc:Ignorable="d"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-        Title="Caja" Height="480.391" Width="899.627" ResizeMode="NoResize" WindowStartupLocation="CenterScreen">
-    <Grid Margin="0,0,0,-19">
+        Title="Caja" Height="500.391" Width="899.627" ResizeMode="NoResize" WindowStartupLocation="CenterScreen">
+    <Grid Height="450" VerticalAlignment="Top">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="2*"/>
             <ColumnDefinition Width="294*"/>
