@@ -150,7 +150,7 @@ namespace SistemaDental
         }
 
         /// <summary>
-        /// Boton Ver el paciente seleccionado en el combobox
+        /// Boton Ver el historial del paciente seleccionado en el combobox
         /// </summary>
         private void btnVerPaciente_Click(object sender, RoutedEventArgs e)
         {
@@ -163,6 +163,9 @@ namespace SistemaDental
                 else
                 {
                     LlenarTextBox();
+                    string identidad = txtIdentidad.Text;
+                    dtgHistorial.ItemsSource = unPaciente.MostrarHistorial(identidad);
+                    dtgHistorial.SelectedValuePath = "id_paciente";
                 }
 
 

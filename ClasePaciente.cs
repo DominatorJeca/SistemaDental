@@ -19,6 +19,12 @@ namespace SistemaDental
         //Propiedad para extraer todos los ID almacenados en la BD
         public string id_paciente { get; set; }
 
+        public DateTime Fecha { get; set; }
+        public int IdHistorial { get; set; }
+        public string IdPaciente { get; set; }
+        public string IdTratamiento { get; set; }
+
+
         //Arreglo tipo string para almacenar los datos extraidos de la BD
         string[] datosPaciente = new string[10];
 
@@ -141,7 +147,42 @@ namespace SistemaDental
             
         }
 
+        public List<ClasePaciente> MostrarHistorial(string id)
+        {
+            sqlConnection.Open();
 
+            try
+            {
+
+                SqlCommand sqlCommand = new SqlCommand("MostrarHistorial", sqlConnection);
+                sqlCommand.CommandType = CommandType.StoredProcedure;
+                sqlCommand.Parameters.AddWithValue("@id", id);
+                SqlDataReader reader = sqlCommand.ExecuteReader();
+
+                List<ClasePaciente> TestList = new List<ClasePaciente>();
+                ClasePaciente test = null;
+
+                while (reader.Read())
+                {
+                    test = new ClasePaciente();
+                    test.IdHistorial = int.Parse(reader["id_historial"].ToString());
+                    test.IdPaciente = reader["id_paciente"].ToString();
+                    test.Fecha = DateTime.Parse(reader["fecha"].ToString());
+                    test.IdTratamiento = reader["id_tratamiento"].ToString();
+                    TestList.Add(test);
+                }
+
+                return TestList;
+            }
+            catch
+            {
+                throw;
+            }
+            finally
+            {
+                sqlConnection.Close();
+            }
+        }
 
     }
 }
