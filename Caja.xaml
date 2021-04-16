@@ -16,21 +16,19 @@
         <Grid.Background>
             <ImageBrush ImageSource="TeethPattern.jpg" Stretch="UniformToFill"/>
         </Grid.Background>
-        <TextBox Name="txtDineroCaja" Margin="556,311,34,75" materialDesign:HintAssist.Hint="Dinero Disponible" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontFamily="Bahnschrift" FontSize="18" Background="#7FFFFFFF" Foreground="Black" Grid.ColumnSpan="2" Grid.Column="1" />
+        <TextBox Name="txtDineroCaja" Margin="556,311,34,75" materialDesign:HintAssist.Hint="Dinero Disponible" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontFamily="Bahnschrift" FontSize="18" Background="#7FFFFFFF" Foreground="Black" Grid.ColumnSpan="2" Grid.Column="1" Text="{Binding ElementName=dgvCaja,Path=SelectedItem.Dinero_disponible}" IsEnabled="False"/>
         <TextBox Name="txtCantidadCaja" Margin="47,311,342,75" materialDesign:HintAssist.Hint="Cantidad" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontFamily="Bahnschrift" FontSize="18" Background="#7FFFFFFF" Foreground="Black" Grid.Column="1"/>
         <Label Content="Transacción" HorizontalAlignment="Left" Margin="338,311,0,0" VerticalAlignment="Top" FontFamily="Bahnschrift" FontSize="16" Foreground="Black" Grid.Column="1"/>
         <RadioButton Name ="rbIngreso" Content="Ingreso" HorizontalAlignment="Left" Margin="349,343,0,0" VerticalAlignment="Top" FontFamily="Bahnschrift" FontSize="16" Grid.Column="1"/>
         <RadioButton Name ="rbEgreso" Content="Egreso" HorizontalAlignment="Left" Margin="458,343,0,0" VerticalAlignment="Top" FontFamily="Bahnschrift" FontSize="16" Grid.Column="1"/>
         <Button Name = "btnRealizar" Content="Realizar Transacción" HorizontalAlignment="Left" Margin="270,409,0,0" VerticalAlignment="Top" Width="170" Height="40" Background="#FF056676" BorderBrush="{x:Null}" Grid.Column="1" Click="btnRealizar_Click"/>
         <Button Content="Guardar" HorizontalAlignment="Left" Margin="467,408,0,0" VerticalAlignment="Top" Width="170" Height="40" Background="#FF056676" BorderBrush="{x:Null}" Grid.Column="1"/>
-        <DataGrid  Name ="dgvCaja" HorizontalAlignment="Left" Height="238" Margin="34,36,0,0" VerticalAlignment="Top" Width="821" Background="#FF056676" Foreground="#DDFFFFFF" Grid.ColumnSpan="2" Grid.Column="1" >
+        <DataGrid  Name ="dgvCaja" HorizontalAlignment="Left" Height="238" Margin="34,36,0,0" VerticalAlignment="Top" Width="821" Background="#FF056676" Foreground="#DDFFFFFF" Grid.ColumnSpan="2" Grid.Column="1" AutoGenerateColumns="False">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Id" Binding="{Binding id_transaccion}" FontFamily="Bahnschrift" FontSize="18" IsReadOnly="True"/>
-                <DataGridTextColumn Header="Tipo de Transaccion" Binding="{Binding tipo_transacción}" FontFamily="Bahnschrift" FontSize="18" IsReadOnly="True"/>
-                <DataGridTextColumn Header="Cantidad" Binding="{Binding cantidad}" FontFamily="Bahnschrift" FontSize="18" IsReadOnly="True"/>
-                <DataGridTextColumn Header="Tipo de Transaccion" Binding="{Binding tipo_transacción}" FontFamily="Bahnschrift" FontSize="18" IsReadOnly="True"/>
-                <DataGridTextColumn Header="Fecha" Binding="{Binding fecha}" FontFamily="Bahnschrift" FontSize="18" IsReadOnly="True"/>
-                <DataGridTextColumn Header="Dinero Disponible" Binding="{Binding dinero_disponible}" FontFamily="Bahnschrift" FontSize="18" IsReadOnly="True"/>
+                <DataGridTextColumn Header="Tipo de Transaccion" Binding="{Binding Tipo_transacción}" FontFamily="Bahnschrift" FontSize="18" IsReadOnly="True" Width="200"/>
+                <DataGridTextColumn Header="Cantidad" Binding="{Binding Cantidad}" FontFamily="Bahnschrift" FontSize="18" IsReadOnly="True" Width="200"/>
+                <DataGridTextColumn Header="Fecha" Binding="{Binding Fecha}" FontFamily="Bahnschrift" FontSize="18" IsReadOnly="True" Width="220"/>
+                <DataGridTextColumn Header="Dinero Disponible" Binding="{Binding Dinero_disponible}" FontFamily="Bahnschrift" FontSize="18" IsReadOnly="True" Width="200"/>
             </DataGrid.Columns>
         </DataGrid>
 

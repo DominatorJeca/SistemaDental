@@ -29,9 +29,7 @@ namespace SistemaDental
         
         private ClaseCaja caja = new ClaseCaja();
 
-        int resultado = 0;
-        int cantidad = 0;
-        int dinero = 0;
+        
         public Caja()
         {
             InitializeComponent();
@@ -40,33 +38,28 @@ namespace SistemaDental
         }
 
 
-        public void DineroDisponible()
-        {
-            if (rbEgreso.IsChecked == true)
-            {
-                
-                cantidad = Convert.ToInt32(txtCantidadCaja);
-                dinero = Convert.ToInt32(txtDineroCaja);
-                resultado = dinero - cantidad;
-            }
-            else if (rbIngreso.IsChecked == true)
-                {
-                resultado = dinero + cantidad;
-                }
-        }
+       
         public void MostrarCaja()
         {
             dgvCaja.ItemsSource = caja.MostrarCaja();
             dgvCaja.SelectedValuePath = "Id_transaccion";
-            dgvCaja.DisplayMemberPath = "Tipo_transacción";
+            dgvCaja.SelectedIndex = dgvCaja.Items.Count-2;
         }
 
         private void ObtenerValues()
         {
             
             caja.Cantidad = Convert.ToInt32(txtCantidadCaja.Text);
-            caja.Dinero_disponible = Convert.ToInt32(txtDineroCaja.Text);
-
+            if (rbEgreso.IsChecked == true)
+            {
+                caja.Dinero_disponible = Convert.ToInt32(txtDineroCaja.Text)-caja.Cantidad;
+                caja.Tipo_transacción = "Egreso";
+            }
+            else if(rbIngreso.IsChecked==true){
+                caja.Dinero_disponible= Convert.ToInt32(txtDineroCaja.Text) + caja.Cantidad;
+                caja.Tipo_transacción = "Ingreso";
+            }
+            caja.Fecha = DateTime.Now;
         }
 
 
@@ -102,26 +95,13 @@ namespace SistemaDental
         private void btnRealizar_Click(object sender, RoutedEventArgs e)
         {
             // Verificar los datos que fueron ingresados
-            if(VerificarValores() == true)
+            if (VerificarValores() == true)
             {
 
                 try
                 {
-
-                    //asignacion de valores de txt a variables
-                    string cantidad = txtCantidadCaja.Text;
-                    string dinero_disponible = txtDineroCaja.Text;
-
-                    string transaccion;
-                    if (rbEgreso.IsChecked == true)
-                    {
-                        { transaccion = "Egreso";  }
-                    } else { transaccion = "Ingreso";  }
-                    //Obtener los valores de caja
                     ObtenerValues();
-
-                    //Insertar datos de Caja
-                    caja.IngresarCaja(caja, transaccion);
+                    caja.IngresarCaja(caja);
 
                     // Mensaje de insercion exitosa a la base
                     MessageBox.Show("Datos insertados correctamente");
@@ -132,9 +112,21 @@ namespace SistemaDental
                     MessageBox.Show("Ha occurido un error al momento de insertar.");
                     MessageBox.Show(ex.Message);
                 }
-                
+                finally
+                {
+                    MostrarCaja();
+                }
+
+            }
+            else
+            {
+                MessageBox.Show("Seleccione ");
             }
 
+        }
+        private void SelectLast_Click(object sender, RoutedEventArgs e)
+        {
+            dgvCaja.SelectedIndex = dgvCaja.Items.Count - 1;
         }
     }
 }
