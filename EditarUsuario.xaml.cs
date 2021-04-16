@@ -26,6 +26,7 @@ namespace SistemaDental
             InitializeComponent();
             MostrarUsuario();
             MostrarPuesto();
+
         }
 
         private void btnRegresar_Click(object sender, RoutedEventArgs e)
