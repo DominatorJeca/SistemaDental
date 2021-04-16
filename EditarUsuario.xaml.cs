@@ -49,10 +49,6 @@ namespace SistemaDental
 
         
 
-        private void cmbUsuario_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            
-            cmbPuesto.Text = puesto.MostrarPuesto(Convert.ToInt32(cmbPuesto.Text));
-        }
+        
     }
 }

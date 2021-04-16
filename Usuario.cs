@@ -12,6 +12,7 @@ namespace SistemaDental
     public class Usuario
     {
         //variable miembro
+        private Puesto puesto = new Puesto();
         private static string connectionString = ConfigurationManager.ConnectionStrings["SistemaDental.Properties.Settings.ClinicaBDConnection"].ConnectionString;
         private SqlConnection sqlConnection = new SqlConnection(connectionString);
 
@@ -27,6 +28,8 @@ namespace SistemaDental
         public string Correo{get; set;}
 
         public int Puesto { get; set; }
+
+        public string PuestoNombre { get; set; }
 
         public string Genero{ get; set; }
         public string Contraseña { get; set; }
@@ -235,17 +238,19 @@ namespace SistemaDental
             try
             {
                 sqlConnection.Open();
+
                 //crear el comando SQL
                 SqlCommand sqlCommand = new SqlCommand("MostrarEmpleadosActivos", sqlConnection);
 
                 sqlCommand.CommandType = CommandType.StoredProcedure;
+
 
                 // Obtener los datos de los puestos
                 using (SqlDataReader rdr = sqlCommand.ExecuteReader())
                 {
                     while (rdr.Read())
                         usuarios.Add(new Usuario { Id = Convert.ToString(rdr["id_empleado"]), Nombre= rdr["nombre"].ToString(), Apellido = rdr["apellido"].ToString(),
-                            Telefono = rdr["telefono"].ToString(),Correo = rdr["correo"].ToString(),Puesto= Convert.ToInt32(rdr["idpuesto"]),Genero= rdr["genero"].ToString(),
+                            Telefono = rdr["telefono"].ToString(),Correo = rdr["correo"].ToString(),Puesto= Convert.ToInt32(rdr["idpuesto"]),PuestoNombre=puesto.MostrarPuesto(Convert.ToInt32(rdr["idpuesto"])),Genero= rdr["genero"].ToString(),
                             Contraseña = rdr["contraseña"].ToString(),Estado=Convert.ToBoolean(rdr["estado"]),Administrador= Convert.ToBoolean(rdr["administrador"])});
                 }
 
