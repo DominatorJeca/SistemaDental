@@ -117,10 +117,16 @@
       <DependentUpon>Caja.xaml</DependentUpon>
     </Compile>
 
+
+
+
     <Compile Include="Citas.xaml.cs">
       <DependentUpon>Citas.xaml</DependentUpon>
     </Compile>
     <Compile Include="ClaseCitas.cs" />
+
+    <Compile Include="ClaseCaja.cs" />
+
 
     <Compile Include="ClaseCaja.cs" />
 
@@ -263,6 +269,9 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Menu Background.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Menu Bienvendida.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="packages\MaterialDesignThemes.4.0.0\build\MaterialDesignThemes.targets" Condition="Exists('packages\MaterialDesignThemes.4.0.0\build\MaterialDesignThemes.targets')" />

@@ -74,5 +74,16 @@ namespace SistemaDental
             Ajustes ajustes = new Ajustes();
             ajustes.Show();
         }
+
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void btnCitas_Click(object sender, RoutedEventArgs e)
+        {
+            Citas citas = new Citas();
+            citas.Show();
+        }
     }
 }
