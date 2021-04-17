@@ -19,6 +19,9 @@ namespace SistemaDental
     /// </summary>
     public partial class Menu : Window
     {
+       private bool Admin;
+        private String Nombree;
+
         
         public Menu()
         {
@@ -31,6 +34,8 @@ namespace SistemaDental
             InitializeComponent();
             lblUsuario.Content = name;
             PermisosAdministrador(admin);
+            Nombree = name;
+            Admin = admin;
         }
 
         public void PermisosAdministrador(bool admin)
@@ -47,32 +52,37 @@ namespace SistemaDental
         }
         public void btnInventario_Click(object sender, RoutedEventArgs e)
         {
-            Inventario inventario = new Inventario();
+            Inventario inventario = new Inventario(Admin,Nombree);
             inventario.Show();
+            this.Hide();
         }
 
         private void btnTratamiento_Click(object sender, RoutedEventArgs e)
         {
-            Tratamiento tratamiento = new Tratamiento();
+            Tratamiento tratamiento = new Tratamiento(Admin, Nombree);
             tratamiento.Show();
+            this.Hide();
         }
 
         private void btnCaja_Click(object sender, RoutedEventArgs e)
         {
-            Caja caja = new Caja();
+            Caja caja = new Caja(Admin, Nombree);
             caja.Show();
+            this.Hide();
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            Pacientes pacientes = new Pacientes();
+            Pacientes pacientes = new Pacientes(Admin, Nombree);
             pacientes.Show();
+            this.Hide();
         }
 
         private void btnAjustes_Click(object sender, RoutedEventArgs e)
         {
-            Ajustes ajustes = new Ajustes();
+            Ajustes ajustes = new Ajustes(Admin, Nombree);
             ajustes.Show();
+            this.Hide();
         }
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
@@ -82,8 +92,9 @@ namespace SistemaDental
 
         private void btnCitas_Click(object sender, RoutedEventArgs e)
         {
-            Citas citas = new Citas();
+            Citas citas = new Citas(Admin, Nombree);
             citas.Show();
+            this.Hide();
         }
     }
 }

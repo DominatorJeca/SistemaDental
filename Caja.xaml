@@ -23,7 +23,7 @@
         <RadioButton Name ="rbEgreso" Content="Egreso" HorizontalAlignment="Left" Margin="458,343,0,0" VerticalAlignment="Top" FontFamily="Bahnschrift" FontSize="16" Grid.Column="1"/>
         <Button Name = "btnRealizar" Content="Realizar Transacción" HorizontalAlignment="Left" Margin="270,409,0,0" VerticalAlignment="Top" Width="170" Height="40" Background="#FF056676" BorderBrush="{x:Null}" Grid.Column="1" Click="btnRealizar_Click"/>
         <Button Content="Guardar" HorizontalAlignment="Left" Margin="467,408,0,0" VerticalAlignment="Top" Width="170" Height="40" Background="#FF056676" BorderBrush="{x:Null}" Grid.Column="1"/>
-        <DataGrid  Name ="dgvCaja" HorizontalAlignment="Left" Height="238" Margin="34,36,0,0" VerticalAlignment="Top" Width="821" Background="#FF056676" Foreground="#DDFFFFFF" Grid.ColumnSpan="2" Grid.Column="1" AutoGenerateColumns="False">
+        <DataGrid  Name ="dgvCaja" HorizontalAlignment="Left" Height="238" Margin="34.2,68,0,0" VerticalAlignment="Top" Width="821" Background="#FF056676" Foreground="#DDFFFFFF" Grid.ColumnSpan="2" Grid.Column="1" AutoGenerateColumns="False">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Tipo de Transaccion" Binding="{Binding Tipo_transacción}" FontFamily="Bahnschrift" FontSize="18" IsReadOnly="True" Width="200"/>
                 <DataGridTextColumn Header="Cantidad" Binding="{Binding Cantidad}" FontFamily="Bahnschrift" FontSize="18" IsReadOnly="True" Width="200"/>
@@ -31,6 +31,7 @@
                 <DataGridTextColumn Header="Dinero Disponible" Binding="{Binding Dinero_disponible}" FontFamily="Bahnschrift" FontSize="18" IsReadOnly="True" Width="200"/>
             </DataGrid.Columns>
         </DataGrid>
+        <Button Name = "btnRegresar" Content="Regresar" HorizontalAlignment="Left" Margin="10.2,10,0,0" VerticalAlignment="Top" Width="130" Height="34" Background="#FF056676" BorderBrush="{x:Null}" Grid.Column="1" Click="btnRegresar_Click"/>
 
     </Grid>
 </Window>

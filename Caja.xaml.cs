@@ -26,19 +26,25 @@ namespace SistemaDental
     public partial class Caja : Window
     {
 
-        
+        private bool Admin;
+        private String Nombree;
         private ClaseCaja caja = new ClaseCaja();
-
         
         public Caja()
         {
             InitializeComponent();
             MostrarCaja();
-            
         }
 
+        public Caja(bool admin, string name)
+        {
+            InitializeComponent();
+            MostrarCaja();
+            Nombree = name;
+            Admin = admin;
 
-       
+        }
+
         public void MostrarCaja()
         {
             dgvCaja.ItemsSource = caja.MostrarCaja();
@@ -127,6 +133,13 @@ namespace SistemaDental
         private void SelectLast_Click(object sender, RoutedEventArgs e)
         {
             dgvCaja.SelectedIndex = dgvCaja.Items.Count - 1;
+        }
+
+        private void btnRegresar_Click(object sender, RoutedEventArgs e)
+        {
+            Menu menu = new Menu(Admin,Nombree);
+            menu.Show();
+            this.Hide();
         }
     }
 }

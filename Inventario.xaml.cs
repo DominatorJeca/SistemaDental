@@ -30,11 +30,22 @@ namespace SistemaDental
     public partial class Inventario : Window
     {
         ClaseInventario inventario = new ClaseInventario();
-       
+        private bool Admin;
+        private String Nombree;
+
         public Inventario()
         {
             InitializeComponent();
             MostrarMaterial();
+
+        }
+
+        public Inventario(bool admin, string name)
+        {
+            InitializeComponent();
+            MostrarMaterial();
+            Nombree = name;
+            Admin = admin;
 
         }
 
@@ -116,7 +127,7 @@ namespace SistemaDental
 
         private void btnRegresar_Click(object sender, RoutedEventArgs e)
         {
-            Menu menu = new Menu();
+            Menu menu = new Menu(Admin,Nombree);
             menu.Show();
             this.Hide();
         }

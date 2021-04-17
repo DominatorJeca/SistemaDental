@@ -22,13 +22,24 @@ namespace SistemaDental
     {
         ClaseCitas citas = new ClaseCitas();
         int bandera = 0;
+        private bool Admin;
+        private String Nombree;
         public Citas()
         {
             InitializeComponent();
             MostrarDatos();
             mostrarCitas();
         }
-        
+
+        public Citas(bool admin, string name)
+        {
+            InitializeComponent();
+            MostrarDatos();
+            mostrarCitas();
+            Nombree = name;
+            Admin = admin;
+        }
+
         private void MostrarDatos()
         {
             cmbPaciente.ItemsSource = citas.mostrarIdPacientes();

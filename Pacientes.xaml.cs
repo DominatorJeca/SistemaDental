@@ -19,28 +19,37 @@ namespace SistemaDental
     /// </summary>
     public partial class Pacientes : Window
     {
+        private bool Admin;
+        private String Nombree;
         public Pacientes()
         {
             InitializeComponent();
         }
 
+        public Pacientes(bool admin, string name)
+        {
+            InitializeComponent();
+            Nombree = name;
+            Admin = admin;
+        }
+
         private void btnVerPaciente_Click(object sender, RoutedEventArgs e)
         {
-            VerPaciente verpaciente = new VerPaciente();
+            VerPaciente verpaciente = new VerPaciente(Admin, Nombree);
             verpaciente.Show();
             this.Hide();
         }
 
         private void btnAgregarPaciente_Click(object sender, RoutedEventArgs e)
         {
-            AgregarPaciente agregarPaciente = new AgregarPaciente();
+            AgregarPaciente agregarPaciente = new AgregarPaciente(Admin, Nombree);
             agregarPaciente.Show();
             this.Hide();
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            Menu menu = new Menu();
+            Menu menu = new Menu(Admin,Nombree);
             menu.Show();
             this.Hide();
         }

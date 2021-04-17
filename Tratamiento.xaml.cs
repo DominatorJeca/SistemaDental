@@ -23,11 +23,21 @@ namespace SistemaDental
     {
         ClaseTratamiento tratamiento = new ClaseTratamiento();
         DateTime DateTime = new DateTime();
+        private bool Admin;
+        private String Nombree;
         public Tratamiento()
         {
             InitializeComponent();
             MostrarTratamientos();
             MostrarPacientes();
+        }
+        public Tratamiento(bool admin, string name)
+        {
+            InitializeComponent();
+            MostrarTratamientos();
+            MostrarPacientes();
+            Nombree = name;
+            Admin = admin;
         }
 
         public void MostrarTratamientos()
@@ -161,7 +171,7 @@ namespace SistemaDental
 
         private void btnRegresar_Click(object sender, RoutedEventArgs e)
         {
-            Menu menu = new Menu();
+            Menu menu = new Menu(Admin,Nombree);
             menu.Show();
             this.Hide();
         }

@@ -19,8 +19,13 @@ namespace SistemaDental
     /// </summary>
     public partial class AgregarUsuario : Window
     {
+        //Variables miembro
         private Usuario usuario = new Usuario();
         private Puesto puesto = new Puesto();
+        private bool Admin;
+        private String Nombree;
+
+        //Contructores
         public AgregarUsuario()
         {
             InitializeComponent();
@@ -28,12 +33,29 @@ namespace SistemaDental
            
         }
 
-        private void btnRegresar_Click(object sender, RoutedEventArgs e)
+        public AgregarUsuario(bool admin, string name)
         {
-            Ajustes ajustes = new Ajustes();
-            ajustes.Show();
+            InitializeComponent();
+            MostrarPuesto();
+            Nombree = name;
+            Admin = admin;
         }
 
+        /// <summary>
+        /// Abre el formulario ajustes y cierra el actual
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btnRegresar_Click(object sender, RoutedEventArgs e)
+        {
+            Ajustes ajustes = new Ajustes(Admin,Nombree);
+            ajustes.Show();
+            this.Hide();
+        }
+
+        /// <summary>
+        /// Asigna la lista de puestos al cmbPuestos
+        /// </summary>
         public void MostrarPuesto()
         {
             cmbPuesto.ItemsSource = puesto.MostrarPuestos();
@@ -41,6 +63,9 @@ namespace SistemaDental
             cmbPuesto.DisplayMemberPath = "NombrePuesto";
         }
 
+        /// <summary>
+        /// Obtiene los datos de los textbox y combobox en el formulario
+        /// </summary>
         public void ObtenerValores()
         {
             usuario.Id = Convert.ToString(txtAgregarIdentidad.Text);
@@ -111,6 +136,11 @@ namespace SistemaDental
 
         }
 
+        /// <summary>
+        /// Lllama al metodo de agregar usuario y envia los parametros correspondientes
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnAgregarUsuario_Click_1(object sender, RoutedEventArgs e)
         {
             // Verificar que se ingresaron los valores requeridos

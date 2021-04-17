@@ -13,6 +13,7 @@ namespace SistemaDental
     {
         //variable miembro
         private Puesto puesto = new Puesto();
+        //cadena de conexion
         private static string connectionString = ConfigurationManager.ConnectionStrings["SistemaDental.Properties.Settings.ClinicaBDConnection"].ConnectionString;
         private SqlConnection sqlConnection = new SqlConnection(connectionString);
 
@@ -110,11 +111,12 @@ namespace SistemaDental
         /// <param name="usuario">Datos del usuario</param>
 
         public void IngresarUsuario(Usuario usuario)
-        {
+        {   //abrir la cadena de conexion
             sqlConnection.Open();
 
             try
             {
+                //crear el comando SQL
                 SqlCommand sqlCommand = new SqlCommand("IngresoEmpleados", sqlConnection);
                 sqlCommand.CommandType = CommandType.StoredProcedure;
                 //Establecer los valores de parametros
@@ -142,13 +144,17 @@ namespace SistemaDental
         }
 
 
-
+        /// <summary>
+        /// Editar los datos de un usuario en la tabla empleados
+        /// </summary>
+        /// <param name="usuario">Datos del usuario</param>
         public void EditarUsuario(Usuario usuario)
         {
             sqlConnection.Open();
 
             try
             {
+                //crear el comando SQL
                 SqlCommand sqlCommand = new SqlCommand("EditarEmpleados", sqlConnection);
                 sqlCommand.CommandType = CommandType.StoredProcedure;
                 //Establecer los valores de parametros
@@ -174,13 +180,17 @@ namespace SistemaDental
                 sqlConnection.Close();
             }
         }
-
+        /// <summary>
+        /// Cambia el estado del empleado a 0 o desactivo
+        /// </summary>
+        /// <param name="idUsuario"> Id del usuario a eliminar</param>
         public void EliminarUsuario(string idUsuario)
         {
             sqlConnection.Open();
 
             try
             {
+                //crear el comando SQL
                 SqlCommand sqlCommand = new SqlCommand("EliminarUsuario", sqlConnection);
                 sqlCommand.CommandType = CommandType.StoredProcedure;
                 //Establecer los valores de parametros
@@ -199,13 +209,17 @@ namespace SistemaDental
             }
 
         }
-
+        /// <summary>
+        /// Edita el campo privilegio de usuario a 1
+        /// </summary>
+        /// <param name="idUsuario">Id del usuario al que se le dara privilegios</param>
         public void PrivilegioUsuario(string idUsuario)
         {
             sqlConnection.Open();
 
             try
             {
+                //crear el comando SQL
                 SqlCommand sqlCommand = new SqlCommand("PrivilegioAdministrador", sqlConnection);
                 sqlCommand.CommandType = CommandType.StoredProcedure;
                 //Establecer los valores de parametros

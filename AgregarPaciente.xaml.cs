@@ -24,9 +24,9 @@ namespace SistemaDental
     /// </summary>
     public partial class AgregarPaciente : Window
     {
-        
-        //Variable para la conexion con la base de datos
-        private SqlConnection sqlConnection;
+
+        bool Admin;
+        String Nombree;
 
         //Variable para definir el genero seleccionado por el radio boton
         ClasePaciente paciente = new ClasePaciente();
@@ -37,9 +37,14 @@ namespace SistemaDental
             
             InitializeComponent();
 
-            //Creacion de Conexion con la Base de Datos
-            string connectionString = ConfigurationManager.ConnectionStrings["SistemaDental.Properties.Settings.ClinicaBDConnection"].ConnectionString;
-            sqlConnection = new SqlConnection(connectionString);
+        }
+
+        public AgregarPaciente(bool admin, string name)
+        {
+
+            InitializeComponent();
+            Nombree = name;
+            Admin = admin;
 
         }
 
@@ -48,7 +53,7 @@ namespace SistemaDental
         /// </summary>
         private void btnRegresar_Click(object sender, RoutedEventArgs e)
         {
-            Pacientes pacientes = new Pacientes();
+            Pacientes pacientes = new Pacientes(Admin,Nombree);
             pacientes.Show();
             this.Hide();
         }
@@ -96,11 +101,7 @@ namespace SistemaDental
                 {
                     MessageBox.Show("Ha ocurrido un error, revise sus datos e intente de nuevo");
                 }
-                // Cierra la Conexión a la Base de Datos
-                finally
-                {
-                    sqlConnection.Close();
-                }
+                
             }
 
         }

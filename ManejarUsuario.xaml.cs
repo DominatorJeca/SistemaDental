@@ -19,19 +19,41 @@ namespace SistemaDental
     /// </summary>
     public partial class ManejarUsuario : Window
     {
+        //variables miembro
         private Usuario usuario = new Usuario();
+        private bool Admin;
+        private String Nombree;
+
+        //Contructores
         public ManejarUsuario()
         {
             InitializeComponent();
             MostrarUsuario();
         }
 
-        private void btnRegresar_Click(object sender, RoutedEventArgs e)
+        public ManejarUsuario(bool admin, string name)
         {
-            Ajustes ajustes = new Ajustes();
-            ajustes.Show();
+            InitializeComponent();
+            MostrarUsuario();
+            Nombree = name;
+            Admin = admin;
         }
 
+        /// <summary>
+        /// Abre el formulario de ajustes y cierra el actual
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btnRegresar_Click(object sender, RoutedEventArgs e)
+        {
+            Ajustes ajustes = new Ajustes(Admin,Nombree);
+            ajustes.Show();
+            this.Hide();
+        }
+
+        /// <summary>
+        /// Asigna la lista de usuarios al combobox
+        /// </summary>
         public void MostrarUsuario()
         {
             cmbUsuario.ItemsSource = usuario.MostrarUsuarios();
@@ -39,6 +61,11 @@ namespace SistemaDental
             cmbUsuario.DisplayMemberPath = "Id";
         }
 
+        /// <summary>
+        /// Llama el metodo de eliminar usuario de la clase Usuario
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnEliminarUsuario_Click(object sender, RoutedEventArgs e)
         {
             try
@@ -68,7 +95,11 @@ namespace SistemaDental
                 MostrarUsuario();
             }
         }
-
+        /// <summary>
+        /// Llama el metodo de dar privilegios de la clase usuario
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnPrivilegios_Click(object sender, RoutedEventArgs e)
         {
             try

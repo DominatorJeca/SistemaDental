@@ -23,6 +23,9 @@ namespace SistemaDental
         //Creacion de un objeto de tipo ClasePaciente
         private ClasePaciente unPaciente = new ClasePaciente();
 
+        private bool Admin;
+        private String Nombree;
+
         /// <summary>
         /// Componentes que se inicializan junto al form
         /// </summary>
@@ -33,12 +36,21 @@ namespace SistemaDental
             HabilitacionDeshabilitacion(false, true);
         }
 
+        public VerPaciente(bool admin, string name)
+        {
+            InitializeComponent();
+            MostrarPacientes();
+            HabilitacionDeshabilitacion(false, true);
+            Nombree = name;
+            Admin = admin;
+        }
+
         /// <summary>
         /// Boton para regresar al menu anterior
         /// </summary>
         private void btnRegresar_Click(object sender, RoutedEventArgs e)
         {
-            Pacientes pacientes = new Pacientes();
+            Pacientes pacientes = new Pacientes(Admin,Nombree);
             pacientes.Show();
             this.Hide();
         }
