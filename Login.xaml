@@ -23,7 +23,7 @@
         </Grid.ColumnDefinitions>
         <CheckBox Grid.Column="3" Content="Mostrar Contraseña" HorizontalAlignment="Left" Margin="59,442,0,0" VerticalAlignment="Top" FontSize="16" FontFamily="Bahnschrift" RenderTransformOrigin="0.493,-1.796" Background="White" Width="175" Foreground="Black"/>
         <Button x:Name="btnLogin" Content="Iniciar" Grid.Column="3" HorizontalAlignment="Left" Margin="89,358,0,0" VerticalAlignment="Top" Width="102" BorderThickness="0" Background="{x:Null}" FontFamily="Bahnschrift" FontSize="20" Click="btnLogin_Click" />
-        <Button x:Name="btnSalir" Content="Salir" Grid.Column="3" HorizontalAlignment="Left" Margin="261,428,0,0" VerticalAlignment="Top" Width="77" Height="40" Background="{x:Null}" BorderThickness="0" FontFamily="Bahnschrift" FontSize="12" RenderTransformOrigin="0.182,0.225"/>
+        <Button x:Name="btnSalir" Content="Salir" Grid.Column="3" HorizontalAlignment="Left" Margin="261,428,0,0" VerticalAlignment="Top" Width="77" Height="40" Background="{x:Null}" BorderThickness="0" FontFamily="Bahnschrift" FontSize="12" RenderTransformOrigin="0.182,0.225" Click="btnSalir_Click"/>
         <Label Content="Ingrese los datos" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="68,35,68,0" Foreground="Gray" FontSize="18"/>
         <StackPanel VerticalAlignment="Center"  Height="126" Grid.Column="3" Margin="40,196,90,167" Background="#7F056676">
             <TextBox x:Name="txtUsuario" Margin="0,10" materialDesign:HintAssist.Hint="Usuario" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontFamily="Bahnschrift" FontSize="18" Background="{x:Null}" Height="44"/>

@@ -18,5 +18,6 @@
         <Label Content="¿Que desea realizar?" HorizontalAlignment="Left" Margin="270,101,0,0" VerticalAlignment="Top" FontSize="32" FontFamily="Bahnschrift"/>
         <Label x:Name="lblUsuario" Content="Usuario" HorizontalAlignment="Left" Margin="580,101,0,0" VerticalAlignment="Top" FontSize="32" FontFamily="Bahnschrift"/>
         <Button Name ="btnCitas" Content="Citas" HorizontalAlignment="Left" Margin="451,386,0,0" VerticalAlignment="Top" Width="143" Background="{x:Null}" FontFamily="Bahnschrift" FontSize="20" Click="btnCitas_Click" BorderBrush="{x:Null}"/>
+        <Button x:Name = "btnSalir" Content="Salir" HorizontalAlignment="Left" Margin="14,474,0,0" VerticalAlignment="Top" Width="100" Height="40" Background="#FF056676" BorderBrush="{x:Null}" Click="btnRealizar_Click"/>
     </Grid>
 </Window>

@@ -19,10 +19,13 @@ namespace SistemaDental
     /// </summary>
     public partial class EditarUsuario : Window
     {
+        //variable miembro
         private Usuario usuario = new Usuario();
         private Puesto puesto = new Puesto();
         private bool Admin;
         private String Nombree;
+        
+        //constructores
         public EditarUsuario()
         {
             InitializeComponent();
@@ -41,12 +44,14 @@ namespace SistemaDental
 
         }
 
+        //Abre el formulario ajustes y cierra el actual
         private void btnRegresar_Click(object sender, RoutedEventArgs e)
         {
             Ajustes ajustes = new Ajustes(Admin,Nombree);
             ajustes.Show();
             this.Hide();
         }
+        //Asigna la lista de puestos al combobox de puestos
         public void MostrarPuesto()
         {
             cmbPuesto.ItemsSource = puesto.MostrarPuestos();
@@ -54,6 +59,7 @@ namespace SistemaDental
             cmbPuesto.DisplayMemberPath = "NombrePuesto";
         }
 
+        //Asigna la lista de usuario a el combobox de usuarios
         public void MostrarUsuario()
         {
             cmbUsuario.ItemsSource = usuario.MostrarUsuarios();
@@ -61,6 +67,9 @@ namespace SistemaDental
             cmbUsuario.DisplayMemberPath = "Id";
         }
 
+        /// <summary>
+        /// Obtiene los valores de los textbox y combobox
+        /// </summary>
         public void ObtenerValores()
         {
             usuario.Id = Convert.ToString(txtEditarIdentidad.Text);
@@ -119,6 +128,11 @@ namespace SistemaDental
 
         }
 
+        /// <summary>
+        /// Llama al metodo para actualizar usuario de la clase usuario
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnActualizarUsuario_Click(object sender, RoutedEventArgs e)
         {
             // Verificar que se ingresaron los valores requeridos
@@ -148,6 +162,11 @@ namespace SistemaDental
 
         }
 
+        /// <summary>
+        /// Devuelve el formulario a su forma inicial
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnCancelar_Click(object sender, RoutedEventArgs e)
         {
             LimpiarFormulario();
@@ -155,6 +174,11 @@ namespace SistemaDental
 
         }
 
+        /// <summary>
+        /// Abre el formulario ajustes y cierra el actual
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnRegresar_Click_1(object sender, RoutedEventArgs e)
         {
             this.Hide();

@@ -19,10 +19,11 @@ namespace SistemaDental
     /// </summary>
     public partial class Menu : Window
     {
-       private bool Admin;
+       //Variables miembros
+        private bool Admin;
         private String Nombree;
 
-        
+        //Constructores
         public Menu()
         {
             InitializeComponent();
@@ -38,6 +39,10 @@ namespace SistemaDental
             Admin = admin;
         }
 
+        /// <summary>
+        /// Verifica si el usuario que ingreso tiene permisos de administrador
+        /// </summary>
+        /// <param name="admin"></param>
         public void PermisosAdministrador(bool admin)
         {
             if (admin)
@@ -50,6 +55,12 @@ namespace SistemaDental
             }
 
         }
+
+        /// <summary>
+        /// Abre el Formulario de inventario y cierra el actual
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         public void btnInventario_Click(object sender, RoutedEventArgs e)
         {
             Inventario inventario = new Inventario(Admin,Nombree);
@@ -57,20 +68,33 @@ namespace SistemaDental
             this.Hide();
         }
 
+        /// <summary>
+        /// Abre el Formulario de tratamiento y cierra el actual
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnTratamiento_Click(object sender, RoutedEventArgs e)
         {
             Tratamiento tratamiento = new Tratamiento(Admin, Nombree);
             tratamiento.Show();
             this.Hide();
         }
-
+        /// <summary>
+        /// Abre el Formulario de caja y cierra el actual
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnCaja_Click(object sender, RoutedEventArgs e)
         {
             Caja caja = new Caja(Admin, Nombree);
             caja.Show();
             this.Hide();
         }
-
+        /// <summary>
+        /// Abre el Formulario de pacientes y cierra el actual
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             Pacientes pacientes = new Pacientes(Admin, Nombree);
@@ -78,6 +102,11 @@ namespace SistemaDental
             this.Hide();
         }
 
+        /// <summary>
+        /// Abre el Formulario de ajustes y cierra el actual
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnAjustes_Click(object sender, RoutedEventArgs e)
         {
             Ajustes ajustes = new Ajustes(Admin, Nombree);
@@ -90,10 +119,22 @@ namespace SistemaDental
 
         }
 
+        /// <summary>
+        /// Abre el Formulario de Citas y cierra el actual
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnCitas_Click(object sender, RoutedEventArgs e)
         {
             Citas citas = new Citas(Admin, Nombree);
             citas.Show();
+            this.Hide();
+        }
+
+        private void btnRealizar_Click(object sender, RoutedEventArgs e)
+        {
+            Login login = new Login();
+            login.Show();
             this.Hide();
         }
     }

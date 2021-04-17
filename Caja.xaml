@@ -21,8 +21,7 @@
         <Label Content="Transacción" HorizontalAlignment="Left" Margin="338,311,0,0" VerticalAlignment="Top" FontFamily="Bahnschrift" FontSize="16" Foreground="Black" Grid.Column="1"/>
         <RadioButton Name ="rbIngreso" Content="Ingreso" HorizontalAlignment="Left" Margin="349,343,0,0" VerticalAlignment="Top" FontFamily="Bahnschrift" FontSize="16" Grid.Column="1"/>
         <RadioButton Name ="rbEgreso" Content="Egreso" HorizontalAlignment="Left" Margin="458,343,0,0" VerticalAlignment="Top" FontFamily="Bahnschrift" FontSize="16" Grid.Column="1"/>
-        <Button Name = "btnRealizar" Content="Realizar Transacción" HorizontalAlignment="Left" Margin="270,409,0,0" VerticalAlignment="Top" Width="170" Height="40" Background="#FF056676" BorderBrush="{x:Null}" Grid.Column="1" Click="btnRealizar_Click"/>
-        <Button Content="Guardar" HorizontalAlignment="Left" Margin="467,408,0,0" VerticalAlignment="Top" Width="170" Height="40" Background="#FF056676" BorderBrush="{x:Null}" Grid.Column="1"/>
+        <Button Name = "btnRealizar" Content="Realizar Transacción" HorizontalAlignment="Left" Margin="360.2,410,0,0" VerticalAlignment="Top" Width="170" Height="40" Background="#FF056676" BorderBrush="{x:Null}" Grid.Column="1" Click="btnRealizar_Click"/>
         <DataGrid  Name ="dgvCaja" HorizontalAlignment="Left" Height="238" Margin="34.2,68,0,0" VerticalAlignment="Top" Width="821" Background="#FF056676" Foreground="#DDFFFFFF" Grid.ColumnSpan="2" Grid.Column="1" AutoGenerateColumns="False">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Tipo de Transaccion" Binding="{Binding Tipo_transacción}" FontFamily="Bahnschrift" FontSize="18" IsReadOnly="True" Width="200"/>

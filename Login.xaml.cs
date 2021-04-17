@@ -50,6 +50,7 @@ namespace SistemaDental
                         //Abrir formulario Menu
                         Menu menu = new Menu(elUsuario.Administrador,elUsuario.Nombre);
                         menu.Show();
+                        this.Hide();
                     }
                     else if (!elUsuario.Estado)
                     {
@@ -68,6 +69,11 @@ namespace SistemaDental
                 MessageBox.Show("Ocurrio un error al momento de realizar la consulta");
                 Console.WriteLine(ex.Message);
             }
+        }
+
+        private void btnSalir_Click(object sender, RoutedEventArgs e)
+        {
+            App.Current.Shutdown();
         }
     }
 }
