@@ -273,7 +273,7 @@ namespace SistemaDental
 
         private void btnRegresar_Click(object sender, RoutedEventArgs e)
         {
-            Menu menu = new Menu();
+            Menu menu = new Menu(Admin,Nombree);
             menu.Show();
             this.Hide();
         }

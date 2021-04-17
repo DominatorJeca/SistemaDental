@@ -67,11 +67,17 @@ namespace SistemaDental
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            txtCantidadInventario.IsEnabled = true;
-            txtMaterialInventario.IsEnabled= true;
-            btnGuardar.IsEnabled = true;
-            btnEditar.IsEnabled = false;
-            OcultarMostrarBotones(Visibility.Visible);
+            if (dgv_Materiales.SelectedValue != null)
+            {
+                txtCantidadInventario.IsEnabled = true;
+                btnGuardar.IsEnabled = true;
+                btnEditar.IsEnabled = false;
+                OcultarMostrarBotones(Visibility.Visible);
+            }
+            else
+            {
+                MessageBox.Show("Seleccione un material");
+            }
         }
 
         private void ObtenerValores()
