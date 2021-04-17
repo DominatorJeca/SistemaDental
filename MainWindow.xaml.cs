@@ -23,6 +23,18 @@ namespace SistemaDental
         public MainWindow()
         {
             InitializeComponent();
+            lblFecha.Content = DateTime.Now;
+        }
+        /// <summary>
+        /// Abre el formulario de login y cierra el actual
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            Login login = new Login();
+            login.Show();
+            this.Hide();
         }
     }
 }

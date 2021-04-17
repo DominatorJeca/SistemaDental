@@ -1,0 +1,23 @@
+﻿<Window x:Class="SistemaDental.Menu"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:SistemaDental"
+        mc:Ignorable="d"
+        Title="Menu" Height="555" Width="1050" ResizeMode="NoResize" BorderBrush="#FF5EAAA8">
+    <Grid>
+        <Grid.Background>
+            <ImageBrush ImageSource="Menu Bienvendida.png"/>
+        </Grid.Background>
+        <Button x:Name="btnTratamiento" Content="Tratamiento" Height="26" VerticalAlignment="Top" Margin="347,256,545,0" Background="{x:Null}" RenderTransformOrigin="0.496,2.246" FontFamily="Bahnschrift" FontSize="20" BorderBrush="{x:Null}" Click="btnTratamiento_Click"/>
+        <Button x:Name="btnPacientes" Content="Pacientes" Height="45" VerticalAlignment="Top" Margin="346,321,541,0" Background="{x:Null}" RenderTransformOrigin="0.496,2.246" FontFamily="Bahnschrift" FontSize="20" BorderBrush="{x:Null}" Click="Button_Click"/>
+        <Button x:Name="btnInventario" Content="Inventario" Height="33" VerticalAlignment="Top" Margin="451,195,450,0" Background="{x:Null}" RenderTransformOrigin="0.496,2.246" FontFamily="Bahnschrift" FontSize="20" BorderBrush="{x:Null}" Click="btnInventario_Click"/>
+        <Button x:Name="btnCaja" Content="Caja" Height="41" VerticalAlignment="Top" Margin="564,251,363,0" Background="{x:Null}" RenderTransformOrigin="0.496,2.246" FontFamily="Bahnschrift" FontSize="20" BorderBrush="{x:Null}" Click="btnCaja_Click"/>
+        <Button x:Name="btnAjustes" Content="Ajustes" Height="45" VerticalAlignment="Top" Margin="568,320,356,0" Background="{x:Null}" RenderTransformOrigin="0.496,2.246" FontFamily="Bahnschrift" FontSize="20" BorderBrush="{x:Null}" Click="btnAjustes_Click"/>
+        <Label Content="¿Que desea realizar?" HorizontalAlignment="Left" Margin="270,101,0,0" VerticalAlignment="Top" FontSize="32" FontFamily="Bahnschrift"/>
+        <Label x:Name="lblUsuario" Content="Usuario" HorizontalAlignment="Left" Margin="580,101,0,0" VerticalAlignment="Top" FontSize="32" FontFamily="Bahnschrift"/>
+        <Button Name ="btnCitas" Content="Citas" HorizontalAlignment="Left" Margin="451,386,0,0" VerticalAlignment="Top" Width="143" Background="{x:Null}" FontFamily="Bahnschrift" FontSize="20" Click="btnCitas_Click" BorderBrush="{x:Null}"/>
+        <Button x:Name = "btnSalir" Content="Salir" HorizontalAlignment="Left" Margin="14,474,0,0" VerticalAlignment="Top" Width="100" Height="40" Background="#FF056676" BorderBrush="{x:Null}" Click="btnRealizar_Click"/>
+    </Grid>
+</Window>
