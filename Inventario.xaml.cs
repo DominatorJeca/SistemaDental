@@ -100,7 +100,8 @@ namespace SistemaDental
                 }
                 catch(Exception ex)
                 {
-                    MessageBox.Show("Asegurese de ingresar una cantidad mayor a 0..."+ex);
+                    MessageBox.Show("Asegurese de ingresar una cantidad mayor a 0...");
+                   
                 }
                 finally
                 {
