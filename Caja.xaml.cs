@@ -141,5 +141,10 @@ namespace SistemaDental
             menu.Show();
             this.Hide();
         }
+
+        private void dgvCaja_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            dgvCaja.SelectedIndex = dgvCaja.Items.Count - 2;
+        }
     }
 }
