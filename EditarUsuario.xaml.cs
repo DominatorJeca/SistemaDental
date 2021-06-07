@@ -72,7 +72,7 @@ namespace SistemaDental
         /// </summary>
         public void ObtenerValores()
         {
-            usuario.Id = Convert.ToString(txtEditarIdentidad.Text);
+            usuario.Id =((ComboBoxItem)cmbUsuario.SelectedItem).Content.ToString();
             usuario.Nombre = Convert.ToString(txtEditarNombre.Text);
             usuario.Apellido = Convert.ToString(txtEditarApellido.Text);
             usuario.Telefono = Convert.ToString(txtEditarTelefono.Text);
@@ -91,7 +91,7 @@ namespace SistemaDental
         private bool VerificarValores()
         {
             if (txtEditarApellido.Text == string.Empty || txtEditarNombre.Text == string.Empty || txtEditarCorreo.Text == string.Empty
-                || txtEditarIdentidad.Text == string.Empty || txtEditarTelefono.Text == string.Empty || txtNuevaContra.Text == string.Empty)
+                 || txtEditarTelefono.Text == string.Empty || txtNuevaContra.Text == string.Empty)
             {
                 MessageBox.Show("Por favor ingresa todos los valores en las cajas de texto");
                 return false;
@@ -119,7 +119,7 @@ namespace SistemaDental
             txtEditarApellido.Text = string.Empty;
             txtEditarNombre.Text = string.Empty;
             txtEditarCorreo.Text = string.Empty;
-            txtEditarIdentidad.Text = string.Empty;
+            
             txtEditarTelefono.Text = string.Empty;
             txtNuevaContra.Text = string.Empty;
             cmbUsuario.SelectedValue = null;

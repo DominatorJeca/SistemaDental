@@ -12,10 +12,9 @@
             <ImageBrush ImageSource="TeethPattern.jpg" Stretch="UniformToFill"/>
         </Grid.Background>
         <Button x:Name="btnRegresar" Content="Regresar" HorizontalAlignment="Left" Margin="17,10,0,0" VerticalAlignment="Top" Width="103" FontFamily="Bahnschrift" FontSize="16" Background="#FF056676" BorderBrush="{x:Null}" Click="btnRegresar_Click_1"/>
-        <TextBox Text="{Binding SelectedItem.Nombre, ElementName=cmbUsuario}" Name="txtEditarNombre" Margin="426,98,85.6,278" materialDesign:HintAssist.Hint="Nombre" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontFamily="Bahnschrift" FontSize="12" Background="#7FFFFFFF"/>
-        <TextBox Text="{Binding SelectedItem.Apellido, ElementName=cmbUsuario}" Name="txtEditarApellido" Margin="426,142,85.6,234" materialDesign:HintAssist.Hint="Apellido" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontFamily="Bahnschrift" FontSize="12" Background="#7FFFFFFF"/>
-        <TextBox Text="{Binding SelectedItem.Id, ElementName=cmbUsuario}" Name="txtEditarIdentidad" IsEnabled="False" Margin="426,186,85.6,193" materialDesign:HintAssist.Hint="Identidad" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontFamily="Bahnschrift" FontSize="12" Background="#7FFFFFFF"/>
-        <TextBox Text="{Binding SelectedItem.Telefono, ElementName=cmbUsuario}" Name="txtEditarTelefono" Margin="426,232,85.6,146" materialDesign:HintAssist.Hint="Telefono" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontFamily="Bahnschrift" FontSize="12" Background="#7FFFFFFF"/>
+        <TextBox Text="{Binding SelectedItem.Nombre, ElementName=cmbUsuario}" Name="txtEditarNombre" Margin="426,118,85.6,258" materialDesign:HintAssist.Hint="Nombre" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontFamily="Bahnschrift" FontSize="12" Background="#7FFFFFFF"/>
+        <TextBox Text="{Binding SelectedItem.Apellido, ElementName=cmbUsuario}" Name="txtEditarApellido" Margin="426,168,85.6,208" materialDesign:HintAssist.Hint="Apellido" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontFamily="Bahnschrift" FontSize="12" Background="#7FFFFFFF"/>
+        <TextBox Text="{Binding SelectedItem.Telefono, ElementName=cmbUsuario}" Name="txtEditarTelefono" Margin="426,222,85.6,156" materialDesign:HintAssist.Hint="Telefono" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontFamily="Bahnschrift" FontSize="12" Background="#7FFFFFFF"/>
         <TextBox Text="{Binding SelectedItem.Correo, ElementName=cmbUsuario}" Name="txtEditarCorreo" Margin="54,257,457.6,121" materialDesign:HintAssist.Hint="Correo" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontFamily="Bahnschrift" FontSize="12" Background="#7FFFFFFF"/>
 
         
