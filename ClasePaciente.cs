@@ -142,9 +142,9 @@ namespace SistemaDental
 
                 return pacientes;
             }
-            catch
+            catch (Exception e)
             {
-                throw;
+                throw e;
             }
             finally
             {

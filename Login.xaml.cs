@@ -75,5 +75,10 @@ namespace SistemaDental
         {
             App.Current.Shutdown();
         }
+
+        private void txtUsuario_TextChanged(object sender, TextChangedEventArgs e)
+        {
+
+        }
     }
 }
