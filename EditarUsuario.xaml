@@ -6,7 +6,8 @@
         xmlns:local="clr-namespace:SistemaDental"
         mc:Ignorable="d"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-        Title="Editar Usuario" Height="450" Width="800">
+        Title="Editar Usuario" Height="450" Width="800"
+        ResizeMode="NoResize">
     <Grid>
         <Grid.Background>
             <ImageBrush ImageSource="TeethPattern.jpg" Stretch="UniformToFill"/>
@@ -24,7 +25,7 @@
             <ComboBoxItem Content="Masculino" HorizontalAlignment="Left" Width="118.4"/>
         </ComboBox>
         <Label Content="Sexo" HorizontalAlignment="Left" Margin="426,277,0,0" VerticalAlignment="Top" FontSize="12" FontFamily="Bahnschrift"/>
-        <TextBox Text="{Binding SelectedItem.Contraseña, ElementName=cmbUsuario}" Name="txtNuevaContra" Margin="54,305,457.6,72" materialDesign:HintAssist.Hint="Contraseña" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontFamily="Bahnschrift" FontSize="12" Background="#7FFFFFFF"/>
+        <TextBox Text="{Binding SelectedItem.Contraseña, ElementName=cmbUsuario}"  Name="txtNuevaContra" Margin="54,305,457.6,72" materialDesign:HintAssist.Hint="Contraseña" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontFamily="Bahnschrift" FontSize="12" Background="#7FFFFFFF"/>
         <Button x:Name="btnActualizarUsuario" Content="Actualizar" HorizontalAlignment="Left" Margin="209,364,0,0" VerticalAlignment="Top" Width="150" FontFamily="Bahnschrift" FontSize="16" Background="#FF056676" BorderBrush="{x:Null}" Click="btnActualizarUsuario_Click"/>
         <Button x:Name="btnCancelar" Content="Cancelar" HorizontalAlignment="Left" Margin="424,364,0,0" VerticalAlignment="Top" Width="103" FontFamily="Bahnschrift" FontSize="16" Background="#FF056676" BorderBrush="{x:Null}" Click="btnCancelar_Click"/>
         <Image Source="Happy_Sm.png" RenderTransformOrigin="0.735,0.5" Margin="54,51,433,168"/>
