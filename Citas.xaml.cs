@@ -64,8 +64,8 @@ namespace SistemaDental
             citas.IdDoctor = cmbEmpleado.SelectedValue.ToString();
             citas.IdPacientes = cmbPaciente.SelectedValue.ToString();
             citas.IdTratamiento =Convert.ToInt32(cmbTratamiento.SelectedValue.ToString());
-            citas.fechaCita = Convert.ToDateTime(SelectedDateTextBox.Text);
-            
+            DateTime cmb = cdCitas.SelectedDate.Value.Add(ctTiempo.SelectedTime.Value.TimeOfDay);
+            citas.fechaCita = cmb;
         }
 
         private void obtenerCita()
@@ -82,14 +82,14 @@ namespace SistemaDental
         {
             try
             {
-                if (cmbEmpleado.SelectedValue.ToString() != null && cmbPaciente.SelectedValue.ToString() != null && Convert.ToInt32(cmbTratamiento.SelectedValue) > 0)
+                if (RevisarDatos())
                 {
                     ObtenerValores();
                     
                     //Se valida que no haya una cita registrada con detalles iguales
                     foreach(ClaseCitas citas in dtg_Citas.ItemsSource)
                     {
-                        if (citas.IdPacientes == cmbPaciente.SelectedValue.ToString() && citas.fechaCita==Convert.ToDateTime(SelectedDateTextBox.Text) || citas.IdDoctor== cmbEmpleado.SelectedValue.ToString() && citas.fechaCita == Convert.ToDateTime(SelectedDateTextBox.Text))
+                        if (citas.IdPacientes == cmbPaciente.SelectedValue.ToString() || citas.IdDoctor== cmbEmpleado.SelectedValue.ToString())
                         {
                             bandera = 1;
                         }
@@ -108,10 +108,6 @@ namespace SistemaDental
                         MessageBox.Show("Al parecer ya hay una cita agendada con ciertos parámetros iguales");
                     }
                 }
-                else
-                {
-                    MessageBox.Show("Debe seleccionar todos los elementos necesarios para agendar una cita y debe revisar que su fecha sea la correcta");
-                }
             }
             catch(Exception ex)
             {
@@ -124,6 +120,56 @@ namespace SistemaDental
                 cmbTratamiento.SelectedValue = 0;
                 mostrarCitas();
             }
+        }
+
+        private bool RevisarDatos()
+        {
+            if(cmbEmpleado.SelectedIndex < 0)
+            {
+                MessageBox.Show("Por favor, selecione el doctor");
+                return false;
+            }
+            if(cmbPaciente.SelectedIndex < 0)
+            {
+                MessageBox.Show("Por favor, selecione el paciente");
+                return false;
+            }
+            if(cmbTratamiento.SelectedIndex < 0)
+            {
+                MessageBox.Show("Por favor, selecione el tratamiento");
+                return false;
+            }
+            if(cdCitas.SelectedDate == null)
+            {
+                MessageBox.Show("Selecione una fecha");
+                return false;
+            }
+            if(RevisarFecha())
+            {
+                MessageBox.Show("Por favor, selecione una fecha validad");
+                return false;
+            }
+            if(ctTiempo.SelectedTime == null)
+            {
+                MessageBox.Show("Por favor, selecione una hora");
+                return false;
+            }
+
+            return true;
+        }
+
+        private bool RevisarFecha()
+        {
+            if (cdCitas.SelectedDate.Value.Date == DateTime.Now.Date)
+            {
+                return true;
+            }
+            if (cdCitas.SelectedDate.Value.Date < DateTime.Now.Date)
+            {
+                return true;
+            }
+            
+            return false;
         }
 
         /// <summary>
@@ -143,7 +189,7 @@ namespace SistemaDental
                     btnEditar.IsEnabled = false;
                     btnAgregar.IsEnabled = false;
                     btnCancelar.IsEnabled = true;
-                    btnBorrar.IsEnabled = false;
+                    
                     dtg_Citas.IsEnabled = false;
                 }
                 else
@@ -177,7 +223,7 @@ namespace SistemaDental
                 //Se valida que no haya una cita registrada con detalles iguales
                 foreach (ClaseCitas citas in dtg_Citas.ItemsSource)
                 {
-                    if (citas.IdPacientes == cmbPaciente.SelectedValue.ToString() && citas.fechaCita == Convert.ToDateTime(SelectedDateTextBox.Text) || citas.IdDoctor == cmbEmpleado.SelectedValue.ToString() && citas.fechaCita == Convert.ToDateTime(SelectedDateTextBox.Text))
+                    if (citas.IdPacientes == cmbPaciente.SelectedValue.ToString() || citas.IdDoctor == cmbEmpleado.SelectedValue.ToString())
                     {
                         bandera = 1;
                     }
@@ -207,7 +253,7 @@ namespace SistemaDental
                 btnEditar.IsEnabled = true;
                 btnAgregar.IsEnabled = true;
                 btnCancelar.IsEnabled = false;
-                btnBorrar.IsEnabled = true;
+
                 dtg_Citas.IsEnabled = true;
             }
         }
@@ -219,7 +265,7 @@ namespace SistemaDental
         /// <param name="e"></param>
         private void cdCitas_SelectedDatesChanged(object sender, SelectionChangedEventArgs e)
         {
-            SelectedDateTextBox.Text = cdCitas.SelectedDate.ToString();
+
         }
 
         private void dtg_Citas_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -267,7 +313,7 @@ namespace SistemaDental
             mostrarCitas();
             btnAgregar.IsEnabled = true;
             btnEditar.IsEnabled = true;
-            btnBorrar.IsEnabled = true;
+
             btnCancelar.IsEnabled = false;
         }
 
@@ -275,7 +321,12 @@ namespace SistemaDental
         {
             Menu menu = new Menu(Admin,Nombree);
             menu.Show();
-            this.Hide();
+            this.Close();
+        }
+
+        private void ctTiempo_SelectedTimeChanged(object sender, RoutedPropertyChangedEventArgs<DateTime?> e)
+        {
+
         }
     }
 }
