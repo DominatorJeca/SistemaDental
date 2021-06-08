@@ -95,8 +95,16 @@ namespace SistemaDental
 
                 try
                 {
-                    ObtenerValores();
-                    inventario.actualizarCantidad(inventario);
+                    if (Convert.ToInt32(txtCantidadInventario.Text) >= 1)
+                    {
+                        ObtenerValores();
+                        inventario.actualizarCantidad(inventario);
+                    }
+                    else
+                    {
+                        MostrarMaterial();
+                        MessageBox.Show("No puede ingresar una cantidad menor que 1");
+                    }
                 }
                 catch(Exception ex)
                 {
@@ -107,6 +115,7 @@ namespace SistemaDental
                 {
                     MostrarMaterial();
                     btnEditar.IsEnabled = true;
+                    btnGuardar.IsEnabled = false;
                     txtCantidadInventario.IsEnabled = false;
                     OcultarMostrarBotones(Visibility.Hidden);
                 }
@@ -137,6 +146,30 @@ namespace SistemaDental
             Menu menu = new Menu(Admin,Nombree);
             menu.Show();
             this.Hide();
+        }
+
+        protected override void OnClosing(System.ComponentModel.CancelEventArgs e)
+        {
+            this.Visibility = Visibility.Hidden;
+
+            string msg = "Close or not?";
+            MessageBoxResult result =
+              MessageBox.Show(
+                msg,
+                "Warning",
+                MessageBoxButton.YesNo,
+                MessageBoxImage.Warning);
+            if (result == MessageBoxResult.No)
+            {
+                // If user doesn't want to close, cancel closure
+                Inventario inventario = new Inventario();
+                inventario.Show();
+            }
+            else
+            {
+                Menu menu = new Menu();
+                menu.Show();
+            }
         }
     }
 }

@@ -124,9 +124,9 @@ namespace SistemaDental
                 }
 
             }
-            else
+            else if(VerificarValores()==false)
             {
-                MessageBox.Show("Seleccione ");
+                MessageBox.Show("Ingrese una cantidad y seleccione una de las transacciones");
             }
 
         }

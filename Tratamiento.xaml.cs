@@ -77,7 +77,7 @@ namespace SistemaDental
             
             try
             {
-                if (Convert.ToInt32(cmbTratamiento.SelectedValue) > 0 && Convert.ToString(cmbPaciente.SelectedValue) != " ")
+                if (Convert.ToInt32(cmbTratamiento.SelectedValue) > 0 && Convert.ToString(cmbPaciente.SelectedValue) != " " && Convert.ToInt32(txtCantidad.ToString())>=0)
                 {
                     ObtenerValores();
                     tratamiento.IngresarAlHistorial(tratamiento);
@@ -111,7 +111,7 @@ namespace SistemaDental
 
             try
             {
-                if (dg_materiales.SelectedValue == null || cmbTratamiento.SelectedValue == null)
+                if (dg_materiales.SelectedValue == null || cmbTratamiento.SelectedValue == null )
                 {
                     MessageBox.Show("Seleccione un tratamiento y un material para poder ser editado");
                 }
