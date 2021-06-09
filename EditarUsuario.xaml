@@ -6,16 +6,16 @@
         xmlns:local="clr-namespace:SistemaDental"
         mc:Ignorable="d"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-        Title="Editar Usuario" Height="450" Width="800">
+        Title="Editar Usuario" Height="450" Width="800"
+        ResizeMode="NoResize" Closed="Window_Closed">
     <Grid>
         <Grid.Background>
             <ImageBrush ImageSource="TeethPattern.jpg" Stretch="UniformToFill"/>
         </Grid.Background>
         <Button x:Name="btnRegresar" Content="Regresar" HorizontalAlignment="Left" Margin="17,10,0,0" VerticalAlignment="Top" Width="103" FontFamily="Bahnschrift" FontSize="16" Background="#FF056676" BorderBrush="{x:Null}" Click="btnRegresar_Click_1"/>
-        <TextBox Text="{Binding SelectedItem.Nombre, ElementName=cmbUsuario}" Name="txtEditarNombre" Margin="426,98,85.6,278" materialDesign:HintAssist.Hint="Nombre" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontFamily="Bahnschrift" FontSize="12" Background="#7FFFFFFF"/>
-        <TextBox Text="{Binding SelectedItem.Apellido, ElementName=cmbUsuario}" Name="txtEditarApellido" Margin="426,142,85.6,234" materialDesign:HintAssist.Hint="Apellido" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontFamily="Bahnschrift" FontSize="12" Background="#7FFFFFFF"/>
-        <TextBox Text="{Binding SelectedItem.Id, ElementName=cmbUsuario}" Name="txtEditarIdentidad" IsEnabled="False" Margin="426,186,85.6,193" materialDesign:HintAssist.Hint="Identidad" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontFamily="Bahnschrift" FontSize="12" Background="#7FFFFFFF"/>
-        <TextBox Text="{Binding SelectedItem.Telefono, ElementName=cmbUsuario}" Name="txtEditarTelefono" Margin="426,232,85.6,146" materialDesign:HintAssist.Hint="Telefono" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontFamily="Bahnschrift" FontSize="12" Background="#7FFFFFFF"/>
+        <TextBox Text="{Binding SelectedItem.Nombre, ElementName=cmbUsuario}" PreviewTextInput="PreviewTextInputOnlyLetters" Name="txtEditarNombre" Margin="426,118,85.6,258" materialDesign:HintAssist.Hint="Nombre" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontFamily="Bahnschrift" FontSize="12" Background="#7FFFFFFF"/>
+        <TextBox Text="{Binding SelectedItem.Apellido, ElementName=cmbUsuario}" PreviewTextInput="PreviewTextInputOnlyLetters" Name="txtEditarApellido" Margin="426,168,85.6,208" materialDesign:HintAssist.Hint="Apellido" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontFamily="Bahnschrift" FontSize="12" Background="#7FFFFFFF"/>
+        <TextBox PreviewTextInput="PreviewTextInputOnlyNumbers" Text="{Binding SelectedItem.Telefono, ElementName=cmbUsuario}" Name="txtEditarTelefono" Margin="426,222,85.6,156" materialDesign:HintAssist.Hint="Telefono" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontFamily="Bahnschrift" FontSize="12" Background="#7FFFFFFF"/>
         <TextBox Text="{Binding SelectedItem.Correo, ElementName=cmbUsuario}" Name="txtEditarCorreo" Margin="54,257,457.6,121" materialDesign:HintAssist.Hint="Correo" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontFamily="Bahnschrift" FontSize="12" Background="#7FFFFFFF"/>
 
         
@@ -25,7 +25,7 @@
             <ComboBoxItem Content="Masculino" HorizontalAlignment="Left" Width="118.4"/>
         </ComboBox>
         <Label Content="Sexo" HorizontalAlignment="Left" Margin="426,277,0,0" VerticalAlignment="Top" FontSize="12" FontFamily="Bahnschrift"/>
-        <TextBox Text="{Binding SelectedItem.Contraseña, ElementName=cmbUsuario}" Name="txtNuevaContra" Margin="54,305,457.6,72" materialDesign:HintAssist.Hint="Contraseña" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontFamily="Bahnschrift" FontSize="12" Background="#7FFFFFFF"/>
+        <TextBox Text="{Binding SelectedItem.Contraseña, ElementName=cmbUsuario}"  Name="txtNuevaContra" Margin="54,305,457.6,72" materialDesign:HintAssist.Hint="Contraseña" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontFamily="Bahnschrift" FontSize="12" Background="#7FFFFFFF"/>
         <Button x:Name="btnActualizarUsuario" Content="Actualizar" HorizontalAlignment="Left" Margin="209,364,0,0" VerticalAlignment="Top" Width="150" FontFamily="Bahnschrift" FontSize="16" Background="#FF056676" BorderBrush="{x:Null}" Click="btnActualizarUsuario_Click"/>
         <Button x:Name="btnCancelar" Content="Cancelar" HorizontalAlignment="Left" Margin="424,364,0,0" VerticalAlignment="Top" Width="103" FontFamily="Bahnschrift" FontSize="16" Background="#FF056676" BorderBrush="{x:Null}" Click="btnCancelar_Click"/>
         <Image Source="Happy_Sm.png" RenderTransformOrigin="0.735,0.5" Margin="54,51,433,168"/>
@@ -33,6 +33,7 @@
         <ComboBox Text="{Binding SelectedItem.PuestoNombre, ElementName=cmbUsuario}" Name="cmbPuesto" HorizontalAlignment="Left" Margin="584,316,0,0" VerticalAlignment="Top" Width="120"/>
         <Label Content="Usuario" HorizontalAlignment="Left" Margin="423,60,0,0" VerticalAlignment="Top" FontFamily="Bahnschrift" FontSize="12"/>
         <ComboBox x:Name="cmbUsuario" HorizontalAlignment="Left" Margin="493,52,0,0" VerticalAlignment="Top" Width="213" />
+       
 
     </Grid>
 </Window>
