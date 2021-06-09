@@ -101,6 +101,7 @@ namespace SistemaDental
         {
 
         }
+
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
 
@@ -115,5 +116,6 @@ namespace SistemaDental
         {
             this.Close();
         }
+
     }
 }

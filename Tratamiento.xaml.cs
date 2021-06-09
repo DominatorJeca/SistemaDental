@@ -25,6 +25,7 @@ namespace SistemaDental
         DateTime DateTime = new DateTime();
         private bool Admin;
         private String Nombree;
+        int cant_anterior = 0;
         public Tratamiento()
         {
             InitializeComponent();
@@ -108,7 +109,7 @@ namespace SistemaDental
 
         private void btnEditar_Click(object sender, RoutedEventArgs e)
         {
-
+              cant_anterior = Convert.ToInt32(txtCantidad.Text);
             try
             {
                 if (dg_materiales.SelectedValue == null || cmbTratamiento.SelectedValue == null )
@@ -136,13 +137,21 @@ namespace SistemaDental
         {
             try
             {
-
-
                 foreach (ClaseTratamiento tratamientos in dg_materiales.ItemsSource)
                 {
-                    if (tratamiento.NombreMaterial == dg_materiales.SelectedValue.ToString())
+                    if (tratamiento.NombreMaterial == dg_materiales.SelectedValue.ToString() && Convert.ToInt32(txtCantidad.Text) <= Convert.ToInt32(tratamientos.Cantidad.ToString()))
+                    {
                         tratamiento.Cantidad = Convert.ToInt32(tratamientos.Cantidad.ToString());
+                   
+                    }
+                    else
+                    {
+                        MessageBox.Show("Valor mayor a la cantidad actual");
+                        txtCantidad.Text = cant_anterior.ToString();
+                        break;
+                    }
                 }
+                
             }
             catch
             {
@@ -175,5 +184,21 @@ namespace SistemaDental
             menu.Show();
             this.Hide();
         }
-    }
+
+        private void dg_materiales_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
+
+        private void txtCantidad_TextChanged(object sender, TextChangedEventArgs e)
+        {
+
+        }
+  
+        private void TratamientoWindow_Closed(object sender, EventArgs e)
+                {
+                    Menu menu = new Menu();
+                    menu.Show();
+                }
+            }
 }

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -105,7 +106,7 @@ namespace SistemaDental
         {
             unPaciente.NombrePaciente = txtNombre.Text;
             unPaciente.ApellidoPaciente = txtApellido.Text;
-            unPaciente.Edad = Convert.ToInt32(txtEdad.Text);
+            unPaciente.FechaNac = Convert.ToDateTime(dpFechaNac.Text);
             unPaciente.Genero = cmbGenero.Text;
             unPaciente.Telefono = txtTelefono.Text;
             unPaciente.Id_paciente = txtIdentidad.Text;
@@ -118,6 +119,8 @@ namespace SistemaDental
         /// </summary>
         private void btnEditarPaciente_Click(object sender, RoutedEventArgs e)
         {
+            txtEdad.Visibility = Visibility.Hidden;
+            dpFechaNac.Visibility = Visibility;
             try
             {
                 //Mensaje de advertencia si no selecciona ningun elemento
@@ -143,6 +146,8 @@ namespace SistemaDental
         /// </summary>
         private void btnCancelar_Click(object sender, RoutedEventArgs e)
         {
+            txtEdad.Visibility = Visibility;
+            dpFechaNac.Visibility = Visibility.Hidden;
             try
             {
                 //llama la funcion para deshabilitar los textbox y botones
@@ -162,6 +167,8 @@ namespace SistemaDental
 
         private void btnGuardarPaciente_Click(object sender, RoutedEventArgs e)
         {
+            txtEdad.Visibility = Visibility;
+            dpFechaNac.Visibility = Visibility.Hidden;
             try
             {
                 if (VerificarCampos())
@@ -185,7 +192,7 @@ namespace SistemaDental
         private void cmbPaciente_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if (cmbPaciente.SelectedValue != null)
-            {
+                {
                 unPaciente.Id_paciente = cmbPaciente.SelectedValue.ToString();
                 dtgHistorial.ItemsSource = unPaciente.MostrarHistorial(unPaciente);
             }
@@ -251,6 +258,35 @@ namespace SistemaDental
                         yield return childOfChild;
                     }
                 }
+            }
+        }
+
+        private void AddPaciente_Closed(object sender, EventArgs e)
+        {
+            Pacientes pacientes = new Pacientes(Admin, Nombree);
+            pacientes.Show();
+            this.Close();
+        }
+
+        private void txtNombre_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            Regex reg = new Regex("[0-9]");
+            bool b = reg.IsMatch(txtNombre.Text);
+            if (b == true)
+            {
+                MessageBox.Show("Ingrese solamente caracteres");
+                txtNombre.Text = "";
+            }
+            
+        }
+
+        private void AddPaciente_Loaded(object sender, RoutedEventArgs e)
+        {
+               Regex reg = new Regex("[0-9]");
+            bool b = reg.IsMatch(txtNombre.Text);
+            if (b == false)
+            {
+               
             }
         }
     }
