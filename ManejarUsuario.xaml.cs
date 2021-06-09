@@ -140,5 +140,23 @@ namespace SistemaDental
                 MostrarUsuario();
             }
         }
+
+        private void btnRestaurarUsuario_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void CheckBox_Checked(object sender, RoutedEventArgs e)
+        {
+            if (CKActivo.IsChecked == true)
+            {
+                MostrarUsuario();
+            }
+            else
+            {
+
+            }
+
+        }
     }
 }
