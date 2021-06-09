@@ -17,6 +17,7 @@
         <TextBox x:Name="txtAgregarTelefono" Margin="180,136,332,241" materialDesign:HintAssist.Hint="Telefóno" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontFamily="Bahnschrift" FontSize="12" Background="#7FFFFFFF"/>
         <TextBox x:Name="txtAgregarIdentidad" Margin="180,178,332,199" materialDesign:HintAssist.Hint="Identidad" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontFamily="Bahnschrift" FontSize="12" Background="#7FFFFFFF"/>
         <DatePicker Height="33" HorizontalAlignment="Left" Margin="178,238,0,0" materialDesign:HintAssist.Hint="Fecha de Nacimiento" Name="datePicker1" VerticalAlignment="Top" Width="284" Style="{StaticResource MaterialDesignFloatingHintDatePicker}" FontFamily="Bahnschrift" FontSize="12" Background="#7FFFFFFF"/>
+        
 
         <StackPanel Margin="169,193,479,80">
             <RadioButton x:Name="rbFemenino" Margin="57,86,-22,-76"  Height="20" FontFamily="Bahnschrift" IsChecked="True">
@@ -34,5 +35,7 @@
         <Label Content="Sexo" HorizontalAlignment="Left" Margin="178,279,0,0" VerticalAlignment="Top" FontSize="12" FontFamily="Bahnschrift"/>
         <Button x:Name="btnAgregarPaciente" Content="Agregar" HorizontalAlignment="Center" Margin="181,340,326,0" VerticalAlignment="Top" Width="287" Background="#FF056676" BorderBrush="{x:Null}" Click="btnAgregarPaciente_Click"/>
         <Image Source="Happy_Sm.png" RenderTransformOrigin="0.4,0.334" Margin="467,63,45,83" />
+        <Label Content="Numero de 8 digitos" HorizontalAlignment="Left" Margin="46,156,0,0" VerticalAlignment="Top" Style="{StaticResource MaterialDesignLabel}" FontFamily="Bahnschrift" FontSize="12" Background="#7FFFFFFF" Opacity="0.5"  />
+        <Label Content="Numero de 13 digitos" HorizontalAlignment="Left" Margin="46,198,0,0" VerticalAlignment="Top" Style="{StaticResource MaterialDesignLabel}" FontFamily="Bahnschrift" FontSize="12" Background="#7FFFFFFF" Opacity="0.5"/> 
     </Grid>
 </Window>
