@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         Title="Editar Usuario" Height="450" Width="800"
-        ResizeMode="NoResize">
+        ResizeMode="NoResize" Closed="Window_Closed">
     <Grid>
         <Grid.Background>
             <ImageBrush ImageSource="TeethPattern.jpg" Stretch="UniformToFill"/>
