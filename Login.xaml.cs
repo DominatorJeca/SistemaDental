@@ -32,6 +32,12 @@ namespace SistemaDental
 
         private void btnLogin_Click(object sender, RoutedEventArgs e)
         {
+            if (txtPassword.Visibility == Visibility.Hidden)
+            {
+                txtPassword.Password = txtpas.Text;
+            }
+
+
             try
             {
                 //buscar usuario
