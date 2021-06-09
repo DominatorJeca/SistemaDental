@@ -156,6 +156,7 @@ namespace SistemaDental
                 }
 
             }
+
             else if (rbIngreso.IsChecked==false && rbEgreso.IsChecked == false)
             {
                 MessageBox.Show("Por favor selecione una opcion de transaccion");
