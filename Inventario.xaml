@@ -6,7 +6,9 @@
         xmlns:local="clr-namespace:SistemaDental"
         mc:Ignorable="d"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-        Title="Inventario" Height="568" Width="800">
+        Title="Inventario" Height="568" Width="800"
+        ResizeMode="NoResize">
+
     <Grid>
         <Grid.Background>
             <ImageBrush ImageSource="TeethPattern.jpg" Stretch="UniformToFill"/>
@@ -29,13 +31,10 @@
                 <DataGridTextColumn Header="Código" Binding="{Binding IdMaterial}" Width="150"></DataGridTextColumn>
                 <DataGridTextColumn Header="Nombre" Binding="{Binding NombreMaterial}" Width="150"></DataGridTextColumn>
                 <DataGridTextColumn Header="Cantidad" Binding="{Binding Cantidad}" Width="150"></DataGridTextColumn>
-
-
             </DataGrid.Columns>
         </DataGrid>
         <Button  x:Name="btnCancelarCambios" Content="Cancelar" HorizontalAlignment="Left" Margin="578,445,0,0" VerticalAlignment="Top" Width="123" Height="45" Background="#FF056676" FontFamily="Bahnschrift" BorderBrush="{x:Null}" Click="Button_Cancelar" Visibility="Hidden"/>
         <Button x:Name="btnRegresar" Content="Regresar" HorizontalAlignment="Left" Margin="672,10,0,0" VerticalAlignment="Top" Width="110" Height="32" Background="#FF056676" FontFamily="Bahnschrift" BorderBrush="{x:Null}" Click="btnRegresar_Click" />
-
-
+       
     </Grid>
 </Window>

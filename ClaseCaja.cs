@@ -23,18 +23,18 @@ namespace SistemaDental
 
         public string Tipo_transacción { get; set; }
 
-        public int Cantidad { get; set; }
+        public float Cantidad { get; set; }
 
         public DateTime Fecha  { get; set; }
 
-        public int Dinero_disponible { get; set; }
+        public float Dinero_disponible { get; set; }
 
         // Constructores
 
         public ClaseCaja() { }
         
 
-        public ClaseCaja(int id_transaccion, string tipo_transaccion, int cantidad, DateTime fecha, int dinero_disponible)
+        public ClaseCaja(int id_transaccion, string tipo_transaccion, float cantidad, DateTime fecha, float dinero_disponible)
         {
             Id_transaccion = id_transaccion;
             Tipo_transacción = tipo_transaccion;
@@ -61,7 +61,7 @@ namespace SistemaDental
                 {
                     while (rdr.Read())
                     {
-                        list.Add(new ClaseCaja { Id_transaccion = Convert.ToInt32(rdr["id_transaccion"]), Tipo_transacción = Convert.ToString(rdr["tipo_transacción"]), Cantidad = Convert.ToInt32(rdr["cantidad"]), Dinero_disponible = Convert.ToInt32(rdr["dinero_disponible"]), Fecha = Convert.ToDateTime(rdr["fecha"].ToString())});
+                        list.Add(new ClaseCaja { Id_transaccion = Convert.ToInt32(rdr["id_transaccion"]), Tipo_transacción = Convert.ToString(rdr["tipo_transacción"]), Cantidad = (float)Convert.ToDecimal(rdr["cantidad"]), Dinero_disponible = (float)Convert.ToDecimal(rdr["dinero_disponible"]), Fecha = Convert.ToDateTime(rdr["fecha"].ToString())});
                     }
                 }
 

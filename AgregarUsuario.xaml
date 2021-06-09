@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:SistemaDental"
         mc:Ignorable="d"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-        Title="AgregarUsuario" Height="450" Width="800">
+        Title="AgregarUsuario" Height="450" Width="800" ResizeMode="NoResize">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="619*"/>
@@ -18,12 +18,19 @@
         <Button x:Name="btnRegresar" Content="Regresar" HorizontalAlignment="Left" Margin="17,10,0,0" VerticalAlignment="Top" Width="103" FontFamily="Bahnschrift" FontSize="16" Background="#FF056676" Click="btnRegresar_Click" BorderBrush="{x:Null}"/>
         <TextBox x:Name="txtAgregarNombre" Margin="67,168,270.4,210" materialDesign:HintAssist.Hint="Nombre" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontFamily="Bahnschrift" FontSize="12" Background="#7FFFFFFF"/>
         <TextBox x:Name="txtAgregarApellido" Margin="68,210,269.4,171" materialDesign:HintAssist.Hint="Apellido" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontFamily="Bahnschrift" FontSize="12" Background="#7FFFFFFF"/>
-        <TextBox x:Name="txtAgregarTelefono" Margin="68,249,269.4,131" materialDesign:HintAssist.Hint="Telefóno" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontFamily="Bahnschrift" FontSize="12" Background="#7FFFFFFF"/>
-        <TextBox x:Name="txtAgregarIdentidad" Margin="68,294,269.4,85" materialDesign:HintAssist.Hint="Identidad" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontFamily="Bahnschrift" FontSize="12" Background="#7FFFFFFF"/>
-        <TextBox x:Name="txtAgregarCorreo" Margin="468,167,43.6,211" materialDesign:HintAssist.Hint="Correo" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontFamily="Bahnschrift" FontSize="12" Background="#7FFFFFFF" Grid.ColumnSpan="2"/>
-        <TextBox x:Name="txtConfirmarCorreo" Margin="468,209,43.6,172" materialDesign:HintAssist.Hint="Confirmar Correo" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontFamily="Bahnschrift" FontSize="12" Background="#7FFFFFFF" Grid.ColumnSpan="2"/>
-        <TextBox x:Name="txtAgregarContra" Margin="467,248,44.6,131" materialDesign:HintAssist.Hint="Contraseña" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontFamily="Bahnschrift" FontSize="12" Background="#7FFFFFFF" Grid.ColumnSpan="2"/>
-        <TextBox x:Name="txtConfirmarContra" Margin="467,288,44.6,91" materialDesign:HintAssist.Hint="Confirmar Contraseña" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontFamily="Bahnschrift" FontSize="12" Background="#7FFFFFFF" Grid.ColumnSpan="2"/>
+        <TextBox x:Name="txtAgregarTelefono" Margin="68,249,269.4,131" materialDesign:HintAssist.Hint="Telefóno" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontFamily="Bahnschrift" FontSize="12" Background="#7FFFFFFF"
+                 PreviewTextInput="txtAgregarTelefono_PreviewTextInput" MaxLength="15"/>
+        
+        <TextBox x:Name="txtAgregarIdentidad" Margin="68,294,269.4,85" materialDesign:HintAssist.Hint="Identidad" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontFamily="Bahnschrift" FontSize="12" Background="#7FFFFFFF"
+                 PreviewTextInput="txtAgregarIdentidad_PreviewTextInput" MaxLength="13"/>
+        <TextBox x:Name="txtAgregarCorreo" Margin="468,167,43.6,211" materialDesign:HintAssist.Hint="Correo" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontFamily="Bahnschrift" FontSize="12" Background="#7FFFFFFF" Grid.ColumnSpan="2"
+                 MaxLength="50"/>
+        <TextBox x:Name="txtConfirmarCorreo" Margin="468,209,43.6,172" materialDesign:HintAssist.Hint="Confirmar Correo" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontFamily="Bahnschrift" FontSize="12" Background="#7FFFFFFF" Grid.ColumnSpan="2"
+                 MaxLength="50"/>
+        <PasswordBox x:Name="txtAgregarContra" Margin="467,248,44.6,131" materialDesign:HintAssist.Hint="Contraseña" Style="{StaticResource MaterialDesignFloatingHintPasswordBox}" FontFamily="Bahnschrift" FontSize="12" Background="#7FFFFFFF" Grid.ColumnSpan="2"
+                     MaxLength="20"/>
+        <PasswordBox x:Name="txtConfirmarContra" Margin="467,288,44.6,91" materialDesign:HintAssist.Hint="Confirmar Contraseña" Style="{StaticResource MaterialDesignFloatingHintPasswordBox}" FontFamily="Bahnschrift" FontSize="12" Background="#7FFFFFFF" Grid.ColumnSpan="2"
+                     MaxLength="20"/>
         <ComboBox Name="cmbSexo" HorizontalAlignment="Left" Margin="228,360,0,0" VerticalAlignment="Top" Width="120">
             <ComboBoxItem Content="Femenino" HorizontalAlignment="Left" Width="118.4"/>
             <ComboBoxItem Content="Masculino" HorizontalAlignment="Left" Width="118.4"/>

@@ -68,7 +68,8 @@ namespace SistemaDental
                 using (SqlDataReader rdr = sqlCommand.ExecuteReader())
                 {
                     while (rdr.Read())
-                        paciente.Add(new ClasePaciente { Id_paciente = rdr["id_paciente"].ToString(), NombrePaciente=rdr["nombre"].ToString(), ApellidoPaciente=rdr["apellido"].ToString(), Telefono=rdr["telefono"].ToString(), Edad = Convert.ToInt32(rdr["Edad"].ToString()), FechaNac =Convert.ToDateTime(rdr["FechaNac"].ToString()), Genero=rdr["genero"].ToString()});
+
+                        paciente.Add(new ClasePaciente { Id_paciente = rdr["id_paciente"].ToString(), NombrePaciente=rdr["nombre"].ToString(), ApellidoPaciente=rdr["apellido"].ToString(), Fecha=((DateTime)rdr["Fechanac"]), Telefono=rdr["telefono"].ToString(), Genero=rdr["genero"].ToString()});
                 }
 
                 return paciente;
@@ -144,6 +145,7 @@ namespace SistemaDental
                 return pacientes;
             }
             catch (Exception e)
+
             {
                 throw e;
             }
