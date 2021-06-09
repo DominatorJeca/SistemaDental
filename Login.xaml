@@ -8,7 +8,7 @@
         xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
         x:Class="SistemaDental.Login"
         mc:Ignorable="d"
-        Title="Inicio de Sesión" Height="520" Width="400" WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
+        Title="Inicio de Sesión" Height="520" Width="400" WindowStartupLocation="CenterScreen" ResizeMode="NoResize" Closed="Window_Closed">
     <Window.Background>
         <ImageBrush ImageSource="Login Background.jpg"/>
     </Window.Background>

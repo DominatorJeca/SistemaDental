@@ -110,6 +110,11 @@ namespace SistemaDental
                    MessageBox.Show("No hay suficiente fondo");
                   return false;
             }
+            if ((float)Convert.ToDecimal(txtCantidadCaja.Text)>100000.00)
+            {
+                MessageBox.Show("No se permite hacer esta transacción, su limite es de 100,000.00 Lps");
+                return false;
+            }
             
 
 

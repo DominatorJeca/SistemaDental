@@ -110,5 +110,10 @@ namespace SistemaDental
             btnview.Visibility = Visibility.Visible;
             btnview2.Visibility = Visibility.Hidden;
         }
+
+        private void Window_Closed(object sender, EventArgs e)
+        {
+            this.Close();
+        }
     }
 }
