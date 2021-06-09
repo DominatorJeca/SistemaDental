@@ -79,8 +79,8 @@ namespace SistemaDental
             txtNombre.IsEnabled = habilitacionGrupoA;
             txtApellido.IsEnabled = habilitacionGrupoA;
             txtTelefono.IsEnabled = habilitacionGrupoA;
-        
-            txtEdad.IsEnabled = habilitacionGrupoA;
+            
+           // txtEdad.IsEnabled = habilitacionGrupoA;
             cmbGenero.IsEnabled = habilitacionGrupoA;
             dtpFechaNac.IsEnabled = habilitacionGrupoA;
             btnEditarPaciente.IsEnabled = habilitacionGrupoB;
@@ -109,6 +109,7 @@ namespace SistemaDental
             unPaciente.Genero = cmbGenero.Text;
             unPaciente.Telefono = txtTelefono.Text;
             unPaciente.Id_paciente = txtIdentidad.Text;
+            unPaciente.Fecha =(DateTime) dtpFechaNac.SelectedDate;
             
         }
 
@@ -208,28 +209,29 @@ namespace SistemaDental
                             break;
                         }
 
-                    case "txtEdad":
+                /*    case "txtEdad":
                         {
                             if (int.Parse(tb.Text) <= 0 && int.Parse(tb.Text) >= 110)
                                 band = false;
                             break;
-                        }
+                        }*/
                     case "txtIdentidad":
                         {
                             if (tb.Text.CompareTo("0101192100000")<0 && tb.Text.CompareTo("1811202199999")>0)
                                 band = false;
                             break;
                         }
-                    default:
+                  default:
                         {
-                            if (tb.Text.Trim(' ').Equals(""))
+                           if (tb.Text.Replace(" ","").Equals("") && tb.Name!= "PART_EditableTextBox" && tb.Name!= "PART_TextBox")
                                 band = false;
                             break;
                         }
                 }
- 
-            }
 
+
+            }
+            MessageBox.Show(band+"");
             return band;
         }
         public static IEnumerable<T> FindVisualChildren<T>(DependencyObject depObj) where T : DependencyObject
