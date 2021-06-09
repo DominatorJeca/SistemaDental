@@ -100,13 +100,14 @@ namespace SistemaDental
             txtEdad.Text = null;
             dtgHistorial.ItemsSource = null;
             cmbPaciente.SelectedValue = null;
+            dtpFechaNac.SelectedDate = null;
         }
 
         public void obtenerValores()
         {
             unPaciente.NombrePaciente = txtNombre.Text;
             unPaciente.ApellidoPaciente = txtApellido.Text;
-            unPaciente.FechaNac = Convert.ToDateTime(dpFechaNac.Text);
+            unPaciente.FechaNac = Convert.ToDateTime(dtpFechaNac.Text);
             unPaciente.Genero = cmbGenero.Text;
             unPaciente.Telefono = txtTelefono.Text;
             unPaciente.Id_paciente = txtIdentidad.Text;
@@ -119,8 +120,8 @@ namespace SistemaDental
         /// </summary>
         private void btnEditarPaciente_Click(object sender, RoutedEventArgs e)
         {
-            txtEdad.Visibility = Visibility.Hidden;
-            dpFechaNac.Visibility = Visibility;
+           // txtEdad.Visibility = Visibility.Hidden;
+            //dtpFechaNac.Visibility = Visibility;
             try
             {
                 //Mensaje de advertencia si no selecciona ningun elemento
@@ -147,7 +148,7 @@ namespace SistemaDental
         private void btnCancelar_Click(object sender, RoutedEventArgs e)
         {
             txtEdad.Visibility = Visibility;
-            dpFechaNac.Visibility = Visibility.Hidden;
+            dtpFechaNac.Visibility = Visibility.Hidden;
             try
             {
                 //llama la funcion para deshabilitar los textbox y botones
@@ -163,12 +164,11 @@ namespace SistemaDental
         /// <summary>
         /// Boton Ver el historial del paciente seleccionado en el combobox
         /// </summary>
-       
-
+        /// 
         private void btnGuardarPaciente_Click(object sender, RoutedEventArgs e)
         {
-            txtEdad.Visibility = Visibility;
-            dpFechaNac.Visibility = Visibility.Hidden;
+           // txtEdad.Visibility = Visibility;
+           // dtpFechaNac.Visibility = Visibility.Hidden;
             try
             {
                 if (VerificarCampos())
@@ -238,7 +238,6 @@ namespace SistemaDental
 
 
             }
-            MessageBox.Show(band+"");
             return band;
         }
         public static IEnumerable<T> FindVisualChildren<T>(DependencyObject depObj) where T : DependencyObject
