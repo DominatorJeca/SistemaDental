@@ -131,10 +131,14 @@ namespace SistemaDental
             {
                 switch (tb.Name)
                 {
-                    case "txtTelefono":
+                    case "txtEditarTelefono":
                         {
                             if (int.Parse(tb.Text) <= 100000000 && int.Parse(tb.Text) >= 99999999)
+                            {
                                 band = false;
+                                MessageBox.Show("El numero de telefono no es valido");
+                            }
+                               
                             break;
                         }
 
@@ -142,7 +146,12 @@ namespace SistemaDental
                     default:
                         {
                             if (tb.Text.Trim(' ').Equals(""))
+                            {
                                 band = false;
+
+                                //MessageBox.Show("Un campo contiene muchos espacios");
+                            }
+                                
                             break;
                         }
                 }
@@ -152,15 +161,30 @@ namespace SistemaDental
             return band;
         }
 
-        private IEnumerable<T> FindVisualChildren<T>(EditarUsuario editarUsuario)
+        public static IEnumerable<T> FindVisualChildren<T>(DependencyObject depObj) where T : DependencyObject
         {
-            throw new NotImplementedException();
+            if (depObj != null)
+            {
+                for (int i = 0; i < VisualTreeHelper.GetChildrenCount(depObj); i++)
+                {
+                    DependencyObject child = VisualTreeHelper.GetChild(depObj, i);
+                    if (child != null && child is T)
+                    {
+                        yield return (T)child;
+                    }
+
+                    foreach (T childOfChild in FindVisualChildren<T>(child))
+                    {
+                        yield return childOfChild;
+                    }
+                }
+            }
         }
 
-        /// <summary>
-        /// Funcion para limpiar los textbox y combobox del formulario
-        /// </summary>
-        private void LimpiarFormulario()
+            /// <summary>
+            /// Funcion para limpiar los textbox y combobox del formulario
+            /// </summary>
+            private void LimpiarFormulario()
         {
             txtEditarApellido.Text = string.Empty;
             txtEditarNombre.Text = string.Empty;
@@ -182,7 +206,7 @@ namespace SistemaDental
         private void btnActualizarUsuario_Click(object sender, RoutedEventArgs e)
         {
             // Verificar que se ingresaron los valores requeridos
-            if (VerificarValores() == true)
+            if (VerificarValores() == true && VerificarCampos() == true)
             {
                 try
                 {
