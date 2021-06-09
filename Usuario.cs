@@ -209,6 +209,36 @@ namespace SistemaDental
             }
 
         }
+
+        /// <summary>
+        /// Cambia el estado del empleado a 1 o activo
+        /// </summary>
+        /// <param name="idUsuario"> Id del usuario a restaurar</param>
+        public void RestaurarUsuario(string idUsuario)
+        {
+            sqlConnection.Open();
+
+            try
+            {
+                //crear el comando SQL
+                SqlCommand sqlCommand = new SqlCommand("RestaurarUsuario", sqlConnection);
+                sqlCommand.CommandType = CommandType.StoredProcedure;
+                //Establecer los valores de parametros
+                sqlCommand.Parameters.AddWithValue("@id", idUsuario);
+
+                sqlCommand.ExecuteNonQuery();
+
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+            finally
+            {    //Cerrar conexion 
+                sqlConnection.Close();
+            }
+
+        }
         /// <summary>
         /// Edita el campo privilegio de usuario a 1
         /// </summary>
@@ -284,9 +314,9 @@ namespace SistemaDental
 
 
         /// <summary>
-        /// Mostrar los usuarios que se encuentran en la BD activos
+        /// Mostrar los usuarios que se encuentran en la BD desactivos
         /// </summary>
-        /// <returns>Lista de todos los usuarios activos</returns>
+        /// <returns>Lista de todos los usuarios desactivos</returns>
         public List<Usuario> MostrarUsuariosDesactivos()
         {
             // Inicializar una lista vacía de usuarios
