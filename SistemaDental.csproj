@@ -264,6 +264,18 @@
   <ItemGroup>
     <Resource Include="Menu Bienvendida.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="png-clipart-eye-outline-large-people-eyes.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="eyes.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Sin título-1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="eye.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="packages\MaterialDesignThemes.4.0.0\build\MaterialDesignThemes.targets" Condition="Exists('packages\MaterialDesignThemes.4.0.0\build\MaterialDesignThemes.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

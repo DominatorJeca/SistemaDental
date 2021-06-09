@@ -67,7 +67,7 @@ namespace SistemaDental
                 using (SqlDataReader rdr = sqlCommand.ExecuteReader())
                 {
                     while (rdr.Read())
-                        paciente.Add(new ClasePaciente { Id_paciente = rdr["id_paciente"].ToString(), NombrePaciente=rdr["nombre"].ToString(), ApellidoPaciente=rdr["apellido"].ToString(), Edad=Convert.ToInt32(rdr["edad"].ToString()), Telefono=rdr["telefono"].ToString(), Genero=rdr["genero"].ToString()});
+                        paciente.Add(new ClasePaciente { Id_paciente = rdr["id_paciente"].ToString(), NombrePaciente=rdr["nombre"].ToString(), ApellidoPaciente=rdr["apellido"].ToString(), Fecha=((DateTime)rdr["Fechanac"]), Telefono=rdr["telefono"].ToString(), Genero=rdr["genero"].ToString()});
                 }
 
                 return paciente;
@@ -103,7 +103,7 @@ namespace SistemaDental
                 sqlCommand.Parameters.AddWithValue("@nombre", paciente.NombrePaciente);
                 sqlCommand.Parameters.AddWithValue("@apellido", paciente.ApellidoPaciente);
                 sqlCommand.Parameters.AddWithValue("@telefono",paciente.Telefono);
-                sqlCommand.Parameters.AddWithValue("@edad", paciente.Edad);
+                sqlCommand.Parameters.AddWithValue("@fechanac", paciente.Fecha);
                 sqlCommand.Parameters.AddWithValue("@genero", paciente.Genero);
                 sqlCommand.ExecuteNonQuery();
             }
@@ -142,7 +142,7 @@ namespace SistemaDental
 
                 return pacientes;
             }
-            catch
+            catch 
             {
                 throw;
             }
@@ -163,7 +163,7 @@ namespace SistemaDental
                 sqlCommand.Parameters.AddWithValue("@nombre", paciente.NombrePaciente);
                 sqlCommand.Parameters.AddWithValue("@apellido", paciente.ApellidoPaciente);
                 sqlCommand.Parameters.AddWithValue("@telefono", paciente.Telefono);
-                sqlCommand.Parameters.AddWithValue("@edad", paciente.Edad);
+                sqlCommand.Parameters.AddWithValue("@fecha", paciente.Fecha);
                 sqlCommand.Parameters.AddWithValue("@genero", paciente.Genero);
                 sqlCommand.Parameters.AddWithValue("@estado", 1);
                 sqlCommand.ExecuteNonQuery();

@@ -209,6 +209,36 @@ namespace SistemaDental
             }
 
         }
+
+        /// <summary>
+        /// Cambia el estado del empleado a 1 o activo
+        /// </summary>
+        /// <param name="idUsuario"> Id del usuario a restaurar</param>
+        public void RestaurarUsuario(string idUsuario)
+        {
+            sqlConnection.Open();
+
+            try
+            {
+                //crear el comando SQL
+                SqlCommand sqlCommand = new SqlCommand("RestaurarUsuario", sqlConnection);
+                sqlCommand.CommandType = CommandType.StoredProcedure;
+                //Establecer los valores de parametros
+                sqlCommand.Parameters.AddWithValue("@id", idUsuario);
+
+                sqlCommand.ExecuteNonQuery();
+
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+            finally
+            {    //Cerrar conexion 
+                sqlConnection.Close();
+            }
+
+        }
         /// <summary>
         /// Edita el campo privilegio de usuario a 1
         /// </summary>
@@ -266,6 +296,61 @@ namespace SistemaDental
                         usuarios.Add(new Usuario { Id = Convert.ToString(rdr["id_empleado"]), Nombre= rdr["nombre"].ToString(), Apellido = rdr["apellido"].ToString(),
                             Telefono = rdr["telefono"].ToString(),Correo = rdr["correo"].ToString(),Puesto= Convert.ToInt32(rdr["idpuesto"]),PuestoNombre=puesto.MostrarPuesto(Convert.ToInt32(rdr["idpuesto"])),Genero= rdr["genero"].ToString(),
                             Contraseña = rdr["contraseña"].ToString(),Estado=Convert.ToBoolean(rdr["estado"]),Administrador= Convert.ToBoolean(rdr["administrador"])});
+                }
+
+                return usuarios;
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+            finally
+            {
+                // Cerrar la conexión
+                sqlConnection.Close();
+            }
+        }
+
+
+
+        /// <summary>
+        /// Mostrar los usuarios que se encuentran en la BD desactivos
+        /// </summary>
+        /// <returns>Lista de todos los usuarios desactivos</returns>
+        public List<Usuario> MostrarUsuariosDesactivos()
+        {
+            // Inicializar una lista vacía de usuarios
+            List<Usuario> usuarios = new List<Usuario>();
+
+
+            try
+            {
+                sqlConnection.Open();
+
+                //crear el comando SQL
+                SqlCommand sqlCommand = new SqlCommand("MostrarEmpleadosDesactivos", sqlConnection);
+
+                sqlCommand.CommandType = CommandType.StoredProcedure;
+
+
+                // Obtener los datos de los puestos
+                using (SqlDataReader rdr = sqlCommand.ExecuteReader())
+                {
+                    while (rdr.Read())
+                        usuarios.Add(new Usuario
+                        {
+                            Id = Convert.ToString(rdr["id_empleado"]),
+                            Nombre = rdr["nombre"].ToString(),
+                            Apellido = rdr["apellido"].ToString(),
+                            Telefono = rdr["telefono"].ToString(),
+                            Correo = rdr["correo"].ToString(),
+                            Puesto = Convert.ToInt32(rdr["idpuesto"]),
+                            PuestoNombre = puesto.MostrarPuesto(Convert.ToInt32(rdr["idpuesto"])),
+                            Genero = rdr["genero"].ToString(),
+                            Contraseña = rdr["contraseña"].ToString(),
+                            Estado = Convert.ToBoolean(rdr["estado"]),
+                            Administrador = Convert.ToBoolean(rdr["administrador"])
+                        });
                 }
 
                 return usuarios;

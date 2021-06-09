@@ -34,10 +34,12 @@ namespace SistemaDental
             InitializeComponent();
             MostrarPacientes();
             HabilitacionDeshabilitacion(false, true);
+            dtpFechaNac.BlackoutDates.Add(new CalendarDateRange(DateTime.Now.AddYears(-1), DateTime.MaxValue));
         }
 
         public VerPaciente(bool admin, string name)
         {
+
             InitializeComponent();
             MostrarPacientes();
             HabilitacionDeshabilitacion(false, true);
@@ -77,9 +79,10 @@ namespace SistemaDental
             txtNombre.IsEnabled = habilitacionGrupoA;
             txtApellido.IsEnabled = habilitacionGrupoA;
             txtTelefono.IsEnabled = habilitacionGrupoA;
-            txtIdentidad.IsEnabled = habilitacionGrupoA;
-            txtEdad.IsEnabled = habilitacionGrupoA;
+            
+           // txtEdad.IsEnabled = habilitacionGrupoA;
             cmbGenero.IsEnabled = habilitacionGrupoA;
+            dtpFechaNac.IsEnabled = habilitacionGrupoA;
             btnEditarPaciente.IsEnabled = habilitacionGrupoB;
             cmbPaciente.IsEnabled = habilitacionGrupoB;
         }
@@ -106,6 +109,7 @@ namespace SistemaDental
             unPaciente.Genero = cmbGenero.Text;
             unPaciente.Telefono = txtTelefono.Text;
             unPaciente.Id_paciente = txtIdentidad.Text;
+            unPaciente.Fecha =(DateTime) dtpFechaNac.SelectedDate;
             
         }
 
@@ -160,25 +164,22 @@ namespace SistemaDental
         {
             try
             {
-                
+                if (VerificarCampos())
+                {
                     obtenerValores();
                     unPaciente.ActualizarDatosPaciente(unPaciente);
                     MessageBox.Show("Éxito al actualizar los datos");
                     LimpiarPantalla();
+                    MostrarPacientes();
+                    HabilitacionDeshabilitacion(false, true);
+                }
+                else throw new Exception();
        
             }
-            catch
+            catch (Exception ex)
             {
-                throw;
+                MessageBox.Show("Ha ocurrido un error al guardar al paciente");
             }
-            finally
-            {
-                MostrarPacientes();
-                HabilitacionDeshabilitacion(false, true);
-            }
-          
-
-
         }
 
         private void cmbPaciente_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -191,9 +192,66 @@ namespace SistemaDental
             
         }
 
-        private void btnGuardarPaciente_Click()
-        {
+   
 
+
+        private bool VerificarCampos ()
+        {
+            bool band = true;
+            foreach (TextBox tb in FindVisualChildren<TextBox>(this))
+            {
+                switch (tb.Name)
+                {
+                    case "txtTelefono":
+                        {
+                            if (int.Parse(tb.Text) <= 100000000 && int.Parse(tb.Text) >= 99999999)
+                                band = false;
+                            break;
+                        }
+
+                /*    case "txtEdad":
+                        {
+                            if (int.Parse(tb.Text) <= 0 && int.Parse(tb.Text) >= 110)
+                                band = false;
+                            break;
+                        }*/
+                    case "txtIdentidad":
+                        {
+                            if (tb.Text.CompareTo("0101192100000")<0 && tb.Text.CompareTo("1811202199999")>0)
+                                band = false;
+                            break;
+                        }
+                  default:
+                        {
+                           if (tb.Text.Replace(" ","").Equals("") && tb.Name!= "PART_EditableTextBox" && tb.Name!= "PART_TextBox")
+                                band = false;
+                            break;
+                        }
+                }
+
+
+            }
+            MessageBox.Show(band+"");
+            return band;
+        }
+        public static IEnumerable<T> FindVisualChildren<T>(DependencyObject depObj) where T : DependencyObject
+        {
+            if (depObj != null)
+            {
+                for (int i = 0; i < VisualTreeHelper.GetChildrenCount(depObj); i++)
+                {
+                    DependencyObject child = VisualTreeHelper.GetChild(depObj, i);
+                    if (child != null && child is T)
+                    {
+                        yield return (T)child;
+                    }
+
+                    foreach (T childOfChild in FindVisualChildren<T>(child))
+                    {
+                        yield return childOfChild;
+                    }
+                }
+            }
         }
     }
 }
