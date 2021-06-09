@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using System.Text.RegularExpressions;
 
 namespace SistemaDental
 {
@@ -84,7 +85,7 @@ namespace SistemaDental
             usuario.Administrador = false;
         }
 
-
+        
         /// <summary>
         /// Verifica que los valores de los textbox y combobox no esten vacios
         /// </summary>
