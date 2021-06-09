@@ -108,6 +108,11 @@ namespace SistemaDental
                 MessageBox.Show("Por favor selecciona el Sexo del empleado");
                 return false;
             }
+            else if (!ValidarEmail(txtEditarCorreo.Text) )
+            {
+                MessageBox.Show("Por favor, ingrese un correo valido");
+                return false;
+            }
             else if (cmbPuesto.SelectedValue == null)
             {
                 MessageBox.Show("Por favor selecciona el puesto del empleado");
