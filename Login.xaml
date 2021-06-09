@@ -4,9 +4,10 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SistemaDental"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
         x:Class="SistemaDental.Login"
         mc:Ignorable="d"
-        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         Title="Inicio de Sesión" Height="520" Width="400" WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
     <Window.Background>
         <ImageBrush ImageSource="Login Background.jpg"/>
@@ -25,8 +26,19 @@
         <Button x:Name="btnSalir" Content="Salir" Grid.Column="3" HorizontalAlignment="Left" Margin="261,428,0,0" VerticalAlignment="Top" Width="77" Height="40" Background="{x:Null}" BorderThickness="0" FontFamily="Bahnschrift" FontSize="12" RenderTransformOrigin="0.182,0.225" Click="btnSalir_Click"/>
         <Label Content="Ingrese los datos" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="68,35,68,0" Foreground="Gray" FontSize="18"/>
         <StackPanel VerticalAlignment="Center"  Height="126" Grid.Column="3" Margin="40,196,90,167" Background="#7F056676">
-            <TextBox x:Name="txtUsuario" Margin="0,10" materialDesign:HintAssist.Hint="Usuario" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontFamily="Bahnschrift" FontSize="18" Background="{x:Null}" Height="44"/>
-            <PasswordBox x:Name="txtPassword" Margin="0,10" materialDesign:HintAssist.Hint="Contraseña" Style="{StaticResource MaterialDesignFloatingHintPasswordBox}" FontFamily="Bahnschrift" FontSize="18" Background="{x:Null}"/>
+            <TextBox x:Name="txtUsuario" Margin="0,10" materialDesign:HintAssist.Hint="Usuario" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontFamily="Bahnschrift" FontSize="18" Background="{x:Null}" Height="44" TextChanged="txtUsuario_TextChanged" HorizontalAlignment="Left" Width="201"/>
+            <PasswordBox x:Name="txtPassword" Margin="1,10,0,10" materialDesign:HintAssist.Hint="Contraseña" Style="{StaticResource MaterialDesignFloatingHintPasswordBox}" FontFamily="Bahnschrift" FontSize="18" Background="{x:Null}" Height="43" mah:TextBoxHelper.UseFloatingWatermark="True" mah:PasswordBoxHelper.CapsLockIcon="!" mah:TextBoxHelper.HasText="True" PasswordChar="●" HorizontalAlignment="Left" Width="171"/>
         </StackPanel>
+        <Button x:Name="btnview" Content="" HorizontalAlignment="Left" VerticalAlignment="Top" Width="29" Grid.Column="3" Margin="212,280,0,0" BorderBrush="{x:Null}" Height="24" Click="Button_Click" RenderTransformOrigin="0.5,0.5">
+            <Button.Background>
+                <ImageBrush ImageSource="eye.png"/>
+            </Button.Background>
+        </Button>
+        <Button x:Name="btnview2" Content="" HorizontalAlignment="Left" VerticalAlignment="Top" Width="29" Grid.Column="3" Margin="212,280,0,0" BorderBrush="{x:Null}" Height="24" Click="Button_Click_1" Visibility="Hidden">
+            <Button.Background>
+                <ImageBrush ImageSource="Sin título-1.png"/>
+            </Button.Background>
+        </Button>
+        <TextBox x:Name="txtpas" Margin="41,265,0,0" materialDesign:HintAssist.Hint="Contraseña" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontFamily="Bahnschrift" FontSize="18" Background="{x:Null}" TextChanged="txtUsuario_TextChanged" HorizontalAlignment="Left" Width="172" Grid.Column="3" Height="43" VerticalAlignment="Top" Visibility="Hidden"/>
     </Grid>
 </Window>

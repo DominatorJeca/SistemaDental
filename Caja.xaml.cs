@@ -16,7 +16,7 @@ using System.Windows.Shapes;
 using System.Data;
 using System.Data.SqlClient;
 using System.Configuration;
-
+using System.Text.RegularExpressions;
 
 namespace SistemaDental
 {
@@ -25,7 +25,7 @@ namespace SistemaDental
     /// </summary>
     public partial class Caja : Window
     {
-
+        private bool bandera;
         private bool Admin;
         private String Nombree;
         private ClaseCaja caja = new ClaseCaja();
@@ -54,18 +54,30 @@ namespace SistemaDental
 
         private void ObtenerValues()
         {
+            caja.Cantidad = (float)Convert.ToDecimal(txtCantidadCaja.Text);
             
-            caja.Cantidad = Convert.ToInt32(txtCantidadCaja.Text);
-            if (rbEgreso.IsChecked == true)
-            {
-                caja.Dinero_disponible = Convert.ToInt32(txtDineroCaja.Text)-caja.Cantidad;
-                caja.Tipo_transacción = "Egreso";
-            }
-            else if(rbIngreso.IsChecked==true){
-                caja.Dinero_disponible= Convert.ToInt32(txtDineroCaja.Text) + caja.Cantidad;
-                caja.Tipo_transacción = "Ingreso";
-            }
-            caja.Fecha = DateTime.Now;
+            
+               
+                if (rbEgreso.IsChecked == true)
+                {
+ 
+                              caja.Dinero_disponible = (float)Convert.ToDecimal(txtDineroCaja.Text) - caja.Cantidad;
+                              caja.Tipo_transacción = "Egreso";
+
+                }
+                else if (rbIngreso.IsChecked == true)
+                {                
+                    caja.Dinero_disponible = (float)Convert.ToDecimal(txtDineroCaja.Text) + caja.Cantidad;
+                    caja.Tipo_transacción = "Ingreso";
+                 }
+                caja.Fecha = DateTime.Now;
+
+
+           
+            
+           
+            
+           
         }
 
 
@@ -75,18 +87,33 @@ namespace SistemaDental
         
             private bool VerificarValores()
             {
-                if(txtCantidadCaja.Text == string.Empty || txtDineroCaja.Text == string.Empty)
-                {
-                    MessageBox.Show("Por favor ingrese todos los valores en las cajas de texto");
-                    return false;
-                } 
-                else if(rbIngreso.IsChecked == false && rbEgreso.IsChecked == false)
-                {
-                    MessageBox.Show("Por favor escoga una opcion de transaccion.");
-                    return false;
-                }   
 
-            return true;
+            Regex reg = new Regex("[0-9]");
+            bool b = reg.IsMatch(txtCantidadCaja.Text);
+
+            if (txtCantidadCaja.Text == string.Empty || txtDineroCaja.Text == string.Empty)
+             {
+                    MessageBox.Show("Por favor ingrese la cantidad de dinero para realizar su transaccion");
+                    return false;
+             } 
+            else if(rbIngreso.IsChecked == false && rbEgreso.IsChecked == false)
+            {          
+                    return false;
+            }
+            else if (b == false)
+            {
+                MessageBox.Show("No se aceptan letras en el campo de cantidad");
+                return false;
+            }
+            else if ((float)Convert.ToDecimal(txtCantidadCaja.Text) >= (float)Convert.ToDecimal(txtDineroCaja.Text) && rbEgreso.IsChecked == true)
+            {
+                   MessageBox.Show("No hay suficiente fondo");
+                  return false;
+            }
+            
+
+
+                return true;
             }
 
 
@@ -110,13 +137,13 @@ namespace SistemaDental
                     caja.IngresarCaja(caja);
 
                     // Mensaje de insercion exitosa a la base
-                    MessageBox.Show("Datos insertados correctamente");
+                    MessageBox.Show("Se realizo con exito transaccion");
                 }
                 catch (Exception ex)
                 {
 
-                    MessageBox.Show("Ha occurido un error al momento de insertar.");
-                    MessageBox.Show(ex.Message);
+                    MessageBox.Show("Oh No! algo Salio mal,revisa que la cantidad tenga el formato correcto y sea positivo");
+                   
                 }
                 finally
                 {
@@ -124,9 +151,9 @@ namespace SistemaDental
                 }
 
             }
-            else
+            else if (rbIngreso.IsChecked==false && rbEgreso.IsChecked == false)
             {
-                MessageBox.Show("Seleccione ");
+                MessageBox.Show("Por favor selecione una opcion de transaccion");
             }
 
         }
@@ -146,5 +173,19 @@ namespace SistemaDental
         {
             dgvCaja.SelectedIndex = dgvCaja.Items.Count - 2;
         }
+
+        private void txtCantidadCaja_TextChanged(object sender, TextChangedEventArgs e)
+        {
+
+        }
+
+        private void frmcaja_Closed(object sender, EventArgs e)
+        {
+            Menu menu = new Menu(Admin, Nombree);
+            menu.Show();
+            this.Close();
+        }
+
+      
     }
 }

@@ -75,5 +75,34 @@ namespace SistemaDental
         {
             App.Current.Shutdown();
         }
+
+        
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+           
+            
+                txtPassword.Visibility = Visibility.Hidden;
+                txtpas.Visibility = Visibility.Visible;
+                txtpas.Text = txtPassword.Password;
+                btnview.Visibility=Visibility.Hidden;
+                btnview2.Visibility = Visibility.Visible;
+
+        }
+
+
+        private void txtUsuario_TextChanged(object sender, TextChangedEventArgs e)
+        {
+
+        }
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+
+            txtPassword.Visibility = Visibility.Visible;
+            txtpas.Visibility = Visibility.Hidden;
+            txtPassword.Password = txtpas.Text ;
+            btnview.Visibility = Visibility.Visible;
+            btnview2.Visibility = Visibility.Hidden;
+        }
     }
 }
