@@ -29,12 +29,14 @@ namespace SistemaDental
         {
             InitializeComponent();
             MostrarUsuario();
+           
         }
 
         public ManejarUsuario(bool admin, string name)
         {
             InitializeComponent();
            MostrarUsuario();
+            
             Nombree = name;
             Admin = admin;
         }
@@ -159,7 +161,9 @@ namespace SistemaDental
             if (CKActivo.IsChecked == true)
             {
                 MostrarUsuario();
-                btnEliminarUsuario.
+                btnEliminarUsuario.IsEnabled = true;
+                btnPrivilegios.IsEnabled = true;
+                btnRestaurarUsuario.IsEnabled = false;
             }
             
 
@@ -172,6 +176,9 @@ namespace SistemaDental
             if (CKActivo.IsChecked == false)
             {
                 MostrarUsuarioDesactivo();
+                btnEliminarUsuario.IsEnabled = false;
+                btnPrivilegios.IsEnabled = false;
+                btnRestaurarUsuario.IsEnabled = true;
             }
 
         }
