@@ -6,7 +6,8 @@
         xmlns:local="clr-namespace:SistemaDental"
         mc:Ignorable="d"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-        Title="Ver Paciente" Height="450" Width="800">
+        Title="Ver Paciente" Height="450" Width="800" ResizeMode="CanMinimize">
+
     <Window.Background>
         <ImageBrush ImageSource="TeethPattern.jpg" Stretch="UniformToFill"/>
     </Window.Background>
@@ -19,8 +20,9 @@
         <TextBox x:Name="txtNombre" Margin="7,66,428,309" materialDesign:HintAssist.Hint="Nombre" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontFamily="Bahnschrift" FontSize="12" Background="#7FFFFFFF" Text="{Binding ElementName=cmbPaciente,Path=SelectedItem.NombrePaciente}" Grid.Column="1"/>
         <TextBox x:Name="txtApellido" Margin="7,116,428,259" materialDesign:HintAssist.Hint="Apellido" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontFamily="Bahnschrift" FontSize="12" Background="#7FFFFFFF" Text="{Binding ElementName=cmbPaciente,Path=SelectedItem.ApellidoPaciente}" Grid.Column="1"/>
         <TextBox x:Name="txtTelefono" Margin="350,64,85,309" materialDesign:HintAssist.Hint="Telefóno" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontFamily="Bahnschrift" FontSize="12" Background="#7FFFFFFF" Text="{Binding ElementName=cmbPaciente,Path=SelectedItem.Telefono}" Grid.Column="1"/>
-        <TextBox x:Name="txtEdad" Margin="350,114,85,259" materialDesign:HintAssist.Hint="Edad" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontFamily="Bahnschrift" FontSize="12" Background="#7FFFFFFF" Text="{Binding ElementName=cmbPaciente,Path=SelectedItem.Edad}" Grid.Column="1"/>
-        <TextBox x:Name="txtIdentidad" Margin="7,165,428,212" materialDesign:HintAssist.Hint="Identidad" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontFamily="Bahnschrift" FontSize="12" Background="#7FFFFFFF" Text="{Binding ElementName=cmbPaciente,Path=SelectedItem.Id_paciente}" Grid.Column="1"/>
+        <TextBox x:Name="txtEdad" Margin="350,114,246,259" materialDesign:HintAssist.Hint="Edad" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontFamily="Bahnschrift" IsEnabled="False" FontSize="12" Background="#7FFFFFFF" Text="{Binding ElementName=cmbPaciente,Path=SelectedItem.Edad}" Grid.Column="1"/>
+        <DatePicker x:Name="dtpFechaNac" Grid.Column="1" Margin="482,128,85,260" FontSize="11" DisplayDateStart="1921-01-01" SelectedDate="{ Binding ElementName=cmbPaciente,Path=SelectedItem.Fecha}" Height="33"></DatePicker>
+        <TextBox x:Name="txtIdentidad" Margin="7,165,428,212" materialDesign:HintAssist.Hint="Identidad" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontFamily="Bahnschrift" FontSize="12" Background="#7FFFFFFF" IsEnabled="False" Text="{Binding ElementName=cmbPaciente,Path=SelectedItem.Id_paciente}" Grid.Column="1"/>
         <Label Content="Sexo" HorizontalAlignment="Left" Margin="350,185,0,0" VerticalAlignment="Top" FontSize="12" FontFamily="Bahnschrift" RenderTransformOrigin="10.888,-6.676" Grid.Column="1"/>
         <Button x:Name="btnEditarPaciente" Content="Editar" HorizontalAlignment="Center" Margin="482,234,30,0" VerticalAlignment="Top" Width="203" Background="#FF056676" BorderBrush="{x:Null}" Click="btnEditarPaciente_Click" Grid.Column="1"/>
         <Label Content="Historial Clínico" HorizontalAlignment="Left" Margin="7,212,0,0" VerticalAlignment="Top" FontSize="12" FontFamily="Bahnschrift" Background="#7F056676" Grid.Column="1"/>
@@ -40,14 +42,12 @@
             <ComboBoxItem Content="Femenino"/>
             <ComboBoxItem Content="Masculino"/>
         </ComboBox>
-  
-        <ComboBox x:Name="cmbSexo" HorizontalAlignment="Left" Margin="488,125,0,0" VerticalAlignment="Top" Width="120"/>
         <Label Content="Sexo" HorizontalAlignment="Left" Margin="427,128,0,0" VerticalAlignment="Top" FontSize="12" FontFamily="Bahnschrift" RenderTransformOrigin="10.888,-6.676"/>
-       
+
         <Label Content="Historial Clínico" HorizontalAlignment="Left" Margin="84,212,0,0" VerticalAlignment="Top" FontSize="12" FontFamily="Bahnschrift" Background="#7F056676"/>
-      
-        
+
+
         <Label Content="Paciente" HorizontalAlignment="Left" Margin="177,32,0,0" VerticalAlignment="Top" FontSize="12" FontFamily="Bahnschrift"/>
-        
+
     </Grid>
 </Window>
