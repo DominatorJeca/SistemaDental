@@ -280,5 +280,60 @@ namespace SistemaDental
                 sqlConnection.Close();
             }
         }
+
+
+
+        /// <summary>
+        /// Mostrar los usuarios que se encuentran en la BD activos
+        /// </summary>
+        /// <returns>Lista de todos los usuarios activos</returns>
+        public List<Usuario> MostrarUsuariosDesactivos()
+        {
+            // Inicializar una lista vacía de usuarios
+            List<Usuario> usuarios = new List<Usuario>();
+
+
+            try
+            {
+                sqlConnection.Open();
+
+                //crear el comando SQL
+                SqlCommand sqlCommand = new SqlCommand("MostrarEmpleadosDesactivos", sqlConnection);
+
+                sqlCommand.CommandType = CommandType.StoredProcedure;
+
+
+                // Obtener los datos de los puestos
+                using (SqlDataReader rdr = sqlCommand.ExecuteReader())
+                {
+                    while (rdr.Read())
+                        usuarios.Add(new Usuario
+                        {
+                            Id = Convert.ToString(rdr["id_empleado"]),
+                            Nombre = rdr["nombre"].ToString(),
+                            Apellido = rdr["apellido"].ToString(),
+                            Telefono = rdr["telefono"].ToString(),
+                            Correo = rdr["correo"].ToString(),
+                            Puesto = Convert.ToInt32(rdr["idpuesto"]),
+                            PuestoNombre = puesto.MostrarPuesto(Convert.ToInt32(rdr["idpuesto"])),
+                            Genero = rdr["genero"].ToString(),
+                            Contraseña = rdr["contraseña"].ToString(),
+                            Estado = Convert.ToBoolean(rdr["estado"]),
+                            Administrador = Convert.ToBoolean(rdr["administrador"])
+                        });
+                }
+
+                return usuarios;
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+            finally
+            {
+                // Cerrar la conexión
+                sqlConnection.Close();
+            }
+        }
     }
 }
