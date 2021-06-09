@@ -85,7 +85,12 @@ namespace SistemaDental
             usuario.Administrador = false;
         }
 
-        
+        public static bool ValidarEmail(string email)
+        {
+            Regex regex = new Regex(@"^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$");
+            return regex.IsMatch(email);
+        }
+
         /// <summary>
         /// Verifica que los valores de los textbox y combobox no esten vacios
         /// </summary>
@@ -108,6 +113,8 @@ namespace SistemaDental
                 MessageBox.Show("Por favor selecciona el puesto del empleado");
                 return false;
             }
+
+
 
             return true;
         }
