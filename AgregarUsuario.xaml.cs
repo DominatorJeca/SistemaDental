@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using System.Text.RegularExpressions;
 
 namespace SistemaDental
 {
@@ -50,7 +51,7 @@ namespace SistemaDental
         {
             Ajustes ajustes = new Ajustes(Admin,Nombree);
             ajustes.Show();
-            this.Hide();
+            this.Close();
         }
 
         /// <summary>
@@ -75,7 +76,7 @@ namespace SistemaDental
             usuario.Correo = Convert.ToString(txtAgregarCorreo.Text);
             usuario.Puesto = Convert.ToInt32(cmbPuesto.SelectedValue);
             usuario.Genero = ((ComboBoxItem)cmbSexo.SelectedItem).Content.ToString();
-            usuario.Contraseña = Convert.ToString(txtAgregarContra.Text);
+            usuario.Contraseña = Convert.ToString(txtAgregarContra.Password);
             usuario.Estado = true;
             usuario.Administrador = false;
         }
@@ -88,7 +89,7 @@ namespace SistemaDental
         private bool VerificarValores()
         {
             if (txtAgregarApellido.Text == string.Empty || txtAgregarNombre.Text == string.Empty || txtAgregarCorreo.Text == string.Empty
-                || txtAgregarIdentidad.Text == string.Empty || txtAgregarTelefono.Text == string.Empty || txtAgregarContra.Text == string.Empty)
+                || txtAgregarIdentidad.Text == string.Empty || txtAgregarTelefono.Text == string.Empty || txtAgregarContra.Password == string.Empty)
             {
                 MessageBox.Show("Por favor ingresa todos los valores en las cajas de texto");
                 return false;
@@ -103,9 +104,13 @@ namespace SistemaDental
                 MessageBox.Show("Por favor selecciona el puesto del nuevo empleado");
                 return false;
             }
-            else if (txtConfirmarContra.Text != txtAgregarContra.Text)
+            else if (txtConfirmarContra.Password != txtAgregarContra.Password)
             {
                 MessageBox.Show("La confirmación de contraseña no coincide");
+                return false;
+            }else if (!ValidarEmail(txtConfirmarCorreo.Text) && !ValidarEmail(txtAgregarCorreo.Text))
+            {
+                MessageBox.Show("Por favor, ingrese un correo valido");
                 return false;
             }
             else if (txtConfirmarCorreo.Text != txtAgregarCorreo.Text)
@@ -128,8 +133,8 @@ namespace SistemaDental
             txtAgregarCorreo.Text = string.Empty;
             txtAgregarIdentidad.Text = string.Empty; 
             txtAgregarTelefono.Text= string.Empty;
-            txtAgregarContra.Text = string.Empty;
-            txtConfirmarContra.Text = string.Empty;
+            txtAgregarContra.Password = string.Empty;
+            txtConfirmarContra.Password = string.Empty;
             txtConfirmarCorreo.Text = string.Empty;
             cmbPuesto.SelectedValue = null;
             cmbSexo.SelectedValue = null;
@@ -169,5 +174,22 @@ namespace SistemaDental
 
         }
 
+        public static bool ValidarEmail(string email)
+        {
+            Regex regex = new Regex(@"^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$");
+            return regex.IsMatch(email);
+        }
+
+        private void txtAgregarTelefono_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            Regex regex = new Regex("[^0-9]+");
+            e.Handled = regex.IsMatch(e.Text);
+        }
+
+        private void txtAgregarIdentidad_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            Regex regex = new Regex("[^0-9]+");
+            e.Handled = regex.IsMatch(e.Text);
+        }
     }
 }
