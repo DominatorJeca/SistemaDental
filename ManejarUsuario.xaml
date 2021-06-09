@@ -23,6 +23,6 @@
         <Label Content="Usuario" HorizontalAlignment="Left" Margin="373,100,0,0" VerticalAlignment="Top" FontFamily="Bahnschrift" FontSize="12"/>
         <ComboBox x:Name="cmbUsuario" HorizontalAlignment="Left" Margin="445,100,0,0" VerticalAlignment="Top" Width="210"/>
         <Button x:Name="btnRestaurarUsuario" Content="Restaurar Usuario" HorizontalAlignment="Center" Margin="579,360,49.6,0" VerticalAlignment="Top" Width="165" Background="#FF056676" BorderBrush="{x:Null}" Click="btnRestaurarUsuario_Click"/>
-        <CheckBox Content="¿Activo?" Name="CKActivo" HorizontalAlignment="Left" Margin="671,87,0,0" VerticalAlignment="Top" Background="#FF056676" BorderBrush="#FF056676" Height="49" Width="93" IsChecked="True" Checked="CheckBox_Checked"/>
+        <CheckBox Content="¿Activo?" Name="CKActivo" HorizontalAlignment="Left" Margin="671,87,0,0" VerticalAlignment="Top" Background="#FF056676" BorderBrush="#FF056676" Height="49" Width="93" IsChecked="True" Checked="CheckBox_Checked" Unchecked="CKActivo_Unchecked"/>
     </Grid>
 </Window>

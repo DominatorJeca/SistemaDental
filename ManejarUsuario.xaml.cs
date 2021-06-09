@@ -34,7 +34,7 @@ namespace SistemaDental
         public ManejarUsuario(bool admin, string name)
         {
             InitializeComponent();
-            MostrarUsuario();
+           MostrarUsuario();
             Nombree = name;
             Admin = admin;
         }
@@ -60,6 +60,14 @@ namespace SistemaDental
             cmbUsuario.SelectedValuePath = "Id";
             cmbUsuario.DisplayMemberPath = "Id";
         }
+
+        public void MostrarUsuarioDesactivo()
+        {
+            cmbUsuario.ItemsSource = usuario.MostrarUsuariosDesactivos();
+            cmbUsuario.SelectedValuePath = "Id";
+            cmbUsuario.DisplayMemberPath = "Id";
+        }
+
 
         /// <summary>
         /// Llama el metodo de eliminar usuario de la clase Usuario
@@ -151,10 +159,19 @@ namespace SistemaDental
             if (CKActivo.IsChecked == true)
             {
                 MostrarUsuario();
+                btnEliminarUsuario.
             }
-            else
-            {
+            
 
+        }
+
+
+
+        private void CKActivo_Unchecked(object sender, RoutedEventArgs e)
+        {
+            if (CKActivo.IsChecked == false)
+            {
+                MostrarUsuarioDesactivo();
             }
 
         }
