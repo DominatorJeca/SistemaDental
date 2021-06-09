@@ -208,5 +208,12 @@ namespace SistemaDental
             }
 
         }
+
+        private void Window_Closed(object sender, EventArgs e)
+        {
+            this.Close();
+            Ajustes ajustes = new Ajustes(Admin, Nombree);
+            ajustes.Show();
+        }
     }
 }

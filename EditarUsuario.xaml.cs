@@ -277,7 +277,9 @@ namespace SistemaDental
 
         private void Window_Closed(object sender, EventArgs e)
         {
-            App.Current.Shutdown();
+            this.Close();
+            Ajustes ajustes = new Ajustes(Admin, Nombree);
+            ajustes.Show();
         }
     }
 }
