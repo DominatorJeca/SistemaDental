@@ -145,16 +145,14 @@ namespace SistemaDental
                   
                     default:
                         {
-                            if (tb.Text.Trim(' ').Equals(""))
-                            {
+                            if (tb.Text.Replace(" ", "").Equals("") && tb.Name != "PART_EditableTextBox" && tb.Name != "PART_TextBox") { 
                                 band = false;
-
-                                //MessageBox.Show("Un campo contiene muchos espacios");
+                            MessageBox.Show("Un campo contiene muchos espacios");
                             }
-                                
                             break;
                         }
                 }
+                
 
             }
 
