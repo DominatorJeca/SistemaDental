@@ -6,7 +6,8 @@
         xmlns:local="clr-namespace:SistemaDental"
         mc:Ignorable="d"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-        Title="Inventario" Height="568" Width="800">
+        Title="Inventario" Height="568" Width="800"
+        ResizeMode="NoResize">
 
     <Grid>
         <Grid.Background>
