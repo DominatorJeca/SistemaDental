@@ -124,6 +124,38 @@ namespace SistemaDental
             return true;
         }
 
+        private bool VerificarCampos()
+        {
+            bool band = true;
+            foreach (TextBox tb in FindVisualChildren<TextBox>(this))
+            {
+                switch (tb.Name)
+                {
+                    case "txtTelefono":
+                        {
+                            if (int.Parse(tb.Text) <= 100000000 && int.Parse(tb.Text) >= 99999999)
+                                band = false;
+                            break;
+                        }
+
+                  
+                    default:
+                        {
+                            if (tb.Text.Trim(' ').Equals(""))
+                                band = false;
+                            break;
+                        }
+                }
+
+            }
+
+            return band;
+        }
+
+        private IEnumerable<T> FindVisualChildren<T>(EditarUsuario editarUsuario)
+        {
+            throw new NotImplementedException();
+        }
 
         /// <summary>
         /// Funcion para limpiar los textbox y combobox del formulario
