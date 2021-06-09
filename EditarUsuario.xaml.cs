@@ -24,7 +24,7 @@ namespace SistemaDental
         private Puesto puesto = new Puesto();
         private bool Admin;
         private String Nombree;
-        
+
         //constructores
         public EditarUsuario()
         {
@@ -47,7 +47,7 @@ namespace SistemaDental
         //Abre el formulario ajustes y cierra el actual
         private void btnRegresar_Click(object sender, RoutedEventArgs e)
         {
-            Ajustes ajustes = new Ajustes(Admin,Nombree);
+            Ajustes ajustes = new Ajustes(Admin, Nombree);
             ajustes.Show();
             this.Hide();
         }
@@ -84,6 +84,7 @@ namespace SistemaDental
             usuario.Administrador = false;
         }
 
+
         /// <summary>
         /// Verifica que los valores de los textbox y combobox no esten vacios
         /// </summary>
@@ -106,7 +107,7 @@ namespace SistemaDental
                 MessageBox.Show("Por favor selecciona el puesto del empleado");
                 return false;
             }
-            
+
             return true;
         }
 
@@ -119,7 +120,7 @@ namespace SistemaDental
             txtEditarApellido.Text = string.Empty;
             txtEditarNombre.Text = string.Empty;
             txtEditarCorreo.Text = string.Empty;
-            
+
             txtEditarTelefono.Text = string.Empty;
             txtNuevaContra.Text = string.Empty;
             cmbUsuario.SelectedValue = null;
@@ -184,6 +185,17 @@ namespace SistemaDental
             this.Hide();
             Ajustes ajustes = new Ajustes(Admin, Nombree);
             ajustes.Show();
+        }
+
+
+        private void PreviewTextInputOnlyLetters(object sender, TextCompositionEventArgs e)
+        {
+            int character = Convert.ToInt32(Convert.ToChar(e.Text));
+            if ((character >= 65 && character <= 90) || (character >= 97 && character <= 122))
+                e.Handled = false;
+            else
+                e.Handled = true;
+
         }
     }
 }
