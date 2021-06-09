@@ -33,6 +33,7 @@
         <ComboBox Text="{Binding SelectedItem.PuestoNombre, ElementName=cmbUsuario}" Name="cmbPuesto" HorizontalAlignment="Left" Margin="584,316,0,0" VerticalAlignment="Top" Width="120"/>
         <Label Content="Usuario" HorizontalAlignment="Left" Margin="423,60,0,0" VerticalAlignment="Top" FontFamily="Bahnschrift" FontSize="12"/>
         <ComboBox x:Name="cmbUsuario" HorizontalAlignment="Left" Margin="493,52,0,0" VerticalAlignment="Top" Width="213" />
+       
 
     </Grid>
 </Window>

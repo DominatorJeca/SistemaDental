@@ -72,7 +72,7 @@ namespace SistemaDental
         /// </summary>
         public void ObtenerValores()
         {
-            usuario.Id =((ComboBoxItem)cmbUsuario.SelectedItem).Content.ToString();
+            usuario.Id = Convert.ToString(cmbUsuario.SelectedValue);
             usuario.Nombre = Convert.ToString(txtEditarNombre.Text);
             usuario.Apellido = Convert.ToString(txtEditarApellido.Text);
             usuario.Telefono = Convert.ToString(txtEditarTelefono.Text);
@@ -182,7 +182,7 @@ namespace SistemaDental
         private void btnRegresar_Click_1(object sender, RoutedEventArgs e)
         {
             this.Hide();
-            Ajustes ajustes = new Ajustes();
+            Ajustes ajustes = new Ajustes(Admin, Nombree);
             ajustes.Show();
         }
     }
