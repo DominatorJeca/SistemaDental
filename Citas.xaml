@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:SistemaDental"
         mc:Ignorable="d"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-        Title="Citas" Height="596.117" Width="923.526">
+        Title="Citas" Height="596.117" Width="923.526" ResizeMode="NoResize">
     <Grid Margin="0,0,-6,-29">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="207*"/>
@@ -33,8 +33,7 @@
         </DataGrid>
         <Button x:Name="btnAgregar" Content="Agregar" HorizontalAlignment="Left" Margin="12,301,0,0" VerticalAlignment="Top" Width="202" Background="#FF056676" BorderBrush="{x:Null}" Grid.ColumnSpan="2" Click="btnAgregar_Click"/>
         <Button Name="btnEditar" Content="Editar" HorizontalAlignment="Left" Margin="24,301,0,0" VerticalAlignment="Top" Width="202" Background="#FF056676" BorderBrush="{x:Null}" Grid.Column="1" Click="btnEditar_Click"/>
-        <Button x:Name="btnBorrar" Content="Borrar" HorizontalAlignment="Left" Margin="12,347,0,0" VerticalAlignment="Top" Width="202" Background="#FF056676" BorderBrush="{x:Null}" Grid.ColumnSpan="2" Click="btnBorrar_Click"/>
-        <Button Name="btnCancelar" Content="Cancelar" HorizontalAlignment="Left" Margin="108,404,0,0" VerticalAlignment="Top" Width="202" RenderTransformOrigin="0.463,1.027" Background="#FF056676" BorderBrush="{x:Null}" IsEnabled="False" Grid.ColumnSpan="2" Click="btnCancelar_Click"/>
+        <Button Name="btnCancelar" Content="Cancelar" HorizontalAlignment="Left" Margin="24,357,0,0" VerticalAlignment="Top" Width="202" RenderTransformOrigin="0.463,1.027" Background="#FF056676" BorderBrush="{x:Null}" IsEnabled="False" Click="btnCancelar_Click" Grid.Column="1"/>
         <ComboBox Name="cmbEmpleado" HorizontalAlignment="Left" Margin="468,144,0,0" VerticalAlignment="Top" Width="216" Grid.Column="1" RenderTransformOrigin="0.603,0.358" Text="{Binding ElementName=dtg_Citas,Path=SelectedItem.NombreDoctor, Mode=OneWay}"/>
         <ComboBox Name="cmbPaciente" HorizontalAlignment="Left" Margin="468,96,0,0" VerticalAlignment="Top" Width="216" RenderTransformOrigin="0.603,0.358" Grid.Column="1" Text="{Binding ElementName=dtg_Citas, Path=SelectedItem.IdPacientes}"/>
         <Label Content="Id Paciente" HorizontalAlignment="Left" Margin="350,103,0,0" VerticalAlignment="Top"  FontSize="15" Foreground="Black" Background="White" FontFamily="Bahnschrift" Grid.Column="1"/>
@@ -42,9 +41,13 @@
         <ComboBox Name="cmbTratamiento" HorizontalAlignment="Left" Margin="468,185,0,0" VerticalAlignment="Top" Width="216" Grid.Column="1" Text="{Binding ElementName=dtg_Citas,Path=SelectedItem.NombreTratamiento, Mode=OneWay}"/>
         <Label Content="Tratamiento" HorizontalAlignment="Left" Margin="350,193,0,0" VerticalAlignment="Top"  FontSize="15" Foreground="Black" Background="White" FontFamily="Bahnschrift" Grid.Column="1" />
         <Button Name="btnRegresar" Content="Regresar" HorizontalAlignment="Left" Margin="12,10,0,0" VerticalAlignment="Top" Width="103" FontFamily="Bahnschrift" FontSize="16" Background="#FF056676"  BorderBrush="{x:Null}" Click="btnRegresar_Click"/>
-        <Calendar Name="cdCitas" Grid.Column="1" HorizontalAlignment="Left" Margin="380,243,0,0" VerticalAlignment="Top" Height="323" Width="305" SelectedDatesChanged="cdCitas_SelectedDatesChanged" SelectedDate="{Binding ElementName=dtg_Citas,Path=SelectedItem.fechaCita,Mode=OneWay}"/>
-        <Button x:Name="btnGuardar" Content="Guardar" HorizontalAlignment="Left" Margin="24,347,0,0" VerticalAlignment="Top" Width="202" Background="#FF056676" BorderBrush="{x:Null}" Grid.Column="1" Click="btnGuardar_Click" IsEnabled="False"/>
-        <TextBox Width="143" Height="30" VerticalAlignment="Bottom" HorizontalAlignment="Left" Margin="232,0,0,73" Name="SelectedDateTextBox" Grid.Column="1" Text="{Binding ElementName=dtg_Citas,Path=SelectedItem.fechaCita, Mode=OneWay}"/>
+        <Button x:Name="btnGuardar" Content="Guardar" HorizontalAlignment="Left" Margin="12,357,0,0" VerticalAlignment="Top" Width="202" Background="#FF056676" BorderBrush="{x:Null}" Click="btnGuardar_Click" IsEnabled="False" Grid.ColumnSpan="2"/>
+
+        <Label Content="Fecha de cita" Grid.Column="1" Margin="350,251,244,0" VerticalAlignment="Top"  FontSize="15" Foreground="Black" Background="White" FontFamily="Bahnschrift" Height="51"/>
+        <DatePicker Name="cdCitas" Grid.Column="1" HorizontalAlignment="Left" Margin="471,245,0,0" VerticalAlignment="Top" Height="32" Width="213" />
+
+        <Label Content="Hora de cita" VerticalAlignment="Top"  FontSize="15" Foreground="Black" Background="White" FontFamily="Bahnschrift" Height="51" Grid.Column="1" Margin="350,301,244,0"/>
+        <materialDesign:TimePicker SelectedTimeFormat="Short" Name="ctTiempo" Grid.Column="1" HorizontalAlignment="Left" Margin="468,301,0,0" VerticalAlignment="Top" Width="216"/>
 
     </Grid>
 </Window>

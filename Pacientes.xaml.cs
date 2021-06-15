@@ -53,5 +53,13 @@ namespace SistemaDental
             menu.Show();
             this.Hide();
         }
+
+        private void frmpaciente_Closed(object sender, EventArgs e)
+        {
+            Menu menu = new Menu(Admin, Nombree);
+            menu.Show();
+            this.Close();
+
+        }
     }
 }

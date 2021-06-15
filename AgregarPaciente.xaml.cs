@@ -16,6 +16,7 @@ using System.Windows.Shapes;
 using System.Data;
 using System.Data.SqlClient;
 using System.Configuration;
+using System.Text.RegularExpressions;
 
 namespace SistemaDental
 {
@@ -62,7 +63,7 @@ namespace SistemaDental
         {
             paciente.NombrePaciente = txtAgregarNombre.Text;
             paciente.ApellidoPaciente = txtAgregarApellido.Text;
-            paciente.Edad = Convert.ToInt32(txtAgregarEdad.Text);
+            paciente.FechaNac = Convert.ToDateTime(datePicker1.Text);
             paciente.Telefono = txtAgregarTelefono.Text;
             paciente.Id_paciente = txtAgregarIdentidad.Text;
             if (rbFemenino.IsChecked == true)
@@ -80,7 +81,7 @@ namespace SistemaDental
         {
 
             //Comprueba que todos los campos estén llenos
-            if (txtAgregarApellido.Text == String.Empty || txtAgregarNombre.Text == String.Empty || txtAgregarIdentidad.Text == String.Empty || txtAgregarTelefono.Text == String.Empty || txtAgregarEdad.Text == String.Empty ||rbMasculino.IsChecked==false && rbFemenino.IsChecked==false)
+            if (txtAgregarApellido.Text == String.Empty || txtAgregarNombre.Text == String.Empty || txtAgregarIdentidad.Text == String.Empty || txtAgregarTelefono.Text == String.Empty || datePicker1.Text == String.Empty ||rbMasculino.IsChecked==false && rbFemenino.IsChecked==false)
             {
                 MessageBox.Show("¡Por favor llena todos los campos!");
                 txtAgregarNombre.Focus();
@@ -110,11 +111,41 @@ namespace SistemaDental
         {
             txtAgregarApellido.Text = "";
             txtAgregarNombre.Text = "";
-            txtAgregarEdad.Text = "";
+            datePicker1.Text = "";
             txtAgregarIdentidad.Text = "";
             txtAgregarTelefono.Text = "";
             rbFemenino.IsChecked = false;
             rbMasculino.IsChecked = false;
+        }
+
+        private void txtAgregarNombre_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            Regex reg = new Regex("[0-9]");
+            bool b = reg.IsMatch(txtAgregarNombre.Text);
+            if (b == true)
+            {
+                MessageBox.Show("Ingrese solamente caracteres");
+                txtAgregarNombre.Text = "";
+            }
+        }
+
+        private void txtAgregarApellido_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            Regex reg = new Regex("[0-9]");
+            bool b = reg.IsMatch(txtAgregarApellido.Text);
+            if (b == true)
+            {
+                MessageBox.Show("Ingrese solamente caracteres");
+                txtAgregarApellido.Text = "";
+            }
+        }
+
+        private void AddPaciente_Closed(object sender, EventArgs e)
+        {
+            Pacientes pacientes = new Pacientes(Admin, Nombree);
+            pacientes.Show();
+            this.Close();
+
         }
     }
 }
