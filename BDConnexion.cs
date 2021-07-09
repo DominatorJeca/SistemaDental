@@ -32,5 +32,25 @@ namespace SistemaDental
                 sqlConnection.Close();
             }
         }
+        public SqlConnection Open()
+        {
+            if (sqlConnection.State == ConnectionState.Closed)
+            {
+                sqlConnection.Open();
+            }
+
+            return sqlConnection;
+        }
+
+        public SqlConnection Close()
+        {
+
+            if (sqlConnection.State == ConnectionState.Open)
+            {
+                sqlConnection.Close();
+            }
+
+            return sqlConnection;
+        }
     }
 }
