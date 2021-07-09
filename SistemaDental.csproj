@@ -141,6 +141,7 @@
       <DependentUpon>Tratamiento.xaml</DependentUpon>
     </Compile>
     <Compile Include="Usuario.cs" />
+    <Compile Include="Validaciones.cs" />
     <Compile Include="VerPaciente.xaml.cs">
       <DependentUpon>VerPaciente.xaml</DependentUpon>
     </Compile>

@@ -19,6 +19,7 @@ namespace SistemaDental
     /// </summary>
     public partial class ManejarUsuario : Window
     {
+        Validaciones validaciones = new Validaciones();
         //variables miembro
         private Usuario usuario = new Usuario();
         private bool Admin;

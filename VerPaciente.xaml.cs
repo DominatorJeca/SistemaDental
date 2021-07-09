@@ -8,19 +8,23 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Documents;
+using System.Windows.Forms;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using MessageBox = System.Windows.Forms.MessageBox;
 
 namespace SistemaDental
 {
     /// <summary>
     /// Interaction logic for VerPaciente.xaml
     /// </summary>
+    /// 
+  
     public partial class VerPaciente : Window
     {
-
+        Validaciones validaciones = new Validaciones();
         //Creacion de un objeto de tipo ClasePaciente
         private ClasePaciente unPaciente = new ClasePaciente();
 
@@ -127,7 +131,7 @@ namespace SistemaDental
                 //Mensaje de advertencia si no selecciona ningun elemento
                 if (cmbPaciente.SelectedItem == null)
                 {
-                    MessageBox.Show("Por favor seleccione un paciente.");
+                    System.Windows.MessageBox.Show("Por favor seleccione un paciente.");
                 }
                 else {
                     //Deshabilita el combobox paciente, el boton editar y ver
@@ -139,7 +143,7 @@ namespace SistemaDental
             
             }
             catch
-            {MessageBox.Show("Ha ocurrido un error en el sistema.");}
+            { MessageBox.Show("Ha ocurrido un error en el sistema."); }
         }
 
         /// <summary>
@@ -171,7 +175,8 @@ namespace SistemaDental
            // dtpFechaNac.Visibility = Visibility.Hidden;
             try
             {
-                if (VerificarCampos())
+                
+                if (validaciones.VerificarCampos(this))
                 {
                     obtenerValores();
                     unPaciente.ActualizarDatosPaciente(unPaciente);
@@ -185,7 +190,7 @@ namespace SistemaDental
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Ha ocurrido un error al guardar al paciente");
+                MessageBox.Show("Ha ocurrido un error al guardar al paciente"+ex);
             }
         }
 
@@ -199,47 +204,7 @@ namespace SistemaDental
             
         }
 
-   
-
-
-        private bool VerificarCampos ()
-        {
-            bool band = true;
-            foreach (TextBox tb in FindVisualChildren<TextBox>(this))
-            {
-                switch (tb.Name)
-                {
-                    case "txtTelefono":
-                        {
-                            if (int.Parse(tb.Text) <= 100000000 && int.Parse(tb.Text) >= 99999999)
-                                band = false;
-                            break;
-                        }
-
-                /*    case "txtEdad":
-                        {
-                            if (int.Parse(tb.Text) <= 0 && int.Parse(tb.Text) >= 110)
-                                band = false;
-                            break;
-                        }*/
-                    case "txtIdentidad":
-                        {
-                            if (tb.Text.CompareTo("0101192100000")<0 && tb.Text.CompareTo("1811202199999")>0)
-                                band = false;
-                            break;
-                        }
-                  default:
-                        {
-                           if (tb.Text.Replace(" ","").Equals("") && tb.Name!= "PART_EditableTextBox" && tb.Name!= "PART_TextBox")
-                                band = false;
-                            break;
-                        }
-                }
-
-
-            }
-            return band;
-        }
+       
         public static IEnumerable<T> FindVisualChildren<T>(DependencyObject depObj) where T : DependencyObject
         {
             if (depObj != null)

@@ -25,7 +25,7 @@ namespace SistemaDental
     /// </summary>
     public partial class AgregarPaciente : Window
     {
-
+        Validaciones validaciones = new Validaciones();
         bool Admin;
         String Nombree;
 
@@ -65,7 +65,8 @@ namespace SistemaDental
             paciente.ApellidoPaciente = txtAgregarApellido.Text;
             paciente.FechaNac = Convert.ToDateTime(datePicker1.Text);
             paciente.Telefono = txtAgregarTelefono.Text;
-            paciente.Id_paciente = txtAgregarIdentidad.Text;
+            if(validaciones.VerificarIdentidad(txtAgregarIdentidad.Text))
+                paciente.Id_paciente = txtAgregarIdentidad.Text;
             if (rbFemenino.IsChecked == true)
             {
                 paciente.Genero = "Femenino";

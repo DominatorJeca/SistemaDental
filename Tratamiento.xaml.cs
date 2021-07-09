@@ -21,6 +21,7 @@ namespace SistemaDental
     /// </summary>
     public partial class Tratamiento : Window
     {
+        Validaciones validaciones = new Validaciones();
         ClaseTratamiento tratamiento = new ClaseTratamiento();
         DateTime DateTime = new DateTime();
         private bool Admin;
@@ -75,10 +76,9 @@ namespace SistemaDental
 
         private void btnRealizar_Click(object sender, RoutedEventArgs e)
         {
-            
             try
             {
-                if (Convert.ToInt32(cmbTratamiento.SelectedValue) > 0 && Convert.ToString(cmbPaciente.SelectedValue) != " " && Convert.ToInt32(txtCantidad.ToString())>=0)
+                if (Convert.ToInt32(cmbTratamiento.SelectedValue) > 0 && Convert.ToString(cmbPaciente.SelectedValue) != " ")
                 {
                     ObtenerValores();
                     tratamiento.IngresarAlHistorial(tratamiento);
@@ -109,14 +109,11 @@ namespace SistemaDental
 
         private void btnEditar_Click(object sender, RoutedEventArgs e)
         {
-              cant_anterior = Convert.ToInt32(txtCantidad.Text);
+
+            
             try
             {
-                if (dg_materiales.SelectedValue == null || cmbTratamiento.SelectedValue == null )
-                {
-                    MessageBox.Show("Seleccione un tratamiento y un material para poder ser editado");
-                }
-                else
+                if (dg_materiales.SelectedValue != null || validaciones.VerificarCampos(this) )
                 {
 
                     txtCantidad.IsEnabled = true;
@@ -125,6 +122,10 @@ namespace SistemaDental
                     btnEditar.IsEnabled = false;
                     btnRealizar.IsEnabled = false;
                     cmbTratamiento.IsEnabled = false;
+                }
+                else
+                {
+                    MessageBox.Show("Seleccione un tratamiento y un material para poder ser editado");
                 }
             }
             catch(Exception ex)
@@ -137,19 +138,26 @@ namespace SistemaDental
         {
             try
             {
-                foreach (ClaseTratamiento tratamientos in dg_materiales.ItemsSource)
+                if (validaciones.VerificarCantidad(Convert.ToDouble(txtCantidad.Text)))
                 {
-                    if (tratamiento.NombreMaterial == dg_materiales.SelectedValue.ToString() && Convert.ToInt32(txtCantidad.Text) <= Convert.ToInt32(tratamientos.Cantidad.ToString()))
+                    foreach (ClaseTratamiento tratamientos in dg_materiales.ItemsSource)
                     {
-                        tratamiento.Cantidad = Convert.ToInt32(tratamientos.Cantidad.ToString());
-                   
+                        if (tratamiento.NombreMaterial == dg_materiales.SelectedValue.ToString() && Convert.ToInt32(txtCantidad.Text) <= Convert.ToInt32(tratamientos.Cantidad.ToString()))
+                        {
+                            tratamiento.Cantidad = Convert.ToInt32(tratamientos.Cantidad.ToString());
+                        }
+                        else
+                        {
+                            MessageBox.Show("Valor mayor a la cantidad actual");
+                           txtCantidad.Text = cant_anterior.ToString();
+                           break;
+                        }
                     }
-                    else
-                    {
-                        MessageBox.Show("Valor mayor a la cantidad actual");
-                        txtCantidad.Text = cant_anterior.ToString();
-                        break;
-                    }
+                }
+                else
+                {
+                    MessageBox.Show("No ingrese valores menores que 0");
+                    MostrarMateriales();
                 }
                 
             }

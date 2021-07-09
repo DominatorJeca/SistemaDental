@@ -20,6 +20,7 @@ namespace SistemaDental
     /// </summary>
     public partial class AgregarUsuario : Window
     {
+        Validaciones validaciones = new Validaciones();
         //Variables miembro
         private Usuario usuario = new Usuario();
         private Puesto puesto = new Puesto();
@@ -69,14 +70,15 @@ namespace SistemaDental
         /// </summary>
         public void ObtenerValores()
         {
-            usuario.Id = Convert.ToString(txtAgregarIdentidad.Text);
-            usuario.Nombre = Convert.ToString(txtAgregarNombre.Text);
-            usuario.Apellido = Convert.ToString(txtAgregarApellido.Text);
-            usuario.Telefono = Convert.ToString(txtAgregarTelefono.Text);
-            usuario.Correo = Convert.ToString(txtAgregarCorreo.Text);
+            if(validaciones.VerificarIdentidad(txtAgregarIdentidad.Text))
+                usuario.Id = txtAgregarIdentidad.Text;
+            usuario.Nombre = txtAgregarNombre.Text;
+            usuario.Apellido = txtAgregarApellido.Text;
+            usuario.Telefono = txtAgregarTelefono.Text;
+            usuario.Correo = txtAgregarCorreo.Text;
             usuario.Puesto = Convert.ToInt32(cmbPuesto.SelectedValue);
             usuario.Genero = ((ComboBoxItem)cmbSexo.SelectedItem).Content.ToString();
-            usuario.Contraseña = Convert.ToString(txtAgregarContra.Password);
+            usuario.Contraseña = txtAgregarContra.Password;
             usuario.Estado = true;
             usuario.Administrador = false;
         }
@@ -86,7 +88,7 @@ namespace SistemaDental
         /// Verifica que los valores de los textbox y combobox no esten vacios
         /// </summary>
         /// <returns>Verificacion de valores</returns>
-        private bool VerificarValores()
+        /*private bool VerificarValores()
         {
             if (txtAgregarApellido.Text == string.Empty || txtAgregarNombre.Text == string.Empty || txtAgregarCorreo.Text == string.Empty
                 || txtAgregarIdentidad.Text == string.Empty || txtAgregarTelefono.Text == string.Empty || txtAgregarContra.Password == string.Empty)
@@ -94,17 +96,17 @@ namespace SistemaDental
                 MessageBox.Show("Por favor ingresa todos los valores en las cajas de texto");
                 return false;
             }
-            else if (cmbSexo.SelectedValue == null)
+            /*else if (cmbSexo.SelectedValue == null)
             {
                 MessageBox.Show("Por favor selecciona el Sexo del nuevo empleado");
                 return false;
-            }
-            else if (cmbPuesto.SelectedValue == null)
+            }*/
+            /*else if (cmbPuesto.SelectedValue == null)
             {
                 MessageBox.Show("Por favor selecciona el puesto del nuevo empleado");
                 return false;
-            }
-            else if (txtConfirmarContra.Password != txtAgregarContra.Password)
+            }*/
+           /* else if (txtConfirmarContra.Password != txtAgregarContra.Password)
             {
                 MessageBox.Show("La confirmación de contraseña no coincide");
                 return false;
@@ -118,10 +120,10 @@ namespace SistemaDental
                 MessageBox.Show("La confirmaciónn de correo no coincide");
                 return false;
             }
-
+            
 
             return true;
-        }
+        }*/
 
         /// <summary>
         /// Funcion para limpiar los textbox y combobox del formulario
@@ -149,8 +151,7 @@ namespace SistemaDental
         private void btnAgregarUsuario_Click_1(object sender, RoutedEventArgs e)
         {
             // Verificar que se ingresaron los valores requeridos
-            if (VerificarValores() == true)
-            {
+            
                 try
                 {
                     // Obtener los valores para el empleado
@@ -169,8 +170,6 @@ namespace SistemaDental
                     MessageBox.Show("Ha ocurrido un error al momento de insertar el empleado...");
                     Console.WriteLine(ex.Message);
                 }
-              
-            }
 
         }
 
