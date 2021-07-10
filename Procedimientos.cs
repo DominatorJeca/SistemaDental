@@ -18,10 +18,8 @@ namespace SistemaDental
         BDConnexion con = new BDConnexion();
         SqlCommand command = new SqlCommand();
         SqlDataReader reader;
-          public List<ClaseTratamiento> mostrarTratamientos()
+          List<ClaseTratamiento> mostrarTratamientos()
         {
-           
-
             try
             {
                 command.Connection = con.Open();
