@@ -82,6 +82,29 @@ namespace SistemaDental
 
         }
        
+        public bool VerificarNumero(string numero)
+        {
+            bool siono = false;
+            if(numero.Length == 8)
+            {
+                siono = true;
+            }
+
+            return siono;
+        }
+
+        public bool VerificarFecha(DateTime Fecha)
+        {
+            DateTime presente = DateTime.Today;
+            bool siono = false;
+            int anio = Fecha.Year;
+            if (anio > 1900 && anio < presente.Year - 1)
+            {
+                siono = true;
+            }
+
+            return siono;
+        }
        
     }
 }

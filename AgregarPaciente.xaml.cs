@@ -63,8 +63,10 @@ namespace SistemaDental
         {
             paciente.NombrePaciente = txtAgregarNombre.Text;
             paciente.ApellidoPaciente = txtAgregarApellido.Text;
-            paciente.FechaNac = Convert.ToDateTime(datePicker1.Text);
-            paciente.Telefono = txtAgregarTelefono.Text;
+            if (validaciones.VerificarFecha(Convert.ToDateTime(datePicker1.Text)))
+                paciente.FechaNac = Convert.ToDateTime(datePicker1.Text);
+            if(validaciones.VerificarNumero(txtAgregarTelefono.Text))
+                paciente.Telefono = txtAgregarTelefono.Text;
             if(validaciones.VerificarIdentidad(txtAgregarIdentidad.Text))
                 paciente.Id_paciente = txtAgregarIdentidad.Text;
             if (rbFemenino.IsChecked == true)

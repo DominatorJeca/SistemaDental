@@ -74,7 +74,8 @@ namespace SistemaDental
                 usuario.Id = txtAgregarIdentidad.Text;
             usuario.Nombre = txtAgregarNombre.Text;
             usuario.Apellido = txtAgregarApellido.Text;
-            usuario.Telefono = txtAgregarTelefono.Text;
+            if (validaciones.VerificarNumero(txtAgregarTelefono.Text))
+                usuario.Telefono = txtAgregarTelefono.Text;
             usuario.Correo = txtAgregarCorreo.Text;
             usuario.Puesto = Convert.ToInt32(cmbPuesto.SelectedValue);
             usuario.Genero = ((ComboBoxItem)cmbSexo.SelectedItem).Content.ToString();
