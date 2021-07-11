@@ -20,7 +20,7 @@ namespace SistemaDental
     /// </summary>
     public partial class AgregarUsuario : Window
     {
-        Validaciones validaciones = new Validaciones();
+        Validaciones validar = new Validaciones();
         //Variables miembro
         private Usuario usuario = new Usuario();
         private Puesto puesto = new Puesto();
@@ -70,11 +70,11 @@ namespace SistemaDental
         /// </summary>
         public void ObtenerValores()
         {
-            if(validaciones.VerificarIdentidad(txtAgregarIdentidad.Text))
+            if(validar.VerificarIdentidad(txtAgregarIdentidad.Text))
                 usuario.Id = txtAgregarIdentidad.Text;
             usuario.Nombre = txtAgregarNombre.Text;
             usuario.Apellido = txtAgregarApellido.Text;
-            if (validaciones.VerificarNumero(txtAgregarTelefono.Text))
+            if (validar.VerificarNumero(txtAgregarTelefono.Text))
                 usuario.Telefono = txtAgregarTelefono.Text;
             usuario.Correo = txtAgregarCorreo.Text;
             usuario.Puesto = Convert.ToInt32(cmbPuesto.SelectedValue);
@@ -102,29 +102,29 @@ namespace SistemaDental
                 MessageBox.Show("Por favor selecciona el Sexo del nuevo empleado");
                 return false;
             }*/
-            /*else if (cmbPuesto.SelectedValue == null)
-            {
-                MessageBox.Show("Por favor selecciona el puesto del nuevo empleado");
-                return false;
-            }*/
-           /* else if (txtConfirmarContra.Password != txtAgregarContra.Password)
-            {
-                MessageBox.Show("La confirmación de contraseña no coincide");
-                return false;
-            }else if (!ValidarEmail(txtConfirmarCorreo.Text) && !ValidarEmail(txtAgregarCorreo.Text))
-            {
-                MessageBox.Show("Por favor, ingrese un correo valido");
-                return false;
-            }
-            else if (txtConfirmarCorreo.Text != txtAgregarCorreo.Text)
-            {
-                MessageBox.Show("La confirmaciónn de correo no coincide");
-                return false;
-            }
-            
-
-            return true;
+        /*else if (cmbPuesto.SelectedValue == null)
+        {
+            MessageBox.Show("Por favor selecciona el puesto del nuevo empleado");
+            return false;
         }*/
+        /* else if (txtConfirmarContra.Password != txtAgregarContra.Password)
+         {
+             MessageBox.Show("La confirmación de contraseña no coincide");
+             return false;
+         }else if (!validar.ValidarEmail(txtConfirmarCorreo.Text) && !validar.ValidarEmail(txtAgregarCorreo.Text))
+         {
+             MessageBox.Show("Por favor, ingrese un correo valido");
+             return false;
+         }
+         else if (txtConfirmarCorreo.Text != txtAgregarCorreo.Text)
+         {
+             MessageBox.Show("La confirmaciónn de correo no coincide");
+             return false;
+         }
+
+
+         return true;
+     }*/
 
         /// <summary>
         /// Funcion para limpiar los textbox y combobox del formulario
@@ -174,22 +174,22 @@ namespace SistemaDental
 
         }
 
-        public static bool ValidarEmail(string email)
+     
+
+        private void PreviewTextInputOnlyLetters(object sender, TextCompositionEventArgs e)
         {
-            Regex regex = new Regex(@"^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$");
-            return regex.IsMatch(email);
+
+            validar.SoloLetras(e);
+
         }
 
-        private void txtAgregarTelefono_PreviewTextInput(object sender, TextCompositionEventArgs e)
+
+        private void PreviewTextInputOnlyNumbers(object sender, TextCompositionEventArgs e)
         {
-            Regex regex = new Regex("[^0-9]+");
-            e.Handled = regex.IsMatch(e.Text);
+
+            validar.SoloNumeros(e);
         }
 
-        private void txtAgregarIdentidad_PreviewTextInput(object sender, TextCompositionEventArgs e)
-        {
-            Regex regex = new Regex("[^0-9]+");
-            e.Handled = regex.IsMatch(e.Text);
-        }
+
     }
 }

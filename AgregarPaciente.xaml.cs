@@ -39,7 +39,7 @@ namespace SistemaDental
             InitializeComponent();
 
         }
-
+        Validaciones validar = new Validaciones();
         public AgregarPaciente(bool admin, string name)
         {
 
@@ -121,26 +121,22 @@ namespace SistemaDental
             rbMasculino.IsChecked = false;
         }
 
-        private void txtAgregarNombre_TextChanged(object sender, TextChangedEventArgs e)
+     
+
+        private void PreviewTextInputOnlyLetters(object sender, TextCompositionEventArgs e)
         {
-            Regex reg = new Regex("[0-9]");
-            bool b = reg.IsMatch(txtAgregarNombre.Text);
-            if (b == true)
-            {
-                MessageBox.Show("Ingrese solamente caracteres");
-                txtAgregarNombre.Text = "";
-            }
+            
+
+            validar.SoloLetras(e);
+
         }
 
-        private void txtAgregarApellido_TextChanged(object sender, TextChangedEventArgs e)
+
+        private void PreviewTextInputOnlyNumbers(object sender, TextCompositionEventArgs e)
         {
-            Regex reg = new Regex("[0-9]");
-            bool b = reg.IsMatch(txtAgregarApellido.Text);
-            if (b == true)
-            {
-                MessageBox.Show("Ingrese solamente caracteres");
-                txtAgregarApellido.Text = "";
-            }
+            
+
+            validar.SoloNumeros(e);
         }
 
         private void AddPaciente_Closed(object sender, EventArgs e)

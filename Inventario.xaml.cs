@@ -33,6 +33,7 @@ namespace SistemaDental
         private bool Admin;
         private String Nombree;
 
+        Validaciones validar = new Validaciones();
         public Inventario()
         {
             InitializeComponent();
@@ -146,6 +147,11 @@ namespace SistemaDental
             Menu menu = new Menu(Admin,Nombree);
             menu.Show();
             this.Hide();
+        }
+
+        private void PreviewTextInputOnlyNumbers(object sender, TextCompositionEventArgs e)
+        { 
+            validar.SoloNumeros(e);
         }
 
         protected override void OnClosing(System.ComponentModel.CancelEventArgs e)

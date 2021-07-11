@@ -21,12 +21,13 @@ namespace SistemaDental
     /// </summary>
     public partial class Tratamiento : Window
     {
-        Validaciones validaciones = new Validaciones();
+        
         ClaseTratamiento tratamiento = new ClaseTratamiento();
         DateTime DateTime = new DateTime();
         private bool Admin;
         private String Nombree;
         int cant_anterior = 0;
+        Validaciones validar = new Validaciones();
         public Tratamiento()
         {
             InitializeComponent();
@@ -113,7 +114,7 @@ namespace SistemaDental
             
             try
             {
-                if (dg_materiales.SelectedValue != null || validaciones.VerificarCampos(this) )
+                if (dg_materiales.SelectedValue != null || validar.VerificarCampos(this) )
                 {
 
                     txtCantidad.IsEnabled = true;
@@ -138,7 +139,7 @@ namespace SistemaDental
         {
             try
             {
-                if (validaciones.VerificarCantidad(Convert.ToDouble(txtCantidad.Text)))
+                if (validar.VerificarCantidad(Convert.ToDouble(txtCantidad.Text)))
                 {
                     foreach (ClaseTratamiento tratamientos in dg_materiales.ItemsSource)
                     {
@@ -198,11 +199,12 @@ namespace SistemaDental
 
         }
 
-        private void txtCantidad_TextChanged(object sender, TextChangedEventArgs e)
-        {
+        private void PreviewTextInputOnlyNumbers(object sender, TextCompositionEventArgs e)
+        { 
 
+            validar.SoloNumeros(e);
         }
-  
+
         private void TratamientoWindow_Closed(object sender, EventArgs e)
                 {
                     Menu menu = new Menu();

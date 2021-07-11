@@ -24,7 +24,7 @@ namespace SistemaDental
   
     public partial class VerPaciente : Window
     {
-        Validaciones validaciones = new Validaciones();
+        Validaciones validar = new Validaciones();
         //Creacion de un objeto de tipo ClasePaciente
         private ClasePaciente unPaciente = new ClasePaciente();
 
@@ -176,7 +176,7 @@ namespace SistemaDental
             try
             {
                 
-                if (validaciones.VerificarCampos(this))
+                if (validar.VerificarCampos(this))
                 {
                     obtenerValores();
                     unPaciente.ActualizarDatosPaciente(unPaciente);
@@ -232,26 +232,21 @@ namespace SistemaDental
             this.Close();
         }
 
-        private void txtNombre_TextChanged(object sender, TextChangedEventArgs e)
+     
+        private void PreviewTextInputOnlyLetters(object sender, TextCompositionEventArgs e)
         {
-            Regex reg = new Regex("[0-9]");
-            bool b = reg.IsMatch(txtNombre.Text);
-            if (b == true)
-            {
-                MessageBox.Show("Ingrese solamente caracteres");
-                txtNombre.Text = "";
-            }
-            
+
+            validar.SoloLetras(e);
+
         }
 
-        private void AddPaciente_Loaded(object sender, RoutedEventArgs e)
+
+        private void PreviewTextInputOnlyNumbers(object sender, TextCompositionEventArgs e)
         {
-               Regex reg = new Regex("[0-9]");
-            bool b = reg.IsMatch(txtNombre.Text);
-            if (b == false)
-            {
-               
-            }
+
+
+            validar.SoloNumeros(e);
         }
+      
     }
 }

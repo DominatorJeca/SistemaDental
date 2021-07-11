@@ -20,7 +20,7 @@ namespace SistemaDental
 
         public Validaciones() { }
 
-        public static void SoloLetras(TextCompositionEventArgs e)
+        public void SoloLetras(TextCompositionEventArgs e)
         {
             int character = Convert.ToInt32(Convert.ToChar(e.Text));
             if ((character >= 65 && character <= 90) || (character >= 97 && character <= 122))
@@ -29,7 +29,7 @@ namespace SistemaDental
                 e.Handled = true;
         }
 
-        public static void SoloNumeros(TextCompositionEventArgs e)
+        public void SoloNumeros(TextCompositionEventArgs e)
         {
             int character = Convert.ToInt32(Convert.ToChar(e.Text));
             if (character >= 48 && character <= 57)
@@ -38,7 +38,7 @@ namespace SistemaDental
                 e.Handled = true;
         }
 
-        public static bool ValidarEmail(string email)
+        public bool ValidarEmail(string email)
         {
             Regex regex = new Regex(@"^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$");
             return regex.IsMatch(email);

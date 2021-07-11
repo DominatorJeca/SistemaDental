@@ -26,6 +26,8 @@ namespace SistemaDental
         private bool Admin;
         private String Nombree;
 
+        Validaciones validar = new Validaciones();
+
         //constructores
         public EditarUsuario()
         {
@@ -34,7 +36,7 @@ namespace SistemaDental
             MostrarPuesto();
 
         }
-       Validaciones validar = new Validaciones();
+      
         public EditarUsuario(bool admin, string name)
         {
             InitializeComponent();
@@ -93,7 +95,7 @@ namespace SistemaDental
         /// <returns>Verificacion de valores</returns>
         private bool VerificarValores()
         {
-            Validaciones validar = new Validaciones();
+            
             if (txtEditarApellido.Text == string.Empty || txtEditarNombre.Text == string.Empty || txtEditarCorreo.Text == string.Empty
                  || txtEditarTelefono.Text == string.Empty || txtNuevaContra.Text == string.Empty)
             {
@@ -254,16 +256,16 @@ namespace SistemaDental
 
         private void PreviewTextInputOnlyLetters(object sender, TextCompositionEventArgs e)
         {
-            Validaciones val = new Validaciones();
+            
 
-            val.SoloLetras(e);
+            validar.SoloLetras(e);
 
         }
 
 
         private void PreviewTextInputOnlyNumbers(object sender, TextCompositionEventArgs e)
         {
-           Validaciones validar = new Validaciones();
+           
 
             validar.SoloNumeros(e);
         }

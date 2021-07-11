@@ -29,7 +29,7 @@ namespace SistemaDental
         private bool Admin;
         private String Nombree;
         private ClaseCaja caja = new ClaseCaja();
-        
+        Validaciones validar = new Validaciones();
         public Caja()
         {
             InitializeComponent();
@@ -88,9 +88,6 @@ namespace SistemaDental
             private bool VerificarValores()
             {
 
-            Regex reg = new Regex("[0-9]");
-            bool b = reg.IsMatch(txtCantidadCaja.Text);
-
             if (txtCantidadCaja.Text == string.Empty || txtDineroCaja.Text == string.Empty)
              {
                     MessageBox.Show("Por favor ingrese la cantidad de dinero para realizar su transaccion");
@@ -100,11 +97,7 @@ namespace SistemaDental
             {          
                     return false;
             }
-            else if (b == false)
-            {
-                MessageBox.Show("No se aceptan letras en el campo de cantidad");
-                return false;
-            }
+            
             else if ((float)Convert.ToDecimal(txtCantidadCaja.Text) >= (float)Convert.ToDecimal(txtDineroCaja.Text) && rbEgreso.IsChecked == true)
             {
                    MessageBox.Show("No hay suficiente fondo");
@@ -184,7 +177,11 @@ namespace SistemaDental
         {
 
         }
+        private void PreviewTextInputOnlyNumbers(object sender, TextCompositionEventArgs e)
+        {
 
+            validar.SoloNumeros(e);
+        }
         private void frmcaja_Closed(object sender, EventArgs e)
         {
             Menu menu = new Menu(Admin, Nombree);
