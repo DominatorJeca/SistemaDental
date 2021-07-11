@@ -72,7 +72,8 @@ namespace SistemaDental
             catch (Exception ex)
             {
 
-                MessageBox.Show("Ocurrio un error al momento de realizar la consulta");
+                MessageBox.Show("Ocurrio un error al momento de realizar la consulta"+ex);
+
                 Console.WriteLine(ex.Message);
             }
         }
