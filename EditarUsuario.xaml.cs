@@ -257,22 +257,16 @@ namespace SistemaDental
 
         private void PreviewTextInputOnlyLetters(object sender, TextCompositionEventArgs e)
         {
-            int character = Convert.ToInt32(Convert.ToChar(e.Text));
-            if ((character >= 65 && character <= 90) || (character >= 97 && character <= 122))
-                e.Handled = false;
-            else
-                e.Handled = true;
+            Validaciones validar = new Validaciones();
+            validar.SoloLetras(e);
 
         }
 
 
         private void PreviewTextInputOnlyNumbers(object sender, TextCompositionEventArgs e)
         {
-            int character = Convert.ToInt32(Convert.ToChar(e.Text));
-            if (character >= 48 && character <= 57)
-                e.Handled = false;
-            else
-                e.Handled = true;
+            Validaciones validar = new Validaciones();
+            validar.SoloNumeros(e);
         }
 
         private void Window_Closed(object sender, EventArgs e)
@@ -281,5 +275,7 @@ namespace SistemaDental
             Ajustes ajustes = new Ajustes(Admin, Nombree);
             ajustes.Show();
         }
+
+      
     }
 }

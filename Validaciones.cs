@@ -6,6 +6,11 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
+using System.Text.RegularExpressions;
+using System.Windows.Input;
+
+
+//using System.Windows.Forms;
 
 
 namespace SistemaDental
@@ -14,6 +19,24 @@ namespace SistemaDental
     {
 
         public Validaciones() { }
+
+        public static void SoloLetras(TextCompositionEventArgs e)
+        {
+            int character = Convert.ToInt32(Convert.ToChar(e.Text));
+            if ((character >= 65 && character <= 90) || (character >= 97 && character <= 122))
+                e.Handled = false;
+            else
+                e.Handled = true;
+        }
+
+        public static void SoloNumeros(TextCompositionEventArgs e)
+        {
+            int character = Convert.ToInt32(Convert.ToChar(e.Text));
+            if (character >= 48 && character <= 57)
+                e.Handled = false;
+            else
+                e.Handled = true;
+        }
 
         public static IEnumerable<T> FindVisualChildren<T>(DependencyObject depObj) where T : DependencyObject
         {
