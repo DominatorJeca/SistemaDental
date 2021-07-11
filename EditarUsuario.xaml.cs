@@ -34,7 +34,7 @@ namespace SistemaDental
             MostrarPuesto();
 
         }
-
+       Validaciones validar = new Validaciones();
         public EditarUsuario(bool admin, string name)
         {
             InitializeComponent();
@@ -85,11 +85,7 @@ namespace SistemaDental
             usuario.Administrador = false;
         }
 
-        public static bool ValidarEmail(string email)
-        {
-            Regex regex = new Regex(@"^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$");
-            return regex.IsMatch(email);
-        }
+      
 
         /// <summary>
         /// Verifica que los valores de los textbox y combobox no esten vacios
@@ -97,6 +93,7 @@ namespace SistemaDental
         /// <returns>Verificacion de valores</returns>
         private bool VerificarValores()
         {
+            Validaciones validar = new Validaciones();
             if (txtEditarApellido.Text == string.Empty || txtEditarNombre.Text == string.Empty || txtEditarCorreo.Text == string.Empty
                  || txtEditarTelefono.Text == string.Empty || txtNuevaContra.Text == string.Empty)
             {
@@ -108,7 +105,7 @@ namespace SistemaDental
                 MessageBox.Show("Por favor selecciona el Sexo del empleado");
                 return false;
             }
-            else if (!ValidarEmail(txtEditarCorreo.Text) )
+            else if (!validar.ValidarEmail(txtEditarCorreo.Text) )
             {
                 MessageBox.Show("Por favor, ingrese un correo valido");
                 return false;
@@ -257,15 +254,17 @@ namespace SistemaDental
 
         private void PreviewTextInputOnlyLetters(object sender, TextCompositionEventArgs e)
         {
-            Validaciones validar = new Validaciones();
-            validar.SoloLetras(e);
+            Validaciones val = new Validaciones();
+
+            val.SoloLetras(e);
 
         }
 
 
         private void PreviewTextInputOnlyNumbers(object sender, TextCompositionEventArgs e)
         {
-            Validaciones validar = new Validaciones();
+           Validaciones validar = new Validaciones();
+
             validar.SoloNumeros(e);
         }
 

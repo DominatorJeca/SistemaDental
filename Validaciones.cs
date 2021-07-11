@@ -15,7 +15,7 @@ using System.Windows.Input;
 
 namespace SistemaDental
 {
-    class Validaciones
+    public class Validaciones
     {
 
         public Validaciones() { }
@@ -36,6 +36,12 @@ namespace SistemaDental
                 e.Handled = false;
             else
                 e.Handled = true;
+        }
+
+        public static bool ValidarEmail(string email)
+        {
+            Regex regex = new Regex(@"^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$");
+            return regex.IsMatch(email);
         }
 
         public static IEnumerable<T> FindVisualChildren<T>(DependencyObject depObj) where T : DependencyObject
