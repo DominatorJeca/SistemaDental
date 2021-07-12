@@ -21,12 +21,14 @@ namespace SistemaDental
     /// </summary>
     public partial class Tratamiento : Window
     {
+        
         ClaseTratamiento tratamiento = new ClaseTratamiento();
         Procedimientos proc= new Procedimientos();
         DateTime DateTime = new DateTime();
         private bool Admin;
         private String Nombree;
         int cant_anterior = 0;
+        Validaciones validar = new Validaciones();
         public Tratamiento()
         {
             InitializeComponent();
@@ -76,10 +78,9 @@ namespace SistemaDental
 
         private void btnRealizar_Click(object sender, RoutedEventArgs e)
         {
-            
             try
             {
-                if (Convert.ToInt32(cmbTratamiento.SelectedValue) > 0 && Convert.ToString(cmbPaciente.SelectedValue) != " " && Convert.ToInt32(txtCantidad.ToString())>=0)
+                if (Convert.ToInt32(cmbTratamiento.SelectedValue) > 0 && Convert.ToString(cmbPaciente.SelectedValue) != " ")
                 {
                     ObtenerValores();
                     proc.IngresarAlHistorial(tratamiento);
@@ -110,14 +111,11 @@ namespace SistemaDental
 
         private void btnEditar_Click(object sender, RoutedEventArgs e)
         {
-              cant_anterior = Convert.ToInt32(txtCantidad.Text);
+
+            
             try
             {
-                if (dg_materiales.SelectedValue == null || cmbTratamiento.SelectedValue == null )
-                {
-                    MessageBox.Show("Seleccione un tratamiento y un material para poder ser editado");
-                }
-                else
+                if (dg_materiales.SelectedValue != null || validar.VerificarCampos(this) )
                 {
 
                     txtCantidad.IsEnabled = true;
@@ -126,6 +124,10 @@ namespace SistemaDental
                     btnEditar.IsEnabled = false;
                     btnRealizar.IsEnabled = false;
                     cmbTratamiento.IsEnabled = false;
+                }
+                else
+                {
+                    MessageBox.Show("Seleccione un tratamiento y un material para poder ser editado");
                 }
             }
             catch(Exception ex)
@@ -138,19 +140,26 @@ namespace SistemaDental
         {
             try
             {
-                foreach (ClaseTratamiento tratamientos in dg_materiales.ItemsSource)
+                if (validar.VerificarCantidad(Convert.ToDouble(txtCantidad.Text)))
                 {
-                    if (tratamiento.NombreMaterial == dg_materiales.SelectedValue.ToString() && Convert.ToInt32(txtCantidad.Text) <= Convert.ToInt32(tratamientos.Cantidad.ToString()))
+                    foreach (ClaseTratamiento tratamientos in dg_materiales.ItemsSource)
                     {
-                        tratamiento.Cantidad = Convert.ToInt32(tratamientos.Cantidad.ToString());
-                   
+                        if (tratamiento.NombreMaterial == dg_materiales.SelectedValue.ToString() && Convert.ToInt32(txtCantidad.Text) <= Convert.ToInt32(tratamientos.Cantidad.ToString()))
+                        {
+                            tratamiento.Cantidad = Convert.ToInt32(tratamientos.Cantidad.ToString());
+                        }
+                        else
+                        {
+                            MessageBox.Show("Valor mayor a la cantidad actual");
+                           txtCantidad.Text = cant_anterior.ToString();
+                           break;
+                        }
                     }
-                    else
-                    {
-                        MessageBox.Show("Valor mayor a la cantidad actual");
-                        txtCantidad.Text = cant_anterior.ToString();
-                        break;
-                    }
+                }
+                else
+                {
+                    MessageBox.Show("No ingrese valores menores que 0");
+                    MostrarMateriales();
                 }
                 
             }
@@ -191,11 +200,12 @@ namespace SistemaDental
 
         }
 
-        private void txtCantidad_TextChanged(object sender, TextChangedEventArgs e)
-        {
+        private void PreviewTextInputOnlyNumbers(object sender, TextCompositionEventArgs e)
+        { 
 
+            validar.SoloNumeros(e);
         }
-  
+
         private void TratamientoWindow_Closed(object sender, EventArgs e)
                 {
                     Menu menu = new Menu();

@@ -16,13 +16,13 @@
             <ImageBrush ImageSource="TeethPattern.jpg" Stretch="UniformToFill"/>
         </Grid.Background>
         <Button x:Name="btnRegresar" Content="Regresar" HorizontalAlignment="Left" Margin="17,10,0,0" VerticalAlignment="Top" Width="103" FontFamily="Bahnschrift" FontSize="16" Background="#FF056676" Click="btnRegresar_Click" BorderBrush="{x:Null}"/>
-        <TextBox x:Name="txtAgregarNombre" Margin="67,168,270.4,210" materialDesign:HintAssist.Hint="Nombre" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontFamily="Bahnschrift" FontSize="12" Background="#7FFFFFFF"/>
-        <TextBox x:Name="txtAgregarApellido" Margin="68,210,269.4,171" materialDesign:HintAssist.Hint="Apellido" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontFamily="Bahnschrift" FontSize="12" Background="#7FFFFFFF"/>
+        <TextBox x:Name="txtAgregarNombre" PreviewTextInput="PreviewTextInputOnlyLetters" Margin="67,168,270.4,210" materialDesign:HintAssist.Hint="Nombre" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontFamily="Bahnschrift" FontSize="12" Background="#7FFFFFFF"/>
+        <TextBox x:Name="txtAgregarApellido" PreviewTextInput="PreviewTextInputOnlyLetters" Margin="68,210,269.4,171" materialDesign:HintAssist.Hint="Apellido" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontFamily="Bahnschrift" FontSize="12" Background="#7FFFFFFF"/>
         <TextBox x:Name="txtAgregarTelefono" Margin="68,249,269.4,131" materialDesign:HintAssist.Hint="Telefóno" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontFamily="Bahnschrift" FontSize="12" Background="#7FFFFFFF"
-                 PreviewTextInput="txtAgregarTelefono_PreviewTextInput" MaxLength="15"/>
+                PreviewTextInput="PreviewTextInputOnlyNumbers" MaxLength="15"/>
         
         <TextBox x:Name="txtAgregarIdentidad" Margin="68,294,269.4,85" materialDesign:HintAssist.Hint="Identidad" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontFamily="Bahnschrift" FontSize="12" Background="#7FFFFFFF"
-                 PreviewTextInput="txtAgregarIdentidad_PreviewTextInput" MaxLength="13"/>
+                PreviewTextInput="PreviewTextInputOnlyNumbers" MaxLength="13"/>
         <TextBox x:Name="txtAgregarCorreo" Margin="468,167,43.6,211" materialDesign:HintAssist.Hint="Correo" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontFamily="Bahnschrift" FontSize="12" Background="#7FFFFFFF" Grid.ColumnSpan="2"
                  MaxLength="50"/>
         <TextBox x:Name="txtConfirmarCorreo" Margin="468,209,43.6,172" materialDesign:HintAssist.Hint="Confirmar Correo" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontFamily="Bahnschrift" FontSize="12" Background="#7FFFFFFF" Grid.ColumnSpan="2"

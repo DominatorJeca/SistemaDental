@@ -12,10 +12,10 @@
             <ImageBrush ImageSource="TeethPattern.jpg" Stretch="UniformToFill"/>
         </Grid.Background>
         <Button x:Name="btnRegresar" Content="Regresar" HorizontalAlignment="Left" Margin="17,10,0,0" VerticalAlignment="Top" Width="103" FontFamily="Bahnschrift" FontSize="16" Background="#FF056676" Click="btnRegresar_Click" BorderBrush="{x:Null}" />
-        <TextBox x:Name="txtAgregarNombre" Margin="180,51,332,328" materialDesign:HintAssist.Hint="Nombre" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontFamily="Bahnschrift" FontSize="12" Background="#7FFFFFFF" TextChanged="txtAgregarNombre_TextChanged"/>
-        <TextBox x:Name="txtAgregarApellido" Margin="180,96,332,283" materialDesign:HintAssist.Hint="Apellido" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontFamily="Bahnschrift" FontSize="12" Background="#7FFFFFFF" TextChanged="txtAgregarApellido_TextChanged"/>
-        <TextBox x:Name="txtAgregarTelefono" Margin="180,136,332,241" materialDesign:HintAssist.Hint="Telefóno" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontFamily="Bahnschrift" FontSize="12" Background="#7FFFFFFF"/>
-        <TextBox x:Name="txtAgregarIdentidad" Margin="180,178,332,199" materialDesign:HintAssist.Hint="Identidad" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontFamily="Bahnschrift" FontSize="12" Background="#7FFFFFFF"/>
+        <TextBox x:Name="txtAgregarNombre" PreviewTextInput="PreviewTextInputOnlyLetters" Margin="180,51,332,328" materialDesign:HintAssist.Hint="Nombre" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontFamily="Bahnschrift" FontSize="12" Background="#7FFFFFFF" />
+        <TextBox x:Name="txtAgregarApellido" PreviewTextInput="PreviewTextInputOnlyLetters" Margin="180,96,332,283" materialDesign:HintAssist.Hint="Apellido" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontFamily="Bahnschrift" FontSize="12" Background="#7FFFFFFF" />
+        <TextBox x:Name="txtAgregarTelefono" PreviewTextInput="PreviewTextInputOnlyNumbers" Margin="180,136,332,241" materialDesign:HintAssist.Hint="Telefóno" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontFamily="Bahnschrift" FontSize="12" Background="#7FFFFFFF"/>
+        <TextBox x:Name="txtAgregarIdentidad" PreviewTextInput="PreviewTextInputOnlyNumbers" Margin="180,178,332,199" materialDesign:HintAssist.Hint="Identidad" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontFamily="Bahnschrift" FontSize="12" Background="#7FFFFFFF"/>
         <DatePicker Height="33" HorizontalAlignment="Left" Margin="178,238,0,0" materialDesign:HintAssist.Hint="Fecha de Nacimiento" Name="datePicker1" VerticalAlignment="Top" Width="284" Style="{StaticResource MaterialDesignFloatingHintDatePicker}" FontFamily="Bahnschrift" FontSize="12" Background="#7FFFFFFF"/>
         
 

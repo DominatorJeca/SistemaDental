@@ -30,9 +30,11 @@ namespace SistemaDental
     public partial class Inventario : Window
     {
         ClaseInventario inventario = new ClaseInventario();
+        
         private bool Admin;
         private String Nombree;
 
+        Validaciones validar = new Validaciones();
         public Inventario()
         {
             InitializeComponent();
@@ -67,7 +69,7 @@ namespace SistemaDental
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            if (dgv_Materiales.SelectedValue != null)
+            if (validar.VerificarCampos(this))
             {
                 txtCantidadInventario.IsEnabled = true;
                 btnGuardar.IsEnabled = true;
@@ -90,12 +92,12 @@ namespace SistemaDental
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
             
-            if (Convert.ToInt32(dgv_Materiales.SelectedValue) > 0)
+            if (validar.VerificarCampos(this))
             {
 
                 try
                 {
-                    if (Convert.ToInt32(txtCantidadInventario.Text) >= 1)
+                    if (validar.VerificarCantidad(Convert.ToDouble(txtCantidadInventario.Text))) 
                     {
                         ObtenerValores();
                         inventario.actualizarCantidad(inventario);
@@ -146,6 +148,11 @@ namespace SistemaDental
             Menu menu = new Menu(Admin,Nombree);
             menu.Show();
             this.Hide();
+        }
+
+        private void PreviewTextInputOnlyNumbers(object sender, TextCompositionEventArgs e)
+        { 
+            validar.SoloNumeros(e);
         }
 
         protected override void OnClosing(System.ComponentModel.CancelEventArgs e)
