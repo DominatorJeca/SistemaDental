@@ -11,10 +11,9 @@ namespace SistemaDental
 {
     public class Puesto
     {
-
+        Procedimientos proce = new Procedimientos();
         //variable miembro
-        private static string connectionString = ConfigurationManager.ConnectionStrings["SistemaDental.Properties.Settings.ClinicaBDConnection"].ConnectionString;
-        private SqlConnection sqlConnection = new SqlConnection(connectionString);
+
 
         //Propiedades
         public int Id { get; set; }
@@ -34,73 +33,13 @@ namespace SistemaDental
         /// <returns>Lista de todos los datos de los puestos</returns>
         public List<Puesto> MostrarPuestos()
         {
-            // Inicializar una lista vacía de puestos
-            List<Puesto> puestos = new List<Puesto>();
-           
-
-            try
-            {
-                sqlConnection.Open();
-                //crear el comando SQL
-                SqlCommand sqlCommand = new SqlCommand("MostrarPuesto", sqlConnection);
-
-                sqlCommand.CommandType = CommandType.StoredProcedure;
-
-                // Obtener los datos de los puestos
-                using (SqlDataReader rdr = sqlCommand.ExecuteReader())
-                {
-                    while (rdr.Read())
-                        puestos.Add(new Puesto { Id = Convert.ToInt32(rdr["id_puesto"]), NombrePuesto = rdr["nombrePuesto"].ToString()});
-                }
-
-                return puestos;
-            }
-            catch (Exception e)
-            {
-                throw e;
-            }
-            finally
-            {
-                // Cerrar la conexión
-                sqlConnection.Close();
-            }
+            return proce.MostrarPuestos();
 
         }
 
         public string MostrarPuesto(int id)
         {
-            // Inicializar una lista vacía de puestos
-            string puesto;
-
-
-            try
-            {
-                sqlConnection.Open();
-                //crear el comando SQL
-                SqlCommand sqlCommand = new SqlCommand("MostrarUnPuesto", sqlConnection);
-
-                sqlCommand.CommandType = CommandType.StoredProcedure;
-                sqlCommand.Parameters.AddWithValue("@id", id);
-
-                // Obtener los datos de los puestos
-                using (SqlDataReader rdr = sqlCommand.ExecuteReader())
-                {
-                    rdr.Read();
-                      
-                    puesto = rdr["nombrePuesto"].ToString();
-                }
-
-                return puesto;
-            }
-            catch (Exception e)
-            {
-                throw e;
-            }
-            finally
-            {
-                // Cerrar la conexión
-                sqlConnection.Close();
-            }
+            return proce.MostrarPuesto(id);
 
         }
     }

@@ -166,7 +166,7 @@ namespace SistemaDental
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show("Ha ocurrido un error al momento de insertar el empleado...");
+                    MessageBox.Show("Ha ocurrido un error al momento de insertar el empleado..."+ex);
                     Console.WriteLine(ex.Message);
                 }
               
