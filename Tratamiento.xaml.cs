@@ -22,6 +22,7 @@ namespace SistemaDental
     public partial class Tratamiento : Window
     {
         ClaseTratamiento tratamiento = new ClaseTratamiento();
+        Procedimientos proc= new Procedimientos();
         DateTime DateTime = new DateTime();
         private bool Admin;
         private String Nombree;
@@ -43,21 +44,21 @@ namespace SistemaDental
 
         public void MostrarTratamientos()
         {
-            cmbTratamiento.ItemsSource = tratamiento.mostrarTratamientos();
+            cmbTratamiento.ItemsSource = proc.mostrarTratamientos();
             cmbTratamiento.DisplayMemberPath = "NombreTratamiento";
             cmbTratamiento.SelectedValuePath = "IdTratamiento";
         }
 
         public void MostrarPacientes()
         {
-            cmbPaciente.ItemsSource = tratamiento.mostrarIdPacientes();
+            cmbPaciente.ItemsSource = proc.mostrarIdPacientes();
             cmbPaciente.DisplayMemberPath = "IdPaciente";
             cmbPaciente.SelectedValuePath = "IdPaciente";
         }
 
         public void MostrarMateriales()
         {
-            dg_materiales.ItemsSource = tratamiento.mostrarMateriales(Convert.ToInt32(cmbTratamiento.SelectedValue));
+            dg_materiales.ItemsSource = proc.mostrarMateriales(Convert.ToInt32(cmbTratamiento.SelectedValue));
             dg_materiales.SelectedValuePath = "NombreMaterial";
         }
 
@@ -81,12 +82,12 @@ namespace SistemaDental
                 if (Convert.ToInt32(cmbTratamiento.SelectedValue) > 0 && Convert.ToString(cmbPaciente.SelectedValue) != " " && Convert.ToInt32(txtCantidad.ToString())>=0)
                 {
                     ObtenerValores();
-                    tratamiento.IngresarAlHistorial(tratamiento);
+                    proc.IngresarAlHistorial(tratamiento);
                     foreach (ClaseTratamiento tratamientos in dg_materiales.ItemsSource)
                     {
                         tratamiento.Cantidad=Convert.ToInt32(tratamientos.Cantidad.ToString());
                         tratamiento.NombreMaterial = tratamientos.NombreMaterial.ToString();
-                        tratamiento.ActualizarMaterialDisponible(tratamiento);
+                        proc.ActualizarMaterialDisponible(tratamiento);
                     }
                     MessageBox.Show("Ingreso al historial fue un éxito");
                 }
