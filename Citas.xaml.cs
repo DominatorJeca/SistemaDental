@@ -279,7 +279,7 @@ namespace SistemaDental
         /// <param name="sender"></param>
         /// <param name="e"></param>
 
-        private void btnBorrar_Click(object sender, RoutedEventArgs e)
+        /*private void btnBorrar_Click(object sender, RoutedEventArgs e)
         {
             try
             {
@@ -305,7 +305,7 @@ namespace SistemaDental
             {
                 mostrarCitas();
             }
-        }
+        }*/
 
         private void btnCancelar_Click(object sender, RoutedEventArgs e)
         {
