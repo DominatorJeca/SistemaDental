@@ -85,6 +85,13 @@ namespace SistemaDental
                 if (tb.SelectedValue==null)
                     band = false;
             }
+
+            foreach (var tb in FindVisualChildren<RadioButton>(window))
+            {
+                if (tb.IsChecked == false)
+                    band = false;
+            }
+
             return band;
         }
 

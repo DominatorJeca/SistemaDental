@@ -25,7 +25,8 @@ namespace SistemaDental
     /// </summary>
     public partial class Caja : Window
     {
-        private bool bandera;
+        
+        Validaciones validaciones = new Validaciones();
         private bool Admin;
         private String Nombree;
         private ClaseCaja caja = new ClaseCaja();
@@ -88,15 +89,12 @@ namespace SistemaDental
             private bool VerificarValores()
             {
 
-            if (txtCantidadCaja.Text == string.Empty || txtDineroCaja.Text == string.Empty)
+            if (validaciones.VerificarCampos(this))
              {
-                    MessageBox.Show("Por favor ingrese la cantidad de dinero para realizar su transaccion");
+                    MessageBox.Show("Por favor ingrese la cantidad de dinero para realizar su transaccion y elija una opción");
                     return false;
              } 
-            else if(rbIngreso.IsChecked == false && rbEgreso.IsChecked == false)
-            {          
-                    return false;
-            }
+           
             
             else if ((float)Convert.ToDecimal(txtCantidadCaja.Text) >= (float)Convert.ToDecimal(txtDineroCaja.Text) && rbEgreso.IsChecked == true)
             {
