@@ -28,6 +28,7 @@ namespace SistemaDental
         Validaciones validaciones = new Validaciones();
         bool Admin;
         String Nombree;
+        private Procedimientos proc = new Procedimientos();
 
         //Variable para definir el genero seleccionado por el radio boton
         ClasePaciente paciente = new ClasePaciente();
@@ -95,7 +96,7 @@ namespace SistemaDental
                 try
                 {
                     ObtenerValores();
-                    paciente.AgregarPaciente(paciente);
+                    proc.AgregarPaciente(paciente);
                     MessageBox.Show("Datos ingresados correctamente.");
                     Limpiar();
 

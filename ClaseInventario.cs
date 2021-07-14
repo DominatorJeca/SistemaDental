@@ -27,20 +27,6 @@ namespace SistemaDental
 
         }
 
-        public List<ClaseInventario> MostrarInventario()
-        {
-            return proc.InventarioMostrarInventario();
-        }
-
-        
-        public DataTable mostrarUsoTratamiento(int idmaterial)
-        {
-            return proc.InventarioMostrarUsoTratamiento(idmaterial);
-        }
-
-        public void actualizarCantidad(ClaseInventario inventario)
-        {
-            proc.InventarioActualizarCantidad(inventario);
-        }
+   
     }
 }

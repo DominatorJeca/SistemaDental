@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:SistemaDental"
         mc:Ignorable="d"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-        Title="Ver Paciente" Height="450" Width="800" ResizeMode="CanMinimize" Closed="AddPaciente_Closed" Loaded="AddPaciente_Loaded" >
+        Title="Ver Paciente" Height="450" Width="800" ResizeMode="CanMinimize" Closed="AddPaciente_Closed" >
 
     <Window.Background>
         <ImageBrush ImageSource="TeethPattern.jpg" Stretch="UniformToFill"/>
@@ -17,7 +17,7 @@
             <ColumnDefinition Width="65*"/>
         </Grid.ColumnDefinitions>
         <Button x:Name="btnRegresar" Content="Regresar" HorizontalAlignment="Left" Margin="17,10,0,0" VerticalAlignment="Top" Width="103" FontFamily="Bahnschrift" FontSize="16" Background="#FF056676" Click="btnRegresar_Click" BorderBrush="{x:Null}" Grid.ColumnSpan="2"/>
-        <TextBox x:Name="txtNombre"  PreviewTextInput="PreviewTextInputOnlyLetters" Margin="7,66,428,309" materialDesign:HintAssist.Hint="Nombre" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontFamily="Bahnschrift" FontSize="12" Background="#7FFFFFFF" Text="{Binding ElementName=cmbPaciente,Path=SelectedItem.NombrePaciente}" Grid.Column="1" TextChanged="txtNombre_TextChanged"/>
+        <TextBox x:Name="txtNombre"  PreviewTextInput="PreviewTextInputOnlyLetters" Margin="7,66,428,309" materialDesign:HintAssist.Hint="Nombre" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontFamily="Bahnschrift" FontSize="12" Background="#7FFFFFFF" Text="{Binding ElementName=cmbPaciente,Path=SelectedItem.NombrePaciente}" Grid.Column="1" />
         <TextBox x:Name="txtApellido"  PreviewTextInput="PreviewTextInputOnlyLetters" Margin="7,116,428,259" materialDesign:HintAssist.Hint="Apellido" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontFamily="Bahnschrift" FontSize="12" Background="#7FFFFFFF" Text="{Binding ElementName=cmbPaciente,Path=SelectedItem.ApellidoPaciente}" Grid.Column="1"/>
         <TextBox x:Name="txtTelefono" PreviewTextInput="PreviewTextInputOnlyNumbers" Margin="350,64,85,309" materialDesign:HintAssist.Hint="Telefóno" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontFamily="Bahnschrift" FontSize="12" Background="#7FFFFFFF" Text="{Binding ElementName=cmbPaciente,Path=SelectedItem.Telefono}" Grid.Column="1"/>
         <TextBox x:Name="txtEdad" Margin="350,114,246,259" materialDesign:HintAssist.Hint="Edad" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontFamily="Bahnschrift" IsEnabled="False" FontSize="12" Background="#7FFFFFFF" Text="{Binding ElementName=cmbPaciente,Path=SelectedItem.Edad}" Grid.Column="1"/>

@@ -31,16 +31,6 @@ namespace SistemaDental
         /// Mostrar los puestos
         /// </summary>
         /// <returns>Lista de todos los datos de los puestos</returns>
-        public List<Puesto> MostrarPuestos()
-        {
-            return proce.MostrarPuestos();
-
-        }
-
-        public string MostrarPuesto(int id)
-        {
-            return proce.MostrarPuesto(id);
-
-        }
+     
     }
 }

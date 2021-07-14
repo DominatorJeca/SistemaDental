@@ -26,6 +26,7 @@ namespace SistemaDental
         private Puesto puesto = new Puesto();
         private bool Admin;
         private String Nombree;
+        private Procedimientos proc = new Procedimientos();
 
         //Contructores
         public AgregarUsuario()
@@ -60,7 +61,7 @@ namespace SistemaDental
         /// </summary>
         public void MostrarPuesto()
         {
-            cmbPuesto.ItemsSource = puesto.MostrarPuestos();
+            cmbPuesto.ItemsSource = proc.MostrarPuestos();
             cmbPuesto.SelectedValuePath = "Id";
             cmbPuesto.DisplayMemberPath = "NombrePuesto";
         }
@@ -158,8 +159,8 @@ namespace SistemaDental
                     // Obtener los valores para el empleado
                     ObtenerValores();
 
-                    // Insertar los datos del usuario 
-                    usuario.IngresarUsuario(usuario);
+                // Insertar los datos del usuario 
+                proc.IngresarUsuario(usuario);
 
                     // Mensaje de inserción exitosa
                     MessageBox.Show("¡Datos insertados correctamente!");

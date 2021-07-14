@@ -14,8 +14,6 @@ namespace SistemaDental
 
         //variable miembro
         Procedimientos proc = new Procedimientos();
-        private static string connectionString = ConfigurationManager.ConnectionStrings["SistemaDental.Properties.Settings.ClinicaBDConnection"].ConnectionString;
-        private SqlConnection sqlConnection = new SqlConnection(connectionString);
 
         //Propiedad para extraer todos los ID almacenados en la BD
         public string Id_paciente { get; set; }
@@ -50,32 +48,7 @@ namespace SistemaDental
         /// Metodo para mostrar los pacientes existentes
         /// </summary>
         /// <returns>Lista de todos los datos de los pacientes</returns>
-        public List<ClasePaciente> MostrarPacientes()
-        {
-            return proc.MostrarPacientes();
-        }
-
-
-        /// <summary>
-        /// Metodo para actualizar los datos del paciente seleccionado
-        /// </summary>
-        /// <returns>Lista de todos los datos de los pacientes</returns>
-        public void ActualizarDatosPaciente(ClasePaciente paciente)
-        {
-            proc.ActualizarDatosPaciente(paciente);
-
-            
-        }
-
-        public List<ClasePaciente> MostrarHistorial(ClasePaciente paciente)
-        {
-            return proc.MostrarHistorial(paciente);
-        }
-
-        public void AgregarPaciente( ClasePaciente paciente)
-        {
-            proc.AgregarPaciente(paciente);
-        }
+      
 
     }
 }

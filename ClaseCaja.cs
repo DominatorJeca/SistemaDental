@@ -43,16 +43,7 @@ namespace SistemaDental
 
         }
 
-        public List<ClaseCaja> MostrarCaja()
-        {
-            return proc.MostrarCaja();
-        }
-
-
-        public void IngresarCaja(ClaseCaja caja)
-        {
-           proc.IngresarCaja(caja);
-        }
+      
 
     }
 

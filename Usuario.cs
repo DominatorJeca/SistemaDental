@@ -65,46 +65,6 @@ namespace SistemaDental
         /// </summary>
         /// <param name="id">Identificacion de usuario</param>
         /// <returns>Datos del usuario</returns>
-        public Usuario BuscarUsuario(string id)
-        {
-            return proc.BuscarUsuario(id);
-        }
-        public void IngresarUsuario(Usuario usuario)
-        {
-            proc.IngresarUsuario(usuario);
-        }
-
-        public void EditarUsuario(Usuario usuario)
-        {
-             proc.EditarUsuario(usuario);
-        }
-   
-        public void EliminarUsuario(string idUsuario)
-        {
-             proc.EliminarUsuario(idUsuario);
-
-        }
-
-        public void RestaurarUsuario(string idUsuario)
-        {
-             proc.RestaurarUsuario(idUsuario);
-        }
        
-        public void PrivilegioUsuario(string idUsuario)
-        {
-             proc.PrivilegioUsuario(idUsuario);
-
-        }
-
-        public List<Usuario> MostrarUsuarios()
-        {
-            return proc.MostrarUsuarios();
-        }
-
-
-        public List<Usuario> MostrarUsuariosDesactivos()
-        {
-            return proc.MostrarUsuariosDesactivos();
-        }
     }
 }

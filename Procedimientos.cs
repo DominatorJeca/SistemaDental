@@ -15,7 +15,6 @@ namespace SistemaDental
     {
         BDConnexion con = new BDConnexion();
         SqlCommand command = new SqlCommand();
-
         SqlDataReader reader;
 
         #region Citas - Procedimientos
@@ -549,13 +548,12 @@ namespace SistemaDental
             finally
             {
                 command.Parameters.Clear();
-                reader.Close();
                 command.Connection = con.Close();
             }
 
         }
           #endregion
-        #region usurio
+        #region usuario
 
             public Usuario BuscarUsuario(string id)
             {
@@ -602,7 +600,35 @@ namespace SistemaDental
 
             }
 
+        /*    public Usuario IniciarSesion(string usuario, string contrasenia)
+        {
+            Usuario user = new Usuario();
+            command.Connection = con.Open();
+            try
+            {
+                command.CommandText = "IniciarSesion";
+                command.CommandType = CommandType.StoredProcedure;
+                //Establecer los valores de parametros
+                command.Parameters.AddWithValue("@usuario", usuario);
+                command.Parameters.AddWithValue("@nombre", contrasenia);
 
+                reader = command.ExecuteReader();
+                while (reader.Read())
+                {
+                  //  user.Administrador =reader[]
+                }
+
+            }
+            catch
+            {
+
+            }
+            finally
+            {
+
+            }
+        
+        }*/
             public void IngresarUsuario(Usuario usuario)
             {   //abrir la cadena de conexion
                 command.Connection = con.Open();

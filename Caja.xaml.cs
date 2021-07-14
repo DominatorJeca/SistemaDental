@@ -25,7 +25,7 @@ namespace SistemaDental
     /// </summary>
     public partial class Caja : Window
     {
-        
+        private Procedimientos proc = new Procedimientos();
         Validaciones validaciones = new Validaciones();
         private bool Admin;
         private String Nombree;
@@ -48,7 +48,7 @@ namespace SistemaDental
 
         public void MostrarCaja()
         {
-            dgvCaja.ItemsSource = caja.MostrarCaja();
+            dgvCaja.ItemsSource = proc.MostrarCaja();
             dgvCaja.SelectedValuePath = "Id_transaccion";
             dgvCaja.SelectedIndex = dgvCaja.Items.Count-2;
         }
@@ -130,7 +130,7 @@ namespace SistemaDental
                 try
                 {
                     ObtenerValues();
-                    caja.IngresarCaja(caja);
+                    proc.IngresarCaja(caja);
 
                     // Mensaje de insercion exitosa a la base
                     MessageBox.Show("Se realizo con exito transaccion");

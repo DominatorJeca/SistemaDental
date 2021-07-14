@@ -30,7 +30,7 @@ namespace SistemaDental
 
         private bool Admin;
         private String Nombree;
-
+        private Procedimientos proc = new Procedimientos();
         /// <summary>
         /// Componentes que se inicializan junto al form
         /// </summary>
@@ -67,7 +67,7 @@ namespace SistemaDental
         /// </summary>
         public void MostrarPacientes()
         {
-            cmbPaciente.ItemsSource = unPaciente.MostrarPacientes();
+            cmbPaciente.ItemsSource = proc.MostrarPacientes();
             cmbPaciente.SelectedValuePath = "Id_paciente";
             cmbPaciente.DisplayMemberPath = "Id_paciente";
         }
@@ -179,7 +179,7 @@ namespace SistemaDental
                 if (validar.VerificarCampos(this))
                 {
                     obtenerValores();
-                    unPaciente.ActualizarDatosPaciente(unPaciente);
+                    proc.ActualizarDatosPaciente(unPaciente);
                     MessageBox.Show("Éxito al actualizar los datos");
                     LimpiarPantalla();
                     MostrarPacientes();
@@ -199,7 +199,7 @@ namespace SistemaDental
             if (cmbPaciente.SelectedValue != null)
                 {
                 unPaciente.Id_paciente = cmbPaciente.SelectedValue.ToString();
-                dtgHistorial.ItemsSource = unPaciente.MostrarHistorial(unPaciente);
+                dtgHistorial.ItemsSource = proc.MostrarHistorial(unPaciente);
             }
             
         }
@@ -243,8 +243,6 @@ namespace SistemaDental
 
         private void PreviewTextInputOnlyNumbers(object sender, TextCompositionEventArgs e)
         {
-
-
             validar.SoloNumeros(e);
         }
       

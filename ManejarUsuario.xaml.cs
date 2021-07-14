@@ -24,7 +24,7 @@ namespace SistemaDental
         private Usuario usuario = new Usuario();
         private bool Admin;
         private String Nombree;
-
+        private Procedimientos proc = new Procedimientos();
         //Contructores
         public ManejarUsuario()
         {
@@ -59,14 +59,14 @@ namespace SistemaDental
         /// </summary>
         public void MostrarUsuario()
         {
-            cmbUsuario.ItemsSource = usuario.MostrarUsuarios();
+            cmbUsuario.ItemsSource = proc.MostrarUsuarios();
             cmbUsuario.SelectedValuePath = "Id";
             cmbUsuario.DisplayMemberPath = "Id";
         }
 
         public void MostrarUsuarioDesactivo()
         {
-            cmbUsuario.ItemsSource = usuario.MostrarUsuariosDesactivos();
+            cmbUsuario.ItemsSource = proc.MostrarUsuariosDesactivos();
             cmbUsuario.SelectedValuePath = "Id";
             cmbUsuario.DisplayMemberPath = "Id";
         }
@@ -91,7 +91,7 @@ namespace SistemaDental
                     if (result == MessageBoxResult.Yes)
                     {
                         // Eliminar el empleado
-                        usuario.EliminarUsuario(Convert.ToString(cmbUsuario.SelectedValue));
+                        proc.EliminarUsuario(Convert.ToString(cmbUsuario.SelectedValue));
                     }
                 }
             }
@@ -115,7 +115,7 @@ namespace SistemaDental
         {
             try
             {
-                Usuario elUsuario = usuario.BuscarUsuario(Convert.ToString(cmbUsuario.SelectedValue));
+                Usuario elUsuario = proc.BuscarUsuario(Convert.ToString(cmbUsuario.SelectedValue));
 
 
                 //Verificar si el usuario existe
@@ -135,7 +135,7 @@ namespace SistemaDental
                     if (result == MessageBoxResult.Yes)
                     {
                         // Eliminar el empleado
-                        usuario.PrivilegioUsuario(Convert.ToString(cmbUsuario.SelectedValue));
+                        proc.PrivilegioUsuario(Convert.ToString(cmbUsuario.SelectedValue));
                         MessageBox.Show("Permisos asignados correctamente");
                     }
                 }
@@ -166,7 +166,7 @@ namespace SistemaDental
                     if (result == MessageBoxResult.Yes)
                     {
                         // Eliminar el empleado
-                        usuario.RestaurarUsuario(Convert.ToString(cmbUsuario.SelectedValue));
+                        proc.RestaurarUsuario(Convert.ToString(cmbUsuario.SelectedValue));
                     }
                 }
             }

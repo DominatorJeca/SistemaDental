@@ -28,53 +28,6 @@ namespace SistemaDental
 
         public DateTime fechaCita { get; set; }
 
-        public List<ClaseCitas> mostrarIdPacientes()
-        {
-            return proc.CitamostrarIdPacientes();
-        }
-
-        public List<ClaseCitas> MostrarEmpleado()
-        {
-            return proc.CitaMostrarEmpleado();
-        }
-
-        public List<ClaseCitas> MostrarTratamiento()
-        {
-            return proc.CitaMostrarTratamiento();
-        }
-
-        public void AgendarCita(ClaseCitas cita)
-        {
-            proc.CitaAgendarCita(cita);
-        }
-
-        public void EditarCita(ClaseCitas cita)
-        {
-            proc.CitaEditarCita(cita);
-        }
-
-        public List<ClaseCitas> MostrarCitas()
-        {
-            return proc.CitaMostrarCitas();
-        }
-        /*
-        public void EliminarCita()
-        {
-            try
-            {
-                SqlCommand command = new SqlCommand("EliminarCitas", con.Open());
-                command.CommandType = CommandType.StoredProcedure;
-                command.Parameters.AddWithValue("@idcita", IdCita);
-                command.ExecuteNonQuery();
-            }
-            catch
-            {
-                throw;
-            }
-            finally
-            {
-                con.Close();
-            }
-        }*/
+     
     }
 }

@@ -24,6 +24,7 @@ namespace SistemaDental
         int bandera = 0;
         private bool Admin;
         private String Nombree;
+        private Procedimientos proc = new Procedimientos();
         public Citas()
         {
             InitializeComponent();
@@ -42,20 +43,20 @@ namespace SistemaDental
 
         private void MostrarDatos()
         {
-            cmbPaciente.ItemsSource = citas.mostrarIdPacientes();
+            cmbPaciente.ItemsSource = proc.mostrarIdPacientes();
             cmbPaciente.DisplayMemberPath = "IdPacientes";
             cmbPaciente.SelectedValuePath = "IdPacientes";
-            cmbEmpleado.ItemsSource = citas.MostrarEmpleado();
+            cmbEmpleado.ItemsSource = proc.MostrarUsuarios();
             cmbEmpleado.DisplayMemberPath = "NombreDoctor";
             cmbEmpleado.SelectedValuePath = "IdDoctor";
-            cmbTratamiento.ItemsSource = citas.MostrarTratamiento();
+            cmbTratamiento.ItemsSource = proc.mostrarTratamientos();
             cmbTratamiento.DisplayMemberPath = "NombreTratamiento";
             cmbTratamiento.SelectedValuePath = "IdTratamiento";
         }
 
         private void mostrarCitas()
         {
-            dtg_Citas.ItemsSource = citas.MostrarCitas();
+            dtg_Citas.ItemsSource = proc.CitaMostrarCitas();
             dtg_Citas.SelectedValuePath = "IdCita";
         }
 
@@ -100,7 +101,7 @@ namespace SistemaDental
                     }
                     if (bandera == 0)
                     {
-                        citas.AgendarCita(citas);
+                        proc.CitaAgendarCita(citas);
                         MessageBox.Show("Cita agendada con éxito");
                     }
                     else
@@ -234,7 +235,7 @@ namespace SistemaDental
                 }
                 if (bandera == 0)
                 {
-                    citas.EditarCita(citas);
+                    proc.CitaEditarCita(citas);
                     MessageBox.Show("Exito al editar");
                 }
                 else

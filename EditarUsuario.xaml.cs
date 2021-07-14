@@ -25,7 +25,7 @@ namespace SistemaDental
         private Puesto puesto = new Puesto();
         private bool Admin;
         private String Nombree;
-
+        private Procedimientos proc = new Procedimientos();
         Validaciones validar = new Validaciones();
 
         //constructores
@@ -57,7 +57,7 @@ namespace SistemaDental
         //Asigna la lista de puestos al combobox de puestos
         public void MostrarPuesto()
         {
-            cmbPuesto.ItemsSource = puesto.MostrarPuestos();
+            cmbPuesto.ItemsSource = proc.MostrarPuestos();
             cmbPuesto.SelectedValuePath = "Id";
             cmbPuesto.DisplayMemberPath = "NombrePuesto";
         }
@@ -65,7 +65,7 @@ namespace SistemaDental
         //Asigna la lista de usuario a el combobox de usuarios
         public void MostrarUsuario()
         {
-            cmbUsuario.ItemsSource = usuario.MostrarUsuarios();
+            cmbUsuario.ItemsSource = proc.MostrarUsuarios();
             cmbUsuario.SelectedValuePath = "Id";
             cmbUsuario.DisplayMemberPath = "Id";
         }
@@ -211,7 +211,7 @@ namespace SistemaDental
                     ObtenerValores();
 
                     // Insertar los datos del usuario 
-                    usuario.EditarUsuario(usuario);
+                    proc.EditarUsuario(usuario);
 
                     // Mensaje de inserción exitosa
                     MessageBox.Show("¡Datos editados correctamente!");

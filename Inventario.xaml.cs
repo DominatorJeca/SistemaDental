@@ -33,6 +33,7 @@ namespace SistemaDental
         
         private bool Admin;
         private String Nombree;
+        private Procedimientos proc = new Procedimientos();
 
         Validaciones validar = new Validaciones();
         public Inventario()
@@ -53,7 +54,7 @@ namespace SistemaDental
 
         public void MostrarMaterial()
         {
-            dgv_Materiales.ItemsSource = inventario.MostrarInventario();
+            dgv_Materiales.ItemsSource = proc.InventarioMostrarInventario();
             dgv_Materiales.SelectedValuePath = "IdMaterial";
         }
 
@@ -63,7 +64,7 @@ namespace SistemaDental
         private void dgv_Materiales_SelectionChanged_1(object sender, SelectionChangedEventArgs e)
         {
    
-            dgv_Tratamiento.ItemsSource = inventario.mostrarUsoTratamiento(Convert.ToInt32(dgv_Materiales.SelectedValue)).DefaultView;
+            dgv_Tratamiento.ItemsSource = proc.InventarioMostrarUsoTratamiento(Convert.ToInt32(dgv_Materiales.SelectedValue)).DefaultView;
   
         }
 
@@ -100,7 +101,7 @@ namespace SistemaDental
                     if (validar.VerificarCantidad(Convert.ToDouble(txtCantidadInventario.Text))) 
                     {
                         ObtenerValores();
-                        inventario.actualizarCantidad(inventario);
+                        proc.InventarioActualizarCantidad(inventario);
                     }
                     else
                     {
