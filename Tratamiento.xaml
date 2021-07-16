@@ -13,7 +13,7 @@
             <ColumnDefinition Width="Auto"/>
         </Grid.ColumnDefinitions>
         <Grid.Background>
-            <ImageBrush ImageSource="TeethPattern.jpg" Stretch="UniformToFill"/>
+            <ImageBrush ImageSource="/imagenes/TeethPattern.jpg" Stretch="UniformToFill"/>
         </Grid.Background>
         <ComboBox x:Name="cmbPaciente" HorizontalAlignment="Left" Margin="62,54,0,0" VerticalAlignment="Top" Width="643"/>
         <Label Content="Paciente" HorizontalAlignment="Left" Margin="60,26,0,0" VerticalAlignment="Top" FontSize="20" Foreground="Black" Background="#7F056676" FontFamily="Bahnschrift"/>

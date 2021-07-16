@@ -9,7 +9,7 @@
         Title="AgregarPaciente" Height="450" Width="802.967" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" Closed="AddPaciente_Closed">
     <Grid>
         <Grid.Background>
-            <ImageBrush ImageSource="TeethPattern.jpg" Stretch="UniformToFill"/>
+            <ImageBrush ImageSource="/imagenes/TeethPattern.jpg" Stretch="UniformToFill"/>
         </Grid.Background>
         <Button x:Name="btnRegresar" Content="Regresar" HorizontalAlignment="Left" Margin="17,10,0,0" VerticalAlignment="Top" Width="103" FontFamily="Bahnschrift" FontSize="16" Background="#FF056676" Click="btnRegresar_Click" BorderBrush="{x:Null}" />
         <TextBox x:Name="txtAgregarNombre" Margin="180,51,332,328" materialDesign:HintAssist.Hint="Nombre" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontFamily="Bahnschrift" FontSize="12" Background="#7FFFFFFF" TextChanged="txtAgregarNombre_TextChanged"/>

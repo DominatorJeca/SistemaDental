@@ -9,7 +9,7 @@
         Title="Ver Paciente" Height="450" Width="800" ResizeMode="CanMinimize" Closed="AddPaciente_Closed" Loaded="AddPaciente_Loaded" >
 
     <Window.Background>
-        <ImageBrush ImageSource="TeethPattern.jpg" Stretch="UniformToFill"/>
+        <ImageBrush ImageSource="/imagenes/TeethPattern.jpg" Stretch="UniformToFill"/>
     </Window.Background>
     <Grid>
         <Grid.ColumnDefinitions>

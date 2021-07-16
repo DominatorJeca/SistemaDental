@@ -1,0 +1,38 @@
+﻿<UserControl x:Class="SistemaDental.MVCCV.Vista.CajaVista"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:SistemaDental.MVCCV.Vista"
+             mc:Ignorable="d" 
+               xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" Height="471" Width="893">
+    <Grid>
+        <Grid Height="450" VerticalAlignment="Top">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="5*"/>
+                <ColumnDefinition Width="662*"/>
+                <ColumnDefinition Width="218*"/>
+                <ColumnDefinition Width="9*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.Background>
+                <ImageBrush ImageSource="/imagenes/TeethPattern.jpg" Stretch="UniformToFill"/>
+            </Grid.Background>
+            <TextBox Name="txtDineroCaja" Margin="556,311,25.428,75" materialDesign:HintAssist.Hint="Dinero Disponible" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontFamily="Bahnschrift" FontSize="18" Background="#7FFFFFFF" Foreground="Black" Grid.ColumnSpan="2" Grid.Column="1" Text="{Binding ElementName=dgvCaja,Path=SelectedItem.Dinero_disponible}" IsEnabled="False"/>
+            <TextBox Name="txtCantidadCaja" Margin="47,311,342,75" materialDesign:HintAssist.Hint="Cantidad" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontFamily="Bahnschrift" FontSize="18" Background="#7FFFFFFF" Foreground="Black" Grid.Column="1" TextChanged="txtCantidadCaja_TextChanged" HorizontalScrollBarVisibility="Visible"/>
+            <Label Content="Transacción" HorizontalAlignment="Left" Margin="338,311,0,0" VerticalAlignment="Top" FontFamily="Bahnschrift" FontSize="16" Foreground="Black" Grid.Column="1"/>
+            <RadioButton Name ="rbIngreso" Content="Ingreso" HorizontalAlignment="Left" Margin="349,343,0,0" VerticalAlignment="Top" FontFamily="Bahnschrift" FontSize="16" Grid.Column="1"/>
+            <RadioButton Name ="rbEgreso" Content="Egreso" HorizontalAlignment="Left" Margin="458,343,0,0" VerticalAlignment="Top" FontFamily="Bahnschrift" FontSize="16" Grid.Column="1"/>
+            <Button Name = "btnRealizar" Content="Realizar Transacción" HorizontalAlignment="Left" Margin="360,410,0,0" VerticalAlignment="Top" Width="170" Height="40" Background="#FF056676" BorderBrush="{x:Null}" Grid.Column="1" Click="btnRealizar_Click"/>
+            <DataGrid  Name ="dgvCaja" HorizontalAlignment="Left" Height="238" Margin="34,68,0,0" VerticalAlignment="Top" Width="821" Background="#FF056676" Foreground="#DDFFFFFF" Grid.ColumnSpan="2" Grid.Column="1" AutoGenerateColumns="False" IsEnabled="True" SelectionChanged="dgvCaja_SelectionChanged">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Tipo de Transaccion" Binding="{Binding Tipo_transacción}" FontFamily="Bahnschrift" FontSize="18" IsReadOnly="True" Width="200"/>
+                    <DataGridTextColumn Header="Cantidad" Binding="{Binding Cantidad}" FontFamily="Bahnschrift" FontSize="18" IsReadOnly="True" Width="200"/>
+                    <DataGridTextColumn Header="Fecha" Binding="{Binding Fecha}" FontFamily="Bahnschrift" FontSize="18" IsReadOnly="True" Width="220"/>
+                    <DataGridTextColumn Header="Dinero Disponible" Binding="{Binding Dinero_disponible}" FontFamily="Bahnschrift" FontSize="18" IsReadOnly="True" Width="200"/>
+                </DataGrid.Columns>
+            </DataGrid>
+            <Button Name = "btnRegresar" Content="Regresar" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="130" Height="34" Background="#FF056676" BorderBrush="{x:Null}" Grid.Column="1" Click="btnRegresar_Click"/>
+
+        </Grid>
+    </Grid>
+</UserControl>

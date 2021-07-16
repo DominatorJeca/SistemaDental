@@ -13,7 +13,7 @@
             <ColumnDefinition Width="695*"/>
         </Grid.ColumnDefinitions>
         <Grid.Background>
-            <ImageBrush ImageSource="TeethPattern.jpg" Stretch="UniformToFill"/>
+            <ImageBrush ImageSource="/imagenes/TeethPattern.jpg" Stretch="UniformToFill"/>
         </Grid.Background>
         <Label Content="Citas" HorizontalAlignment="Left" Margin="12,58,0,0" VerticalAlignment="Top" FontSize="20" Foreground="Black" Background="#7F056676" FontFamily="Bahnschrift" />
         <DataGrid x:Name="dtg_Citas" HorizontalAlignment="Left" Height="187" Margin="12,90,0,0" VerticalAlignment="Top" Width="545" Background="#FF056676" Foreground="#DDFFFFFF" Grid.ColumnSpan="2" RenderTransformOrigin="0.45,0.505" AutoGenerateColumns="False" IsReadOnly="True" SelectionChanged="dtg_Citas_SelectionChanged">

@@ -8,7 +8,7 @@
         Title="Pacientes" Height="450" Width="800" Closed="frmpaciente_Closed">
     <Grid>
         <Grid.Background>
-            <ImageBrush ImageSource="bienvenida.png"/>
+            <ImageBrush ImageSource="/imagenes/bienvenida.png"/>
         </Grid.Background>
         <Button x:Name="btnVerPaciente" Content="Ver Paciente" HorizontalAlignment="Left" Margin="249,228,0,0" VerticalAlignment="Top" Width="154" Background="#FF056676" Foreground="White" BorderBrush="{x:Null}" Height="48" RenderTransformOrigin="-0.796,-0.506" Click="btnVerPaciente_Click"/>
         <Label x:Name="___No_Name_" Content="¿Que desea hacer?" HorizontalAlignment="Left" Margin="276,177,0,0" VerticalAlignment="Top" FontSize="32" FontFamily="Bahnschrift"/>

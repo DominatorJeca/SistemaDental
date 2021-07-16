@@ -22,7 +22,8 @@ namespace SistemaDental
        //Variables miembros
         private bool Admin;
         private String Nombree;
-
+        private Caja frmCaja = new Caja();
+   
         //Constructores
         public Menu()
         {
@@ -33,7 +34,7 @@ namespace SistemaDental
         {
            
             InitializeComponent();
-            lblUsuario.Content = name;
+            //lblUsuario.Content = name;
             PermisosAdministrador(admin);
             Nombree = name;
             Admin = admin;
@@ -88,7 +89,6 @@ namespace SistemaDental
         {
             Caja caja = new Caja(Admin, Nombree);
             caja.Show();
-            this.Hide();
         }
         /// <summary>
         /// Abre el Formulario de pacientes y cierra el actual
@@ -136,6 +136,21 @@ namespace SistemaDental
             Login login = new Login();
             login.Show();
             this.Hide();
+        }
+        private void Window_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            if (e.ChangedButton == MouseButton.Left)
+                DragMove();
+        }
+
+        private void btnSalir_Click(object sender, RoutedEventArgs e)
+        {
+            App.Current.Shutdown(); 
+        }
+
+        private void btnMin_Click(object sender, RoutedEventArgs e)
+        {
+            this.WindowState = WindowState.Minimized;
         }
     }
 }

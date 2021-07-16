@@ -15,7 +15,7 @@
             <ColumnDefinition Width="9*"/>
         </Grid.ColumnDefinitions>
         <Grid.Background>
-            <ImageBrush ImageSource="TeethPattern.jpg" Stretch="UniformToFill"/>
+            <ImageBrush ImageSource="/imagenes/TeethPattern.jpg" Stretch="UniformToFill"/>
         </Grid.Background>
         <TextBox Name="txtDineroCaja" Margin="556,311,25.428,75" materialDesign:HintAssist.Hint="Dinero Disponible" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontFamily="Bahnschrift" FontSize="18" Background="#7FFFFFFF" Foreground="Black" Grid.ColumnSpan="2" Grid.Column="1" Text="{Binding ElementName=dgvCaja,Path=SelectedItem.Dinero_disponible}" IsEnabled="False"/>
         <TextBox Name="txtCantidadCaja" Margin="47,311,342,75" materialDesign:HintAssist.Hint="Cantidad" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontFamily="Bahnschrift" FontSize="18" Background="#7FFFFFFF" Foreground="Black" Grid.Column="1" TextChanged="txtCantidadCaja_TextChanged" HorizontalScrollBarVisibility="Visible"/>

@@ -8,7 +8,7 @@
         Title="Ajustes" Height="450" Width="800">
     <Grid>
         <Grid.Background>
-            <ImageBrush ImageSource="bienvenida.png"/>
+            <ImageBrush ImageSource="/imagenes/bienvenida.png"/>
         </Grid.Background>
         <Button x:Name="btnEditarUsuario" Content="Editar Usuario" HorizontalAlignment="Left" Margin="306,125,0,0" VerticalAlignment="Top" Width="224" Background="#FF056676" BorderBrush="{x:Null}" Click="btnEditarUsuario_Click_1"/>
         <Button x:Name="btnAgregarNuevoUsuario" Content="Agregar Nuevo Usuario" HorizontalAlignment="Left" Margin="306,178,0,0" VerticalAlignment="Top" Width="224" Background="#FF056676" BorderBrush="{x:Null}" Click="btnAgregarNuevoUsuario_Click"/>

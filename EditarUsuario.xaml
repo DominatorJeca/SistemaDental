@@ -10,7 +10,7 @@
         ResizeMode="NoResize" Closed="Window_Closed">
     <Grid>
         <Grid.Background>
-            <ImageBrush ImageSource="TeethPattern.jpg" Stretch="UniformToFill"/>
+            <ImageBrush ImageSource="/imagenes/TeethPattern.jpg" Stretch="UniformToFill"/>
         </Grid.Background>
         <Button x:Name="btnRegresar" Content="Regresar" HorizontalAlignment="Left" Margin="17,10,0,0" VerticalAlignment="Top" Width="103" FontFamily="Bahnschrift" FontSize="16" Background="#FF056676" BorderBrush="{x:Null}" Click="btnRegresar_Click_1"/>
         <TextBox Text="{Binding SelectedItem.Nombre, ElementName=cmbUsuario}" PreviewTextInput="PreviewTextInputOnlyLetters" Name="txtEditarNombre" Margin="426,118,85.6,258" materialDesign:HintAssist.Hint="Nombre" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontFamily="Bahnschrift" FontSize="12" Background="#7FFFFFFF"/>

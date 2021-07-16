@@ -113,6 +113,8 @@
     <Compile Include="Ajustes.xaml.cs">
       <DependentUpon>Ajustes.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Base\ObservableObject.cs" />
+    <Compile Include="Base\RelayCommand.cs" />
     <Compile Include="Caja.xaml.cs">
       <DependentUpon>Caja.xaml</DependentUpon>
     </Compile>
@@ -132,6 +134,15 @@
     </Compile>
     <Compile Include="ManejarUsuario.xaml.cs">
       <DependentUpon>ManejarUsuario.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MVCCV\VistaControlador\CajaVistaControlador.cs" />
+    <Compile Include="MVCCV\VistaControlador\CasaVistaControlador.cs" />
+    <Compile Include="MVCCV\VistaControlador\MenuPrincipalVistaControlador.cs" />
+    <Compile Include="MVCCV\Vista\CajaVista.xaml.cs">
+      <DependentUpon>CajaVista.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MVCCV\Vista\MenuInicioVista.xaml.cs">
+      <DependentUpon>MenuInicioVista.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pacientes.xaml.cs">
       <DependentUpon>Pacientes.xaml</DependentUpon>
@@ -199,6 +210,14 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="MVCCV\Vista\CajaVista.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MVCCV\Vista\MenuInicioVista.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Pacientes.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -244,37 +263,52 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="bienvenida.png" />
+    <Resource Include="Imagenes\bienvenida.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="background login.jpg" />
+    <Resource Include="Imagenes\TeethPattern.jpg" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="TeethPattern.jpg" />
+    <Resource Include="Imagenes\Happy_Sm.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Happy_Sm.png" />
+    <Resource Include="Imagenes\Menu Background.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Login Background.jpg" />
+    <Resource Include="Imagenes\Menu Bienvendida.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Menu Background.png" />
+    <Resource Include="Imagenes\png-clipart-eye-outline-large-people-eyes.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Menu Bienvendida.png" />
+    <Resource Include="Imagenes\eyes.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="png-clipart-eye-outline-large-people-eyes.png" />
+    <Resource Include="Imagenes\Sin título-1.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="eyes.png" />
+    <Resource Include="Imagenes\eye.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Sin título-1.png" />
+    <Resource Include="Imagenes\FondoProyecto2.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="eye.png" />
+    <Resource Include="Imagenes\FondoMenuPrincipal.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Imagenes\dentist.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="dentist.svg" />
+    <Resource Include="Imagenes\seo-report.png" />
+    <Resource Include="Imagenes\shopping-cart.png" />
+    <Resource Include="Imagenes\inventory.png" />
+    <Resource Include="Imagenes\chair.png" />
+    <Resource Include="Imagenes\dental-care.png" />
+    <Resource Include="Imagenes\patient.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="MVCCV\Controlador\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="packages\MaterialDesignThemes.4.0.0\build\MaterialDesignThemes.targets" Condition="Exists('packages\MaterialDesignThemes.4.0.0\build\MaterialDesignThemes.targets')" />

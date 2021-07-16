@@ -2,8 +2,9 @@
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:local="clr-namespace:SistemaDental"
-
-             StartupUri="Login.xaml">
+                 xmlns:viewModel="clr-namespace:SistemaDental.MVCCV.VistaControlador"
+             xmlns:view="clr-namespace:SistemaDental.MVCCV.Vista"
+             StartupUri="Menu.xaml">
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
@@ -11,7 +12,15 @@
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Defaults.xaml" />
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Primary/MaterialDesignColor.Blue.xaml" />
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Accent/MaterialDesignColor.Indigo.xaml" />
+                
             </ResourceDictionary.MergedDictionaries>
+            <DataTemplate DataType="{x:Type viewModel:CasaVistaControlador}">
+                <view:MenuInicioVista/>
+            </DataTemplate>
+
+            <DataTemplate DataType="{x:Type viewModel:CajaVistaControlador}">
+                <view:CajaVista/>
+            </DataTemplate>
         </ResourceDictionary>
     </Application.Resources>
 </Application>
