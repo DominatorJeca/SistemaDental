@@ -24,8 +24,8 @@
         </DataGrid>
         <TextBox IsEnabled="False" Text="{Binding ElementName=dgv_Materiales, Path=SelectedItem.NombreMaterial}" Name="txtMaterialInventario"   Margin="503,79,91,414" materialDesign:HintAssist.Hint="Material" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontFamily="Bahnschrift" FontSize="18" Background="#7FFFFFFF" Height="44" />
         <TextBox IsEnabled="False" Text="{Binding ElementName=dgv_Materiales, Path=SelectedItem.Cantidad}" PreviewTextInput="PreviewTextInputOnlyNumbers" Name="txtCantidadInventario" Margin="503,146,91,332" materialDesign:HintAssist.Hint="Cantidad" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontFamily="Bahnschrift" FontSize="18" Background="#7FFFFFFF"/>
-        <Button Name="btnEditar" Content="Editar" HorizontalAlignment="Left" Margin="578,284,0,0" VerticalAlignment="Top" Width="123" Height="45" Background="#FF056676" FontFamily="Bahnschrift" BorderBrush="{x:Null}" Click="Button_Click" />
-        <Button IsEnabled="False" Content="Guardar" HorizontalAlignment="Left" Margin="578,395,0,0" VerticalAlignment="Top" Width="123" Height="45" Background="#FF056676" FontFamily="Bahnschrift" BorderBrush="{x:Null}" Click="Button_Click_1" Name="btnGuardar"/>
+        <Button Name="btnEditar" Content="Editar" HorizontalAlignment="Left" Margin="503,284,0,0" VerticalAlignment="Top" Width="200" Height="45" Background="#FF056676" FontFamily="Bahnschrift" BorderBrush="{x:Null}" Click="Button_Click" />
+        <Button IsEnabled="False" Content="Guardar" HorizontalAlignment="Left" Margin="503,393,0,0" VerticalAlignment="Top" Width="200" Height="45" Background="#FF056676" FontFamily="Bahnschrift" BorderBrush="{x:Null}" Click="Button_Click_1" Name="btnGuardar"/>
         <DataGrid HorizontalAlignment="Left" Height="250" Margin="29,79,0,0" VerticalAlignment="Top" Width="450" Background="#FF056676" x:Name="dgv_Materiales" HorizontalContentAlignment="Center" SelectionChanged="dgv_Materiales_SelectionChanged_1" IsReadOnly="True" AutoGenerateColumns="False">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Código" Binding="{Binding IdMaterial}" Width="150"></DataGridTextColumn>
@@ -35,6 +35,6 @@
         </DataGrid>
         <Button  x:Name="btnCancelarCambios" Content="Cancelar" HorizontalAlignment="Left" Margin="578,445,0,0" VerticalAlignment="Top" Width="123" Height="45" Background="#FF056676" FontFamily="Bahnschrift" BorderBrush="{x:Null}" Click="Button_Cancelar" Visibility="Hidden"/>
         <Button x:Name="btnRegresar" Content="Regresar" HorizontalAlignment="Left" Margin="672,10,0,0" VerticalAlignment="Top" Width="110" Height="32" Background="#FF056676" FontFamily="Bahnschrift" BorderBrush="{x:Null}" Click="btnRegresar_Click" />
-       
+
     </Grid>
 </Window>

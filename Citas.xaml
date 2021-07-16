@@ -18,7 +18,7 @@
         <Label Content="Citas" HorizontalAlignment="Left" Margin="12,58,0,0" VerticalAlignment="Top" FontSize="20" Foreground="Black" Background="#7F056676" FontFamily="Bahnschrift" />
         <DataGrid x:Name="dtg_Citas" HorizontalAlignment="Left" Height="187" Margin="12,90,0,0" VerticalAlignment="Top" Width="545" Background="#FF056676" Foreground="#DDFFFFFF" Grid.ColumnSpan="2" RenderTransformOrigin="0.45,0.505" AutoGenerateColumns="False" IsReadOnly="True" SelectionChanged="dtg_Citas_SelectionChanged">
             <DataGrid.Columns >
-                <DataGridTextColumn Header="Paciente">
+                <DataGridTextColumn Header="Paciente" Width="120">
                     <DataGridTextColumn.Binding>
                         <MultiBinding StringFormat="{}{0} {1}">
                             <Binding Path="NombrePaciente" />
@@ -26,14 +26,14 @@
                         </MultiBinding>
                     </DataGridTextColumn.Binding>
                 </DataGridTextColumn>
-                <DataGridTextColumn Header="Doctor" Width="125" Binding="{Binding NombreDoctor}"/>
+                <DataGridTextColumn Header="Doctor" Width="120" Binding="{Binding NombreDoctor}"/>
                 <DataGridTextColumn Header="Tratamiento" Binding="{Binding NombreTratamiento}" Width="120"/>
-                <DataGridTextColumn Header="Fecha" Binding="{Binding fechaCita}" Width="175"/>
+                <DataGridTextColumn Header="Fecha" Binding="{Binding fechaCita}" Width="120"/>
             </DataGrid.Columns>
         </DataGrid>
         <Button x:Name="btnAgregar" Content="Agregar" HorizontalAlignment="Left" Margin="12,301,0,0" VerticalAlignment="Top" Width="202" Background="#FF056676" BorderBrush="{x:Null}" Grid.ColumnSpan="2" Click="btnAgregar_Click"/>
-        <Button Name="btnEditar" Content="Editar" HorizontalAlignment="Left" Margin="24,301,0,0" VerticalAlignment="Top" Width="202" Background="#FF056676" BorderBrush="{x:Null}" Grid.Column="1" Click="btnEditar_Click"/>
-        <Button Name="btnCancelar" Content="Cancelar" HorizontalAlignment="Left" Margin="24,357,0,0" VerticalAlignment="Top" Width="202" RenderTransformOrigin="0.463,1.027" Background="#FF056676" BorderBrush="{x:Null}" IsEnabled="False" Click="btnCancelar_Click" Grid.Column="1"/>
+        <Button Name="btnEditar" Content="Editar" HorizontalAlignment="Left" Margin="143,301,0,0" VerticalAlignment="Top" Width="202" Background="#FF056676" BorderBrush="{x:Null}" Grid.Column="1" Click="btnEditar_Click"/>
+        <Button Name="btnCancelar" Content="Cancelar" HorizontalAlignment="Left" Margin="143,357,0,0" VerticalAlignment="Top" Width="202" RenderTransformOrigin="0.463,1.027" Background="#FF056676" BorderBrush="{x:Null}" IsEnabled="False" Click="btnCancelar_Click" Grid.Column="1"/>
         <ComboBox Name="cmbEmpleado" HorizontalAlignment="Left" Margin="468,144,0,0" VerticalAlignment="Top" Width="216" Grid.Column="1" RenderTransformOrigin="0.603,0.358" Text="{Binding ElementName=dtg_Citas,Path=SelectedItem.NombreDoctor, Mode=OneWay}"/>
         <ComboBox Name="cmbPaciente" HorizontalAlignment="Left" Margin="468,96,0,0" VerticalAlignment="Top" Width="216" RenderTransformOrigin="0.603,0.358" Grid.Column="1" Text="{Binding ElementName=dtg_Citas, Path=SelectedItem.IdPacientes}"/>
         <Label Content="Id Paciente" HorizontalAlignment="Left" Margin="350,103,0,0" VerticalAlignment="Top"  FontSize="15" Foreground="Black" Background="White" FontFamily="Bahnschrift" Grid.Column="1"/>

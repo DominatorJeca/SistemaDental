@@ -16,6 +16,8 @@ namespace SistemaDental
         //private SqlConnection sqlConnection = new SqlConnection(connectionString);
 
         public string IdPaciente { get; set; }
+
+        public string NombrePaciente { get; set; }
         public int IdTratamiento { get; set; }
         public int IdMaterial { get; set; }
         public string NombreTratamiento { get; set; }

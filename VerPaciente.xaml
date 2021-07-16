@@ -16,7 +16,7 @@
             <ColumnDefinition Width="7*"/>
             <ColumnDefinition Width="65*"/>
         </Grid.ColumnDefinitions>
-        <Button x:Name="btnRegresar" Content="Regresar" HorizontalAlignment="Left" Margin="17,10,0,0" VerticalAlignment="Top" Width="103" FontFamily="Bahnschrift" FontSize="16" Background="#FF056676" Click="btnRegresar_Click" BorderBrush="{x:Null}" Grid.ColumnSpan="2"/>
+        <Button x:Name="btnRegresar" Content="Regresar" HorizontalAlignment="Left" Margin="604,10,0,0" VerticalAlignment="Top" Width="103" FontFamily="Bahnschrift" FontSize="16" Background="#FF056676" Click="btnRegresar_Click" BorderBrush="{x:Null}" Grid.Column="1"/>
         <TextBox x:Name="txtNombre"  PreviewTextInput="PreviewTextInputOnlyLetters" Margin="7,66,428,309" materialDesign:HintAssist.Hint="Nombre" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontFamily="Bahnschrift" FontSize="12" Background="#7FFFFFFF" Text="{Binding ElementName=cmbPaciente,Path=SelectedItem.NombrePaciente}" Grid.Column="1" />
         <TextBox x:Name="txtApellido"  PreviewTextInput="PreviewTextInputOnlyLetters" Margin="7,116,428,259" materialDesign:HintAssist.Hint="Apellido" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontFamily="Bahnschrift" FontSize="12" Background="#7FFFFFFF" Text="{Binding ElementName=cmbPaciente,Path=SelectedItem.ApellidoPaciente}" Grid.Column="1"/>
         <TextBox x:Name="txtTelefono" PreviewTextInput="PreviewTextInputOnlyNumbers" Margin="350,64,85,309" materialDesign:HintAssist.Hint="Telefóno" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontFamily="Bahnschrift" FontSize="12" Background="#7FFFFFFF" Text="{Binding ElementName=cmbPaciente,Path=SelectedItem.Telefono}" Grid.Column="1"/>
@@ -36,9 +36,9 @@
         </DataGrid>
         <Button x:Name="btnGuardarPaciente" Content="Guardar" HorizontalAlignment="Center" Margin="482,287,30,0" VerticalAlignment="Top" Width="203" Background="#FF056676" BorderBrush="{x:Null}" Click="btnGuardarPaciente_Click" Grid.Column="1" />
         <Button x:Name="btnCancelar" Content="Cancelar" HorizontalAlignment="Center" Margin="482,339,30,0" VerticalAlignment="Top" Width="203" Background="#FF056676" BorderBrush="{x:Null}" Click="btnCancelar_Click" Grid.Column="1"/>
-        <Label Content="Paciente" HorizontalAlignment="Left" Margin="56,32,0,0" VerticalAlignment="Top" FontSize="12" FontFamily="Bahnschrift" Grid.Column="1"/>
-        <ComboBox x:Name="cmbPaciente" HorizontalAlignment="Left" Margin="126,24,0,0" VerticalAlignment="Top" Width="460" SelectionChanged="cmbPaciente_SelectionChanged" Grid.Column="1"/>
-        <ComboBox Name="cmbGenero" HorizontalAlignment="Left" Margin="391,185,0,0" VerticalAlignment="Top" Width="216" Grid.Column="1" Text="{Binding ElementName=cmbPaciente,Path=SelectedItem.Genero}">
+        <Label Content="Paciente" HorizontalAlignment="Left" Margin="0,32,0,0" VerticalAlignment="Top" FontSize="12" FontFamily="Bahnschrift" Grid.Column="1"/>
+        <ComboBox x:Name="cmbPaciente" HorizontalAlignment="Left" Margin="59,29,0,0" VerticalAlignment="Top" Width="230" SelectionChanged="cmbPaciente_SelectionChanged" Grid.Column="1"/>
+        <ComboBox Name="cmbGenero" HorizontalAlignment="Left" Margin="391,185,0,0" VerticalAlignment="Top" Width="241" Grid.Column="1" Text="{Binding ElementName=cmbPaciente,Path=SelectedItem.Genero}">
             <ComboBoxItem Content="Femenino"/>
             <ComboBoxItem Content="Masculino"/>
         </ComboBox>

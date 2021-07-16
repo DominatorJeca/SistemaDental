@@ -317,6 +317,7 @@ namespace SistemaDental
                 {
                     paciente = new ClaseTratamiento();
                     paciente.IdPaciente = reader["id_paciente"].ToString();
+                    paciente.NombrePaciente = reader["nombre"].ToString();
                     pacientes.Add(paciente);
                 }
                 return pacientes;

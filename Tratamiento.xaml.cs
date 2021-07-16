@@ -74,6 +74,7 @@ namespace SistemaDental
             tratamiento.fecha = DateTime.Now.ToString("dddd , MMM dd yyyy,hh:mm:ss");
             tratamiento.IdPaciente = Convert.ToString(cmbPaciente.SelectedValue);
             tratamiento.IdTratamiento = Convert.ToInt32(cmbTratamiento.SelectedValue);
+            
         }
 
         private void btnRealizar_Click(object sender, RoutedEventArgs e)
@@ -211,5 +212,10 @@ namespace SistemaDental
                     Menu menu = new Menu();
                     menu.Show();
                 }
-            }
+
+        private void cmbPaciente_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
+    }
 }

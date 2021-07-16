@@ -11,7 +11,7 @@ namespace SistemaDental
 {
     class BDConnexion
     {
-        private static string connectionString = @"server = (local); Initial Catalog = clinicaDental; Integrated Security = True; MultipleActiveResultSets=true";
+        private static string connectionString = @"server = DESKTOP-E7NG9FA\SQLEXPRESS; Initial Catalog = clinicaDental; Integrated Security = True; MultipleActiveResultSets=true";
         protected SqlConnection sqlConnection = new SqlConnection(connectionString);
 
         public void CheckConnection()
