@@ -26,14 +26,14 @@ namespace SistemaDental.MVCCV.Vista
         private String Nombree;
 
         //Contructores
-        public ManejarUsuario()
+        public ManejarUsuarioVista()
         {
             InitializeComponent();
             MostrarUsuario();
-
+            
         }
 
-        public ManejarUsuario(bool admin, string name)
+        public ManejarUsuarioVista(bool admin, string name)
         {
             InitializeComponent();
             MostrarUsuario();
@@ -175,13 +175,13 @@ namespace SistemaDental.MVCCV.Vista
             {
                 // Actualizar el combobox de empleados
                 MostrarUsuario();
-                CKActivo.IsChecked = true;
+                CheckBox.IsChecked = true;
             }
         }
 
         private void CheckBox_Checked(object sender, RoutedEventArgs e)
         {
-            if (CKActivo.IsChecked == true)
+            if (CheckBox.IsChecked == true)
             {
                 MostrarUsuario();
                 btnEliminarUsuario.IsEnabled = true;
@@ -196,7 +196,7 @@ namespace SistemaDental.MVCCV.Vista
 
         private void CKActivo_Unchecked(object sender, RoutedEventArgs e)
         {
-            if (CKActivo.IsChecked == false)
+            if (CheckBox.IsChecked == false)
             {
                 MostrarUsuarioDesactivo();
                 btnEliminarUsuario.IsEnabled = false;
@@ -208,9 +208,24 @@ namespace SistemaDental.MVCCV.Vista
 
         private void Window_Closed(object sender, EventArgs e)
         {
-            this.Close();
+         
             Ajustes ajustes = new Ajustes(Admin, Nombree);
             ajustes.Show();
+        }
+
+        private void cmbUsuario_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
+
+        private void txtCorreo_TextChanged(object sender, TextChangedEventArgs e)
+        {
+
+        }
+
+        private void txtNombre_TextChanged(object sender, TextChangedEventArgs e)
+        {
+
         }
     }
 }

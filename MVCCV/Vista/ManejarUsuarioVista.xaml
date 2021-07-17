@@ -10,8 +10,6 @@
         <Grid.Background>
             <ImageBrush ImageSource="/imagenes/TeethPattern.jpg" Stretch="UniformToFill"/>
         </Grid.Background>
-
-        <Button x:Name="btnRegresar" Content="Regresar" HorizontalAlignment="Left" Margin="17,10,0,0" VerticalAlignment="Top" Width="103" FontFamily="Bahnschrift" FontSize="16" Background="#FF056676" Click="btnRegresar_Click" BorderBrush="{x:Null}"/>
         <TextBox Text="{Binding SelectedItem.Nombre, ElementName=cmbUsuario}" Name="txtNombre" Margin="378,148,102.6,226" materialDesign:HintAssist.Hint="Nombre" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontFamily="Bahnschrift" FontSize="12" Background="#7FFFFFFF" IsEnabled="False" TextChanged="txtNombre_TextChanged"/>
         <TextBox Text="{Binding SelectedItem.Apellido, ElementName=cmbUsuario}" Name="txtApellido" Margin="378,203,102.6,170" materialDesign:HintAssist.Hint="Apellido" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontFamily="Bahnschrift" FontSize="12" Background="#7FFFFFFF" IsEnabled="False"/>
         <TextBox Text="{Binding SelectedItem.Correo, ElementName=cmbUsuario}" Name="txtCorreo" Margin="378,260,102.6,118" materialDesign:HintAssist.Hint="Correo" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontFamily="Bahnschrift" FontSize="12" Background="#7FFFFFFF" IsEnabled="False" TextChanged="txtCorreo_TextChanged"/>
@@ -20,6 +18,7 @@
         <Image Source="Happy_Sm.png" RenderTransformOrigin="0.222,0.424" Margin="32,88,486,139" />
         <Label Content="Usuario" HorizontalAlignment="Left" Margin="373,100,0,0" VerticalAlignment="Top" FontFamily="Bahnschrift" FontSize="12"/>
         <ComboBox x:Name="cmbUsuario" HorizontalAlignment="Left" Margin="445,100,0,0" VerticalAlignment="Top" Width="210" SelectionChanged="cmbUsuario_SelectionChanged"/>
+        <CheckBox Content="¿Activo?" Name="CheckBox" HorizontalAlignment="Left" Margin="716,41,0,0" VerticalAlignment="Top" Background="#FF056676" BorderBrush="#FF056676" Height="49" Width="93" IsChecked="True" Checked="CheckBox_Checked" Unchecked="CKActivo_Unchecked"/>
 
         <Button x:Name="btnRestaurarUsuario" Content="Restaurar Usuario" HorizontalAlignment="Center" Margin="579,360,49.6,0" VerticalAlignment="Top" Width="165" Background="#FF056676" BorderBrush="{x:Null}" Click="btnRestaurarUsuario_Click"/>
     </Grid>

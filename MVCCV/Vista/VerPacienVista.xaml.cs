@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Text.RegularExpressions;
 
 namespace SistemaDental.MVCCV.Vista
 {
@@ -20,10 +21,7 @@ namespace SistemaDental.MVCCV.Vista
     /// </summary>
     public partial class VerPacienVista : UserControl
     {
-        public VerPacienVista()
-        {
-            InitializeComponent();
-        }
+        
         public ClasePaciente unPaciente = new ClasePaciente();
 
         private bool Admin;
@@ -32,7 +30,7 @@ namespace SistemaDental.MVCCV.Vista
         /// <summary>
         /// Componentes que se inicializan junto al form
         /// </summary>
-        public VerPaciente()
+        public VerPacienVista()
         {
             InitializeComponent();
             MostrarPacientes();
@@ -40,7 +38,7 @@ namespace SistemaDental.MVCCV.Vista
             dtpFechaNac.BlackoutDates.Add(new CalendarDateRange(DateTime.Now.AddYears(-1), DateTime.MaxValue));
         }
 
-        public VerPaciente(bool admin, string name)
+        public VerPacienVista(bool admin, string name)
         {
 
             InitializeComponent();
@@ -262,7 +260,7 @@ namespace SistemaDental.MVCCV.Vista
         {
             Pacientes pacientes = new Pacientes(Admin, Nombree);
             pacientes.Show();
-            this.Close();
+        
         }
 
         private void txtNombre_TextChanged(object sender, TextChangedEventArgs e)

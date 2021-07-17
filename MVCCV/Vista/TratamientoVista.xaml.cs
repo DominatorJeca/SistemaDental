@@ -20,23 +20,20 @@ namespace SistemaDental.MVCCV.Vista
     /// </summary>
     public partial class TratamientoVista : UserControl
     {
-        public TratamientoVista()
-        {
-            InitializeComponent();
-        }
+        
 
         ClaseTratamiento tratamiento = new ClaseTratamiento();
         DateTime DateTime = new DateTime();
         private bool Admin;
         private String Nombree;
         int cant_anterior = 0;
-        public Tratamiento()
+        public TratamientoVista()
         {
             InitializeComponent();
             MostrarTratamientos();
             MostrarPacientes();
         }
-        public Tratamiento(bool admin, string name)
+        public TratamientoVista(bool admin, string name)
         {
             InitializeComponent();
             MostrarTratamientos();
@@ -191,13 +188,23 @@ namespace SistemaDental.MVCCV.Vista
 
         private void txtCantidad_TextChanged(object sender, TextChangedEventArgs e)
         {
-
+            
         }
 
         private void TratamientoWindow_Closed(object sender, EventArgs e)
         {
             Menu menu = new Menu();
             menu.Show();
+        }
+
+        private void cmbPaciente_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
+
+        private void txtMaterial_TextChanged(object sender, TextChangedEventArgs e)
+        {
+
         }
     }
 }

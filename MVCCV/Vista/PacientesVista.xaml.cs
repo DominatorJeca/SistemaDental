@@ -22,12 +22,12 @@ namespace SistemaDental.MVCCV.Vista
     {
         private bool Admin;
         private String Nombree;
-        public PacientesVistaControlador()
+        public Pacientes()
         {
             InitializeComponent();
         }
 
-        public PacientesVistaControlador(bool admin, string name)
+        public Pacientes(bool admin, string name)
         {
             InitializeComponent();
             Nombree = name;
