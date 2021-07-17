@@ -27,6 +27,8 @@
 
 
         <StackPanel Grid.Row="0" Orientation="Horizontal" Margin="0 0 0 0" Background="#427F97" >
+
+
             <Button x:Name="btnInicio" Style="{StaticResource MaterialDesignIconButton}" ToolTip="Inicio"  Margin="375 0 0 0" Height="60" Width="60" BorderThickness="0" Command="{Binding CasaVistaComando}">
                 <materialDesign:PackIcon Kind="Home" Width="auto" Height="auto" Foreground="LightGray"/>
             </Button>

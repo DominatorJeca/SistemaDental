@@ -26,7 +26,7 @@ namespace SistemaDental.Properties {
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
-        [global::System.Configuration.DefaultSettingValueAttribute("Data Source =DESKTOP-V2P02VJ; Initial Catalog = clinicaDental; Integrated Securit" +
+        [global::System.Configuration.DefaultSettingValueAttribute("Data Source =DESKTOP-8MP5H5G; Initial Catalog = clinicaDental; Integrated Securit" +
             "y = true;")]
         public string ClinicaBDConnection {
             get {

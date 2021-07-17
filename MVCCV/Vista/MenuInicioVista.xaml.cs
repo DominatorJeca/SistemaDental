@@ -24,5 +24,15 @@ namespace SistemaDental.MVCCV.Vista
         {
             InitializeComponent();
         }
+
+        private void btnPacientes_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void btnPacientes_Click_1(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -11,17 +10,20 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace SistemaDental
+namespace SistemaDental.MVCCV.Vista
 {
     /// <summary>
-    /// Interaction logic for VerPaciente.xaml
+    /// Lógica de interacción para VerPacienVista.xaml
     /// </summary>
-    public partial class VerPaciente : Window
+    public partial class VerPacienVista : UserControl
     {
-
-        //Creacion de un objeto de tipo ClasePaciente
+        public VerPacienVista()
+        {
+            InitializeComponent();
+        }
         public ClasePaciente unPaciente = new ClasePaciente();
 
         private bool Admin;
@@ -51,12 +53,7 @@ namespace SistemaDental
         /// <summary>
         /// Boton para regresar al menu anterior
         /// </summary>
-        private void btnRegresar_Click(object sender, RoutedEventArgs e)
-        {
-            Pacientes pacientes = new Pacientes(Admin,Nombree);
-            pacientes.Show();
-            this.Hide();
-        }
+        
 
         /// <summary>
         /// Funcion para llenar el combobox con los id extraidos de la BD mediante la clase ClasePaciente
@@ -68,7 +65,7 @@ namespace SistemaDental
             cmbPaciente.DisplayMemberPath = "Id_paciente";
         }
 
-   
+
 
         /// <summary>
         /// Funcion para habilitar o deshabilitar los botones, textbox y combobox del formulario
@@ -80,8 +77,8 @@ namespace SistemaDental
             txtNombre.IsEnabled = habilitacionGrupoA;
             txtApellido.IsEnabled = habilitacionGrupoA;
             txtTelefono.IsEnabled = habilitacionGrupoA;
-            
-           // txtEdad.IsEnabled = habilitacionGrupoA;
+
+            // txtEdad.IsEnabled = habilitacionGrupoA;
             cmbGenero.IsEnabled = habilitacionGrupoA;
             dtpFechaNac.IsEnabled = habilitacionGrupoA;
             btnEditarPaciente.IsEnabled = habilitacionGrupoB;
@@ -91,7 +88,7 @@ namespace SistemaDental
         /// <summary>
         /// Funcion para limpiar el contenido del Form
         /// </summary>
-        public void LimpiarPantalla ()
+        public void LimpiarPantalla()
         {
             txtNombre.Text = null;
             txtApellido.Text = null;
@@ -111,8 +108,8 @@ namespace SistemaDental
             unPaciente.Genero = cmbGenero.Text;
             unPaciente.Telefono = txtTelefono.Text;
             unPaciente.Id_paciente = txtIdentidad.Text;
-            unPaciente.Fecha =(DateTime) dtpFechaNac.SelectedDate;
-            
+            unPaciente.Fecha = (DateTime)dtpFechaNac.SelectedDate;
+
         }
 
         /// <summary>
@@ -120,7 +117,7 @@ namespace SistemaDental
         /// </summary>
         private void btnEditarPaciente_Click(object sender, RoutedEventArgs e)
         {
-           // txtEdad.Visibility = Visibility.Hidden;
+            // txtEdad.Visibility = Visibility.Hidden;
             //dtpFechaNac.Visibility = Visibility;
             try
             {
@@ -129,17 +126,18 @@ namespace SistemaDental
                 {
                     MessageBox.Show("Por favor seleccione un paciente.");
                 }
-                else {
+                else
+                {
                     //Deshabilita el combobox paciente, el boton editar y ver
                     //Habilita los demás botones y textbox para poder editar los datos
                     HabilitacionDeshabilitacion(true, false);
-                    
+
 
                 }
-            
+
             }
             catch
-            {MessageBox.Show("Ha ocurrido un error en el sistema.");}
+            { MessageBox.Show("Ha ocurrido un error en el sistema."); }
         }
 
         /// <summary>
@@ -167,8 +165,8 @@ namespace SistemaDental
         /// 
         private void btnGuardarPaciente_Click(object sender, RoutedEventArgs e)
         {
-           // txtEdad.Visibility = Visibility;
-           // dtpFechaNac.Visibility = Visibility.Hidden;
+            // txtEdad.Visibility = Visibility;
+            // dtpFechaNac.Visibility = Visibility.Hidden;
             try
             {
                 if (VerificarCampos())
@@ -181,7 +179,7 @@ namespace SistemaDental
                     HabilitacionDeshabilitacion(false, true);
                 }
                 else throw new Exception();
-       
+
             }
             catch (Exception ex)
             {
@@ -192,17 +190,17 @@ namespace SistemaDental
         private void cmbPaciente_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if (cmbPaciente.SelectedValue != null)
-                {
+            {
                 unPaciente.Id_paciente = cmbPaciente.SelectedValue.ToString();
                 dtgHistorial.ItemsSource = unPaciente.MostrarHistorial(unPaciente);
             }
-            
+
         }
 
-   
 
 
-        private bool VerificarCampos ()
+
+        private bool VerificarCampos()
         {
             bool band = true;
             foreach (TextBox tb in FindVisualChildren<TextBox>(this))
@@ -216,21 +214,21 @@ namespace SistemaDental
                             break;
                         }
 
-                /*    case "txtEdad":
-                        {
-                            if (int.Parse(tb.Text) <= 0 && int.Parse(tb.Text) >= 110)
-                                band = false;
-                            break;
-                        }*/
+                    /*    case "txtEdad":
+                            {
+                                if (int.Parse(tb.Text) <= 0 && int.Parse(tb.Text) >= 110)
+                                    band = false;
+                                break;
+                            }*/
                     case "txtIdentidad":
                         {
-                            if (tb.Text.CompareTo("0101192100000")<0 && tb.Text.CompareTo("1811202199999")>0)
+                            if (tb.Text.CompareTo("0101192100000") < 0 && tb.Text.CompareTo("1811202199999") > 0)
                                 band = false;
                             break;
                         }
-                  default:
+                    default:
                         {
-                           if (tb.Text.Replace(" ","").Equals("") && tb.Name!= "PART_EditableTextBox" && tb.Name!= "PART_TextBox")
+                            if (tb.Text.Replace(" ", "").Equals("") && tb.Name != "PART_EditableTextBox" && tb.Name != "PART_TextBox")
                                 band = false;
                             break;
                         }
@@ -276,16 +274,16 @@ namespace SistemaDental
                 MessageBox.Show("Ingrese solamente caracteres");
                 txtNombre.Text = "";
             }
-            
+
         }
 
         private void AddPaciente_Loaded(object sender, RoutedEventArgs e)
         {
-               Regex reg = new Regex("[0-9]");
+            Regex reg = new Regex("[0-9]");
             bool b = reg.IsMatch(txtNombre.Text);
             if (b == false)
             {
-               
+
             }
         }
 

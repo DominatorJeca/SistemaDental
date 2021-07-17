@@ -137,12 +137,28 @@
     </Compile>
     <Compile Include="MVCCV\VistaControlador\CajaVistaControlador.cs" />
     <Compile Include="MVCCV\VistaControlador\CasaVistaControlador.cs" />
+    <Compile Include="MVCCV\VistaControlador\ManejarusuariovistaControlador.cs" />
+    <Compile Include="MVCCV\VistaControlador\Pacientesvistacontrolador.cs" />
+    <Compile Include="MVCCV\VistaControlador\TratamientosvistaControlador.cs" />
+    <Compile Include="MVCCV\VistaControlador\VerPacienVistaControlador.cs" />
     <Compile Include="MVCCV\VistaControlador\MenuPrincipalVistaControlador.cs" />
     <Compile Include="MVCCV\Vista\CajaVista.xaml.cs">
       <DependentUpon>CajaVista.xaml</DependentUpon>
     </Compile>
+    <Compile Include="MVCCV\Vista\ManejarUsuarioVista.xaml.cs">
+      <DependentUpon>ManejarUsuarioVista.xaml</DependentUpon>
+    </Compile>
     <Compile Include="MVCCV\Vista\MenuInicioVista.xaml.cs">
       <DependentUpon>MenuInicioVista.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MVCCV\Vista\PacientesVistaControlador.xaml.cs">
+      <DependentUpon>PacientesVistaControlador.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MVCCV\Vista\TratamientoVista.xaml.cs">
+      <DependentUpon>TratamientoVista.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MVCCV\Vista\VerPacienVista.xaml.cs">
+      <DependentUpon>VerPacienVista.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pacientes.xaml.cs">
       <DependentUpon>Pacientes.xaml</DependentUpon>
@@ -214,7 +230,23 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="MVCCV\Vista\ManejarUsuarioVista.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MVCCV\Vista\MenuInicioVista.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MVCCV\Vista\PacientesVistaControlador.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MVCCV\Vista\TratamientoVista.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MVCCV\Vista\VerPacienVista.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

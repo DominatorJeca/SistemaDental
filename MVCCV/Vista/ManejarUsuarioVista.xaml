@@ -1,0 +1,28 @@
+﻿<UserControl x:Class="SistemaDental.MVCCV.Vista.ManejarUsuarioVista"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:SistemaDental.MVCCV.Vista"
+             mc:Ignorable="d" 
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" Height="471" Width="893">
+    <Grid>
+        <Grid.Background>
+            <ImageBrush ImageSource="/imagenes/TeethPattern.jpg" Stretch="UniformToFill"/>
+        </Grid.Background>
+
+        <Button x:Name="btnRegresar" Content="Regresar" HorizontalAlignment="Left" Margin="17,10,0,0" VerticalAlignment="Top" Width="103" FontFamily="Bahnschrift" FontSize="16" Background="#FF056676" Click="btnRegresar_Click" BorderBrush="{x:Null}"/>
+        <TextBox Text="{Binding SelectedItem.Nombre, ElementName=cmbUsuario}" Name="txtNombre" Margin="378,148,102.6,226" materialDesign:HintAssist.Hint="Nombre" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontFamily="Bahnschrift" FontSize="12" Background="#7FFFFFFF" IsEnabled="False" TextChanged="txtNombre_TextChanged"/>
+        <TextBox Text="{Binding SelectedItem.Apellido, ElementName=cmbUsuario}" Name="txtApellido" Margin="378,203,102.6,170" materialDesign:HintAssist.Hint="Apellido" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontFamily="Bahnschrift" FontSize="12" Background="#7FFFFFFF" IsEnabled="False"/>
+        <TextBox Text="{Binding SelectedItem.Correo, ElementName=cmbUsuario}" Name="txtCorreo" Margin="378,260,102.6,118" materialDesign:HintAssist.Hint="Correo" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontFamily="Bahnschrift" FontSize="12" Background="#7FFFFFFF" IsEnabled="False" TextChanged="txtCorreo_TextChanged"/>
+        <Button x:Name="btnEliminarUsuario" Content="Eliminar Usuario" HorizontalAlignment="Center" Margin="382,360,246.6,0" VerticalAlignment="Top" Width="165" Background="#FF056676" BorderBrush="{x:Null}" Click="btnEliminarUsuario_Click"/>
+        <Button x:Name="btnPrivilegios" Content="Dar Privilegios de Administrador" HorizontalAlignment="Center" Margin="42,360,448.6,0" VerticalAlignment="Top" Width="303" Background="#FF056676" BorderBrush="{x:Null}" Click="btnPrivilegios_Click"/>
+        <Image Source="Happy_Sm.png" RenderTransformOrigin="0.222,0.424" Margin="32,88,486,139" />
+        <Label Content="Usuario" HorizontalAlignment="Left" Margin="373,100,0,0" VerticalAlignment="Top" FontFamily="Bahnschrift" FontSize="12"/>
+        <ComboBox x:Name="cmbUsuario" HorizontalAlignment="Left" Margin="445,100,0,0" VerticalAlignment="Top" Width="210" SelectionChanged="cmbUsuario_SelectionChanged"/>
+
+        <Button x:Name="btnRestaurarUsuario" Content="Restaurar Usuario" HorizontalAlignment="Center" Margin="579,360,49.6,0" VerticalAlignment="Top" Width="165" Background="#FF056676" BorderBrush="{x:Null}" Click="btnRestaurarUsuario_Click"/>
+    </Grid>
+
+
+</UserControl>
