@@ -104,9 +104,6 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="AgragarCompra.xaml.cs">
-      <DependentUpon>AgragarCompra.xaml</DependentUpon>
-    </Compile>
     <Compile Include="AgregarPaciente.xaml.cs">
       <DependentUpon>AgregarPaciente.xaml</DependentUpon>
     </Compile>
@@ -118,6 +115,7 @@
     </Compile>
     <Compile Include="Base\ObservableObject.cs" />
     <Compile Include="Base\RelayCommand.cs" />
+    <Compile Include="BDConnexion.cs" />
     <Compile Include="Caja.xaml.cs">
       <DependentUpon>Caja.xaml</DependentUpon>
     </Compile>
@@ -144,7 +142,11 @@
     </Compile>
     <Compile Include="MVCCV\VistaControlador\CajaVistaControlador.cs" />
     <Compile Include="MVCCV\VistaControlador\CasaVistaControlador.cs" />
+    <Compile Include="MVCCV\VistaControlador\CompraVistaControlador.cs" />
     <Compile Include="MVCCV\VistaControlador\MenuPrincipalVistaControlador.cs" />
+    <Compile Include="MVCCV\Vista\AgragarCompra.xaml.cs">
+      <DependentUpon>AgragarCompra.xaml</DependentUpon>
+    </Compile>
     <Compile Include="MVCCV\Vista\CajaVista.xaml.cs">
       <DependentUpon>CajaVista.xaml</DependentUpon>
     </Compile>
@@ -162,10 +164,6 @@
     <Compile Include="VerPaciente.xaml.cs">
       <DependentUpon>VerPaciente.xaml</DependentUpon>
     </Compile>
-    <Page Include="AgragarCompra.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="AgregarPaciente.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -224,6 +222,10 @@
     <Page Include="MenuReporte.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MVCCV\Vista\AgragarCompra.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="MVCCV\Vista\CajaVista.xaml">
       <SubType>Designer</SubType>

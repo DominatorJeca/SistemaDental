@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -13,7 +14,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace SistemaDental
+namespace SistemaDental.MVCCV.Vista
 {
     /// <summary>
     /// Interaction logic for AgragarCompra.xaml
@@ -23,6 +24,16 @@ namespace SistemaDental
         public AgragarCompra()
         {
             InitializeComponent();
+        }
+
+        private void btnComprar_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void btnagregar_Click(object sender, RoutedEventArgs e)
+        {
+            
         }
     }
 }
