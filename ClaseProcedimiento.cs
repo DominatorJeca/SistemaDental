@@ -14,23 +14,24 @@ namespace SistemaDental
         SqlCommand command = new SqlCommand();
         SqlDataReader reader;
 
-        public void ActualizarTurno(ClaseTurno turno)
+        #region Turno - Procedimientos
+     
+        public void ActualizarTurno(Turno turno)
         {
 
             try
             {//Abrir la conexion sql
                 command.Connection = con.Open();
                 //crear el comando SQL
-                command.CommandText = "EditarPacientes";
+                command.CommandText = "sp_Turno_Actualizar";
                 command.CommandType = CommandType.StoredProcedure;
 
                 //Definir las variables del procedimiento mediante los parametros obtenidos
-                command.Parameters.AddWithValue("@id", paciente.Id_paciente);
-                command.Parameters.AddWithValue("@nombre", paciente.NombrePaciente);
-                command.Parameters.AddWithValue("@apellido", paciente.ApellidoPaciente);
-                command.Parameters.AddWithValue("@telefono", paciente.Telefono);
-                command.Parameters.AddWithValue("@fechanac", paciente.FechaNac);
-                command.Parameters.AddWithValue("@genero", paciente.Genero);
+                command.Parameters.AddWithValue("@AgendaID", turno.AgendaID);
+                command.Parameters.AddWithValue("@UsuarioID", turno.UsuarioID);
+                command.Parameters.AddWithValue("@ComienzoTurno", turno.ComienzoTurno);
+                command.Parameters.AddWithValue("@FinalTurno", turno.FinalTurno);
+
                 command.ExecuteNonQuery();
             }
 
@@ -48,5 +49,7 @@ namespace SistemaDental
 
 
         }
+        
+
     }
 }

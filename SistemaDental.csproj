@@ -158,6 +158,7 @@
     <Compile Include="Tratamiento.xaml.cs">
       <DependentUpon>Tratamiento.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Turno.cs" />
     <Compile Include="Usuario.cs" />
     <Compile Include="VerPaciente.xaml.cs">
       <DependentUpon>VerPaciente.xaml</DependentUpon>
