@@ -36,7 +36,7 @@
             <Button x:Name="btnPerfil" Foreground="LightGray" Width="60" Height="60" VerticalAlignment="Top" Style="{StaticResource MaterialDesignIconButton}"  Margin="20 20  0 20" Background="{x:Null}" RenderTransformOrigin="0.496,2.246" FontFamily="Bahnschrift" FontSize="20" Click="btnAjustes_Click">
                 <materialDesign:PackIcon Kind="User" Width="auto" Height="auto"/>
             </Button>
-            <Button x:Name="btnAjustes" Foreground="LightGray" Width="60" Height="60" VerticalAlignment="Top" Style="{StaticResource MaterialDesignIconButton}" Margin="20 20  0 20" Background="{x:Null}" RenderTransformOrigin="0.5,0.467" FontFamily="Bahnschrift" FontSize="20" Click="btnAjustes_Click">
+            <Button x:Name="btnAjustes" Foreground="LightGray" Width="60" Height="60" VerticalAlignment="Top" Style="{StaticResource MaterialDesignIconButton}" Margin="20 20  0 20" Background="{x:Null}" RenderTransformOrigin="0.5,0.467" FontFamily="Bahnschrift" FontSize="20" Command="{Binding AjusteVistaComando}">
                 <materialDesign:PackIcon Kind="Settings" Width="auto" Height="auto"/>
             </Button>
 
