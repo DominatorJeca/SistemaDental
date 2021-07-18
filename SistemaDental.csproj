@@ -104,6 +104,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="AgragarCompra.xaml.cs">
+      <DependentUpon>AgragarCompra.xaml</DependentUpon>
+    </Compile>
     <Compile Include="AgregarPaciente.xaml.cs">
       <DependentUpon>AgregarPaciente.xaml</DependentUpon>
     </Compile>
@@ -135,6 +138,9 @@
     <Compile Include="ManejarUsuario.xaml.cs">
       <DependentUpon>ManejarUsuario.xaml</DependentUpon>
     </Compile>
+    <Compile Include="MenuReporte.xaml.cs">
+      <DependentUpon>MenuReporte.xaml</DependentUpon>
+    </Compile>
     <Compile Include="MVCCV\VistaControlador\CajaVistaControlador.cs" />
     <Compile Include="MVCCV\VistaControlador\CasaVistaControlador.cs" />
     <Compile Include="MVCCV\VistaControlador\MenuPrincipalVistaControlador.cs" />
@@ -155,6 +161,10 @@
     <Compile Include="VerPaciente.xaml.cs">
       <DependentUpon>VerPaciente.xaml</DependentUpon>
     </Compile>
+    <Page Include="AgragarCompra.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="AgregarPaciente.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -207,6 +217,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Menu.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MenuReporte.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
