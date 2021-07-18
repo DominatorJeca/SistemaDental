@@ -118,6 +118,7 @@
     </Compile>
     <Compile Include="Base\ObservableObject.cs" />
     <Compile Include="Base\RelayCommand.cs" />
+    <Compile Include="BDConexion.cs" />
     <Compile Include="Caja.xaml.cs">
       <DependentUpon>Caja.xaml</DependentUpon>
     </Compile>

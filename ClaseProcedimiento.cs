@@ -10,7 +10,7 @@ namespace SistemaDental
 {
     class ClaseProcedimiento
     {
-        BDConnexion con = new BDConnexion();
+        BDConexion con = new BDConexion();
         SqlCommand command = new SqlCommand();
         SqlDataReader reader;
 
@@ -102,7 +102,10 @@ namespace SistemaDental
         }
         #endregion
 
+        #region Usuario-Procedimientos
 
+
+        #endregion
 
 
     }
