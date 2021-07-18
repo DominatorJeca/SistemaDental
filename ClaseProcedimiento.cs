@@ -50,6 +50,60 @@ namespace SistemaDental
 
         }
 
+        public void AgregarTurno(Turno turno)
+        {
+
+            try
+            {
+                command.Connection = con.Open();
+                command.CommandText = "sp_Turno_Insertar";
+                command.CommandType = CommandType.StoredProcedure;
+                command.Parameters.AddWithValue("@UsuarioID", turno.UsuarioID);
+                command.Parameters.AddWithValue("@ComienzoTruno", turno.ComienzoTurno);
+                command.Parameters.AddWithValue("@FinalTurno", turno.FinalTurno);
+               
+                command.ExecuteNonQuery();
+            }
+            catch
+            {
+                throw;
+            }
+            finally
+            {
+                command.Parameters.Clear();
+                command.Connection = con.Close();
+            }
+
+        }
+
+        public void EliminarTurno(int AgendaID)
+        {
+
+            try
+            {
+                command.Connection = con.Open();
+                command.CommandText = "sp_Turno_Eliminar";
+                command.CommandType = CommandType.StoredProcedure;
+                command.Parameters.AddWithValue("@AgendaID", AgendaID);
+             
+
+                command.ExecuteNonQuery();
+            }
+            catch
+            {
+                throw;
+            }
+            finally
+            {
+                command.Parameters.Clear();
+                command.Connection = con.Close();
+            }
+
+        }
+        #endregion
+
+
+
 
     }
 
