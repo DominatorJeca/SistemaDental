@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Data.SqlClient;
 using System.Data;
+using System.Windows.Forms;
 
 namespace SistemaDental
 {
@@ -61,7 +62,7 @@ namespace SistemaDental
                 command.Parameters.AddWithValue("@UsuarioID", turno.UsuarioID);
                 command.Parameters.AddWithValue("@ComienzoTruno", turno.ComienzoTurno);
                 command.Parameters.AddWithValue("@FinalTurno", turno.FinalTurno);
-               
+
                 command.ExecuteNonQuery();
             }
             catch
@@ -85,7 +86,7 @@ namespace SistemaDental
                 command.CommandText = "sp_Turno_Eliminar";
                 command.CommandType = CommandType.StoredProcedure;
                 command.Parameters.AddWithValue("@AgendaID", AgendaID);
-             
+
 
                 command.ExecuteNonQuery();
             }
@@ -104,10 +105,61 @@ namespace SistemaDental
 
         #region Usuario-Procedimientos
 
+        public Usuario BuscarUsuario(string user, string contra)
+        {
+            //objeto que contendrá los datos del usuario
+            Usuario usuario = new Usuario();
+            try
+            {
+                command.Connection = con.Open();
+                //crear el comando SQL
+                command.CommandText = "sp_Usuario_VerificarLogin";
+                SqlParameter outputParametro = command.Parameters.Add("@mensajeRespuesta", SqlDbType.VarChar, 50);
 
-        #endregion
+                command.Parameters["@mensajeRespuesta"].Direction = ParameterDirection.Output;
+                command.CommandType = CommandType.StoredProcedure;
+                //Establecer los valores de parametros
+                command.Parameters.AddWithValue("@nombreUsuario", user);
+                command.Parameters.AddWithValue("@contrasena", contra);
+                reader = command.ExecuteReader();
 
+                string mensajeRespuesta = Convert.ToString(command.Parameters["@mensajeRespuesta"].Value);
+
+                if(mensajeRespuesta== "invalido")
+                {
+                    MessageBox.Show("Usuario o contraseña invalido");
+                }
+                else { 
+                using (reader)
+                {
+                    while (reader.Read())
+                    {
+                        //Obtener valores del usuario
+
+                        usuario.Nombre = Convert.ToString(reader["Nombre"]);
+                        usuario.Apellido = Convert.ToString(reader["Apellido"]);
+                        usuario.Administrador = Convert.ToBoolean(reader["administrador"]);
+                    }
+                }
+                }
+                return usuario;
+            }
+            catch (Exception e)
+            {
+
+                throw e;
+
+            }
+            finally
+            {    //Cerrar conexion
+                reader.Close();
+                command.Parameters.Clear();
+                command.Connection = con.Close();
+            }
+            #endregion
+
+
+        }
 
     }
-
 }
