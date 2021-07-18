@@ -1,0 +1,34 @@
+﻿<UserControl x:Class="SistemaDental.MVCCV.Vista.EditarUsuarioVista"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:SistemaDental.MVCCV.Vista"
+             mc:Ignorable="d" 
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" Height="471" Width="893">
+    <Grid>
+        <Grid.Background>
+            <ImageBrush ImageSource="/imagenes/TeethPattern.jpg" Stretch="UniformToFill"/>
+        </Grid.Background>
+        <TextBox Text="{Binding SelectedItem.Nombre, ElementName=cmbUsuario}" PreviewTextInput="PreviewTextInputOnlyLetters" Name="txtEditarNombre" Margin="426,118,85.6,258" materialDesign:HintAssist.Hint="Nombre" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontFamily="Bahnschrift" FontSize="12" Background="#7FFFFFFF"/>
+        <TextBox Text="{Binding SelectedItem.Apellido, ElementName=cmbUsuario}" PreviewTextInput="PreviewTextInputOnlyLetters" Name="txtEditarApellido" Margin="426,168,85.6,208" materialDesign:HintAssist.Hint="Apellido" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontFamily="Bahnschrift" FontSize="12" Background="#7FFFFFFF"/>
+        <TextBox PreviewTextInput="PreviewTextInputOnlyNumbers" Text="{Binding SelectedItem.Telefono, ElementName=cmbUsuario}" Name="txtEditarTelefono" Margin="426,222,85.6,156" materialDesign:HintAssist.Hint="Telefono" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontFamily="Bahnschrift" FontSize="12" Background="#7FFFFFFF"/>
+        <TextBox Text="{Binding SelectedItem.Correo, ElementName=cmbUsuario}" Name="txtEditarCorreo" Margin="54,257,457.6,121" materialDesign:HintAssist.Hint="Correo" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontFamily="Bahnschrift" FontSize="12" Background="#7FFFFFFF"/>
+
+
+
+        <ComboBox Text="{Binding SelectedItem.Genero, ElementName=cmbUsuario}" Name="cmbSexo" HorizontalAlignment="Left" Margin="584,274,0,0" VerticalAlignment="Top" Width="120">
+            <ComboBoxItem Content="Femenino" HorizontalAlignment="Left" Width="118.4"/>
+            <ComboBoxItem Content="Masculino" HorizontalAlignment="Left" Width="118.4"/>
+        </ComboBox>
+        <Label Content="Sexo" HorizontalAlignment="Left" Margin="426,277,0,0" VerticalAlignment="Top" FontSize="12" FontFamily="Bahnschrift"/>
+        <TextBox Text="{Binding SelectedItem.Contraseña, ElementName=cmbUsuario}"  Name="txtNuevaContra" Margin="54,305,457.6,72" materialDesign:HintAssist.Hint="Contraseña" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontFamily="Bahnschrift" FontSize="12" Background="#7FFFFFFF"/>
+        <Button x:Name="btnActualizarUsuario" Content="Actualizar" HorizontalAlignment="Left" Margin="258,418,0,0" VerticalAlignment="Top" Width="150" FontFamily="Bahnschrift" FontSize="16" Background="#FF056676" BorderBrush="{x:Null}" Click="btnActualizarUsuario_Click"/>
+        <Button x:Name="btnCancelar" Content="Cancelar" HorizontalAlignment="Left" Margin="473,418,0,0" VerticalAlignment="Top" Width="103" FontFamily="Bahnschrift" FontSize="16" Background="#FF056676" BorderBrush="{x:Null}" Click="btnCancelar_Click"/>
+        <Image Source="Happy_Sm.png" RenderTransformOrigin="0.735,0.5" Margin="54,51,433,168"/>
+        <Label Content="Puesto" HorizontalAlignment="Left" Margin="426,316,0,0" VerticalAlignment="Top" FontFamily="Bahnschrift" FontSize="12"/>
+        <ComboBox Text="{Binding SelectedItem.PuestoNombre, ElementName=cmbUsuario}" Name="cmbPuesto" HorizontalAlignment="Left" Margin="584,316,0,0" VerticalAlignment="Top" Width="120"/>
+        <Label Content="Usuario" HorizontalAlignment="Left" Margin="423,60,0,0" VerticalAlignment="Top" FontFamily="Bahnschrift" FontSize="12"/>
+        <ComboBox x:Name="cmbUsuario" HorizontalAlignment="Left" Margin="493,52,0,0" VerticalAlignment="Top" Width="213" />
+    </Grid>
+</UserControl>

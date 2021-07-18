@@ -33,6 +33,12 @@
             <DataTemplate DataType="{x:Type viewModel:Pacientesvistacontrolador}">
                 <view:VerPacienVista/>
             </DataTemplate>
+            <DataTemplate DataType="{x:Type viewModel:EdditarUsuariovistaControlador}">
+                <view:EditarUsuarioVista/>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type viewModel:InventarioVistaControlador}">
+                <view:InventarioVista/>
+            </DataTemplate>
         </ResourceDictionary>
     </Application.Resources>
 </Application>

@@ -137,6 +137,8 @@
     </Compile>
     <Compile Include="MVCCV\VistaControlador\CajaVistaControlador.cs" />
     <Compile Include="MVCCV\VistaControlador\CasaVistaControlador.cs" />
+    <Compile Include="MVCCV\VistaControlador\EdditarUsuariovistaControlador.cs" />
+    <Compile Include="MVCCV\VistaControlador\InventarioVistaControlador.cs" />
     <Compile Include="MVCCV\VistaControlador\ManejarusuariovistaControlador.cs" />
     <Compile Include="MVCCV\VistaControlador\Pacientesvistacontrolador.cs" />
     <Compile Include="MVCCV\VistaControlador\TratamientosvistaControlador.cs" />
@@ -144,6 +146,12 @@
     <Compile Include="MVCCV\VistaControlador\MenuPrincipalVistaControlador.cs" />
     <Compile Include="MVCCV\Vista\CajaVista.xaml.cs">
       <DependentUpon>CajaVista.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MVCCV\Vista\EditarUsuarioVista.xaml.cs">
+      <DependentUpon>EditarUsuarioVista.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MVCCV\Vista\InventarioVista.xaml.cs">
+      <DependentUpon>InventarioVista.xaml</DependentUpon>
     </Compile>
     <Compile Include="MVCCV\Vista\ManejarUsuarioVista.xaml.cs">
       <DependentUpon>ManejarUsuarioVista.xaml</DependentUpon>
@@ -227,6 +235,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="MVCCV\Vista\CajaVista.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MVCCV\Vista\EditarUsuarioVista.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MVCCV\Vista\InventarioVista.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
