@@ -128,6 +128,7 @@
     <Compile Include="ClaseCaja.cs" />
     <Compile Include="ClaseInventario.cs" />
     <Compile Include="ClasePaciente.cs" />
+    <Compile Include="ClaseProcedimiento.cs" />
     <Compile Include="ClaseTratamiento.cs" />
     <Compile Include="EditarUsuario.xaml.cs">
       <DependentUpon>EditarUsuario.xaml</DependentUpon>
