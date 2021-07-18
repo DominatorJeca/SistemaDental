@@ -24,5 +24,10 @@ namespace SistemaDental.MVCCV.Vista
         {
             InitializeComponent();
         }
+
+        private void btnCitas_Click(object sender, RoutedEventArgs e)
+        {
+            
+        }
     }
 }

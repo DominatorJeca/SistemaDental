@@ -5,13 +5,15 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              xmlns:local="clr-namespace:SistemaDental.MVCCV.Vista"
+             xmlns:viewModel="clr-namespace:SistemaDental.MVCCV.VistaControlador"
+             xmlns:otros="clr-namespace:SistemaDental"
              mc:Ignorable="d" 
              d:DesignHeight="455" d:DesignWidth="1050"  >
     <Grid>
         <StackPanel Margin="0">
             <StackPanel Orientation="Horizontal" Margin="0">
 
-                <Button x:Name="btnCitas" Height="150" Width="150" Margin="250,80,0,0" VerticalAlignment="Top"  Style="{StaticResource MaterialDesignRaisedButton}" RenderTransformOrigin="0.496,2.246" materialDesign:ButtonAssist.CornerRadius="10" FontFamily="Bahnschrift" FontSize="20" BorderBrush="{x:Null}">
+                <Button x:Name="btnCitas" Height="150" Width="150" Margin="250,80,0,0" VerticalAlignment="Top"  Style="{StaticResource MaterialDesignRaisedButton}" RenderTransformOrigin="0.496,2.246" materialDesign:ButtonAssist.CornerRadius="10" FontFamily="Bahnschrift" FontSize="20" BorderBrush="{x:Null}" Command="{Binding Path= DataContext.CitaVistaComando, RelativeSource={RelativeSource AncestorType={x:Type otros:Menu}}, Mode=OneWay}"  >
                     <Button.Background>
                         <LinearGradientBrush StartPoint="0,0" EndPoint="1,2">
                             <GradientStop Color="#56A2BF" Offset="0"/>

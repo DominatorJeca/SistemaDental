@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -10,16 +11,17 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
-using System.Text.RegularExpressions;
 
-namespace SistemaDental
+namespace SistemaDental.MVCCV.Vista
 {
     /// <summary>
-    /// Interaction logic for AgregarUsuario.xaml
+    /// Lógica de interacción para VistaAgregarUsuario.xaml
     /// </summary>
-    public partial class AgregarUsuario : Window
+    public partial class VistaAgregarUsuario : UserControl
     {
+     
         //Variables miembro
         private Usuario usuario = new Usuario();
         private Puesto puesto = new Puesto();
@@ -27,14 +29,14 @@ namespace SistemaDental
         private String Nombree;
 
         //Contructores
-        public AgregarUsuario()
+        public VistaAgregarUsuario()
         {
             InitializeComponent();
             MostrarPuesto();
-           
+
         }
 
-        public AgregarUsuario(bool admin, string name)
+        public VistaAgregarUsuario(bool admin, string name)
         {
             InitializeComponent();
             MostrarPuesto();
@@ -47,12 +49,7 @@ namespace SistemaDental
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void btnRegresar_Click(object sender, RoutedEventArgs e)
-        {
-            Ajustes ajustes = new Ajustes(Admin,Nombree);
-            ajustes.Show();
-            this.Close();
-        }
+      
 
         /// <summary>
         /// Asigna la lista de puestos al cmbPuestos
@@ -108,7 +105,8 @@ namespace SistemaDental
             {
                 MessageBox.Show("La confirmación de contraseña no coincide");
                 return false;
-            }else if (!ValidarEmail(txtConfirmarCorreo.Text) && !ValidarEmail(txtAgregarCorreo.Text))
+            }
+            else if (!ValidarEmail(txtConfirmarCorreo.Text) && !ValidarEmail(txtAgregarCorreo.Text))
             {
                 MessageBox.Show("Por favor, ingrese un correo valido");
                 return false;
@@ -131,8 +129,8 @@ namespace SistemaDental
             txtAgregarApellido.Text = string.Empty;
             txtAgregarNombre.Text = string.Empty;
             txtAgregarCorreo.Text = string.Empty;
-            txtAgregarIdentidad.Text = string.Empty; 
-            txtAgregarTelefono.Text= string.Empty;
+            txtAgregarIdentidad.Text = string.Empty;
+            txtAgregarTelefono.Text = string.Empty;
             txtAgregarContra.Password = string.Empty;
             txtConfirmarContra.Password = string.Empty;
             txtConfirmarCorreo.Text = string.Empty;
@@ -169,7 +167,7 @@ namespace SistemaDental
                     MessageBox.Show("Ha ocurrido un error al momento de insertar el empleado...");
                     Console.WriteLine(ex.Message);
                 }
-              
+
             }
 
         }
@@ -193,3 +191,4 @@ namespace SistemaDental
         }
     }
 }
+
