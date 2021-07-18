@@ -15,7 +15,7 @@ namespace SistemaDental
         SqlDataReader reader;
 
         #region Turno - Procedimientos
-     
+
         public void ActualizarTurno(Turno turno)
         {
 
@@ -49,7 +49,8 @@ namespace SistemaDental
 
 
         }
-        
+
 
     }
+
 }
