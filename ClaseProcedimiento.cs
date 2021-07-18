@@ -114,22 +114,14 @@ namespace SistemaDental
                 command.Connection = con.Open();
                 //crear el comando SQL
                 command.CommandText = "sp_Usuario_VerificarLogin";
-                SqlParameter outputParametro = command.Parameters.Add("@mensajeRespuesta", SqlDbType.VarChar, 50);
-
-                command.Parameters["@mensajeRespuesta"].Direction = ParameterDirection.Output;
+                
                 command.CommandType = CommandType.StoredProcedure;
                 //Establecer los valores de parametros
                 command.Parameters.AddWithValue("@nombreUsuario", user);
                 command.Parameters.AddWithValue("@contrasena", contra);
                 reader = command.ExecuteReader();
 
-                string mensajeRespuesta = Convert.ToString(command.Parameters["@mensajeRespuesta"].Value);
-
-                if(mensajeRespuesta== "invalido")
-                {
-                    MessageBox.Show("Usuario o contraseña invalido");
-                }
-                else { 
+                
                 using (reader)
                 {
                     while (reader.Read())
@@ -141,7 +133,7 @@ namespace SistemaDental
                         usuario.Administrador = Convert.ToBoolean(reader["administrador"]);
                     }
                 }
-                }
+                
                 return usuario;
             }
             catch (Exception e)
