@@ -10,6 +10,10 @@ namespace SistemaDental
 {
     class ClaseProcedimiento
     {
+        BDConnexion con = new BDConnexion();
+        SqlCommand command = new SqlCommand();
+        SqlDataReader reader;
+
         public void ActualizarTurno(ClaseTurno turno)
         {
 
