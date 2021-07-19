@@ -1,0 +1,34 @@
+﻿<Window x:Class="SistemaDental.MVCCV.Vista.ReestablecerContrasenia"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:SistemaDental.MVCCV.Vista"
+        mc:Ignorable="d"
+           xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
+        Title="ReestablecerContrasenia" Height="450" Width="900" WindowStyle="None">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <StackPanel x:Name="pnlPaso1" Grid.Row="1" Visibility="Collapsed">
+            <TextBlock FontSize="30" FontFamily="Bahnschrift">Ingrese el correo de su usuario</TextBlock>
+            <Button Style="{StaticResource MaterialDesignFlatAccentButton}" Background="Aqua" Content="Buscar correo" BorderBrush="{x:Null}" Foreground="White"></Button>
+        </StackPanel>
+        <StackPanel Name="pnlPaso2" Grid.Row="1" Visibility="Collapsed">
+            <TextBlock FontSize="30" FontFamily="Bahnschrift">Se le envio un codigo aleatorio a su correo electronico, <LineBreak/> por favor ingrese el codigo enviado</TextBlock>
+            <TextBox Style="{StaticResource MaterialDesignFloatingHintTextBox}" materialDesign:HintAssist.Hint="Codigo de verificacion"/>
+            <Button Style="{StaticResource MaterialDesignFlatAccentButton}" Background="Aqua" Content="Verificar correo" BorderBrush="{x:Null}" Foreground="White"></Button>
+        </StackPanel>
+        <StackPanel x:Name="pnlPaso3" Grid.Row="1" Margin="30">
+            <TextBlock FontSize="30" FontFamily="Bahnschrift" HorizontalAlignment="Center">Porfavor ingrese los datos correspondientes </TextBlock>
+            <TextBox Style="{StaticResource MaterialDesignFloatingHintTextBox}" Margin="15,20,15,0" Width="600" materialDesign:HintAssist.Hint="Contraseña anterior"/>
+            <TextBox Style="{StaticResource MaterialDesignFloatingHintTextBox}" Margin="15,20,15,0"  Width="600" materialDesign:HintAssist.Hint="Confirmar contraseña anterior"/>
+            <TextBox Style="{StaticResource MaterialDesignFloatingHintTextBox}" Margin="15,20,15,0"  Width="600" materialDesign:HintAssist.Hint="Nueva contraseña"/>
+            <TextBox Style="{StaticResource MaterialDesignFloatingHintTextBox}" Margin="15,20,15,0" Width="600" materialDesign:HintAssist.Hint="Confirmar nueva contraseña"/>
+        </StackPanel>
+        
+    </Grid>
+</Window>

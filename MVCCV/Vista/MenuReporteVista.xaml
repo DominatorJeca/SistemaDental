@@ -3,17 +3,29 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:SistemaDental.MVCCV.Vista"
+             xmlns:rv="clr-namespace:Microsoft.Reporting.WinForms;assembly=Microsoft.ReportViewer.WinForms"
+             xmlns:BoldReport="clr-namespace:BoldReports.UI.Xaml;assembly=BoldReports.Wpf"
              mc:Ignorable="d" 
              d:DesignHeight="455" d:DesignWidth="1050">
     <Grid>
         <Grid.Background>
             <ImageBrush ImageSource="/imagenes/TeethPattern.jpg" Stretch="UniformToFill"/>
         </Grid.Background>
-        <Button x:Name="btnreporte1" Content="Reporte 1" HorizontalAlignment="Center" Margin="0,125,0,0" VerticalAlignment="Top" Width="224" Background="#FF056676" BorderBrush="{x:Null}" />
-        <Button x:Name="btnreporte2" Content="Reporte 2" HorizontalAlignment="Center" Margin="0,175,0,0" VerticalAlignment="Top" Width="224" Background="#FF056676" BorderBrush="{x:Null}" />
-        <Button x:Name="btnreporte3" Content="Reporte 3" HorizontalAlignment="Center" Margin="0,225,0,0" VerticalAlignment="Top" Width="224" Background="#FF056676" BorderBrush="{x:Null}" />
-        <Button x:Name="btnreporte4" Content="Reporte 4" HorizontalAlignment="Center" Margin="0,276,0,0" VerticalAlignment="Top" Width="224" Background="#FF056676" BorderBrush="{x:Null}" />
-        <Button x:Name="btnreporte5" Content="Reporte 5" HorizontalAlignment="Center" Margin="0,328,0,0" VerticalAlignment="Top" Width="224" Background="#FF056676" BorderBrush="{x:Null}" />
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="300"/>
+            <ColumnDefinition/>
+
+        </Grid.ColumnDefinitions>
+        <StackPanel>
+            <Button x:Name="btnreporte1" Content="Reporte materiales proximos a vencer" HorizontalAlignment="Stretch"  VerticalAlignment="Top" Width="auto" Background="#FF056676" BorderBrush="{x:Null}" Click="btnreporte1_Click" />
+            <Button x:Name="btnreporte2" Content="Reporte de compras segun mes" HorizontalAlignment="Stretch"  VerticalAlignment="Top" Background="#FF056676" BorderBrush="{x:Null}" Click="btnreporte2_Click" />
+            <Button x:Name="btnreporte3" Content="Reporte de tratamientos" HorizontalAlignment="Stretch"  VerticalAlignment="Top"  Background="#FF056676" BorderBrush="{x:Null}" Click="btnreporte3_Click" />
+            <Button x:Name="btnreporte4" Content="Reporte de ventas segun año y mes" HorizontalAlignment="Stretch" VerticalAlignment="Top" Background="#FF056676" BorderBrush="{x:Null}" Click="btnreporte4_Click" />
+            <Button x:Name="btnreporte5" Content="Reporte de ventas por año" HorizontalAlignment="Stretch"  VerticalAlignment="Top"  Background="#FF056676" BorderBrush="{x:Null}" Click="btnreporte5_Click" />
+        </StackPanel>
+        <BoldReport:ReportViewer Grid.Column="1" x:Name="rpViewer">
+            
+        </BoldReport:ReportViewer>
+  
     </Grid>
 </UserControl>

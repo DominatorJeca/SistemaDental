@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using BoldReports.UI.Xaml;
 
 namespace SistemaDental.MVCCV.Vista
 {
@@ -23,6 +24,56 @@ namespace SistemaDental.MVCCV.Vista
         public MenuReporteVista()
         {
             InitializeComponent();
+         
+            
+         
+        }
+
+        private void btnreporte1_Click(object sender, RoutedEventArgs e)
+        {
+
+            /* rpViewer.LocalReport.ReportPath= System.IO.Path.Combine(Environment.CurrentDirectory, @"/Reportes/FecVenc.rdlc");
+             SistemaDentalDataSet dataSet = new SistemaDentalDataSet();
+             rpViewer.LocalReport.DataSources.Clear();
+             rpViewer.LocalReport.DataSources.Add(new ReportDataSource(""))  
+             rpViewer.LocalReport.Refresh();
+             rpViewer.Refresh();*/
+            rpViewer.ReportPath = System.IO.Path.Combine(Environment.CurrentDirectory, @"Reportes\FecVenc.rdl");
+            rpViewer.Refresh();
+            rpViewer.RefreshReport();
+        }
+
+        private void btnreporte2_Click(object sender, RoutedEventArgs e)
+        {
+         
+            rpViewer.ReportPath = null;
+            rpViewer.ReportPath = System.IO.Path.Combine(Environment.CurrentDirectory, @"Reportes\MesCompra.rdl");
+            rpViewer.RefreshReport();
+        }
+
+        private void btnreporte3_Click(object sender, RoutedEventArgs e)
+        {
+       
+            rpViewer.ReportPath = System.IO.Path.Combine(Environment.CurrentDirectory, @"Reportes\tratamientos.rdl");
+            rpViewer.Refresh();
+            rpViewer.RefreshReport();
+        }
+
+        private void btnreporte4_Click(object sender, RoutedEventArgs e)
+        {
+          
+            rpViewer.ReportPath = null;
+            rpViewer.ReportPath = System.IO.Path.Combine(Environment.CurrentDirectory, @"Reportes\VentasAñosoMesesEspecificos.rdl");
+            rpViewer.Refresh();
+            rpViewer.RefreshReport();
+        }
+
+        private void btnreporte5_Click(object sender, RoutedEventArgs e)
+        {
+            rpViewer.ReportPath = null;
+            rpViewer.ReportPath = System.IO.Path.Combine(Environment.CurrentDirectory, @"Reportes\VentasAñosoMesesEspecificos.rdl");
+            rpViewer.Refresh();
+            rpViewer.RefreshReport();
         }
     }
 }

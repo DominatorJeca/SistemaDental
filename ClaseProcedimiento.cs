@@ -150,7 +150,7 @@ namespace SistemaDental
         public Usuario BuscarUsuario(string user, string contra)
         {
             //objeto que contendrá los datos del usuario
-            Usuario usuario = new Usuario();
+            Usuario usuario = null;
             try
             {
                 command.Connection = con.Open();
@@ -169,7 +169,7 @@ namespace SistemaDental
                     while (reader.Read())
                     {
                         //Obtener valores del usuario
-
+                        usuario = new Usuario();
                         usuario.Nombre = Convert.ToString(reader["Nombre"]);
                         usuario.Apellido = Convert.ToString(reader["Apellido"]);
                         usuario.Administrador = Convert.ToBoolean(reader["administrador"]);
@@ -194,7 +194,37 @@ namespace SistemaDental
 
 
         }
+        public Usuario BuscarEmail(string correo)
+        {
+            try
+            {
+                Usuario usuario = null;
+                command.Connection = con.Open();
+                //crear el comando SQL
+                command.CommandText = "BuscarEmail";
+                command.Parameters.AddWithValue("@CorreoElectronico", correo);
+                command.CommandType = CommandType.StoredProcedure;
+                reader = command.ExecuteReader();
+                if (reader.Read())
+                {
+                    usuario = new Usuario();
+                    usuario.Id=Convert.ToInt32(reader[0]);
+                    usuario.Nombre = Convert.ToString(reader[1]);
 
+                }
+
+                return usuario;
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+            finally
+            {
+
+            }
+
+        }
         public List<ClaseInventario> MostrarInventario ()
         {
             try

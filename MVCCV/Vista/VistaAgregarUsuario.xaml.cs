@@ -66,7 +66,7 @@ namespace SistemaDental.MVCCV.Vista
         /// </summary>
         public void ObtenerValores()
         {
-            usuario.Id = Convert.ToString(txtAgregarIdentidad.Text);
+            usuario.Id = Convert.ToInt32(txtAgregarIdentidad.Text);
             usuario.Nombre = Convert.ToString(txtAgregarNombre.Text);
             usuario.Apellido = Convert.ToString(txtAgregarApellido.Text);
             usuario.Telefono = Convert.ToString(txtAgregarTelefono.Text);

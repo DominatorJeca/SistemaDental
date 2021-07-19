@@ -8,7 +8,7 @@
         xmlns:viewModel="clr-namespace:SistemaDental.MVCCV.VistaControlador"
         xmlns:local="clr-namespace:SistemaDental"
         mc:Ignorable="d"
-        Title="Menu" Height="555" Width="1050" ResizeMode="NoResize" BorderBrush="#FF5EAAA8" WindowStyle="None" AllowsTransparency="True" MouseDown="Window_MouseDown">
+        Title="Menu" Height="555" Width="1050" ResizeMode="NoResize" BorderBrush="#FF5EAAA8" WindowStyle="None" AllowsTransparency="False" MouseDown="Window_MouseDown">
     <Window.Background>
         <ImageBrush ImageSource="/imagenes/FondoMenuPrincipal.png"/>
     </Window.Background>
