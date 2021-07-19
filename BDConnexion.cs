@@ -12,7 +12,7 @@ namespace SistemaDental
 {
     class BDConnexion
     {
-        private static string connectionString = @"server = (local); Initial Catalog = clinicaDental; Integrated Security = True; MultipleActiveResultSets=true";
+        private static string connectionString = @"Server=tcp:sistemassps.database.windows.net,1433;Database=SistemaDental;User ID=SistemasSps;Password=grupito7@;Trusted_Connection=False;Encrypt=True;MultipleActiveResultSets=True;";
         protected SqlConnection sqlConnection = new SqlConnection(connectionString);
 
 

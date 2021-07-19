@@ -105,8 +105,6 @@ namespace SistemaDental
                 command.Parameters.AddWithValue("@FechaVencimiento", FechaVenci);
                 command.Parameters.AddWithValue("@PrecioCompra", precio);
                 command.Parameters.AddWithValue("@cantidad", cantidad);
-
-
             }
             catch
             {

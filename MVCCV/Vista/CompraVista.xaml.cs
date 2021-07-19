@@ -24,5 +24,10 @@ namespace SistemaDental.MVCCV.Vista
         {
             InitializeComponent();
         }
+        public string Hola = "Alemania";
+        private void btnComprar_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }
