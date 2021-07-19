@@ -15,10 +15,8 @@
 
             </ResourceDictionary.MergedDictionaries>
 
-
-            <DataTemplate DataType="{x:Type viewModel:MenuPrincipalVistaControlador}">
-                <local:Menu/>
-            </DataTemplate>
+   
+          
             <DataTemplate DataType="{x:Type viewModel:CasaVistaControlador}">
                 <view:MenuInicioVista/>
             </DataTemplate>
@@ -54,9 +52,11 @@
             </DataTemplate>
 
             <DataTemplate DataType="{x:Type viewModel:CompraVistaControlador}">
-                <view:AgragarCompra/>
+                <view:CompraVista/>
             </DataTemplate>
-
+            <DataTemplate DataType="{x:Type viewModel:MenuReporteVistaControlador}">
+                <view:MenuReporteVista/>
+            </DataTemplate>
         </ResourceDictionary>
     </Application.Resources>
 </Application>

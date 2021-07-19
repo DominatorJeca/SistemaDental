@@ -40,6 +40,26 @@
     <StartupObject>
     </StartupObject>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x64\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <LangVersion>7.3</LangVersion>
+    <ErrorReport>prompt</ErrorReport>
+    <Prefer32Bit>true</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
+    <OutputPath>bin\x64\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <LangVersion>7.3</LangVersion>
+    <ErrorReport>prompt</ErrorReport>
+    <Prefer32Bit>true</Prefer32Bit>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="ControlzEx, Version=4.0.0.0, Culture=neutral, PublicKeyToken=69f1c32f803d307e, processorArchitecture=MSIL">
       <HintPath>packages\ControlzEx.4.3.0\lib\net462\ControlzEx.dll</HintPath>
@@ -141,6 +161,7 @@
     <Compile Include="MVCCV\VistaControlador\EdditarUsuariovistaControlador.cs" />
     <Compile Include="MVCCV\VistaControlador\InventarioVistaControlador.cs" />
     <Compile Include="MVCCV\VistaControlador\ManejarusuariovistaControlador.cs" />
+    <Compile Include="MVCCV\VistaControlador\MenuReporteVistaControlador.cs" />
     <Compile Include="MVCCV\VistaControlador\Pacientesvistacontrolador.cs" />
     <Compile Include="MVCCV\VistaControlador\TratamientosvistaControlador.cs" />
     <Compile Include="MVCCV\VistaControlador\VerPacienVistaControlador.cs" />
@@ -153,11 +174,11 @@
       <DependentUpon>MenuReporte.xaml</DependentUpon>
     </Compile>
     <Compile Include="MVCCV\VistaControlador\CompraVistaControlador.cs" />
-    <Compile Include="MVCCV\Vista\AgragarCompra.xaml.cs">
-      <DependentUpon>AgragarCompra.xaml</DependentUpon>
-    </Compile>
     <Compile Include="MVCCV\Vista\CajaVista.xaml.cs">
       <DependentUpon>CajaVista.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MVCCV\Vista\CompraVista.xaml.cs">
+      <DependentUpon>CompraVista.xaml</DependentUpon>
     </Compile>
     <Compile Include="MVCCV\Vista\EditarUsuarioVista.xaml.cs">
       <DependentUpon>EditarUsuarioVista.xaml</DependentUpon>
@@ -173,6 +194,9 @@
     </Compile>
     <Compile Include="MVCCV\Vista\MenuInicioVista.xaml.cs">
       <DependentUpon>MenuInicioVista.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MVCCV\Vista\MenuReporteVista.xaml.cs">
+      <DependentUpon>MenuReporteVista.xaml</DependentUpon>
     </Compile>
     <Compile Include="MVCCV\Vista\PacientesVistaControlador.xaml.cs">
       <DependentUpon>PacientesVistaControlador.xaml</DependentUpon>
@@ -257,11 +281,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="MVCCV\Vista\AgragarCompra.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
     <Page Include="MVCCV\Vista\CajaVista.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MVCCV\Vista\CompraVista.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -282,6 +306,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="MVCCV\Vista\MenuInicioVista.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MVCCV\Vista\MenuReporteVista.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

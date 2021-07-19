@@ -14,7 +14,7 @@ namespace SistemaDental
         //variable miembro
         private Puesto puesto = new Puesto();
         //cadena de conexion
-        private static string connectionString = ConfigurationManager.ConnectionStrings["SistemaDental.Properties.Settings.ClinicaBDConnection"].ConnectionString;
+        private static string connectionString = @"server = (local); Initial Catalog = clinicaDental; Integrated Security = True; MultipleActiveResultSets=true";
         private SqlConnection sqlConnection = new SqlConnection(connectionString);
 
         //Propiedades

@@ -19,6 +19,11 @@ namespace SistemaDental.MVCCV.VistaControlador
         public InventarioVistaControlador  inventarioVista { get; set; }
         public ManejarusuariovistaControlador manejarusuariovista { get; set; }
 
+        public CitaVistaControlador CitaVista { get; set; }
+        public AjusteVistaControlador AjusteVista { get; set; }
+        public CompraVistaControlador CompraVista { get; set; }
+        public MenuReporteVistaControlador menuReporteVista { get; set; }
+
         private object _vistaActual;
         public RelayCommand CasaVistaComando { get; set; }
         public RelayCommand CajaVistaComando { get; set; }
@@ -28,12 +33,10 @@ namespace SistemaDental.MVCCV.VistaControlador
         public RelayCommand InventarioVistaComando { get; set; }
         public RelayCommand manejarusuariovistaComando { get; set; }
 
-        public CitaVistaControlador CitaVista { get; set; }
-        public AjusteVistaControlador AjusteVista { get; set; }
-
+        public RelayCommand MenuReporteVistaComando { get; set; }
         public RelayCommand CitaVistaComando { get; set; }
         public RelayCommand AjusteVistaComando { get; set; }
-        public CompraVistaControlador CompraVista { get; set; }
+      
         public RelayCommand CompraVistaComando { get; set; }
         public object vistaActual
         {
@@ -51,7 +54,7 @@ namespace SistemaDental.MVCCV.VistaControlador
             edditarUsuariovista = new EdditarUsuariovistaControlador();
             inventarioVista = new InventarioVistaControlador();
             manejarusuariovista = new ManejarusuariovistaControlador();
-
+            menuReporteVista = new MenuReporteVistaControlador();
             CitaVista = new CitaVistaControlador();
             AjusteVista = new AjusteVistaControlador();
             CompraVista = new CompraVistaControlador();
@@ -87,7 +90,6 @@ namespace SistemaDental.MVCCV.VistaControlador
                 vistaActual = manejarusuariovista;
             });
 
-
             CitaVistaComando = new RelayCommand(o =>
             {
                 vistaActual = CitaVista;
@@ -102,6 +104,10 @@ namespace SistemaDental.MVCCV.VistaControlador
             CompraVistaComando = new RelayCommand(o =>
             {
                 vistaActual = CompraVista;
+            });
+            MenuReporteVistaComando = new RelayCommand(o =>
+            {
+                vistaActual = menuReporteVista;
             });
         }
 

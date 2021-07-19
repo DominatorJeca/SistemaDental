@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -17,23 +16,13 @@ using System.Windows.Shapes;
 namespace SistemaDental.MVCCV.Vista
 {
     /// <summary>
-    /// Interaction logic for AgragarCompra.xaml
+    /// Interaction logic for MenuReporteVista.xaml
     /// </summary>
-    public partial class AgragarCompra : Page
+    public partial class MenuReporteVista : UserControl
     {
-        public AgragarCompra()
+        public MenuReporteVista()
         {
             InitializeComponent();
-        }
-
-        private void btnComprar_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void btnagregar_Click(object sender, RoutedEventArgs e)
-        {
-            
         }
     }
 }
