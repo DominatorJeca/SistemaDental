@@ -55,9 +55,6 @@ namespace SistemaDental
         private void ObtenerValues()
         {
             caja.Cantidad = (float)Convert.ToDecimal(txtCantidadCaja.Text);
-            
-            
-               
                 if (rbEgreso.IsChecked == true)
                 {
  

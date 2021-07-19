@@ -23,13 +23,13 @@ namespace SistemaDental
         private bool Admin;
         private String Nombree;
         private Caja frmCaja = new Caja();
-        private BDConnexion conex = new BDConnexion();
+ 
    
         //Constructores
         public Menu()
         {
             InitializeComponent();
-            conex.CheckConnection();
+        
         }
 
         public Menu(bool admin,string name)

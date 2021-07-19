@@ -20,6 +20,7 @@ namespace SistemaDental
     public partial class Login : Window
     {
         private Usuario usuario = new Usuario();
+        ClaseProcedimiento proc = new ClaseProcedimiento();
         public Login()
         {
             InitializeComponent();
@@ -41,32 +42,20 @@ namespace SistemaDental
             try
             {
                 //buscar usuario
-                Usuario elUsuario = usuario.BuscarUsuario(txtUsuario.Text);
-
-
-                //Verificar si el usuario existe
-                if (elUsuario.Id == null)
+                Usuario elUsuario = proc.BuscarUsuario(txtUsuario.Text,txtpas.Text);
+                if (elUsuario != null)
                 {
-                    MessageBox.Show("El usuario o contraseña es incorrecto");
+
+                    Menu men = new Menu(elUsuario.Administrador, elUsuario.Nombre);
+                    men.Show();
+                    this.Close();
                 }
                 else
-                {
-                    if ((elUsuario.Contraseña == txtPassword.Password) && (elUsuario.Estado == true))
-                    {
-                        //Abrir formulario Menu
-                        Menu menu = new Menu(elUsuario.Administrador,elUsuario.Nombre);
-                        menu.Show();
-                        this.Hide();
-                    }
-                    else if (!elUsuario.Estado)
-                    {
-                        MessageBox.Show("Su usuario se encuentra deshabilitado, por favor comunicarse con ");
-                    }
-                    else
-                    {
-                        MessageBox.Show("El usuario o contraseña es incorrecto");
-                    }
-                }
+                    MessageBox.Show("Usuario o contraseña incorrectos");
+
+                //Verificar si el usuario existe
+              
+                 
 
             }
             catch (Exception ex)
@@ -86,13 +75,23 @@ namespace SistemaDental
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-           
-            
-                txtPassword.Visibility = Visibility.Hidden;
+
+            if (btnview.Content == FindResource("Nover"))
+            {
+                btnview.Content = FindResource("ver");
+                txtPassword.Visibility = Visibility.Collapsed;
                 txtpas.Visibility = Visibility.Visible;
                 txtpas.Text = txtPassword.Password;
-                btnview.Visibility=Visibility.Hidden;
-                btnview2.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                btnview.Content = FindResource("Nover");
+                txtPassword.Visibility = Visibility.Visible;
+                txtpas.Visibility = Visibility.Collapsed;
+                txtPassword.Password = txtpas.Text;
+        
+            }
+         
 
         }
 
@@ -113,7 +112,7 @@ namespace SistemaDental
             txtpas.Visibility = Visibility.Hidden;
             txtPassword.Password = txtpas.Text ;
             btnview.Visibility = Visibility.Visible;
-            btnview2.Visibility = Visibility.Hidden;
+           // btnview2.Visibility = Visibility.Hidden;
         }
 
         private void Window_Closed(object sender, EventArgs e)

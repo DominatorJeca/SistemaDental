@@ -7,39 +7,34 @@
               xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              mc:Ignorable="d" 
              d:DesignHeight="455" d:DesignWidth="1050" >
-    <Grid>
+    <Grid Loaded="Grid_Loaded">
 
         <Grid.Background>
             <ImageBrush ImageSource="/imagenes/TeethPattern.jpg" Stretch="UniformToFill"/>
         </Grid.Background>
-        <ComboBox x:Name="cmbInventario" materialDesign:HintAssist.Hint="Inventario" Margin="33,128,735,0" VerticalAlignment="Top" FontFamily="Bahnschrift" IsReadOnly="False" Height="36"/>
-        <TextBox x:Name="txtAgregarNombre" Margin="33,90,735,0" materialDesign:HintAssist.Hint="Empleado" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontFamily="Bahnschrift" FontSize="12" Background="#7FFFFFFF" Height="35" VerticalAlignment="Top"/>
-        <DatePicker Name="fchCompra" materialDesign:HintAssist.Hint="Fecha de Compra" Margin="355,99,516,330" VerticalAlignment="Stretch" />
-        <DatePicker Name="fchVencimiento" materialDesign:HintAssist.Hint="Fecha de Vencimiento" Margin="355,52,516,370" VerticalAlignment="Stretch" />
-        <TextBox x:Name="txtprecio"  Margin="33,52,735,0" materialDesign:HintAssist.Hint="Precio" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontFamily="Bahnschrift" FontSize="12" Background="#7FFFFFFF" Height="33" VerticalAlignment="Top"/>
-        <DataGrid Margin="0,187,394,65" Background="#FF056676" x:Name="dgv_Compras" HorizontalContentAlignment="Center" IsReadOnly="True" AutoGenerateColumns="False" HorizontalAlignment="Right" Width="623">
+        <DatePicker Name="fchVencimiento" materialDesign:HintAssist.Hint="Fecha de Vencimiento" Margin="33,103,617,319" VerticalAlignment="Stretch" />
+        <TextBox x:Name="txtNombreProd" Style="{StaticResource MaterialDesignFloatingHintTextBox}" Text="{Binding ElementName=dgv_Compras,Path=SelectedItem.NombreMaterial}" materialDesign:HintAssist.Hint="Nombre del producto" FontFamily="Bahnschrift" FontSize="12" Margin="33,60,617,357"/>
+        <TextBox x:Name="txtprecio"  Margin="451,65,394,0" materialDesign:HintAssist.Hint="Precio" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontFamily="Bahnschrift" FontSize="12" Background="#7FFFFFFF" Height="33" VerticalAlignment="Top"/>
+        <DataGrid Margin="0,149,394,65"  Background="#FF056676" x:Name="dgv_Compras" HorizontalContentAlignment="Center" IsReadOnly="True" AutoGenerateColumns="False" HorizontalAlignment="Right" Width="623"  SelectionMode="Single" SelectionChanged="dgv_Compras_SelectionChanged">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Inventario"  Width="150"></DataGridTextColumn>
-                <DataGridTextColumn Header="Empleado"  Width="150"></DataGridTextColumn>
-                <DataGridTextColumn Header="Fecha de Compra"  Width="150"></DataGridTextColumn>
-                <DataGridTextColumn Header="Fecha de Vencimiento" Width="200"></DataGridTextColumn>
+                <DataGridTextColumn Header="Producto"  Width="150*" Binding="{Binding NombreMaterial}"/>
+                <DataGridTextColumn Header="Cantidad Actual" Width="150* " Binding="{Binding Cantidad}"/>
             </DataGrid.Columns>
         </DataGrid>
-        <TextBox x:Name="txtCantidad" Margin="355,134,516,291" materialDesign:HintAssist.Hint="Cantidad" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontFamily="Bahnschrift" FontSize="12" Background="#7FFFFFFF"/>
-        <DataGrid Margin="676,128,10,65" Background="#FF056676" x:Name="dgv_Carrito" HorizontalContentAlignment="Center" IsReadOnly="True" AutoGenerateColumns="False">
+        <TextBox x:Name="txtCantidad" Margin="451,103,394,319" materialDesign:HintAssist.Hint="Cantidad a comprar" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontFamily="Bahnschrift" FontSize="12" Background="#7FFFFFFF"/>
+        <DataGrid Margin="676,128,10,65" Background="#FF056676" x:Name="dgv_Carrito" HorizontalContentAlignment="Center" IsReadOnly="True" AutoGenerateColumns="False"  ScrollViewer.CanContentScroll="True" >
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Inventario"  Width="150"/>
-                <DataGridTextColumn Header="Empleado"  Width="150"/>
-                <DataGridTextColumn Header="Fecha de Compra"  Width="150"/>
-                <DataGridTextColumn Header="Fecha de Vencimiento" Width="200"/>
-                <DataGridTextColumn Header="Cantidad" Width="200"/>
-                <DataGridTextColumn Header="Precio" Width="200"/>
+                <DataGridTextColumn Header="Producto"  Width="100" Binding="{Binding NombreMaterial}"/>
+                <DataGridTextColumn Header="Cantidad" Width="100" Binding="{Binding Cantidad}"/>
+                <DataGridTextColumn Header="Precio" Width="100" Binding="{Binding precio}"/>
+                <DataGridTextColumn Header="Fecha de vencimiento" Width="auto" Binding="{Binding fechaVenc}" />
 
 
             </DataGrid.Columns>
         </DataGrid>
-        <Button x:Name="btnagregar" Content="Agregar al Carrito" Margin="676,47,10,356" FontFamily="Bahnschrift" FontSize="16" Background="#48C9B0 " BorderBrush="{x:Null}" Height="Auto" RenderTransformOrigin="0.491,0.744" />
-        <Button x:Name="btnComprar" Content="Comprar" Margin="676,395,10,10" FontFamily="Bahnschrift" FontSize="16" Background="#48C9B0 " BorderBrush="{x:Null}" Height="Auto" Click="btnComprar_Click"/>
+        <Button x:Name="btnagregar" Content="Agregar al Carrito" Margin="676,71,10,332" FontFamily="Bahnschrift" FontSize="16" Background="#48C9B0 " BorderBrush="{x:Null}" Height="Auto" RenderTransformOrigin="0.491,0.744" Click="btnagregar_Click" />
+        <Button x:Name="btnComprar" Content="Comprar" Margin="676,395,10,10" FontFamily="Bahnschrift" FontSize="16" Background="#48C9B0 " BorderBrush="{x:Null}" Height="Auto" Command="{Binding LoadComand}" Click="btnComprar_Click"/>
+        <Button x:Name="btnQuitar" Content="Quitar del carrito" Margin="676,16,10,389" FontFamily="Bahnschrift" FontSize="16" Background="#48C9B0 " BorderBrush="{x:Null}" Height="Auto" Click="btnQuitar_Click" />
 
 
 
