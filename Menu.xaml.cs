@@ -24,12 +24,18 @@ namespace SistemaDental
         private String Nombree;
         private Caja frmCaja = new Caja();
         private BDConnexion conex = new BDConnexion();
-   
+        private ClaseProcedimiento proced = new ClaseProcedimiento();
+
         //Constructores
         public Menu()
         {
             InitializeComponent();
             conex.CheckConnection();
+            Turno turno = new Turno();
+            turno.UsuarioID = 33;
+            turno.ComienzoTurno = DateTime.Now;
+
+            proced.AgregarTurno(turno);
         }
 
         public Menu(bool admin,string name)

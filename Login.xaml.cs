@@ -51,8 +51,7 @@ namespace SistemaDental
                     MessageBox.Show("El usuario o contraseña es incorrecto");
                 }
                 else
-                {
-                    
+                { 
                         //Abrir formulario Menu
                         EditarUsuario menu = new EditarUsuario();
                         menu.Show();
