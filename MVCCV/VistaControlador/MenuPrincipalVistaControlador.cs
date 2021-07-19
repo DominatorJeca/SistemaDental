@@ -1,9 +1,11 @@
-﻿using SistemaDental.Base;
+﻿using Microsoft.Xaml.Behaviors.Core;
+using SistemaDental.Base;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
 
 namespace SistemaDental.MVCCV.VistaControlador
 {
@@ -26,6 +28,11 @@ namespace SistemaDental.MVCCV.VistaControlador
         public RelayCommand InventarioVistaComando { get; set; }
         public RelayCommand manejarusuariovistaComando { get; set; }
 
+        public CitaVistaControlador CitaVista { get; set; }
+        public AjusteVistaControlador AjusteVista { get; set; }
+   
+        public RelayCommand CitaVistaComando { get; set; }
+        public RelayCommand AjusteVistaComando { get; set; }
         public object vistaActual
         {
             get { return _vistaActual; }
@@ -43,6 +50,8 @@ namespace SistemaDental.MVCCV.VistaControlador
             inventarioVista = new InventarioVistaControlador();
             manejarusuariovista = new ManejarusuariovistaControlador();
 
+            CitaVista = new CitaVistaControlador();
+            AjusteVista = new AjusteVistaControlador();
             vistaActual = CasaVista;
             CasaVistaComando = new RelayCommand(o =>
             {
@@ -51,6 +60,7 @@ namespace SistemaDental.MVCCV.VistaControlador
             CajaVistaComando = new RelayCommand(o =>
             {
                 vistaActual = CajaVista;
+
             });
             verPacienVistaComando = new RelayCommand(o =>
             {
@@ -75,7 +85,19 @@ namespace SistemaDental.MVCCV.VistaControlador
             });
 
 
+            CitaVistaComando = new RelayCommand(o =>
+            {
+                vistaActual = CitaVista;
+
+
+            });
+            AjusteVistaComando = new RelayCommand(o =>
+            {
+                vistaActual = AjusteVista;
+            });
 
         }
+
+
     }
 }

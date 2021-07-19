@@ -10,23 +10,25 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace SistemaDental
+namespace SistemaDental.MVCCV.Vista
 {
     /// <summary>
-    /// Interaction logic for Ajustes.xaml
+    /// Lógica de interacción para AjustesVista.xaml
     /// </summary>
-    public partial class Ajustes : Window
+    public partial class AjustesVista : UserControl
     {
+        
         private bool Admin;
         private String Nombree;
-        public Ajustes()
+        public AjustesVista()
         {
             InitializeComponent();
         }
 
-        public Ajustes(bool admin, string name)
+        public AjustesVista(bool admin, string name)
         {
             InitializeComponent();
             Nombree = name;
@@ -41,28 +43,22 @@ namespace SistemaDental
 
         private void btnRegresar_Click(object sender, RoutedEventArgs e)
         {
-            Menu menu = new Menu(Admin, Nombree);
-            menu.Show();
-            this.Hide();
+     
         }
 
         private void btnEditarUsuario_Click_1(object sender, RoutedEventArgs e)
         {
-            EditarUsuario editarUsuario = new EditarUsuario(Admin, Nombree);
-            editarUsuario.Show();
-            this.Hide();
+      
         }
 
         private void btnAgregarNuevoUsuario_Click(object sender, RoutedEventArgs e)
         {
-    
+
         }
 
         private void btnManejarUsuarios_Click(object sender, RoutedEventArgs e)
         {
-            ManejarUsuario manejarUsuario = new ManejarUsuario(Admin, Nombree);
-            manejarUsuario.Show();
-            this.Hide();
+    
         }
     }
 }

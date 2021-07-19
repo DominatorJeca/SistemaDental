@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace SistemaDental.MVCCV.VistaControlador
 {
-    class CasaVistaControlador:ObservableObject
+    class AjusteVistaControlador: ObservableObject
     {
     }
 }
