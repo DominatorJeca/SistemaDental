@@ -27,13 +27,14 @@ namespace SistemaDental
         private BDConnexion conex = new BDConnexion();
         private ClaseProcedimiento proced = new ClaseProcedimiento();
 
-
+        public Turno turno = new Turno();
+        
         //Constructores
         public Menu()
         {
             InitializeComponent();
             conex.CheckConnection();
-            Turno turno = new Turno();
+         
             turno.UsuarioID = 37;
             turno.ComienzoTurno = DateTime.Now;
             proced.AgregarTurno(turno);
@@ -160,7 +161,6 @@ namespace SistemaDental
             switch (result)
             {
                 case MessageBoxResult.Yes:
-                    Turno turno = new Turno();
                     turno.UsuarioID = 37;
                     turno.FinalTurno = DateTime.Now;
                     proced.ActualizarTurno(turno);
