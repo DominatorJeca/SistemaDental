@@ -19,7 +19,8 @@ namespace SistemaDental
     /// </summary>
     public partial class Login : Window
     {
-        private Usuario usuario = new Usuario();
+        //private Usuario usuario = new Usuario();
+        private ClaseProcedimiento proced = new ClaseProcedimiento();
         public Login()
         {
             InitializeComponent();
@@ -41,31 +42,22 @@ namespace SistemaDental
             try
             {
                 //buscar usuario
-                Usuario elUsuario = usuario.BuscarUsuario(txtUsuario.Text);
-
+                Usuario elUsuario = proced.BuscarUsuario(txtUsuario.Text, txtPassword.Password);
+                
 
                 //Verificar si el usuario existe
-                if (elUsuario.Id == null)
+                if (elUsuario == null)
                 {
                     MessageBox.Show("El usuario o contraseña es incorrecto");
                 }
                 else
                 {
-                    if ((elUsuario.Contraseña == txtPassword.Password) && (elUsuario.Estado == true))
-                    {
+                    
                         //Abrir formulario Menu
-                        Menu menu = new Menu(elUsuario.Administrador,elUsuario.Nombre);
+                        EditarUsuario menu = new EditarUsuario();
                         menu.Show();
                         this.Hide();
-                    }
-                    else if (!elUsuario.Estado)
-                    {
-                        MessageBox.Show("Su usuario se encuentra deshabilitado, por favor comunicarse con ");
-                    }
-                    else
-                    {
-                        MessageBox.Show("El usuario o contraseña es incorrecto");
-                    }
+                    
                 }
 
             }
