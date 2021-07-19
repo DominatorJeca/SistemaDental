@@ -112,6 +112,7 @@
     </Compile>
     <Compile Include="Base\ObservableObject.cs" />
     <Compile Include="Base\RelayCommand.cs" />
+    <Compile Include="BDConnexion.cs" />
     <Compile Include="Caja.xaml.cs">
       <DependentUpon>Caja.xaml</DependentUpon>
     </Compile>
@@ -122,6 +123,7 @@
     <Compile Include="ClaseCaja.cs" />
     <Compile Include="ClaseInventario.cs" />
     <Compile Include="ClasePaciente.cs" />
+    <Compile Include="ClaseProcedimiento.cs" />
     <Compile Include="ClaseTratamiento.cs" />
     <Compile Include="EditarUsuario.xaml.cs">
       <DependentUpon>EditarUsuario.xaml</DependentUpon>
@@ -146,6 +148,13 @@
     <Compile Include="MVCCV\VistaControlador\MenuPrincipalVistaControlador.cs" />
     <Compile Include="MVCCV\Vista\AjustesVista.xaml.cs">
       <DependentUpon>AjustesVista.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MenuReporte.xaml.cs">
+      <DependentUpon>MenuReporte.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MVCCV\VistaControlador\CompraVistaControlador.cs" />
+    <Compile Include="MVCCV\Vista\AgragarCompra.xaml.cs">
+      <DependentUpon>AgragarCompra.xaml</DependentUpon>
     </Compile>
     <Compile Include="MVCCV\Vista\CajaVista.xaml.cs">
       <DependentUpon>CajaVista.xaml</DependentUpon>
@@ -184,6 +193,7 @@
     <Compile Include="Tratamiento.xaml.cs">
       <DependentUpon>Tratamiento.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Turno.cs" />
     <Compile Include="Usuario.cs" />
     <Compile Include="VerPaciente.xaml.cs">
       <DependentUpon>VerPaciente.xaml</DependentUpon>
@@ -242,6 +252,14 @@
     <Page Include="MVCCV\Vista\AjustesVista.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MenuReporte.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MVCCV\Vista\AgragarCompra.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="MVCCV\Vista\CajaVista.xaml">
       <SubType>Designer</SubType>

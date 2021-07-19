@@ -52,6 +52,11 @@
             <DataTemplate DataType="{x:Type viewModel:CitaVistaControlador}">
                 <view:CitaVista/>
             </DataTemplate>
+
+            <DataTemplate DataType="{x:Type viewModel:CompraVistaControlador}">
+                <view:AgragarCompra/>
+            </DataTemplate>
+
         </ResourceDictionary>
     </Application.Resources>
 </Application>
