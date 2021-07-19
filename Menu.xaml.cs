@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+
 using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Documents;
@@ -26,15 +27,15 @@ namespace SistemaDental
         private BDConnexion conex = new BDConnexion();
         private ClaseProcedimiento proced = new ClaseProcedimiento();
 
+
         //Constructores
         public Menu()
         {
             InitializeComponent();
             conex.CheckConnection();
             Turno turno = new Turno();
-            turno.UsuarioID = 33;
+            turno.UsuarioID = 37;
             turno.ComienzoTurno = DateTime.Now;
-
             proced.AgregarTurno(turno);
         }
 
@@ -153,7 +154,27 @@ namespace SistemaDental
 
         private void btnSalir_Click(object sender, RoutedEventArgs e)
         {
-            App.Current.Shutdown(); 
+
+
+            MessageBoxResult result = MessageBox.Show("¿Deseas terminar tu turno?", "Turno", MessageBoxButton.YesNoCancel);
+            switch (result)
+            {
+                case MessageBoxResult.Yes:
+                    Turno turno = new Turno();
+                    turno.UsuarioID = 37;
+                    turno.FinalTurno = DateTime.Now;
+                    proced.ActualizarTurno(turno);
+                    App.Current.Shutdown();
+                    break;
+                case MessageBoxResult.No:
+                    App.Current.Shutdown();
+                    break;
+                case MessageBoxResult.Cancel:
+                    break;
+            }
+
+
+           
         }
 
         private void btnMin_Click(object sender, RoutedEventArgs e)
