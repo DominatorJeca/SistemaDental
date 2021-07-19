@@ -11,9 +11,11 @@ namespace SistemaDental.MVCCV.VistaControlador
     {
         public CasaVistaControlador CasaVista { get; set; }
         public CajaVistaControlador CajaVista { get; set; }
+        public CompraVistaControlador CompraVista { get; set; }
         private object _vistaActual;
         public RelayCommand CasaVistaComando { get; set; }
         public RelayCommand CajaVistaComando { get; set; }
+        public RelayCommand CompraVistaComando { get; set; }
         public object vistaActual
         {
             get { return _vistaActual; }
@@ -25,6 +27,7 @@ namespace SistemaDental.MVCCV.VistaControlador
         {
             CasaVista = new CasaVistaControlador();
             CajaVista = new CajaVistaControlador();
+            CompraVista = new CompraVistaControlador();
             vistaActual = CasaVista;
             CasaVistaComando = new RelayCommand(o =>
             {
@@ -33,6 +36,10 @@ namespace SistemaDental.MVCCV.VistaControlador
             CajaVistaComando = new RelayCommand(o =>
             {
                 vistaActual = CajaVista;
+            });
+            CompraVistaComando = new RelayCommand(o =>
+            {
+                vistaActual = CompraVista;
             });
         }
     }

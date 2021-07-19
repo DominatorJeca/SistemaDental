@@ -9,9 +9,10 @@ using System.Windows.Forms;
 
 namespace SistemaDental
 {
-    class ClaseProcedimiento
+
+    class ClaseProcedimiento : BDConnexion
     {
-        BDConexion con = new BDConexion();
+        BDConnexion con = new BDConnexion();
         SqlCommand command = new SqlCommand();
         SqlDataReader reader;
 
@@ -74,9 +75,50 @@ namespace SistemaDental
                 command.Parameters.Clear();
                 command.Connection = con.Close();
             }
-
         }
 
+        public bool Modificaciones(string Cadena)
+        {
+            SqlCommand cmd = new SqlCommand(Cadena, sqlConnection);
+
+            sqlConnection.Open();
+            cmd.ExecuteNonQuery();
+
+            sqlConnection.Dispose();
+            cmd.Dispose();
+            return true;
+        }
+
+        #region Compras
+
+        public void EditarCompra(int CompraID, int InventarioID, int EmpleadoID, DateTime FechaCompra, DateTime FechaVenci, double precio, int cantidad)
+        {
+            try
+            {
+                command.Connection = con.Open();
+                command.CommandText = "EditarCompra";
+                command.CommandType = CommandType.StoredProcedure;
+                command.Parameters.AddWithValue("@CompraID", CompraID);
+                command.Parameters.AddWithValue("@InventarioID", InventarioID);
+                command.Parameters.AddWithValue("@EmpleadoID", EmpleadoID);
+                command.Parameters.AddWithValue("@FechaCompra", FechaCompra);
+                command.Parameters.AddWithValue("@FechaVencimiento", FechaVenci);
+                command.Parameters.AddWithValue("@PrecioCompra", precio);
+                command.Parameters.AddWithValue("@cantidad", cantidad);
+
+
+            }
+            catch
+            {
+                throw;
+            }
+            finally
+            {
+                command.Parameters.Clear();
+                command.Connection = con.Close();
+            }
+
+        }
         public void EliminarTurno(int AgendaID)
         {
 
@@ -89,6 +131,34 @@ namespace SistemaDental
 
 
                 command.ExecuteNonQuery();
+              }
+              catch
+              {
+                  throw;
+              }
+              finally
+              {
+                  command.Parameters.Clear();
+                  command.Connection = con.Close();
+              }
+
+        }
+
+        public void InsertarCompra(int InventarioID, int EmpleadoID, DateTime FechaCompra, DateTime FechaVenci, double precio, int cantidad)
+        {
+            try
+            {
+                command.Connection = con.Open();
+                command.CommandText = "IngresarCompra";
+                command.CommandType = CommandType.StoredProcedure;
+                command.Parameters.AddWithValue("@InventarioID", InventarioID);
+                command.Parameters.AddWithValue("@EmpleadoID", EmpleadoID);
+                command.Parameters.AddWithValue("@FechaCompra", FechaCompra);
+                command.Parameters.AddWithValue("@FechaVencimiento", FechaVenci);
+                command.Parameters.AddWithValue("@PrecioCompra", precio);
+                command.Parameters.AddWithValue("@cantidad", cantidad);
+
+
             }
             catch
             {
@@ -99,7 +169,6 @@ namespace SistemaDental
                 command.Parameters.Clear();
                 command.Connection = con.Close();
             }
-
         }
         #endregion
 
@@ -114,14 +183,14 @@ namespace SistemaDental
                 command.Connection = con.Open();
                 //crear el comando SQL
                 command.CommandText = "sp_Usuario_VerificarLogin";
-                
+
                 command.CommandType = CommandType.StoredProcedure;
                 //Establecer los valores de parametros
                 command.Parameters.AddWithValue("@nombreUsuario", user);
                 command.Parameters.AddWithValue("@contrasena", contra);
                 reader = command.ExecuteReader();
 
-                
+
                 using (reader)
                 {
                     while (reader.Read())
@@ -133,7 +202,7 @@ namespace SistemaDental
                         usuario.Administrador = Convert.ToBoolean(reader["administrador"]);
                     }
                 }
-                
+
                 return usuario;
             }
             catch (Exception e)
@@ -152,6 +221,8 @@ namespace SistemaDental
 
 
         }
+
+        #endregion
 
     }
 }

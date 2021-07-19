@@ -21,6 +21,11 @@
             <DataTemplate DataType="{x:Type viewModel:CajaVistaControlador}">
                 <view:CajaVista/>
             </DataTemplate>
+
+            <DataTemplate DataType="{x:Type viewModel:CompraVistaControlador}">
+                <view:AgragarCompra/>
+            </DataTemplate>
+
         </ResourceDictionary>
     </Application.Resources>
 </Application>
