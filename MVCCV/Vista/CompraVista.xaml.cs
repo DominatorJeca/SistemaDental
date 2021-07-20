@@ -55,6 +55,24 @@ namespace SistemaDental.MVCCV.Vista
             productosCompra.Add(prod);
             dgv_Carrito.ItemsSource = productosCompra;
             dgv_Carrito.SelectedValuePath = "IdMaterial";
+            calculos();
+        }
+
+        public void calculos ()
+        {
+            double totales=0;
+            int cantidad=0;
+            double subtotal=0;
+            foreach (ClaseInventario prod in productosCompra)
+            {
+                cantidad += prod.Cantidad;
+                subtotal += (prod.precio*prod.Cantidad);
+            }
+            totales = subtotal + ((subtotal) * 0.15);
+
+            txtCantidadTotal.Text = Convert.ToString(cantidad);
+            txtSubtotal.Text = Convert.ToString(subtotal);
+            txtTotal.Text = Convert.ToString(totales);
         }
 
         private void Grid_Loaded(object sender, RoutedEventArgs e)
@@ -68,9 +86,8 @@ namespace SistemaDental.MVCCV.Vista
         private void btnQuitar_Click(object sender, RoutedEventArgs e)
         {
             if(dgv_Carrito.SelectedValue!=null)
-        
                  productosCompra.RemoveAt(dgv_Carrito.SelectedIndex);
-           
+            calculos();
         }
 
         private void dgv_Compras_SelectionChanged(object sender, SelectionChangedEventArgs e)

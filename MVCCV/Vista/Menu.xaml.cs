@@ -39,7 +39,7 @@ namespace SistemaDental
             proced.AgregarTurno(turno);
         }
 
-        public Menu(bool admin,string name)
+        public Menu(bool admin,string name,int id)
         {
 
             InitializeComponent();
@@ -47,7 +47,7 @@ namespace SistemaDental
             PermisosAdministrador(admin);
             Nombree = name;
             Admin = admin;
-            turno.UsuarioID = 37;
+            turno.UsuarioID = id;
             turno.ComienzoTurno = DateTime.Now;
             proced.AgregarTurno(turno);
         }
@@ -164,7 +164,6 @@ namespace SistemaDental
             {
                 case MessageBoxResult.Yes:
                     {
-                        turno.UsuarioID = 37;
                         turno.FinalTurno = DateTime.Now;
                         proced.ActualizarTurno(turno);
                         Login log = new Login();

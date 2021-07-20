@@ -167,9 +167,9 @@ namespace SistemaDental
 
         private void btnRegresar_Click(object sender, RoutedEventArgs e)
         {
-            Menu menu = new Menu(Admin,Nombree);
+           /* Menu menu = new Menu(Admin,Nombree);
             menu.Show();
-            this.Hide();
+            this.Hide();*/
         }
 
         private void dgvCaja_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -184,9 +184,9 @@ namespace SistemaDental
 
         private void frmcaja_Closed(object sender, EventArgs e)
         {
-            Menu menu = new Menu(Admin, Nombree);
+           /* Menu menu = new Menu(Admin, Nombree);
             menu.Show();
-            this.Close();
+            this.Close();*/
         }
 
       

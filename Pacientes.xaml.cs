@@ -49,16 +49,16 @@ namespace SistemaDental
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            Menu menu = new Menu(Admin,Nombree);
+           /* Menu menu = new Menu(Admin,Nombree);
             menu.Show();
-            this.Hide();
+            this.Hide();*/
         }
 
         private void frmpaciente_Closed(object sender, EventArgs e)
         {
-            Menu menu = new Menu(Admin, Nombree);
+          /*  Menu menu = new Menu(Admin, Nombree);
             menu.Show();
-            this.Close();
+            this.Close();*/
 
         }
     }

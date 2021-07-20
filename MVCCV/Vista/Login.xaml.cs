@@ -45,7 +45,7 @@ namespace SistemaDental
                 Usuario elUsuario = proc.BuscarUsuario(txtUsuario.Text,txtPassword.Password);
                 if (elUsuario != null)
                 {
-                    Menu men = new Menu(elUsuario.Administrador, elUsuario.Nombre);
+                    Menu men = new Menu(elUsuario.Administrador, elUsuario.Nombre,elUsuario.Id);
                     men.Show();
                     this.Close();
                 }
@@ -58,7 +58,7 @@ namespace SistemaDental
             catch (Exception ex)
             {
 
-                MessageBox.Show("Ocurrio un error al momento de realizar la consulta");
+                MessageBox.Show("Ocurrio un error al momento de realizar la consulta" + ex);
                 Console.WriteLine(ex.Message);
             }
         }

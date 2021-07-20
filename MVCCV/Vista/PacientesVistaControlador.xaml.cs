@@ -50,15 +50,15 @@ namespace SistemaDental.MVCCV.Vista
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            Menu menu = new Menu(Admin, Nombree);
-            menu.Show();
+          /*  Menu menu = new Menu(Admin, Nombree);
+            menu.Show();*/
 
         }
 
         private void frmpaciente_Closed(object sender, EventArgs e)
         {
-            Menu menu = new Menu(Admin, Nombree);
-            menu.Show();
+           /* Menu menu = new Menu(Admin, Nombree);
+            menu.Show();*/
     
 
         }

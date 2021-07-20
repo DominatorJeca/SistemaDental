@@ -143,9 +143,9 @@ namespace SistemaDental
 
         private void btnRegresar_Click(object sender, RoutedEventArgs e)
         {
-            Menu menu = new Menu(Admin,Nombree);
+           /* Menu menu = new Menu(Admin,Nombree);
             menu.Show();
-            this.Hide();
+            this.Hide();*/
         }
 
         protected override void OnClosing(System.ComponentModel.CancelEventArgs e)

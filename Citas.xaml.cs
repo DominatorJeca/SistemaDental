@@ -319,9 +319,9 @@ namespace SistemaDental
 
         private void btnRegresar_Click(object sender, RoutedEventArgs e)
         {
-            Menu menu = new Menu(Admin,Nombree);
+           /* Menu menu = new Menu(Admin,Nombree);
             menu.Show();
-            this.Close();
+            this.Close();*/
         }
 
         private void ctTiempo_SelectedTimeChanged(object sender, RoutedPropertyChangedEventArgs<DateTime?> e)

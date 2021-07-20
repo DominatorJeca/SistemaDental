@@ -35,6 +35,9 @@
         <Button x:Name="btnagregar" Content="Agregar al Carrito" Margin="676,71,10,332" FontFamily="Bahnschrift" FontSize="16" Background="#48C9B0 " BorderBrush="{x:Null}" Height="Auto" RenderTransformOrigin="0.491,0.744" Click="btnagregar_Click" />
         <Button x:Name="btnComprar" Content="Comprar" Margin="676,395,10,10" FontFamily="Bahnschrift" FontSize="16" Background="#48C9B0 " BorderBrush="{x:Null}" Height="Auto" Command="{Binding LoadComand}" Click="btnComprar_Click"/>
         <Button x:Name="btnQuitar" Content="Quitar del carrito" Margin="676,16,10,389" FontFamily="Bahnschrift" FontSize="16" Background="#48C9B0 " BorderBrush="{x:Null}" Height="Auto" Click="btnQuitar_Click" />
+        <TextBox x:Name="txtSubtotal"  Margin="33,400,812,0" materialDesign:HintAssist.Hint="Subtotal" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontFamily="Bahnschrift" FontSize="12" Background="#7FFFFFFF" Height="33" VerticalAlignment="Top"/>
+        <TextBox x:Name="txtCantidadTotal"  Margin="243,400,602,0" materialDesign:HintAssist.Hint="Cantidad" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontFamily="Bahnschrift" FontSize="12" Background="#7FFFFFFF" Height="33" VerticalAlignment="Top"/>
+        <TextBox x:Name="txtTotal"  Margin="453,400,392,0" materialDesign:HintAssist.Hint="Total" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontFamily="Bahnschrift" FontSize="12" Background="#7FFFFFFF" Height="33" VerticalAlignment="Top"/>
 
 
 
