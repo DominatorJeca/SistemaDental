@@ -12,7 +12,7 @@ namespace SistemaDental
 {
     class ClaseInventario
     {
-        private static string connectionString = @"server = .; Initial Catalog = clinicaDental; Integrated Security = True; MultipleActiveResultSets=true";
+        private static string connectionString = @"server = DESKTOP-E7NG9FA\SQLEXPRESS; Initial Catalog = clinicaDental; Integrated Security = True; MultipleActiveResultSets=true";
         private SqlConnection sqlConnection = new SqlConnection(connectionString);
 
         

@@ -4,7 +4,6 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:rv="clr-namespace:Microsoft.Reporting.WinForms;assembly=Microsoft.ReportViewer.WinForms"
-             xmlns:BoldReport="clr-namespace:BoldReports.UI.Xaml;assembly=BoldReports.Wpf"
              mc:Ignorable="d" 
              d:DesignHeight="455" d:DesignWidth="1050">
     <Grid>
@@ -16,16 +15,28 @@
             <ColumnDefinition/>
 
         </Grid.ColumnDefinitions>
-        <StackPanel>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <StackPanel Grid.Column="0" Grid.Row="0" Grid.RowSpan="2" Margin="0,10,0,0">
             <Button x:Name="btnreporte1" Content="Reporte materiales proximos a vencer" HorizontalAlignment="Stretch"  VerticalAlignment="Top" Width="auto" Background="#FF056676" BorderBrush="{x:Null}" Click="btnreporte1_Click" />
             <Button x:Name="btnreporte2" Content="Reporte de compras segun mes" HorizontalAlignment="Stretch"  VerticalAlignment="Top" Background="#FF056676" BorderBrush="{x:Null}" Click="btnreporte2_Click" />
             <Button x:Name="btnreporte3" Content="Reporte de tratamientos" HorizontalAlignment="Stretch"  VerticalAlignment="Top"  Background="#FF056676" BorderBrush="{x:Null}" Click="btnreporte3_Click" />
             <Button x:Name="btnreporte4" Content="Reporte de ventas segun año y mes" HorizontalAlignment="Stretch" VerticalAlignment="Top" Background="#FF056676" BorderBrush="{x:Null}" Click="btnreporte4_Click" />
             <Button x:Name="btnreporte5" Content="Reporte de ventas por año" HorizontalAlignment="Stretch"  VerticalAlignment="Top"  Background="#FF056676" BorderBrush="{x:Null}" Click="btnreporte5_Click" />
         </StackPanel>
-        <BoldReport:ReportViewer Grid.Column="1" x:Name="rpViewer">
-            
-        </BoldReport:ReportViewer>
+        <WindowsFormsHost Grid.Column="1" Grid.Row="1">
+            <rv:ReportViewer x:Name="reporte"/>
+        </WindowsFormsHost>
+
+        <StackPanel Orientation="Horizontal" Grid.Column="1" Grid.Row="0">
+            <Label>Año</Label>
+            <TextBox x:Name="txtanio" Width="150"/>
+            <Label>Mes</Label>
+            <TextBox x:Name="Mes" Width="150"/>
+            <Button Style="{StaticResource MaterialDesignFlatButton}" Background="Beige" Width="300" Click="Button_Click"/>
+        </StackPanel>
   
     </Grid>
 </UserControl>

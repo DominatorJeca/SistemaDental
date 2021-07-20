@@ -16,6 +16,9 @@ namespace SistemaDental
         SqlCommand command = new SqlCommand();
         SqlDataReader reader;
 
+        public int anio { get; set; }
+        public int mes { get; set; }
+
         #region Turno - Procedimientos
 
         public void ActualizarTurno(Turno turno)
@@ -348,5 +351,33 @@ namespace SistemaDental
         }
         #endregion
 
+        public DataTable FechaVenc()
+        {
+           
+
+            try
+            {
+                DataTable dt = new DataTable();
+
+                    command.Connection = con.Open();
+                    command.CommandText = "Report_FechaVencimiento";
+                    command.Parameters.AddWithValue("@mes", SqlDbType.Int).Value = mes;
+                    command.Parameters.AddWithValue("@año", SqlDbType.Int).Value = anio;
+                    command.CommandType = CommandType.StoredProcedure;
+                    SqlDataAdapter adapter = new SqlDataAdapter(command);
+                    adapter.Fill(dt);
+                
+                return dt;
+            }
+            catch(Exception e)
+            {
+                throw e;
+            }
+            finally
+            {
+                command.Connection = con.Close();
+                command.Parameters.Clear();
+            }
+        }
     }
 }

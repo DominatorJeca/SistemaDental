@@ -61,12 +61,6 @@
     <Prefer32Bit>true</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Bold.Licensing, Version=3.1460.43.0, Culture=neutral, PublicKeyToken=632609b4d040f6b4, processorArchitecture=MSIL">
-      <HintPath>packages\Bold.Licensing.3.1.43\lib\net46\Bold.Licensing.dll</HintPath>
-    </Reference>
-    <Reference Include="BoldReports.WPF, Version=3.1460.43.0, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89, processorArchitecture=MSIL">
-      <HintPath>packages\BoldReports.WPF.3.1.43\lib\net46\BoldReports.WPF.dll</HintPath>
-    </Reference>
     <Reference Include="ControlzEx, Version=4.0.0.0, Culture=neutral, PublicKeyToken=69f1c32f803d307e, processorArchitecture=MSIL">
       <HintPath>packages\ControlzEx.4.3.0\lib\net462\ControlzEx.dll</HintPath>
     </Reference>
@@ -236,6 +230,11 @@
     <Compile Include="ClasePaciente.cs" />
     <Compile Include="ClaseProcedimiento.cs" />
     <Compile Include="ClaseTratamiento.cs" />
+    <Compile Include="DataSetfecven.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DataSetfecven.xsd</DependentUpon>
+    </Compile>
     <Compile Include="EditarUsuario.xaml.cs">
       <DependentUpon>EditarUsuario.xaml</DependentUpon>
     </Compile>
@@ -461,27 +460,27 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Include="Report1.rdlc" />
     <None Include=".editorconfig" />
+    <None Include="DataSetfecven.xsc">
+      <DependentUpon>DataSetfecven.xsd</DependentUpon>
+    </None>
+    <None Include="DataSetfecven.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DataSetfecven.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="DataSetfecven.xss">
+      <DependentUpon>DataSetfecven.xsd</DependentUpon>
+    </None>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
-    <Content Include="Reportes\MesCompra.rdl">
+    <EmbeddedResource Include="Reportes\FecVenc.rdlc">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Reportes\tratamientos.rdl">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Reportes\VentasAñosoMesesEspecificos.rdl">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Reportes\VentasxAño.rdl">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Reportes\FecVenc.rdl">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
+    </EmbeddedResource>
     <Resource Include="Localization\zh-CHT.xml" />
     <Resource Include="Localization\zh-CHS.xml" />
     <Resource Include="Localization\vi.xml" />
