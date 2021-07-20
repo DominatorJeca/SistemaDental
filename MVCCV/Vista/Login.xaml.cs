@@ -37,8 +37,6 @@ namespace SistemaDental
             {
                 txtPassword.Password = txtpas.Text;
             }
-
-
             try
             {
                 //buscar usuario

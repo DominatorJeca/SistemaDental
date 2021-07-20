@@ -1,5 +1,5 @@
 ﻿<Window x:Class="SistemaDental.MVCCV.Vista.ReestablecerContrasenia"
-        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
@@ -7,28 +7,73 @@
         mc:Ignorable="d"
            xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
-        Title="ReestablecerContrasenia" Height="450" Width="900" WindowStyle="None">
+        Title="ReestablecerContrasenia" Height="450" Width="900" WindowStyle="None" ResizeMode="NoResize" MouseDown="Window_MouseDown">
+    <Window.Resources>
+        <Image x:Key="Nover" Source="/Imagenes/eye.png" Height="40" Width="40" Stretch="Uniform" x:Shared="false" />
+        <Image x:Key="ver"  Source="/Imagenes/Sin título-1.png" Height="40" Width="40" Stretch="Uniform" x:Shared="false"  />
+    </Window.Resources>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="50"/>
             <RowDefinition/>
         </Grid.RowDefinitions>
-        <StackPanel x:Name="pnlPaso1" Grid.Row="1" Visibility="Collapsed">
-            <TextBlock FontSize="30" FontFamily="Bahnschrift">Ingrese el correo de su usuario</TextBlock>
-            <Button Style="{StaticResource MaterialDesignFlatAccentButton}" Background="Aqua" Content="Buscar correo" BorderBrush="{x:Null}" Foreground="White"></Button>
+        <Border Background="#427F97" Grid.Row="0"/>
+        <StackPanel x:Name="topMenu" Grid.Row="0" HorizontalAlignment="Right" Orientation="Horizontal" Margin="0,0,10,0">
+            <Button x:Name="btnMin"   Width="30" Height="30" Margin="0,0,10,0" Click="btnMin_Click" Style="{StaticResource MaterialDesignFloatingActionAccentButton}" ToolTip="Minimizar" Background="Turquoise" BorderBrush="Transparent">
+                <materialDesign:PackIcon Kind="WindowMinimize" Height="auto" Width="auto" ></materialDesign:PackIcon>
+            </Button>
+            <Button x:Name="btnSalir"   Width="30" Height="30"  Click="btnSalir_Click" Style="{StaticResource MaterialDesignFloatingActionAccentButton}" ToolTip="Salir" Background="Red" BorderBrush="Transparent">
+                <materialDesign:PackIcon Kind="Close" Height="auto" Width="auto"></materialDesign:PackIcon>
+            </Button>
         </StackPanel>
-        <StackPanel Name="pnlPaso2" Grid.Row="1" Visibility="Collapsed">
-            <TextBlock FontSize="30" FontFamily="Bahnschrift">Se le envio un codigo aleatorio a su correo electronico, <LineBreak/> por favor ingrese el codigo enviado</TextBlock>
-            <TextBox Style="{StaticResource MaterialDesignFloatingHintTextBox}" materialDesign:HintAssist.Hint="Codigo de verificacion"/>
-            <Button Style="{StaticResource MaterialDesignFlatAccentButton}" Background="Aqua" Content="Verificar correo" BorderBrush="{x:Null}" Foreground="White"></Button>
+        <StackPanel x:Name="pnlPaso1" Grid.Row="1" Visibility="Visible" Margin="0,0,0,0">
+            <TextBlock FontSize="30" Margin="0,100,0,0" FontFamily="Bahnschrift" HorizontalAlignment="Center">Ingrese el correo de su usuario</TextBlock>
+            <TextBox x:Name="txtCorreo" Margin="0,50,0,0" Style="{StaticResource MaterialDesignFloatingHintTextBox}" HorizontalAlignment="Center" Width="650" materialDesign:HintAssist.Hint="Correo de Usuario"/>
+            <Button x:Name="btnBuscarCorreo" Style="{StaticResource MaterialDesignFlatAccentButton}" Margin="0,50,0,0" Width="300" Content="Buscar correo" BorderBrush="{x:Null}" Foreground="White" materialDesign:ButtonAssist.CornerRadius="3" Click="btnBuscarCorreo_Click">
+                <Button.Background>
+                    <LinearGradientBrush>
+                        <GradientStop Color="#56A2BF" Offset="0"/>
+                        <GradientStop Color="Turquoise" Offset="1.2"/>
+                    </LinearGradientBrush>
+                </Button.Background>
+            </Button>
         </StackPanel>
-        <StackPanel x:Name="pnlPaso3" Grid.Row="1" Margin="30">
-            <TextBlock FontSize="30" FontFamily="Bahnschrift" HorizontalAlignment="Center">Porfavor ingrese los datos correspondientes </TextBlock>
-            <TextBox Style="{StaticResource MaterialDesignFloatingHintTextBox}" Margin="15,20,15,0" Width="600" materialDesign:HintAssist.Hint="Contraseña anterior"/>
-            <TextBox Style="{StaticResource MaterialDesignFloatingHintTextBox}" Margin="15,20,15,0"  Width="600" materialDesign:HintAssist.Hint="Confirmar contraseña anterior"/>
-            <TextBox Style="{StaticResource MaterialDesignFloatingHintTextBox}" Margin="15,20,15,0"  Width="600" materialDesign:HintAssist.Hint="Nueva contraseña"/>
-            <TextBox Style="{StaticResource MaterialDesignFloatingHintTextBox}" Margin="15,20,15,0" Width="600" materialDesign:HintAssist.Hint="Confirmar nueva contraseña"/>
+        <StackPanel Name="pnlPaso2" Grid.Row="1" Visibility="Collapsed" Margin="25">
+            <TextBlock FontSize="30" FontFamily="Bahnschrift" HorizontalAlignment="Center" TextAlignment="Center">Se le envió un código aleatorio a su correo electronico, <LineBreak/> por favor ingrese el codigo enviado</TextBlock>
+            <TextBox x:Name="txtCodigoVer" Style="{StaticResource MaterialDesignFloatingHintTextBox}" HorizontalAlignment="Center" Width="400" Margin="0,100,0,0" materialDesign:HintAssist.Hint="Codigo de verificacion"/>
+            <Button x:Name="btnVerificarCodigo" Style="{StaticResource MaterialDesignFlatAccentButton}" Content="Verificar código" HorizontalAlignment="Center" Width="400" Margin="0,100,0,0" BorderBrush="{x:Null}" Foreground="White" Click="btnVerificarCodigo_Click">
+                <Button.Background>
+                    <LinearGradientBrush>
+                        <GradientStop Color="#56A2BF" Offset="0"/>
+                        <GradientStop Color="Turquoise" Offset="1.2"/>
+                    </LinearGradientBrush>
+                </Button.Background>
+            </Button>
         </StackPanel>
-        
+        <StackPanel x:Name="pnlPaso3" Grid.Row="1" Margin="30,15,30,30" Visibility="Collapsed">
+            <TextBlock FontSize="30" FontFamily="Bahnschrift" HorizontalAlignment="Center"> Porfavor ingrese los datos correspondientes</TextBlock>
+            <StackPanel Orientation="Horizontal"  Margin="15,60,15,0" HorizontalAlignment="Center">
+                <PasswordBox x:Name="pswNuevaContra" Style="{StaticResource MaterialDesignFloatingHintPasswordBox}" Width="600" materialDesign:HintAssist.Hint =" Nueva contraseña"/>
+                <TextBox x:Name="txtNuevaContra" Visibility="Collapsed" Style="{StaticResource MaterialDesignFloatingHintTextBox}"  Width="600" materialDesign:HintAssist.Hint="Nueva contraseña"/>
+                <Button x:Name="btnview3"  HorizontalAlignment="Center" VerticalAlignment="Center" Width="70" Background="Transparent" BorderBrush="{x:Null}" Height="52" Click="btnview3_Click"  >
+                    <DynamicResource ResourceKey="Nover"/>
+                </Button>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal"  Margin="15,15,15,0" HorizontalAlignment="Center">
+                <TextBox x:Name="txtConfNuevaContra" Style="{StaticResource MaterialDesignFloatingHintTextBox}" Visibility="Collapsed" Width="600" materialDesign:HintAssist.Hint="Confirmar nueva contraseña"/>
+                <PasswordBox x:Name="pswConfNuevaContra" Style="{StaticResource MaterialDesignFloatingHintPasswordBox}" Width="600" materialDesign:HintAssist.Hint="Confirmar nueva contraseña"/>
+                <Button x:Name="btnview4"  HorizontalAlignment="Center" VerticalAlignment="Center" Width="70" Background="Transparent" BorderBrush="{x:Null}" Height="52" Click="btnview4_Click"  >
+                    <DynamicResource ResourceKey="Nover"/>
+                </Button>
+            </StackPanel>
+            <Button x:Name="btnCambiarContr" Style="{StaticResource MaterialDesignFlatButton}" Width="400" Content="Cambiar Contraseña" Foreground="White" Margin="0,100,0,0" Click="btnCambiarContr_Click">
+                <Button.Background>
+                    <LinearGradientBrush>
+                        <GradientStop Color="#56A2BF" Offset="0"/>
+                        <GradientStop Color="Turquoise" Offset="1.2"/>
+                    </LinearGradientBrush>
+                </Button.Background>
+            </Button>
+        </StackPanel>
     </Grid>
 </Window>

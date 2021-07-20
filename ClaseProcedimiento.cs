@@ -6,6 +6,8 @@ using System.Threading.Tasks;
 using System.Data.SqlClient;
 using System.Data;
 using System.Windows.Forms;
+using System.Net;
+using System.Net.Mail;
 
 namespace SistemaDental
 {
@@ -252,7 +254,48 @@ namespace SistemaDental
             }
             finally
             {
+                reader.Close();
+                command.Parameters.Clear();
+                command.Connection = con.Close();
+            }
 
+         
+
+        }
+        public Usuario ModificarUsuario(int UsuarioId = 0, string Usuario= null, string contra= null,bool admin = false,string contraCambio = null, string correo = null)
+        {
+            try
+            {
+                var user = new Usuario();
+                command.Connection = con.Open();
+                //crear el comando SQL
+                command.CommandText = "sp_Usuario_Actualizar";
+                command.Parameters.AddWithValue("@UsuarioID", UsuarioId);
+                command.Parameters.AddWithValue("@usuario", Usuario);
+                command.Parameters.AddWithValue("@contrasena", contra);
+                command.Parameters.AddWithValue("@administrador", admin);
+                command.Parameters.AddWithValue("@contrasenaCambio", contraCambio);
+                command.Parameters.AddWithValue("@correo", correo);
+                command.CommandType = CommandType.StoredProcedure;
+                reader = command.ExecuteReader();
+                if (reader.Read())
+                {
+                    user.Id =Convert.ToInt32( reader[0]);
+                    user.Nombre = Convert.ToString(reader[1]);
+                    user.Administrador = Convert.ToBoolean(reader[2]);
+                }
+                return user;
+
+            }
+            catch (Exception E)
+            {
+                throw E;
+            }
+            finally
+            {
+                reader.Close();
+                command.Parameters.Clear();
+                command.Connection = con.Close();
             }
 
         }
@@ -345,6 +388,119 @@ namespace SistemaDental
                 command.Parameters.Clear();
                 command.Connection = con.Close();
             }
+        }
+
+        public string EnviarCodigoRecuperacion (string correoDestino)
+        {
+            try
+            {
+
+                var usuario = BuscarEmail(correoDestino);
+                if (usuario == null)
+                    throw new Exception("No se encontro este correo");
+
+                Random rand = new Random();
+                var randomCode = (rand.Next(999999).ToString());
+                MailMessage message = new MailMessage();
+                var messageBody = @"<table align='center'  cellpadding='0' cellspacing='0' width='600' style='background-image:url(https://imgur.com/LdPJmpH.jpg); background-size:500px;background-color:#D1D1D1'>
+<tr> <!--Primera fila -->
+        <td  align='center' style='padding: 0px 0 0px 0; font-family: Arial, sans-serif;' >
+             <img src='https://imgur.com/RzOOQm0.png' align='left' alt='Ferreteria Maresa S.A' width='150' height='150' style='display: block;' />
+             <br>
+        </td>
+    </tr>
+    <tr>  <!--Segunda fila -->
+        <td  style='padding: 30px 30px 30px 30px; font-family: Arial, sans-serif; font-size: 14px;'>
+          <table>  <!--Tabla principal de 2da fila -->
+            <tr>     <!--Primera fila -->
+              <td>
+                <p style='margin: 0;'>Buenas tardes su codigo de verificacion es el siguiente: " + randomCode+@" </p>
+                <br>
+                <p>Pasos a seguir: </p>
+                <br>
+                </td>
+              </tr>
+              <tr>  <!--Segunda fila -->
+                <td>
+                  <table border='1' cellpadding='0' cellspacing='0' width='100%' style='border-collapse: collapse;'> <!--tabla dentro de la tabla 2 -->
+                        <tr>
+                          <td style='padding: 10px 10px; font-family: Arial, sans-serif; font-size: 11px;'>
+                            <p style='margin: 0;'> Paso 1: Copie el codigo presentado anteriormente
+                          </td>
+                        </tr>
+                        <tr>
+                          <td style='padding: 10px 10px; font-family: Arial, sans-serif; font-size: 11px;'>
+                            <p>
+                              Paso 2: Dirigase al sistema de la empresa e ingrese el codigo.
+                            </p>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td style='padding: 10px 10px; font-family: Arial, sans-serif; font-size: 11px;'>
+                            <p>
+                               Paso 3: Una vez verificado cambie su contraseña y posteriormente ingrese sesion nuevamente
+                            </p>
+                          </td>
+                        </tr>
+                  </table>
+                </td>
+              </tr>
+
+
+                </table>
+
+        </td>
+    </tr>
+    <tr>  <!--Tercera fila -->
+        <td  style='padding: 30px 30px;'>
+            <table border='1' cellpadding='0' cellspacing='0' width='100%' style='border-collapse: collapse; border:0px'> <!--Tabla pie de pagina -->
+                <tr>
+                  <td>
+                    <p>
+                      Sistema Dental
+                    </p>
+                  </td>
+                  <td align='Right'>
+                    <table border='0' >
+                      <tr>
+                        <td>
+                            Universidad Catolica de Honduras. Campus San Pedro y San Pablo
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>
+                          Telefono: +504 9818-2388
+                        </td>
+                      </tr>
+
+                    </table>
+                  </td>
+                </tr>
+            </table>
+        </td>
+    </tr>
+</table>";
+                message.To.Add(correoDestino);
+                message.From = new MailAddress("clinicadentalsps4@gmail.com");
+                message.Body = messageBody;
+                message.Subject = "Correo de recuperación de contraseña";
+                message.IsBodyHtml = true;
+                message.BodyEncoding = System.Text.Encoding.UTF8;
+                SmtpClient smtp = new SmtpClient("smtp.gmail.com");
+                smtp.EnableSsl = true;
+                smtp.Port = 587;
+                smtp.DeliveryMethod = SmtpDeliveryMethod.Network;
+                smtp.Credentials = new NetworkCredential("clinicadentalsps4@gmail.com", "clinica1234");
+                smtp.Send(message);
+                return randomCode;
+            }
+            catch (Exception E)
+            {
+                MessageBox.Show("Ocurrio un error al realizar esta accion: " + E);
+                return null;
+            } 
+
+
         }
         #endregion
 
