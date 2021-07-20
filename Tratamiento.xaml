@@ -15,7 +15,7 @@
         <Grid.Background>
             <ImageBrush ImageSource="/imagenes/TeethPattern.jpg" Stretch="UniformToFill"/>
         </Grid.Background>
-        <ComboBox x:Name="cmbPaciente" HorizontalAlignment="Left" Margin="62,54,0,0" VerticalAlignment="Top" Width="643"/>
+        <ComboBox x:Name="cmbPaciente" HorizontalAlignment="Left" Margin="62,54,0,0" VerticalAlignment="Top" Width="643" SelectionChanged="cmbPaciente_SelectionChanged"/>
         <Label Content="Paciente" HorizontalAlignment="Left" Margin="60,26,0,0" VerticalAlignment="Top" FontSize="20" Foreground="Black" Background="#7F056676" FontFamily="Bahnschrift"/>
         <Label Content="Tratamiento" HorizontalAlignment="Left" Margin="62,88,0,0" VerticalAlignment="Top" FontSize="20" Foreground="Black" Background="#7F056676" FontFamily="Bahnschrift"/>
         <ComboBox x:Name="cmbTratamiento" HorizontalAlignment="Left" Margin="62,129,0,0" VerticalAlignment="Top" Width="643" FontFamily="Bahnschrift" SelectionChanged="cmbTratamiento_SelectionChanged" IsReadOnly="False"/>

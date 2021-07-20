@@ -200,5 +200,10 @@ namespace SistemaDental
                     Menu menu = new Menu();
                     menu.Show();
                 }
-            }
+
+        private void cmbPaciente_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
+    }
 }

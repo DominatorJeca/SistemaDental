@@ -230,6 +230,9 @@
     <Compile Include="ClasePaciente.cs" />
     <Compile Include="ClaseProcedimiento.cs" />
     <Compile Include="ClaseTratamiento.cs" />
+    <Compile Include="DataSetfecven.cs">
+      <DependentUpon>DataSetfecven.xsd</DependentUpon>
+    </Compile>
     <Compile Include="DataSetfecven.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -461,6 +464,10 @@
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Report1.rdlc" />
+    <EmbeddedResource Include="ReportAnioGanancias.rdlc" />
+    <EmbeddedResource Include="ReportTratamiento.rdlc" />
+    <EmbeddedResource Include="ReportTurnosxEmpleado.rdlc" />
+    <EmbeddedResource Include="ReportVentasxMes.rdlc" />
     <None Include=".editorconfig" />
     <None Include="DataSetfecven.xsc">
       <DependentUpon>DataSetfecven.xsd</DependentUpon>
@@ -478,7 +485,8 @@
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
-    <EmbeddedResource Include="Reportes\FecVenc.rdlc">
+    <EmbeddedResource Include="CompraMes.rdlc" />
+    <EmbeddedResource Include="FecVenc.rdlc">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </EmbeddedResource>
     <Resource Include="Localization\zh-CHT.xml" />
@@ -570,6 +578,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="MVCCV\Controlador\" />
+    <Folder Include="Reportes\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="packages\MaterialDesignThemes.4.0.0\build\MaterialDesignThemes.targets" Condition="Exists('packages\MaterialDesignThemes.4.0.0\build\MaterialDesignThemes.targets')" />

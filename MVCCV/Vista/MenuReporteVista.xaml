@@ -25,17 +25,22 @@
             <Button x:Name="btnreporte3" Content="Reporte de tratamientos" HorizontalAlignment="Stretch"  VerticalAlignment="Top"  Background="#FF056676" BorderBrush="{x:Null}" Click="btnreporte3_Click" />
             <Button x:Name="btnreporte4" Content="Reporte de ventas segun año y mes" HorizontalAlignment="Stretch" VerticalAlignment="Top" Background="#FF056676" BorderBrush="{x:Null}" Click="btnreporte4_Click" />
             <Button x:Name="btnreporte5" Content="Reporte de ventas por año" HorizontalAlignment="Stretch"  VerticalAlignment="Top"  Background="#FF056676" BorderBrush="{x:Null}" Click="btnreporte5_Click" />
+            <Button x:Name="btnreporte6" Content="Reporte de turnos por empleado" HorizontalAlignment="Stretch"  VerticalAlignment="Top"  Background="#FF056676" BorderBrush="{x:Null}" Click="btnreporte6_Click"  />
         </StackPanel>
         <WindowsFormsHost Grid.Column="1" Grid.Row="1">
             <rv:ReportViewer x:Name="reporte"/>
         </WindowsFormsHost>
 
-        <StackPanel Orientation="Horizontal" Grid.Column="1" Grid.Row="0">
-            <Label>Año</Label>
-            <TextBox x:Name="txtanio" Width="150"/>
-            <Label>Mes</Label>
+        <StackPanel Orientation="Horizontal" Grid.Column="1" Grid.Row="0"  x:Name="stpPanel">
+            <Label x:Name="lblanio" Visibility="Collapsed">Año</Label>
+            <TextBox x:Name="txtanio" Visibility="Collapsed" Width="150"/>
+            <Label x:Name="lblmes" Visibility="Collapsed">Mes</Label>
             <TextBox x:Name="Mes" Width="150"/>
-            <Button Style="{StaticResource MaterialDesignFlatButton}" Background="Beige" Width="300" Click="Button_Click"/>
+            <Label x:Name="lbltratamiento" Visibility="Collapsed">Tratamiento</Label>
+            <ComboBox x:Name="Tratamiento" Width="150" Visibility="Collapsed"/>
+            <Label x:Name="lblempleado" Visibility="Collapsed">Empleados</Label>
+            <ComboBox x:Name="cmbEmpleado" Width="150" Visibility="Collapsed"/>
+            <Button Style="{StaticResource MaterialDesignFlatButton}" Background="Beige" Width="150" Click="Button_Click" x:Name="btnMostrarReporte"/>
         </StackPanel>
   
     </Grid>

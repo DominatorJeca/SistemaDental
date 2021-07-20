@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.Data.SqlClient;
 using System.Data;
 using System.Windows.Forms;
+using System.Diagnostics;
 
 namespace SistemaDental
 {
@@ -18,6 +19,14 @@ namespace SistemaDental
 
         public int anio { get; set; }
         public int mes { get; set; }
+
+        public string Nombre { get; set; }
+
+        public string tratamiento { get; set; }
+
+        public string NombreEmpleado { get; set; }
+
+        public string Empleado { get; set; }
 
         #region Turno - Procedimientos
 
@@ -379,5 +388,203 @@ namespace SistemaDental
                 command.Parameters.Clear();
             }
         }
+
+        public DataTable TotalCompraMes()
+        {
+
+
+            try
+            {
+
+                DataTable dt = new DataTable();
+                command.Connection = con.Open();
+                command.CommandText = "Report_TotalCompraxMes";
+                command.Parameters.AddWithValue("@anio", SqlDbType.Int).Value = anio;
+                command.Parameters.AddWithValue("@mes", SqlDbType.Int).Value = mes;
+                command.CommandType = CommandType.StoredProcedure;
+                SqlDataAdapter adapter = new SqlDataAdapter(command);
+                adapter.Fill(dt);
+
+                return dt;
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+            finally
+            {
+                command.Connection = con.Close();
+                command.Parameters.Clear();
+            }
+        }
+
+        public List<ClaseProcedimiento> NombreTratamientos()
+        {
+            try
+            {
+
+
+                command.Connection = con.Open();
+                command.CommandText = "NombreTratamientos";
+                command.CommandType = CommandType.StoredProcedure;
+                reader = command.ExecuteReader();
+
+                List<ClaseProcedimiento> TestList = new List<ClaseProcedimiento>();
+                ClaseProcedimiento proc = null;
+
+                while (reader.Read())
+                {
+                    proc = new ClaseProcedimiento();
+                    proc.Nombre = reader["Nombre"].ToString();
+                    TestList.Add(proc);
+                }
+
+                return TestList;
+            }catch(Exception e)
+            {
+                throw e;
+            }
+            finally
+            {
+                command.Connection = con.Close();
+            }
+        }
+
+        public DataTable TotalxTratamiento()
+        {
+            try
+            {
+                DataTable dt = new DataTable();
+                command.Connection = con.Open();
+                command.CommandText = "Report_TotalxTratamiento";
+                command.Parameters.AddWithValue("@tratamiento", SqlDbType.NVarChar).Value = tratamiento;
+                command.Parameters.AddWithValue("@anio", SqlDbType.Int).Value = anio;
+                command.Parameters.AddWithValue("@mes", SqlDbType.Int).Value = mes;
+                command.CommandType = CommandType.StoredProcedure;
+                SqlDataAdapter adapter = new SqlDataAdapter(command);
+                adapter.Fill(dt);
+
+                return dt;
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+            finally
+            {
+                command.Connection = con.Close();
+                command.Parameters.Clear();
+            }
+        }
+
+        public DataTable AnioGanancias()
+        {
+            try
+            {
+                DataTable dt = new DataTable();
+                command.Connection = con.Open();
+                command.CommandText = "Reporte_Ganancias";
+                command.Parameters.AddWithValue("@anio", SqlDbType.Int).Value = anio;
+                command.CommandType = CommandType.StoredProcedure;
+                SqlDataAdapter adapter = new SqlDataAdapter(command);
+                adapter.Fill(dt);
+
+                return dt;
+            }
+            catch(Exception e)
+            {
+                throw e;
+            }
+            finally
+            {
+                command.Connection = con.Close();
+                command.Parameters.Clear();
+            }
+        }
+
+        public DataTable VentasMes()
+        {
+            try
+            {
+                DataTable dt = new DataTable();
+                command.Connection = con.Open();
+                command.CommandText = "Report_VentasxMes";
+                command.Parameters.AddWithValue("@mes", SqlDbType.Int).Value = mes;
+                command.Parameters.AddWithValue("@anio", SqlDbType.Int).Value = anio;
+                command.CommandType = CommandType.StoredProcedure;
+                SqlDataAdapter adapter = new SqlDataAdapter(command);
+                adapter.Fill(dt);
+
+                return dt;
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+            finally
+            {
+                command.Connection = con.Close();
+                command.Parameters.Clear();
+            }
+        }
+
+        public DataTable TurnosxEmpleado()
+        {
+            try
+            {
+                DataTable dt = new DataTable();
+                command.Connection = con.Open();
+                command.CommandText = "Report_TurnosxEmpleado";
+                command.Parameters.AddWithValue("@Nombre", SqlDbType.NVarChar).Value = NombreEmpleado;
+                command.CommandType = CommandType.StoredProcedure;
+                SqlDataAdapter adapter = new SqlDataAdapter(command);
+                adapter.Fill(dt);
+
+                return dt;
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+            finally
+            {
+                command.Connection = con.Close();
+                command.Parameters.Clear();
+            }
+        }
+
+        public List<ClaseProcedimiento> NombreEmpleados()
+        {
+            try
+            {
+
+
+                command.Connection = con.Open();
+                command.CommandText = "NombreEmpleadoConcat";
+                command.CommandType = CommandType.StoredProcedure;
+                reader = command.ExecuteReader();
+
+                List<ClaseProcedimiento> TestList = new List<ClaseProcedimiento>();
+                ClaseProcedimiento proc = null;
+
+                while (reader.Read())
+                {
+                    proc = new ClaseProcedimiento();
+                    proc.Empleado = reader["Nombre"].ToString();
+                    TestList.Add(proc);
+                }
+
+                return TestList;
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+            finally
+            {
+                command.Connection = con.Close();
+            }
+        }
+
     }
 }
