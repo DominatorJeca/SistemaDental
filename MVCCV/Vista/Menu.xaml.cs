@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+
 using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Documents;
@@ -23,23 +24,32 @@ namespace SistemaDental
         private bool Admin;
         private String Nombree;
         private Caja frmCaja = new Caja();
- 
-   
+        private ClaseProcedimiento proced = new ClaseProcedimiento();
+
+        public Turno turno = new Turno();
+
         //Constructores
         public Menu()
         {
             InitializeComponent();
-        
+   
+
+            turno.UsuarioID = 37;
+            turno.ComienzoTurno = DateTime.Now;
+            proced.AgregarTurno(turno);
         }
 
         public Menu(bool admin,string name)
         {
-           
+
             InitializeComponent();
             //lblUsuario.Content = name;
             PermisosAdministrador(admin);
             Nombree = name;
             Admin = admin;
+            turno.UsuarioID = 37;
+            turno.ComienzoTurno = DateTime.Now;
+            proced.AgregarTurno(turno);
         }
 
         /// <summary>
@@ -147,7 +157,34 @@ namespace SistemaDental
 
         private void btnSalir_Click(object sender, RoutedEventArgs e)
         {
-            App.Current.Shutdown(); 
+
+
+            MessageBoxResult result = MessageBox.Show("¿Deseas terminar tu turno?", "Turno", MessageBoxButton.YesNoCancel);
+            switch (result)
+            {
+                case MessageBoxResult.Yes:
+                    {
+                        turno.UsuarioID = 37;
+                        turno.FinalTurno = DateTime.Now;
+                        proced.ActualizarTurno(turno);
+                        Login log = new Login();
+                        log.Show();
+                        this.Close();
+                        break;
+                    }
+                case MessageBoxResult.No:
+                    {
+                        Login log = new Login();
+                            log.Show();
+                        this.Close();
+                        break;
+                    }
+                case MessageBoxResult.Cancel:
+                    break;
+            }
+
+
+
         }
 
         private void btnMin_Click(object sender, RoutedEventArgs e)

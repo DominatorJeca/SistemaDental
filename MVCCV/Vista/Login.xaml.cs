@@ -42,10 +42,9 @@ namespace SistemaDental
             try
             {
                 //buscar usuario
-                Usuario elUsuario = proc.BuscarUsuario(txtUsuario.Text,txtpas.Text);
+                Usuario elUsuario = proc.BuscarUsuario(txtUsuario.Text,txtPassword.Password);
                 if (elUsuario != null)
                 {
-
                     Menu men = new Menu(elUsuario.Administrador, elUsuario.Nombre);
                     men.Show();
                     this.Close();
@@ -54,9 +53,7 @@ namespace SistemaDental
                     MessageBox.Show("Usuario o contraseña incorrectos");
 
                 //Verificar si el usuario existe
-              
-                 
-
+    
             }
             catch (Exception ex)
             {
@@ -68,10 +65,11 @@ namespace SistemaDental
 
         private void btnSalir_Click(object sender, RoutedEventArgs e)
         {
+            this.Close();
             App.Current.Shutdown();
         }
 
-        
+
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
@@ -89,9 +87,9 @@ namespace SistemaDental
                 txtPassword.Visibility = Visibility.Visible;
                 txtpas.Visibility = Visibility.Collapsed;
                 txtPassword.Password = txtpas.Text;
-        
+
             }
-         
+
 
         }
 
