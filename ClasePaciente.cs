@@ -13,7 +13,7 @@ namespace SistemaDental
     {
 
         //variable miembro
-        private static string connectionString = @"server =  .\SQLEXPRESS; Initial Catalog = clinicaDental; Integrated Security = True; MultipleActiveResultSets=true";
+        private static string connectionString = @"server =  .; Initial Catalog = clinicaDental; Integrated Security = True; MultipleActiveResultSets=true";
         private SqlConnection sqlConnection = new SqlConnection(connectionString);
 
         //Propiedad para extraer todos los ID almacenados en la BD

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,7 +13,9 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using BoldReports.UI.Xaml;
+using ControlzEx.Standard;
+using Microsoft.Reporting.WinForms;
+
 
 namespace SistemaDental.MVCCV.Vista
 {
@@ -21,6 +24,10 @@ namespace SistemaDental.MVCCV.Vista
     /// </summary>
     public partial class MenuReporteVista : UserControl
     {
+        ClaseProcedimiento procedimiento = new ClaseProcedimiento();
+        int reporteseleccionado = 0;
+        DataTable dt;
+        ReportDataSource ds;
         public MenuReporteVista()
         {
             InitializeComponent();
@@ -29,51 +36,164 @@ namespace SistemaDental.MVCCV.Vista
          
         }
 
+        
+        private void ManejoReportes()
+        {
+            txtanio.Clear();
+            Mes.Clear();
+            reporte.Clear();
+            foreach(Control control in stpPanel.Children)
+            {
+                control.Visibility = Visibility.Collapsed;
+            }
+
+           
+        }
+
+        private void ObtenerValores()
+        {
+            procedimiento.anio = Convert.ToInt32(txtanio.Text);
+            procedimiento.mes = Convert.ToInt32(Mes.Text);
+            procedimiento.tratamiento = Convert.ToString(Tratamiento.SelectedValue);
+            procedimiento.NombreEmpleado = Convert.ToString(cmbEmpleado.SelectedValue);
+        }
+
         private void btnreporte1_Click(object sender, RoutedEventArgs e)
         {
-
-            /* rpViewer.LocalReport.ReportPath= System.IO.Path.Combine(Environment.CurrentDirectory, @"/Reportes/FecVenc.rdlc");
-             SistemaDentalDataSet dataSet = new SistemaDentalDataSet();
-             rpViewer.LocalReport.DataSources.Clear();
-             rpViewer.LocalReport.DataSources.Add(new ReportDataSource(""))  
-             rpViewer.LocalReport.Refresh();
-             rpViewer.Refresh();*/
-            rpViewer.ReportPath = System.IO.Path.Combine(Environment.CurrentDirectory, @"Reportes\FecVenc.rdl");
-            rpViewer.Refresh();
-            rpViewer.RefreshReport();
+            reporteseleccionado = 1;
+            ManejoReportes();
+            ManejoVisibilidad();
         }
 
         private void btnreporte2_Click(object sender, RoutedEventArgs e)
         {
-         
-            rpViewer.ReportPath = null;
-            rpViewer.ReportPath = System.IO.Path.Combine(Environment.CurrentDirectory, @"Reportes\MesCompra.rdl");
-            rpViewer.RefreshReport();
+            reporteseleccionado = 2;
+            ManejoReportes();
+            ManejoVisibilidad();
         }
 
         private void btnreporte3_Click(object sender, RoutedEventArgs e)
         {
-       
-            rpViewer.ReportPath = System.IO.Path.Combine(Environment.CurrentDirectory, @"Reportes\tratamientos.rdl");
-            rpViewer.Refresh();
-            rpViewer.RefreshReport();
+            reporteseleccionado = 3;
+            ManejoReportes();
+            ManejoVisibilidad();
+            Tratamiento.ItemsSource = procedimiento.NombreTratamientos();
+            Tratamiento.SelectedValuePath = "Nombre";
+            Tratamiento.DisplayMemberPath = "Nombre";
         }
 
         private void btnreporte4_Click(object sender, RoutedEventArgs e)
         {
-          
-            rpViewer.ReportPath = null;
-            rpViewer.ReportPath = System.IO.Path.Combine(Environment.CurrentDirectory, @"Reportes\VentasAñosoMesesEspecificos.rdl");
-            rpViewer.Refresh();
-            rpViewer.RefreshReport();
+            reporteseleccionado = 4;
+            ManejoReportes();
+            ManejoVisibilidad();
         }
 
         private void btnreporte5_Click(object sender, RoutedEventArgs e)
         {
-            rpViewer.ReportPath = null;
-            rpViewer.ReportPath = System.IO.Path.Combine(Environment.CurrentDirectory, @"Reportes\VentasAñosoMesesEspecificos.rdl");
-            rpViewer.Refresh();
-            rpViewer.RefreshReport();
+            reporteseleccionado = 5;
+            ManejoReportes();
+            ManejoVisibilidad();
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+
+            switch (reporteseleccionado)
+            {
+                case 1:
+                    ObtenerValores();
+                    reporte.Reset();
+                    dt = procedimiento.FechaVenc();
+                    ds = new ReportDataSource("DataSet1", dt);
+                    reporte.LocalReport.DataSources.Add(ds);
+                    reporte.LocalReport.ReportEmbeddedResource = "SistemaDental.Report1.rdlc";
+                    reporte.RefreshReport();
+                    break;
+                case 2:
+                    ObtenerValores();
+                    reporte.Reset();
+                    dt = procedimiento.TotalCompraMes();
+                    ds = new ReportDataSource("DataSetMesCompra", dt);
+                    reporte.LocalReport.DataSources.Add(ds);
+                    reporte.LocalReport.ReportEmbeddedResource = "SistemaDental.CompraMes.rdlc";
+                    reporte.RefreshReport();
+                    break;
+                case 3:
+                    ObtenerValores();
+                    reporte.Reset();
+                    dt = procedimiento.TotalxTratamiento();
+                    ds = new ReportDataSource("DataSettt", dt);
+                    reporte.LocalReport.DataSources.Add(ds);
+                    reporte.LocalReport.ReportEmbeddedResource = "SistemaDental.ReportTratamiento.rdlc";
+                    reporte.RefreshReport();
+                    break;
+                case 4:
+                    ObtenerValores();
+                    reporte.Reset();
+                    dt = procedimiento.VentasMes();
+                    ds = new ReportDataSource("DataSetVxM", dt);
+                    reporte.LocalReport.DataSources.Add(ds);
+                    reporte.LocalReport.ReportEmbeddedResource = "SistemaDental.ReportVentasxMes.rdlc";
+                    reporte.RefreshReport();
+                    break;
+                case 5:
+                    procedimiento.anio = Convert.ToInt32(txtanio.Text);
+                    reporte.Reset();
+                    dt = procedimiento.AnioGanancias();
+                    ds = new ReportDataSource("DataSetAG", dt);
+                    reporte.LocalReport.DataSources.Add(ds);
+                    reporte.LocalReport.ReportEmbeddedResource = "SistemaDental.ReportAnioGanancias.rdlc";
+                    reporte.RefreshReport();
+                    break;
+                case 6:
+                    procedimiento.NombreEmpleado = Convert.ToString(cmbEmpleado.SelectedValue);
+                    reporte.Reset();
+                    dt = procedimiento.TurnosxEmpleado();
+                    ds = new ReportDataSource("DataSetTE", dt);
+                    reporte.LocalReport.DataSources.Add(ds);
+                    reporte.LocalReport.ReportEmbeddedResource = "SistemaDental.ReportTurnosxEmpleado.rdlc";
+                    reporte.RefreshReport();
+                    break;
+            }
+        }
+
+        private void btnreporte6_Click(object sender, RoutedEventArgs e)
+        {
+            reporteseleccionado = 6;
+            ManejoReportes();
+            ManejoVisibilidad();
+            cmbEmpleado.ItemsSource = procedimiento.NombreEmpleados();
+            cmbEmpleado.SelectedValuePath = "Empleado";
+            cmbEmpleado.DisplayMemberPath = "Empleado";
+        }
+
+
+        private void ManejoVisibilidad()
+        {
+            btnMostrarReporte.Visibility = Visibility.Visible;
+            if(reporteseleccionado==1 || reporteseleccionado == 2 || reporteseleccionado == 3 || reporteseleccionado == 4)
+            {
+                lblanio.Visibility = Visibility.Visible;
+                txtanio.Visibility = Visibility.Visible;
+                lblmes.Visibility= Visibility.Visible;
+                Mes.Visibility= Visibility.Visible;
+            }
+            if (reporteseleccionado == 5)
+            {
+                lblanio.Visibility = Visibility.Visible;
+                txtanio.Visibility = Visibility.Visible;
+            }
+            if (reporteseleccionado == 3)
+            {
+                lbltratamiento.Visibility = Visibility.Visible;
+                Tratamiento.Visibility = Visibility.Visible;
+            }
+            if (reporteseleccionado == 6)
+            {
+                lblempleado.Visibility = Visibility.Visible;
+                cmbEmpleado.Visibility = Visibility.Visible;
+            }
         }
     }
 }
