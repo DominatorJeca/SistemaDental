@@ -532,10 +532,17 @@ namespace SistemaDental
                 reader = command.ExecuteReader();
                 while (reader.Read())
                 {
-                    ClaseInventario prods = new ClaseInventario();
-                    prods.IdMaterial = Convert.ToInt32(reader["InventarioID"]);
-                    prods.NombreMaterial = Convert.ToString(reader["Nombre"]);
-                    prods.Cantidad = Convert.ToInt32(reader["CantidadDisponible"]);
+                    Usuario prods = new Usuario();
+                    prods.Id= Convert.ToInt32(reader["Identidad"]);
+                    prods.Nombre = Convert.ToString(reader["Nombre"]);
+                    prods.Apellido = Convert.ToString(reader["Apellido"]);
+                    prods.Telefono = Convert.ToString(reader["Telefono"]);
+                    prods.Correo = Convert.ToString(reader["Correo"]);
+                    prods.PuestoNombre = Convert.ToString(reader["NombrePuesto"]);
+                    prods.Genero = Convert.ToString(reader["NombreGenero"]);
+                    prods.Contraseña = Convert.ToString(reader["contrasena"]);
+                    prods.Administrador = Convert.ToBoolean(reader["administrador"]);
+
                     prod.Add(prods);
                 }
                 return prod;
@@ -553,6 +560,42 @@ namespace SistemaDental
                 command.Parameters.Clear();
             }
 
+
+
+        }
+
+        public List<Puesto> MostrarPuestos()
+        {
+            // Inicializar una lista vacía de puestos
+            List<Puesto> puestos = new List<Puesto>();
+
+
+            try
+            {
+                sqlConnection.Open();
+                //crear el comando SQL
+                SqlCommand sqlCommand = new SqlCommand("MostrarPuesto", sqlConnection);
+
+                sqlCommand.CommandType = CommandType.StoredProcedure;
+
+                // Obtener los datos de los puestos
+                using (SqlDataReader rdr = sqlCommand.ExecuteReader())
+                {
+                    while (rdr.Read())
+                        puestos.Add(new Puesto { Id = Convert.ToInt32(rdr["PuestoID"]), NombrePuesto = rdr["NombrePuesto"].ToString() });
+                }
+
+                return puestos;
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+            finally
+            {
+                // Cerrar la conexión
+                sqlConnection.Close();
+            }
 
         }
         #endregion

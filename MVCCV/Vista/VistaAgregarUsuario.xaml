@@ -39,9 +39,9 @@
         <Button x:Name="btnAgregarUsuario" Content="Agregar" HorizontalAlignment="Right"  VerticalAlignment="Bottom" Margin="0,0,72.6,179.2" Width="236" Height="43" Background="#48C9B0 " BorderBrush="{x:Null}" Click="btnAgregarUsuario_Click_1"/>
         <DataGrid x:Name="dgvEmpleado" HorizontalAlignment="Left" Height="186" Margin="42,233,0,0" VerticalAlignment="Top" Width="670" Background="#FF056676" Foreground="#DDFFFFFF" AutoGenerateColumns="False" IsReadOnly="True">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Identidad" Binding="{Binding Fecha}" Width="200"/>
-                <DataGridTextColumn Header="Nombre" Binding="{Binding NombreTratamiento}" Width="200"/>
-                <DataGridTextColumn Header="Apellido" Binding="{Binding NombreTratamiento}" Width="200"/>
+                <DataGridTextColumn Header="Identidad" Binding="{Binding Id}" Width="200"/>
+                <DataGridTextColumn Header="Nombre" Binding="{Binding Nombre}" Width="200"/>
+                <DataGridTextColumn Header="Apellido" Binding="{Binding Apellido}" Width="200"/>
             </DataGrid.Columns>
 
         </DataGrid>
@@ -50,7 +50,7 @@
         <Button x:Name="btnEliminar" Content="Eliminar" HorizontalAlignment="Right"  VerticalAlignment="Bottom" Margin="0,0,72.6,82.2" Width="236" Height="43" Background="#48C9B0" BorderBrush="{x:Null}" Click="btnAgregarUsuario_Click_1"/>
         <Button x:Name="btnGuardar" Content="Guardar" HorizontalAlignment="Right"  VerticalAlignment="Bottom" Margin="0,0,72.6,34.2" Width="236" Height="43" Background="#48C9B0 " BorderBrush="{x:Null}" Click="btnAgregarUsuario_Click_1"/>
         <TextBox  x:Name="txtBuscar"  Margin="173,196,597.6,222.2"  materialDesign:HintAssist.Hint="Buscar" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontFamily="Bahnschrift" FontSize="12" Background="#7FFFFFFF"/>
-        <CheckBox Content="Administrador" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="880,179,0,0"/>
+        <CheckBox Content="Administrador" x:Name="chkAdmin" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="880,179,0,0"/>
         <Button x:Name="btnPermisos" Content="Dar Permisos de Administrador" Visibility="Hidden" HorizontalAlignment="Right"  VerticalAlignment="Bottom" Margin="0,0,72.6,131.2" Width="236" Height="42" Background="#FF056676" BorderBrush="{x:Null}" Click="btnAgregarUsuario_Click_1"/>
 
 

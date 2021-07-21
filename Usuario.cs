@@ -22,6 +22,8 @@ namespace SistemaDental
 
         public string Nombre { get; set; }
 
+        public string Usuar { get; set; }
+
         public string Apellido { get; set; }
 
         public string Telefono{ get; set; }
@@ -43,10 +45,11 @@ namespace SistemaDental
 
         public Usuario() { }
 
-        public Usuario(int id, string nombre, string apellido, string telefono, string correo,int puesto,string genero, string contraseña, bool estado, bool administrador)
+        public Usuario(int id, string nombre, string usuar,string apellido, string telefono, string correo,int puesto,string genero, string contraseña, bool estado, bool administrador)
         {
             Id = id;
             Nombre = nombre;
+            Usuar = usuar;
             Apellido = apellido;
             Telefono = telefono;
             Correo = correo;

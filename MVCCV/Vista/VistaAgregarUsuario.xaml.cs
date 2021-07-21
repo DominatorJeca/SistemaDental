@@ -24,7 +24,7 @@ namespace SistemaDental.MVCCV.Vista
      
         //Variables miembro
         private Usuario usuario = new Usuario();
-        private Puesto puesto = new Puesto();
+      
         private bool Admin;
         private String Nombree;
         private ClaseProcedimiento Proc = new ClaseProcedimiento();
@@ -34,6 +34,7 @@ namespace SistemaDental.MVCCV.Vista
         {
             InitializeComponent();
             MostrarPuesto();
+            MostrarMaterial();
 
         }
 
@@ -41,6 +42,7 @@ namespace SistemaDental.MVCCV.Vista
         {
             InitializeComponent();
             MostrarPuesto();
+            MostrarMaterial();
             Nombree = name;
             Admin = admin;
         }
@@ -57,7 +59,7 @@ namespace SistemaDental.MVCCV.Vista
         /// </summary>
         public void MostrarPuesto()
         {
-            cmbPuesto.ItemsSource = puesto.MostrarPuestos();
+            cmbPuesto.ItemsSource = Proc.MostrarPuestos();
             cmbPuesto.SelectedValuePath = "Id";
             cmbPuesto.DisplayMemberPath = "NombrePuesto";
         }
@@ -76,7 +78,7 @@ namespace SistemaDental.MVCCV.Vista
             usuario.Genero = ((ComboBoxItem)cmbSexo.SelectedItem).Content.ToString();
             usuario.Contraseña = Convert.ToString(txtAgregarContra.Password);
             usuario.Estado = true;
-            usuario.Administrador = false;
+            usuario.Administrador = true;
         }
 
 
@@ -118,8 +120,8 @@ namespace SistemaDental.MVCCV.Vista
 
         public void MostrarMaterial()
         {
-            dgvEmpleado.ItemsSource = Proc.MostrarEmpleado();
-            dgvEmpleado.SelectedValuePath = "IdMaterial";
+            dgvEmpleado.ItemsSource = Proc.MostrarEmpleadosActivos();
+            dgvEmpleado.SelectedValuePath = "Id";
         }
 
         /// <summary>
