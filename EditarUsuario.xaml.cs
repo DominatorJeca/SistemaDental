@@ -25,6 +25,7 @@ namespace SistemaDental
         private Puesto puesto = new Puesto();
         private bool Admin;
         private String Nombree;
+      
 
         //constructores
         public EditarUsuario()

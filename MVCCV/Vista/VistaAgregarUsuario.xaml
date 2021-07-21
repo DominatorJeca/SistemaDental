@@ -16,8 +16,8 @@
         </Grid.Background>
 
 
-        <TextBox  x:Name="txtAgregarNombre"  Margin="70,39,700.6,381.2"  materialDesign:HintAssist.Hint="Nombre" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontFamily="Bahnschrift" FontSize="12" Background="#7FFFFFFF"/>
-        <TextBox x:Name="txtAgregarApellido" Margin="70,87,700.6,333.2" materialDesign:HintAssist.Hint="Apellido" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontFamily="Bahnschrift" FontSize="12" Background="#7FFFFFFF"/>
+        <TextBox  x:Name="txtAgregarNombre"  Margin="70,39,700.6,381.2" PreviewTextInput="PreviewTextInputOnlyLetters" materialDesign:HintAssist.Hint="Nombre" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontFamily="Bahnschrift" FontSize="12" Background="#7FFFFFFF"/>
+        <TextBox x:Name="txtAgregarApellido" Margin="70,87,700.6,333.2" PreviewTextInput="PreviewTextInputOnlyLetters" materialDesign:HintAssist.Hint="Apellido" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontFamily="Bahnschrift" FontSize="12" Background="#7FFFFFFF"/>
         <TextBox x:Name="txtAgregarTelefono" Margin="382,39,384.6,381.2" materialDesign:HintAssist.Hint="Telefóno" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontFamily="Bahnschrift" FontSize="12" Background="#7FFFFFFF"
                  PreviewTextInput="txtAgregarTelefono_PreviewTextInput" MaxLength="15"/>
         <TextBox x:Name="txtAgregarIdentidad" Margin="70,127,700.6,293.2" materialDesign:HintAssist.Hint="Identidad" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontFamily="Bahnschrift" FontSize="12" Background="#7FFFFFFF"
@@ -49,7 +49,7 @@
         <Button x:Name="btnEditar" Content="Editar" HorizontalAlignment="Right"  VerticalAlignment="Bottom" Margin="0,0,72.6,131.2" Width="236" Height="42" Background="#48C9B0" BorderBrush="{x:Null}" Click="btnAgregarUsuario_Click_1"/>
         <Button x:Name="btnEliminar" Content="Eliminar" HorizontalAlignment="Right"  VerticalAlignment="Bottom" Margin="0,0,72.6,82.2" Width="236" Height="43" Background="#48C9B0" BorderBrush="{x:Null}" Click="btnAgregarUsuario_Click_1"/>
         <Button x:Name="btnGuardar" Content="Guardar" HorizontalAlignment="Right"  VerticalAlignment="Bottom" Margin="0,0,72.6,34.2" Width="236" Height="43" Background="#48C9B0 " BorderBrush="{x:Null}" Click="btnAgregarUsuario_Click_1"/>
-        <TextBox  x:Name="txtBuscar"  Margin="203,196,567.6,227.2"  materialDesign:HintAssist.Hint="Buscar" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontFamily="Bahnschrift" FontSize="12" Background="#7FFFFFFF"/>
+        <TextBox  x:Name="txtBuscar" Margin="203,196,567.6,227.2"  materialDesign:HintAssist.Hint="Buscar" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontFamily="Bahnschrift" FontSize="12" Background="#7FFFFFFF"/>
         <CheckBox Content="Administrador" x:Name="chkAdmin" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="880,183,0,0" Checked="chkAdmin_Checked"/>
         <Button x:Name="btnPermisos" Content="Dar Permisos de Administrador" Visibility="Hidden" HorizontalAlignment="Right"  VerticalAlignment="Bottom" Margin="0,0,72.6,131.2" Width="236" Height="42" Background="#FF056676" BorderBrush="{x:Null}" Click="btnAgregarUsuario_Click_1"/>
 

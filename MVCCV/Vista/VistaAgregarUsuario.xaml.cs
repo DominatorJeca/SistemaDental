@@ -28,6 +28,7 @@ namespace SistemaDental.MVCCV.Vista
         private bool Admin;
         private String Nombree;
         private ClaseProcedimiento Proc = new ClaseProcedimiento();
+        Validaciones validar = new Validaciones();
 
         //Contructores
         public VistaAgregarUsuario()
@@ -197,6 +198,22 @@ namespace SistemaDental.MVCCV.Vista
             Regex regex = new Regex("[^0-9]+");
             e.Handled = regex.IsMatch(e.Text);
         }
+
+        private void PreviewTextInputOnlyNumbers(object sender, TextCompositionEventArgs e)
+        {
+
+
+            validar.SoloNumeros(e);
+        }
+
+        private void PreviewTextInputOnlyLetters(object sender, TextCompositionEventArgs e)
+        {
+
+
+            validar.SoloLetras(e);
+
+        }
+
 
         private void chkAdmin_Checked(object sender, RoutedEventArgs e)
         {
