@@ -5,34 +5,27 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:SistemaDental.MVCCV.Vista"
              mc:Ignorable="d" 
-               xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" Height="471" Width="893">
+               xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             d:DesignHeight="455" d:DesignWidth="1050" >
     <Grid>
         <Grid Height="450" VerticalAlignment="Top">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="5*"/>
-                <ColumnDefinition Width="662*"/>
-                <ColumnDefinition Width="218*"/>
-                <ColumnDefinition Width="9*"/>
-            </Grid.ColumnDefinitions>
             <Grid.Background>
                 <ImageBrush ImageSource="/imagenes/TeethPattern.jpg" Stretch="UniformToFill"/>
             </Grid.Background>
-            <TextBox Name="txtDineroCaja" Margin="556,311,25.428,75" materialDesign:HintAssist.Hint="Dinero Disponible" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontFamily="Bahnschrift" FontSize="18" Background="#7FFFFFFF" Foreground="Black" Grid.ColumnSpan="2" Grid.Column="1" Text="{Binding ElementName=dgvCaja,Path=SelectedItem.Dinero_disponible}" IsEnabled="False"/>
-            <TextBox Name="txtCantidadCaja" Margin="47,311,342,75" materialDesign:HintAssist.Hint="Cantidad" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontFamily="Bahnschrift" FontSize="18" Background="#7FFFFFFF" Foreground="Black" Grid.Column="1" TextChanged="txtCantidadCaja_TextChanged" HorizontalScrollBarVisibility="Visible"/>
-            <Label Content="Transacción" HorizontalAlignment="Left" Margin="338,311,0,0" VerticalAlignment="Top" FontFamily="Bahnschrift" FontSize="16" Foreground="Black" Grid.Column="1"/>
-            <RadioButton Name ="rbIngreso" Content="Ingreso" HorizontalAlignment="Left" Margin="349,343,0,0" VerticalAlignment="Top" FontFamily="Bahnschrift" FontSize="16" Grid.Column="1"/>
-            <RadioButton Name ="rbEgreso" Content="Egreso" HorizontalAlignment="Left" Margin="458,343,0,0" VerticalAlignment="Top" FontFamily="Bahnschrift" FontSize="16" Grid.Column="1"/>
-            <Button Name = "btnRealizar" Content="Realizar Transacción" HorizontalAlignment="Left" Margin="360,410,0,0" VerticalAlignment="Top" Width="170" Height="40" Background="#FF056676" BorderBrush="{x:Null}" Grid.Column="1" Click="btnRealizar_Click"/>
-            <DataGrid  Name ="dgvCaja" HorizontalAlignment="Left" Height="238" Margin="34,68,0,0" VerticalAlignment="Top" Width="821" Background="#FF056676" Foreground="#DDFFFFFF" Grid.ColumnSpan="2" Grid.Column="1" AutoGenerateColumns="False" IsEnabled="True" SelectionChanged="dgvCaja_SelectionChanged">
+            <TextBox Name="txtDineroAbono" Margin="535,104,54,282" materialDesign:HintAssist.Hint="Cantidad a abonar"  materialDesign:TextFieldAssist.SuffixText="lps." Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontFamily="Bahnschrift" FontSize="18" Background="#7FFFFFFF" Foreground="Black" IsEnabled="False"/>
+            <ComboBox Name="txtCantidadCaja" Margin="10,22,580,364" materialDesign:HintAssist.Hint="Paciente" Style="{StaticResource MaterialDesignFloatingHintComboBox}" FontFamily="Bahnschrift" FontSize="18" Background="#7FFFFFFF" Foreground="Black" Height="64" />
+            <Button Name = "btnRealizar" Content="Realizar Transacción" HorizontalAlignment="Left" Margin="462,400,0,0" VerticalAlignment="Top" Width="170" Height="40" Background="#FF056676" BorderBrush="{x:Null}" Click="btnRealizar_Click"/>
+            <DataGrid  Name ="dgvCaja" HorizontalAlignment="Left" Height="274" Margin="10,104,0,0" VerticalAlignment="Top" Width="460" Background="#FF056676" Foreground="#DDFFFFFF" AutoGenerateColumns="False" IsEnabled="True" SelectionChanged="dgvCaja_SelectionChanged">
                 <DataGrid.Columns>
-                    <DataGridTextColumn Header="Tipo de Transaccion" Binding="{Binding Tipo_transacción}" FontFamily="Bahnschrift" FontSize="18" IsReadOnly="True" Width="200"/>
-                    <DataGridTextColumn Header="Cantidad" Binding="{Binding Cantidad}" FontFamily="Bahnschrift" FontSize="18" IsReadOnly="True" Width="200"/>
-                    <DataGridTextColumn Header="Fecha" Binding="{Binding Fecha}" FontFamily="Bahnschrift" FontSize="18" IsReadOnly="True" Width="220"/>
-                    <DataGridTextColumn Header="Dinero Disponible" Binding="{Binding Dinero_disponible}" FontFamily="Bahnschrift" FontSize="18" IsReadOnly="True" Width="200"/>
+                    <DataGridTextColumn Header="Doctor"/>
+                    <DataGridTextColumn Header="Tratamiento"/>
+                    <DataGridTextColumn Header="Fecha de la cita" Binding="{Binding Fecha}" FontFamily="Bahnschrift" FontSize="18" IsReadOnly="True" Width="*"/>
+                    <DataGridTextColumn Header="Fecha de ultimo pago" Binding="{Binding Dinero_disponible}" FontFamily="Bahnschrift" FontSize="18" IsReadOnly="True" Width="*"/>
                 </DataGrid.Columns>
             </DataGrid>
-            <Button Name = "btnRegresar" Content="Regresar" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="130" Height="34" Background="#FF056676" BorderBrush="{x:Null}" Grid.Column="1" Click="btnRegresar_Click"/>
-
+            <TextBox Style="{StaticResource MaterialDesignOutlinedTextBox}" Margin="535,179,54,131" materialDesign:HintAssist.Hint="Descripcion de cita"/>
+            <TextBox x:Name="txtCantidadAbonada" Margin="535,328,54,72" materialDesign:HintAssist.Hint="Cantidad Abonada" Style="{StaticResource MaterialDesignFloatingHintTextBox}"  materialDesign:TextFieldAssist.SuffixText="lps." FontFamily="Bahnschrift" FontSize="18" Background="#7FFFFFFF" Foreground="Black" IsEnabled="False"/>
+            <TextBox x:Name="txtTratamientoCobro" Margin="535,22,54,364" materialDesign:HintAssist.Hint="Cantidad Cobrada"  materialDesign:TextFieldAssist.SuffixText="lps." Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontFamily="Bahnschrift" FontSize="18" Background="#7FFFFFFF" Foreground="Black" IsEnabled="False"/>
         </Grid>
     </Grid>
 </UserControl>
