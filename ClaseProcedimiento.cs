@@ -217,7 +217,7 @@ namespace SistemaDental
                         usuario.Nombre = Convert.ToString(reader["Nombre"]);
                         usuario.Apellido = Convert.ToString(reader["Apellido"]);
                         usuario.Administrador = Convert.ToBoolean(reader["administrador"]);
-                        usuario.Id = Convert.ToInt32(reader[0]);
+                        usuario.Id = Convert.ToString(reader[0]);
                     }
                 }
 
@@ -253,7 +253,7 @@ namespace SistemaDental
                 if (reader.Read())
                 {
                     usuario = new Usuario();
-                    usuario.Id=Convert.ToInt32(reader[0]);
+                    usuario.Id=Convert.ToString(reader[0]);
                     usuario.Nombre = Convert.ToString(reader[1]);
 
                 }
@@ -292,7 +292,7 @@ namespace SistemaDental
                 reader = command.ExecuteReader();
                 if (reader.Read())
                 {
-                    user.Id =Convert.ToInt32( reader[0]);
+                    user.Id =Convert.ToString( reader[0]);
                     user.Nombre = Convert.ToString(reader[1]);
                     user.Administrador = Convert.ToBoolean(reader[2]);
                 }
@@ -533,7 +533,7 @@ namespace SistemaDental
                 while (reader.Read())
                 {
                     Usuario prods = new Usuario();
-                    prods.Id= Convert.ToInt32(reader["Identidad"]);
+                    prods.Id= Convert.ToString(reader["Identidad"]);
                     prods.Nombre = Convert.ToString(reader["Nombre"]);
                     prods.Apellido = Convert.ToString(reader["Apellido"]);
                     prods.Telefono = Convert.ToString(reader["Telefono"]);
@@ -572,18 +572,16 @@ namespace SistemaDental
 
             try
             {
-                sqlConnection.Open();
+                command.Connection = con.Open();
                 //crear el comando SQL
-                SqlCommand sqlCommand = new SqlCommand("MostrarPuesto", sqlConnection);
-
-                sqlCommand.CommandType = CommandType.StoredProcedure;
-
+                command.CommandText = "MostrarPuestos";
+                command.CommandType = CommandType.StoredProcedure;
+                reader = command.ExecuteReader();
                 // Obtener los datos de los puestos
-                using (SqlDataReader rdr = sqlCommand.ExecuteReader())
-                {
-                    while (rdr.Read())
-                        puestos.Add(new Puesto { Id = Convert.ToInt32(rdr["PuestoID"]), NombrePuesto = rdr["NombrePuesto"].ToString() });
-                }
+              
+                    while (reader.Read())
+                       puestos.Add(new Puesto { Id = Convert.ToInt32(reader["PuestoID"]), NombrePuesto = reader["NombrePuesto"].ToString() });
+                
 
                 return puestos;
             }
@@ -593,8 +591,9 @@ namespace SistemaDental
             }
             finally
             {
-                // Cerrar la conexión
-                sqlConnection.Close();
+                reader.Close();
+                command.Connection = con.Close();
+                command.Parameters.Clear();
             }
 
         }

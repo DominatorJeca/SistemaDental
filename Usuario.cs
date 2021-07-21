@@ -18,7 +18,8 @@ namespace SistemaDental
         private SqlConnection sqlConnection = new SqlConnection(connectionString);
 
         //Propiedades
-        public int Id { get; set; }
+        public string Id { get; set; }
+        public int Ide { get; set; }
 
         public string Nombre { get; set; }
 
@@ -45,10 +46,11 @@ namespace SistemaDental
 
         public Usuario() { }
 
-        public Usuario(int id, string nombre, string usuar,string apellido, string telefono, string correo,int puesto,string genero, string contraseña, bool estado, bool administrador)
+        public Usuario(string id,int ide, string nombre, string usuar,string apellido, string telefono, string correo,int puesto,string genero, string contraseña, bool estado, bool administrador)
         {
             Id = id;
             Nombre = nombre;
+            Ide = ide;
             Usuar = usuar;
             Apellido = apellido;
             Telefono = telefono;
@@ -85,7 +87,7 @@ namespace SistemaDental
                     while (LeeUsuario.Read())
                     {
                         //Obtener valores del usuario
-                        usuario.Id = Convert.ToInt32(LeeUsuario["id_empleado"]);
+                        usuario.Id = Convert.ToString(LeeUsuario["id_empleado"]);
                         usuario.Nombre = Convert.ToString(LeeUsuario["nombre"]);
                         usuario.Contraseña = Convert.ToString(LeeUsuario["contraseña"]);
                         usuario.Estado = Convert.ToBoolean(LeeUsuario["estado"]);
@@ -296,7 +298,7 @@ namespace SistemaDental
                 using (SqlDataReader rdr = sqlCommand.ExecuteReader())
                 {
                     while (rdr.Read())
-                        usuarios.Add(new Usuario { Id = Convert.ToInt32(rdr["id_empleado"]), Nombre= rdr["nombre"].ToString(), Apellido = rdr["apellido"].ToString(),
+                        usuarios.Add(new Usuario { Id = Convert.ToString(rdr["id_empleado"]), Nombre= rdr["nombre"].ToString(), Apellido = rdr["apellido"].ToString(),
                             Telefono = rdr["telefono"].ToString(),Correo = rdr["correo"].ToString(),Puesto= Convert.ToInt32(rdr["idpuesto"]),PuestoNombre=puesto.MostrarPuesto(Convert.ToInt32(rdr["idpuesto"])),Genero= rdr["genero"].ToString(),
                             Contraseña = rdr["contraseña"].ToString(),Estado=Convert.ToBoolean(rdr["estado"]),Administrador= Convert.ToBoolean(rdr["administrador"])});
                 }
@@ -342,7 +344,7 @@ namespace SistemaDental
                     while (rdr.Read())
                         usuarios.Add(new Usuario
                         {
-                            Id = Convert.ToInt32(rdr["id_empleado"]),
+                            Id = Convert.ToString(rdr["id_empleado"]),
                             Nombre = rdr["nombre"].ToString(),
                             Apellido = rdr["apellido"].ToString(),
                             Telefono = rdr["telefono"].ToString(),

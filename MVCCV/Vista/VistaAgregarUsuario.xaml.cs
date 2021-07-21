@@ -24,7 +24,7 @@ namespace SistemaDental.MVCCV.Vista
      
         //Variables miembro
         private Usuario usuario = new Usuario();
-      
+        int opcion = 0;
         private bool Admin;
         private String Nombree;
         private ClaseProcedimiento Proc = new ClaseProcedimiento();
@@ -69,7 +69,7 @@ namespace SistemaDental.MVCCV.Vista
         /// </summary>
         public void ObtenerValores()
         {
-            usuario.Id = Convert.ToInt32(txtAgregarIdentidad.Text);
+            usuario.Id = Convert.ToString(txtAgregarIdentidad.Text);
             usuario.Nombre = Convert.ToString(txtAgregarNombre.Text);
             usuario.Apellido = Convert.ToString(txtAgregarApellido.Text);
             usuario.Telefono = Convert.ToString(txtAgregarTelefono.Text);
@@ -148,29 +148,35 @@ namespace SistemaDental.MVCCV.Vista
         /// <param name="e"></param>
         private void btnAgregarUsuario_Click_1(object sender, RoutedEventArgs e)
         {
+            opcion = 1;
+            btnEditar.IsEnabled = false;
+            btnEliminar.IsEnabled = false;
+            btnAgregarUsuario.IsEnabled = false;
+           
+            
             // Verificar que se ingresaron los valores requeridos
-            if (VerificarValores() == true)
-            {
-                try
-                {
-                    // Obtener los valores para el empleado
-                    ObtenerValores();
+            /* if (VerificarValores() == true)
+             {
+                 try
+                 {
+                     // Obtener los valores para el empleado
+                     ObtenerValores();
 
-                    // Insertar los datos del usuario 
-                    usuario.IngresarUsuario(usuario);
+                     // Insertar los datos del usuario 
+                     usuario.IngresarUsuario(usuario);
 
-                    // Mensaje de inserción exitosa
-                    MessageBox.Show("¡Datos insertados correctamente!");
-                    LimpiarFormulario();
+                     // Mensaje de inserción exitosa
+                     MessageBox.Show("¡Datos insertados correctamente!");
+                     LimpiarFormulario();
 
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show("Ha ocurrido un error al momento de insertar el empleado...");
-                    Console.WriteLine(ex.Message);
-                }
+                 }
+                 catch (Exception ex)
+                 {
+                     MessageBox.Show("Ha ocurrido un error al momento de insertar el empleado...");
+                     Console.WriteLine(ex.Message);
+                 }
 
-            }
+             }*/
 
         }
 
@@ -190,6 +196,11 @@ namespace SistemaDental.MVCCV.Vista
         {
             Regex regex = new Regex("[^0-9]+");
             e.Handled = regex.IsMatch(e.Text);
+        }
+
+        private void chkAdmin_Checked(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

@@ -73,7 +73,7 @@ namespace SistemaDental
         /// </summary>
         public void ObtenerValores()
         {
-            usuario.Id = Convert.ToInt32(cmbUsuario.SelectedValue);
+            usuario.Id = Convert.ToString(cmbUsuario.SelectedValue);
             usuario.Nombre = Convert.ToString(txtEditarNombre.Text);
             usuario.Apellido = Convert.ToString(txtEditarApellido.Text);
             usuario.Telefono = Convert.ToString(txtEditarTelefono.Text);
