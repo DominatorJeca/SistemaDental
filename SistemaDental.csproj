@@ -218,12 +218,6 @@
     <Compile Include="Base\ObservableObject.cs" />
     <Compile Include="Base\RelayCommand.cs" />
     <Compile Include="BDConnexion.cs" />
-    <Compile Include="Caja.xaml.cs">
-      <DependentUpon>Caja.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Citas.xaml.cs">
-      <DependentUpon>Citas.xaml</DependentUpon>
-    </Compile>
     <Compile Include="ClaseCitas.cs" />
     <Compile Include="ClaseCaja.cs" />
     <Compile Include="ClaseInventario.cs" />
@@ -244,9 +238,6 @@
     <Compile Include="Inventario.xaml.cs">
       <DependentUpon>Inventario.xaml</DependentUpon>
     </Compile>
-    <Compile Include="ManejarUsuario.xaml.cs">
-      <DependentUpon>ManejarUsuario.xaml</DependentUpon>
-    </Compile>
     <Compile Include="MVCCV\VistaControlador\AgregarUsuarioVistaControlador.cs" />
     <Compile Include="MVCCV\VistaControlador\AjusteVistaControlador.cs" />
     <Compile Include="MVCCV\VistaControlador\CajaVistaControlador.cs" />
@@ -262,9 +253,6 @@
     <Compile Include="MVCCV\VistaControlador\MenuPrincipalVistaControlador.cs" />
     <Compile Include="MVCCV\Vista\AjustesVista.xaml.cs">
       <DependentUpon>AjustesVista.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="MenuReporte.xaml.cs">
-      <DependentUpon>MenuReporte.xaml</DependentUpon>
     </Compile>
     <Compile Include="MVCCV\VistaControlador\CompraVistaControlador.cs" />
     <Compile Include="MVCCV\Vista\CajaVista.xaml.cs">
@@ -306,9 +294,6 @@
     <Compile Include="MVCCV\Vista\VistaAgregarUsuario.xaml.cs">
       <DependentUpon>VistaAgregarUsuario.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Pacientes.xaml.cs">
-      <DependentUpon>Pacientes.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Puesto.cs" />
     <Compile Include="Tratamiento.xaml.cs">
       <DependentUpon>Tratamiento.xaml</DependentUpon>
@@ -326,14 +311,6 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Caja.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Citas.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="EditarUsuario.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -346,10 +323,6 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="MainWindow.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
@@ -357,23 +330,11 @@
     <Compile Include="MVCCV\Vista\Login.xaml.cs">
       <DependentUpon>Login.xaml</DependentUpon>
     </Compile>
-    <Compile Include="MainWindow.xaml.cs">
-      <DependentUpon>MainWindow.xaml</DependentUpon>
-      <SubType>Code</SubType>
-    </Compile>
-    <Page Include="ManejarUsuario.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="MVCCV\Vista\Menu.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="MVCCV\Vista\AjustesVista.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="MenuReporte.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -426,10 +387,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="MVCCV\Vista\VistaAgregarUsuario.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Pacientes.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

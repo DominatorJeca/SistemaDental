@@ -23,7 +23,7 @@ namespace SistemaDental
        //Variables miembros
         private bool Admin;
         private String Nombree;
-        private Caja frmCaja = new Caja();
+      
         private ClaseProcedimiento proced = new ClaseProcedimiento();
 
         public Turno turno = new Turno();
@@ -99,8 +99,8 @@ namespace SistemaDental
         /// <param name="e"></param>
         private void btnCaja_Click(object sender, RoutedEventArgs e)
         {
-            Caja caja = new Caja(Admin, Nombree);
-            caja.Show();
+          
+          
         }
         /// <summary>
         /// Abre el Formulario de pacientes y cierra el actual
@@ -109,8 +109,8 @@ namespace SistemaDental
         /// <param name="e"></param>
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            Pacientes pacientes = new Pacientes(Admin, Nombree);
-            pacientes.Show();
+           
+          
             this.Hide();
         }
 
@@ -138,8 +138,8 @@ namespace SistemaDental
         /// <param name="e"></param>
         private void btnCitas_Click(object sender, RoutedEventArgs e)
         {
-            Citas citas = new Citas(Admin, Nombree);
-            citas.Show();
+           
+           
             this.Hide();
         }
 
