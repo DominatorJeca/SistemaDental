@@ -9,6 +9,7 @@ using System.Windows.Forms;
 using System.Net;
 using System.Net.Mail;
 using System.Diagnostics;
+using System.Security.Policy;
 
 namespace SistemaDental
 {
@@ -29,6 +30,20 @@ namespace SistemaDental
         public string NombreEmpleado { get; set; }
 
         public string Empleado { get; set; }
+
+        #region atributos empleado
+        public string Contrasena { get; set; }
+        public string ApellidoEmpleado { get; set; }
+        public string Telefono { get; set; }
+
+        public string Correo { get; set; }
+
+        public string Puesto { get; set; }
+
+        public string Genero { get; set; }
+
+        public string Usuario { get; set; }
+        #endregion
 
         #region Turno - Procedimientos
 
@@ -741,6 +756,42 @@ namespace SistemaDental
                 command.Connection = con.Close();
             }
         }
+        #region Empleado
+
+        public List<ClaseProcedimiento> DatosUsuario()
+        {
+            try
+            {
+
+                List<ClaseProcedimiento> prod = new List<ClaseProcedimiento>();
+                command.Connection = con.Open();
+                command.CommandText = "DatosUsuario";
+                command.Parameters.AddWithValue("@usuario", Usuario);
+                command.CommandType = CommandType.StoredProcedure;
+                reader = command.ExecuteReader();
+                while (reader.Read())
+                {
+                    ClaseProcedimiento procedimiento = new ClaseProcedimiento();
+                    procedimiento.NombreEmpleado = reader["Nombre"].ToString();
+                    procedimiento.Contrasena = reader["contrasena"].ToString();
+                    procedimiento.ApellidoEmpleado = reader["Apellido"].ToString();
+                }
+                return prod;
+            }
+
+            catch (Exception e)
+            {
+                throw e;
+            }
+
+            finally
+            {
+                reader.Close();
+                command.Connection = con.Close();
+                command.Parameters.Clear();
+            }
+        }
+        #endregion
 
     }
 }
