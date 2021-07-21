@@ -53,9 +53,7 @@ namespace SistemaDental
         /// </summary>
         private void btnRegresar_Click(object sender, RoutedEventArgs e)
         {
-            Pacientes pacientes = new Pacientes(Admin,Nombree);
-            pacientes.Show();
-            this.Hide();
+            
         }
 
         /// <summary>
@@ -262,9 +260,7 @@ namespace SistemaDental
 
         private void AddPaciente_Closed(object sender, EventArgs e)
         {
-            Pacientes pacientes = new Pacientes(Admin, Nombree);
-            pacientes.Show();
-            this.Close();
+           
         }
 
         private void txtNombre_TextChanged(object sender, TextChangedEventArgs e)

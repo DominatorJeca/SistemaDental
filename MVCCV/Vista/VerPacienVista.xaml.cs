@@ -258,8 +258,7 @@ namespace SistemaDental.MVCCV.Vista
 
         private void AddPaciente_Closed(object sender, EventArgs e)
         {
-            Pacientes pacientes = new Pacientes(Admin, Nombree);
-            pacientes.Show();
+           
         
         }
 

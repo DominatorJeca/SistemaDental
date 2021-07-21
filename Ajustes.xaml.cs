@@ -60,9 +60,7 @@ namespace SistemaDental
 
         private void btnManejarUsuarios_Click(object sender, RoutedEventArgs e)
         {
-            ManejarUsuario manejarUsuario = new ManejarUsuario(Admin, Nombree);
-            manejarUsuario.Show();
-            this.Hide();
+
         }
     }
 }
