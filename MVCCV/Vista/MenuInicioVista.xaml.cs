@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -28,6 +29,12 @@ namespace SistemaDental.MVCCV.Vista
         private void btnCitas_Click(object sender, RoutedEventArgs e)
         {
 
+        }
+
+        private void btnHelp_Click(object sender, RoutedEventArgs e)
+        {
+            string url = "http://localhost/ProjectoClinicaDental/vistas/";
+            Process.Start(new ProcessStartInfo("cmd", $"/c start {url}") { CreateNoWindow = true });
         }
     }
 }
