@@ -57,6 +57,9 @@
             <DataTemplate DataType="{x:Type viewModel:MenuReporteVistaControlador}">
                 <view:MenuReporteVista/>
             </DataTemplate>
+            <DataTemplate DataType="{x:Type viewModel:DatosDeUsuarioVistaControlador}">
+                <view:DatosDeUsuario/>
+            </DataTemplate>
         </ResourceDictionary>
     </Application.Resources>
 </Application>

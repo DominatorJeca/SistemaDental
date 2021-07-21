@@ -14,7 +14,7 @@ namespace SistemaDental
         //variable miembro
         private Puesto puesto = new Puesto();
         //cadena de conexion
-        private static string connectionString = @"server = .; Initial Catalog = clinicaDental; Integrated Security = True; MultipleActiveResultSets=true";
+        private static string connectionString = @"server = DESKTOP-E7NG9FA\SQLEXPRESS; Initial Catalog = clinicaDental; Integrated Security = True; MultipleActiveResultSets=true";
         private SqlConnection sqlConnection = new SqlConnection(connectionString);
 
         //Propiedades

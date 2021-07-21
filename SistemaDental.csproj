@@ -238,9 +238,6 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>DataSetfecven.xsd</DependentUpon>
     </Compile>
-    <Compile Include="DatosDeUsuario.xaml.cs">
-      <DependentUpon>DatosDeUsuario.xaml</DependentUpon>
-    </Compile>
     <Compile Include="EditarUsuario.xaml.cs">
       <DependentUpon>EditarUsuario.xaml</DependentUpon>
     </Compile>
@@ -254,6 +251,7 @@
     <Compile Include="MVCCV\VistaControlador\AjusteVistaControlador.cs" />
     <Compile Include="MVCCV\VistaControlador\CajaVistaControlador.cs" />
     <Compile Include="MVCCV\VistaControlador\CasaVistaControlador.cs" />
+    <Compile Include="MVCCV\VistaControlador\DatosDeUsuarioVistaControlador.cs" />
     <Compile Include="MVCCV\VistaControlador\EdditarUsuariovistaControlador.cs" />
     <Compile Include="MVCCV\VistaControlador\InventarioVistaControlador.cs" />
     <Compile Include="MVCCV\VistaControlador\ManejarusuariovistaControlador.cs" />
@@ -275,6 +273,9 @@
     </Compile>
     <Compile Include="MVCCV\Vista\CompraVista.xaml.cs">
       <DependentUpon>CompraVista.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MVCCV\Vista\DatosDeUsuario.xaml.cs">
+      <DependentUpon>DatosDeUsuario.xaml</DependentUpon>
     </Compile>
     <Compile Include="MVCCV\Vista\EditarUsuarioVista.xaml.cs">
       <DependentUpon>EditarUsuarioVista.xaml</DependentUpon>
@@ -337,15 +338,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="DatosDeUsuario.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="EditarUsuario.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Inventario.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MVCCV\Vista\DatosDeUsuario.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

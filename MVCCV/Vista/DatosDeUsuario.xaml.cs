@@ -13,7 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace SistemaDental
+namespace SistemaDental.MVCCV.Vista
 {
     /// <summary>
     /// Lógica de interacción para DatosDeUsuario.xaml
