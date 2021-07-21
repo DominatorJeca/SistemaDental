@@ -12,7 +12,7 @@ namespace SistemaDental
 {
     class ClaseTratamiento
     {
-        private static string connectionString = @"server = .; Initial Catalog = clinicaDental; Integrated Security = True; MultipleActiveResultSets=true";
+        private static string connectionString = @"server = DESKTOP-8MP5H5G; Initial Catalog = clinicaDental; Integrated Security = True; MultipleActiveResultSets=true";
         private SqlConnection sqlConnection = new SqlConnection(connectionString);
 
         public string IdPaciente { get; set; }
