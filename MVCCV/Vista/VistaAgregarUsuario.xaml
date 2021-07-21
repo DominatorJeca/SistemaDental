@@ -19,9 +19,9 @@
         <TextBox  x:Name="txtAgregarNombre"  Margin="70,39,700.6,381.2" PreviewTextInput="PreviewTextInputOnlyLetters" materialDesign:HintAssist.Hint="Nombre" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontFamily="Bahnschrift" FontSize="12" Background="#7FFFFFFF"/>
         <TextBox x:Name="txtAgregarApellido" Margin="70,87,700.6,333.2" PreviewTextInput="PreviewTextInputOnlyLetters" materialDesign:HintAssist.Hint="Apellido" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontFamily="Bahnschrift" FontSize="12" Background="#7FFFFFFF"/>
         <TextBox x:Name="txtAgregarTelefono" Margin="382,39,384.6,381.2" materialDesign:HintAssist.Hint="Telefóno" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontFamily="Bahnschrift" FontSize="12" Background="#7FFFFFFF"
-                 PreviewTextInput="txtAgregarTelefono_PreviewTextInput" MaxLength="15"/>
+                 PreviewTextInput="PreviewTextInputOnlyNumbers" MaxLength="15"/>
         <TextBox x:Name="txtAgregarIdentidad" Margin="70,127,700.6,293.2" materialDesign:HintAssist.Hint="Identidad" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontFamily="Bahnschrift" FontSize="12" Background="#7FFFFFFF"
-                 PreviewTextInput="txtAgregarIdentidad_PreviewTextInput"   MaxLength="13"/>
+                PreviewTextInput="PreviewTextInputOnlyNumbers"   MaxLength="13"/>
         <Label Content="Puesto" HorizontalAlignment="Left"  VerticalAlignment="Top" FontSize="12" FontFamily="Bahnschrift" Margin="700,140,0,0" RenderTransformOrigin="-2.498,7.577" Width="73"/>
         <ComboBox Name="cmbPuesto" HorizontalAlignment="Right"  VerticalAlignment="Top" Width="196" Margin="0,140,72.6,0"/>
         <ComboBox Name="cmbSexo" HorizontalAlignment="Right"  VerticalAlignment="Top" Width="205" Margin="0,137,390.6,0">

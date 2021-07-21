@@ -65,7 +65,7 @@ namespace SistemaDental
         }
 
         
-        public bool VerificarCampos(Window window)
+        public bool VerificarCampos(UserControl window)
         {
             bool band = true;
             foreach (var tb in FindVisualChildren<TextBox>(window))

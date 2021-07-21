@@ -89,20 +89,19 @@ namespace SistemaDental.MVCCV.Vista
         /// <returns>Verificacion de valores</returns>
         private bool VerificarValores()
         {
-            if (txtAgregarApellido.Text == string.Empty || txtAgregarNombre.Text == string.Empty || txtAgregarCorreo.Text == string.Empty
-                || txtAgregarIdentidad.Text == string.Empty || txtAgregarTelefono.Text == string.Empty || txtAgregarContra.Password == string.Empty)
+            if (!validar.VerificarCampos(this))
             {
-                MessageBox.Show("Por favor ingresa todos los valores en las cajas de texto");
+                MessageBox.Show("Por favor ingresa todos los valores que se le solicitan");
                 return false;
             }
-            else if (cmbSexo.SelectedValue == null)
+            else if (!validar.VerificarIdentidad(txtAgregarIdentidad.Text))
             {
-                MessageBox.Show("Por favor selecciona el Sexo del nuevo empleado");
+                MessageBox.Show("El numero de identidad no tiene un formato correcto");
                 return false;
             }
-            else if (cmbPuesto.SelectedValue == null)
+            else if (!validar.VerificarNumero(txtAgregarTelefono.Text))
             {
-                MessageBox.Show("Por favor selecciona el puesto del nuevo empleado");
+                MessageBox.Show("El numero de telefono no tiene un formato correcto");
                 return false;
             }
             else if (txtConfirmarContra.Password != txtAgregarContra.Password)
@@ -110,7 +109,7 @@ namespace SistemaDental.MVCCV.Vista
                 MessageBox.Show("La confirmación de contraseña no coincide");
                 return false;
             }
-            else if (!ValidarEmail(txtAgregarCorreo.Text))
+            else if (!validar.ValidarEmail(txtAgregarCorreo.Text))
             {
                 MessageBox.Show("Por favor, ingrese un correo valido");
                 return false;
@@ -181,24 +180,9 @@ namespace SistemaDental.MVCCV.Vista
 
         }
 
-        public static bool ValidarEmail(string email)
-        {
-            Regex regex = new Regex(@"^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$");
-            return regex.IsMatch(email);
-        }
+     
 
-        private void txtAgregarTelefono_PreviewTextInput(object sender, TextCompositionEventArgs e)
-        {
-            Regex regex = new Regex("[^0-9]+");
-            e.Handled = regex.IsMatch(e.Text);
-        }
-
-        private void txtAgregarIdentidad_PreviewTextInput(object sender, TextCompositionEventArgs e)
-        {
-            Regex regex = new Regex("[^0-9]+");
-            e.Handled = regex.IsMatch(e.Text);
-        }
-
+        
         private void PreviewTextInputOnlyNumbers(object sender, TextCompositionEventArgs e)
         {
 
