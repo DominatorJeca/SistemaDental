@@ -238,6 +238,9 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>DataSetfecven.xsd</DependentUpon>
     </Compile>
+    <Compile Include="DatosDeUsuario.xaml.cs">
+      <DependentUpon>DatosDeUsuario.xaml</DependentUpon>
+    </Compile>
     <Compile Include="EditarUsuario.xaml.cs">
       <DependentUpon>EditarUsuario.xaml</DependentUpon>
     </Compile>
@@ -331,6 +334,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Citas.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="DatosDeUsuario.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

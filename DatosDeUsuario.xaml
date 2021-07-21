@@ -1,0 +1,29 @@
+﻿<UserControl x:Class="SistemaDental.DatosDeUsuario"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:SistemaDental"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             mc:Ignorable="d" 
+              d:DesignHeight="455" d:DesignWidth="1050">
+    <Grid>
+        <Grid.Background>
+            <ImageBrush ImageSource="/imagenes/TeethPattern.jpg" Stretch="UniformToFill"/>
+        </Grid.Background>
+        <TextBox PreviewTextInput="PreviewTextInputOnlyLetters" Name="txtEditarNombre" Margin="20,18,492,405" materialDesign:HintAssist.Hint="Nombre" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontFamily="Bahnschrift" FontSize="12" Background="#7FFFFFFF"/>
+        <TextBox PreviewTextInput="PreviewTextInputOnlyLetters" Name="txtEditarApellido" Margin="20,54,492,369" materialDesign:HintAssist.Hint="Apellido" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontFamily="Bahnschrift" FontSize="12" Background="#7FFFFFFF"/>
+        <TextBox PreviewTextInput="PreviewTextInputOnlyNumbers" Text="{Binding SelectedItem.Telefono, ElementName=cmbUsuario}" Name="txtEditarTelefono" Margin="20,92,492,329" materialDesign:HintAssist.Hint="Telefono" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontFamily="Bahnschrift" FontSize="12" Background="#7FFFFFFF"/>
+        <TextBox Name="txtEditarCorreo" Margin="20,164,676,257" materialDesign:HintAssist.Hint="Correo" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontFamily="Bahnschrift" FontSize="12" Background="#7FFFFFFF"/>
+        <TextBox Name="cmbSexo" HorizontalAlignment="Left" Margin="58,134,0,0" VerticalAlignment="Top" Width="120"/>
+        <Label Content="Sexo" HorizontalAlignment="Left" Margin="20,134,0,0" VerticalAlignment="Top" FontSize="12" FontFamily="Bahnschrift"/>
+        <TextBox Name="txtNuevaContra" Margin="20,202,801,221" materialDesign:HintAssist.Hint="Nueva contraseña" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontFamily="Bahnschrift" FontSize="12" Background="#7FFFFFFF"/>
+        <Button x:Name="btnActualizarUsuario" Content="Actualizar" HorizontalAlignment="Left" Margin="848,280,0,0" VerticalAlignment="Top" Width="150" FontFamily="Bahnschrift" FontSize="16" Background="#FF056676" BorderBrush="{x:Null}" Click="btnActualizarUsuario_Click" RenderTransformOrigin="-0.25,-0.219"/>
+        <Button x:Name="btnCancelar" Content="Cancelar" HorizontalAlignment="Left" Margin="848,332,0,0" VerticalAlignment="Top" Width="150" FontFamily="Bahnschrift" FontSize="16" Background="#FF056676" BorderBrush="{x:Null}" Click="btnCancelar_Click"/>
+        <Label Content="Puesto" HorizontalAlignment="Left" Margin="204,134,0,0" VerticalAlignment="Top" FontFamily="Bahnschrift" FontSize="12"/>
+        <TextBox Name="cmbPuesto" HorizontalAlignment="Left" Margin="254,134,0,0" VerticalAlignment="Top" Width="120"/>
+        <DataGrid Margin="20,262,492,26"/>
+        <Button x:Name="btnCancelar_Copy" Content="Guardar" HorizontalAlignment="Left" Margin="848,382,0,0" VerticalAlignment="Top" Width="150" FontFamily="Bahnschrift" FontSize="16" Background="#FF056676" BorderBrush="{x:Null}" Click="btnCancelar_Click"/>
+        <TextBox x:Name="txtNuevaContra_Copy" Margin="294,202,492,221" materialDesign:HintAssist.Hint="Confirmar contraseña nueva" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontFamily="Bahnschrift" FontSize="12" Background="#7FFFFFFF"/>
+    </Grid>
+</UserControl>
