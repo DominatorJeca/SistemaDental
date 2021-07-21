@@ -465,6 +465,7 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Report1.rdlc" />
     <EmbeddedResource Include="ReportAnioGanancias.rdlc" />
+    <EmbeddedResource Include="ReportFechaCompraMaterial.rdlc" />
     <EmbeddedResource Include="ReportTratamiento.rdlc" />
     <EmbeddedResource Include="ReportTurnosxEmpleado.rdlc" />
     <EmbeddedResource Include="ReportVentasxMes.rdlc" />

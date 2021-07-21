@@ -51,7 +51,7 @@ namespace SistemaDental
 
         public void MostrarMaterial()
         {
-            dgv_Materiales.ItemsSource = inventario.MostrarInventario();
+            //dgv_Materiales.ItemsSource = inventario.MostrarInventario();
             dgv_Materiales.SelectedValuePath = "IdMaterial";
         }
 

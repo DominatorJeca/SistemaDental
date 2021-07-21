@@ -15,7 +15,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using ControlzEx.Standard;
 using Microsoft.Reporting.WinForms;
-
+using Syncfusion.Windows.Controls.Grid;
 
 namespace SistemaDental.MVCCV.Vista
 {
@@ -25,6 +25,7 @@ namespace SistemaDental.MVCCV.Vista
     public partial class MenuReporteVista : UserControl
     {
         ClaseProcedimiento procedimiento = new ClaseProcedimiento();
+        ClaseInventario inventario = new ClaseInventario();
         int reporteseleccionado = 0;
         DataTable dt;
         ReportDataSource ds;
@@ -155,6 +156,16 @@ namespace SistemaDental.MVCCV.Vista
                     reporte.LocalReport.ReportEmbeddedResource = "SistemaDental.ReportTurnosxEmpleado.rdlc";
                     reporte.RefreshReport();
                     break;
+                case 7:
+                    procedimiento.IdMaterial = Convert.ToInt32(cmbMaterial.SelectedValue);
+                    reporte.Reset();
+                    dt = procedimiento.FechaCompraMaterial();
+                    ds = new ReportDataSource("DataSetFCM", dt);
+                    reporte.LocalReport.DataSources.Add(ds);
+                    reporte.LocalReport.ReportEmbeddedResource = "SistemaDental.ReportFechaCompraMaterial.rdlc";
+                    reporte.RefreshReport();
+                    break;
+
             }
         }
 
@@ -194,6 +205,21 @@ namespace SistemaDental.MVCCV.Vista
                 lblempleado.Visibility = Visibility.Visible;
                 cmbEmpleado.Visibility = Visibility.Visible;
             }
+            if (reporteseleccionado == 7)
+            {
+                lblmaterila.Visibility = Visibility.Visible;
+                cmbMaterial.Visibility = Visibility.Visible;
+            }
+        }
+
+        private void btnreporte7_Click(object sender, RoutedEventArgs e)
+        {
+            reporteseleccionado = 7;
+            ManejoReportes();
+            ManejoVisibilidad();
+            cmbMaterial.ItemsSource = procedimiento.MostrarInventario();
+            cmbMaterial.SelectedValuePath = "IdMaterial";
+            cmbMaterial.DisplayMemberPath = "NombreMaterial";
         }
     }
 }

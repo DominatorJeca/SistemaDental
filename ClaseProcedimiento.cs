@@ -7,6 +7,7 @@ using System.Data.SqlClient;
 using System.Data;
 using System.Windows.Forms;
 using System.Diagnostics;
+using Syncfusion.XlsIO.Parser.Biff_Records.PivotTable;
 
 namespace SistemaDental
 {
@@ -16,9 +17,11 @@ namespace SistemaDental
         BDConnexion con = new BDConnexion();
         SqlCommand command = new SqlCommand();
         SqlDataReader reader;
+        ClaseInventario prods = new ClaseInventario();
 
         public int anio { get; set; }
         public int mes { get; set; }
+        public int IdMaterial { get; set; }
 
         public string Nombre { get; set; }
 
@@ -268,44 +271,7 @@ namespace SistemaDental
             }
 
         }
-        public List<ClaseInventario> MostrarInventario ()
-        {
-            try
-            {//Abrir la conexion sql
-                
-                List<ClaseInventario> prod = new List<ClaseInventario>();
-                command.Connection = con.Open();
-                //crear el comando SQL
-                command.CommandText = "MostrarInventario";
-                command.CommandType = CommandType.StoredProcedure;
-
-                //Definir las variables del procedimiento mediante los parametros obtenidos
-                reader = command.ExecuteReader();
-                while (reader.Read())
-                {
-                    ClaseInventario prods = new ClaseInventario();
-                    prods.IdMaterial = Convert.ToInt32(reader["InventarioID"]);
-                    prods.NombreMaterial = Convert.ToString(reader["Nombre"]);
-                    prods.Cantidad = Convert.ToInt32(reader["CantidadDisponible"]);
-                    prod.Add(prods);
-                }
-                return prod;
-            }
-
-            catch (Exception e)
-            {
-                throw e;
-            }
-
-            finally
-            {
-                reader.Close();
-                command.Connection = con.Close();
-                command.Parameters.Clear();
-            }
-
-
-        }
+        
         public int InsertarCompra(int empleadoId)
         {
             try
@@ -360,6 +326,46 @@ namespace SistemaDental
         }
         #endregion
 
+        #region Inventario
+        public List<ClaseInventario> MostrarInventario()
+        {
+            try
+            {//Abrir la conexion sql
+
+                List<ClaseInventario> prod = new List<ClaseInventario>();
+                command.Connection = con.Open();
+                //crear el comando SQL
+                command.CommandText = "MostrarInventario";
+                command.CommandType = CommandType.StoredProcedure;
+
+                //Definir las variables del procedimiento mediante los parametros obtenidos
+                reader = command.ExecuteReader();
+                while (reader.Read())
+                {
+                    prods = new ClaseInventario();
+                    prods.IdMaterial = Convert.ToInt32(reader["InventarioID"]);
+                    prods.NombreMaterial = Convert.ToString(reader["Nombre"]);
+                    prods.Cantidad = Convert.ToInt32(reader["CantidadDisponible"]);
+                    prod.Add(prods);
+                }
+                return prod;
+            }
+
+            catch (Exception e)
+            {
+                throw e;
+            }
+
+            finally
+            {
+                reader.Close();
+                command.Connection = con.Close();
+                command.Parameters.Clear();
+            }
+
+
+        }
+        #endregion
         public DataTable FechaVenc()
         {
            
@@ -586,5 +592,29 @@ namespace SistemaDental
             }
         }
 
+        public DataTable FechaCompraMaterial()
+        {
+            try
+            {
+                DataTable dt = new DataTable();
+                command.Connection = con.Open();
+                command.CommandText = "FechaCompraxMaterial";
+                command.Parameters.AddWithValue("@materialid",SqlDbType.Int).Value = IdMaterial;
+                command.CommandType = CommandType.StoredProcedure;
+                SqlDataAdapter adapter = new SqlDataAdapter(command);
+                adapter.Fill(dt);
+
+                return dt;
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+            finally
+            {
+                command.Connection = con.Close();
+                command.Parameters.Clear();
+            }
+        }
     }
 }

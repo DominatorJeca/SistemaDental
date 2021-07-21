@@ -30,7 +30,7 @@ namespace SistemaDental
 
         }
 
-        public List<ClaseInventario> MostrarInventario()
+        /*public List<ClaseInventario> MostrarInventario()
         {
             sqlConnection.Open();
 
@@ -64,7 +64,7 @@ namespace SistemaDental
                 sqlConnection.Close();
             }
         }
-
+        */
         
         public DataTable mostrarUsoTratamiento(int idmaterial)
         {
