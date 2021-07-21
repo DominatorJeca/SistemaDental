@@ -516,6 +516,47 @@ namespace SistemaDental
         }
         #endregion
 
+        #region Empleados
+        public List<Usuario> MostrarEmpleadosActivos()
+        {
+            try
+            {//Abrir la conexion sql
+
+                List<Usuario> prod = new List<Usuario>();
+                command.Connection = con.Open();
+                //crear el comando SQL
+                command.CommandText = "sp_Empleados_Mostrar_Activos";
+                command.CommandType = CommandType.StoredProcedure;
+
+                //Definir las variables del procedimiento mediante los parametros obtenidos
+                reader = command.ExecuteReader();
+                while (reader.Read())
+                {
+                    ClaseInventario prods = new ClaseInventario();
+                    prods.IdMaterial = Convert.ToInt32(reader["InventarioID"]);
+                    prods.NombreMaterial = Convert.ToString(reader["Nombre"]);
+                    prods.Cantidad = Convert.ToInt32(reader["CantidadDisponible"]);
+                    prod.Add(prods);
+                }
+                return prod;
+            }
+
+            catch (Exception e)
+            {
+                throw e;
+            }
+
+            finally
+            {
+                reader.Close();
+                command.Connection = con.Close();
+                command.Parameters.Clear();
+            }
+
+
+        }
+        #endregion
+
         public DataTable FechaVenc()
         {
 

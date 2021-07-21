@@ -27,6 +27,7 @@ namespace SistemaDental.MVCCV.Vista
         private Puesto puesto = new Puesto();
         private bool Admin;
         private String Nombree;
+        private ClaseProcedimiento Proc = new ClaseProcedimiento();
 
         //Contructores
         public VistaAgregarUsuario()
@@ -106,19 +107,19 @@ namespace SistemaDental.MVCCV.Vista
                 MessageBox.Show("La confirmación de contraseña no coincide");
                 return false;
             }
-            else if (!ValidarEmail(txtConfirmarCorreo.Text) && !ValidarEmail(txtAgregarCorreo.Text))
+            else if (!ValidarEmail(txtAgregarCorreo.Text))
             {
                 MessageBox.Show("Por favor, ingrese un correo valido");
                 return false;
             }
-            else if (txtConfirmarCorreo.Text != txtAgregarCorreo.Text)
-            {
-                MessageBox.Show("La confirmaciónn de correo no coincide");
-                return false;
-            }
-
-
+           
             return true;
+        }
+
+        public void MostrarMaterial()
+        {
+            dgvEmpleado.ItemsSource = Proc.MostrarEmpleado();
+            dgvEmpleado.SelectedValuePath = "IdMaterial";
         }
 
         /// <summary>
@@ -133,7 +134,6 @@ namespace SistemaDental.MVCCV.Vista
             txtAgregarTelefono.Text = string.Empty;
             txtAgregarContra.Password = string.Empty;
             txtConfirmarContra.Password = string.Empty;
-            txtConfirmarCorreo.Text = string.Empty;
             cmbPuesto.SelectedValue = null;
             cmbSexo.SelectedValue = null;
 
