@@ -21,7 +21,7 @@ namespace SistemaDental.MVCCV.Vista
     /// </summary>
     public partial class VistaAgregarUsuario : UserControl
     {
-     
+
         //Variables miembro
         private Usuario usuario = new Usuario();
         int opcion = 0;
@@ -53,7 +53,7 @@ namespace SistemaDental.MVCCV.Vista
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-      
+
 
         /// <summary>
         /// Asigna la lista de puestos al cmbPuestos
@@ -79,7 +79,7 @@ namespace SistemaDental.MVCCV.Vista
             usuario.Genero = ((ComboBoxItem)cmbSexo.SelectedItem).Content.ToString();
             usuario.Contraseña = Convert.ToString(txtAgregarContra.Password);
             usuario.Estado = true;
-            usuario.Administrador = true;
+            usuario.Administrador = Convert.ToBoolean(chkAdmin);
         }
 
 
@@ -114,7 +114,7 @@ namespace SistemaDental.MVCCV.Vista
                 MessageBox.Show("Por favor, ingrese un correo valido");
                 return false;
             }
-           
+
             return true;
         }
 
@@ -152,8 +152,8 @@ namespace SistemaDental.MVCCV.Vista
             btnEditar.IsEnabled = false;
             btnEliminar.IsEnabled = false;
             btnAgregarUsuario.IsEnabled = false;
-           
-            
+
+
             // Verificar que se ingresaron los valores requeridos
             /* if (VerificarValores() == true)
              {
@@ -180,9 +180,9 @@ namespace SistemaDental.MVCCV.Vista
 
         }
 
-     
 
-        
+
+
         private void PreviewTextInputOnlyNumbers(object sender, TextCompositionEventArgs e)
         {
 
@@ -202,6 +202,64 @@ namespace SistemaDental.MVCCV.Vista
         private void chkAdmin_Checked(object sender, RoutedEventArgs e)
         {
 
+        }
+
+        private void btnEditarUsuario_Click_1(object sender, RoutedEventArgs e)
+        {
+            opcion = 2;
+            btnAgregarUsuario.IsEnabled = false;
+            btnEliminar.IsEnabled = false;
+            btnEditar.IsEnabled = false;
+            btnPermisos.Visibility = Visibility.Visible;
+        }
+
+        private void btnEliminarUsuario_Click_1(object sender, RoutedEventArgs e)
+        {
+            opcion = 2;
+            btnAgregarUsuario.IsEnabled = false;
+            btnEliminar.IsEnabled = false;
+            btnEditar.IsEnabled = false;
+            btnPermisos.Visibility = Visibility.Visible;
+        }
+
+        private void btnGuardarUsuario_Click_1(object sender, RoutedEventArgs e)
+        {
+            switch (opcion)
+            {
+                case 1:
+
+                    break;
+                case 2:
+                    break;
+                case 3:
+                    break;
+            }
+
+        }
+
+        private void IngresarEmpleado(Usuario usu)
+        {
+            if (VerificarValores() == true)
+            {
+                try
+                {
+                    // Obtener los valores para el empleado
+                    ObtenerValores();
+
+                    // Insertar los datos del usuario 
+                    usuario.IngresarUsuario(usuario);
+
+                    // Mensaje de inserción exitosa
+                    MessageBox.Show("¡Datos insertados correctamente!");
+                    LimpiarFormulario();
+
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Ha ocurrido un error al momento de insertar el empleado...");
+                    Console.WriteLine(ex.Message);
+                }
+            }
         }
     }
 }
