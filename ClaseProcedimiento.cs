@@ -91,48 +91,8 @@ namespace SistemaDental
             }
         }
 
-       /* public Turno SeleccionarTurno(Turno turno)
-        {
-            //objeto que contendrá los datos del usuario
-            Usuario usuario = new Usuario();
-            try
-            {
-                command.Connection = con.Open();
-                //crear el comando SQL
-                command.CommandText = "SeleccionarTurno";
+     
 
-                command.CommandType = CommandType.StoredProcedure;
-                command.Parameters.AddWithValue("@usuarioID", turno.UsuarioID);
-                command.Parameters.AddWithValue("@fecha", turno.ComienzoTurno);
-                reader = command.ExecuteReader();
-
-
-                using (reader)
-                {
-
-                    turno.AgendaID = Convert.ToInt32(reader["AgendaID"]);
-                    turno.UsuarioID = Convert.ToInt32(reader["UsuarioID"]);
-                    turno.ComienzoTurno = Convert.ToDateTime(reader["ComienzoTurno"]);
-                    turno.FinalTurno = Convert.ToDateTime(reader["FinalTurno"]);
-
-                }
-
-                return turno;
-            }
-            catch (Exception e)
-            {
-
-                throw e;
-
-            }
-            finally
-            {    //Cerrar conexion
-                reader.Close();
-                command.Parameters.Clear();
-                command.Connection = con.Close();
-            }
-
-        }*/
         #region Compras
 
         public void EditarCompra(int CompraID, int InventarioID, int EmpleadoID, DateTime FechaCompra, DateTime FechaVenci, double precio, int cantidad)
@@ -235,10 +195,13 @@ namespace SistemaDental
                 command.Parameters.Clear();
                 command.Connection = con.Close();
             }
-            #endregion
+
 
 
         }
+
+
+        #endregion
         public Usuario BuscarEmail(string correo)
         {
             try
