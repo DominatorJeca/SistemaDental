@@ -35,7 +35,8 @@ namespace SistemaDental.MVCCV.Vista
         {
             InitializeComponent();
             MostrarPuesto();
-            MostrarMaterial();
+            MostrarEmpleados();
+            btnGuardar.IsEnabled = false;
 
         }
 
@@ -43,7 +44,8 @@ namespace SistemaDental.MVCCV.Vista
         {
             InitializeComponent();
             MostrarPuesto();
-            MostrarMaterial();
+            btnGuardar.IsEnabled = false;
+            MostrarEmpleados();
             Nombree = name;
             Admin = admin;
         }
@@ -76,10 +78,12 @@ namespace SistemaDental.MVCCV.Vista
             usuario.Telefono = Convert.ToString(txtAgregarTelefono.Text);
             usuario.Correo = Convert.ToString(txtAgregarCorreo.Text);
             usuario.Puesto = Convert.ToInt32(cmbPuesto.SelectedValue);
-            usuario.Genero = ((ComboBoxItem)cmbSexo.SelectedItem).Content.ToString();
+            usuario.Genero = 1;
             usuario.Contraseña = Convert.ToString(txtAgregarContra.Password);
             usuario.Estado = true;
-            usuario.Administrador = Convert.ToBoolean(chkAdmin);
+            
+            
+          
         }
 
 
@@ -89,12 +93,12 @@ namespace SistemaDental.MVCCV.Vista
         /// <returns>Verificacion de valores</returns>
         private bool VerificarValores()
         {
-            if (!validar.VerificarCampos(this))
+           /* if (!validar.VerificarCampos(this))
             {
                 MessageBox.Show("Por favor ingresa todos los valores que se le solicitan");
                 return false;
-            }
-            else if (!validar.VerificarIdentidad(txtAgregarIdentidad.Text))
+            }*/
+            if (!validar.VerificarIdentidad(txtAgregarIdentidad.Text))
             {
                 MessageBox.Show("El numero de identidad no tiene un formato correcto");
                 return false;
@@ -118,7 +122,7 @@ namespace SistemaDental.MVCCV.Vista
             return true;
         }
 
-        public void MostrarMaterial()
+        public void MostrarEmpleados()
         {
             dgvEmpleado.ItemsSource = Proc.MostrarEmpleadosActivos();
             dgvEmpleado.SelectedValuePath = "Id";
@@ -152,31 +156,7 @@ namespace SistemaDental.MVCCV.Vista
             btnEditar.IsEnabled = false;
             btnEliminar.IsEnabled = false;
             btnAgregarUsuario.IsEnabled = false;
-
-
-            // Verificar que se ingresaron los valores requeridos
-            /* if (VerificarValores() == true)
-             {
-                 try
-                 {
-                     // Obtener los valores para el empleado
-                     ObtenerValores();
-
-                     // Insertar los datos del usuario 
-                     usuario.IngresarUsuario(usuario);
-
-                     // Mensaje de inserción exitosa
-                     MessageBox.Show("¡Datos insertados correctamente!");
-                     LimpiarFormulario();
-
-                 }
-                 catch (Exception ex)
-                 {
-                     MessageBox.Show("Ha ocurrido un error al momento de insertar el empleado...");
-                     Console.WriteLine(ex.Message);
-                 }
-
-             }*/
+            btnGuardar.IsEnabled = true;
 
         }
 
@@ -201,7 +181,12 @@ namespace SistemaDental.MVCCV.Vista
 
         private void chkAdmin_Checked(object sender, RoutedEventArgs e)
         {
+            usuario.Administrador = true;
+        }
 
+        private void chkAdmin_Unchecked(object sender, RoutedEventArgs e)
+        {
+            usuario.Administrador = false; 
         }
 
         private void btnEditarUsuario_Click_1(object sender, RoutedEventArgs e)
@@ -211,6 +196,7 @@ namespace SistemaDental.MVCCV.Vista
             btnEliminar.IsEnabled = false;
             btnEditar.IsEnabled = false;
             btnPermisos.Visibility = Visibility.Visible;
+            btnGuardar.IsEnabled = true;
         }
 
         private void btnEliminarUsuario_Click_1(object sender, RoutedEventArgs e)
@@ -220,6 +206,7 @@ namespace SistemaDental.MVCCV.Vista
             btnEliminar.IsEnabled = false;
             btnEditar.IsEnabled = false;
             btnPermisos.Visibility = Visibility.Visible;
+            btnGuardar.IsEnabled = true;
         }
 
         private void btnGuardarUsuario_Click_1(object sender, RoutedEventArgs e)
@@ -227,7 +214,7 @@ namespace SistemaDental.MVCCV.Vista
             switch (opcion)
             {
                 case 1:
-
+                    IngresarEmpleado(usuario);
                     break;
                 case 2:
                     break;
@@ -247,16 +234,21 @@ namespace SistemaDental.MVCCV.Vista
                     ObtenerValores();
 
                     // Insertar los datos del usuario 
-                    usuario.IngresarUsuario(usuario);
+                    Proc.IngresarUsuario(usu);
 
                     // Mensaje de inserción exitosa
                     MessageBox.Show("¡Datos insertados correctamente!");
+                    MostrarEmpleados();
                     LimpiarFormulario();
+                    btnAgregarUsuario.IsEnabled = true;
+                    btnEditar.IsEnabled = true;
+                    btnEliminar.IsEnabled = true;
+                    btnGuardar.IsEnabled = false;
 
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show("Ha ocurrido un error al momento de insertar el empleado...");
+                    MessageBox.Show("Ha ocurrido un error al momento de insertar el empleado..."+ ex.Message);
                     Console.WriteLine(ex.Message);
                 }
             }

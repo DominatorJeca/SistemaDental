@@ -50,9 +50,9 @@
         <Button x:Name="btnEliminar" Content="Eliminar" HorizontalAlignment="Right"  VerticalAlignment="Bottom" Margin="0,0,72.6,82.2" Width="236" Height="43" Background="#48C9B0" BorderBrush="{x:Null}" Click="btnEliminarUsuario_Click_1"/>
         <Button x:Name="btnGuardar" Content="Realizar" HorizontalAlignment="Right"  VerticalAlignment="Bottom" Margin="0,0,72.6,34.2" Width="236" Height="43" Background="#48C9B0 " BorderBrush="{x:Null}" Click="btnGuardarUsuario_Click_1"/>
         <TextBox  x:Name="txtBuscar" Margin="203,196,567.6,227.2"  materialDesign:HintAssist.Hint="Buscar" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontFamily="Bahnschrift" FontSize="12" Background="#7FFFFFFF"/>
-        <CheckBox Content="Administrador" x:Name="chkAdmin" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="880,183,0,0" Checked="chkAdmin_Checked"/>
+        <CheckBox Content="Administrador" x:Name="chkAdmin" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="880,183,0,0" Checked="chkAdmin_Checked" Unchecked="chkAdmin_Unchecked"/>
         <Button x:Name="btnPermisos" Content="Dar Permisos de Administrador" Visibility="Hidden" HorizontalAlignment="Right"  VerticalAlignment="Bottom" Margin="0,0,72.6,131.2" Width="236" Height="42" Background="#48C9B0" BorderBrush="{x:Null}" Click="btnAgregarUsuario_Click_1"/>
-
+ 
 
     </Grid>
 

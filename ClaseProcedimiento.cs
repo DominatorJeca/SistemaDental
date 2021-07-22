@@ -150,7 +150,38 @@ namespace SistemaDental
         #endregion
 
         #region Usuario-Procedimientos
+        public void IngresarUsuario(Usuario usuario)
+        {  
+            
 
+            try
+            {
+                command.Connection = con.Open();
+                command.CommandText = "sp_UsuarioEmpleado_Insertar";
+                command.CommandType = CommandType.StoredProcedure;
+                //Establecer los valores de parametros
+                command.Parameters.AddWithValue("@Identidad", usuario.Id);
+                command.Parameters.AddWithValue("@Nombre", usuario.Nombre);
+                command.Parameters.AddWithValue("@Apellido", usuario.Apellido);
+                command.Parameters.AddWithValue("@Telefono", usuario.Telefono);
+                command.Parameters.AddWithValue("@Correo", usuario.Correo);
+                command.Parameters.AddWithValue("@PuestoID", usuario.Puesto);
+                command.Parameters.AddWithValue("@GeneroID", usuario.Genero);
+                command.Parameters.AddWithValue("@contrasena", usuario.Contraseña);
+                command.Parameters.AddWithValue("@Estado", usuario.Estado);
+                command.Parameters.AddWithValue("@Administrador", usuario.Administrador);
+                command.ExecuteNonQuery();
+
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+            finally
+            {    //Cerrar conexion 
+                sqlConnection.Close();
+            }
+        }
         public Usuario BuscarUsuario(string user, string contra)
         {
             //objeto que contendrá los datos del usuario
@@ -502,7 +533,7 @@ namespace SistemaDental
                     prods.Telefono = Convert.ToString(reader["Telefono"]);
                     prods.Correo = Convert.ToString(reader["Correo"]);
                     prods.PuestoNombre = Convert.ToString(reader["NombrePuesto"]);
-                    prods.Genero = Convert.ToString(reader["NombreGenero"]);
+                    prods.GeneroNombre = Convert.ToString(reader["NombreGenero"]);
                     prods.Contraseña = Convert.ToString(reader["contrasena"]);
                     prods.Administrador = Convert.ToBoolean(reader["administrador"]);
 

@@ -79,6 +79,7 @@ namespace SistemaDental
                 if (tb.SelectedValue.ToString().Replace(" ", "").Equals("") && tb.Name != "PART_EditableTextBox" && tb.Name != "PART_TextBox")
                     band = false;
             }
+            //foreach(Control con in window.Content)
 
             foreach (var tb in FindVisualChildren<DataGrid>(window))
             {

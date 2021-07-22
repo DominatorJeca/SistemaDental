@@ -35,7 +35,8 @@ namespace SistemaDental
 
         public string PuestoNombre { get; set; }
 
-        public string Genero{ get; set; }
+        public int Genero{ get; set; }
+        public string GeneroNombre { get; set; }
         public string Contraseña { get; set; }
         public bool Estado { get; set; }
 
@@ -46,7 +47,7 @@ namespace SistemaDental
 
         public Usuario() { }
 
-        public Usuario(string id,int ide, string nombre, string usuar,string apellido, string telefono, string correo,int puesto,string genero, string contraseña, bool estado, bool administrador)
+        public Usuario(string id,int ide, string nombre, string usuar,string apellido, string telefono, string correo,int puesto,string generonombre,int genero, string contraseña, bool estado, bool administrador)
         {
             Id = id;
             Nombre = nombre;
@@ -56,7 +57,8 @@ namespace SistemaDental
             Telefono = telefono;
             Correo = correo;
             Puesto = puesto;
-            Genero = genero;
+            GeneroNombre = generonombre;
+            Genero = Genero;
             Contraseña = contraseña;
             Estado = estado;
             Administrador = administrador;
@@ -299,7 +301,7 @@ namespace SistemaDental
                 {
                     while (rdr.Read())
                         usuarios.Add(new Usuario { Id = Convert.ToString(rdr["id_empleado"]), Nombre= rdr["nombre"].ToString(), Apellido = rdr["apellido"].ToString(),
-                            Telefono = rdr["telefono"].ToString(),Correo = rdr["correo"].ToString(),Puesto= Convert.ToInt32(rdr["idpuesto"]),PuestoNombre=puesto.MostrarPuesto(Convert.ToInt32(rdr["idpuesto"])),Genero= rdr["genero"].ToString(),
+                            Telefono = rdr["telefono"].ToString(),Correo = rdr["correo"].ToString(),Puesto= Convert.ToInt32(rdr["idpuesto"]),PuestoNombre=puesto.MostrarPuesto(Convert.ToInt32(rdr["idpuesto"])),GeneroNombre= rdr["genero"].ToString(),
                             Contraseña = rdr["contraseña"].ToString(),Estado=Convert.ToBoolean(rdr["estado"]),Administrador= Convert.ToBoolean(rdr["administrador"])});
                 }
 
@@ -351,7 +353,7 @@ namespace SistemaDental
                             Correo = rdr["correo"].ToString(),
                             Puesto = Convert.ToInt32(rdr["idpuesto"]),
                             PuestoNombre = puesto.MostrarPuesto(Convert.ToInt32(rdr["idpuesto"])),
-                            Genero = rdr["genero"].ToString(),
+                            GeneroNombre = rdr["genero"].ToString(),
                             Contraseña = rdr["contraseña"].ToString(),
                             Estado = Convert.ToBoolean(rdr["estado"]),
                             Administrador = Convert.ToBoolean(rdr["administrador"])

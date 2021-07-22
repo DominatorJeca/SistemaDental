@@ -80,7 +80,7 @@ namespace SistemaDental
             usuario.Telefono = Convert.ToString(txtEditarTelefono.Text);
             usuario.Correo = Convert.ToString(txtEditarCorreo.Text);
             usuario.Puesto = Convert.ToInt32(cmbPuesto.SelectedValue);
-            usuario.Genero = ((ComboBoxItem)cmbSexo.SelectedItem).Content.ToString();
+            usuario.Genero = 1;
             usuario.Contraseña = Convert.ToString(txtNuevaContra.Text);
             usuario.Estado = true;
             usuario.Administrador = false;
