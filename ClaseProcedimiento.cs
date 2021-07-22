@@ -42,7 +42,7 @@ namespace SistemaDental
 
         public string Genero { get; set; }
 
-        public string Usuario { get; set; }
+        
         #endregion
 
         #region Turno - Procedimientos
@@ -758,38 +758,48 @@ namespace SistemaDental
         }
         #region Empleado
 
-        public List<ClaseProcedimiento> DatosUsuario()
+        
+
+        public Usuario DatosUsuarios(string nombreusuario)
         {
             try
             {
-
-                List<ClaseProcedimiento> prod = new List<ClaseProcedimiento>();
+                Usuario usuario = null;
                 command.Connection = con.Open();
+                //crear el comando SQL
                 command.CommandText = "DatosUsuario";
-                command.Parameters.AddWithValue("@usuario", Usuario);
+                command.Parameters.AddWithValue("@usuario",nombreusuario);
                 command.CommandType = CommandType.StoredProcedure;
                 reader = command.ExecuteReader();
-                while (reader.Read())
+                if (reader.Read())
                 {
-                    ClaseProcedimiento procedimiento = new ClaseProcedimiento();
-                    procedimiento.NombreEmpleado = reader["Nombre"].ToString();
-                    procedimiento.Contrasena = reader["contrasena"].ToString();
-                    procedimiento.ApellidoEmpleado = reader["Apellido"].ToString();
+                    usuario = new Usuario();
+                    usuario.Contraseña = Convert.ToString(reader[0]);
+                    usuario.Nombre = Convert.ToString(reader[1]);
+                    usuario.Apellido = Convert.ToString(reader[2]);
+                    usuario.Telefono = Convert.ToString(reader[3]);
+                    usuario.Correo = Convert.ToString(reader[4]);
+                    usuario.PuestoNombre = Convert.ToString(reader[5]);
+                    usuario.Genero = Convert.ToString(reader[6]);
                 }
-                return prod;
-            }
 
+                return usuario;
+            }
             catch (Exception e)
             {
                 throw e;
             }
-
             finally
             {
                 reader.Close();
-                command.Connection = con.Close();
                 command.Parameters.Clear();
+                command.Connection = con.Close();
             }
+        }
+
+        public List<ClaseProcedimiento> CitasUsuario()
+        {
+
         }
         #endregion
 

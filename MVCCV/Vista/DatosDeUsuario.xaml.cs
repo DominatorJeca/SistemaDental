@@ -20,9 +20,19 @@ namespace SistemaDental.MVCCV.Vista
     /// </summary>
     public partial class DatosDeUsuario : UserControl
     {
+        ClaseProcedimiento procedimiento = new ClaseProcedimiento();
         public DatosDeUsuario()
         {
             InitializeComponent();
+            var Usuario = procedimiento.DatosUsuarios("javi");
+            txtApellido.Text = Usuario.Apellido;
+            txtNombre.Text = Usuario.Nombre;
+            txtCorreo.Text = Usuario.Correo;
+            txtTelefono.Text = Usuario.Telefono;
+            txtsexo.Text = Usuario.Genero;
+            txtpuesto.Text = Usuario.PuestoNombre;
         }
+
+        
     }
 }

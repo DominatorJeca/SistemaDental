@@ -38,6 +38,7 @@ namespace SistemaDental
 
         public bool Administrador{ get; set; }
 
+        public string usuario { get; set; }
 
         //Contructores
 
