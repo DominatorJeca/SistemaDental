@@ -195,7 +195,7 @@ namespace SistemaDental.MVCCV.Vista
             btnAgregarUsuario.IsEnabled = false;
             btnEliminar.IsEnabled = false;
             btnEditar.IsEnabled = false;
-            btnPermisos.Visibility = Visibility.Visible;
+           // btnPermisos.Visibility = Visibility.Visible;
             btnGuardar.IsEnabled = true;
         }
 
@@ -205,7 +205,7 @@ namespace SistemaDental.MVCCV.Vista
             btnAgregarUsuario.IsEnabled = false;
             btnEliminar.IsEnabled = false;
             btnEditar.IsEnabled = false;
-            btnPermisos.Visibility = Visibility.Visible;
+            //btnPermisos.Visibility = Visibility.Visible;
             btnGuardar.IsEnabled = true;
         }
 
@@ -252,6 +252,11 @@ namespace SistemaDental.MVCCV.Vista
                     Console.WriteLine(ex.Message);
                 }
             }
+        }
+
+        private void dgvEmpleado_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            //txtAgregarNombre=
         }
     }
 }
