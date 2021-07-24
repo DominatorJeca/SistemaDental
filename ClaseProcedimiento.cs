@@ -19,6 +19,7 @@ namespace SistemaDental
         BDConnexion con = new BDConnexion();
         SqlCommand command = new SqlCommand();
         SqlDataReader reader;
+        Usuario objusuario = new Usuario();
 
         public int anio { get; set; }
         public int mes { get; set; }
@@ -29,21 +30,11 @@ namespace SistemaDental
 
         public string NombreEmpleado { get; set; }
 
+        public string Paciente { get; set; }
+
         public string Empleado { get; set; }
 
-        #region atributos empleado
-        public string Contrasena { get; set; }
-        public string ApellidoEmpleado { get; set; }
-        public string Telefono { get; set; }
-
-        public string Correo { get; set; }
-
-        public string Puesto { get; set; }
-
-        public string Genero { get; set; }
-
-        
-        #endregion
+      
 
         #region Turno - Procedimientos
 
@@ -797,11 +788,71 @@ namespace SistemaDental
             }
         }
 
-        public List<ClaseProcedimiento> CitasUsuario()
+        public List<ClaseProcedimiento> CitasUsuario(string usuario)
         {
+            try
+            {
+                command.Connection = con.Open();
+                command.CommandText = "UsuarioCita";
+                command.Parameters.AddWithValue("@usuario",usuario);
+                command.CommandType = CommandType.StoredProcedure;
+                reader = command.ExecuteReader();
 
+                List<ClaseProcedimiento> TestList = new List<ClaseProcedimiento>();
+                ClaseProcedimiento proc = null;
+
+                while (reader.Read())
+                {
+                    proc = new ClaseProcedimiento();
+                    proc.Paciente = reader["Paciente"].ToString();
+                    proc.tratamiento = reader["Tratamientos"].ToString();
+                    TestList.Add(proc);
+                }
+
+                return TestList;
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+            finally
+            {
+                reader.Close();
+                command.Connection = con.Close();
+                command.Parameters.Clear();
+            }
+        }
+
+        public void EditarUsuario(Usuario usuario)
+        {
+            try
+            {
+                command.Connection = con.Open();
+                command.CommandText ="EditarUsuario";
+                command.CommandType = CommandType.StoredProcedure;
+                command.Parameters.AddWithValue("@usuario", usuario.usuario);
+                command.Parameters.AddWithValue("@contrasenia", usuario.Contraseña);
+                command.Parameters.AddWithValue("@contranueva", usuario.Contrasenianueva);
+                command.Parameters.AddWithValue("@nombre", usuario.Nombre);
+                command.Parameters.AddWithValue("@apellido", usuario.Apellido);
+                command.Parameters.AddWithValue("@correo", usuario.Correo);
+                command.Parameters.AddWithValue("@telefono", usuario.Telefono);
+                command.ExecuteNonQuery();
+
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+            finally
+            {
+                command.Parameters.Clear();
+                command.Connection = con.Close();
+            }
         }
         #endregion
+
+       
 
     }
 }

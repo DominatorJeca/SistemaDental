@@ -33,7 +33,9 @@ namespace SistemaDental
         public string PuestoNombre { get; set; }
 
         public string Genero{ get; set; }
+
         public string Contraseña { get; set; }
+        public string Contrasenianueva { get; set; }
         public bool Estado { get; set; }
 
         public bool Administrador{ get; set; }
