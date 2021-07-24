@@ -355,6 +355,42 @@ namespace SistemaDental
 
 
         }
+
+        public List<ClaseInventario> mostrarUsoTratamiento(int idmaterial)
+        {
+            try
+            {
+               
+                List<ClaseInventario> prod = new List<ClaseInventario>();
+                command.Connection = con.Open();
+                command.CommandText = "MostrarUso";
+                command.CommandType = CommandType.StoredProcedure;
+                command.Parameters.AddWithValue("@idmaterial", idmaterial);
+                reader = command.ExecuteReader();
+                while (reader.Read())
+                {
+                    ClaseInventario prods = new ClaseInventario();
+                    prods.NombreTratamiento = reader["Nombre"].ToString();
+                    prods.CantidadUsada = Convert.ToInt32(reader["CantidadUsada"]);
+                    prod.Add(prods);
+                }
+                return prod;
+            }
+
+            catch (Exception e)
+            {
+                throw e;
+            }
+
+            finally
+            {
+                reader.Close();
+                command.Connection = con.Close();
+                command.Parameters.Clear();
+            }
+
+
+        }
         public int InsertarCompra(int empleadoId)
         {
             try
