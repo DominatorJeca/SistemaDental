@@ -125,7 +125,7 @@ namespace SistemaDental.MVCCV.Vista
         public void MostrarEmpleados()
         {
             dgvEmpleado.ItemsSource = Proc.MostrarEmpleadosActivos();
-            dgvEmpleado.SelectedValuePath = "Id";
+            dgvEmpleado.SelectedValuePath = "Ide";
         }
 
         /// <summary>
@@ -238,8 +238,9 @@ namespace SistemaDental.MVCCV.Vista
 
                     // Mensaje de inserción exitosa
                     MessageBox.Show("¡Datos insertados correctamente!");
-                    MostrarEmpleados();
+                   
                     LimpiarFormulario();
+                    MostrarEmpleados();
                     btnAgregarUsuario.IsEnabled = true;
                     btnEditar.IsEnabled = true;
                     btnEliminar.IsEnabled = true;
@@ -256,7 +257,7 @@ namespace SistemaDental.MVCCV.Vista
 
         private void dgvEmpleado_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            //txtAgregarNombre=
+           
         }
     }
 }

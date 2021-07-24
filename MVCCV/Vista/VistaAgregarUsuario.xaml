@@ -23,8 +23,8 @@
         <TextBox x:Name="txtAgregarIdentidad" Margin="70,127,700.6,293.2" Text="{Binding ElementName=dgvEmpleado, Path=SelectedItem.Id}" materialDesign:HintAssist.Hint="Identidad" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontFamily="Bahnschrift" FontSize="12" Background="#7FFFFFFF"
                 PreviewTextInput="PreviewTextInputOnlyNumbers"   MaxLength="13"/>
         <Label Content="Puesto" HorizontalAlignment="Left"  VerticalAlignment="Top" FontSize="12" FontFamily="Bahnschrift" Margin="700,140,0,0" RenderTransformOrigin="-2.498,7.577" Width="73"/>
-        <ComboBox Name="cmbPuesto" HorizontalAlignment="Right" Text="{Binding ElementName=dgvEmpleado, Path=SelectedItem.Puesto}" VerticalAlignment="Top" Width="196" Margin="0,140,72.6,0"/>
-        <ComboBox Name="cmbSexo" HorizontalAlignment="Right" Text="{Binding ElementName=dgvEmpleado, Path=SelectedItem.Sexo}" VerticalAlignment="Top" Width="205" Margin="0,137,390.6,0">
+        <ComboBox Name="cmbPuesto" HorizontalAlignment="Right" Text="{Binding ElementName=dgvEmpleado, Path=SelectedItem.PuestoNombre}" VerticalAlignment="Top" Width="196" Margin="0,140,72.6,0"/>
+        <ComboBox Name="cmbSexo" HorizontalAlignment="Right" Text="{Binding ElementName=dgvEmpleado, Path=SelectedItem.GeneroNombre}" VerticalAlignment="Top" Width="205" Margin="0,137,390.6,0">
             <ComboBoxItem Content="Femenino" HorizontalAlignment="Center" Width="118.4"/>
             <ComboBoxItem Content="Masculino" HorizontalAlignment="Center" Width="118.4"/>
         </ComboBox>
@@ -50,7 +50,7 @@
         <Button x:Name="btnEliminar" Content="Eliminar" HorizontalAlignment="Right"  VerticalAlignment="Bottom" Margin="0,0,72.6,82.2" Width="236" Height="43" Background="#48C9B0" BorderBrush="{x:Null}" Click="btnEliminarUsuario_Click_1"/>
         <Button x:Name="btnGuardar" Content="Realizar" HorizontalAlignment="Right"  VerticalAlignment="Bottom" Margin="0,0,72.6,34.2" Width="236" Height="43" Background="#48C9B0 " BorderBrush="{x:Null}" Click="btnGuardarUsuario_Click_1"/>
         <TextBox  x:Name="txtBuscar" Margin="203,196,567.6,227.2"  materialDesign:HintAssist.Hint="Buscar" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontFamily="Bahnschrift" FontSize="12" Background="#7FFFFFFF"/>
-        <CheckBox Content="Administrador" x:Name="chkAdmin" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="880,183,0,0" Checked="chkAdmin_Checked" Unchecked="chkAdmin_Unchecked"/>
+        <CheckBox Content="Administrador" IsChecked="{Binding ElementName=dgvEmpleado, Path=SelectedItem.Administrador}" x:Name="chkAdmin" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="880,183,0,0" Checked="chkAdmin_Checked" Unchecked="chkAdmin_Unchecked"/>
         <Button x:Name="btnCancelar" Content="Cancelar" Visibility="Hidden" HorizontalAlignment="Right"  VerticalAlignment="Bottom" Margin="0,0,72.6,83.2" Width="236" Height="42" Background="#48C9B0" BorderBrush="{x:Null}" Click="btnAgregarUsuario_Click_1"/>
  
 
