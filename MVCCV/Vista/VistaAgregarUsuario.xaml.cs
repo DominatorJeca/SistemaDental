@@ -72,6 +72,8 @@ namespace SistemaDental.MVCCV.Vista
         /// </summary>
         public void ObtenerValores()
         {
+            Usuario usu = new Usuario();
+
             usuario.Id = Convert.ToString(txtAgregarIdentidad.Text);
             usuario.Nombre = Convert.ToString(txtAgregarNombre.Text);
             usuario.Apellido = Convert.ToString(txtAgregarApellido.Text);
@@ -81,6 +83,7 @@ namespace SistemaDental.MVCCV.Vista
             usuario.Genero = 1;
             usuario.Contraseña = Convert.ToString(txtAgregarContra.Password);
             usuario.Estado = true;
+            usuario.Ide = (Convert.ToInt32(dgvEmpleado.SelectedValue));
             
             
           

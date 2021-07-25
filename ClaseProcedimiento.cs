@@ -192,9 +192,10 @@ namespace SistemaDental
             try
             {
                 command.Connection = con.Open();
-                command.CommandText = "sp_UsuarioEmpleado_Insertar";
+                command.CommandText = "sp_Empleados_Actualizar";
                 command.CommandType = CommandType.StoredProcedure;
                 //Establecer los valores de parametros
+                command.Parameters.AddWithValue("@EmpleadoID", usuario.Ide);
                 command.Parameters.AddWithValue("@Identidad", usuario.Id);
                 command.Parameters.AddWithValue("@Nombre", usuario.Nombre);
                 command.Parameters.AddWithValue("@Apellido", usuario.Apellido);
@@ -202,6 +203,7 @@ namespace SistemaDental
                 command.Parameters.AddWithValue("@Correo", usuario.Correo);
                 command.Parameters.AddWithValue("@PuestoID", usuario.Puesto);
                 command.Parameters.AddWithValue("@GeneroID", usuario.Genero);
+                command.Parameters.AddWithValue("@Estado",usuario.Estado);
                 command.ExecuteNonQuery();
 
             }
@@ -560,6 +562,7 @@ namespace SistemaDental
                 while (reader.Read())
                 {
                     Usuario prods = new Usuario();
+                    prods.Ide= Convert.ToInt32(reader["EmpleadoID"]);
                     prods.Id= Convert.ToString(reader["Identidad"]);
                     prods.Nombre = Convert.ToString(reader["Nombre"]);
                     prods.Apellido = Convert.ToString(reader["Apellido"]);
