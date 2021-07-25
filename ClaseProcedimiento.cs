@@ -546,7 +546,7 @@ namespace SistemaDental
         #endregion
 
         #region Empleados
-        public List<Usuario> MostrarEmpleadosActivos()
+        public List<Usuario> MostrarEmpleados(bool act)
         {
             try
             {//Abrir la conexion sql
@@ -560,7 +560,7 @@ namespace SistemaDental
                 //Definir las variables del procedimiento mediante los parametros obtenidos
                 reader = command.ExecuteReader();
                 while (reader.Read())
-                {
+                {  
                     Usuario prods = new Usuario();
                     prods.Ide= Convert.ToInt32(reader["EmpleadoID"]);
                     prods.Id= Convert.ToString(reader["Identidad"]);
@@ -572,8 +572,10 @@ namespace SistemaDental
                     prods.GeneroNombre = Convert.ToString(reader["NombreGenero"]);
                     prods.Contraseña = Convert.ToString(reader["contrasena"]);
                     prods.Administrador = Convert.ToBoolean(reader["administrador"]);
-
+                    prods.Estado = Convert.ToBoolean(reader["Estado"]);
+                    if (prods.Estado == act) { 
                     prod.Add(prods);
+                    }
                 }
                 return prod;
             }

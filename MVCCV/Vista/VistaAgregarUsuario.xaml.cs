@@ -35,7 +35,7 @@ namespace SistemaDental.MVCCV.Vista
         {
             InitializeComponent();
             MostrarPuesto();
-            MostrarEmpleados();
+            MostrarEmpleados(true);
             btnGuardar.IsEnabled = false;
 
         }
@@ -45,7 +45,7 @@ namespace SistemaDental.MVCCV.Vista
             InitializeComponent();
             MostrarPuesto();
             btnGuardar.IsEnabled = false;
-            MostrarEmpleados();
+            MostrarEmpleados(true);
             Nombree = name;
             Admin = admin;
         }
@@ -125,9 +125,9 @@ namespace SistemaDental.MVCCV.Vista
             return true;
         }
 
-        public void MostrarEmpleados()
+        public void MostrarEmpleados(bool act)
         {
-            dgvEmpleado.ItemsSource = Proc.MostrarEmpleadosActivos();
+            dgvEmpleado.ItemsSource = Proc.MostrarEmpleados(act);
             dgvEmpleado.SelectedValuePath = "Ide";
         }
 
@@ -210,8 +210,23 @@ namespace SistemaDental.MVCCV.Vista
             btnEditar.IsEnabled = false;
             //btnPermisos.Visibility = Visibility.Visible;
             btnGuardar.IsEnabled = true;
+
+         
         }
 
+        private void HabilitarInhabilitarTXT(bool habilitar)
+        {
+            txtAgregarNombre.IsEnabled = habilitar;
+            txtAgregarIdentidad.IsEnabled= habilitar;
+            txtAgregarApellido.IsEnabled= habilitar;
+            txtAgregarContra.IsEnabled = habilitar;
+            txtAgregarCorreo.IsEnabled= habilitar;
+            txtConfirmarContra.IsEnabled= habilitar;
+            txtAgregarTelefono.IsEnabled= habilitar;
+            cmbPuesto.IsEnabled= habilitar;
+            cmbSexo.IsEnabled= habilitar;
+
+        }
         private void btnGuardarUsuario_Click_1(object sender, RoutedEventArgs e)
         {
             switch (opcion)
@@ -224,6 +239,8 @@ namespace SistemaDental.MVCCV.Vista
                     break;
                 case 3:
                     EliminarEmpleado();
+                    break;
+                case 4:
                     break;
             }
 
@@ -245,7 +262,7 @@ namespace SistemaDental.MVCCV.Vista
                     MessageBox.Show("¡Datos insertados correctamente!");
                    
                     LimpiarFormulario();
-                    MostrarEmpleados();
+                    MostrarEmpleados(true);
                     btnAgregarUsuario.IsEnabled = true;
                     btnEditar.IsEnabled = true;
                     btnEliminar.IsEnabled = true;
@@ -276,7 +293,7 @@ namespace SistemaDental.MVCCV.Vista
                     MessageBox.Show("¡Datos editados correctamente!");
 
                     LimpiarFormulario();
-                    MostrarEmpleados();
+                    MostrarEmpleados(true);
                     btnAgregarUsuario.IsEnabled = true;
                     btnEditar.IsEnabled = true;
                     btnEliminar.IsEnabled = true;
@@ -307,7 +324,7 @@ namespace SistemaDental.MVCCV.Vista
                     MessageBox.Show("El empleado a sido eliminado correctamente!");
 
                     LimpiarFormulario();
-                    MostrarEmpleados();
+                    MostrarEmpleados(true);
                     btnAgregarUsuario.IsEnabled = true;
                     btnEditar.IsEnabled = true;
                     btnEliminar.IsEnabled = true;
@@ -325,6 +342,12 @@ namespace SistemaDental.MVCCV.Vista
         private void dgvEmpleado_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
            
+        }
+
+        private void btnRestablecer_Click(object sender, RoutedEventArgs e)
+        {
+            MostrarEmpleados(false);
+            opcion = 4;
         }
     }
 }
