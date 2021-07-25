@@ -526,6 +526,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="dentist.svg" />
+    <Resource Include="Image1.png" />
     <Resource Include="Imagenes\seo-report.png" />
     <Resource Include="Imagenes\shopping-cart.png" />
     <Resource Include="Imagenes\inventory.png" />

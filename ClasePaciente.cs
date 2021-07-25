@@ -17,8 +17,9 @@ namespace SistemaDental
         private SqlConnection sqlConnection = new SqlConnection(connectionString);
 
         //Propiedad para extraer todos los ID almacenados en la BD
-        public string Id_paciente { get; set; }
-
+        public int Id_paciente { get; set; }
+        public string correo { get; set; }
+        public string identificacionPaciente { get; set; }
         public string NombrePaciente { get; set; }
 
         public string ApellidoPaciente { get; set; }
@@ -49,7 +50,7 @@ namespace SistemaDental
         /// Metodo para mostrar los pacientes existentes
         /// </summary>
         /// <returns>Lista de todos los datos de los pacientes</returns>
-        public List<ClasePaciente> MostrarPacientes()
+     /*   public List<ClasePaciente> MostrarPacientes()
         {
 
             List<ClasePaciente> paciente = new List<ClasePaciente>();
@@ -179,7 +180,7 @@ namespace SistemaDental
             {
                 sqlConnection.Close();
             }
-        }
+        }*/
 
     }
 }

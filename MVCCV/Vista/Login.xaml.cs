@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SistemaDental.MVCCV.Vista;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -120,6 +121,12 @@ namespace SistemaDental
         {
             if (e.ChangedButton == MouseButton.Left)
                 DragMove();
+        }
+
+        private void btnOlvidarPass_Click(object sender, RoutedEventArgs e)
+        {
+            ReestablecerContrasenia reestablecer = new ReestablecerContrasenia();
+                reestablecer.ShowDialog();
         }
     }
 }

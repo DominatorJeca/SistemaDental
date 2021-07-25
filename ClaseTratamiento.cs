@@ -10,7 +10,7 @@ using System.Data;
 
 namespace SistemaDental
 {
-    class ClaseTratamiento
+    public class ClaseTratamiento
     {
         private static string connectionString = @"server =.; Initial Catalog = clinicaDental; Integrated Security = True; MultipleActiveResultSets=true";
         private SqlConnection sqlConnection = new SqlConnection(connectionString);

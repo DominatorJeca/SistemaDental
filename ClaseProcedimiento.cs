@@ -414,27 +414,28 @@ namespace SistemaDental
                 Random rand = new Random();
                 var randomCode = (rand.Next(999999).ToString());
                 MailMessage message = new MailMessage();
+                #region html
                 var messageBody = @"<table align='center'  cellpadding='0' cellspacing='0' width='600' style='background-image:url(https://imgur.com/LdPJmpH.jpg); background-size:500px;background-color:#D1D1D1'>
-<tr> <!--Primera fila -->
-        <td  align='center' style='padding: 0px 0 0px 0; font-family: Arial, sans-serif;' >
-             <img src='https://imgur.com/RzOOQm0.png' align='left' alt='Ferreteria Maresa S.A' width='150' height='150' style='display: block;' />
-             <br>
-        </td>
-    </tr>
-    <tr>  <!--Segunda fila -->
-        <td  style='padding: 30px 30px 30px 30px; font-family: Arial, sans-serif; font-size: 14px;'>
-          <table>  <!--Tabla principal de 2da fila -->
-            <tr>     <!--Primera fila -->
-              <td>
-                <p style='margin: 0;'>Buenas tardes su codigo de verificacion es el siguiente: " + randomCode+@" </p>
-                <br>
-                <p>Pasos a seguir: </p>
-                <br>
+                <tr> <!--Primera fila -->
+                 <td  align='center' style='padding: 0px 0 0px 0; font-family: Arial, sans-serif;' >
+                 <img src='https://imgur.com/RzOOQm0.png' align='left' alt='Ferreteria Maresa S.A' width='150' height='150' style='display: block;' />
+                 <br>
                 </td>
-              </tr>
-              <tr>  <!--Segunda fila -->
-                <td>
-                  <table border='1' cellpadding='0' cellspacing='0' width='100%' style='border-collapse: collapse;'> <!--tabla dentro de la tabla 2 -->
+                 </tr>
+                  <tr>  <!--Segunda fila -->
+                      <td  style='padding: 30px 30px 30px 30px; font-family: Arial, sans-serif; font-size: 14px;'>
+                      <table>  <!--Tabla principal de 2da fila -->
+                     <tr>     <!--Primera fila -->
+                    <td>
+                     <p style='margin: 0;'>Buenas tardes su codigo de verificacion es el siguiente: " + randomCode+@" </p>
+                        <br>
+                      <p>Pasos a seguir: </p>
+                       <br>
+                       </td>
+                    </tr>
+                      <tr>  <!--Segunda fila -->
+                       <td>
+                        <table border='1' cellpadding='0' cellspacing='0' width='100%' style='border-collapse: collapse;'> <!--tabla dentro de la tabla 2 -->
                         <tr>
                           <td style='padding: 10px 10px; font-family: Arial, sans-serif; font-size: 11px;'>
                             <p style='margin: 0;'> Paso 1: Copie el codigo presentado anteriormente
@@ -492,6 +493,7 @@ namespace SistemaDental
         </td>
     </tr>
 </table>";
+                #endregion
                 message.To.Add(correoDestino);
                 message.From = new MailAddress("clinicadentalsps4@gmail.com");
                 message.Body = messageBody;
@@ -741,6 +743,117 @@ namespace SistemaDental
                 command.Connection = con.Close();
             }
         }
+
+        #region Transacciones
+        
+
+        public List<ClaseCaja> traerTransaccionesCitas(int pacienteID)
+        {
+            try
+            {
+                command.Connection = con.Open();
+                command.CommandText = "BuscarTransacciones";
+                command.Parameters.AddWithValue ("@pacienteId", pacienteID);
+                command.CommandType = CommandType.StoredProcedure;
+                reader = command.ExecuteReader();
+                List<ClaseCaja> ListaDetransacciones = new List<ClaseCaja>();
+                while (reader.Read())
+                {
+       
+                    var cita = new ClaseCitas();
+                    var transaccion = new ClaseCaja();
+                    transaccion.Abonado = (reader["Cantidad Abonada"].ToString() == "")? float.Parse("0.00000"): float.Parse(reader["Cantidad Abonada"].ToString());
+                    cita.IdCita = Convert.ToInt32(reader["CitaId"]);
+                    transaccion.tratamientos = Convert.ToString(reader["Tratamientos"]);
+                    cita.NombreDoctor = Convert.ToString(reader["Doctor"]);
+                    transaccion.UltimoAbono =(reader["Ultima Fecha Abonada"].ToString()=="")?  "No se ha hecho ningun pago": reader["Ultima Fecha Abonada"].ToString() ;
+                    transaccion.Cobrado = float.Parse(reader["Cantidad cobrada"].ToString());
+                    cita.fechaCita = DateTime.Parse(reader["FechaCita"].ToString());
+                    cita.Observaciones = reader["Observaciones"].ToString();
+
+                    transaccion.cita = cita;
+                    ListaDetransacciones.Add(transaccion);
+                }
+
+                return ListaDetransacciones;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.ToString());
+                throw e;
+            }
+            finally
+            {
+                command.Parameters.Clear();
+                reader.Close(); 
+                command.Connection = con.Close();
+
+            }
+        }
+
+        public void InsertarTransaccion (int usuarioID,float cantidad,string observaciones,int CitaID)
+        {
+            try
+            {
+                command.Connection = con.Open();
+                command.CommandText = "InsertarTransaccion";
+                command.Parameters.AddWithValue("@UsuarioID", usuarioID);
+                command.Parameters.AddWithValue("@CitaID", CitaID);
+                command.Parameters.AddWithValue("@Fecha ", DateTime.Now);
+                command.Parameters.AddWithValue("@Monto", cantidad);
+                command.Parameters.AddWithValue("@observaciones", observaciones);
+                command.CommandType = CommandType.StoredProcedure;
+                command.ExecuteNonQuery();
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+            finally
+            {
+                command.Parameters.Clear();
+                reader.Close();
+                command.Connection = con.Close();
+            }
+        }
+        #endregion
+        #region Pacientes
+        
+        public List<ClasePaciente> MostrarPacientesAct ()
+        {
+            try
+            {
+
+
+                command.Connection = con.Open();
+                command.CommandText = "sp_Pacientes_Mostrar";
+     
+                command.CommandType = CommandType.StoredProcedure;
+                reader = command.ExecuteReader();
+                List<ClasePaciente> ListaPacientes = new List<ClasePaciente>();
+                while (reader.Read())
+                {
+                    var paciente = new ClasePaciente();
+                    paciente.Id_paciente = Convert.ToInt32(reader[0]);
+                    paciente.identificacionPaciente = reader[4].ToString();
+                    paciente.NombrePaciente = reader[1].ToString()+ " "+reader[2].ToString();
+                        ListaPacientes.Add(paciente);
+                }
+                return ListaPacientes;
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+            finally
+            {
+                command.Parameters.Clear();
+                reader.Close();
+                command.Connection = con.Close();
+
+            }
+        }
+        #endregion
 
     }
 }

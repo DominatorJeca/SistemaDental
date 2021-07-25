@@ -61,7 +61,7 @@ namespace SistemaDental
         /// </summary>
         public void MostrarPacientes()
         {
-            cmbPaciente.ItemsSource = unPaciente.MostrarPacientes();
+           // cmbPaciente.ItemsSource = unPaciente.MostrarPacientes();
             cmbPaciente.SelectedValuePath = "Id_paciente";
             cmbPaciente.DisplayMemberPath = "Id_paciente";
         }
@@ -108,7 +108,7 @@ namespace SistemaDental
             unPaciente.FechaNac = Convert.ToDateTime(dtpFechaNac.Text);
             unPaciente.Genero = cmbGenero.Text;
             unPaciente.Telefono = txtTelefono.Text;
-            unPaciente.Id_paciente = txtIdentidad.Text;
+           // unPaciente.Id_paciente = txtIdentidad.Text;
             unPaciente.Fecha =(DateTime) dtpFechaNac.SelectedDate;
             
         }
@@ -172,7 +172,7 @@ namespace SistemaDental
                 if (VerificarCampos())
                 {
                     obtenerValores();
-                    unPaciente.ActualizarDatosPaciente(unPaciente);
+                  //  unPaciente.ActualizarDatosPaciente(unPaciente);
                     MessageBox.Show("Éxito al actualizar los datos");
                     LimpiarPantalla();
                     MostrarPacientes();
@@ -191,8 +191,8 @@ namespace SistemaDental
         {
             if (cmbPaciente.SelectedValue != null)
                 {
-                unPaciente.Id_paciente = cmbPaciente.SelectedValue.ToString();
-                dtgHistorial.ItemsSource = unPaciente.MostrarHistorial(unPaciente);
+               // unPaciente.Id_paciente = cmbPaciente.SelectedValue.ToString();
+              //  dtgHistorial.ItemsSource = unPaciente.MostrarHistorial(unPaciente);
             }
             
         }
