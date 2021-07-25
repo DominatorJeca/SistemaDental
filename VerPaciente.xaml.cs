@@ -14,10 +14,12 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
 namespace SistemaDental
-{
+{ }
     /// <summary>
     /// Interaction logic for VerPaciente.xaml
     /// </summary>
+    /// 
+    /*
     public partial class VerPaciente : Window
     {
 
@@ -219,7 +221,7 @@ namespace SistemaDental
                             if (int.Parse(tb.Text) <= 0 && int.Parse(tb.Text) >= 110)
                                 band = false;
                             break;
-                        }*/
+                        }
                     case "txtIdentidad":
                         {
                             if (tb.Text.CompareTo("0101192100000")<0 && tb.Text.CompareTo("1811202199999")>0)
@@ -291,3 +293,4 @@ namespace SistemaDental
         }
     }
 }
+    */

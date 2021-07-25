@@ -742,5 +742,135 @@ namespace SistemaDental
             }
         }
 
+
+        public List<ClasePaciente> MostrarPacientes()
+        {
+
+            List<ClasePaciente> paciente = new List<ClasePaciente>();
+
+
+            try
+            {
+                sqlConnection.Open();
+
+                //crear el comando SQL
+                SqlCommand sqlCommand = new SqlCommand("sp_Pacientes_Mostrar", sqlConnection);
+
+                sqlCommand.CommandType = CommandType.StoredProcedure;
+
+                // Obtener los datos de los puestos
+                using (SqlDataReader rdr = sqlCommand.ExecuteReader())
+                {
+                    while (rdr.Read())
+
+                        paciente.Add(new ClasePaciente { Id_paciente = rdr["PacienteID"].ToString(), NombrePaciente = rdr["Nombre"].ToString(), ApellidoPaciente = rdr["Apellido"].ToString(), FechaNac = ((DateTime)rdr["Fechanac"]), Telefono = rdr["Telefono"].ToString(), Genero = rdr["GeneroID"].ToString(), Identidad = rdr["Identidad"].ToString(), Estado = rdr["Estado"].ToString(), Correo = rdr["Correo"].ToString() }); 
+                
+                }
+               
+                return paciente;
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+            finally
+            {
+                // Cerrar la conexión
+                sqlConnection.Close();
+            }
+        }
+
+        public void ActualizarDatosPaciente(ClasePaciente paciente)
+        {
+
+            try
+            {   
+                //Abrir la conexion sql
+                sqlConnection.Open();
+                //crear el comando SQL
+                SqlCommand sqlCommand = new SqlCommand("sp_Pacientes_Actualizar", sqlConnection);
+                sqlCommand.CommandType = CommandType.StoredProcedure;
+
+                //Definir las variables del procedimiento mediante los parametros obtenidos
+                sqlCommand.Parameters.AddWithValue("@Nombre", paciente.NombrePaciente);
+                sqlCommand.Parameters.AddWithValue("@Apellido", paciente.ApellidoPaciente);
+                sqlCommand.Parameters.AddWithValue("@Telefono", paciente.Telefono);
+                sqlCommand.Parameters.AddWithValue("@Identidad", paciente.Id_paciente);
+                sqlCommand.Parameters.AddWithValue("@FechaNac", paciente.FechaNac);
+                sqlCommand.Parameters.AddWithValue("@generoID", paciente.Genero);
+                sqlCommand.Parameters.AddWithValue("@Estado", paciente.Estado);
+                sqlCommand.Parameters.AddWithValue("@Correo", paciente.Correo);
+                sqlCommand.ExecuteNonQuery();
+            }
+
+            catch (Exception e)
+            {
+                throw e;
+            }
+
+            finally
+            {
+                sqlConnection.Close();
+            }
+
+
+        }
+        public List<ClasePaciente> MostrarHistorial(ClasePaciente paciente)
+        {
+           
+
+            try
+            {
+                sqlConnection.Open();
+                SqlCommand sqlCommand = new SqlCommand("MostrarHistorial", sqlConnection);
+                sqlCommand.CommandType = CommandType.StoredProcedure;
+                sqlCommand.Parameters.AddWithValue("@identidad", paciente.Id_paciente);
+                SqlDataReader reader = sqlCommand.ExecuteReader();
+
+                List<ClasePaciente> pacientes = new List<ClasePaciente>();
+
+                while (reader.Read())
+                {
+                    pacientes.Add(new ClasePaciente {Paciente = reader["Paciente"].ToString(), NombreTratamiento = reader["Nombre"].ToString(),Doctor = reader["Doctor"].ToString(), FechaCita = Convert.ToDateTime(reader["FechaCita"].ToString()) });
+                }
+
+                return pacientes;
+            }
+            catch (Exception e)
+
+            {
+                throw e;
+            }
+            finally
+            {
+                sqlConnection.Close();
+            }
+        }
+        public void AgregarPaciente(ClasePaciente paciente)
+        {
+            sqlConnection.Open();
+            try
+            {
+                SqlCommand sqlCommand = new SqlCommand("sp_Pacientes_Insertar", sqlConnection);
+                sqlCommand.CommandType = CommandType.StoredProcedure;
+                sqlCommand.Parameters.AddWithValue("@Nombre", paciente.NombrePaciente);
+                sqlCommand.Parameters.AddWithValue("@Apellido", paciente.ApellidoPaciente);
+                sqlCommand.Parameters.AddWithValue("@Telefono", paciente.Telefono);
+                sqlCommand.Parameters.AddWithValue("@Identidad", paciente.Id_paciente);
+                sqlCommand.Parameters.AddWithValue("@FechaNac", paciente.FechaNac);
+                sqlCommand.Parameters.AddWithValue("@GeneroID", paciente.Genero);
+                sqlCommand.Parameters.AddWithValue("@Estado", paciente.Estado);
+                sqlCommand.Parameters.AddWithValue("@Correo", paciente.Correo);
+                sqlCommand.ExecuteNonQuery();
+            }
+            catch
+            {
+                throw;
+            }
+            finally
+            {
+                sqlConnection.Close();
+            }
+        }
     }
 }

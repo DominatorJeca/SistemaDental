@@ -43,7 +43,7 @@ namespace SistemaDental.MVCCV.Vista
 
             InitializeComponent();
             MostrarPacientes();
-            HabilitacionDeshabilitacion(false, true);
+            HabilitacionDeshabilitacion(true, false);
             Nombree = name;
             Admin = admin;
         }
@@ -59,8 +59,8 @@ namespace SistemaDental.MVCCV.Vista
         public void MostrarPacientes()
         {
             cmbPaciente.ItemsSource = unPaciente.MostrarPacientes();
-            cmbPaciente.SelectedValuePath = "Id_paciente";
-            cmbPaciente.DisplayMemberPath = "Id_paciente";
+            cmbPaciente.SelectedValuePath = "Identidad";
+            cmbPaciente.DisplayMemberPath = "Identidad";
         }
 
 
@@ -68,19 +68,26 @@ namespace SistemaDental.MVCCV.Vista
         /// <summary>
         /// Funcion para habilitar o deshabilitar los botones, textbox y combobox del formulario
         /// </summary>
+        /// 
+        
         public void HabilitacionDeshabilitacion(bool habilitacionGrupoA, bool habilitacionGrupoB)
         {
-            btnGuardarPaciente.IsEnabled = habilitacionGrupoA;
-            btnCancelar.IsEnabled = habilitacionGrupoA;
+           //Grupo de datos
             txtNombre.IsEnabled = habilitacionGrupoA;
             txtApellido.IsEnabled = habilitacionGrupoA;
             txtTelefono.IsEnabled = habilitacionGrupoA;
-
-            // txtEdad.IsEnabled = habilitacionGrupoA;
             cmbGenero.IsEnabled = habilitacionGrupoA;
+            txtcorreo.IsEnabled = habilitacionGrupoA;
+            txtIdentidad.IsEnabled = habilitacionGrupoA;
             dtpFechaNac.IsEnabled = habilitacionGrupoA;
-            btnEditarPaciente.IsEnabled = habilitacionGrupoB;
             cmbPaciente.IsEnabled = habilitacionGrupoB;
+            /*Grupo de botontes
+            btnAgregarPaciente.IsEnabled = habilitacionGrupoB;
+            btnEditarPaciente.IsEnabled = habilitacionGrupoB;
+            btnGuardarPaciente.IsEnabled = habilitacionGrupoB;
+            btnCancelar.IsEnabled = habilitacionGrupoB;
+           */
+            
         }
 
         /// <summary>
@@ -92,10 +99,10 @@ namespace SistemaDental.MVCCV.Vista
             txtApellido.Text = null;
             txtIdentidad.Text = null;
             txtTelefono.Text = null;
-            txtEdad.Text = null;
             dtgHistorial.ItemsSource = null;
             cmbPaciente.SelectedValue = null;
             dtpFechaNac.SelectedDate = null;
+            txtcorreo.Text = null;
         }
 
         public void obtenerValores()
@@ -103,10 +110,11 @@ namespace SistemaDental.MVCCV.Vista
             unPaciente.NombrePaciente = txtNombre.Text;
             unPaciente.ApellidoPaciente = txtApellido.Text;
             unPaciente.FechaNac = Convert.ToDateTime(dtpFechaNac.Text);
-            unPaciente.Genero = cmbGenero.Text;
+            unPaciente.Genero = cmbGenero.SelectedIndex.ToString();
             unPaciente.Telefono = txtTelefono.Text;
             unPaciente.Id_paciente = txtIdentidad.Text;
-            unPaciente.Fecha = (DateTime)dtpFechaNac.SelectedDate;
+            //unPaciente. = (DateTime)dtpFechaNac.SelectedDate;
+            unPaciente.Correo = txtcorreo.Text;
 
         }
 
@@ -117,6 +125,8 @@ namespace SistemaDental.MVCCV.Vista
         {
             // txtEdad.Visibility = Visibility.Hidden;
             //dtpFechaNac.Visibility = Visibility;
+            btnGuardarPaciente.IsEnabled = true;
+
             try
             {
                 //Mensaje de advertencia si no selecciona ningun elemento
@@ -129,6 +139,7 @@ namespace SistemaDental.MVCCV.Vista
                     //Deshabilita el combobox paciente, el boton editar y ver
                     //Habilita los demás botones y textbox para poder editar los datos
                     HabilitacionDeshabilitacion(true, false);
+                    btnEditarPaciente.IsEnabled = false;
 
 
                 }
@@ -143,7 +154,7 @@ namespace SistemaDental.MVCCV.Vista
         /// </summary>
         private void btnCancelar_Click(object sender, RoutedEventArgs e)
         {
-            txtEdad.Visibility = Visibility;
+           
             dtpFechaNac.Visibility = Visibility.Hidden;
             try
             {
@@ -152,6 +163,9 @@ namespace SistemaDental.MVCCV.Vista
                 //llama la funcion para limpiar pantalla
                 LimpiarPantalla();
                 MessageBox.Show("Se han cancelado los cambios.");
+                btnEditarPaciente.IsEnabled = false;
+                btnGuardarPaciente.IsEnabled = false;
+                btnAgregarPaciente.IsEnabled = true;
             }
 
             catch { MessageBox.Show("Ha ocurrido un error en el sistema."); }
@@ -165,16 +179,20 @@ namespace SistemaDental.MVCCV.Vista
         {
             // txtEdad.Visibility = Visibility;
             // dtpFechaNac.Visibility = Visibility.Hidden;
+            btnEditarPaciente.IsEnabled = false;
+            btnAgregarPaciente.IsEnabled = true;
+
             try
             {
                 if (VerificarCampos())
                 {
                     obtenerValores();
                     unPaciente.ActualizarDatosPaciente(unPaciente);
-                    MessageBox.Show("Éxito al actualizar los datos");
+                    MessageBox.Show("Éxito al agregar los datos");
                     LimpiarPantalla();
                     MostrarPacientes();
                     HabilitacionDeshabilitacion(false, true);
+                    btnAgregarPaciente.IsEnabled = false;
                 }
                 else throw new Exception();
 
@@ -187,6 +205,8 @@ namespace SistemaDental.MVCCV.Vista
 
         private void cmbPaciente_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            btnAgregarPaciente.IsEnabled = false;
+            btnEditarPaciente.IsEnabled = true;
             if (cmbPaciente.SelectedValue != null)
             {
                 unPaciente.Id_paciente = cmbPaciente.SelectedValue.ToString();
@@ -224,9 +244,17 @@ namespace SistemaDental.MVCCV.Vista
                                 band = false;
                             break;
                         }
+                    case "PART_EditableTextBox":
+                        {
+                            break;
+                        }
+                    case "PART_TextBox":
+                        {
+                            break;
+                        }
                     default:
                         {
-                            if (tb.Text.Replace(" ", "").Equals("") && tb.Name != "PART_EditableTextBox" && tb.Name != "PART_TextBox")
+                            if (tb.Text.Length == 0)
                                 band = false;
                             break;
                         }
