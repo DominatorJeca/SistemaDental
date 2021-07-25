@@ -72,7 +72,7 @@ namespace SistemaDental.MVCCV.Vista
         /// </summary>
         public void ObtenerValores()
         {
-            Usuario usu = new Usuario();
+            
 
             usuario.Id = Convert.ToString(txtAgregarIdentidad.Text);
             usuario.Nombre = Convert.ToString(txtAgregarNombre.Text);
@@ -204,7 +204,7 @@ namespace SistemaDental.MVCCV.Vista
 
         private void btnEliminarUsuario_Click_1(object sender, RoutedEventArgs e)
         {
-            opcion = 2;
+            opcion = 3;
             btnAgregarUsuario.IsEnabled = false;
             btnEliminar.IsEnabled = false;
             btnEditar.IsEnabled = false;
@@ -217,18 +217,19 @@ namespace SistemaDental.MVCCV.Vista
             switch (opcion)
             {
                 case 1:
-                    IngresarEmpleado(usuario);
+                    IngresarEmpleado();
                     break;
                 case 2:
-                    EditarEmpleado(usuario);
+                    EditarEmpleado();
                     break;
                 case 3:
+                    EliminarEmpleado();
                     break;
             }
 
         }
 
-        private void IngresarEmpleado(Usuario usu)
+        private void IngresarEmpleado()
         {
             if (VerificarValores() == true)
             {
@@ -238,7 +239,7 @@ namespace SistemaDental.MVCCV.Vista
                     ObtenerValores();
 
                     // Insertar los datos del usuario 
-                    Proc.IngresarUsuario(usu);
+                    Proc.IngresarUsuario(usuario);
 
                     // Mensaje de inserción exitosa
                     MessageBox.Show("¡Datos insertados correctamente!");
@@ -259,7 +260,7 @@ namespace SistemaDental.MVCCV.Vista
             }
         }
 
-        private void EditarEmpleado(Usuario usu)
+        private void EditarEmpleado()
         {
             if (VerificarValores() == true)
             {
@@ -269,7 +270,7 @@ namespace SistemaDental.MVCCV.Vista
                     ObtenerValores();
 
                     // Insertar los datos del usuario 
-                    Proc.EditarUsuario(usu);
+                    Proc.EditarUsuario(usuario);
 
                     // Mensaje de inserción exitosa
                     MessageBox.Show("¡Datos editados correctamente!");
@@ -288,6 +289,37 @@ namespace SistemaDental.MVCCV.Vista
                     Console.WriteLine(ex.Message);
                 }
             }
+        }
+
+        private void EliminarEmpleado()
+        {
+           
+            
+                try
+                {
+                    // Obtener los valores para el empleado
+                    ObtenerValores();
+                    usuario.Estado = false;
+                    // Insertar los datos del usuario 
+                    Proc.EditarUsuario(usuario);
+
+                    // Mensaje de inserción exitosa
+                    MessageBox.Show("El empleado a sido eliminado correctamente!");
+
+                    LimpiarFormulario();
+                    MostrarEmpleados();
+                    btnAgregarUsuario.IsEnabled = true;
+                    btnEditar.IsEnabled = true;
+                    btnEliminar.IsEnabled = true;
+                    btnGuardar.IsEnabled = false;
+
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Ha ocurrido un error al momento de eliminar el empleado..." + ex.Message);
+                    Console.WriteLine(ex.Message);
+                }
+            
         }
 
         private void dgvEmpleado_SelectionChanged(object sender, SelectionChangedEventArgs e)
