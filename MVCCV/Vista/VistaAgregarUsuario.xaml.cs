@@ -256,9 +256,10 @@ namespace SistemaDental.MVCCV.Vista
                     EditarEmpleado();
                     break;
                 case 3:
-                    EliminarEmpleado();
+                    EliminarRestablecerEmpleado(false);
                     break;
                 case 4:
+                    EliminarRestablecerEmpleado(true);
                     break;
             }
 
@@ -329,7 +330,7 @@ namespace SistemaDental.MVCCV.Vista
             }
         }
 
-        private void EliminarEmpleado()
+        private void EliminarRestablecerEmpleado(bool act)
         {
            
             
@@ -337,12 +338,12 @@ namespace SistemaDental.MVCCV.Vista
                 {
                     // Obtener los valores para el empleado
                     ObtenerValores();
-                    usuario.Estado = false;
+                    usuario.Estado = act;
                     // Insertar los datos del usuario 
                     Proc.EditarUsuario(usuario);
 
                     // Mensaje de inserción exitosa
-                    MessageBox.Show("El empleado a sido eliminado correctamente!");
+                    MessageBox.Show("La operación se realizó con exito!");
 
                     LimpiarFormulario();
                     MostrarEmpleados(true);
