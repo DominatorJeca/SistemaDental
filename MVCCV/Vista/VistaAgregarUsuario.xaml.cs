@@ -217,6 +217,7 @@ namespace SistemaDental.MVCCV.Vista
                     IngresarEmpleado(usuario);
                     break;
                 case 2:
+                    EditarEmpleado(usuario);
                     break;
                 case 3:
                     break;
@@ -250,6 +251,37 @@ namespace SistemaDental.MVCCV.Vista
                 catch (Exception ex)
                 {
                     MessageBox.Show("Ha ocurrido un error al momento de insertar el empleado..."+ ex.Message);
+                    Console.WriteLine(ex.Message);
+                }
+            }
+        }
+
+        private void EditarEmpleado(Usuario usu)
+        {
+            if (VerificarValores() == true)
+            {
+                try
+                {
+                    // Obtener los valores para el empleado
+                    ObtenerValores();
+
+                    // Insertar los datos del usuario 
+                    Proc.EditarUsuario(usu);
+
+                    // Mensaje de inserción exitosa
+                    MessageBox.Show("¡Datos editados correctamente!");
+
+                    LimpiarFormulario();
+                    MostrarEmpleados();
+                    btnAgregarUsuario.IsEnabled = true;
+                    btnEditar.IsEnabled = true;
+                    btnEliminar.IsEnabled = true;
+                    btnGuardar.IsEnabled = false;
+
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Ha ocurrido un error al momento de editar el empleado..." + ex.Message);
                     Console.WriteLine(ex.Message);
                 }
             }

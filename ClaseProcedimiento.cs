@@ -171,6 +171,7 @@ namespace SistemaDental
                 command.Parameters.AddWithValue("@Estado", usuario.Estado);
                 command.Parameters.AddWithValue("@Administrador", usuario.Administrador);
                 command.ExecuteNonQuery();
+              
 
             }
             catch (Exception e)
@@ -179,7 +180,8 @@ namespace SistemaDental
             }
             finally
             {    //Cerrar conexion 
-                sqlConnection.Close();
+                command.Parameters.Clear();
+                command.Connection = con.Close();
             }
         }
 
@@ -200,9 +202,6 @@ namespace SistemaDental
                 command.Parameters.AddWithValue("@Correo", usuario.Correo);
                 command.Parameters.AddWithValue("@PuestoID", usuario.Puesto);
                 command.Parameters.AddWithValue("@GeneroID", usuario.Genero);
-                command.Parameters.AddWithValue("@contrasena", usuario.Contraseña);
-                command.Parameters.AddWithValue("@Estado", usuario.Estado);
-                command.Parameters.AddWithValue("@Administrador", usuario.Administrador);
                 command.ExecuteNonQuery();
 
             }
@@ -212,7 +211,8 @@ namespace SistemaDental
             }
             finally
             {    //Cerrar conexion 
-                sqlConnection.Close();
+                command.Parameters.Clear();
+                command.Connection = con.Close();
             }
         }
         public Usuario BuscarUsuario(string user, string contra)
