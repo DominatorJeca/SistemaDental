@@ -36,7 +36,9 @@ namespace SistemaDental.MVCCV.Vista
             InitializeComponent();
             MostrarPuesto();
             MostrarEmpleados(true);
-            btnGuardar.IsEnabled = false;
+            
+            HabilitarInhabilitarTXT(false);
+            botoneshabilitados(true);
 
         }
 
@@ -44,10 +46,12 @@ namespace SistemaDental.MVCCV.Vista
         {
             InitializeComponent();
             MostrarPuesto();
-            btnGuardar.IsEnabled = false;
+            
             MostrarEmpleados(true);
+            botoneshabilitados(true);
             Nombree = name;
             Admin = admin;
+            HabilitarInhabilitarTXT(false);
         }
 
         /// <summary>
@@ -156,13 +160,10 @@ namespace SistemaDental.MVCCV.Vista
         private void btnAgregarUsuario_Click_1(object sender, RoutedEventArgs e)
         {
             opcion = 1;
-            btnEditar.IsEnabled = false;
-            btnEliminar.IsEnabled = false;
-            btnAgregarUsuario.IsEnabled = false;
-            btnGuardar.IsEnabled = true;
+            botoneshabilitados(false);
+            HabilitarInhabilitarTXT(true);
 
         }
-
 
 
 
@@ -195,23 +196,40 @@ namespace SistemaDental.MVCCV.Vista
         private void btnEditarUsuario_Click_1(object sender, RoutedEventArgs e)
         {
             opcion = 2;
-            btnAgregarUsuario.IsEnabled = false;
-            btnEliminar.IsEnabled = false;
-            btnEditar.IsEnabled = false;
-           // btnPermisos.Visibility = Visibility.Visible;
-            btnGuardar.IsEnabled = true;
+            botoneshabilitados(false);
+            HabilitarInhabilitarTXT(true);
         }
+
 
         private void btnEliminarUsuario_Click_1(object sender, RoutedEventArgs e)
         {
             opcion = 3;
-            btnAgregarUsuario.IsEnabled = false;
-            btnEliminar.IsEnabled = false;
-            btnEditar.IsEnabled = false;
-            //btnPermisos.Visibility = Visibility.Visible;
-            btnGuardar.IsEnabled = true;
+            botoneshabilitados(false);
 
-         
+
+
+        }
+
+        private void botoneshabilitados(bool grupo)
+        {
+            if (grupo)
+            {
+                btnAgregarUsuario.IsEnabled = true;
+                btnEliminar.IsEnabled = true;
+                btnEditar.IsEnabled = true;
+                btnRestablecer.Visibility = Visibility.Visible;
+                btnGuardar.Visibility = Visibility.Hidden;
+                btnCancelar.Visibility = Visibility.Hidden;
+            }
+            else
+            {
+                btnAgregarUsuario.IsEnabled = false;
+                btnEliminar.IsEnabled = false;
+                btnEditar.IsEnabled = false;
+                btnRestablecer.Visibility = Visibility.Hidden;
+                btnGuardar.Visibility = Visibility.Visible;
+                btnCancelar.Visibility = Visibility.Visible;
+            }
         }
 
         private void HabilitarInhabilitarTXT(bool habilitar)
@@ -243,6 +261,9 @@ namespace SistemaDental.MVCCV.Vista
                 case 4:
                     break;
             }
+
+            HabilitarInhabilitarTXT(false);
+            botoneshabilitados(true);
 
         }
 
@@ -348,6 +369,16 @@ namespace SistemaDental.MVCCV.Vista
         {
             MostrarEmpleados(false);
             opcion = 4;
+            botoneshabilitados(false);
+            HabilitarInhabilitarTXT(false);
+        }
+
+        private void btnCancelar_Click(object sender, RoutedEventArgs e)
+        {
+            MostrarEmpleados(true);
+            LimpiarFormulario();
+            botoneshabilitados(true);
+            HabilitarInhabilitarTXT(false);
         }
     }
 }
