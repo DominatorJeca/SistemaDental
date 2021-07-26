@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -20,170 +21,155 @@ namespace SistemaDental.MVCCV.Vista
     /// </summary>
     public partial class TratamientoVista : UserControl
     {
-        
 
-        ClaseTratamiento tratamiento = new ClaseTratamiento();
-        DateTime DateTime = new DateTime();
+
+        ClaseProcedimiento proc = new ClaseProcedimiento();
+        ClaseTratamiento trat = new ClaseTratamiento();
+        List<Materiales> listMateriales = new List<Materiales>();
+
+        public int gTratamientoID = 0;
+        public bool isUpdate = false;
+
         private bool Admin;
         private String Nombree;
-        int cant_anterior = 0;
         public TratamientoVista()
         {
             InitializeComponent();
-            MostrarTratamientos();
-            MostrarPacientes();
+            ObtenerTratamientos();
+            ObtenerMateriales();
+            LlenarMaterialSelecionado();
         }
         public TratamientoVista(bool admin, string name)
         {
             InitializeComponent();
-            MostrarTratamientos();
-            MostrarPacientes();
+
             Nombree = name;
             Admin = admin;
         }
 
-        public void MostrarTratamientos()
-        {
-            cmbTratamiento.ItemsSource = tratamiento.mostrarTratamientos();
-            cmbTratamiento.DisplayMemberPath = "NombreTratamiento";
-            cmbTratamiento.SelectedValuePath = "IdTratamiento";
-        }
-
-        public void MostrarPacientes()
-        {
-            cmbPaciente.ItemsSource = tratamiento.mostrarIdPacientes();
-            cmbPaciente.DisplayMemberPath = "IdPaciente";
-            cmbPaciente.SelectedValuePath = "IdPaciente";
-        }
-
-        public void MostrarMateriales()
-        {
-            dg_materiales.ItemsSource = tratamiento.mostrarMateriales(Convert.ToInt32(cmbTratamiento.SelectedValue));
-            dg_materiales.SelectedValuePath = "NombreMaterial";
-        }
-
         private void cmbTratamiento_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            MostrarMateriales();
-        }
 
-        public void ObtenerValores()
-        {
-            tratamiento.fecha = DateTime.Now.ToString("dddd , MMM dd yyyy,hh:mm:ss");
-            tratamiento.IdPaciente = Convert.ToString(cmbPaciente.SelectedValue);
-            tratamiento.IdTratamiento = Convert.ToInt32(cmbTratamiento.SelectedValue);
         }
 
         private void btnRealizar_Click(object sender, RoutedEventArgs e)
         {
 
-            try
-            {
-                if (Convert.ToInt32(cmbTratamiento.SelectedValue) > 0 && Convert.ToString(cmbPaciente.SelectedValue) != " " && Convert.ToInt32(txtCantidad.ToString()) >= 0)
-                {
-                    ObtenerValores();
-                    tratamiento.IngresarAlHistorial(tratamiento);
-                    foreach (ClaseTratamiento tratamientos in dg_materiales.ItemsSource)
-                    {
-                        tratamiento.Cantidad = Convert.ToInt32(tratamientos.Cantidad.ToString());
-                        tratamiento.NombreMaterial = tratamientos.NombreMaterial.ToString();
-                        tratamiento.ActualizarMaterialDisponible(tratamiento);
-                    }
-                    MessageBox.Show("Ingreso al historial fue un éxito");
-                }
-                else
-                {
-                    MessageBox.Show("Asegurese de seleccionar un tratamiento y un paciente");
-                }
-            }
-            catch
-            {
-                throw;
-            }
-            finally
-            {
-                cmbPaciente.SelectedItem = null;
-                cmbTratamiento.SelectedItem = null;
-            }
-
+           
         }
 
         private void btnEditar_Click(object sender, RoutedEventArgs e)
         {
-            cant_anterior = Convert.ToInt32(txtCantidad.Text);
-            try
-            {
-                if (dg_materiales.SelectedValue == null || cmbTratamiento.SelectedValue == null)
-                {
-                    MessageBox.Show("Seleccione un tratamiento y un material para poder ser editado");
-                }
-                else
-                {
+            isUpdate = true;
+            btnCancelar.IsEnabled = true;
+            btnEditar.IsEnabled = false;
 
-                    txtCantidad.IsEnabled = true;
-                    btnGuardar.IsEnabled = true;
-                    btnCancelar.IsEnabled = true;
-                    btnEditar.IsEnabled = false;
-                    btnRealizar.IsEnabled = false;
-                    cmbTratamiento.IsEnabled = false;
+            ObtenerTratamientoDatos();
+            ObtenerInventarioTratamientos(gTratamientoID);
+        }
+
+        private void ObtenerTratamientoDatos()
+        {
+            DataTable dt = new DataTable();
+
+            DataRowView dataRow = (DataRowView)dg_tratamientos.SelectedItem;
+            if (dataRow != null)
+            {
+                gTratamientoID = int.Parse(dataRow[0].ToString());
+
+                dt = proc.BuscarTratamiento(gTratamientoID);
+                foreach(DataRow row in dt.Rows)
+                {
+                    gTratamientoID = int.Parse(row["TratamientoID"].ToString());
+                    txtTratamientoNombre.Text = row["Nombre"].ToString();
+                    txtPrecioSugerido.Text = row["PrecioSugerido"].ToString();
+                    chkestado.IsChecked = bool.Parse(row["Estado"].ToString());
+                    chkmasUno.IsChecked = bool.Parse(row["MasUno"].ToString());
                 }
             }
-            catch (Exception ex)
+        }
+
+        private void ObtenerInventarioTratamientos(int id)
+        { 
+            DataTable dt = new DataTable();
+
+            listMateriales.Clear();
+
+            dt = proc.BuscarInventarioTratamiento(id);
+            foreach (DataRow row in dt.Rows)
             {
-                MessageBox.Show("" + ex);
+                Materiales mat = new Materiales();
+                mat.InvID = int.Parse(row["InventarioID"].ToString());
+                mat.NombreMaterial = row["Nombre"].ToString();
+                mat.Cantidad = int.Parse(row["CantidadUsada"].ToString());
+ 
+                listMateriales.Add(mat);
             }
+
+            dg_tratamientos_materiales.Items.Refresh();
         }
 
         private void btnGuardar_Click(object sender, RoutedEventArgs e)
         {
-            try
+            if(!isUpdate)
             {
-                foreach (ClaseTratamiento tratamientos in dg_materiales.ItemsSource)
-                {
-                    if (tratamiento.NombreMaterial == dg_materiales.SelectedValue.ToString() && Convert.ToInt32(txtCantidad.Text) <= Convert.ToInt32(tratamientos.Cantidad.ToString()))
-                    {
-                        tratamiento.Cantidad = Convert.ToInt32(tratamientos.Cantidad.ToString());
-
-                    }
-                    else
-                    {
-                        MessageBox.Show("Valor mayor a la cantidad actual");
-                        txtCantidad.Text = cant_anterior.ToString();
-                        break;
-                    }
-                }
-
+                GuardarTratamiento();
             }
-            catch
+            else
             {
-                throw;
+                ActualizarTratamiento();
             }
-            finally
+            MessageBox.Show("Datos insertados con exito");
+            Cleaner();
+        }
+
+        private void ActualizarTratamiento()
+        {
+            proc.EliminarInventarioTratamiento(gTratamientoID);
+            GuardarTratamientoInventario(gTratamientoID);
+        }
+
+        private void GuardarTratamiento()
+        {
+            int id;
+
+            trat.TratamientoNombre = txtTratamientoNombre.Text;
+            trat.precioSugerido = float.Parse(txtPrecioSugerido.Text);
+            trat.masUno = ObtenerCheck(chkmasUno);
+            trat.Estado = ObtenerCheck(chkestado);
+
+            id = proc.InsertarTratamiento(trat);
+
+            GuardarTratamientoInventario(id);
+        }
+
+        private void GuardarTratamientoInventario(int tratID)
+        {
+            foreach(var item in listMateriales)
             {
-                btnGuardar.IsEnabled = false;
-                txtCantidad.IsEnabled = false;
-                btnEditar.IsEnabled = true;
-                btnRealizar.IsEnabled = true;
-                cmbTratamiento.IsEnabled = true;
-                btnCancelar.IsEnabled = false;
+                proc.InsertarTratamientoDetalle(tratID, item.InvID, item.Cantidad);
+            }
+        }
+
+        private int ObtenerCheck(CheckBox chk)
+        {
+            if(chk.IsChecked.ToString() == "True")
+            {
+                return 1;
+            }
+            else
+            {
+                return 0;
             }
         }
 
         private void btnCancelar_Click(object sender, RoutedEventArgs e)
         {
-            btnGuardar.IsEnabled = false;
-            txtCantidad.IsEnabled = false;
+            btnGuardar.IsEnabled = true;
             btnEditar.IsEnabled = true;
-            btnRealizar.IsEnabled = true;
-            cmbTratamiento.IsEnabled = true;
             btnCancelar.IsEnabled = false;
-        }
 
-       
-
-        private void dg_materiales_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-
+            isUpdate = false;
         }
 
         private void txtCantidad_TextChanged(object sender, TextChangedEventArgs e)
@@ -197,12 +183,84 @@ namespace SistemaDental.MVCCV.Vista
             menu.Show();
         }
 
-        private void cmbPaciente_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void ObtenerTratamientos()
+        {
+            dg_tratamientos.ItemsSource = proc.ObtenerTratamientosDatos().DefaultView;
+            dg_tratamientos.SelectedValuePath = "TratamientoID";
+        }
+
+        private void ObtenerMateriales()
+        {
+            dg_materiales.ItemsSource = proc.ObtenerMaterialesDatos().DefaultView;
+            dg_materiales.SelectedValuePath = "InvID";
+        }
+
+        private void dg_tratamientos_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            int id;
+
+            DataRowView dataRow = (DataRowView)dg_tratamientos.SelectedItem;
+            if (dataRow != null)
+            {
+                id = int.Parse(dataRow[0].ToString());
+            }
+        }
+
+        private void dg_materiales_SelectionChanged_1(object sender, SelectionChangedEventArgs e)
         {
 
         }
 
-        private void txtMaterial_TextChanged(object sender, TextChangedEventArgs e)
+        private void btnListaAgregar_Click(object sender, RoutedEventArgs e)
+        {
+            DataRowView dataRow = (DataRowView)dg_materiales.SelectedItem;
+            Materiales mat = new Materiales();
+
+            if (dataRow != null)
+            {
+                mat.InvID = int.Parse(dataRow[0].ToString());
+                mat.NombreMaterial = dataRow[1].ToString();
+                mat.Cantidad = int.Parse(txtCantidad.Text);
+
+                listMateriales.Add(mat);
+                dg_tratamientos_materiales.Items.Refresh();
+            }
+        }
+
+        private void LlenarMaterialSelecionado()
+        {
+            dg_tratamientos_materiales.ItemsSource = listMateriales;
+            dg_materiales.SelectedValuePath = "InvID";
+        }
+
+        private void btnListaEliminar_Click(object sender, RoutedEventArgs e)
+        {
+            if(dg_tratamientos_materiales.SelectedValue != null)
+            {
+                listMateriales.RemoveAt(dg_tratamientos_materiales.SelectedIndex);
+                dg_tratamientos_materiales.Items.Refresh();
+            }
+        }
+
+        private void Cleaner()
+        {
+            txtTratamientoNombre.Clear();
+            txtPrecioSugerido.Clear();
+            chkestado.IsChecked = true;
+            chkmasUno.IsChecked = false;
+            txtCantidad.Clear();
+            listMateriales.Clear();
+            dg_tratamientos_materiales.Items.Refresh();
+        }
+    }
+
+    public class Materiales
+    {
+        public int InvID { get; set; }
+        public string NombreMaterial { get; set; }
+        public int Cantidad { get; set; }
+
+        public Materiales ()
         {
 
         }

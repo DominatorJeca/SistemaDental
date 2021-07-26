@@ -43,7 +43,7 @@
                         </LinearGradientBrush>
                     </Button.Background>
                 </Button>
-                <Button x:Name="btnTratamientos" Height="150" Width="150" Margin="50,00,0,0" Style="{StaticResource MaterialDesignFlatAccentButton}"  FontFamily="Bahnschrift" materialDesign:ButtonAssist.CornerRadius="10" >
+                <Button x:Name="btnTratamientos" Height="150" Width="150" Margin="50,00,0,0" Style="{StaticResource MaterialDesignFlatAccentButton}"  FontFamily="Bahnschrift" materialDesign:ButtonAssist.CornerRadius="10" Click="btnTratamientos_Click_1" Command="{Binding Path= DataContext.tratamientoVistaComando, RelativeSource={RelativeSource AncestorType={x:Type otros:Menu}}, Mode=OneWay}">
                     <Button.Background>
                         <LinearGradientBrush StartPoint="0,0" EndPoint="1,2">
                             <GradientStop Color="#56A2BF" Offset="0"/>

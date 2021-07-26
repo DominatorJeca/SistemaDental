@@ -27,7 +27,7 @@
                 <view:VerPacienVista/>
             </DataTemplate>
             <DataTemplate DataType="{x:Type viewModel:TratamientosvistaControlador}">
-                <view:VerPacienVista/>
+                <view:TratamientoVista/>
             </DataTemplate>
             <DataTemplate DataType="{x:Type viewModel:ManejarusuariovistaControlador}">
                 <view:VerPacienVista/>

@@ -36,5 +36,15 @@ namespace SistemaDental.MVCCV.Vista
             string url = "http://localhost/ProjectoClinicaDental/vistas/";
             Process.Start(new ProcessStartInfo("cmd", $"/c start {url}") { CreateNoWindow = true });
         }
+
+        private void btnTratamientos_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void btnTratamientos_Click_1(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }
