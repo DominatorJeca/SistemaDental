@@ -15,7 +15,7 @@ namespace SistemaDental
     {
 
         //Variable Miembro
-     
+
 
         // Propiedades
         public int Id_transaccion { get; set; }
@@ -37,11 +37,8 @@ namespace SistemaDental
         public ClaseCaja()
         {
         }
-        
+
 
     }
 
 }
-    
-
-

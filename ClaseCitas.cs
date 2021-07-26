@@ -28,7 +28,7 @@ namespace SistemaDental
         public string ApellidoPaciente { get; set; }
         public string Observaciones { get; set; }
         public DateTime fechaCita { get; set; }
-    
+
         public List<ClaseCitas> mostrarIdPacientes()
         {
             sqlConnection.Open();
@@ -39,14 +39,14 @@ namespace SistemaDental
                 SqlDataReader reader = command.ExecuteReader();
 
                 List<ClaseCitas> pacientes = new List<ClaseCitas>();
-               
+
 
                 while (reader.Read())
                 {
 
                     pacientes.Add(new ClaseCitas { IdPacientes = reader["id_paciente"].ToString() });
                 }
-                
+
                 return pacientes;
             }
             catch

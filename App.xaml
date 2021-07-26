@@ -53,6 +53,9 @@
             <DataTemplate DataType="{x:Type viewModel:UsuariosVistaControlador}">
                 <view:VistaAgregarUsuario/>
             </DataTemplate>
+            <DataTemplate DataType="{x:Type viewModel:DatosDeUsuarioVistaControlador}">
+                <view:DatosDeUsuario/>
+            </DataTemplate>
         </ResourceDictionary>
     </Application.Resources>
 </Application>

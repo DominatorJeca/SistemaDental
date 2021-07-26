@@ -39,12 +39,12 @@ namespace SistemaDental
 
 
         //Arreglo tipo string para almacenar los datos extraidos de la BD
-        
+
 
         public ClasePaciente() { }
 
         //propiedad con el parámetro id_paciente
-        
+
 
         /// <summary>
         /// Metodo para mostrar los pacientes existentes
@@ -113,15 +113,15 @@ namespace SistemaDental
 
             catch (Exception e)
             {
-                throw e; 
+                throw e;
             }
 
-            finally 
-            { 
-                sqlConnection.Close(); 
+            finally
+            {
+                sqlConnection.Close();
             }
 
-            
+
         }
 
         public List<ClasePaciente> MostrarHistorial(ClasePaciente paciente)

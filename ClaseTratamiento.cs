@@ -25,7 +25,7 @@ namespace SistemaDental
 
         public float precioTrat { get; set; }
         public List<ClaseInventario> Materiales { get; set; }
-       
+
         public ClaseTratamiento() { }
 
         public List<ClaseTratamiento> mostrarTratamientos()
@@ -50,7 +50,7 @@ namespace SistemaDental
                 }
                 return tratamientos;
             }
-            catch 
+            catch
             {
                 throw;
             }
