@@ -10,7 +10,7 @@ using System.Text.RegularExpressions;
 using System.Windows.Input;
 
 
-//using System.Windows.Forms;
+
 
 
 namespace SistemaDental
@@ -65,7 +65,7 @@ namespace SistemaDental
         }
 
         
-        public bool VerificarCampos(Window window)
+        public bool VerificarCampos(UserControl window)
         {
             bool band = true;
             foreach (var tb in FindVisualChildren<TextBox>(window))
@@ -79,6 +79,7 @@ namespace SistemaDental
                 if (tb.SelectedValue.ToString().Replace(" ", "").Equals("") && tb.Name != "PART_EditableTextBox" && tb.Name != "PART_TextBox")
                     band = false;
             }
+            //foreach(Control con in window.Content)
 
             foreach (var tb in FindVisualChildren<DataGrid>(window))
             {

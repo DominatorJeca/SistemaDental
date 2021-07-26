@@ -69,13 +69,13 @@ namespace SistemaDental.MVCCV.Vista
         /// </summary>
         public void ObtenerValores()
         {
-            usuario.Id = Convert.ToInt32(cmbUsuario.SelectedValue);
+            usuario.Id = Convert.ToString(cmbUsuario.SelectedValue);
             usuario.Nombre = Convert.ToString(txtEditarNombre.Text);
             usuario.Apellido = Convert.ToString(txtEditarApellido.Text);
             usuario.Telefono = Convert.ToString(txtEditarTelefono.Text);
             usuario.Correo = Convert.ToString(txtEditarCorreo.Text);
             usuario.Puesto = Convert.ToInt32(cmbPuesto.SelectedValue);
-            usuario.Genero = ((ComboBoxItem)cmbSexo.SelectedItem).Content.ToString();
+            usuario.GeneroNombre = ((ComboBoxItem)cmbSexo.SelectedItem).Content.ToString();
             usuario.Contraseña = Convert.ToString(txtNuevaContra.Text);
             usuario.Estado = true;
             usuario.Administrador = false;

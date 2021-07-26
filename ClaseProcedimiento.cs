@@ -91,48 +91,8 @@ namespace SistemaDental
             }
         }
 
-       /* public Turno SeleccionarTurno(Turno turno)
-        {
-            //objeto que contendrá los datos del usuario
-            Usuario usuario = new Usuario();
-            try
-            {
-                command.Connection = con.Open();
-                //crear el comando SQL
-                command.CommandText = "SeleccionarTurno";
+     
 
-                command.CommandType = CommandType.StoredProcedure;
-                command.Parameters.AddWithValue("@usuarioID", turno.UsuarioID);
-                command.Parameters.AddWithValue("@fecha", turno.ComienzoTurno);
-                reader = command.ExecuteReader();
-
-
-                using (reader)
-                {
-
-                    turno.AgendaID = Convert.ToInt32(reader["AgendaID"]);
-                    turno.UsuarioID = Convert.ToInt32(reader["UsuarioID"]);
-                    turno.ComienzoTurno = Convert.ToDateTime(reader["ComienzoTurno"]);
-                    turno.FinalTurno = Convert.ToDateTime(reader["FinalTurno"]);
-
-                }
-
-                return turno;
-            }
-            catch (Exception e)
-            {
-
-                throw e;
-
-            }
-            finally
-            {    //Cerrar conexion
-                reader.Close();
-                command.Parameters.Clear();
-                command.Connection = con.Close();
-            }
-
-        }*/
         #region Compras
 
         public void EditarCompra(int CompraID, int InventarioID, int EmpleadoID, DateTime FechaCompra, DateTime FechaVenci, double precio, int cantidad)
@@ -191,7 +151,73 @@ namespace SistemaDental
         #endregion
 
         #region Usuario-Procedimientos
+        public void IngresarUsuario(Usuario usuario)
+        {  
+            
 
+            try
+            {
+                command.Connection = con.Open();
+                command.CommandText = "sp_UsuarioEmpleado_Insertar";
+                command.CommandType = CommandType.StoredProcedure;
+                //Establecer los valores de parametros
+                command.Parameters.AddWithValue("@Identidad", usuario.Id);
+                command.Parameters.AddWithValue("@Nombre", usuario.Nombre);
+                command.Parameters.AddWithValue("@Apellido", usuario.Apellido);
+                command.Parameters.AddWithValue("@Telefono", usuario.Telefono);
+                command.Parameters.AddWithValue("@Correo", usuario.Correo);
+                command.Parameters.AddWithValue("@PuestoID", usuario.Puesto);
+                command.Parameters.AddWithValue("@GeneroID", usuario.Genero);
+                command.Parameters.AddWithValue("@contrasena", usuario.Contraseña);
+                command.Parameters.AddWithValue("@Estado", usuario.Estado);
+                command.Parameters.AddWithValue("@Administrador", usuario.Administrador);
+                command.ExecuteNonQuery();
+              
+
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+            finally
+            {    //Cerrar conexion 
+                command.Parameters.Clear();
+                command.Connection = con.Close();
+            }
+        }
+
+        public void EditarUsuario(Usuario usuario)
+        {
+         
+
+            try
+            {
+                command.Connection = con.Open();
+                command.CommandText = "sp_Empleados_Actualizar";
+                command.CommandType = CommandType.StoredProcedure;
+                //Establecer los valores de parametros
+                command.Parameters.AddWithValue("@EmpleadoID", usuario.Ide);
+                command.Parameters.AddWithValue("@Identidad", usuario.Id);
+                command.Parameters.AddWithValue("@Nombre", usuario.Nombre);
+                command.Parameters.AddWithValue("@Apellido", usuario.Apellido);
+                command.Parameters.AddWithValue("@Telefono", usuario.Telefono);
+                command.Parameters.AddWithValue("@Correo", usuario.Correo);
+                command.Parameters.AddWithValue("@PuestoID", usuario.Puesto);
+                command.Parameters.AddWithValue("@GeneroID", usuario.Genero);
+                command.Parameters.AddWithValue("@Estado",usuario.Estado);
+                command.ExecuteNonQuery();
+
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+            finally
+            {    //Cerrar conexion 
+                command.Parameters.Clear();
+                command.Connection = con.Close();
+            }
+        }
         public Usuario BuscarUsuario(string user, string contra)
         {
             //objeto que contendrá los datos del usuario
@@ -218,7 +244,7 @@ namespace SistemaDental
                         usuario.Nombre = Convert.ToString(reader["Nombre"]);
                         usuario.Apellido = Convert.ToString(reader["Apellido"]);
                         usuario.Administrador = Convert.ToBoolean(reader["administrador"]);
-                        usuario.Id = Convert.ToInt32(reader[0]);
+                        usuario.Id = Convert.ToString(reader[0]);
                     }
                 }
 
@@ -236,10 +262,13 @@ namespace SistemaDental
                 command.Parameters.Clear();
                 command.Connection = con.Close();
             }
-            #endregion
+
 
 
         }
+
+
+        #endregion
         public Usuario BuscarEmail(string correo)
         {
             try
@@ -254,7 +283,7 @@ namespace SistemaDental
                 if (reader.Read())
                 {
                     usuario = new Usuario();
-                    usuario.Id=Convert.ToInt32(reader[0]);
+                    usuario.Id=Convert.ToString(reader[0]);
                     usuario.Nombre = Convert.ToString(reader[1]);
 
                 }
@@ -293,7 +322,7 @@ namespace SistemaDental
                 reader = command.ExecuteReader();
                 if (reader.Read())
                 {
-                    user.Id =Convert.ToInt32( reader[0]);
+                    user.Id =Convert.ToString( reader[0]);
                     user.Nombre = Convert.ToString(reader[1]);
                     user.Administrador = Convert.ToBoolean(reader[2]);
                 }
@@ -575,6 +604,133 @@ namespace SistemaDental
                 return null;
             }
 
+
+        }
+        #endregion
+
+        public string obtenerusuario(string idEmpleado)
+        {
+            
+            try
+            {//Abrir la conexion sql
+
+                string usu = "";
+                command.Connection = con.Open();
+                //crear el comando SQL
+                command.CommandText = "MostrarUsuario";
+                command.CommandType = CommandType.StoredProcedure;
+                command.Parameters.AddWithValue("@empleado",idEmpleado);
+                //Definir las variables del procedimiento mediante los parametros obtenidos
+                reader = command.ExecuteReader();
+
+                while (reader.Read())
+                {
+                    usu = Convert.ToString(reader["Usuario"]);
+                }
+
+                return usu;
+            }
+
+            catch (Exception e)
+            {
+                throw e;
+            }
+
+            finally
+            {
+                command.Parameters.Clear();
+                reader.Close();
+                command.Connection = con.Close();
+              
+            }
+
+
+
+        }
+        #region Empleados
+        public List<Usuario> MostrarEmpleados(bool act)
+
+     
+        {
+            try
+            {//Abrir la conexion sql
+
+                List<Usuario> prod = new List<Usuario>();
+                command.Connection = con.Open();
+                //crear el comando SQL
+                command.CommandText = "sp_Empleados_Mostrar_Activos";
+                command.CommandType = CommandType.StoredProcedure;
+
+                //Definir las variables del procedimiento mediante los parametros obtenidos
+                reader = command.ExecuteReader();
+                while (reader.Read())
+                {  
+                    Usuario prods = new Usuario();
+                    prods.Ide= Convert.ToInt32(reader["EmpleadoID"]);
+                    prods.Id= Convert.ToString(reader["Identidad"]);
+                    prods.Nombre = Convert.ToString(reader["Nombre"]);
+                    prods.Apellido = Convert.ToString(reader["Apellido"]);
+                    prods.Telefono = Convert.ToString(reader["Telefono"]);
+                    prods.Correo = Convert.ToString(reader["Correo"]);
+                    prods.PuestoNombre = Convert.ToString(reader["NombrePuesto"]);
+                    prods.GeneroNombre = Convert.ToString(reader["NombreGenero"]);
+                    prods.Contraseña = Convert.ToString(reader["contrasena"]);
+                    prods.Administrador = Convert.ToBoolean(reader["administrador"]);
+                    prods.Estado = Convert.ToBoolean(reader["Estado"]);
+                    if (prods.Estado == act) { 
+                    prod.Add(prods);
+                    }
+                }
+                return prod;
+            }
+
+            catch (Exception e)
+            {
+                throw e;
+            }
+
+            finally
+            {
+                reader.Close();
+                command.Connection = con.Close();
+                command.Parameters.Clear();
+            }
+
+
+
+        }
+
+        public List<Puesto> MostrarPuestos()
+        {
+            // Inicializar una lista vacía de puestos
+            List<Puesto> puestos = new List<Puesto>();
+
+
+            try
+            {
+                command.Connection = con.Open();
+                //crear el comando SQL
+                command.CommandText = "MostrarPuestos";
+                command.CommandType = CommandType.StoredProcedure;
+                reader = command.ExecuteReader();
+                // Obtener los datos de los puestos
+              
+                    while (reader.Read())
+                       puestos.Add(new Puesto { Id = Convert.ToInt32(reader["PuestoID"]), NombrePuesto = reader["NombrePuesto"].ToString() });
+                
+
+                return puestos;
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+            finally
+            {
+                reader.Close();
+                command.Connection = con.Close();
+                command.Parameters.Clear();
+            }
 
         }
         #endregion

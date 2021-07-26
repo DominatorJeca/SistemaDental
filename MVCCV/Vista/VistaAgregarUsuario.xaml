@@ -7,63 +7,54 @@
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              mc:Ignorable="d" 
              d:DesignHeight="455" d:DesignWidth="1050" >
- 
-        <Grid>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="120"/>
-                <ColumnDefinition Width="345"/>
-                <ColumnDefinition Width="120"/>
-                <ColumnDefinition Width="345"/>
-                <ColumnDefinition Width="120"/>
-            </Grid.ColumnDefinitions>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="25"/>
-                <RowDefinition Height="150"/>
-                <RowDefinition Height="255"/>
-                <RowDefinition Height="25"/>
-            </Grid.RowDefinitions>
-            <Grid.Background>
-                <ImageBrush ImageSource="/imagenes/TeethPattern.jpg" Stretch="UniformToFill"/>
-            </Grid.Background>
-            <StackPanel Grid.Row="2" Grid.Column="1" Orientation="Vertical" >
-                <StackPanel.Resources>
-                    <Style TargetType="{x:Type TextBox}">
-                        <Setter Property="Margin" Value="0,50,0,0"/>
-                    </Style>
-                </StackPanel.Resources>
-                <TextBox  x:Name="txtAgregarNombre"  Margin="0,0,0,0"  materialDesign:HintAssist.Hint="Nombre" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontFamily="Bahnschrift" FontSize="12" Background="#7FFFFFFF"/>
-                <TextBox x:Name="txtAgregarApellido" Margin="0,5,0,0" materialDesign:HintAssist.Hint="Apellido" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontFamily="Bahnschrift" FontSize="12" Background="#7FFFFFFF"/>
-                <TextBox x:Name="txtAgregarTelefono" Margin="0,5,0,0" materialDesign:HintAssist.Hint="Telefóno" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontFamily="Bahnschrift" FontSize="12" Background="#7FFFFFFF"
-                 PreviewTextInput="txtAgregarTelefono_PreviewTextInput" MaxLength="15"/>
-                <TextBox x:Name="txtAgregarIdentidad" Margin="0,15,0,0" materialDesign:HintAssist.Hint="Identidad" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontFamily="Bahnschrift" FontSize="12" Background="#7FFFFFFF"
-                 PreviewTextInput="txtAgregarIdentidad_PreviewTextInput"   MaxLength="13"/>
-                <Grid  Margin="0,15,0,0">
-                    <Label Content="Puesto" HorizontalAlignment="Left"  VerticalAlignment="Top" FontSize="12" FontFamily="Bahnschrift"/>
-                    <ComboBox Name="cmbPuesto" HorizontalAlignment="Right"  VerticalAlignment="Top" Width="120"/>
-                </Grid>
-                <Grid Margin="0,10,0,0">
-                    <ComboBox Name="cmbSexo" HorizontalAlignment="Right"  VerticalAlignment="Top" Width="120">
-                        <ComboBoxItem Content="Femenino" HorizontalAlignment="Center" Width="118.4"/>
-                        <ComboBoxItem Content="Masculino" HorizontalAlignment="Center" Width="118.4"/>
-                    </ComboBox>
-                    <Label Content="Sexo" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="12" FontFamily="Bahnschrift"/>
-                </Grid>
-            </StackPanel>
-            <StackPanel Grid.Row="2" Grid.Column="3" Orientation="Vertical">
 
-                <TextBox x:Name="txtAgregarCorreo"  Margin="0,5,0,0"  materialDesign:HintAssist.Hint="Correo" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontFamily="Bahnschrift" FontSize="12" Background="#7FFFFFFF" Grid.ColumnSpan="2"
-                 MaxLength="50"/>
-                <TextBox x:Name="txtConfirmarCorreo"  Margin="0,5,0,0" materialDesign:HintAssist.Hint="Confirmar Correo" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontFamily="Bahnschrift" FontSize="12" Background="#7FFFFFFF" Grid.ColumnSpan="2"
-                 MaxLength="50"/>
-                <PasswordBox x:Name="txtAgregarContra"  Margin="0,5,0,0" materialDesign:HintAssist.Hint="Contraseña" Style="{StaticResource MaterialDesignFloatingHintPasswordBox}" FontFamily="Bahnschrift" FontSize="12" Background="#7FFFFFFF" Grid.ColumnSpan="2"
-                     MaxLength="20"/>
-                <PasswordBox x:Name="txtConfirmarContra"  Margin="0,5,0,0" materialDesign:HintAssist.Hint="Confirmar Contraseña" Style="{StaticResource MaterialDesignFloatingHintPasswordBox}" FontFamily="Bahnschrift" FontSize="12" Background="#7FFFFFFF" Grid.ColumnSpan="2"
-                     MaxLength="20"/>
-                <Button x:Name="btnAgregarUsuario" Content="Agregar" HorizontalAlignment="Right"  VerticalAlignment="Bottom" Margin="0,28,0,0" Width="280" Height="40" Background="#FF056676" BorderBrush="{x:Null}" Click="btnAgregarUsuario_Click_1"/>
+    <Grid>
 
-            </StackPanel>
-          
-            <Image Source="/imagenes/Happy_Sm.png" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="3"/>
-        </Grid>
- 
+
+        <Grid.Background>
+            <ImageBrush ImageSource="/imagenes/TeethPattern.jpg" Stretch="UniformToFill"/>
+        </Grid.Background>
+
+
+        <TextBox  x:Name="txtAgregarNombre"  Margin="70,39,700.6,381.2"  Text="{Binding ElementName=dgvEmpleado, Path=SelectedItem.Nombre}" PreviewTextInput="PreviewTextInputOnlyLetters" materialDesign:HintAssist.Hint="Nombre" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontFamily="Bahnschrift" FontSize="12" Background="#7FFFFFFF"/>
+        <TextBox x:Name="txtAgregarApellido" Margin="70,87,700.6,333.2" Text="{Binding ElementName=dgvEmpleado, Path=SelectedItem.Apellido}"  PreviewTextInput="PreviewTextInputOnlyLetters" materialDesign:HintAssist.Hint="Apellido" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontFamily="Bahnschrift" FontSize="12" Background="#7FFFFFFF"/>
+        <TextBox x:Name="txtAgregarTelefono" Margin="382,39,384.6,381.2" Text="{Binding ElementName=dgvEmpleado, Path=SelectedItem.Telefono}" materialDesign:HintAssist.Hint="Telefóno" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontFamily="Bahnschrift" FontSize="12" Background="#7FFFFFFF"
+                 PreviewTextInput="PreviewTextInputOnlyNumbers" MaxLength="15"/>
+        <TextBox x:Name="txtAgregarIdentidad" Margin="70,127,700.6,293.2" Text="{Binding ElementName=dgvEmpleado, Path=SelectedItem.Id}" materialDesign:HintAssist.Hint="Identidad" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontFamily="Bahnschrift" FontSize="12" Background="#7FFFFFFF"
+                PreviewTextInput="PreviewTextInputOnlyNumbers"   MaxLength="13"/>
+        <Label Content="Puesto" HorizontalAlignment="Left"  VerticalAlignment="Top" FontSize="12" FontFamily="Bahnschrift" Margin="700,140,0,0" RenderTransformOrigin="-2.498,7.577" Width="73"/>
+        <ComboBox Name="cmbPuesto" HorizontalAlignment="Right" Text="{Binding ElementName=dgvEmpleado, Path=SelectedItem.PuestoNombre}" VerticalAlignment="Top" Width="196" Margin="0,140,72.6,0"/>
+        <ComboBox Name="cmbSexo" HorizontalAlignment="Right" Text="{Binding ElementName=dgvEmpleado, Path=SelectedItem.GeneroNombre}" VerticalAlignment="Top" Width="211" Margin="0,137,384.6,0">
+            <ComboBoxItem Content="Femenino" HorizontalAlignment="Center" Width="118.4"/>
+            <ComboBoxItem Content="Masculino" HorizontalAlignment="Center" Width="118.4"/>
+        </ComboBox>
+        <Label Content="Sexo" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="12" FontFamily="Bahnschrift" Margin="382,140,0,0" Width="64"/>
+
+        <TextBox x:Name="txtAgregarCorreo"  Margin="382,87,384.6,333.2" Text="{Binding ElementName=dgvEmpleado, Path=SelectedItem.Correo}" materialDesign:HintAssist.Hint="Correo" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontFamily="Bahnschrift" FontSize="12" Background="#7FFFFFFF"
+                 MaxLength="50"/>
+        <PasswordBox x:Name="txtAgregarContra"  Margin="694,39,72.6,380.2" materialDesign:HintAssist.Hint="Contraseña" Style="{StaticResource MaterialDesignFloatingHintPasswordBox}" FontFamily="Bahnschrift" FontSize="12" Background="#7FFFFFFF"
+                     MaxLength="20"/>
+        <PasswordBox x:Name="txtConfirmarContra"  Margin="694,88,72.6,330.2" materialDesign:HintAssist.Hint="Confirmar Contraseña" Style="{StaticResource MaterialDesignFloatingHintPasswordBox}" FontFamily="Bahnschrift" FontSize="12" Background="#7FFFFFFF"
+                     MaxLength="20"/>
+        <Button x:Name="btnAgregarUsuario" Content="Agregar" HorizontalAlignment="Right"  VerticalAlignment="Bottom" Margin="0,0,72.6,179.2" Width="236" Height="43" Background="#48C9B0 " BorderBrush="{x:Null}" Click="btnAgregarUsuario_Click_1"/>
+        <DataGrid x:Name="dgvEmpleado" HorizontalAlignment="Left"  Height="186" Margin="70,233,0,0" VerticalAlignment="Top" Width="642" Background="#FF056676" Foreground="#DDFFFFFF" AutoGenerateColumns="False" IsReadOnly="True" SelectionChanged="dgvEmpleado_SelectionChanged">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Identidad" Binding="{Binding Id}" Width="200"/>
+                <DataGridTextColumn Header="Nombre" Binding="{Binding Nombre}" Width="200"/>
+                <DataGridTextColumn Header="Apellido" Binding="{Binding Apellido}" Width="200"/>
+            </DataGrid.Columns>
+
+        </DataGrid>
+        <Label Content="Listado de empleados" HorizontalAlignment="Left" Margin="72,207,0,0" VerticalAlignment="Top" FontSize="12" FontFamily="Bahnschrift" Background="#7F056676" Height="25"/>
+        <Button x:Name="btnEditar" Content="Editar" HorizontalAlignment="Right"  VerticalAlignment="Bottom" Margin="0,0,72.6,131.2" Width="236" Height="42" Background="#48C9B0" BorderBrush="{x:Null}" Click="btnEditarUsuario_Click_1"/>
+        <Button x:Name="btnEliminar" Content="Eliminar" HorizontalAlignment="Right"  VerticalAlignment="Bottom" Margin="0,0,72.6,82.2" Width="236" Height="43" Background="#48C9B0" BorderBrush="{x:Null}" Click="btnEliminarUsuario_Click_1"/>
+        <Button x:Name="btnGuardar" Content="Realizar" Visibility="Hidden" HorizontalAlignment="Right"  VerticalAlignment="Bottom" Margin="0,0,72.6,34.2" Width="236" Height="43" Background="#48C9B0 " BorderBrush="{x:Null}" Click="btnGuardarUsuario_Click_1"/>
+        <TextBox  x:Name="txtBuscar" Margin="203,196,567.6,227.2"  materialDesign:HintAssist.Hint="Buscar" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontFamily="Bahnschrift" FontSize="12" Background="#7FFFFFFF" TextChanged="txtBuscar_TextChanged" />
+        <CheckBox Content="Administrador" IsChecked="{Binding ElementName=dgvEmpleado, Path=SelectedItem.Administrador}" x:Name="chkAdmin" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="876,183,0,0" Checked="chkAdmin_Checked" Unchecked="chkAdmin_Unchecked" Width="108"/>
+        <Button x:Name="btnCancelar" Content="Cancelar" Visibility="Visible" HorizontalAlignment="Right"  VerticalAlignment="Bottom" Margin="0,0,72.6,84.2" Width="236" Height="42" Background="#48C9B0" BorderBrush="{x:Null}" Click="btnCancelar_Click" />
+        <Button x:Name="btnRestablecer" Content="Restablecer Empleado"  HorizontalAlignment="Right"  VerticalAlignment="Bottom" Margin="0,0,73.6,36.2" Width="236" Height="43" Background="#48C9B0" BorderBrush="{x:Null}" Click="btnRestablecer_Click" />
+
+
+    </Grid>
+
 </UserControl>

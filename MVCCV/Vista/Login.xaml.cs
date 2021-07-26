@@ -45,7 +45,7 @@ namespace SistemaDental
                 Usuario elUsuario = proc.BuscarUsuario(txtUsuario.Text,txtPassword.Password);
                 if (elUsuario != null)
                 {
-                    Menu men = new Menu(elUsuario.Administrador, elUsuario.Nombre,elUsuario.Id);
+                    Menu men = new Menu(elUsuario.Administrador, elUsuario.Nombre,elUsuario.Ide);
                     men.Show();
                     this.Close();
                 }
@@ -129,7 +129,7 @@ namespace SistemaDental
             ReestablecerContrasenia reestablecer = new ReestablecerContrasenia();
                 reestablecer.ShowDialog();
         }
-        
+
         private void btnHelp_Click(object sender, RoutedEventArgs e)
         {
             string url = "http://localhost/ProjectoClinicaDental/vistas/";
