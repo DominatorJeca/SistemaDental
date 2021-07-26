@@ -956,5 +956,34 @@ namespace SistemaDental
                 command.Connection = con.Close();
             }
         }
+
+        public void ActualizarTratamiento(ClaseTratamiento trat)
+        {
+            try
+            {
+                command.Connection = con.Open();
+                command.CommandText = "sp_Tratamiento_Actualizar";
+                command.CommandType = CommandType.StoredProcedure;
+
+                command.Parameters.AddWithValue("@TratamientoID", SqlDbType.Int).Value = trat.IdTratamiento;
+                command.Parameters.AddWithValue("@Nombre", SqlDbType.VarChar).Value = trat.TratamientoNombre;
+                command.Parameters.AddWithValue("@PrecioSugerido", SqlDbType.Money).Value = trat.precioSugerido;
+                command.Parameters.AddWithValue("@Estado", SqlDbType.Bit).Value = trat.Estado;
+                command.Parameters.AddWithValue("@MasUno", SqlDbType.Bit).Value = trat.masUno;
+
+                command.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+            finally
+            {
+                command.Parameters.Clear();
+                command.Connection = con.Close();
+            }
+        }
+
     }
 }

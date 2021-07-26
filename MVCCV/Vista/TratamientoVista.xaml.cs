@@ -127,6 +127,16 @@ namespace SistemaDental.MVCCV.Vista
         {
             proc.EliminarInventarioTratamiento(gTratamientoID);
             GuardarTratamientoInventario(gTratamientoID);
+
+            trat.IdTratamiento = gTratamientoID;
+            trat.TratamientoNombre = txtTratamientoNombre.Text;
+            trat.precioSugerido = float.Parse(txtPrecioSugerido.Text);
+            trat.Estado = ObtenerCheck(chkestado);
+            trat.masUno = ObtenerCheck(chkmasUno);
+
+            proc.ActualizarTratamiento(trat);
+
+            dg_tratamientos.Items.Refresh();
         }
 
         private void GuardarTratamiento()
