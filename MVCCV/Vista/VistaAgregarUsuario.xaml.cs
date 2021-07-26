@@ -109,24 +109,28 @@ namespace SistemaDental.MVCCV.Vista
             if (!validar.VerificarIdentidad(txtAgregarIdentidad.Text))
             {
                 MessageBox.Show("El numero de identidad no tiene un formato correcto");
+                MostrarEmpleados(true);
                 return false;
             }
             else if (!validar.VerificarNumero(txtAgregarTelefono.Text))
             {
                 MessageBox.Show("El numero de telefono no tiene un formato correcto");
+                MostrarEmpleados(true);
                 return false;
             }
             else if (txtConfirmarContra.Password != txtAgregarContra.Password)
             {
                 MessageBox.Show("La confirmación de contraseña no coincide");
+                MostrarEmpleados(true);
                 return false;
             }
             else if (!validar.ValidarEmail(txtAgregarCorreo.Text))
             {
+                MostrarEmpleados(true);
                 MessageBox.Show("Por favor, ingrese un correo valido");
                 return false;
             }
-
+          
             return true;
         }
         ICollectionView ColectionEmpleados;
