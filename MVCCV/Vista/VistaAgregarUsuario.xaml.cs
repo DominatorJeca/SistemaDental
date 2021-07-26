@@ -341,7 +341,7 @@ namespace SistemaDental.MVCCV.Vista
                     ObtenerValores();
 
                     // Insertar los datos del usuario 
-                    Proc.EditarUsuario(usuario);
+                    Proc.EditarEmpleado(usuario);
 
                     // Mensaje de inserción exitosa
                     MessageBox.Show("¡Datos editados correctamente!");
@@ -370,7 +370,7 @@ namespace SistemaDental.MVCCV.Vista
                     ObtenerValores();
                     usuario.Estado = act;
                     // Insertar los datos del usuario 
-                    Proc.EditarUsuario(usuario);
+                    Proc.EditarEmpleado(usuario);
 
                     // Mensaje de inserción exitosa
                     MessageBox.Show("La operación se realizó con exito!");
