@@ -168,6 +168,7 @@ namespace SistemaDental.MVCCV.Vista
             opcion = 1;
             botoneshabilitados(false);
             HabilitarInhabilitarTXT(true);
+            LimpiarFormulario();
           
            
         }
@@ -346,12 +347,8 @@ namespace SistemaDental.MVCCV.Vista
                     MessageBox.Show("¡Datos editados correctamente!");
 
                     LimpiarFormulario();
-                   
-                    btnAgregarUsuario.IsEnabled = true;
-                    btnEditar.IsEnabled = true;
-                    btnEliminar.IsEnabled = true;
-                    btnGuardar.IsEnabled = false;
 
+                    botoneshabilitados(true);
                 }
                 catch (Exception ex)
                 {
@@ -379,11 +376,8 @@ namespace SistemaDental.MVCCV.Vista
                     MessageBox.Show("La operación se realizó con exito!");
 
                     LimpiarFormulario();
-                  
-                    btnAgregarUsuario.IsEnabled = true;
-                    btnEditar.IsEnabled = true;
-                    btnEliminar.IsEnabled = true;
-                    btnGuardar.IsEnabled = false;
+
+                botoneshabilitados(true);
 
                 }
                 catch (Exception ex)
