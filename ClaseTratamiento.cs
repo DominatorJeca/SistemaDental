@@ -10,7 +10,7 @@ using System.Data;
 
 namespace SistemaDental
 {
-    class ClaseTratamiento
+    public class ClaseTratamiento
     {
         private static string connectionString = @"server =.; Initial Catalog = clinicaDental; Integrated Security = True; MultipleActiveResultSets=true";
         private SqlConnection sqlConnection = new SqlConnection(connectionString);
@@ -22,6 +22,9 @@ namespace SistemaDental
         public string NombreMaterial { get; set; }
         public int Cantidad { get; set; }
         public string fecha { get; set; }
+
+        public float precioTrat { get; set; }
+        public List<ClaseInventario> Materiales { get; set; }
        
         public ClaseTratamiento() { }
 

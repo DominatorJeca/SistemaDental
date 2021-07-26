@@ -48,7 +48,7 @@
         <Button  x:Name="btnIniciarSesion"  HorizontalAlignment="Center" BorderBrush="Transparent" FontStyle="Normal" FontSize="17" ToolTip="Iniciar Sesion"  Click="btnLogin_Click" Style="{StaticResource MaterialDesignRaisedAccentButton }" materialDesign:ButtonAssist.CornerRadius="25" Background="#7F056676" Margin="65,378,65,84" Height="Auto" Width="260">
             <TextBlock Text="Iniciar Sesión" Foreground="#394F52" FontFamily="Bahnschrift"/>
         </Button>
-        <Button x:Name="btnOlvidarPass" Style="{StaticResource MaterialDesignFlatButton}" Content="¿Olvidó su contraseña?" FontFamily="Bahnschrift" FontSize="17" Margin="94,456,94,22" Foreground="#394F52"></Button>
+        <Button x:Name="btnOlvidarPass" Style="{StaticResource MaterialDesignFlatButton}" Content="¿Olvidó su contraseña?" FontFamily="Bahnschrift" FontSize="17" Margin="94,456,94,22" Foreground="#394F52" Click="btnOlvidarPass_Click"></Button>
        
     </Grid>
 

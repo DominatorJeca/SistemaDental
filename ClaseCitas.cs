@@ -10,24 +10,25 @@ using System.Data;
 
 namespace SistemaDental
 {
-    class ClaseCitas
+    public class ClaseCitas
     {
         private static string connectionString = @"server = .; Initial Catalog = clinicaDental; Integrated Security = True; MultipleActiveResultSets=true";
         private SqlConnection sqlConnection = new SqlConnection(connectionString);
 
         public int IdCita { get; set; }
 
-        public string IdPacientes{get; set;}
+        public string IdPacientes { get; set; }
         public string NombreDoctor { get; set; }
 
         public string IdDoctor { get; set; }
         public int IdTratamiento { get; set; }
-        public string NombreTratamiento { get; set;}
-
+        public string NombreTratamiento { get; set; }
+        public string Preciototal { get; set; }
         public string NombrePaciente { get; set; }
         public string ApellidoPaciente { get; set; }
-
+        public string Observaciones { get; set; }
         public DateTime fechaCita { get; set; }
+    
         public List<ClaseCitas> mostrarIdPacientes()
         {
             sqlConnection.Open();
