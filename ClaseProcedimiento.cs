@@ -545,8 +545,49 @@ namespace SistemaDental
         }
         #endregion
 
+        public string obtenerusuario(string idEmpleado)
+        {
+            
+            try
+            {//Abrir la conexion sql
+
+                string usu = "";
+                command.Connection = con.Open();
+                //crear el comando SQL
+                command.CommandText = "MostrarUsuario";
+                command.CommandType = CommandType.StoredProcedure;
+                command.Parameters.AddWithValue("@empleado",idEmpleado);
+                //Definir las variables del procedimiento mediante los parametros obtenidos
+                reader = command.ExecuteReader();
+
+                while (reader.Read())
+                {
+                    usu = Convert.ToString(reader["Usuario"]);
+                }
+
+                return usu;
+            }
+
+            catch (Exception e)
+            {
+                throw e;
+            }
+
+            finally
+            {
+                command.Parameters.Clear();
+                reader.Close();
+                command.Connection = con.Close();
+              
+            }
+
+
+
+        }
         #region Empleados
         public List<Usuario> MostrarEmpleados(bool act)
+
+     
         {
             try
             {//Abrir la conexion sql

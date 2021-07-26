@@ -37,7 +37,7 @@
         <PasswordBox x:Name="txtConfirmarContra"  Margin="694,88,72.6,330.2" materialDesign:HintAssist.Hint="Confirmar Contraseña" Style="{StaticResource MaterialDesignFloatingHintPasswordBox}" FontFamily="Bahnschrift" FontSize="12" Background="#7FFFFFFF"
                      MaxLength="20"/>
         <Button x:Name="btnAgregarUsuario" Content="Agregar" HorizontalAlignment="Right"  VerticalAlignment="Bottom" Margin="0,0,72.6,179.2" Width="236" Height="43" Background="#48C9B0 " BorderBrush="{x:Null}" Click="btnAgregarUsuario_Click_1"/>
-        <DataGrid x:Name="dgvEmpleado" HorizontalAlignment="Left" Height="186" Margin="70,233,0,0" VerticalAlignment="Top" Width="642" Background="#FF056676" Foreground="#DDFFFFFF" AutoGenerateColumns="False" IsReadOnly="True" SelectionChanged="dgvEmpleado_SelectionChanged">
+        <DataGrid x:Name="dgvEmpleado" HorizontalAlignment="Left"  Height="186" Margin="70,233,0,0" VerticalAlignment="Top" Width="642" Background="#FF056676" Foreground="#DDFFFFFF" AutoGenerateColumns="False" IsReadOnly="True" SelectionChanged="dgvEmpleado_SelectionChanged">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Identidad" Binding="{Binding Id}" Width="200"/>
                 <DataGridTextColumn Header="Nombre" Binding="{Binding Nombre}" Width="200"/>
@@ -49,8 +49,8 @@
         <Button x:Name="btnEditar" Content="Editar" HorizontalAlignment="Right"  VerticalAlignment="Bottom" Margin="0,0,72.6,131.2" Width="236" Height="42" Background="#48C9B0" BorderBrush="{x:Null}" Click="btnEditarUsuario_Click_1"/>
         <Button x:Name="btnEliminar" Content="Eliminar" HorizontalAlignment="Right"  VerticalAlignment="Bottom" Margin="0,0,72.6,82.2" Width="236" Height="43" Background="#48C9B0" BorderBrush="{x:Null}" Click="btnEliminarUsuario_Click_1"/>
         <Button x:Name="btnGuardar" Content="Realizar" Visibility="Hidden" HorizontalAlignment="Right"  VerticalAlignment="Bottom" Margin="0,0,72.6,34.2" Width="236" Height="43" Background="#48C9B0 " BorderBrush="{x:Null}" Click="btnGuardarUsuario_Click_1"/>
-        <TextBox  x:Name="txtBuscar" Margin="203,196,567.6,227.2"  materialDesign:HintAssist.Hint="Buscar" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontFamily="Bahnschrift" FontSize="12" Background="#7FFFFFFF"/>
-        <CheckBox Content="Administrador" IsChecked="{Binding ElementName=dgvEmpleado, Path=SelectedItem.Administrador}" x:Name="chkAdmin" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="564,183,0,0" Checked="chkAdmin_Checked" Unchecked="chkAdmin_Unchecked" Width="108"/>
+        <TextBox  x:Name="txtBuscar" Margin="203,196,567.6,227.2"  materialDesign:HintAssist.Hint="Buscar" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontFamily="Bahnschrift" FontSize="12" Background="#7FFFFFFF" TextChanged="txtBuscar_TextChanged" />
+        <CheckBox Content="Administrador" IsChecked="{Binding ElementName=dgvEmpleado, Path=SelectedItem.Administrador}" x:Name="chkAdmin" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="876,183,0,0" Checked="chkAdmin_Checked" Unchecked="chkAdmin_Unchecked" Width="108"/>
         <Button x:Name="btnCancelar" Content="Cancelar" Visibility="Visible" HorizontalAlignment="Right"  VerticalAlignment="Bottom" Margin="0,0,72.6,84.2" Width="236" Height="42" Background="#48C9B0" BorderBrush="{x:Null}" Click="btnCancelar_Click" />
         <Button x:Name="btnRestablecer" Content="Restablecer Empleado"  HorizontalAlignment="Right"  VerticalAlignment="Bottom" Margin="0,0,73.6,36.2" Width="236" Height="43" Background="#48C9B0" BorderBrush="{x:Null}" Click="btnRestablecer_Click" />
 

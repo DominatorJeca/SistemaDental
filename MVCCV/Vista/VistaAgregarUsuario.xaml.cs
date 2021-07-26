@@ -13,6 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.ComponentModel;
 
 namespace SistemaDental.MVCCV.Vista
 {
@@ -128,10 +129,11 @@ namespace SistemaDental.MVCCV.Vista
 
             return true;
         }
-
+        ICollectionView ColectionEmpleados;
         public void MostrarEmpleados(bool act)
         {
-            dgvEmpleado.ItemsSource = Proc.MostrarEmpleados(act);
+            ColectionEmpleados = new CollectionViewSource() { Source = Proc.MostrarEmpleados(act) }.View;
+            dgvEmpleado.ItemsSource = ColectionEmpleados;
             dgvEmpleado.SelectedValuePath = "Ide";
         }
 
@@ -162,7 +164,8 @@ namespace SistemaDental.MVCCV.Vista
             opcion = 1;
             botoneshabilitados(false);
             HabilitarInhabilitarTXT(true);
-
+          
+           
         }
 
 
@@ -243,6 +246,7 @@ namespace SistemaDental.MVCCV.Vista
             txtAgregarTelefono.IsEnabled= habilitar;
             cmbPuesto.IsEnabled= habilitar;
             cmbSexo.IsEnabled= habilitar;
+            chkAdmin.IsEnabled = habilitar;
 
         }
         private void btnGuardarUsuario_Click_1(object sender, RoutedEventArgs e)
@@ -251,6 +255,7 @@ namespace SistemaDental.MVCCV.Vista
             {
                 case 1:
                     IngresarEmpleado();
+                  
                     break;
                 case 2:
                     EditarEmpleado();
@@ -281,24 +286,46 @@ namespace SistemaDental.MVCCV.Vista
                     Proc.IngresarUsuario(usuario);
 
                     // Mensaje de inserción exitosa
-                    MessageBox.Show("¡Datos insertados correctamente!");
-                   
-                    LimpiarFormulario();
-                    MostrarEmpleados(true);
-                    btnAgregarUsuario.IsEnabled = true;
-                    btnEditar.IsEnabled = true;
-                    btnEliminar.IsEnabled = true;
-                    btnGuardar.IsEnabled = false;
+                    
 
+                   
+                    
+                    obtenerUsuario();
+                    botoneshabilitados(true);
                 }
                 catch (Exception ex)
                 {
                     MessageBox.Show("Ha ocurrido un error al momento de insertar el empleado..."+ ex.Message);
                     Console.WriteLine(ex.Message);
                 }
+
+                MostrarEmpleados(true);
             }
         }
+      
 
+        private void obtenerUsuario()
+        {
+            
+                try
+                {
+
+                string usu;
+                // Insertar los datos del usuario 
+                usu = Proc.obtenerusuario(usuario.Id);
+
+                    // Mensaje de inserción exitosa
+                    MessageBox.Show("El usuario para el empleado que ingresó es: "+ usu);
+
+                LimpiarFormulario();
+            }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Ha ocurrido un error al momento de obtener el usuario..." + ex.Message);
+                    Console.WriteLine(ex.Message);
+                }
+            }
+     
         private void EditarEmpleado()
         {
             if (VerificarValores() == true)
@@ -315,7 +342,7 @@ namespace SistemaDental.MVCCV.Vista
                     MessageBox.Show("¡Datos editados correctamente!");
 
                     LimpiarFormulario();
-                    MostrarEmpleados(true);
+                   
                     btnAgregarUsuario.IsEnabled = true;
                     btnEditar.IsEnabled = true;
                     btnEliminar.IsEnabled = true;
@@ -327,6 +354,8 @@ namespace SistemaDental.MVCCV.Vista
                     MessageBox.Show("Ha ocurrido un error al momento de editar el empleado..." + ex.Message);
                     Console.WriteLine(ex.Message);
                 }
+
+                MostrarEmpleados(true);
             }
         }
 
@@ -346,7 +375,7 @@ namespace SistemaDental.MVCCV.Vista
                     MessageBox.Show("La operación se realizó con exito!");
 
                     LimpiarFormulario();
-                    MostrarEmpleados(true);
+                  
                     btnAgregarUsuario.IsEnabled = true;
                     btnEditar.IsEnabled = true;
                     btnEliminar.IsEnabled = true;
@@ -358,7 +387,7 @@ namespace SistemaDental.MVCCV.Vista
                     MessageBox.Show("Ha ocurrido un error al momento de eliminar el empleado..." + ex.Message);
                     Console.WriteLine(ex.Message);
                 }
-            
+            MostrarEmpleados(true);
         }
 
         private void dgvEmpleado_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -381,6 +410,25 @@ namespace SistemaDental.MVCCV.Vista
             botoneshabilitados(true);
             HabilitarInhabilitarTXT(false);
         }
+
+        private void txtBuscar_TextChanged(object sender, TextChangedEventArgs e)
+        {
+
+            if (txtBuscar.Text == "")
+            {
+                ColectionEmpleados.Filter = null;
+                dgvEmpleado.ItemsSource = ColectionEmpleados;
+            }
+            else
+            {
+                var filtro = new Predicate<object>( item => (((Usuario)item).Id).Contains(txtBuscar.Text));
+                ColectionEmpleados.Filter = filtro;
+                dgvEmpleado.ItemsSource = ColectionEmpleados;
+            }
+        }
+
+
+
     }
 }
 
