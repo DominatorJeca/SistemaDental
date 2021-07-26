@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -20,9 +22,10 @@ namespace SistemaDental.MVCCV.Vista
     /// </summary>
     public partial class CitaVista : UserControl
     {
-       
+        ObservableCollection<ClaseCitas> tratamientos = new ObservableCollection<ClaseCitas>();
         ClaseCitas citas = new ClaseCitas();
         int bandera = 0;
+        int bton = 0;
         private bool Admin;
         private String Nombree;
         public CitaVista()
@@ -30,6 +33,7 @@ namespace SistemaDental.MVCCV.Vista
             InitializeComponent();
             MostrarDatos();
             mostrarCitas();
+
         }
 
         public CitaVista(bool admin, string name)
@@ -40,11 +44,29 @@ namespace SistemaDental.MVCCV.Vista
             Nombree = name;
             Admin = admin;
         }
-
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            ClaseCitas prod = new ClaseCitas();
+            prod.IdTratamiento = Convert.ToInt32(cmbTratamiento.SelectedValue.ToString());
+            citas.mostraridtrtamientos(citas, prod.IdTratamiento);
+            prod.nombreTramientoindividual = citas.nombreTramientoindividual;
+            prod.trtamientoprecio = citas.trtamientoprecio;
+            foreach (ClaseCitas inv in tratamientos)
+                if (inv.IdTratamiento == prod.IdTratamiento)
+                {
+                    MessageBox.Show("Este material ya existe eliminelo e ingreselo nuevamente");
+                    return;
+                }
+            tratamientos.Add(prod);
+            dtg_Tratamientos.ItemsSource = tratamientos;
+            dtg_Tratamientos.SelectedValuePath = "IdTratamiento";
+        }
         private void MostrarDatos()
         {
-            cmbPaciente.ItemsSource = citas.mostrarIdPacientes();
-            cmbPaciente.DisplayMemberPath = "IdPacientes";
+            cmbPaciente.ItemsSource = citas.mostrarPacientes();
+
+
+            cmbPaciente.DisplayMemberPath = "Nombre_Id_paciente";
             cmbPaciente.SelectedValuePath = "IdPacientes";
             cmbEmpleado.ItemsSource = citas.MostrarEmpleado();
             cmbEmpleado.DisplayMemberPath = "NombreDoctor";
@@ -52,16 +74,20 @@ namespace SistemaDental.MVCCV.Vista
             cmbTratamiento.ItemsSource = citas.MostrarTratamiento();
             cmbTratamiento.DisplayMemberPath = "NombreTratamiento";
             cmbTratamiento.SelectedValuePath = "IdTratamiento";
+
         }
 
         private void mostrarCitas()
         {
             dtg_Citas.ItemsSource = citas.MostrarCitas();
             dtg_Citas.SelectedValuePath = "IdCita";
+
         }
 
         private void ObtenerValores()
         {
+           
+
             citas.IdDoctor = cmbEmpleado.SelectedValue.ToString();
             citas.IdPacientes = cmbPaciente.SelectedValue.ToString();
             citas.IdTratamiento = Convert.ToInt32(cmbTratamiento.SelectedValue.ToString());
@@ -81,46 +107,18 @@ namespace SistemaDental.MVCCV.Vista
         /// <param name="e"></param>
         private void btnAgregar_Click(object sender, RoutedEventArgs e)
         {
-            try
-            {
-                if (RevisarDatos())
-                {
-                    ObtenerValores();
 
-                    //Se valida que no haya una cita registrada con detalles iguales
-                    foreach (ClaseCitas citas in dtg_Citas.ItemsSource)
-                    {
-                        if (citas.IdPacientes == cmbPaciente.SelectedValue.ToString() || citas.IdDoctor == cmbEmpleado.SelectedValue.ToString())
-                        {
-                            bandera = 1;
-                        }
-                        else
-                        {
-                            bandera = 0;
-                        }
-                    }
-                    if (bandera == 0)
-                    {
-                        citas.AgendarCita(citas);
-                        MessageBox.Show("Cita agendada con éxito");
-                    }
-                    else
-                    {
-                        MessageBox.Show("Al parecer ya hay una cita agendada con ciertos parámetros iguales");
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Asegurese de ingresar una fecha correcta" + ex);
-            }
-            finally
-            {
-                cmbEmpleado.SelectedValue = null;
-                cmbPaciente.SelectedValue = null;
-                cmbTratamiento.SelectedValue = 0;
-                mostrarCitas();
-            }
+
+            btnGuardar.IsEnabled = true;
+            btnEditar.IsEnabled = false;
+            btnAgregar.IsEnabled = false;
+            btnCancelar.IsEnabled = true;
+            btnelimtratamiento.IsEnabled = true;
+
+            dtg_Citas.IsEnabled = false;
+            bton = 0;
+            encenderbotones();
+
         }
 
         private bool RevisarDatos()
@@ -190,8 +188,10 @@ namespace SistemaDental.MVCCV.Vista
                     btnEditar.IsEnabled = false;
                     btnAgregar.IsEnabled = false;
                     btnCancelar.IsEnabled = true;
-
+                    btnelimtratamiento.IsEnabled = true;
                     dtg_Citas.IsEnabled = false;
+                    bton = 1;
+                    encenderbotones();
                 }
                 else
                 {
@@ -217,45 +217,102 @@ namespace SistemaDental.MVCCV.Vista
         {
             try
             {
-
-
-                obtenerCita();
-                ObtenerValores();
-                //Se valida que no haya una cita registrada con detalles iguales
-                foreach (ClaseCitas citas in dtg_Citas.ItemsSource)
+                if (bton == 1)
                 {
-                    if (citas.IdPacientes == cmbPaciente.SelectedValue.ToString() || citas.IdDoctor == cmbEmpleado.SelectedValue.ToString())
+
+                    obtenerCita();
+                    ObtenerValores();
+                    //Se valida que no haya una cita registrada con detalles iguales
+                    foreach (ClaseCitas citas in dtg_Citas.ItemsSource)
                     {
-                        bandera = 1;
+                        if (citas.IdPacientes == cmbPaciente.SelectedValue.ToString() || citas.IdDoctor == cmbEmpleado.SelectedValue.ToString())
+                        {
+                            bandera = 1;
+                        }
+                        else
+                        {
+                            bandera = 0;
+                        }
+                    }
+                    if (bandera == 0)
+                    {
+                        citas.EditarCita(citas);
+                        citas.eliminardetallecita(citas.IdCita);
+                        foreach (ClaseCitas inv in tratamientos)
+                        {
+
+                            citas.InsertarDetalleCita(citas.IdCita, inv.IdTratamiento, float.Parse(inv.trtamientoprecio));
+                        }
+                        btnGuardar.IsEnabled = false;
+                        btnEditar.IsEnabled = true;
+                        btnAgregar.IsEnabled = true;
+                        btnCancelar.IsEnabled = false;
+                        btnelimtratamiento.IsEnabled = false;
+                        dtg_Citas.IsEnabled = true;
+
+
+                        MessageBox.Show("Exito al editar");
                     }
                     else
                     {
-                        bandera = 0;
+                        MessageBox.Show("Al parecer ya hay una cita agendada con ciertos parámetros iguales");
                     }
-                }
-                if (bandera == 0)
-                {
-                    citas.EditarCita(citas);
-                    MessageBox.Show("Exito al editar");
+
+
                 }
                 else
                 {
-                    MessageBox.Show("Al parecer ya hay una cita agendada con ciertos parámetros iguales");
+                    if (RevisarDatos())
+                    {
+                        ObtenerValores();
+
+                        //Se valida que no haya una cita registrada con detalles iguales
+                        foreach (ClaseCitas citas in dtg_Citas.ItemsSource)
+                        {
+
+                            if (citas.IdPacientes == cmbPaciente.SelectedValue.ToString() || citas.IdDoctor == cmbEmpleado.SelectedValue.ToString())
+                            {
+                                bandera = 1;
+                            }
+                            else
+                            {
+                                bandera = 0;
+                            }
+                        }
+                        if (bandera == 0)
+                        {
+                            citas.AgendarCita(citas);
+                            foreach (ClaseCitas inv in tratamientos)
+                            {
+
+                                citas.InsertarDetalleCita(citas.IdCita, inv.IdTratamiento, float.Parse(inv.trtamientoprecio));
+                            }
+                            MessageBox.Show("Cita agendada con éxito");
+                            btnGuardar.IsEnabled = false;
+                            btnEditar.IsEnabled = true;
+                            btnAgregar.IsEnabled = true;
+                            btnCancelar.IsEnabled = false;
+                            btnelimtratamiento.IsEnabled = false;
+                            dtg_Citas.IsEnabled = true;
+                        }
+                        else
+                        {
+                            MessageBox.Show("Al parecer ya hay una cita agendada con ciertos parámetros iguales");
+                        }
+                    }
+
+
                 }
+
             }
-            catch
+            catch (Exception ex)
             {
-                throw;
+                MessageBox.Show(ex.Message);
             }
             finally
             {
                 mostrarCitas();
-                btnGuardar.IsEnabled = false;
-                btnEditar.IsEnabled = true;
-                btnAgregar.IsEnabled = true;
-                btnCancelar.IsEnabled = false;
-
-                dtg_Citas.IsEnabled = true;
+                encenapagarbotones();
             }
         }
 
@@ -271,6 +328,47 @@ namespace SistemaDental.MVCCV.Vista
 
         private void dtg_Citas_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            int val;
+            if (dtg_Citas.SelectedValue!=null)
+            {
+
+                cmbEmpleado.SelectedValue = ((ClaseCitas)dtg_Citas.SelectedItem).IdEmpleado;
+                cmbPaciente.SelectedValue = ((ClaseCitas)dtg_Citas.SelectedItem).IdPacientes;
+                cdCitas.SelectedDate = ((ClaseCitas)dtg_Citas.SelectedItem).fechaCita;
+                ctTiempo.SelectedTime = ((ClaseCitas)dtg_Citas.SelectedItem).fechaCita;
+                ctTiempo.SelectedTime = ((ClaseCitas)dtg_Citas.SelectedItem).fechaCita;
+                val = ((ClaseCitas)dtg_Citas.SelectedItem).IdCita;
+
+                dtg_Tratamientos.ItemsSource = citas.Mostrartratmientos(val);
+
+                dtg_Tratamientos.SelectedValuePath = "IdCita";
+                int c = 0;
+                tratamientos.Clear();
+                foreach (ClaseCitas tr in dtg_Tratamientos.ItemsSource)
+                {
+                    tratamientos.Add(new ClaseCitas
+                    {
+                        IdTratamiento = tr.IdTratamiento,
+                        nombreTramientoindividual = tr.nombreTramientoindividual.ToString(),
+                        trtamientoprecio = tr.trtamientoprecio.ToString(),
+                        detalleCita = tr.detalleCita,
+                        IdCita = val
+
+
+                    });
+                    if (c == 0)
+                    {
+                        cmbTratamiento.SelectedValue = ((ClaseCitas)tr).IdTratamiento;
+                        c = 1;
+                    }
+                }
+
+            }
+          
+           
+
+           
+
 
         }
 
@@ -290,7 +388,7 @@ namespace SistemaDental.MVCCV.Vista
                     if (dialogResult == MessageBoxResult.Yes)
                     {
                         obtenerCita();
-                        citas.EliminarCita();
+                        citas.EliminarCita(citas);
                     }
                 }
                 else
@@ -311,22 +409,68 @@ namespace SistemaDental.MVCCV.Vista
         private void btnCancelar_Click(object sender, RoutedEventArgs e)
         {
             dtg_Citas.IsEnabled = true;
-            mostrarCitas();
+           
             btnAgregar.IsEnabled = true;
             btnEditar.IsEnabled = true;
-
+            btnGuardar.IsEnabled = false;
             btnCancelar.IsEnabled = false;
+            btnelimtratamiento.IsEnabled = false;
+            encenapagarbotones();
+
+
         }
 
         private void btnRegresar_Click(object sender, RoutedEventArgs e)
         {
-           /* Menu menu = new Menu(Admin, Nombree);
-            menu.Show();
-        */
+            /* Menu menu = new Menu(Admin, Nombree);
+             menu.Show();
+         */
         }
 
         private void ctTiempo_SelectedTimeChanged(object sender, RoutedPropertyChangedEventArgs<DateTime?> e)
         {
+
+        }
+
+        private void dtg_Tratamientos_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
+
+        private void btnelimtratamiento_Click_1(object sender, RoutedEventArgs e)
+        {
+            if (dtg_Tratamientos.SelectedValue != null)
+            {
+                tratamientos.RemoveAt(dtg_Tratamientos.SelectedIndex);
+                 dtg_Tratamientos.ItemsSource = tratamientos;
+            dtg_Tratamientos.SelectedValuePath = "IdTratamiento";
+            }
+            else
+            {
+                MessageBox.Show("Seleccione un tratamiento para eliminarla");
+            }
+
+        }
+
+        public void encenderbotones()
+        {
+            cmbEmpleado.IsEnabled = true;
+            cmbTratamiento.IsEnabled = true;
+            ctTiempo.IsEnabled = true;
+            cdCitas.IsEnabled = true;
+            Agregar_Tratamientos.IsEnabled = true;
+            dtg_Tratamientos.IsEnabled = true;
+        }
+
+        public void encenapagarbotones()
+        {
+            cmbEmpleado.IsEnabled = false;
+            cmbTratamiento.IsEnabled = false;
+            ctTiempo.IsEnabled = false;
+            cdCitas.IsEnabled = false;
+            Agregar_Tratamientos.IsEnabled = false;
+            dtg_Tratamientos.IsEnabled = false;
+
 
         }
     }

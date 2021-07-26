@@ -18,6 +18,7 @@ namespace SistemaDental
         BDConnexion con = new BDConnexion();
         SqlCommand command = new SqlCommand();
         SqlDataReader reader;
+        SqlDataReader reader1;
 
         public int anio { get; set; }
         public int mes { get; set; }
@@ -738,6 +739,7 @@ namespace SistemaDental
             }
             finally
             {
+                reader.Close();
                 command.Connection = con.Close();
             }
         }
@@ -783,8 +785,9 @@ namespace SistemaDental
             }
             finally
             {
-                sqlConnection.Close();
                 reader.Close();
+                sqlConnection.Close();
+               
 
             }
 
@@ -839,23 +842,38 @@ namespace SistemaDental
                 throw;
             }
             finally
+
             {
+                reader.Close();
                 sqlConnection.Close();
             }
         }
 
         public void AgendarCita(ClaseCitas cita)
+           
+		    
+			
+			
+			
         {
             sqlConnection.Open();
             try
             {
-                SqlCommand command = new SqlCommand("IngresoCitas", sqlConnection);
+                SqlCommand command = new SqlCommand("sp_Cita_Insertar", sqlConnection);
+
                 command.CommandType = CommandType.StoredProcedure;
-                command.Parameters.AddWithValue("@idempleado", cita.IdDoctor);
-                command.Parameters.AddWithValue("@idpaciente", cita.IdPacientes);
-                command.Parameters.AddWithValue("@fecha", cita.fechaCita);
-                command.Parameters.AddWithValue("@idtratamiento", cita.IdTratamiento);
+                command.Parameters.AddWithValue("@EmpleadoID", cita.IdDoctor);
+                command.Parameters.AddWithValue("@PacienteID", cita.IdPacientes);
+                command.Parameters.AddWithValue("@FechaCita", cita.fechaCita);
+                command.Parameters.AddWithValue("@Estado", 1);
+                command.Parameters.AddWithValue("@Descuento", 0);
                 command.ExecuteNonQuery();
+                SqlDataReader reader = command.ExecuteReader();
+
+              reader.Read();
+               cita.IdCita= Convert.ToInt32(reader[0]) ;
+                reader.Close();
+
             }
             catch
             {
@@ -863,6 +881,8 @@ namespace SistemaDental
             }
             finally
             {
+                reader.Close();
+                command.Parameters.Clear();
                 sqlConnection.Close();
             }
         }
@@ -873,13 +893,14 @@ namespace SistemaDental
 
             try
             {
-                SqlCommand command = new SqlCommand("EditarCitas", sqlConnection);
+                SqlCommand command = new SqlCommand("sp_Cita_Actualizar", sqlConnection);
                 command.CommandType = CommandType.StoredProcedure;
-                command.Parameters.AddWithValue("@idcita", cita.IdCita);
-                command.Parameters.AddWithValue("@idempleado", cita.IdDoctor);
-                command.Parameters.AddWithValue("@idpaciente", cita.IdPacientes);
-                command.Parameters.AddWithValue("@fecha", cita.fechaCita);
-                command.Parameters.AddWithValue("@idtratamiento", cita.IdTratamiento);
+                command.Parameters.AddWithValue("@CitaID", cita.IdCita);
+                command.Parameters.AddWithValue("@EmpleadoID", cita.IdDoctor);
+                command.Parameters.AddWithValue("@PacienteID", cita.IdPacientes);
+                command.Parameters.AddWithValue("@FechaCita", cita.fechaCita);
+                command.Parameters.AddWithValue("@Estado", 1);
+                command.Parameters.AddWithValue("@Descuento",0);
                 command.ExecuteNonQuery();
             }
             catch
@@ -892,7 +913,62 @@ namespace SistemaDental
             }
         }
 
-        public List<ClaseCitas> MostrarCitas()
+        public void InsertarDetalleCita(int IdTratamiento, float trtamientoprecio, int cita)
+        {
+            try
+            {
+                command.Connection = con.Open();
+                
+                command.CommandText = "sp_DetalleCita_Insertar";
+                command.CommandType = CommandType.StoredProcedure;
+                command.Parameters.AddWithValue("@CitaID", cita);
+                command.Parameters.AddWithValue("@TratamientoID", IdTratamiento);
+                command.Parameters.AddWithValue("@PrecioCobrado", trtamientoprecio);        
+            
+                command.ExecuteNonQuery();
+
+            }
+            catch (Exception E)
+            {
+                throw E;
+            }
+            finally
+            {
+                reader.Close();
+                command.Parameters.Clear();
+                command.Connection = con.Close();
+            }
+        }
+
+       
+
+
+        public void eliminardetallecita(int idcita)
+        {
+
+            try
+            {
+                command.Connection = con.Open();
+                command.CommandText = "sp_Detalle_cita_delete";
+                command.CommandType = CommandType.StoredProcedure;
+                command.Parameters.AddWithValue("@Citaid", idcita);
+                command.ExecuteNonQuery();
+
+            }
+            catch (Exception E)
+            {
+                throw E;
+            }
+            finally
+            {
+                reader.Close();
+                command.Parameters.Clear();
+                command.Connection = con.Close();
+            }
+
+        }
+
+            public List<ClaseCitas> MostrarCitas()
         {
             sqlConnection.Open();
             try
@@ -900,9 +976,9 @@ namespace SistemaDental
                 SqlCommand command = new SqlCommand("sp_Cita_Mostrar", sqlConnection);
                 command.CommandType = CommandType.StoredProcedure;
                 SqlDataReader reader = command.ExecuteReader();
-
+             
                 List<ClaseCitas> citas = new List<ClaseCitas>();
-
+           
                 while (reader.Read())
                 {
                     citas.Add(new ClaseCitas { IdCita = Convert.ToInt32(reader["CitaID"].ToString()), IdEmpleado = reader["EmpleadoID"].ToString(),
@@ -922,9 +998,49 @@ namespace SistemaDental
             }
             finally
             {
+                reader.Close();
+                command.Parameters.Clear();
                 sqlConnection.Close();
             }
         }
+        public List<ClaseCitas> Mostrartratmientos(int cita)
+        {
+      
+            sqlConnection.Open();
+            try
+            {
+                SqlCommand command = new SqlCommand("MostrarTratamientos", sqlConnection);
+                command.CommandType = CommandType.StoredProcedure;
+                List<ClaseCitas> citas = new List<ClaseCitas>();
+                command.Parameters.AddWithValue("@citaId", cita );
+                command.ExecuteNonQuery();
+                SqlDataReader reader = command.ExecuteReader();
+                while (reader.Read())
+                {
+                    citas.Add(new ClaseCitas
+                    {
+                        IdTratamiento = Convert.ToInt32(reader["TratamientoID"]),
+                        nombreTramientoindividual = reader["Nombre"].ToString(),
+                        trtamientoprecio = reader["PrecioCobrado"].ToString(),
+                        detalleCita = Convert.ToInt32(reader["DetalleCitaID"].ToString())
+                    });
+                }
+                reader.Close();
+                return citas;
+            }
+            catch
+            {
+                throw;
+            }
+            finally
+            {
+                reader.Close();
+                command.Parameters.Clear();
+                sqlConnection.Close();
+            }
+        }
+
+
 
         public void EliminarCita(ClaseCitas citas)
         {
@@ -946,10 +1062,70 @@ namespace SistemaDental
             }
         }
 
+        public void mostraridtrtamientos(ClaseCitas citas,int idtratamiento)
+        {
+            command.Connection = con.Open();
+
+            try
+            {
+                command.CommandText="sp_Buscaidtratamiento";
+                command.CommandType = CommandType.StoredProcedure;
+                command.Parameters.AddWithValue("@idtratamiento", idtratamiento);
+                command.ExecuteNonQuery();
+                reader1 = command.ExecuteReader();
+                reader1.Read();
+                citas.trtamientoprecio= reader1["PrecioSugerido"].ToString();
+                citas.nombreTramientoindividual = reader1["Nombre"].ToString();
+               
+            }
+            catch
+            {
+                throw;
+            }
+            finally
+            {
+                reader1.Close();
+                command.Parameters.Clear();
+                command.Connection = con.Close();
+            }
+
+
+        }
 
         #endregion
 
+        public List<ClaseCitas> mostrarPacientes()
+        {
+            sqlConnection.Open();
+            try
+            {
 
+                SqlCommand command = new SqlCommand("sp_Pacientes_Mostrar", sqlConnection);
+                command.CommandType = CommandType.StoredProcedure;
+                reader = command.ExecuteReader();
+
+                List<ClaseCitas> pacientes = new List<ClaseCitas>();
+
+
+                while (reader.Read())
+                {
+
+                    pacientes.Add(new ClaseCitas { IdPacientes = reader["PacienteID"].ToString(), NombrePaciente = reader["Nombre"].ToString(), Nombre_Id_paciente = reader["PacienteID"].ToString() +", "+ reader["Nombre"].ToString() });
+                }
+
+                return pacientes;
+            }
+            catch
+            {
+                throw;
+            }
+            finally
+            {
+                sqlConnection.Close();
+               
+            }
+
+        }
 
 
     }
