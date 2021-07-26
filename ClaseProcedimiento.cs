@@ -185,7 +185,7 @@ namespace SistemaDental
             }
         }
 
-        public void EditarUsuario(Usuario usuario)
+        public void EditarEmpleado(Usuario usuario)
         {
          
 
