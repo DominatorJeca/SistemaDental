@@ -282,6 +282,9 @@
     <Compile Include="MVCCV\Vista\PacientesVistaControlador.xaml.cs">
       <DependentUpon>PacientesVistaControlador.xaml</DependentUpon>
     </Compile>
+    <Compile Include="MVCCV\Vista\RealizarCitaVista.xaml.cs">
+      <DependentUpon>RealizarCitaVista.xaml</DependentUpon>
+    </Compile>
     <Compile Include="MVCCV\Vista\ReestablecerContrasenia.xaml.cs">
       <DependentUpon>ReestablecerContrasenia.xaml</DependentUpon>
     </Compile>
@@ -371,6 +374,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="MVCCV\Vista\PacientesVistaControlador.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MVCCV\Vista\RealizarCitaVista.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

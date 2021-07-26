@@ -4,7 +4,7 @@
              xmlns:local="clr-namespace:SistemaDental"
                  xmlns:viewModel="clr-namespace:SistemaDental.MVCCV.VistaControlador"
              xmlns:view="clr-namespace:SistemaDental.MVCCV.Vista"
-             StartupUri="/MVCCV/Vista/Menu.xaml">
+             StartupUri="/MVCCV/Vista/RealizarCitaVista.xaml">
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
@@ -14,9 +14,7 @@
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Accent/MaterialDesignColor.Indigo.xaml" />
 
             </ResourceDictionary.MergedDictionaries>
-
-   
-          
+            
             <DataTemplate DataType="{x:Type viewModel:CasaVistaControlador}">
                 <view:MenuInicioVista/>
             </DataTemplate>

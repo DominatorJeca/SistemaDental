@@ -22,6 +22,9 @@ namespace SistemaDental
         public string NombreMaterial { get; set; }
         public int Cantidad { get; set; }
         public string fecha { get; set; }
+
+        public float precioTrat { get; set; }
+        public List<ClaseInventario> Materiales { get; set; }
        
         public ClaseTratamiento() { }
 
