@@ -865,7 +865,7 @@ namespace SistemaDental
                 command.Parameters.AddWithValue("@EmpleadoID", cita.IdDoctor);
                 command.Parameters.AddWithValue("@PacienteID", cita.IdPacientes);
                 command.Parameters.AddWithValue("@FechaCita", cita.fechaCita);
-                command.Parameters.AddWithValue("@Estado", 1);
+                command.Parameters.AddWithValue("@Estado", 0);
                 command.Parameters.AddWithValue("@Descuento", 0);
                 command.ExecuteNonQuery();
                 SqlDataReader reader = command.ExecuteReader();
@@ -899,7 +899,7 @@ namespace SistemaDental
                 command.Parameters.AddWithValue("@EmpleadoID", cita.IdDoctor);
                 command.Parameters.AddWithValue("@PacienteID", cita.IdPacientes);
                 command.Parameters.AddWithValue("@FechaCita", cita.fechaCita);
-                command.Parameters.AddWithValue("@Estado", 1);
+                command.Parameters.AddWithValue("@Estado", 0);
                 command.Parameters.AddWithValue("@Descuento",0);
                 command.ExecuteNonQuery();
             }
