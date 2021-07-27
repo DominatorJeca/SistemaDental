@@ -48,7 +48,7 @@ namespace SistemaDental.MVCCV.Vista
         public void MostrarCaja()
         {
 
-           /* dgvCaja.ItemsSource = proc.traerTransaccionesCitas();*/
+           /*dgvCaja.ItemsSource = proc.traerTransaccionesCitas();*/
 
         }
 

@@ -250,7 +250,7 @@ namespace SistemaDental
                         usuario.Nombre = Convert.ToString(reader["Nombre"]);
                         usuario.Apellido = Convert.ToString(reader["Apellido"]);
                         usuario.Administrador = Convert.ToBoolean(reader["administrador"]);
-                        usuario.Id = Convert.ToString(reader[0]);
+                        usuario.Ide = Convert.ToInt32(reader[0].ToString());
                     }
                 }
 
@@ -1128,7 +1128,7 @@ namespace SistemaDental
                     transaccion.tratamientos = Convert.ToString(reader["Tratamientos"]);
                     cita.NombreDoctor = Convert.ToString(reader["Doctor"]);
                     transaccion.UltimoAbono =(reader["Ultima Fecha Abonada"].ToString()=="")?  "No se ha hecho ningun pago": reader["Ultima Fecha Abonada"].ToString() ;
-                    transaccion.Cobrado = float.Parse(reader["Cantidad cobrada"].ToString());
+                    transaccion.Cobrado = (reader["Cantidad cobrada"].ToString() == "") ? float.Parse(0.0+""):float.Parse(reader["Cantidad cobrada"].ToString());
                     cita.fechaCita = DateTime.Parse(reader["FechaCita"].ToString());
                     cita.Observaciones = reader["Observaciones"].ToString();
 
