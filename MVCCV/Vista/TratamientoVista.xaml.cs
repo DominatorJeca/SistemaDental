@@ -178,7 +178,7 @@ namespace SistemaDental.MVCCV.Vista
             btnGuardar.IsEnabled = true;
             btnEditar.IsEnabled = true;
             btnCancelar.IsEnabled = false;
-
+            Cleaner();
             isUpdate = false;
         }
 
@@ -207,12 +207,15 @@ namespace SistemaDental.MVCCV.Vista
 
         private void dg_tratamientos_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            int id;
-
-            DataRowView dataRow = (DataRowView)dg_tratamientos.SelectedItem;
-            if (dataRow != null)
+            if(isUpdate)
             {
-                id = int.Parse(dataRow[0].ToString());
+                DataRowView dataRow = (DataRowView)dg_tratamientos.SelectedItem;
+                if (dataRow != null)
+                {
+                    gTratamientoID = int.Parse(dataRow[0].ToString());
+                    ObtenerTratamientoDatos();
+                    ObtenerInventarioTratamientos(gTratamientoID);
+                }
             }
         }
 
