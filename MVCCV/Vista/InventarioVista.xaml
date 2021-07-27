@@ -18,8 +18,8 @@
                 <DataGridTextColumn Header="Cantidad" Binding="{Binding CantidadUsada}" Width="150*" IsReadOnly="True"/>
             </DataGrid.Columns>
         </DataGrid>
-        <TextBox IsEnabled="False" Text="{Binding ElementName=dgv_Materiales, Path=SelectedItem.NombreMaterial}" Name="txtMaterialInventario"   Margin="557,176,37,228" materialDesign:HintAssist.Hint="Material" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontFamily="Bahnschrift" FontSize="18" Background="#7FFFFFFF" />
-        <TextBox IsEnabled="False" Text="{Binding ElementName=dgv_Materiales, Path=SelectedItem.Cantidad}" Name="txtCantidadInventario" Margin="557,243,37,174" materialDesign:HintAssist.Hint="Cantidad" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontFamily="Bahnschrift" FontSize="18" Background="#7FFFFFFF"/>
+        <TextBox IsEnabled="False" Text="{Binding ElementName=dgv_Materiales, Path=SelectedItem.NombreMaterial}" Name="txtMaterialInventario"   Margin="540,86,53,317" materialDesign:HintAssist.Hint="Material" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontFamily="Bahnschrift" FontSize="18" Background="#7FFFFFFF" />
+        <TextBox IsEnabled="False" Text="{Binding ElementName=dgv_Materiales, Path=SelectedItem.Cantidad}" Name="txtCantidadInventario" Margin="540,154,53,263" materialDesign:HintAssist.Hint="Cantidad" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontFamily="Bahnschrift" FontSize="18" Background="#7FFFFFFF"/>
         <DataGrid HorizontalAlignment="Left" Height="145" Margin="29,79,0,0" VerticalAlignment="Top" Width="450" Background="#FF056676" x:Name="dgv_Materiales" HorizontalContentAlignment="Center" SelectionChanged="dgv_Materiales_SelectionChanged_1" IsReadOnly="True" AutoGenerateColumns="True">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Código" Binding="{Binding IdMaterial}" Width="150"></DataGridTextColumn>
@@ -27,6 +27,9 @@
                 <DataGridTextColumn Header="Cantidad" Binding="{Binding Cantidad}" Width="150"></DataGridTextColumn>
             </DataGrid.Columns>
         </DataGrid>
+        <Button x:Name="btnActualizar" Content="Actualizar" HorizontalAlignment="Left" Margin="540,288,0,0" VerticalAlignment="Top" Width="300" FontFamily="Bahnschrift" FontSize="16" Background="#FF056676" BorderBrush="{x:Null}" RenderTransformOrigin="-0.25,-0.219" Click="btnActualizar_Click"/>
+        <Button x:Name="btnCancelar" IsEnabled="False" Content="Cancelar" HorizontalAlignment="Left" Margin="540,325,0,0" VerticalAlignment="Top" Width="300" FontFamily="Bahnschrift" FontSize="16" Background="#FF056676" BorderBrush="{x:Null}" RenderTransformOrigin="-0.25,-0.219" Click="btnCancelar_Click"/>
+        <Button x:Name="btnGuardar" IsEnabled="False" Content="Guardar" HorizontalAlignment="Left" Margin="540,362,0,0" VerticalAlignment="Top" Width="300" FontFamily="Bahnschrift" FontSize="16" Background="#FF056676" BorderBrush="{x:Null}" RenderTransformOrigin="-0.25,-0.219" Click="btnGuardar_Click"/>
     </Grid>
 
 </UserControl>

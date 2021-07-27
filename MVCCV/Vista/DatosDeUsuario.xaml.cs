@@ -70,7 +70,11 @@ namespace SistemaDental.MVCCV.Vista
             ObtenerValores();
             procedimiento.EditarUsuario(usuarios);
             HabilitarBotones(false, Visibility.Collapsed);
+            btnActualizarUsuario.Visibility = Visibility.Visible;
             LlenadoDeInformacion();
+            txtNuevaContra.Password = "";
+            txtNuevaContra_Copy.Password = "";
+            txtContraseniaActual.Password = "";
         }
 
         private void LlenadoDeInformacion()

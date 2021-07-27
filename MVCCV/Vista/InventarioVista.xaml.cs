@@ -23,6 +23,7 @@ namespace SistemaDental.MVCCV.Vista
         ClaseInventario inventario = new ClaseInventario();
         ClaseProcedimiento procedimiento = new ClaseProcedimiento();
         
+        
         public InventarioVista()
         {
             InitializeComponent();
@@ -46,5 +47,40 @@ namespace SistemaDental.MVCCV.Vista
 
         }
 
+        private void HabilitarEdicion(bool habilitar)
+        {
+            txtMaterialInventario.IsEnabled = habilitar;
+            btnCancelar.IsEnabled = habilitar;
+            btnGuardar.IsEnabled = habilitar;
+        }
+
+        private void ObtenerValores()
+        {
+            inventario.IdMaterial = Convert.ToInt32(dgv_Materiales.SelectedValue);
+            inventario.NombreMaterial = txtMaterialInventario.Text;
+        }
+
+        private void btnActualizar_Click(object sender, RoutedEventArgs e)
+        {
+            HabilitarEdicion(true);
+            btnActualizar.IsEnabled = false;
+            txtMaterialInventario.IsEnabled = true;
+        }
+
+        private void btnGuardar_Click(object sender, RoutedEventArgs e)
+        {
+            ObtenerValores();
+            procedimiento.EditarNombreMaterial(inventario);
+            MostrarMaterial();
+            HabilitarEdicion(false);
+            btnActualizar.IsEnabled = true;
+        }
+
+        private void btnCancelar_Click(object sender, RoutedEventArgs e)
+        {
+            MostrarMaterial();
+            HabilitarEdicion(false);
+            btnActualizar.IsEnabled = true;
+        }
     }
 }

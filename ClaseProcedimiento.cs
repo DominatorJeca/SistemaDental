@@ -479,6 +479,29 @@ namespace SistemaDental
             }
         }
 
+        public void EditarNombreMaterial(ClaseInventario inventario)
+        {
+            try
+            {
+                command.Connection = con.Open();
+                //crear el comando SQL
+                command.CommandText = "InventarioActualizar";
+                command.Parameters.AddWithValue("@nombre", inventario.NombreMaterial);
+                command.Parameters.AddWithValue("@InventarioId", inventario.IdMaterial);
+                command.CommandType = CommandType.StoredProcedure;
+                command.ExecuteNonQuery();
+            }
+            catch (Exception E)
+            {
+                MessageBox.Show("Revise si el material ya existe" + E);
+            }
+            finally
+            {
+                command.Parameters.Clear();
+                command.Connection = con.Close();
+            }
+        }
+
         public int InsertarCompra(int empleadoId)
         {
             try
