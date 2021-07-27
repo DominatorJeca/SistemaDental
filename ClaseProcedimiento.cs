@@ -18,7 +18,7 @@ namespace SistemaDental
         BDConnexion con = new BDConnexion();
         SqlCommand command = new SqlCommand();
         SqlDataReader reader;
-        SqlDataReader reader1;
+   
 
         public int anio { get; set; }
         public int mes { get; set; }
@@ -1042,14 +1042,14 @@ namespace SistemaDental
 
 
 
-        public void EliminarCita(ClaseCitas citas)
+        public void EliminarCita(int citas)
         {
             sqlConnection.Open();
             try
             {
-                SqlCommand command = new SqlCommand("EliminarCitas", sqlConnection);
+                SqlCommand command = new SqlCommand("sp_cita_eliminar", sqlConnection);
                 command.CommandType = CommandType.StoredProcedure;
-                command.Parameters.AddWithValue("@idcita", citas.IdCita);
+                command.Parameters.AddWithValue("@idcita", citas);
                 command.ExecuteNonQuery();
             }
             catch
@@ -1072,11 +1072,11 @@ namespace SistemaDental
                 command.CommandType = CommandType.StoredProcedure;
                 command.Parameters.AddWithValue("@idtratamiento", idtratamiento);
                 command.ExecuteNonQuery();
-                reader1 = command.ExecuteReader();
+                SqlDataReader   reader1 = command.ExecuteReader();
                 reader1.Read();
                 citas.trtamientoprecio= reader1["PrecioSugerido"].ToString();
                 citas.nombreTramientoindividual = reader1["Nombre"].ToString();
-               
+                reader1.Close();
             }
             catch
             {
@@ -1084,7 +1084,7 @@ namespace SistemaDental
             }
             finally
             {
-                reader1.Close();
+               
                 command.Parameters.Clear();
                 command.Connection = con.Close();
             }

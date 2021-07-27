@@ -77,7 +77,7 @@ namespace SistemaDental
         }
 
 
-        public void EliminarCita(ClaseCitas cita)
+        public void EliminarCita(int cita)
         {
             proc.EliminarCita(cita);
         }
