@@ -25,7 +25,10 @@
 
             </DataTemplate>
             <DataTemplate DataType="{x:Type viewModel:TratamientosvistaControlador}">
-
+                <view:TratamientoVista/>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type viewModel:ManejarusuariovistaControlador}">
+                <view:VerPacienVista/>
             </DataTemplate>
 
             <DataTemplate DataType="{x:Type viewModel:Pacientesvistacontrolador}">

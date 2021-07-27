@@ -972,8 +972,6 @@ namespace SistemaDental
         {
             try
             {
-
-
                 command.Connection = con.Open();
                 command.CommandText = "NombreEmpleadoConcat";
                 command.CommandType = CommandType.StoredProcedure;
@@ -1542,6 +1540,251 @@ namespace SistemaDental
 
 
 
+
+        public List<ClasePaciente> ObtenerPacientesDatos()
+        {
+            try
+            {
+                command.Connection = con.Open();
+                command.CommandText = "sp_Pacientes_Mostrar";
+                command.CommandType = CommandType.StoredProcedure;
+                reader = command.ExecuteReader();
+
+                List<ClasePaciente> TestList = new List<ClasePaciente>();
+                ClasePaciente paciente = null;
+
+                while (reader.Read())
+                {
+                    paciente = new ClasePaciente();    
+                    paciente.IdHistorial = int.Parse(reader["PacienteID"].ToString());
+                    paciente.NombrePaciente = reader["Nombre"].ToString();
+                    TestList.Add(paciente);
+                }
+
+                return TestList;
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+            finally
+            {
+                command.Parameters.Clear();
+                command.Connection = con.Close();
+            }
+        }
+
+        public DataTable ObtenerTratamientosDatos()
+        {
+            DataTable dt = new DataTable();
+            try
+            {
+                command.Connection = con.Open();
+                command.CommandText = "sp_Tratamiento_Mostrar";
+                command.CommandType = CommandType.StoredProcedure;
+                command.ExecuteNonQuery();
+                SqlDataAdapter dataAdapter = new SqlDataAdapter(command);
+                dataAdapter.Fill(dt);
+
+                return dt;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                command.Parameters.Clear();
+                command.Connection = con.Close();
+            }
+        }
+
+        public DataTable ObtenerMaterialesDatos()
+        {
+            DataTable dt = new DataTable();
+            try
+            {
+                command.Connection = con.Open();
+                command.CommandText = "MostrarInventario";
+                command.CommandType = CommandType.StoredProcedure;
+                command.ExecuteNonQuery();
+                SqlDataAdapter dataAdapter = new SqlDataAdapter(command);
+                dataAdapter.Fill(dt);
+
+                return dt;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                command.Parameters.Clear();
+                command.Connection = con.Close();
+            }
+        }
+
+        public int InsertarTratamiento(ClaseTratamiento trat)
+        {
+            int id;
+            try
+            {
+                command.Connection = con.Open();
+                command.CommandText = "sp_Tratamiento_Insertar";
+                command.CommandType = CommandType.StoredProcedure;
+
+                command.Parameters.AddWithValue("@Nombre", SqlDbType.VarChar).Value = trat.TratamientoNombre;
+                command.Parameters.AddWithValue("@PrecioSugerido", SqlDbType.Money).Value = trat.precioSugerido;
+                command.Parameters.AddWithValue("@Estado", SqlDbType.Bit).Value = trat.Estado;
+                command.Parameters.AddWithValue("@MasUno", SqlDbType.Bit).Value = trat.masUno;
+
+                command.Parameters.Add("@TratamientoID", SqlDbType.Int);
+                command.Parameters["@TratamientoID"].Direction = ParameterDirection.Output;
+
+                command.ExecuteNonQuery();
+
+                id = int.Parse(command.Parameters["@TratamientoID"].Value.ToString());
+
+                return id;
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+            finally
+            {
+                command.Parameters.Clear();
+                command.Connection = con.Close();
+            }
+        }
+
+        public void InsertarTratamientoDetalle(int TratamientoID, int InventarioID, int cantidad)
+        {
+            try
+            {
+                command.Connection = con.Open();
+                command.CommandText = "[dbo].[sp_InventarioTratamiento_Insertar]";
+                command.CommandType = CommandType.StoredProcedure;
+
+                command.Parameters.AddWithValue("@TratamientoID", SqlDbType.Int).Value = TratamientoID;
+                command.Parameters.AddWithValue("@InventarioID", SqlDbType.Int).Value = InventarioID;
+                command.Parameters.AddWithValue("@CantidadUsada", SqlDbType.Int).Value = cantidad;
+
+                command.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+            finally
+            {
+                command.Parameters.Clear();
+                command.Connection = con.Close();
+            }
+        }
+
+        public DataTable BuscarTratamiento (int TratamientoID)
+        {
+            DataTable dt = new DataTable();
+            try
+            {
+                command.Connection = con.Open();
+                command.CommandText = "sp_Tratamiento_Buscar";
+                command.CommandType = CommandType.StoredProcedure;
+                command.Parameters.AddWithValue("@TratamientoID", SqlDbType.Int).Value = TratamientoID;
+                command.ExecuteNonQuery();
+                SqlDataAdapter dataAdapter = new SqlDataAdapter(command);
+                dataAdapter.Fill(dt);
+
+                return dt;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                command.Parameters.Clear();
+                command.Connection = con.Close();
+            }
+        }
+
+        public DataTable BuscarInventarioTratamiento(int TratamientoID)
+        {
+            DataTable dt = new DataTable();
+            try
+            {
+                command.Connection = con.Open();
+                command.CommandText = "[dbo].[sp_InventarioTratamiento_Buscar]";
+                command.CommandType = CommandType.StoredProcedure;
+                command.Parameters.AddWithValue("@TratamientoID", SqlDbType.Int).Value = TratamientoID;
+                command.ExecuteNonQuery();
+                SqlDataAdapter dataAdapter = new SqlDataAdapter(command);
+                dataAdapter.Fill(dt);
+
+                return dt;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                command.Parameters.Clear();
+                command.Connection = con.Close();
+            }
+        }
+
+        public void EliminarInventarioTratamiento(int TratamientoID)
+        {
+            try
+            {
+                command.Connection = con.Open();
+                command.CommandText = "[dbo].[sp_InventarioTratamiento_Eliminar]";
+                command.CommandType = CommandType.StoredProcedure;
+                command.Parameters.AddWithValue("@TratamientoID", SqlDbType.Int).Value = TratamientoID;
+                command.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                command.Parameters.Clear();
+                command.Connection = con.Close();
+            }
+        }
+
+        public void ActualizarTratamiento(ClaseTratamiento trat)
+        {
+            try
+            {
+                command.Connection = con.Open();
+                command.CommandText = "sp_Tratamiento_Actualizar";
+                command.CommandType = CommandType.StoredProcedure;
+
+                command.Parameters.AddWithValue("@TratamientoID", SqlDbType.Int).Value = trat.IdTratamiento;
+                command.Parameters.AddWithValue("@Nombre", SqlDbType.VarChar).Value = trat.TratamientoNombre;
+                command.Parameters.AddWithValue("@PrecioSugerido", SqlDbType.Money).Value = trat.precioSugerido;
+                command.Parameters.AddWithValue("@Estado", SqlDbType.Bit).Value = trat.Estado;
+                command.Parameters.AddWithValue("@MasUno", SqlDbType.Bit).Value = trat.masUno;
+
+                command.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+            finally
+            {
+                command.Parameters.Clear();
+                command.Connection = con.Close();
+            }
+        }
 
     }
 }
