@@ -174,7 +174,7 @@ namespace SistemaDental.MVCCV.Vista
         private void PreviewTextInputOnlyLetters(object sender, TextCompositionEventArgs e)
         {
 
-            validar.SoloLetras(e);
+            
 
         }
 
@@ -182,7 +182,7 @@ namespace SistemaDental.MVCCV.Vista
         private void PreviewTextInputOnlyNumbers(object sender, TextCompositionEventArgs e)
         {
 
-            validar.SoloNumeros(e);
+            
         }
 
 

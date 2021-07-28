@@ -251,6 +251,10 @@ namespace SistemaDental
         {
 
         }
-      
+
+        private void txtNombre_TextChanged(object sender, TextChangedEventArgs e)
+        {
+
+        }
     }
 }

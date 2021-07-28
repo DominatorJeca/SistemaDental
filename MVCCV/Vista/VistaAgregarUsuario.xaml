@@ -34,9 +34,9 @@
                 <TextBox  x:Name="txtAgregarNombre"  Margin="0,0,0,0"  materialDesign:HintAssist.Hint="Nombre" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontFamily="Bahnschrift" FontSize="12" Background="#7FFFFFFF"/>
                 <TextBox x:Name="txtAgregarApellido" Margin="0,5,0,0" materialDesign:HintAssist.Hint="Apellido" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontFamily="Bahnschrift" FontSize="12" Background="#7FFFFFFF"/>
                 <TextBox x:Name="txtAgregarTelefono" Margin="0,5,0,0" materialDesign:HintAssist.Hint="Telefóno" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontFamily="Bahnschrift" FontSize="12" Background="#7FFFFFFF"
-                 PreviewTextInput="txtAgregarTelefono_PreviewTextInput" MaxLength="15"/>
+                  MaxLength="15"/>
                 <TextBox x:Name="txtAgregarIdentidad" Margin="0,15,0,0" materialDesign:HintAssist.Hint="Identidad" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontFamily="Bahnschrift" FontSize="12" Background="#7FFFFFFF"
-                 PreviewTextInput="txtAgregarIdentidad_PreviewTextInput"   MaxLength="13"/>
+                    MaxLength="13"/>
                 <Grid  Margin="0,15,0,0">
                     <Label Content="Puesto" HorizontalAlignment="Left"  VerticalAlignment="Top" FontSize="12" FontFamily="Bahnschrift"/>
                     <ComboBox Name="cmbPuesto" HorizontalAlignment="Right"  VerticalAlignment="Top" Width="120"/>
