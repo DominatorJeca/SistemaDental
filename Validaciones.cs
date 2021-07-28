@@ -64,7 +64,7 @@ namespace SistemaDental
             }
         }
 
-        
+
         public bool VerificarCampos(UserControl window)
         {
             bool band = true;
@@ -76,10 +76,10 @@ namespace SistemaDental
 
             foreach(var tb in FindVisualChildren<ComboBox>(window))
             {
-                if (tb.SelectedValue.ToString().Replace(" ", "").Equals("") && tb.Name != "PART_EditableTextBox" && tb.Name != "PART_TextBox")
+                if (tb.SelectedValue == null)
                     band = false;
             }
-            
+
 
             foreach (var tb in FindVisualChildren<RadioButton>(window))
             {
@@ -115,7 +115,7 @@ namespace SistemaDental
             if (cantidad <= 0)
             {
                 var = false;
-               
+
             }
             return var;
         }
@@ -130,7 +130,7 @@ namespace SistemaDental
             return var;
 
         }
-       
+
         public bool VerificarNumero(string numero)
         {
             bool siono = false;
@@ -154,6 +154,6 @@ namespace SistemaDental
 
             return siono;
         }
-       
+
     }
 }
