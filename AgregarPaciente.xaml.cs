@@ -25,7 +25,7 @@ namespace SistemaDental
     /// </summary>
     public partial class AgregarPaciente : Window
     {
-
+        Validaciones validaciones = new Validaciones();
         bool Admin;
         String Nombree;
 
@@ -39,7 +39,7 @@ namespace SistemaDental
             InitializeComponent();
 
         }
-
+        Validaciones validar = new Validaciones();
         public AgregarPaciente(bool admin, string name)
         {
 
@@ -61,9 +61,12 @@ namespace SistemaDental
         {
             paciente.NombrePaciente = txtAgregarNombre.Text;
             paciente.ApellidoPaciente = txtAgregarApellido.Text;
-            paciente.FechaNac = Convert.ToDateTime(datePicker1.Text);
-            paciente.Telefono = txtAgregarTelefono.Text;
-            paciente.Id_paciente = txtAgregarIdentidad.Text;
+            if (validaciones.VerificarFecha(Convert.ToDateTime(datePicker1.Text)))
+                paciente.FechaNac = Convert.ToDateTime(datePicker1.Text);
+            if(validaciones.VerificarNumero(txtAgregarTelefono.Text))
+                paciente.Telefono = txtAgregarTelefono.Text;
+            if(validaciones.VerificarIdentidad(txtAgregarIdentidad.Text))
+                paciente.Id_paciente = txtAgregarIdentidad.Text;
             if (rbFemenino.IsChecked == true)
             {
                 paciente.Genero = "Femenino";
@@ -116,26 +119,22 @@ namespace SistemaDental
             rbMasculino.IsChecked = false;
         }
 
-        private void txtAgregarNombre_TextChanged(object sender, TextChangedEventArgs e)
+     
+
+        private void PreviewTextInputOnlyLetters(object sender, TextCompositionEventArgs e)
         {
-            Regex reg = new Regex("[0-9]");
-            bool b = reg.IsMatch(txtAgregarNombre.Text);
-            if (b == true)
-            {
-                MessageBox.Show("Ingrese solamente caracteres");
-                txtAgregarNombre.Text = "";
-            }
+            
+
+            validar.SoloLetras(e);
+
         }
 
-        private void txtAgregarApellido_TextChanged(object sender, TextChangedEventArgs e)
+
+        private void PreviewTextInputOnlyNumbers(object sender, TextCompositionEventArgs e)
         {
-            Regex reg = new Regex("[0-9]");
-            bool b = reg.IsMatch(txtAgregarApellido.Text);
-            if (b == true)
-            {
-                MessageBox.Show("Ingrese solamente caracteres");
-                txtAgregarApellido.Text = "";
-            }
+            
+
+            validar.SoloNumeros(e);
         }
 
         private void AddPaciente_Closed(object sender, EventArgs e)

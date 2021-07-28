@@ -73,7 +73,7 @@ namespace SistemaDental.MVCCV.Vista
             usuario.Correo = Convert.ToString(txtAgregarCorreo.Text);
             usuario.Puesto = Convert.ToInt32(cmbPuesto.SelectedValue);
             usuario.Genero = ((ComboBoxItem)cmbSexo.SelectedItem).Content.ToString();
-            usuario.Contraseña = Convert.ToString(txtAgregarContra.Password);
+            usuario.Contraseña = txtAgregarContra.Password;
             usuario.Estado = true;
             usuario.Administrador = false;
         }
@@ -83,7 +83,7 @@ namespace SistemaDental.MVCCV.Vista
         /// Verifica que los valores de los textbox y combobox no esten vacios
         /// </summary>
         /// <returns>Verificacion de valores</returns>
-        private bool VerificarValores()
+        /*private bool VerificarValores()
         {
             if (txtAgregarApellido.Text == string.Empty || txtAgregarNombre.Text == string.Empty || txtAgregarCorreo.Text == string.Empty
                 || txtAgregarIdentidad.Text == string.Empty || txtAgregarTelefono.Text == string.Empty || txtAgregarContra.Password == string.Empty)
@@ -91,7 +91,7 @@ namespace SistemaDental.MVCCV.Vista
                 MessageBox.Show("Por favor ingresa todos los valores en las cajas de texto");
                 return false;
             }
-            else if (cmbSexo.SelectedValue == null)
+            /*else if (cmbSexo.SelectedValue == null)
             {
                 MessageBox.Show("Por favor selecciona el Sexo del nuevo empleado");
                 return false;
@@ -118,8 +118,8 @@ namespace SistemaDental.MVCCV.Vista
             }
 
 
-            return true;
-        }
+         return true;
+     }*/
 
         /// <summary>
         /// Funcion para limpiar los textbox y combobox del formulario
@@ -147,8 +147,7 @@ namespace SistemaDental.MVCCV.Vista
         private void btnAgregarUsuario_Click_1(object sender, RoutedEventArgs e)
         {
             // Verificar que se ingresaron los valores requeridos
-            if (VerificarValores() == true)
-            {
+            
                 try
                 {
                     // Obtener los valores para el empleado
@@ -170,25 +169,23 @@ namespace SistemaDental.MVCCV.Vista
 
             }
 
+     
+
+        private void PreviewTextInputOnlyLetters(object sender, TextCompositionEventArgs e)
+        {
+
+            validar.SoloLetras(e);
+
         }
 
-        public static bool ValidarEmail(string email)
+
+        private void PreviewTextInputOnlyNumbers(object sender, TextCompositionEventArgs e)
         {
-            Regex regex = new Regex(@"^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$");
-            return regex.IsMatch(email);
+
+            validar.SoloNumeros(e);
         }
 
-        private void txtAgregarTelefono_PreviewTextInput(object sender, TextCompositionEventArgs e)
-        {
-            Regex regex = new Regex("[^0-9]+");
-            e.Handled = regex.IsMatch(e.Text);
-        }
 
-        private void txtAgregarIdentidad_PreviewTextInput(object sender, TextCompositionEventArgs e)
-        {
-            Regex regex = new Regex("[^0-9]+");
-            e.Handled = regex.IsMatch(e.Text);
-        }
     }
 }
 
