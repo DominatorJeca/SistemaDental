@@ -12,11 +12,13 @@
 
 
     <Grid>
-
-        <StackPanel Margin="0">
+        <Button x:Name="btnHelp"  Margin="1010,10,10,415" Width="30" Height="30"  Style="{StaticResource MaterialDesignFloatingActionAccentButton}" ToolTip="Ayuda" Background="#FF4047E0" BorderBrush="Transparent" Click="btnHelp_Click">
+            <materialDesign:PackIcon Kind="Help" Height="auto" Width="auto"  RenderTransformOrigin="0.264,0.45"></materialDesign:PackIcon>
+        </Button>
+        <StackPanel Margin="0,50,0,0">
             <StackPanel Orientation="Horizontal" Margin="0">
 
-                <Button x:Name="btnCitas" Height="150" Width="150" Margin="250,80,0,0" VerticalAlignment="Top"  Style="{StaticResource MaterialDesignRaisedButton}" RenderTransformOrigin="0.496,2.246" materialDesign:ButtonAssist.CornerRadius="10" FontFamily="Bahnschrift" FontSize="20" BorderBrush="{x:Null}" Command="{Binding Path= DataContext.CitaVistaComando, RelativeSource={RelativeSource AncestorType={x:Type otros:Menu}}, Mode=OneWay}"  >
+                <Button x:Name="btnCitas" Height="150" Width="150" Margin="250,0,0,0" VerticalAlignment="Top"  Style="{StaticResource MaterialDesignRaisedButton}" RenderTransformOrigin="0.496,2.246" materialDesign:ButtonAssist.CornerRadius="10" FontFamily="Bahnschrift" FontSize="20" BorderBrush="{x:Null}" Command="{Binding Path= DataContext.CitaVistaComando, RelativeSource={RelativeSource AncestorType={x:Type otros:Menu}}, Mode=OneWay}"  >
                     <Button.Background>
                         <LinearGradientBrush StartPoint="0,0" EndPoint="1,2">
                             <GradientStop Color="#56A2BF" Offset="0"/>
@@ -29,7 +31,7 @@
                     </Grid>
                 </Button>
 
-                <Button  x:Name="btnPacientes"  Height="150" Width="150" Margin="50,80,0,0" Style="{StaticResource MaterialDesignRaisedButton}"  materialDesign:ButtonAssist.CornerRadius="10" VerticalAlignment="Top"  BorderThickness="0" BorderBrush="Transparent"  >
+                <Button  x:Name="btnPacientes"  Height="150" Width="150" Margin="50,00,0,0" Style="{StaticResource MaterialDesignRaisedButton}"  materialDesign:ButtonAssist.CornerRadius="10" VerticalAlignment="Top"  BorderThickness="0" BorderBrush="Transparent"  >
                     <Grid Margin="0" Background="{x:Null}">
                         <Image Source="/imagenes/patient.png" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,-32,-27" Height="137" Width="119"/>
                         <TextBlock FontSize="20" FontFamily="Bahnschrift" Height="auto" Width="auto" Margin="-11,23,39,92" Background="{x:Null}">Pacientes</TextBlock>
@@ -41,7 +43,7 @@
                         </LinearGradientBrush>
                     </Button.Background>
                 </Button>
-                <Button x:Name="btnTratamientos" Height="150" Width="150" Margin="50,80,0,0" Style="{StaticResource MaterialDesignFlatAccentButton}"  FontFamily="Bahnschrift" materialDesign:ButtonAssist.CornerRadius="10" >
+                <Button x:Name="btnTratamientos" Height="150" Width="150" Margin="50,00,0,0" Style="{StaticResource MaterialDesignFlatAccentButton}"  FontFamily="Bahnschrift" materialDesign:ButtonAssist.CornerRadius="10" Click="btnTratamientos_Click_1" Command="{Binding Path= DataContext.tratamientoVistaComando, RelativeSource={RelativeSource AncestorType={x:Type otros:Menu}}, Mode=OneWay}">
                     <Button.Background>
                         <LinearGradientBrush StartPoint="0,0" EndPoint="1,2">
                             <GradientStop Color="#56A2BF" Offset="0"/>

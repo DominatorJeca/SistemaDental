@@ -38,10 +38,12 @@ namespace SistemaDental
         public int Genero{ get; set; }
         public string GeneroNombre { get; set; }
         public string Contraseña { get; set; }
+        public string Contrasenianueva { get; set; }
         public bool Estado { get; set; }
 
         public bool Administrador{ get; set; }
 
+        public string usuario { get; set; }
 
         //Contructores
 
@@ -79,7 +81,7 @@ namespace SistemaDental
                 sqlConnection.Open();
                 //crear el comando SQL
                 SqlCommand sqlCommand = new SqlCommand("VerificarExistenciaEmpleado", sqlConnection);
-                
+
                 sqlCommand.CommandType = CommandType.StoredProcedure;
                 //Establecer los valores de parametros
                 sqlCommand.Parameters.AddWithValue("@user", id);
@@ -106,7 +108,7 @@ namespace SistemaDental
 
             }
             finally
-            {    //Cerrar conexion 
+            {    //Cerrar conexion
                 sqlConnection.Close();
             }
 
@@ -145,7 +147,7 @@ namespace SistemaDental
                 throw e;
             }
             finally
-            {    //Cerrar conexion 
+            {    //Cerrar conexion
                 sqlConnection.Close();
             }
         }
@@ -183,7 +185,7 @@ namespace SistemaDental
                 throw e;
             }
             finally
-            {    //Cerrar conexion 
+            {    //Cerrar conexion
                 sqlConnection.Close();
             }
         }
@@ -202,7 +204,7 @@ namespace SistemaDental
                 sqlCommand.CommandType = CommandType.StoredProcedure;
                 //Establecer los valores de parametros
                 sqlCommand.Parameters.AddWithValue("@id", idUsuario);
-                
+
                 sqlCommand.ExecuteNonQuery();
 
             }
@@ -211,7 +213,7 @@ namespace SistemaDental
                 throw e;
             }
             finally
-            {    //Cerrar conexion 
+            {    //Cerrar conexion
                 sqlConnection.Close();
             }
 
@@ -241,7 +243,7 @@ namespace SistemaDental
                 throw e;
             }
             finally
-            {    //Cerrar conexion 
+            {    //Cerrar conexion
                 sqlConnection.Close();
             }
 
@@ -270,7 +272,7 @@ namespace SistemaDental
                 throw e;
             }
             finally
-            {    //Cerrar conexion 
+            {    //Cerrar conexion
                 sqlConnection.Close();
             }
 

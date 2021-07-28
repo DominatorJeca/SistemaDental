@@ -1,5 +1,7 @@
-﻿using System;
+﻿using SistemaDental.MVCCV.Vista;
+using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -51,7 +53,7 @@ namespace SistemaDental
                     MessageBox.Show("Usuario o contraseña incorrectos");
 
                 //Verificar si el usuario existe
-    
+
             }
             catch (Exception ex)
             {
@@ -120,6 +122,18 @@ namespace SistemaDental
         {
             if (e.ChangedButton == MouseButton.Left)
                 DragMove();
+        }
+
+        private void btnOlvidarPass_Click(object sender, RoutedEventArgs e)
+        {
+            ReestablecerContrasenia reestablecer = new ReestablecerContrasenia();
+                reestablecer.ShowDialog();
+        }
+
+        private void btnHelp_Click(object sender, RoutedEventArgs e)
+        {
+            string url = "http://localhost/ProjectoClinicaDental/vistas/";
+            Process.Start(new ProcessStartInfo("cmd", $"/c start {url}") { CreateNoWindow = true });
         }
     }
 }

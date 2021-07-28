@@ -25,6 +25,12 @@
         <Button x:Name="btnMin"  Margin="329,10,43,482" Width="Auto" Height="Auto"  Click="btnMin_Click" Style="{StaticResource MaterialDesignFloatingActionAccentButton}" ToolTip="Minimizar" Background="Turquoise" BorderBrush="Transparent">
             <materialDesign:PackIcon Kind="WindowMinimize" Height="auto" Width="auto"  RenderTransformOrigin="0.264,0.45"></materialDesign:PackIcon>
         </Button>
+
+        <Button x:Name="btnHelp"  Margin="10,10,362,482" Width="Auto" Height="Auto"  Style="{StaticResource MaterialDesignFloatingActionAccentButton}" ToolTip="Ayuda" Background="#FF4047E0" BorderBrush="Transparent" Click="btnHelp_Click">
+            <materialDesign:PackIcon Kind="Help" Height="auto" Width="auto"  RenderTransformOrigin="0.264,0.45"></materialDesign:PackIcon>
+        </Button>
+
+
         <Label Content="Ingrese los datos" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="129,175,128,0" Foreground="#394F52" FontSize="18"/>
 
         <Border Background="#7F056676" BorderThickness="1" CornerRadius="10" Margin="65,212,65,172">
@@ -42,7 +48,7 @@
         <Button  x:Name="btnIniciarSesion"  HorizontalAlignment="Center" BorderBrush="Transparent" FontStyle="Normal" FontSize="17" ToolTip="Iniciar Sesion"  Click="btnLogin_Click" Style="{StaticResource MaterialDesignRaisedAccentButton }" materialDesign:ButtonAssist.CornerRadius="25" Background="#7F056676" Margin="65,378,65,84" Height="Auto" Width="260">
             <TextBlock Text="Iniciar Sesión" Foreground="#394F52" FontFamily="Bahnschrift"/>
         </Button>
-        <Button x:Name="btnOlvidarPass" Style="{StaticResource MaterialDesignFlatButton}" Content="¿Olvidó su contraseña?" FontFamily="Bahnschrift" FontSize="17" Margin="94,456,94,22" Foreground="#394F52"></Button>
+        <Button x:Name="btnOlvidarPass" Style="{StaticResource MaterialDesignFlatButton}" Content="¿Olvidó su contraseña?" FontFamily="Bahnschrift" FontSize="17" Margin="94,456,94,22" Foreground="#394F52" Click="btnOlvidarPass_Click"></Button>
        
     </Grid>
 

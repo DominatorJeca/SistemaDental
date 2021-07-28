@@ -13,12 +13,13 @@ namespace SistemaDental
     {
 
         //variable miembro
-        private static string connectionString = @"server =  DESKTOP-8MP5H5G; Initial Catalog = clinicaDental; Integrated Security = True; MultipleActiveResultSets=true";
+        private static string connectionString = @"server = .; Initial Catalog = clinicaDental; Integrated Security = True; MultipleActiveResultSets=true";
         private SqlConnection sqlConnection = new SqlConnection(connectionString);
 
         //Propiedad para extraer todos los ID almacenados en la BD
-        public string Id_paciente { get; set; }
-
+        public int Id_paciente { get; set; }
+        public string correo { get; set; }
+        public string identificacionPaciente { get; set; }
         public string NombrePaciente { get; set; }
 
         public string ApellidoPaciente { get; set; }
@@ -38,18 +39,18 @@ namespace SistemaDental
 
 
         //Arreglo tipo string para almacenar los datos extraidos de la BD
-        
+
 
         public ClasePaciente() { }
 
         //propiedad con el parámetro id_paciente
-        
+
 
         /// <summary>
         /// Metodo para mostrar los pacientes existentes
         /// </summary>
         /// <returns>Lista de todos los datos de los pacientes</returns>
-        public List<ClasePaciente> MostrarPacientes()
+     /*   public List<ClasePaciente> MostrarPacientes()
         {
 
             List<ClasePaciente> paciente = new List<ClasePaciente>();
@@ -112,15 +113,15 @@ namespace SistemaDental
 
             catch (Exception e)
             {
-                throw e; 
+                throw e;
             }
 
-            finally 
-            { 
-                sqlConnection.Close(); 
+            finally
+            {
+                sqlConnection.Close();
             }
 
-            
+
         }
 
         public List<ClasePaciente> MostrarHistorial(ClasePaciente paciente)
@@ -179,7 +180,7 @@ namespace SistemaDental
             {
                 sqlConnection.Close();
             }
-        }
+        }*/
 
     }
 }

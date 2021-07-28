@@ -242,6 +242,7 @@
     <Compile Include="MVCCV\VistaControlador\AjusteVistaControlador.cs" />
     <Compile Include="MVCCV\VistaControlador\CajaVistaControlador.cs" />
     <Compile Include="MVCCV\VistaControlador\CasaVistaControlador.cs" />
+    <Compile Include="MVCCV\VistaControlador\DatosDeUsuarioVistaControlador.cs" />
     <Compile Include="MVCCV\VistaControlador\EdditarUsuariovistaControlador.cs" />
     <Compile Include="MVCCV\VistaControlador\InventarioVistaControlador.cs" />
     <Compile Include="MVCCV\VistaControlador\ManejarusuariovistaControlador.cs" />
@@ -261,6 +262,9 @@
     </Compile>
     <Compile Include="MVCCV\Vista\CompraVista.xaml.cs">
       <DependentUpon>CompraVista.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MVCCV\Vista\DatosDeUsuario.xaml.cs">
+      <DependentUpon>DatosDeUsuario.xaml</DependentUpon>
     </Compile>
     <Compile Include="MVCCV\Vista\EditarUsuarioVista.xaml.cs">
       <DependentUpon>EditarUsuarioVista.xaml</DependentUpon>
@@ -282,6 +286,9 @@
     </Compile>
     <Compile Include="MVCCV\Vista\PacientesVistaControlador.xaml.cs">
       <DependentUpon>PacientesVistaControlador.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MVCCV\Vista\RealizarCitaVista.xaml.cs">
+      <DependentUpon>RealizarCitaVista.xaml</DependentUpon>
     </Compile>
     <Compile Include="MVCCV\Vista\ReestablecerContrasenia.xaml.cs">
       <DependentUpon>ReestablecerContrasenia.xaml</DependentUpon>
@@ -318,6 +325,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Inventario.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MVCCV\Vista\DatosDeUsuario.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -373,6 +384,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="MVCCV\Vista\PacientesVistaControlador.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MVCCV\Vista\RealizarCitaVista.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -528,6 +543,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="dentist.svg" />
+    <Resource Include="Image1.png" />
     <Resource Include="Imagenes\seo-report.png" />
     <Resource Include="Imagenes\shopping-cart.png" />
     <Resource Include="Imagenes\inventory.png" />

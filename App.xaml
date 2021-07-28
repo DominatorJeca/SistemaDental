@@ -4,7 +4,7 @@
              xmlns:local="clr-namespace:SistemaDental"
                  xmlns:viewModel="clr-namespace:SistemaDental.MVCCV.VistaControlador"
              xmlns:view="clr-namespace:SistemaDental.MVCCV.Vista"
-             StartupUri="/MVCCV/Vista/Menu.xaml">
+             StartupUri="/MVCCV/Vista/Login.xaml">
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
@@ -15,8 +15,6 @@
 
             </ResourceDictionary.MergedDictionaries>
 
-   
-          
             <DataTemplate DataType="{x:Type viewModel:CasaVistaControlador}">
                 <view:MenuInicioVista/>
             </DataTemplate>
@@ -24,12 +22,15 @@
                 <view:CajaVista/>
             </DataTemplate>
             <DataTemplate DataType="{x:Type viewModel:VerPacienVistaControlador}">
-            
+
             </DataTemplate>
             <DataTemplate DataType="{x:Type viewModel:TratamientosvistaControlador}">
-             
+                <view:TratamientoVista/>
             </DataTemplate>
-        
+            <DataTemplate DataType="{x:Type viewModel:ManejarusuariovistaControlador}">
+                <view:VerPacienVista/>
+            </DataTemplate>
+
             <DataTemplate DataType="{x:Type viewModel:Pacientesvistacontrolador}">
                 <view:VerPacienVista/>
             </DataTemplate>
@@ -54,6 +55,9 @@
             </DataTemplate>
             <DataTemplate DataType="{x:Type viewModel:UsuariosVistaControlador}">
                 <view:VistaAgregarUsuario/>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type viewModel:DatosDeUsuarioVistaControlador}">
+                <view:DatosDeUsuario/>
             </DataTemplate>
         </ResourceDictionary>
     </Application.Resources>

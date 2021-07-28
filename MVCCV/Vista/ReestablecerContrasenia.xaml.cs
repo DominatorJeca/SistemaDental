@@ -98,8 +98,8 @@ namespace SistemaDental.MVCCV.Vista
         private void btnSalir_Click(object sender, RoutedEventArgs e)
         {
             this.Close();
-            Login log = new Login();
-            log.Show();
+          /*  Login log = new Login();
+            log.Show();*/
         }
 
         private void btnMin_Click(object sender, RoutedEventArgs e)
