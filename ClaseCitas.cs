@@ -12,201 +12,93 @@ namespace SistemaDental
 {
     public class ClaseCitas
     {
-        private static string connectionString = @"server = .; Initial Catalog = clinicaDental; Integrated Security = True; MultipleActiveResultSets=true";
-        private SqlConnection sqlConnection = new SqlConnection(connectionString);
+
+        public ClaseProcedimiento proc = new ClaseProcedimiento();
 
         public int IdCita { get; set; }
 
         public string IdPacientes { get; set; }
+        public int detalleCita { get; set; }
+    
+        public string IdEmpleado { get; set; }
         public string NombreDoctor { get; set; }
 
-        public string IdDoctor { get; set; }
+        public string Preciototal { get; set; }
+        public string trtamientoprecio { get; set; }
+        public string nombreTramientoindividual { get; set; }
+        public string Nombre_Id_paciente { get; set; }
+       
         public int IdTratamiento { get; set; }
         public string NombreTratamiento { get; set; }
-        public string Preciototal { get; set; }
+        
         public string NombrePaciente { get; set; }
         public string ApellidoPaciente { get; set; }
         public string Observaciones { get; set; }
         public DateTime fechaCita { get; set; }
 
-        public List<ClaseCitas> mostrarIdPacientes()
+
+        public void InsertarDetalleCita(int cita, int IdTratamiento, float trtamientoprecio)
         {
-            sqlConnection.Open();
-            try
-            {
-                SqlCommand command = new SqlCommand("MostrarPacientes", sqlConnection);
-                command.CommandType = CommandType.StoredProcedure;
-                SqlDataReader reader = command.ExecuteReader();
-
-                List<ClaseCitas> pacientes = new List<ClaseCitas>();
+            proc.InsertarDetalleCita(IdTratamiento, trtamientoprecio, cita);
+        }
 
 
-                while (reader.Read())
-                {
 
-                    pacientes.Add(new ClaseCitas { IdPacientes = reader["id_paciente"].ToString() });
-                }
-
-                return pacientes;
-            }
-            catch
-            {
-                throw;
-            }
-            finally
-            {
-                sqlConnection.Close();
-            }
-
+            public List<ClaseCitas> mostrarIdPacientes()
+        {
+            return proc.mostrarIdPacientes();
         }
 
         public List<ClaseCitas> MostrarEmpleado()
         {
-            sqlConnection.Open();
-
-            try{
-                SqlCommand command = new SqlCommand("MostrarDoctores", sqlConnection);
-                command.CommandType = CommandType.StoredProcedure;
-                SqlDataReader reader = command.ExecuteReader();
-
-                List<ClaseCitas> citas = new List<ClaseCitas>();
-
-                while (reader.Read())
-                {
-                    citas.Add(new ClaseCitas { IdDoctor = reader["id_empleado"].ToString(), NombreDoctor = reader["nombre"].ToString() });
-                }
-                return citas;
-            }
-            catch
-            {
-                throw;
-            }
-            finally
-            {
-                sqlConnection.Close();
-            }
+            return proc.MostrarEmpleado();
         }
 
         public List<ClaseCitas> MostrarTratamiento()
         {
-            sqlConnection.Open();
-            try
-            {
-                SqlCommand command = new SqlCommand("MostrarTratamiento", sqlConnection);
-                command.CommandType = CommandType.StoredProcedure;
-                SqlDataReader reader = command.ExecuteReader();
-                List<ClaseCitas> citas = new List<ClaseCitas>();
-                while (reader.Read())
-                {
-                    citas.Add(new ClaseCitas { IdTratamiento = Convert.ToInt32(reader["id_tratamiento"].ToString()), NombreTratamiento = reader["nombre"].ToString() });
-                }
-
-                return citas;
-            }
-            catch
-            {
-                throw;
-            }
-            finally
-            {
-                sqlConnection.Close();
-            }
+            return proc.MostrarTratamiento();
         }
 
         public void AgendarCita(ClaseCitas cita)
         {
-            sqlConnection.Open();
-            try
-            {
-                SqlCommand command = new SqlCommand("IngresoCitas", sqlConnection);
-                command.CommandType = CommandType.StoredProcedure;
-                command.Parameters.AddWithValue("@idempleado", IdDoctor);
-                command.Parameters.AddWithValue("@idpaciente", IdPacientes);
-                command.Parameters.AddWithValue("@fecha", fechaCita);
-                command.Parameters.AddWithValue("@idtratamiento", IdTratamiento);
-                command.ExecuteNonQuery();
-            }
-            catch
-            {
-                throw;
-            }
-            finally
-            {
-                sqlConnection.Close();
-            }
+            proc.AgendarCita(cita);
         }
 
         public void EditarCita(ClaseCitas cita)
         {
-            sqlConnection.Open();
-
-            try
-            {
-                SqlCommand command = new SqlCommand("EditarCitas", sqlConnection);
-                command.CommandType = CommandType.StoredProcedure;
-                command.Parameters.AddWithValue("@idcita", IdCita);
-                command.Parameters.AddWithValue("@idempleado", IdDoctor);
-                command.Parameters.AddWithValue("@idpaciente", IdPacientes);
-                command.Parameters.AddWithValue("@fecha", fechaCita);
-                command.Parameters.AddWithValue("@idtratamiento", IdTratamiento);
-                command.ExecuteNonQuery();
-            }
-            catch
-            {
-                throw;
-            }
-            finally
-            {
-                sqlConnection.Close();
-            }
+            proc.EditarCita(cita);
         }
 
         public List<ClaseCitas> MostrarCitas()
         {
-            sqlConnection.Open();
-            try
-            {
-                SqlCommand command = new SqlCommand("MostrarCitas", sqlConnection);
-                command.CommandType = CommandType.StoredProcedure;
-                SqlDataReader reader = command.ExecuteReader();
-
-                List<ClaseCitas> citas = new List<ClaseCitas>();
-
-                while (reader.Read())
-                {
-                    citas.Add(new ClaseCitas {IdCita=Convert.ToInt32(reader["idcita"].ToString()), IdPacientes = reader["idpaciente"].ToString(), NombrePaciente=reader["paciente"].ToString(),ApellidoPaciente=reader["apepac"].ToString(),NombreDoctor=reader["nombredoc"].ToString(),NombreTratamiento = reader["tratamiento"].ToString(), fechaCita=Convert.ToDateTime(reader["fecha"].ToString()) });
-                }
-
-                return citas;
-            }
-            catch
-            {
-                throw;
-            }
-            finally
-            {
-                sqlConnection.Close();
-            }
+           return proc.MostrarCitas();
+        }
+        public List<ClaseCitas> Mostrartratmientos(int idcita)
+        {
+            return proc.Mostrartratmientos(idcita);
         }
 
-        public void EliminarCita()
+
+        public void EliminarCita(int cita)
         {
-            sqlConnection.Open();
-            try
-            {
-                SqlCommand command = new SqlCommand("EliminarCitas", sqlConnection);
-                command.CommandType = CommandType.StoredProcedure;
-                command.Parameters.AddWithValue("@idcita", IdCita);
-                command.ExecuteNonQuery();
-            }
-            catch
-            {
-                throw;
-            }
-            finally
-            {
-                sqlConnection.Close();
-            }
+            proc.EliminarCita(cita);
+        }
+        public List<ClaseCitas> mostrarPacientes()
+        {
+
+             return proc.mostrarPacientes();
+
+        }
+         public void mostraridtrtamientos(ClaseCitas cita,int idtratamiento)
+        {
+            proc.mostraridtrtamientos(cita,idtratamiento);
+
+        }
+
+        public void eliminardetallecita (int idcita)
+        {
+
+            proc.eliminardetallecita(idcita);
         }
     }
 }
