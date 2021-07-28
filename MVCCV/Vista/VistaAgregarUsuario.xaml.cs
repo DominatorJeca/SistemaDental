@@ -101,11 +101,11 @@ namespace SistemaDental.MVCCV.Vista
         /// <returns>Verificacion de valores</returns>
         private bool VerificarValores()
         {
-           /* if (!validar.VerificarCampos(this))
+           if (!validar.VerificarCampos(this))
             {
                 MessageBox.Show("Por favor ingresa todos los valores que se le solicitan");
                 return false;
-            }*/
+            }
             if (!validar.VerificarIdentidad(txtAgregarIdentidad.Text))
             {
                 MessageBox.Show("El numero de identidad no tiene un formato correcto");
@@ -169,6 +169,8 @@ namespace SistemaDental.MVCCV.Vista
             botoneshabilitados(false);
             HabilitarInhabilitarTXT(true);
             LimpiarFormulario();
+
+            dgvEmpleado.IsEnabled = false;
           
            
         }
@@ -275,6 +277,7 @@ namespace SistemaDental.MVCCV.Vista
 
             HabilitarInhabilitarTXT(false);
             botoneshabilitados(true);
+            dgvEmpleado.IsEnabled = true;
 
         }
 

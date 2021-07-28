@@ -76,10 +76,9 @@ namespace SistemaDental
 
             foreach(var tb in FindVisualChildren<ComboBox>(window))
             {
-                if (tb.SelectedValue.ToString().Replace(" ", "").Equals("") && tb.Name != "PART_EditableTextBox" && tb.Name != "PART_TextBox")
+                if (tb.SelectedValue == null)
                     band = false;
             }
-            //foreach(Control con in window.Content)
 
             foreach (var tb in FindVisualChildren<DataGrid>(window))
             {
