@@ -991,6 +991,31 @@ namespace SistemaDental
             }
         }
 
+        public DataTable Citasporempleado()
+        {
+            try
+            {
+                DataTable dt = new DataTable();
+                command.Connection = con.Open();
+                command.CommandText = "CitasPorEmpleado";
+                command.Parameters.AddWithValue("@nombre", SqlDbType.NVarChar).Value = NombreEmpleado;
+                command.CommandType = CommandType.StoredProcedure;
+                SqlDataAdapter adapter = new SqlDataAdapter(command);
+                adapter.Fill(dt);
+
+                return dt;
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+            finally
+            {
+                command.Connection = con.Close();
+                command.Parameters.Clear();
+            }
+        }
+
         public List<ClaseProcedimiento> NombreEmpleados()
         {
             try

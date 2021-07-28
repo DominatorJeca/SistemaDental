@@ -87,6 +87,12 @@ namespace SistemaDental
                     band = false;
             }
 
+            foreach(var tb in FindVisualChildren<PasswordBox>(window))
+            {
+                if (tb.Password.Replace(" ", "").Equals("") && tb.Name != "PART_EditableTextBox" && tb.Name != "PART_TextBox")
+                    band = false;
+            }
+
             return band;
         }
 
