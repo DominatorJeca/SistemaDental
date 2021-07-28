@@ -165,11 +165,11 @@ namespace SistemaDental.MVCCV.Vista
         /// <param name="e"></param>
         private void btnAgregarUsuario_Click_1(object sender, RoutedEventArgs e)
         {
-            opcion = 1;
-            botoneshabilitados(false);
-            HabilitarInhabilitarTXT(true);
-            LimpiarFormulario();
-          
+
+                opcion = 1;
+                botoneshabilitados(false);
+                HabilitarInhabilitarTXT(true);
+                LimpiarFormulario();
            
         }
 

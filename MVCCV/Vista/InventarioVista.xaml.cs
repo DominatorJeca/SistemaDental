@@ -22,6 +22,7 @@ namespace SistemaDental.MVCCV.Vista
     {
         ClaseInventario inventario = new ClaseInventario();
         ClaseProcedimiento procedimiento = new ClaseProcedimiento();
+        Validaciones validaciones = new Validaciones();
         
         public InventarioVista()
         {
@@ -43,8 +44,64 @@ namespace SistemaDental.MVCCV.Vista
         {
 
             dgv_Tratamiento.ItemsSource = procedimiento.mostrarUsoTratamiento(Convert.ToInt32(dgv_Materiales.SelectedValue));
-
         }
 
+        private void HabilitarEdicion(bool habilitar)
+        {
+            txtMaterialInventario.IsEnabled = habilitar;
+            btnCancelar.IsEnabled = habilitar;
+            btnGuardar.IsEnabled = habilitar;
+        }
+
+        private void ObtenerValores()
+        {
+            inventario.IdMaterial = Convert.ToInt32(dgv_Materiales.SelectedValue);
+            inventario.NombreMaterial = txtMaterialInventario.Text;
+        }
+
+        private void btnActualizar_Click(object sender, RoutedEventArgs e)
+        {
+           if (validaciones.VerificarCampos(this) && dgv_Materiales.SelectedValue!=null)
+           {
+                HabilitarEdicion(true);
+                btnActualizar.IsEnabled = false;
+                txtMaterialInventario.IsEnabled = true;
+           }
+           else
+            {
+                MessageBox.Show("Seleccione un material");
+            }
+        }
+
+        private void btnGuardar_Click(object sender, RoutedEventArgs e)
+        {
+            ObtenerValores();
+            if (validaciones.VerificarCampos(this))
+            {
+                procedimiento.EditarNombreMaterial(inventario);
+                MostrarMaterial();
+                HabilitarEdicion(false);
+                btnActualizar.IsEnabled = true;
+            }
+            else
+            {
+                MessageBox.Show("Asegurese de ingresar el nombre del material de manera correcta");
+                MostrarMaterial();
+                HabilitarEdicion(false);
+                btnActualizar.IsEnabled = true;
+            }
+        }
+
+        private void btnCancelar_Click(object sender, RoutedEventArgs e)
+        {
+            MostrarMaterial();
+            HabilitarEdicion(false);
+            btnActualizar.IsEnabled = true;
+        }
+
+        private void PreviewTextInputLetters(object sender, TextCompositionEventArgs e)
+        {
+            validaciones.SoloLetras(e);
+        }
     }
 }

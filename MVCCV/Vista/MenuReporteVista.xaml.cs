@@ -31,16 +31,16 @@ namespace SistemaDental.MVCCV.Vista
         public MenuReporteVista()
         {
             InitializeComponent();
-         
-            
-         
+            cmbEmpleado.ItemsSource = procedimiento.NombreEmpleados();
+            cmbEmpleado.SelectedValuePath = "Empleado";
+            cmbEmpleado.DisplayMemberPath = "Empleado";
         }
 
         
         private void ManejoReportes()
         {
-            txtanio.Clear();
-            Mes.Clear();
+            txtanio.SelectedValue = "";
+            Mes.SelectedValue = "";
             reporte.Clear();
             foreach(Control control in stpPanel.Children)
             {
@@ -50,10 +50,44 @@ namespace SistemaDental.MVCCV.Vista
            
         }
 
+        private int mes()
+        {
+            switch (Mes.Text)
+            {
+                case "Enero":
+                    return 1;
+                case "Febrero":
+                    return 2;
+                case "Marzo":
+                    return 3;
+                case "Abril":
+                    return 4;
+                case "Mayo":
+                    return 5;
+                case "Junio":
+                    return 6;
+                case "Julio":
+                    return 7;
+                case "Agosto":
+                    return 8;
+                case "Septiembre":
+                    return 9;
+                case "Octubre":
+                    return 10;
+                case "Noviembre":
+                    return 11;
+                case "Diciembre":
+                    return 12;
+                case "Todos":
+                    return 0;
+            }
+            return 0;
+        }
+
         private void ObtenerValores()
         {
             procedimiento.anio = Convert.ToInt32(txtanio.Text);
-            procedimiento.mes = Convert.ToInt32(Mes.Text);
+            procedimiento.mes = mes();
             procedimiento.tratamiento = Convert.ToString(Tratamiento.SelectedValue);
             procedimiento.NombreEmpleado = Convert.ToString(cmbEmpleado.SelectedValue);
         }
@@ -155,6 +189,15 @@ namespace SistemaDental.MVCCV.Vista
                     reporte.LocalReport.ReportEmbeddedResource = "SistemaDental.ReportTurnosxEmpleado.rdlc";
                     reporte.RefreshReport();
                     break;
+                case 7:
+                    procedimiento.NombreEmpleado = Convert.ToString(cmbEmpleado.SelectedValue);
+                    reporte.Reset();
+                    dt = procedimiento.Citasporempleado();
+                    ds = new ReportDataSource("DataSetCitasEmpleado", dt);
+                    reporte.LocalReport.DataSources.Add(ds);
+                    reporte.LocalReport.ReportEmbeddedResource = "SistemaDental.ReportCitasxEmpleado.rdlc";
+                    reporte.RefreshReport();
+                    break;
             }
         }
 
@@ -163,9 +206,7 @@ namespace SistemaDental.MVCCV.Vista
             reporteseleccionado = 6;
             ManejoReportes();
             ManejoVisibilidad();
-            cmbEmpleado.ItemsSource = procedimiento.NombreEmpleados();
-            cmbEmpleado.SelectedValuePath = "Empleado";
-            cmbEmpleado.DisplayMemberPath = "Empleado";
+            
         }
 
 
@@ -189,11 +230,19 @@ namespace SistemaDental.MVCCV.Vista
                 lbltratamiento.Visibility = Visibility.Visible;
                 Tratamiento.Visibility = Visibility.Visible;
             }
-            if (reporteseleccionado == 6)
+            if (reporteseleccionado == 6 || reporteseleccionado==7)
             {
                 lblempleado.Visibility = Visibility.Visible;
                 cmbEmpleado.Visibility = Visibility.Visible;
             }
+        }
+
+        private void btnreporte7_Click(object sender, RoutedEventArgs e)
+        {
+            reporteseleccionado = 7;
+            ManejoReportes();
+            ManejoVisibilidad();
+
         }
     }
 }

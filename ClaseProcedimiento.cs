@@ -479,6 +479,29 @@ namespace SistemaDental
             }
         }
 
+        public void EditarNombreMaterial(ClaseInventario inventario)
+        {
+            try
+            {
+                command.Connection = con.Open();
+                //crear el comando SQL
+                command.CommandText = "InventarioActualizar";
+                command.Parameters.AddWithValue("@nombre", inventario.NombreMaterial);
+                command.Parameters.AddWithValue("@InventarioId", inventario.IdMaterial);
+                command.CommandType = CommandType.StoredProcedure;
+                command.ExecuteNonQuery();
+            }
+            catch (Exception E)
+            {
+                MessageBox.Show("Revise si el material ya existe" + E);
+            }
+            finally
+            {
+                command.Parameters.Clear();
+                command.Connection = con.Close();
+            }
+        }
+
         public int InsertarCompra(int empleadoId)
         {
             try
@@ -951,6 +974,31 @@ namespace SistemaDental
                 command.Connection = con.Open();
                 command.CommandText = "Report_TurnosxEmpleado";
                 command.Parameters.AddWithValue("@Nombre", SqlDbType.NVarChar).Value = NombreEmpleado;
+                command.CommandType = CommandType.StoredProcedure;
+                SqlDataAdapter adapter = new SqlDataAdapter(command);
+                adapter.Fill(dt);
+
+                return dt;
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+            finally
+            {
+                command.Connection = con.Close();
+                command.Parameters.Clear();
+            }
+        }
+
+        public DataTable Citasporempleado()
+        {
+            try
+            {
+                DataTable dt = new DataTable();
+                command.Connection = con.Open();
+                command.CommandText = "CitasPorEmpleado";
+                command.Parameters.AddWithValue("@nombre", SqlDbType.NVarChar).Value = NombreEmpleado;
                 command.CommandType = CommandType.StoredProcedure;
                 SqlDataAdapter adapter = new SqlDataAdapter(command);
                 adapter.Fill(dt);
