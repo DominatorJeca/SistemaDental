@@ -25,6 +25,7 @@ namespace SistemaDental.MVCCV.Vista
 
         ClaseProcedimiento proc = new ClaseProcedimiento();
         ClaseTratamiento trat = new ClaseTratamiento();
+        Validaciones validar = new Validaciones();
         List<Materiales> listMateriales = new List<Materiales>();
 
         public int gTratamientoID = 0;
@@ -60,12 +61,20 @@ namespace SistemaDental.MVCCV.Vista
 
         private void btnEditar_Click(object sender, RoutedEventArgs e)
         {
-            isUpdate = true;
-            btnCancelar.IsEnabled = true;
-            btnEditar.IsEnabled = false;
+            if(dg_tratamientos.SelectedIndex != -1)
+            {
+                btnGuardar.Content = "Modificar";
+                btnGuardar.IsEnabled = true;
 
-            ObtenerTratamientoDatos();
-            ObtenerInventarioTratamientos(gTratamientoID);
+                isUpdate = true;
+                btnCancelar.IsEnabled = true;
+                btnEditar.IsEnabled = false;   
+                CamposEstado(false);
+            }
+            else
+            {
+                MessageBox.Show("Por favor, selecione el tratamiento a modificar en la lista de tratamientos.");
+            }
         }
 
         private void ObtenerTratamientoDatos()
@@ -111,16 +120,22 @@ namespace SistemaDental.MVCCV.Vista
 
         private void btnGuardar_Click(object sender, RoutedEventArgs e)
         {
-            if(!isUpdate)
+            if(ValidarDatos())
             {
-                GuardarTratamiento();
+                if (!isUpdate)
+                {
+                    GuardarTratamiento();
+                }
+                else
+                {
+                    ActualizarTratamiento();
+                }
+
+                MessageBox.Show("Datos insertados con exito");
+
+                Cleaner();
+                ObtenerTratamientos();
             }
-            else
-            {
-                ActualizarTratamiento();
-            }
-            MessageBox.Show("Datos insertados con exito");
-            Cleaner();
         }
 
         private void ActualizarTratamiento()
@@ -137,6 +152,29 @@ namespace SistemaDental.MVCCV.Vista
             proc.ActualizarTratamiento(trat);
 
             dg_tratamientos.Items.Refresh();
+        }
+
+        private bool ValidarDatos()
+        {
+            if(VerificarDatos(txtTratamientoNombre))
+            {
+                MessageBox.Show("Por favor, ingrese un nombre al tratamiento.");
+                return false;
+            }
+
+            if(VerificarDatos(txtPrecioSugerido) && validar.VerificarCantidad(double.Parse(txtPrecioSugerido.Text)))
+            {
+                MessageBox.Show("Por favor, ingrese un precio valido para el tratamiento.");
+                return false;
+            }
+
+            if(!listMateriales.Any())
+            {
+                MessageBox.Show("Por favor, los materiales que el tratamiento requiere.");
+                return false;
+            }
+
+            return true;
         }
 
         private void GuardarTratamiento()
@@ -175,10 +213,10 @@ namespace SistemaDental.MVCCV.Vista
 
         private void btnCancelar_Click(object sender, RoutedEventArgs e)
         {
+            CamposEstado(false);
             btnGuardar.IsEnabled = true;
             btnEditar.IsEnabled = true;
-            btnCancelar.IsEnabled = false;
-
+            Cleaner();
             isUpdate = false;
         }
 
@@ -207,13 +245,27 @@ namespace SistemaDental.MVCCV.Vista
 
         private void dg_tratamientos_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            int id;
+            CamposEstado(true);
+            btnGuardar.IsEnabled = false;
+
+            ObtenerTratamientoDatos();
+            ObtenerInventarioTratamientos(gTratamientoID);
 
             DataRowView dataRow = (DataRowView)dg_tratamientos.SelectedItem;
             if (dataRow != null)
             {
-                id = int.Parse(dataRow[0].ToString());
+                gTratamientoID = int.Parse(dataRow[0].ToString());
+                ObtenerTratamientoDatos();
+                ObtenerInventarioTratamientos(gTratamientoID);
             }
+        }
+
+        private void CamposEstado(bool estado)
+        {
+            txtTratamientoNombre.IsReadOnly = estado;
+            txtPrecioSugerido.IsReadOnly = estado;
+            chkestado.IsEnabled = !estado;
+            chkmasUno.IsEnabled = !estado;
         }
 
         private void dg_materiales_SelectionChanged_1(object sender, SelectionChangedEventArgs e)
@@ -226,7 +278,7 @@ namespace SistemaDental.MVCCV.Vista
             DataRowView dataRow = (DataRowView)dg_materiales.SelectedItem;
             Materiales mat = new Materiales();
 
-            if (dataRow != null)
+            if (dataRow != null && !VerificarDatos(txtCantidad))
             {
                 mat.InvID = int.Parse(dataRow[0].ToString());
                 mat.NombreMaterial = dataRow[1].ToString();
@@ -234,6 +286,7 @@ namespace SistemaDental.MVCCV.Vista
 
                 listMateriales.Add(mat);
                 dg_tratamientos_materiales.Items.Refresh();
+                dg_materiales.SelectedIndex = -1;
             }
         }
 
@@ -261,6 +314,42 @@ namespace SistemaDental.MVCCV.Vista
             txtCantidad.Clear();
             listMateriales.Clear();
             dg_tratamientos_materiales.Items.Refresh();
+
+            dg_tratamientos.SelectedIndex = -1;
+            dg_tratamientos_materiales.SelectedIndex = -1;
+            dg_materiales.SelectedIndex = -1;
+
+            btnGuardar.Content = "Guardar";
+            btnGuardar.IsEnabled = true;
+            btnEditar.IsEnabled = true;
+            btnListaEliminar.IsEnabled = false;
+
+            listMateriales.Clear();
+        }
+
+        private void PreviewTextInputSoloLetras(object sender, TextCompositionEventArgs e)
+        {
+            validar.SoloLetras(e);
+        }
+
+        private void PreviewTextInputSoloNumeros(object sender, TextCompositionEventArgs e)
+        {
+            validar.SoloNumeros(e);
+        }
+
+        private bool VerificarDatos(TextBox input)
+        {
+            return string.IsNullOrEmpty(input.Text);
+        }
+
+        private void txtTratamientoNombre_TextChanged(object sender, TextChangedEventArgs e)
+        {
+
+        }
+
+        private void dg_tratamientos_materiales_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            btnListaEliminar.IsEnabled = true;
         }
     }
 

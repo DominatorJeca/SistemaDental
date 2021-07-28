@@ -85,8 +85,8 @@ namespace SistemaDental.MVCCV.Vista
             usuario.Telefono = Convert.ToString(txtAgregarTelefono.Text);
             usuario.Correo = Convert.ToString(txtAgregarCorreo.Text);
             usuario.Puesto = Convert.ToInt32(cmbPuesto.SelectedValue);
-            usuario.Genero = 1;
-            usuario.Contraseña = Convert.ToString(txtAgregarContra.Password);
+            usuario.GeneroNombre = ((ComboBoxItem)cmbSexo.SelectedItem).Content.ToString();
+            usuario.Contraseña = txtAgregarContra.Password;
             usuario.Estado = true;
             usuario.Ide = (Convert.ToInt32(dgvEmpleado.SelectedValue));
 
@@ -140,6 +140,8 @@ namespace SistemaDental.MVCCV.Vista
             dgvEmpleado.ItemsSource = ColectionEmpleados;
             dgvEmpleado.SelectedValuePath = "Ide";
         }
+        
+     
 
         /// <summary>
         /// Funcion para limpiar los textbox y combobox del formulario
