@@ -154,6 +154,7 @@ namespace SistemaDental.MVCCV.Vista
             ColectionEmpleados = new CollectionViewSource() { Source = Proc.MostrarEmpleados(act) }.View;
             dgvEmpleado.ItemsSource = ColectionEmpleados;
             dgvEmpleado.SelectedValuePath = "Ide";
+          
         }
         
      
@@ -185,7 +186,8 @@ namespace SistemaDental.MVCCV.Vista
             opcion = 1;
             botoneshabilitados(false);
             HabilitarInhabilitarTXT(true);
-        
+            txtAgregarContra.Visibility = Visibility.Visible;
+            txtConfirmarContra.Visibility = Visibility.Visible;
 
             dgvEmpleado.IsEnabled = false;
 
@@ -320,6 +322,8 @@ namespace SistemaDental.MVCCV.Vista
                     botoneshabilitados(true);
                     LimpiarFormulario();
                     dgvEmpleado.IsEnabled = true;
+                    txtAgregarContra.Visibility = Visibility.Hidden;
+                    txtConfirmarContra.Visibility = Visibility.Hidden;
                 }
                 catch (Exception ex)
                 {
@@ -426,11 +430,15 @@ namespace SistemaDental.MVCCV.Vista
 
         private void btnCancelar_Click(object sender, RoutedEventArgs e)
         {
-            MostrarEmpleados(true);
+           
             LimpiarFormulario();
             botoneshabilitados(true);
             HabilitarInhabilitarTXT(false);
+
             dgvEmpleado.IsEnabled = true;
+            MostrarEmpleados(true);
+            txtAgregarContra.Visibility = Visibility.Hidden;
+            txtConfirmarContra.Visibility = Visibility.Hidden;
         }
 
         private void txtBuscar_TextChanged(object sender, TextChangedEventArgs e)
