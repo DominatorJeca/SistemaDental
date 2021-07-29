@@ -16,20 +16,20 @@
         </Grid.Background>
 
 
-        <TextBox  x:Name="txtAgregarNombre"  Margin="70,39,700.6,381.2"  Text="{Binding ElementName=dgvEmpleado, Path=SelectedItem.Nombre}" PreviewTextInput="PreviewTextInputOnlyLetters" materialDesign:HintAssist.Hint="Nombre" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontFamily="Bahnschrift" FontSize="12" Background="#7FFFFFFF"/>
-        <TextBox x:Name="txtAgregarApellido" Margin="70,87,700.6,333.2" Text="{Binding ElementName=dgvEmpleado, Path=SelectedItem.Apellido}"  PreviewTextInput="PreviewTextInputOnlyLetters" materialDesign:HintAssist.Hint="Apellido" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontFamily="Bahnschrift" FontSize="12" Background="#7FFFFFFF"/>
-        <TextBox x:Name="txtAgregarTelefono" Margin="382,39,384.6,381.2" Text="{Binding ElementName=dgvEmpleado, Path=SelectedItem.Telefono}" materialDesign:HintAssist.Hint="Telefóno" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontFamily="Bahnschrift" FontSize="12" Background="#7FFFFFFF"
+        <TextBox  x:Name="txtAgregarNombre"  Margin="70,39,700.6,381.2"  Text="{Binding ElementName=dgvEmpleado, Path=SelectedItem.Nombre, Mode=OneWay}" PreviewTextInput="PreviewTextInputOnlyLetters" materialDesign:HintAssist.Hint="Nombre" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontFamily="Bahnschrift" FontSize="12" Background="#7FFFFFFF"/>
+        <TextBox x:Name="txtAgregarApellido" Margin="70,87,700.6,333.2" Text="{Binding ElementName=dgvEmpleado, Path=SelectedItem.Apellido,  Mode=OneWay}"  PreviewTextInput="PreviewTextInputOnlyLetters" materialDesign:HintAssist.Hint="Apellido" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontFamily="Bahnschrift" FontSize="12" Background="#7FFFFFFF"/>
+        <TextBox x:Name="txtAgregarTelefono" Margin="382,39,384.6,381.2" Text="{Binding ElementName=dgvEmpleado, Path=SelectedItem.Telefono,  Mode=OneWay}" materialDesign:HintAssist.Hint="Telefóno" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontFamily="Bahnschrift" FontSize="12" Background="#7FFFFFFF"
                  PreviewTextInput="PreviewTextInputOnlyNumbers" MaxLength="15"/>
-        <TextBox x:Name="txtAgregarIdentidad" Margin="70,127,700.6,293.2" Text="{Binding ElementName=dgvEmpleado, Path=SelectedItem.Id}" materialDesign:HintAssist.Hint="Identidad" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontFamily="Bahnschrift" FontSize="12" Background="#7FFFFFFF"
+        <TextBox x:Name="txtAgregarIdentidad" Margin="70,127,700.6,293.2" Text="{Binding ElementName=dgvEmpleado, Path=SelectedItem.Id,  Mode=OneWay}" materialDesign:HintAssist.Hint="Identidad" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontFamily="Bahnschrift" FontSize="12" Background="#7FFFFFFF"
                 PreviewTextInput="PreviewTextInputOnlyNumbers"   MaxLength="13"/>
         <Label Content="Puesto" HorizontalAlignment="Left"  VerticalAlignment="Top" FontSize="12" FontFamily="Bahnschrift" Margin="700,140,0,0" RenderTransformOrigin="-2.498,7.577" Width="73"/>
-        <ComboBox Name="cmbPuesto" HorizontalAlignment="Right" Text="{Binding ElementName=dgvEmpleado, Path=SelectedItem.PuestoNombre}" VerticalAlignment="Top" Width="196" Margin="0,140,72.6,0"/>
-        <ComboBox Name="cmbSexo" HorizontalAlignment="Right" Text="{Binding ElementName=dgvEmpleado, Path=SelectedItem.GeneroNombre}" VerticalAlignment="Top" Width="211" Margin="0,137,384.6,0"/>
+        <ComboBox Name="cmbPuesto" HorizontalAlignment="Right" Text="{Binding ElementName=dgvEmpleado, Path=SelectedItem.PuestoNombre, Mode=OneWay}" VerticalAlignment="Top" Width="196" Margin="0,140,72.6,0"/>
+        <ComboBox Name="cmbSexo" HorizontalAlignment="Right" Text="{Binding ElementName=dgvEmpleado, Path=SelectedItem.GeneroNombre,  Mode=OneWay}" VerticalAlignment="Top" Width="211" Margin="0,137,384.6,0"/>
         
 
         <Label Content="Sexo" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="12" FontFamily="Bahnschrift" Margin="382,140,0,0" Width="64"/>
 
-        <TextBox x:Name="txtAgregarCorreo"  Margin="382,87,384.6,333.2" Text="{Binding ElementName=dgvEmpleado, Path=SelectedItem.Correo}" materialDesign:HintAssist.Hint="Correo" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontFamily="Bahnschrift" FontSize="12" Background="#7FFFFFFF"
+        <TextBox x:Name="txtAgregarCorreo"  Margin="382,87,384.6,333.2" Text="{Binding ElementName=dgvEmpleado, Path=SelectedItem.Correo, Mode=OneWay}" materialDesign:HintAssist.Hint="Correo" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontFamily="Bahnschrift" FontSize="12" Background="#7FFFFFFF"
                  MaxLength="50"/>
         <PasswordBox x:Name="txtAgregarContra"  Margin="694,39,72.6,380.2" materialDesign:HintAssist.Hint="Contraseña" Style="{StaticResource MaterialDesignFloatingHintPasswordBox}" FontFamily="Bahnschrift" FontSize="12" Background="#7FFFFFFF"
                      MaxLength="20"/>
@@ -49,7 +49,7 @@
         <Button x:Name="btnEliminar" Content="Eliminar" HorizontalAlignment="Right"  VerticalAlignment="Bottom" Margin="0,0,72.6,82.2" Width="236" Height="43" Background="#48C9B0" BorderBrush="{x:Null}" Click="btnEliminarUsuario_Click_1"/>
         <Button x:Name="btnGuardar" Content="Realizar" Visibility="Hidden" HorizontalAlignment="Right"  VerticalAlignment="Bottom" Margin="0,0,72.6,34.2" Width="236" Height="43" Background="#48C9B0 " BorderBrush="{x:Null}" Click="btnGuardarUsuario_Click_1"/>
         <TextBox  x:Name="txtBuscarEmpleadoID" Margin="203,196,567.6,227.2"  materialDesign:HintAssist.Hint="Buscar" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontFamily="Bahnschrift" FontSize="12" Background="#7FFFFFFF" TextChanged="txtBuscar_TextChanged" />
-        <CheckBox Content="Administrador" IsChecked="{Binding ElementName=dgvEmpleado, Path=SelectedItem.Administrador}" x:Name="chkAdmin" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="876,183,0,0" Checked="chkAdmin_Checked" Unchecked="chkAdmin_Unchecked" Width="108"/>
+        <CheckBox Content="Administrador" IsChecked="{Binding ElementName=dgvEmpleado, Path=SelectedItem.Administrador, Mode=OneWay}" x:Name="chkAdmin" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="876,183,0,0" Checked="chkAdmin_Checked" Unchecked="chkAdmin_Unchecked" Width="108"/>
         <Button x:Name="btnCancelar" Content="Cancelar" Visibility="Visible" HorizontalAlignment="Right"  VerticalAlignment="Bottom" Margin="0,0,72.6,84.2" Width="236" Height="42" Background="#48C9B0" BorderBrush="{x:Null}" Click="btnCancelar_Click" />
         <Button x:Name="btnRestablecer" Content="Restablecer Empleado"  HorizontalAlignment="Right"  VerticalAlignment="Bottom" Margin="0,0,73.6,36.2" Width="236" Height="43" Background="#48C9B0" BorderBrush="{x:Null}" Click="btnRestablecer_Click" />
 
