@@ -86,16 +86,18 @@ namespace SistemaDental
                 if (tb.IsChecked == false)
                     band = false;
             }
-
-            foreach(var tb in FindVisualChildren<PasswordBox>(window))
+            return band;
+        }
+        public bool verificarpass(UserControl window)
+        {
+            bool band = true;
+            foreach (var tb in FindVisualChildren<PasswordBox>(window))
             {
                 if (tb.Password.Replace(" ", "").Equals("") && tb.Name != "PART_EditableTextBox" && tb.Name != "PART_TextBox")
                     band = false;
             }
-
             return band;
         }
-
         public bool Verificardgv(UserControl window)
         {
             bool band = true;
