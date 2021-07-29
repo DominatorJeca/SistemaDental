@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SistemaDental.MVCCV.Vista;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -28,15 +29,17 @@ namespace SistemaDental
 
         public Turno turno = new Turno();
 
+        private CajaVista VistaCaja = new CajaVista();
+        private MenuInicioVista VistaMenuInicio = new MenuInicioVista();
+        private DatosDeUsuario VistaUsuarioIngresado = new DatosDeUsuario();
+        private AjustesVista VistaAjuste = new AjustesVista();
         //Constructores
         public Menu()
         {
             InitializeComponent();
-   
-
-            turno.UsuarioID = 37;
-            turno.ComienzoTurno = DateTime.Now;
-            proced.AgregarTurno(turno);
+            ContenedorHijos.Content = VistaMenuInicio;
+            VistaMenuInicio.CambioDeVistaPrincipal += CambiarVista;
+            VistaAjuste.CambioDeVistaPrincipal += CambiarVista;
         }
 
         public Menu(bool admin,string name,int id)
@@ -50,6 +53,11 @@ namespace SistemaDental
             turno.UsuarioID = id;
             turno.ComienzoTurno = DateTime.Now;
             proced.AgregarTurno(turno);
+            ContenedorHijos.Content = VistaMenuInicio;
+        }
+        private void CambiarVista(object o,EventArgs e)
+        {
+            ContenedorHijos.Content = o;
         }
 
         /// <summary>
@@ -189,6 +197,26 @@ namespace SistemaDental
         private void btnMin_Click(object sender, RoutedEventArgs e)
         {
             this.WindowState = WindowState.Minimized;
+        }
+
+        private void btnInicio_Click(object sender, RoutedEventArgs e)
+        {
+            CambiarVista(VistaMenuInicio,null);
+        }
+
+        private void btnCaja_Click_1(object sender, RoutedEventArgs e)
+        {
+            CambiarVista(VistaCaja, null);
+        }
+
+        private void btnPerfil_Click(object sender, RoutedEventArgs e)
+        {
+            CambiarVista(VistaUsuarioIngresado, null);
+        }
+
+        private void btnAjustes_Click_1(object sender, RoutedEventArgs e)
+        {
+            CambiarVista(VistaAjuste, null);
         }
     }
 }
