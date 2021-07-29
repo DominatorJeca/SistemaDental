@@ -33,7 +33,7 @@
             </DataGrid.Columns>
 
         </DataGrid>
-        <Button x:Name="btnAgregarPaciente" Content="Agregar" HorizontalAlignment="Center" Margin="357,249,76,0" VerticalAlignment="Top" Width="204" Background="#FF056676" BorderBrush="{x:Null}" Click="btnGuardarPaciente_Click" Grid.Column="1" />
+        <Button x:Name="btnAgregarPaciente" Content="Agregar" HorizontalAlignment="Center" Margin="357,249,76,0" VerticalAlignment="Top" Width="204" Background="#FF056676" BorderBrush="{x:Null}" Click="btnAgregarPaciente_Click" Grid.Column="1" />
 
         <Button x:Name="btnGuardarPaciente" Content="Guardar" HorizontalAlignment="Center" Margin="357,339,76,0" VerticalAlignment="Top" Width="204" Background="#FF056676" BorderBrush="{x:Null}" Click="btnGuardarPaciente_Click" Grid.Column="1" IsEnabled="False"/>
         <Button x:Name="btnCancelar" Content="Cancelar" HorizontalAlignment="Center" Margin="357,387,76,0" VerticalAlignment="Top" Width="204" Background="#FF056676" BorderBrush="{x:Null}" Click="btnCancelar_Click" Grid.Column="1"/>
@@ -45,7 +45,7 @@
         </ComboBox>
 
         <Label Content="Sexo" HorizontalAlignment="Left" Margin="87,143,0,0" VerticalAlignment="Top" FontSize="12" FontFamily="Bahnschrift" RenderTransformOrigin="10.888,-6.676" Grid.Column="1" Width="34" Height="22"/>
-        <TextBox x:Name="txtcorreo" Margin="39,175,0,243" materialDesign:HintAssist.Hint="Correo" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontFamily="Bahnschrift" FontSize="12" Background="#7FFFFFFF" Text="{Binding SelectedItem.Correo, ElementName=cmbPaciente}"/>
+        <TextBox x:Name="txtcorreo" Margin="39,175,0,243" materialDesign:HintAssist.Hint="Correo" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontFamily="Bahnschrift" FontSize="12" Background="#7FFFFFFF" Text="{Binding SelectedItem.Correo, ElementName=cmbPaciente}" TextChanged="txtcorreo_TextChanged"/>
 
 
     </Grid>
