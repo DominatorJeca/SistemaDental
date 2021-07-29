@@ -31,7 +31,7 @@
                     </Grid>
                 </Button>
 
-                <Button  x:Name="btnPacientes"  Height="150" Width="150" Margin="50,00,0,0" Style="{StaticResource MaterialDesignRaisedButton}"  materialDesign:ButtonAssist.CornerRadius="10" VerticalAlignment="Top"  BorderThickness="0" BorderBrush="Transparent"  >
+                <Button  x:Name="btnPacientes"  Height="150" Width="150" Command="{Binding Path= DataContext.verPacienVistaComando, RelativeSource={RelativeSource AncestorType={x:Type otros:Menu}}, Mode=OneWay}" Margin="50,00,0,0" Style="{StaticResource MaterialDesignRaisedButton}"  materialDesign:ButtonAssist.CornerRadius="10" VerticalAlignment="Top"  BorderThickness="0" BorderBrush="Transparent"  >
                     <Grid Margin="0" Background="{x:Null}">
                         <Image Source="/imagenes/patient.png" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,-32,-27" Height="137" Width="119"/>
                         <TextBlock FontSize="20" FontFamily="Bahnschrift" Height="auto" Width="auto" Margin="-11,23,39,92" Background="{x:Null}">Pacientes</TextBlock>
@@ -70,7 +70,7 @@
                         <TextBlock FontSize="20" FontFamily="Bahnschrift" Height="auto" Width="auto" Margin="-11,23,39,92" Background="{x:Null}">Compras</TextBlock>
                     </Grid>
                 </Button>
-                <Button Name ="btnInventario" Height="150" Width="150" Margin="50,50,0,0" HorizontalAlignment="Left"  VerticalAlignment="Top"  Style="{StaticResource MaterialDesignRaisedButton}" materialDesign:ButtonAssist.CornerRadius="10"  FontFamily="Bahnschrift" FontSize="20" BorderBrush="{x:Null}">
+                <Button Name ="btnInventario" Height="150" Width="150" Margin="50,50,0,0" HorizontalAlignment="Left" Command="{Binding Path= DataContext.InventarioVistaComando, RelativeSource={RelativeSource AncestorType={x:Type otros:Menu}}, Mode=OneWay}" VerticalAlignment="Top"  Style="{StaticResource MaterialDesignRaisedButton}" materialDesign:ButtonAssist.CornerRadius="10"  FontFamily="Bahnschrift" FontSize="20" BorderBrush="{x:Null}">
                     <Button.Background>
                         <LinearGradientBrush StartPoint="0,0" EndPoint="1,2">
                             <GradientStop Color="#56A2BF" Offset="0"/>

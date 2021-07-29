@@ -29,7 +29,7 @@
         <DataGrid HorizontalAlignment="Left" Height="149" Margin="10,296,0,0" VerticalAlignment="Top" Width="396" Background="#FF056676" Foreground="#DDFFFFFF" FontFamily="Bahnschrift" x:Name="dg_materiales" AutoGenerateColumns="False" IsReadOnly="True" SelectionChanged="dg_materiales_SelectionChanged_1">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Nombre" Binding="{Binding Nombre}" Width="170"></DataGridTextColumn>
-                <DataGridTextColumn Header="Cantidad disponible" Binding="{Binding PrecioSugerido}" Width="*"></DataGridTextColumn>
+                <DataGridTextColumn Header="Cantidad disponible" Binding="{Binding CantidadUsada}" Width="*"></DataGridTextColumn>
             </DataGrid.Columns>
         </DataGrid>
 

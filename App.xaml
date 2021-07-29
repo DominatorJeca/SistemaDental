@@ -21,25 +21,27 @@
             <DataTemplate DataType="{x:Type viewModel:CajaVistaControlador}">
                 <view:CajaVista/>
             </DataTemplate>
-            <DataTemplate DataType="{x:Type viewModel:VerPacienVistaControlador}">
-
-            </DataTemplate>
+          
             <DataTemplate DataType="{x:Type viewModel:TratamientosvistaControlador}">
                 <view:TratamientoVista/>
             </DataTemplate>
-            <DataTemplate DataType="{x:Type viewModel:ManejarusuariovistaControlador}">
-                <view:VerPacienVista/>
-            </DataTemplate>
+
 
             <DataTemplate DataType="{x:Type viewModel:Pacientesvistacontrolador}">
                 <view:VerPacienVista/>
             </DataTemplate>
+
+
             <DataTemplate DataType="{x:Type viewModel:EdditarUsuariovistaControlador}">
                 <view:EditarUsuarioVista/>
             </DataTemplate>
+                
+                
             <DataTemplate DataType="{x:Type viewModel:InventarioVistaControlador}">
                 <view:InventarioVista/>
             </DataTemplate>
+                
+                
             <DataTemplate DataType="{x:Type viewModel:AjusteVistaControlador}">
                 <view:AjustesVista/>
             </DataTemplate>

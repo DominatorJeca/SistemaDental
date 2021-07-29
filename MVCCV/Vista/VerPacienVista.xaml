@@ -6,40 +6,37 @@
              xmlns:local="clr-namespace:SistemaDental.MVCCV.Vista"
              mc:Ignorable="d" 
               xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" d:DesignHeight="455" d:DesignWidth="1050" >
-
-    <Grid>
-
+    <Grid >
         <Grid.Background>
             <ImageBrush ImageSource="/imagenes/TeethPattern.jpg" Stretch="UniformToFill"/>
         </Grid.Background>
-        <TextBox x:Name="txtNombre" Margin="42,80,564,344" materialDesign:HintAssist.Hint="Nombre" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontFamily="Bahnschrift" FontSize="12" Background="#7FFFFFFF" Text="{Binding ElementName=cmbPaciente,Path=SelectedItem.NombrePaciente}" TextChanged="txtNombre_TextChanged" Grid.ColumnSpan="2"/>
-        <TextBox x:Name="txtApellido" Margin="42,128,564,290" materialDesign:HintAssist.Hint="Apellido" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontFamily="Bahnschrift" FontSize="12" Background="#7FFFFFFF" Text="{Binding ElementName=cmbPaciente,Path=SelectedItem.ApellidoPaciente}" Grid.ColumnSpan="2"/>
-        <TextBox x:Name="txtTelefono" Margin="500,40,82,382" materialDesign:HintAssist.Hint="Telefóno" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontFamily="Bahnschrift" FontSize="12" Background="#7FFFFFFF" Text="{Binding ElementName=cmbPaciente,Path=SelectedItem.Telefono}"/>
-        <TextBox x:Name="txtEdad" Margin="500,80,433,336" materialDesign:HintAssist.Hint="Edad" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontFamily="Bahnschrift" IsEnabled="False" FontSize="12" Background="#7FFFFFFF" Text="{Binding ElementName=cmbPaciente,Path=SelectedItem.Edad}" RenderTransformOrigin="0.47,-0.17"/>
-        <DatePicker x:Name="dtpFechaNac" Margin="633,86,82,336" FontSize="11" DisplayDateStart="1921-01-01" SelectedDate="{ Binding ElementName=cmbPaciente,Path=SelectedItem.Fecha}" Height="33"/>
-        <TextBox x:Name="txtIdentidad" Margin="500,170,82,243" materialDesign:HintAssist.Hint="Identidad" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontFamily="Bahnschrift" FontSize="12" Background="#7FFFFFFF" IsEnabled="False" Text="{Binding ElementName=cmbPaciente,Path=SelectedItem.Id_paciente}"/>
-        <Button x:Name="btnEditarPaciente" Content="Editar" HorizontalAlignment="Center" Margin="765,293,82,0" VerticalAlignment="Top" Width="203" Background="#FF056676" BorderBrush="{x:Null}" Click="btnEditarPaciente_Click"/>
-        <Label Content="Historial Clínico" HorizontalAlignment="Left" Margin="42,222,0,0" VerticalAlignment="Top" FontSize="12" FontFamily="Bahnschrift" Background="#7F056676" Grid.ColumnSpan="2"/>
+        <TextBox x:Name="txtNombre" Margin="42,92,607,332" materialDesign:HintAssist.Hint="Nombre" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontFamily="Bahnschrift" FontSize="12" Background="#7FFFFFFF" Text="{Binding ElementName=cmbPaciente,Path=SelectedItem.NombrePaciente}" TextChanged="txtNombre_TextChanged"/>
+        <TextBox x:Name="txtApellido" Margin="42,128,607,290" materialDesign:HintAssist.Hint="Apellido" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontFamily="Bahnschrift" FontSize="12" Background="#7FFFFFFF" Text="{Binding ElementName=cmbPaciente,Path=SelectedItem.ApellidoPaciente}"/>
+        <TextBox x:Name="txtTelefono" Margin="631,90,24,332" materialDesign:HintAssist.Hint="Telefóno" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontFamily="Bahnschrift" FontSize="12" Background="#7FFFFFFF" Text="{Binding ElementName=cmbPaciente,Path=SelectedItem.Telefono}"/>
+        <DatePicker x:Name="dtpFechaNac" materialDesign:HintAssist.Hint="Fecha de nacimiento" Margin="0,35,24,380" FontSize="11" DisplayDateStart="1921-01-01" SelectedDate="{ Binding ElementName=cmbPaciente,Path=SelectedItem.FechaNac}" Height="40" HorizontalAlignment="Right" Width="395"/>
+        <TextBox x:Name="txtIdentidad" Margin="0,0,24,243" materialDesign:HintAssist.Hint="Identidad" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontFamily="Bahnschrift" FontSize="12" Background="#7FFFFFFF" IsEnabled="True" Text="{Binding ElementName=cmbPaciente,Path=SelectedItem.Identidad}" Height="42" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="395"/>
+        <Button x:Name="btnEditarPaciente" Content="Editar" HorizontalAlignment="Center" Margin="799,301,24,0" VerticalAlignment="Top" Width="227" Background="#FF056676" BorderBrush="{x:Null}" Click="btnEditarPaciente_Click" IsEnabled="False"/>
+        <Label Content="Historial Clínico" HorizontalAlignment="Left" Margin="42,222,0,0" VerticalAlignment="Top" FontSize="12" FontFamily="Bahnschrift" Background="#7F056676" Width="93" Height="22"/>
 
-        <DataGrid x:Name="dtgHistorial" HorizontalAlignment="Left" Height="170" Margin="42,249,0,0" VerticalAlignment="Top" Width="683" Background="#FF056676" Foreground="#DDFFFFFF" AutoGenerateColumns="False" IsReadOnly="True" Grid.ColumnSpan="2">
+        <DataGrid x:Name="dtgHistorial" HorizontalAlignment="Left" Height="170" Margin="42,257,0,0" VerticalAlignment="Top" Width="735" Background="#FF056676" Foreground="#DDFFFFFF" AutoGenerateColumns="False" IsReadOnly="True">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Fecha" Binding="{Binding Fecha}" Width="200"></DataGridTextColumn>
-                <DataGridTextColumn Header="Tratamiento" Binding="{Binding NombreTratamiento}" Width="200"></DataGridTextColumn>
+                <DataGridTextColumn Header="Paciente" Binding="{Binding Paciente}" Width="150"></DataGridTextColumn>
+                <DataGridTextColumn Header="Tratamiento" Binding="{Binding NombreTratamiento}" Width="150"></DataGridTextColumn>
+                <DataGridTextColumn Header="Doctor" Binding="{Binding Doctor}" Width="150"></DataGridTextColumn>
+                <DataGridTextColumn Header="Fecha Cita" Binding="{Binding FechaCita}" Width="150"></DataGridTextColumn>
             </DataGrid.Columns>
 
         </DataGrid>
-        <Button x:Name="btnAgregarPaciente" Content="Agregar" HorizontalAlignment="Center" Margin="765,249,82,0" VerticalAlignment="Top" Width="203" Background="#FF056676" BorderBrush="{x:Null}" Click="btnGuardarPaciente_Click" />
+        <Button x:Name="btnAgregarPaciente" Content="Agregar" HorizontalAlignment="Center" Margin="799,257,24,0" VerticalAlignment="Top" Width="227" Background="#FF056676" BorderBrush="{x:Null}" Click="btnAgregarPaciente_Click" />
 
-        <Button x:Name="btnGuardarPaciente" Content="Guardar" HorizontalAlignment="Center" Margin="765,339,82,0" VerticalAlignment="Top" Width="203" Background="#FF056676" BorderBrush="{x:Null}" Click="btnGuardarPaciente_Click" />
-        <Button x:Name="btnCancelar" Content="Cancelar" HorizontalAlignment="Center" Margin="765,387,82,0" VerticalAlignment="Top" Width="203" Background="#FF056676" BorderBrush="{x:Null}" Click="btnCancelar_Click"/>
-        <Label Content="Paciente" HorizontalAlignment="Left" Margin="42,51,0,0" VerticalAlignment="Top" FontSize="12" FontFamily="Bahnschrift"/>
-        <ComboBox x:Name="cmbPaciente" HorizontalAlignment="Left" Margin="101,48,0,0" VerticalAlignment="Top" Width="385" SelectionChanged="cmbPaciente_SelectionChanged"/>
-        <ComboBox Name="cmbGenero" HorizontalAlignment="Left" Margin="582,140,0,0" VerticalAlignment="Top" Width="386" Text="{Binding ElementName=cmbPaciente,Path=SelectedItem.Genero}">
+        <Button x:Name="btnGuardarPaciente" Content="Guardar" HorizontalAlignment="Center" Margin="799,347,24,0" VerticalAlignment="Top" Width="227" Background="#FF056676" BorderBrush="{x:Null}" Click="btnGuardarPaciente_Click" IsEnabled="False"/>
+        <Button x:Name="btnCancelar" Content="Cancelar" HorizontalAlignment="Center" Margin="799,395,24,0" VerticalAlignment="Top" Width="227" Background="#FF056676" BorderBrush="{x:Null}" Click="btnCancelar_Click"/>
+        <ComboBox materialDesign:HintAssist.Hint="Paciente" x:Name="cmbPaciente" HorizontalAlignment="Left" Margin="42,35,0,0" VerticalAlignment="Top" Width="401" SelectionChanged="cmbPaciente_SelectionChanged" Height="40"/>
+        <ComboBox Name="cmbGenero" materialDesign:HintAssist.Hint="Género" HorizontalAlignment="Right" Margin="0,128,24,0" VerticalAlignment="Top" Width="395" Text="{Binding ElementName=cmbPaciente,Path=SelectedItem.Genero}" Height="37">
             <ComboBoxItem Content="Femenino"/>
             <ComboBoxItem Content="Masculino"/>
         </ComboBox>
-
-        <Label Content="Sexo" HorizontalAlignment="Left" Margin="500,143,0,0" VerticalAlignment="Top" FontSize="12" FontFamily="Bahnschrift" RenderTransformOrigin="10.888,-6.676"/>
+        <TextBox x:Name="txtcorreo" Margin="39,175,607,243" materialDesign:HintAssist.Hint="Correo" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontFamily="Bahnschrift" FontSize="12" Background="#7FFFFFFF" Text="{Binding SelectedItem.Correo, ElementName=cmbPaciente}" TextChanged="txtcorreo_TextChanged"/>
 
 
     </Grid>

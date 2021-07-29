@@ -15,7 +15,7 @@ namespace SistemaDental.MVCCV.VistaControlador
         public CasaVistaControlador CasaVista { get; set; }
         public CajaVistaControlador CajaVista { get; set; }
         public UsuariosVistaControlador UsuarioVista { get; set; }
-        public VerPacienVistaControlador verPacienVista { get; set; }
+      public Pacientesvistacontrolador PacientesVista { get; set; }
         public TratamientosvistaControlador tratamientosvista { get; set; }
         public EdditarUsuariovistaControlador edditarUsuariovista { get; set; }
         public InventarioVistaControlador  inventarioVista { get; set; }
@@ -56,7 +56,7 @@ namespace SistemaDental.MVCCV.VistaControlador
             CasaVista = new CasaVistaControlador();
             CajaVista = new CajaVistaControlador();
             UsuarioVista = new UsuariosVistaControlador();
-            verPacienVista = new VerPacienVistaControlador ();
+            PacientesVista = new Pacientesvistacontrolador();
             tratamientosvista = new TratamientosvistaControlador();
             edditarUsuariovista = new EdditarUsuariovistaControlador();
             inventarioVista = new InventarioVistaControlador();
@@ -67,6 +67,7 @@ namespace SistemaDental.MVCCV.VistaControlador
             CompraVista = new CompraVistaControlador();
             DatosDeUsuarioVista = new DatosDeUsuarioVistaControlador();
             vistaActual = CasaVista;
+           
             CasaVistaComando = new RelayCommand(o =>
             {
                 vistaActual = CasaVista;
@@ -78,7 +79,7 @@ namespace SistemaDental.MVCCV.VistaControlador
             });
             verPacienVistaComando = new RelayCommand(o =>
             {
-                vistaActual = verPacienVista;
+                vistaActual = PacientesVista;
             });
             tratamientoVistaComando = new RelayCommand(o =>
             {
@@ -91,7 +92,7 @@ namespace SistemaDental.MVCCV.VistaControlador
             });
             InventarioVistaComando = new RelayCommand(o =>
             {
-                vistaActual = edditarUsuariovista;
+                vistaActual = inventarioVista;
             });
             manejarusuariovistaComando = new RelayCommand(o =>
             {

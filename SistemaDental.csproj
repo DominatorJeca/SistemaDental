@@ -250,7 +250,6 @@
     <Compile Include="MVCCV\VistaControlador\Pacientesvistacontrolador.cs" />
     <Compile Include="MVCCV\VistaControlador\TratamientosvistaControlador.cs" />
     <Compile Include="MVCCV\VistaControlador\UsuariosVistaControlador.cs" />
-    <Compile Include="MVCCV\VistaControlador\VerPacienVistaControlador.cs" />
     <Compile Include="MVCCV\VistaControlador\CitaVistaControlador.cs" />
     <Compile Include="MVCCV\VistaControlador\MenuPrincipalVistaControlador.cs" />
     <Compile Include="MVCCV\Vista\AjustesVista.xaml.cs">
