@@ -27,6 +27,8 @@ namespace SistemaDental
         private String Nombree;
       
 
+        Validaciones validar = new Validaciones();
+
         //constructores
         public EditarUsuario()
         {
@@ -35,7 +37,7 @@ namespace SistemaDental
             MostrarPuesto();
 
         }
-
+      
         public EditarUsuario(bool admin, string name)
         {
             InitializeComponent();
@@ -86,11 +88,7 @@ namespace SistemaDental
             usuario.Administrador = false;
         }
 
-        public static bool ValidarEmail(string email)
-        {
-            Regex regex = new Regex(@"^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$");
-            return regex.IsMatch(email);
-        }
+      
 
         /// <summary>
         /// Verifica que los valores de los textbox y combobox no esten vacios
@@ -98,6 +96,7 @@ namespace SistemaDental
         /// <returns>Verificacion de valores</returns>
         private bool VerificarValores()
         {
+            
             if (txtEditarApellido.Text == string.Empty || txtEditarNombre.Text == string.Empty || txtEditarCorreo.Text == string.Empty
                  || txtEditarTelefono.Text == string.Empty || txtNuevaContra.Text == string.Empty)
             {
@@ -109,7 +108,7 @@ namespace SistemaDental
                 MessageBox.Show("Por favor selecciona el Sexo del empleado");
                 return false;
             }
-            else if (!ValidarEmail(txtEditarCorreo.Text) )
+            else if (!validar.ValidarEmail(txtEditarCorreo.Text) )
             {
                 MessageBox.Show("Por favor, ingrese un correo valido");
                 return false;
@@ -258,22 +257,18 @@ namespace SistemaDental
 
         private void PreviewTextInputOnlyLetters(object sender, TextCompositionEventArgs e)
         {
-            int character = Convert.ToInt32(Convert.ToChar(e.Text));
-            if ((character >= 65 && character <= 90) || (character >= 97 && character <= 122))
-                e.Handled = false;
-            else
-                e.Handled = true;
+            
+
+            validar.SoloLetras(e);
 
         }
 
 
         private void PreviewTextInputOnlyNumbers(object sender, TextCompositionEventArgs e)
         {
-            int character = Convert.ToInt32(Convert.ToChar(e.Text));
-            if (character >= 48 && character <= 57)
-                e.Handled = false;
-            else
-                e.Handled = true;
+           
+
+            validar.SoloNumeros(e);
         }
 
         private void Window_Closed(object sender, EventArgs e)
@@ -282,5 +277,7 @@ namespace SistemaDental
             Ajustes ajustes = new Ajustes(Admin, Nombree);
             ajustes.Show();
         }
+
+      
     }
 }

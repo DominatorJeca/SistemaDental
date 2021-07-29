@@ -33,14 +33,14 @@ namespace SistemaDental.MVCCV.Vista
             Nombree = name;
             Admin = admin;
         }
-
+/*
         private void btnVerPaciente_Click(object sender, RoutedEventArgs e)
         {
             VerPaciente verpaciente = new VerPaciente(Admin, Nombree);
             verpaciente.Show();
   
         }
-
+*/
         private void btnAgregarPaciente_Click(object sender, RoutedEventArgs e)
         {
             AgregarPaciente agregarPaciente = new AgregarPaciente(Admin, Nombree);

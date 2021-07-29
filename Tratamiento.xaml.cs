@@ -21,11 +21,13 @@ namespace SistemaDental
     /// </summary>
     public partial class Tratamiento : Window
     {
+        
         ClaseTratamiento tratamiento = new ClaseTratamiento();
         DateTime DateTime = new DateTime();
         private bool Admin;
         private String Nombree;
         int cant_anterior = 0;
+        Validaciones validar = new Validaciones();
         public Tratamiento()
         {
             InitializeComponent();
@@ -81,14 +83,11 @@ namespace SistemaDental
 
         private void btnEditar_Click(object sender, RoutedEventArgs e)
         {
-              cant_anterior = Convert.ToInt32(txtCantidad.Text);
-            try
+
+            
+           /* try
             {
-                if (dg_materiales.SelectedValue == null || cmbTratamiento.SelectedValue == null )
-                {
-                    MessageBox.Show("Seleccione un tratamiento y un material para poder ser editado");
-                }
-                else
+                if (dg_materiales.SelectedValue != null || validar.VerificarCampos(this) )
                 {
 
                     txtCantidad.IsEnabled = true;
@@ -98,11 +97,15 @@ namespace SistemaDental
                     btnRealizar.IsEnabled = false;
                     cmbTratamiento.IsEnabled = false;
                 }
+                else
+                {
+                    MessageBox.Show("Seleccione un tratamiento y un material para poder ser editado");
+                }
             }
             catch(Exception ex)
             {
                 MessageBox.Show(""+ ex);
-            }
+            }*/
         }
 
         private void btnGuardar_Click(object sender, RoutedEventArgs e)
@@ -132,11 +135,12 @@ namespace SistemaDental
 
         }
 
-        private void txtCantidad_TextChanged(object sender, TextChangedEventArgs e)
-        {
+        private void PreviewTextInputOnlyNumbers(object sender, TextCompositionEventArgs e)
+        { 
 
+            validar.SoloNumeros(e);
         }
-  
+
         private void TratamientoWindow_Closed(object sender, EventArgs e)
                 {
                     Menu menu = new Menu();

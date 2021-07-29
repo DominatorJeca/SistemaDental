@@ -37,7 +37,7 @@ namespace SistemaDental.MVCCV.Vista
             InitializeComponent();
             MostrarPuesto();
             MostrarEmpleados(true);
-            
+
             HabilitarInhabilitarTXT(false);
             botoneshabilitados(true);
 
@@ -47,7 +47,7 @@ namespace SistemaDental.MVCCV.Vista
         {
             InitializeComponent();
             MostrarPuesto();
-            
+
             MostrarEmpleados(true);
             botoneshabilitados(true);
             Nombree = name;
@@ -77,7 +77,7 @@ namespace SistemaDental.MVCCV.Vista
         /// </summary>
         public void ObtenerValores()
         {
-            
+
 
             usuario.Id = Convert.ToString(txtAgregarIdentidad.Text);
             usuario.Nombre = Convert.ToString(txtAgregarNombre.Text);
@@ -85,13 +85,13 @@ namespace SistemaDental.MVCCV.Vista
             usuario.Telefono = Convert.ToString(txtAgregarTelefono.Text);
             usuario.Correo = Convert.ToString(txtAgregarCorreo.Text);
             usuario.Puesto = Convert.ToInt32(cmbPuesto.SelectedValue);
-            usuario.Genero = 1;
-            usuario.Contraseña = Convert.ToString(txtAgregarContra.Password);
+            usuario.GeneroNombre = ((ComboBoxItem)cmbSexo.SelectedItem).Content.ToString();
+            usuario.Contraseña = txtAgregarContra.Password;
             usuario.Estado = true;
             usuario.Ide = (Convert.ToInt32(dgvEmpleado.SelectedValue));
-            
-            
-          
+
+
+
         }
 
 
@@ -130,7 +130,7 @@ namespace SistemaDental.MVCCV.Vista
                 MessageBox.Show("Por favor, ingrese un correo valido");
                 return false;
             }
-          
+
             return true;
         }
         ICollectionView ColectionEmpleados;
@@ -140,6 +140,8 @@ namespace SistemaDental.MVCCV.Vista
             dgvEmpleado.ItemsSource = ColectionEmpleados;
             dgvEmpleado.SelectedValuePath = "Ide";
         }
+        
+     
 
         /// <summary>
         /// Funcion para limpiar los textbox y combobox del formulario
@@ -171,8 +173,8 @@ namespace SistemaDental.MVCCV.Vista
             LimpiarFormulario();
 
             dgvEmpleado.IsEnabled = false;
-          
-           
+
+
         }
 
 
@@ -200,7 +202,7 @@ namespace SistemaDental.MVCCV.Vista
 
         private void chkAdmin_Unchecked(object sender, RoutedEventArgs e)
         {
-            usuario.Administrador = false; 
+            usuario.Administrador = false;
         }
 
         private void btnEditarUsuario_Click_1(object sender, RoutedEventArgs e)
@@ -262,7 +264,7 @@ namespace SistemaDental.MVCCV.Vista
             {
                 case 1:
                     IngresarEmpleado();
-                  
+
                     break;
                 case 2:
                     EditarEmpleado();
@@ -290,14 +292,14 @@ namespace SistemaDental.MVCCV.Vista
                     // Obtener los valores para el empleado
                     ObtenerValores();
 
-                    // Insertar los datos del usuario 
+                    // Insertar los datos del usuario
                     Proc.IngresarUsuario(usuario);
 
                     // Mensaje de inserción exitosa
-                    
 
-                   
-                    
+
+
+
                     obtenerUsuario();
                     botoneshabilitados(true);
                 }
@@ -310,16 +312,16 @@ namespace SistemaDental.MVCCV.Vista
                 MostrarEmpleados(true);
             }
         }
-      
+
 
         private void obtenerUsuario()
         {
-            
+
                 try
                 {
 
                 string usu;
-                // Insertar los datos del usuario 
+                // Insertar los datos del usuario
                 usu = Proc.obtenerusuario(usuario.Id);
 
                     // Mensaje de inserción exitosa
@@ -333,7 +335,7 @@ namespace SistemaDental.MVCCV.Vista
                     Console.WriteLine(ex.Message);
                 }
             }
-     
+
         private void EditarEmpleado()
         {
             if (VerificarValores() == true)
@@ -343,7 +345,7 @@ namespace SistemaDental.MVCCV.Vista
                     // Obtener los valores para el empleado
                     ObtenerValores();
 
-                    // Insertar los datos del usuario 
+                    // Insertar los datos del usuario
                     Proc.EditarEmpleado(usuario);
 
                     // Mensaje de inserción exitosa
@@ -365,14 +367,14 @@ namespace SistemaDental.MVCCV.Vista
 
         private void EliminarRestablecerEmpleado(bool act)
         {
-           
-            
+
+
                 try
                 {
                     // Obtener los valores para el empleado
                     ObtenerValores();
                     usuario.Estado = act;
-                    // Insertar los datos del usuario 
+                    // Insertar los datos del usuario
                     Proc.EditarEmpleado(usuario);
 
                     // Mensaje de inserción exitosa
@@ -393,7 +395,7 @@ namespace SistemaDental.MVCCV.Vista
 
         private void dgvEmpleado_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-           
+
         }
 
         private void btnRestablecer_Click(object sender, RoutedEventArgs e)
@@ -432,4 +434,3 @@ namespace SistemaDental.MVCCV.Vista
 
     }
 }
-
