@@ -85,7 +85,8 @@ namespace SistemaDental.MVCCV.Vista
             usuario.Telefono = Convert.ToString(txtAgregarTelefono.Text);
             usuario.Correo = Convert.ToString(txtAgregarCorreo.Text);
             usuario.Puesto = Convert.ToInt32(cmbPuesto.SelectedValue);
-            usuario.GeneroNombre = ((ComboBoxItem)cmbSexo.SelectedItem).Content.ToString();
+            usuario.Genero = 1;
+           usuario.GeneroNombre = ((ComboBoxItem)cmbSexo.SelectedItem).Content.ToString();
             usuario.Contraseña = txtAgregarContra.Password;
             usuario.Estado = true;
             usuario.Ide = (Convert.ToInt32(dgvEmpleado.SelectedValue));
