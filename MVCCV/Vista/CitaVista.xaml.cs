@@ -24,7 +24,8 @@ namespace SistemaDental.MVCCV.Vista
     {
         ObservableCollection<ClaseCitas> tratamientos = new ObservableCollection<ClaseCitas>();
         ClaseCitas citas = new ClaseCitas();
-     
+        public event EventHandler CambioDeVistaPrincipal;
+      
         int bton = 0;
         private bool Admin;
         private String Nombree;
@@ -43,6 +44,13 @@ namespace SistemaDental.MVCCV.Vista
             mostrarCitas();
             Nombree = name;
             Admin = admin;
+        }
+        protected virtual void CambioDeVista(object o)
+        {
+            if (MenuNavegacion.IsTopDrawerOpen)
+                MenuNavegacion.IsTopDrawerOpen = false;
+            if (CambioDeVistaPrincipal != null)
+                CambioDeVistaPrincipal(o, null);
         }
         private void Agregar_Tratamientos_Click(object sender, RoutedEventArgs e)
         {
@@ -307,10 +315,7 @@ namespace SistemaDental.MVCCV.Vista
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void cdCitas_SelectedDatesChanged(object sender, SelectionChangedEventArgs e)
-        {
-
-        }
+    
 
         private void dtg_Citas_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
@@ -382,22 +387,7 @@ namespace SistemaDental.MVCCV.Vista
 
         }
 
-        private void btnRegresar_Click(object sender, RoutedEventArgs e)
-        {
-            /* Menu menu = new Menu(Admin, Nombree);
-             menu.Show();
-         */
-        }
-
-        private void ctTiempo_SelectedTimeChanged(object sender, RoutedPropertyChangedEventArgs<DateTime?> e)
-        {
-
-        }
-
-        private void dtg_Tratamientos_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-
-        }
+       
 
         private void btnelimtratamiento_Click_1(object sender, RoutedEventArgs e)
         {
@@ -489,10 +479,35 @@ namespace SistemaDental.MVCCV.Vista
 
 
         }
-
        
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            MenuNavegacion.IsTopDrawerOpen = true;
+        }
 
-        
+        private void MenuNavegacion_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            if (MenuNavegacion.IsTopDrawerOpen)
+                MenuNavegacion.IsTopDrawerOpen = false;
+        }
+
+        private void Grid_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+          
+        }
+
+        private void btnAgendarCita_Click(object sender, RoutedEventArgs e)
+        {
+            if (MenuNavegacion.IsTopDrawerOpen)
+                MenuNavegacion.IsTopDrawerOpen = false;
+        }
+
+        private void btnRealizarCita_Click(object sender, RoutedEventArgs e)
+        {
+            RealizarCitaVista VistaRealizarCita = new RealizarCitaVista();
+            VistaRealizarCita.CambioDeVistaPrincipal += CambioDeVistaPrincipal;
+            CambioDeVista(VistaRealizarCita);
+        }
     }
 
     

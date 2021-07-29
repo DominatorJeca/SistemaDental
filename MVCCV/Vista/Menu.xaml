@@ -49,7 +49,6 @@
             <materialDesign:PackIcon Kind="WindowMinimize" Height="auto" Width="auto"  RenderTransformOrigin="0.264,0.45"></materialDesign:PackIcon>
         </Button>
         <ContentControl x:Name="ContenedorHijos" Grid.Row="1" Margin="0">
-            
         </ContentControl>
 
     </Grid>

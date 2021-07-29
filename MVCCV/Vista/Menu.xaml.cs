@@ -28,7 +28,6 @@ namespace SistemaDental
         private ClaseProcedimiento proced = new ClaseProcedimiento();
 
         public Turno turno = new Turno();
-
         private CajaVista VistaCaja = new CajaVista();
         private MenuInicioVista VistaMenuInicio = new MenuInicioVista();
         private DatosDeUsuario VistaUsuarioIngresado = new DatosDeUsuario();

@@ -22,7 +22,7 @@ namespace SistemaDental.MVCCV.Vista
     public partial class MenuInicioVista : UserControl
     {
         public event EventHandler CambioDeVistaPrincipal;
-        private CitaVista VistaAgendarCita = new CitaVista();
+       public CitaVista VistaAgendarCita = new CitaVista();
         private CompraVista VistaCompras = new CompraVista();
         private InventarioVista VistaInventario = new InventarioVista();
         private TratamientoVista VistaTratamiento = new TratamientoVista();
@@ -31,6 +31,7 @@ namespace SistemaDental.MVCCV.Vista
         public MenuInicioVista()
         {
             InitializeComponent();
+            
         }
 
         private void btnCitas_Click(object sender, RoutedEventArgs e)
@@ -61,6 +62,7 @@ namespace SistemaDental.MVCCV.Vista
 
         private void btnCitas_Click_1(object sender, RoutedEventArgs e)
         {
+            VistaAgendarCita.CambioDeVistaPrincipal += CambioDeVistaPrincipal;
             CambioDeVista(VistaAgendarCita);
         }
 

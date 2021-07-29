@@ -25,6 +25,8 @@ namespace SistemaDental.MVCCV.Vista
         ClaseProcedimiento proc = new ClaseProcedimiento();
         List<ClaseTratamiento> tratamientos = new List<ClaseTratamiento>();
         float total=0;
+        public event EventHandler CambioDeVistaPrincipal;
+       
         public RealizarCitaVista()
         {
             InitializeComponent();
@@ -34,7 +36,13 @@ namespace SistemaDental.MVCCV.Vista
         {
             MostrarDatos();
         }
-
+        protected virtual void CambioDeVista(object o)
+        {
+            if (MenuNavegacion.IsTopDrawerOpen)
+                MenuNavegacion.IsTopDrawerOpen = false;
+            if (CambioDeVistaPrincipal != null)
+                CambioDeVistaPrincipal(o, null);
+        }
         private void MostrarDatos()
         {
             cmbTratamientos.ItemsSource = null;
@@ -138,6 +146,30 @@ namespace SistemaDental.MVCCV.Vista
                     proc.RestarMaterial(inv);
             }
             MostrarDatos();
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            MenuNavegacion.IsTopDrawerOpen = true;
+        }
+
+        private void MenuNavegacion_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            if (MenuNavegacion.IsTopDrawerOpen)
+                MenuNavegacion.IsTopDrawerOpen = false;
+        }
+
+        private void btnRealizarCita_Click(object sender, RoutedEventArgs e)
+        {
+            if (MenuNavegacion.IsTopDrawerOpen)
+                MenuNavegacion.IsTopDrawerOpen = false;
+        }
+
+        private void btnAgendarCita_Click(object sender, RoutedEventArgs e)
+        {
+        CitaVista VistaAgendarCita = new CitaVista();
+            VistaAgendarCita.CambioDeVistaPrincipal += CambioDeVistaPrincipal;
+        CambioDeVista(VistaAgendarCita);
         }
     }
     }
