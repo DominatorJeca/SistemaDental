@@ -21,6 +21,8 @@ namespace SistemaDental.MVCCV.Vista
     /// </summary>
     public partial class DatosDeUsuario : UserControl
     {
+        string contraseniaverificar;
+        int edicion = 0;
         ClaseProcedimiento procedimiento = new ClaseProcedimiento();
         Usuario usuarios = new Usuario();
         Validaciones validar = new Validaciones();
@@ -44,9 +46,9 @@ namespace SistemaDental.MVCCV.Vista
             txtNombre.IsEnabled =mostrar;
             txtCorreo.IsEnabled = mostrar;
             txtTelefono.IsEnabled = mostrar;
-            
-           
 
+
+            btnActualizarContraseña.Visibility = visibility;
             txtContraseniaActual.Visibility = visibility;
             txtNuevaContra.Visibility = visibility;
             txtNuevaContra_Copy.Visibility = visibility;
@@ -68,23 +70,48 @@ namespace SistemaDental.MVCCV.Vista
         }
         private void btnguardar_Click(object sender, RoutedEventArgs e)
         {
-            ObtenerValores();
-            if (validar.VerificarCampos(this) && validar.ValidarEmail(txtCorreo.Text) && validar.VerificarNumero(txtTelefono.Text))
+            if (edicion == 0)
             {
-                procedimiento.EditarUsuario(usuarios);
-                HabilitarBotones(false, Visibility.Collapsed);
-                btnActualizarUsuario.Visibility = Visibility.Visible;
-                LlenadoDeInformacion();
-                txtNuevaContra.Password = "";
-                txtNuevaContra_Copy.Password = "";
-                txtContraseniaActual.Password = "";
+                if (validar.VerificarCampos(this) && validar.ValidarEmail(txtCorreo.Text) && validar.VerificarNumero(txtTelefono.Text) && txtContraseniaActual.Password == contraseniaverificar)
+                {
+                    ObtenerValores();
+                    procedimiento.EditarUsuarioSinPass(usuarios);
+                    HabilitarBotones(false, Visibility.Collapsed);
+                    btnActualizarUsuario.Visibility = Visibility.Visible;
+                    LlenadoDeInformacion();
+                    txtNuevaContra.Password = "";
+                    txtNuevaContra_Copy.Password = "";
+                    txtContraseniaActual.Password = "";
+                }
+                else if (!validar.ValidarEmail(txtCorreo.Text))
+                    MessageBox.Show("El correo que intenta ingresar no es válido");
+                else if (!validar.VerificarNumero(txtTelefono.Text))
+                    MessageBox.Show("Su número telefónico no es correcto");
+                else
+                    MessageBox.Show("Asegurese de verificar la integridad de sus datos");
             }
-            else if (!validar.ValidarEmail(txtCorreo.Text))
-                MessageBox.Show("El correo que intenta ingresar no es válido");
-            else if (!validar.VerificarNumero(txtTelefono.Text))
-                MessageBox.Show("Su número telefónico no es correcto");
             else
-                MessageBox.Show("Asegurese de llenar todos los campos");
+            {
+                if (validar.VerificarCampos(this) && validar.ValidarEmail(txtCorreo.Text) && validar.VerificarNumero(txtTelefono.Text) && validar.verificarpass(this) && txtContraseniaActual.Password == contraseniaverificar)
+                {
+                    ObtenerValores();
+                    procedimiento.EditarUsuario(usuarios);
+                    HabilitarBotones(false, Visibility.Collapsed);
+                    btnActualizarUsuario.Visibility = Visibility.Visible;
+                    LlenadoDeInformacion();
+                    txtNuevaContra.Password = "";
+                    txtNuevaContra_Copy.Password = "";
+                    txtContraseniaActual.Password = "";
+                }
+                else if (!validar.ValidarEmail(txtCorreo.Text))
+                    MessageBox.Show("El correo que intenta ingresar no es válido");
+                else if (!validar.VerificarNumero(txtTelefono.Text))
+                    MessageBox.Show("Su número telefónico no es correcto");
+                else if (!validar.verificarpass(this))
+                    MessageBox.Show("Corrobore la información acerca de sus contraseñas");
+                else
+                    MessageBox.Show("Asegurese de verificar la integridad de sus datos");
+            }
         }
 
         private void LlenadoDeInformacion()
@@ -95,6 +122,7 @@ namespace SistemaDental.MVCCV.Vista
             txtCorreo.Text = Usuario.Correo;
             txtTelefono.Text = Usuario.Telefono;
             txtpuesto.Text = Usuario.PuestoNombre;
+            contraseniaverificar = Usuario.Contraseña;
         }
 
         private void btnCancelar_Click(object sender, RoutedEventArgs e)
@@ -102,6 +130,9 @@ namespace SistemaDental.MVCCV.Vista
             btnActualizarUsuario.Visibility = Visibility.Visible;
             HabilitarBotones(false, Visibility.Collapsed);
             LlenadoDeInformacion();
+            txtNuevaContra.Password = "";
+            txtNuevaContra_Copy.Password = "";
+            txtContraseniaActual.Password = "";
         }
 
         private void PreviewTextInputOnlyNumbers(object sender, TextCompositionEventArgs e)
@@ -117,6 +148,14 @@ namespace SistemaDental.MVCCV.Vista
 
             validar.SoloLetras(e);
 
+        }
+
+        private void btnActualizarContraseña_Click(object sender, RoutedEventArgs e)
+        {
+            edicion = 1;
+            txtNuevaContra.IsEnabled = true;
+            txtNuevaContra_Copy.IsEnabled = true;
+            btnActualizarContraseña.IsEnabled = false;
         }
     }
 }

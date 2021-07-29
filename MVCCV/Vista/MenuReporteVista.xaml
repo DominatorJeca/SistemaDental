@@ -43,7 +43,7 @@
                 <ComboBoxItem Content="2024"/>
             </ComboBox>
             <Label x:Name="lblmes" Visibility="Collapsed">Mes</Label>
-            <ComboBox x:Name="Mes" Width="150">
+            <ComboBox x:Name="Mes" Width="150" Visibility="Collapsed">
                 <ComboBoxItem Content="Enero"/>
                 <ComboBoxItem Content="Febrero"/>
                 <ComboBoxItem Content="Marzo"/>
@@ -62,7 +62,7 @@
             <ComboBox x:Name="Tratamiento" Width="150" Visibility="Collapsed"/>
             <Label x:Name="lblempleado" Visibility="Collapsed">Empleados</Label>
             <ComboBox x:Name="cmbEmpleado" Width="150" Visibility="Collapsed"/>
-            <Button Style="{StaticResource MaterialDesignFlatButton}" Background="Beige" Width="150" Click="Button_Click" x:Name="btnMostrarReporte"/>
+            <Button Style="{StaticResource MaterialDesignFlatButton}" Background="Beige" Width="150" Click="Button_Click" x:Name="btnMostrarReporte" Margin="30,0,0,0"/>
         </StackPanel>
   
     </Grid>

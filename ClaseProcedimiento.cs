@@ -1407,6 +1407,32 @@ namespace SistemaDental
                 command.Connection = con.Close();
             }
         }
+
+        public void EditarUsuarioSinPass(Usuario usuario)
+        {
+            try
+            {
+                command.Connection = con.Open();
+                command.CommandText = "EditarUsuarioSinPass";
+                command.CommandType = CommandType.StoredProcedure;
+                command.Parameters.AddWithValue("@usuario", usuario.usuario);
+                command.Parameters.AddWithValue("@nombre", usuario.Nombre);
+                command.Parameters.AddWithValue("@apellido", usuario.Apellido);
+                command.Parameters.AddWithValue("@correo", usuario.Correo);
+                command.Parameters.AddWithValue("@telefono", usuario.Telefono);
+                command.ExecuteNonQuery();
+
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+            finally
+            {
+                command.Parameters.Clear();
+                command.Connection = con.Close();
+            }
+        }
         #endregion
 
 
