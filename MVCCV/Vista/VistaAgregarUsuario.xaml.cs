@@ -418,14 +418,14 @@ namespace SistemaDental.MVCCV.Vista
         private void txtBuscar_TextChanged(object sender, TextChangedEventArgs e)
         {
 
-            if (txtBuscar.Text == "")
+            if (txtBuscarEmpleadoID.Text == "")
             {
                 ColectionEmpleados.Filter = null;
                 dgvEmpleado.ItemsSource = ColectionEmpleados;
             }
             else
             {
-                var filtro = new Predicate<object>( item => (((Usuario)item).Id).Contains(txtBuscar.Text));
+                var filtro = new Predicate<object>( item => (((Usuario)item).Id).Contains(txtBuscarEmpleadoID.Text));
                 ColectionEmpleados.Filter = filtro;
                 dgvEmpleado.ItemsSource = ColectionEmpleados;
             }

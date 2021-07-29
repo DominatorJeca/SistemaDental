@@ -70,7 +70,7 @@ namespace SistemaDental
             bool band = true;
             foreach (var tb in FindVisualChildren<TextBox>(window))
             {
-                if (tb.Text.Replace(" ", "").Equals("") && tb.Name != "PART_EditableTextBox" && tb.Name != "PART_TextBox")
+                if (tb.Text.Replace(" ", "").Equals("") && tb.Name != "PART_EditableTextBox" && tb.Name != "PART_TextBox" && tb.Name!= "txtBuscarEmpleadoID")
                     band = false;
             }
 
