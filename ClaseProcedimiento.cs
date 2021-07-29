@@ -2187,6 +2187,40 @@ namespace SistemaDental
 
         }
 
+        public List<Genero> MostrarGenero()
+        {
+            // Inicializar una lista vacía de puestos
+            List<Genero> generos = new List<Genero>();
+
+
+            try
+            {
+                command.Connection = con.Open();
+                //crear el comando SQL
+                command.CommandText = "MostrarGeneros";
+                command.CommandType = CommandType.StoredProcedure;
+                reader = command.ExecuteReader();
+                // Obtener los datos de los puestos
+
+                while (reader.Read())
+                    generos.Add(new Genero { Id = Convert.ToInt32(reader["GeneroID"]), NombreGenero = reader["NombreGenero"].ToString() });
+
+
+                return generos;
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+            finally
+            {
+                reader.Close();
+                command.Connection = con.Close();
+                command.Parameters.Clear();
+            }
+
+        }
+
 
     }
 }

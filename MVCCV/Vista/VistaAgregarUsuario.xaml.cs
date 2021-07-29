@@ -37,7 +37,7 @@ namespace SistemaDental.MVCCV.Vista
             InitializeComponent();
             MostrarPuesto();
             MostrarEmpleados(true);
-
+            MostrarGenero();
             HabilitarInhabilitarTXT(false);
             botoneshabilitados(true);
 
@@ -47,6 +47,7 @@ namespace SistemaDental.MVCCV.Vista
         {
             InitializeComponent();
             MostrarPuesto();
+            MostrarGenero();
 
             MostrarEmpleados(true);
             botoneshabilitados(true);
@@ -70,6 +71,13 @@ namespace SistemaDental.MVCCV.Vista
             cmbPuesto.ItemsSource = Proc.MostrarPuestos();
             cmbPuesto.SelectedValuePath = "Id";
             cmbPuesto.DisplayMemberPath = "NombrePuesto";
+        }
+
+        public void MostrarGenero()
+        {
+            cmbSexo.ItemsSource = Proc.MostrarGenero();
+            cmbSexo.SelectedValuePath = "Id";
+             cmbSexo.DisplayMemberPath = "NombreGenero";
         }
 
         /// <summary>

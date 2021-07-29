@@ -24,10 +24,9 @@
                 PreviewTextInput="PreviewTextInputOnlyNumbers"   MaxLength="13"/>
         <Label Content="Puesto" HorizontalAlignment="Left"  VerticalAlignment="Top" FontSize="12" FontFamily="Bahnschrift" Margin="700,140,0,0" RenderTransformOrigin="-2.498,7.577" Width="73"/>
         <ComboBox Name="cmbPuesto" HorizontalAlignment="Right" Text="{Binding ElementName=dgvEmpleado, Path=SelectedItem.PuestoNombre}" VerticalAlignment="Top" Width="196" Margin="0,140,72.6,0"/>
-        <ComboBox Name="cmbSexo" HorizontalAlignment="Right" Text="{Binding ElementName=dgvEmpleado, Path=SelectedItem.GeneroNombre}" VerticalAlignment="Top" Width="211" Margin="0,137,384.6,0">
-            <ComboBoxItem Content="Femenino" HorizontalAlignment="Center" Width="118.4"/>
-            <ComboBoxItem Content="Masculino" HorizontalAlignment="Center" Width="118.4"/>
-        </ComboBox>
+        <ComboBox Name="cmbSexo" HorizontalAlignment="Right" Text="{Binding ElementName=dgvEmpleado, Path=SelectedItem.GeneroNombre}" VerticalAlignment="Top" Width="211" Margin="0,137,384.6,0"/>
+        
+
         <Label Content="Sexo" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="12" FontFamily="Bahnschrift" Margin="382,140,0,0" Width="64"/>
 
         <TextBox x:Name="txtAgregarCorreo"  Margin="382,87,384.6,333.2" Text="{Binding ElementName=dgvEmpleado, Path=SelectedItem.Correo}" materialDesign:HintAssist.Hint="Correo" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontFamily="Bahnschrift" FontSize="12" Background="#7FFFFFFF"
