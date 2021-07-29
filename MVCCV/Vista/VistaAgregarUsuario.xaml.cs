@@ -93,8 +93,8 @@ namespace SistemaDental.MVCCV.Vista
             usuario.Telefono = Convert.ToString(txtAgregarTelefono.Text);
             usuario.Correo = Convert.ToString(txtAgregarCorreo.Text);
             usuario.Puesto = Convert.ToInt32(cmbPuesto.SelectedValue);
-            usuario.Genero = 1;
-           usuario.GeneroNombre = ((ComboBoxItem)cmbSexo.SelectedItem).Content.ToString();
+            usuario.Genero = Convert.ToInt32(cmbSexo.SelectedValue); 
+          // usuario.GeneroNombre = ((ComboBoxItem)cmbSexo.SelectedItem).Content.ToString();
             usuario.Contraseña = txtAgregarContra.Password;
             usuario.Estado = true;
             usuario.Ide = (Convert.ToInt32(dgvEmpleado.SelectedValue));
@@ -113,30 +113,36 @@ namespace SistemaDental.MVCCV.Vista
            if (!validar.VerificarCampos(this))
             {
                 MessageBox.Show("Por favor ingresa todos los valores que se le solicitan");
+                MostrarEmpleados(true);
+                botoneshabilitados(false);
                 return false;
             }
             if (!validar.VerificarIdentidad(txtAgregarIdentidad.Text))
             {
                 MessageBox.Show("El numero de identidad no tiene un formato correcto");
                 MostrarEmpleados(true);
+                botoneshabilitados(false);
                 return false;
             }
             else if (!validar.VerificarNumero(txtAgregarTelefono.Text))
             {
                 MessageBox.Show("El numero de telefono no tiene un formato correcto");
                 MostrarEmpleados(true);
+                botoneshabilitados(false);
                 return false;
             }
             else if (txtConfirmarContra.Password != txtAgregarContra.Password)
             {
                 MessageBox.Show("La confirmación de contraseña no coincide");
                 MostrarEmpleados(true);
+                botoneshabilitados(false);
                 return false;
             }
             else if (!validar.ValidarEmail(txtAgregarCorreo.Text))
             {
                 MostrarEmpleados(true);
                 MessageBox.Show("Por favor, ingrese un correo valido");
+                botoneshabilitados(false);
                 return false;
             }
 
@@ -179,7 +185,7 @@ namespace SistemaDental.MVCCV.Vista
             opcion = 1;
             botoneshabilitados(false);
             HabilitarInhabilitarTXT(true);
-            LimpiarFormulario();
+        
 
             dgvEmpleado.IsEnabled = false;
 
@@ -311,6 +317,7 @@ namespace SistemaDental.MVCCV.Vista
 
                     obtenerUsuario();
                     botoneshabilitados(true);
+                    LimpiarFormulario();
                 }
                 catch (Exception ex)
                 {
