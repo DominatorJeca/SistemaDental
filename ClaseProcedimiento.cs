@@ -1570,7 +1570,7 @@ namespace SistemaDental
                 {
                     while (rdr.Read())
 
-                        paciente.Add(new ClasePaciente { Id_paciente = Convert.ToInt32(rdr["PacienteID"].ToString()), NombrePaciente = rdr["Nombre"].ToString(), ApellidoPaciente = rdr["Apellido"].ToString(), FechaNac = ((DateTime)rdr["Fechanac"]), Telefono = rdr["Telefono"].ToString(), Genero = rdr["NombreGenero"].ToString(), Identidad = rdr["Identidad"].ToString(), Estado = rdr["Estado"].ToString(), Correo = rdr["Correo"].ToString() });
+                        paciente.Add(new ClasePaciente { Id_paciente = Convert.ToInt32(rdr["PacienteID"].ToString()), NombrePaciente = rdr["Nombre"].ToString(), ApellidoPaciente = rdr["Apellido"].ToString(), FechaNac = ((DateTime)rdr["Fechanac"]), Telefono = rdr["Telefono"].ToString(), Genero = rdr["GeneroID"].ToString(), Identidad = rdr["Identidad"].ToString(), Estado = rdr["Estado"].ToString(), Correo = rdr["Correo"].ToString() });
                         
                 }
 

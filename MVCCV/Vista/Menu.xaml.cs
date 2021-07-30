@@ -24,7 +24,7 @@ namespace SistemaDental
        //Variables miembros
         private bool Admin;
         private String Nombree;
-        private string user;
+        private string usuario;
 
         private ClaseProcedimiento proced = new ClaseProcedimiento();
 
@@ -51,7 +51,7 @@ namespace SistemaDental
             PermisosAdministrador(admin);
             Nombree = name;
             Admin = admin;
-            user = nombreusuario;
+            usuario = nombreusuario;
             turno.UsuarioID = id;
             user.Ide = id;
             turno.ComienzoTurno = DateTime.Now;
@@ -60,7 +60,7 @@ namespace SistemaDental
             VistaMenuInicio.CambioDeVistaPrincipal += CambiarVista;
             VistaAjuste.CambioDeVistaPrincipal += CambiarVista;
             ContenedorHijos.Content = VistaMenuInicio;
-            VistaUsuarioIngresado = new DatosDeUsuario(user);
+            VistaUsuarioIngresado = new DatosDeUsuario(usuario);
         }
         private void CambiarVista(object o,EventArgs e)
         {
