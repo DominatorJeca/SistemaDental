@@ -21,7 +21,7 @@ namespace SistemaDental.MVCCV.Vista
     /// </summary>
     public partial class DatosDeUsuario : UserControl
     {
-        private string nombreusaurio;
+        string nombreusaurio;
         int edicion = 0;
         ClaseProcedimiento procedimiento = new ClaseProcedimiento();
         Usuario usuarios = new Usuario();
@@ -36,9 +36,10 @@ namespace SistemaDental.MVCCV.Vista
         public DatosDeUsuario(string usuario)
         {
             InitializeComponent();
+            nombreusaurio = usuario;
             LlenadoDeInformacion();
             dg_citasdia.ItemsSource = procedimiento.CitasUsuario(usuario);
-            nombreusaurio = usuario;
+            
         }
 
         private void btnActualizarUsuario_Click(object sender, RoutedEventArgs e)
@@ -126,7 +127,7 @@ namespace SistemaDental.MVCCV.Vista
 
         private void LlenadoDeInformacion()
         {
-            var Usuario = procedimiento.DatosUsuarios(nombreusaurio);
+            var Usuario = procedimiento.DatosUsuarios("JCASTRO1");
             txtApellido.Text = Usuario.Apellido;
             txtNombre.Text = Usuario.Nombre;
             txtCorreo.Text = Usuario.Correo;
