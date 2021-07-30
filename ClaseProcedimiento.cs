@@ -527,7 +527,7 @@ namespace SistemaDental
             }
         }
 
-        public void InsertarDetalleCompra(int compraid,int inventarioId,int cantidad,float precio,DateTime fechavenc)
+        public void InsertarDetalleCompra(int compraid,int inventarioId,int cantidad,float precio,DateTime fechavenc,string nombre=null)
         {
             try
             {
@@ -539,6 +539,7 @@ namespace SistemaDental
                 command.Parameters.AddWithValue("@Cantidad", cantidad);
                 command.Parameters.AddWithValue("@PrecioCompra", precio);
                 command.Parameters.AddWithValue("@fechaVenc", fechavenc);
+                command.Parameters.AddWithValue("@nombre", nombre);
                 command.CommandType = CommandType.StoredProcedure;
                 command.ExecuteNonQuery();
 
@@ -1699,6 +1700,7 @@ namespace SistemaDental
                 command.CommandType = CommandType.StoredProcedure;
                 command.Parameters.AddWithValue("@CitaID", cita.IdCita);
                 command.Parameters.AddWithValue("@Estado", 1);
+                command.Parameters.AddWithValue("@observaciones", cita.Observaciones);
                 command.ExecuteNonQuery();
             }
             catch

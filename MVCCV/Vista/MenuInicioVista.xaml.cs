@@ -28,6 +28,7 @@ namespace SistemaDental.MVCCV.Vista
         private TratamientoVista VistaTratamiento = new TratamientoVista();
         private VerPacienVista VistaPacientes = new VerPacienVista();
         private MenuReporteVista VistaMenuReportes = new MenuReporteVista();
+        public Usuario user = new Usuario();
         public MenuInicioVista()
         {
             InitializeComponent();
@@ -68,6 +69,7 @@ namespace SistemaDental.MVCCV.Vista
 
         private void btnCompra_Click(object sender, RoutedEventArgs e)
         {
+            VistaCompras.user = user;
             CambioDeVista(VistaCompras);
         }
 

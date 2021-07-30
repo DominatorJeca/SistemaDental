@@ -32,6 +32,7 @@ namespace SistemaDental
         private MenuInicioVista VistaMenuInicio = new MenuInicioVista();
         private DatosDeUsuario VistaUsuarioIngresado = new DatosDeUsuario();
         private AjustesVista VistaAjuste = new AjustesVista();
+        private Usuario user = new Usuario();
         //Constructores
         public Menu()
         {
@@ -50,8 +51,12 @@ namespace SistemaDental
             Nombree = name;
             Admin = admin;
             turno.UsuarioID = id;
+            user.Ide = id;
             turno.ComienzoTurno = DateTime.Now;
             proced.AgregarTurno(turno);
+            VistaMenuInicio.user = user;
+            VistaMenuInicio.CambioDeVistaPrincipal += CambiarVista;
+            VistaAjuste.CambioDeVistaPrincipal += CambiarVista;
             ContenedorHijos.Content = VistaMenuInicio;
         }
         private void CambiarVista(object o,EventArgs e)
