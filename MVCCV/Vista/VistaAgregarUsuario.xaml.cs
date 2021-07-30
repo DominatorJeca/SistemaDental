@@ -94,10 +94,11 @@ namespace SistemaDental.MVCCV.Vista
             usuario.Correo = Convert.ToString(txtAgregarCorreo.Text);
             usuario.Puesto = Convert.ToInt32(cmbPuesto.SelectedValue);
             usuario.Genero = Convert.ToInt32(cmbSexo.SelectedValue); 
-          // usuario.GeneroNombre = ((ComboBoxItem)cmbSexo.SelectedItem).Content.ToString();
+          
             usuario.Contraseña = txtAgregarContra.Password;
             usuario.Estado = true;
             usuario.Ide = (Convert.ToInt32(dgvEmpleado.SelectedValue));
+           
 
 
 
@@ -164,15 +165,9 @@ namespace SistemaDental.MVCCV.Vista
         /// </summary>
         private void LimpiarFormulario()
         {
-            txtAgregarApellido.Text = string.Empty;
-            txtAgregarNombre.Text = string.Empty;
-            txtAgregarCorreo.Text = string.Empty;
-            txtAgregarIdentidad.Text = string.Empty;
-            txtAgregarTelefono.Text = string.Empty;
+          
             txtAgregarContra.Password = string.Empty;
             txtConfirmarContra.Password = string.Empty;
-            cmbPuesto.SelectedValue = null;
-            cmbSexo.SelectedValue = null;
 
         }
 
@@ -188,7 +183,10 @@ namespace SistemaDental.MVCCV.Vista
             HabilitarInhabilitarTXT(true);
             txtAgregarContra.Visibility = Visibility.Visible;
             txtConfirmarContra.Visibility = Visibility.Visible;
-
+            txtAgregarContra.IsEnabled = true;
+            txtConfirmarContra.IsEnabled = true;
+            dgvEmpleado.SelectedItem = null;
+           LimpiarFormulario();
             dgvEmpleado.IsEnabled = false;
 
 
@@ -292,11 +290,7 @@ namespace SistemaDental.MVCCV.Vista
                 case 4:
                     EliminarRestablecerEmpleado(true);
                     break;
-            }
-
-           // HabilitarInhabilitarTXT(false);
-           // botoneshabilitados(true);
-            
+            }   
 
         }
 
@@ -348,7 +342,7 @@ namespace SistemaDental.MVCCV.Vista
 
                     // Mensaje de inserción exitosa
                     MessageBox.Show("El usuario para el empleado que ingresó es: "+ usu);
-
+                dgvEmpleado.SelectedItem = null;
                 LimpiarFormulario();
             }
                 catch (Exception ex)
@@ -373,7 +367,7 @@ namespace SistemaDental.MVCCV.Vista
                     // Mensaje de inserción exitosa
                     MessageBox.Show("¡Datos editados correctamente!");
                     HabilitarInhabilitarTXT(false);
-                    LimpiarFormulario();
+                
 
                     botoneshabilitados(true);
                 }
@@ -402,7 +396,7 @@ namespace SistemaDental.MVCCV.Vista
                     // Mensaje de inserción exitosa
                     MessageBox.Show("La operación se realizó con exito!");
 
-                    LimpiarFormulario();
+                   
 
                 botoneshabilitados(true);
 
@@ -431,7 +425,7 @@ namespace SistemaDental.MVCCV.Vista
         private void btnCancelar_Click(object sender, RoutedEventArgs e)
         {
            
-            LimpiarFormulario();
+         
             botoneshabilitados(true);
             HabilitarInhabilitarTXT(false);
 

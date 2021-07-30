@@ -70,7 +70,7 @@ namespace SistemaDental
             bool band = true;
             foreach (var tb in FindVisualChildren<TextBox>(window))
             {
-                if (tb.Text.Replace(" ", "").Equals("") && tb.Name != "PART_EditableTextBox" && tb.Name != "PART_TextBox" && tb.Name!= "txtBuscarEmpleadoID" && tb.Visibility==Visibility.Visible)
+                if (tb.Text.Replace(" ", "").Equals("") && tb.Name != "PART_EditableTextBox" && tb.Name != "PART_TextBox" && tb.Name!= "txtBuscarEmpleadoID" )
                     band = false;
             }
 
@@ -87,11 +87,11 @@ namespace SistemaDental
                     band = false;
             }
 
-            foreach(var tb in FindVisualChildren<PasswordBox>(window))
+           /* foreach(var tb in FindVisualChildren<PasswordBox>(window))
             {
                 if (tb.Password.Replace(" ", "").Equals("") && tb.Name != "PART_EditableTextBox" && tb.Name != "PART_TextBox")
                     band = false;
-            }
+            }*/
 
             return band;
         }

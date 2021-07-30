@@ -199,7 +199,7 @@ namespace SistemaDental
             try
             {
                 command.Connection = con.Open();
-                command.CommandText = "sp_Empleados_Actualizar";
+                command.CommandText = "sp_UsuarioEmpleado_Actualizar";
                 command.CommandType = CommandType.StoredProcedure;
                 //Establecer los valores de parametros
                 command.Parameters.AddWithValue("@EmpleadoID", usuario.Ide);
@@ -211,6 +211,7 @@ namespace SistemaDental
                 command.Parameters.AddWithValue("@PuestoID", usuario.Puesto);
                 command.Parameters.AddWithValue("@GeneroID", usuario.Genero);
                 command.Parameters.AddWithValue("@Estado",usuario.Estado);
+                command.Parameters.AddWithValue("@Admin", usuario.Administrador);
                 command.ExecuteNonQuery();
 
             }
