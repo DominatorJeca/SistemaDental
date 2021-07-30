@@ -24,13 +24,14 @@ namespace SistemaDental
        //Variables miembros
         private bool Admin;
         private String Nombree;
-      
+        private string user;
+
         private ClaseProcedimiento proced = new ClaseProcedimiento();
 
         public Turno turno = new Turno();
         private CajaVista VistaCaja = new CajaVista();
         private MenuInicioVista VistaMenuInicio = new MenuInicioVista();
-        private DatosDeUsuario VistaUsuarioIngresado = new DatosDeUsuario();
+        private DatosDeUsuario VistaUsuarioIngresado;
         private AjustesVista VistaAjuste = new AjustesVista();
         private Usuario user = new Usuario();
         //Constructores
@@ -42,7 +43,7 @@ namespace SistemaDental
             VistaAjuste.CambioDeVistaPrincipal += CambiarVista;
         }
 
-        public Menu(bool admin,string name,int id)
+        public Menu(bool admin,string name,int id, string nombreusuario)
         {
 
             InitializeComponent();
@@ -50,6 +51,7 @@ namespace SistemaDental
             PermisosAdministrador(admin);
             Nombree = name;
             Admin = admin;
+            user = nombreusuario;
             turno.UsuarioID = id;
             user.Ide = id;
             turno.ComienzoTurno = DateTime.Now;
@@ -58,6 +60,7 @@ namespace SistemaDental
             VistaMenuInicio.CambioDeVistaPrincipal += CambiarVista;
             VistaAjuste.CambioDeVistaPrincipal += CambiarVista;
             ContenedorHijos.Content = VistaMenuInicio;
+            VistaUsuarioIngresado = new DatosDeUsuario(user);
         }
         private void CambiarVista(object o,EventArgs e)
         {

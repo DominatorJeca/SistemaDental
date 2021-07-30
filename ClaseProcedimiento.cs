@@ -252,6 +252,7 @@ namespace SistemaDental
                         usuario.Apellido = Convert.ToString(reader["Apellido"]);
                         usuario.Administrador = Convert.ToBoolean(reader["administrador"]);
                         usuario.Ide = Convert.ToInt32(reader[0].ToString());
+                        usuario.usuario = Convert.ToString(reader["usuario"]);
                     }
                 }
 
