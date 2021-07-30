@@ -31,6 +31,7 @@ namespace SistemaDental.MVCCV.Vista
         private ClaseProcedimiento Proc = new ClaseProcedimiento();
         Validaciones validar = new Validaciones();
 
+        #region Constructores
         //Contructores
         public VistaAgregarUsuario()
         {
@@ -48,7 +49,6 @@ namespace SistemaDental.MVCCV.Vista
             InitializeComponent();
             MostrarPuesto();
             MostrarGenero();
-
             MostrarEmpleados(true);
             botoneshabilitados(true);
             Nombree = name;
@@ -56,13 +56,9 @@ namespace SistemaDental.MVCCV.Vista
             HabilitarInhabilitarTXT(false);
         }
 
-        /// <summary>
-        /// Abre el formulario ajustes y cierra el actual
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
+        #endregion
 
-
+        #region Carga de datos
         /// <summary>
         /// Asigna la lista de puestos al cmbPuestos
         /// </summary>
@@ -80,12 +76,39 @@ namespace SistemaDental.MVCCV.Vista
              cmbSexo.DisplayMemberPath = "NombreGenero";
         }
 
+        ICollectionView ColectionEmpleados;
+        public void MostrarEmpleados(bool act)
+        {
+            ColectionEmpleados = new CollectionViewSource() { Source = Proc.MostrarEmpleados(act) }.View;
+            dgvEmpleado.ItemsSource = ColectionEmpleados;
+            dgvEmpleado.SelectedValuePath = "Ide";
+
+        }
+
+        private void txtBuscar_TextChanged(object sender, TextChangedEventArgs e)
+        {
+
+            if (txtBuscarEmpleadoID.Text == "")
+            {
+                ColectionEmpleados.Filter = null;
+                dgvEmpleado.ItemsSource = ColectionEmpleados;
+            }
+            else
+            {
+                var filtro = new Predicate<object>(item => (((Usuario)item).Id).Contains(txtBuscarEmpleadoID.Text));
+                ColectionEmpleados.Filter = filtro;
+                dgvEmpleado.ItemsSource = ColectionEmpleados;
+            }
+        }
+
+        #endregion
+
+        #region Funciones
         /// <summary>
         /// Obtiene los datos de los textbox y combobox en el formulario
         /// </summary>
         public void ObtenerValores()
         {
-
 
             usuario.Id = Convert.ToString(txtAgregarIdentidad.Text);
             usuario.Nombre = Convert.ToString(txtAgregarNombre.Text);
@@ -100,10 +123,44 @@ namespace SistemaDental.MVCCV.Vista
             usuario.Ide = (Convert.ToInt32(dgvEmpleado.SelectedValue));
            
 
-
-
         }
 
+        private void botoneshabilitados(bool grupo)
+        {
+            if (grupo)
+            {
+                btnAgregarUsuario.IsEnabled = true;
+                btnEliminar.IsEnabled = true;
+                btnEditar.IsEnabled = true;
+                btnRestablecer.Visibility = Visibility.Visible;
+                btnGuardar.Visibility = Visibility.Hidden;
+                btnCancelar.Visibility = Visibility.Hidden;
+            }
+            else
+            {
+                btnAgregarUsuario.IsEnabled = false;
+                btnEliminar.IsEnabled = false;
+                btnEditar.IsEnabled = false;
+                btnRestablecer.Visibility = Visibility.Hidden;
+                btnGuardar.Visibility = Visibility.Visible;
+                btnCancelar.Visibility = Visibility.Visible;
+            }
+        }
+
+        private void HabilitarInhabilitarTXT(bool habilitar)
+        {
+            txtAgregarNombre.IsEnabled = habilitar;
+            txtAgregarIdentidad.IsEnabled = habilitar;
+            txtAgregarApellido.IsEnabled = habilitar;
+            txtAgregarContra.IsEnabled = habilitar;
+            txtAgregarCorreo.IsEnabled = habilitar;
+            txtConfirmarContra.IsEnabled = habilitar;
+            txtAgregarTelefono.IsEnabled = habilitar;
+            cmbPuesto.IsEnabled = habilitar;
+            cmbSexo.IsEnabled = habilitar;
+            chkAdmin.IsEnabled = habilitar;
+
+        }
 
         /// <summary>
         /// Verifica que los valores de los textbox y combobox no esten vacios
@@ -149,14 +206,7 @@ namespace SistemaDental.MVCCV.Vista
 
             return true;
         }
-        ICollectionView ColectionEmpleados;
-        public void MostrarEmpleados(bool act)
-        {
-            ColectionEmpleados = new CollectionViewSource() { Source = Proc.MostrarEmpleados(act) }.View;
-            dgvEmpleado.ItemsSource = ColectionEmpleados;
-            dgvEmpleado.SelectedValuePath = "Ide";
-          
-        }
+       
         
      
 
@@ -170,29 +220,6 @@ namespace SistemaDental.MVCCV.Vista
             txtConfirmarContra.Password = string.Empty;
 
         }
-
-        /// <summary>
-        /// Lllama al metodo de agregar usuario y envia los parametros correspondientes
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void btnAgregarUsuario_Click_1(object sender, RoutedEventArgs e)
-        {
-            opcion = 1;
-            botoneshabilitados(false);
-            HabilitarInhabilitarTXT(true);
-            txtAgregarContra.Visibility = Visibility.Visible;
-            txtConfirmarContra.Visibility = Visibility.Visible;
-            txtAgregarContra.IsEnabled = true;
-            txtConfirmarContra.IsEnabled = true;
-            dgvEmpleado.SelectedItem = null;
-           LimpiarFormulario();
-            dgvEmpleado.IsEnabled = false;
-
-
-        }
-
-
 
         private void PreviewTextInputOnlyNumbers(object sender, TextCompositionEventArgs e)
         {
@@ -220,6 +247,32 @@ namespace SistemaDental.MVCCV.Vista
             usuario.Administrador = false;
         }
 
+        #endregion
+
+        #region Botones
+
+        /// <summary>
+        /// Lllama al metodo de agregar usuario y envia los parametros correspondientes
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btnAgregarUsuario_Click_1(object sender, RoutedEventArgs e)
+        {
+            opcion = 1;
+            botoneshabilitados(false);
+            HabilitarInhabilitarTXT(true);
+            txtAgregarContra.Visibility = Visibility.Visible;
+            txtConfirmarContra.Visibility = Visibility.Visible;
+            txtAgregarContra.IsEnabled = true;
+            txtConfirmarContra.IsEnabled = true;
+            dgvEmpleado.SelectedItem = null;
+            LimpiarFormulario();
+            dgvEmpleado.IsEnabled = false;
+
+
+        }
+
+
         private void btnEditarUsuario_Click_1(object sender, RoutedEventArgs e)
         {
             opcion = 2;
@@ -237,42 +290,7 @@ namespace SistemaDental.MVCCV.Vista
 
         }
 
-        private void botoneshabilitados(bool grupo)
-        {
-            if (grupo)
-            {
-                btnAgregarUsuario.IsEnabled = true;
-                btnEliminar.IsEnabled = true;
-                btnEditar.IsEnabled = true;
-                btnRestablecer.Visibility = Visibility.Visible;
-                btnGuardar.Visibility = Visibility.Hidden;
-                btnCancelar.Visibility = Visibility.Hidden;
-            }
-            else
-            {
-                btnAgregarUsuario.IsEnabled = false;
-                btnEliminar.IsEnabled = false;
-                btnEditar.IsEnabled = false;
-                btnRestablecer.Visibility = Visibility.Hidden;
-                btnGuardar.Visibility = Visibility.Visible;
-                btnCancelar.Visibility = Visibility.Visible;
-            }
-        }
 
-        private void HabilitarInhabilitarTXT(bool habilitar)
-        {
-            txtAgregarNombre.IsEnabled = habilitar;
-            txtAgregarIdentidad.IsEnabled= habilitar;
-            txtAgregarApellido.IsEnabled= habilitar;
-            txtAgregarContra.IsEnabled = habilitar;
-            txtAgregarCorreo.IsEnabled= habilitar;
-            txtConfirmarContra.IsEnabled= habilitar;
-            txtAgregarTelefono.IsEnabled= habilitar;
-            cmbPuesto.IsEnabled= habilitar;
-            cmbSexo.IsEnabled= habilitar;
-            chkAdmin.IsEnabled = habilitar;
-
-        }
         private void btnGuardarUsuario_Click_1(object sender, RoutedEventArgs e)
         {
             switch (opcion)
@@ -294,6 +312,29 @@ namespace SistemaDental.MVCCV.Vista
 
         }
 
+        private void btnRestablecer_Click(object sender, RoutedEventArgs e)
+        {
+            MostrarEmpleados(false);
+            opcion = 4;
+            botoneshabilitados(false);
+            HabilitarInhabilitarTXT(false);
+        }
+
+        private void btnCancelar_Click(object sender, RoutedEventArgs e)
+        {
+
+
+            botoneshabilitados(true);
+            HabilitarInhabilitarTXT(false);
+
+            dgvEmpleado.IsEnabled = true;
+            MostrarEmpleados(true);
+            txtAgregarContra.Visibility = Visibility.Hidden;
+            txtConfirmarContra.Visibility = Visibility.Hidden;
+        }
+        #endregion
+
+        #region Conexion a procedimientos
         private void IngresarEmpleado()
         {
             if (VerificarValores() == true)
@@ -307,8 +348,6 @@ namespace SistemaDental.MVCCV.Vista
                     Proc.IngresarUsuario(usuario);
 
                     // Mensaje de inserción exitosa
-
-
 
 
                     obtenerUsuario();
@@ -408,48 +447,14 @@ namespace SistemaDental.MVCCV.Vista
                 }
             MostrarEmpleados(true);
         }
-
+        #endregion
         private void dgvEmpleado_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
 
         }
 
-        private void btnRestablecer_Click(object sender, RoutedEventArgs e)
-        {
-            MostrarEmpleados(false);
-            opcion = 4;
-            botoneshabilitados(false);
-            HabilitarInhabilitarTXT(false);
-        }
-
-        private void btnCancelar_Click(object sender, RoutedEventArgs e)
-        {
-           
-         
-            botoneshabilitados(true);
-            HabilitarInhabilitarTXT(false);
-
-            dgvEmpleado.IsEnabled = true;
-            MostrarEmpleados(true);
-            txtAgregarContra.Visibility = Visibility.Hidden;
-            txtConfirmarContra.Visibility = Visibility.Hidden;
-        }
-
-        private void txtBuscar_TextChanged(object sender, TextChangedEventArgs e)
-        {
-
-            if (txtBuscarEmpleadoID.Text == "")
-            {
-                ColectionEmpleados.Filter = null;
-                dgvEmpleado.ItemsSource = ColectionEmpleados;
-            }
-            else
-            {
-                var filtro = new Predicate<object>( item => (((Usuario)item).Id).Contains(txtBuscarEmpleadoID.Text));
-                ColectionEmpleados.Filter = filtro;
-                dgvEmpleado.ItemsSource = ColectionEmpleados;
-            }
-        }
+     
+  
 
 
 
