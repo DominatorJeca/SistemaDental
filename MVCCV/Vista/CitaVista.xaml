@@ -101,8 +101,17 @@
             <ComboBox x:Name="cmbPaciente" IsEnabled="False" HorizontalAlignment="Left" VerticalAlignment="Top" Width="210" RenderTransformOrigin="0.603,0.358" Grid.Column="1" Text="{Binding SelectedItem.IdPacientes}"   />
         </StackPanel>
         <StackPanel Orientation="Horizontal" VerticalAlignment="Bottom" HorizontalAlignment="Center" Height="33" Width="423" Margin="57,0,70,333" Grid.Column="1" Grid.Row="1">
-            <Label Content=" Busqueda Paciente" HorizontalAlignment="Center"  VerticalAlignment="Top"  FontSize="15" Foreground="Black" Background="White" FontFamily="Bahnschrift" Grid.Column="1" Width="118"/>
-            <ComboBox x:Name="cmbPaciente1"  HorizontalAlignment="Center" VerticalAlignment="Top" Width="302" RenderTransformOrigin="0.603,0.358" Text="{Binding SelectedItem.IdPacientes}" SelectionChanged="cmbPaciente1_SelectionChanged"   />
+            <Label Content=" Busqueda Paciente" HorizontalAlignment="Center"  VerticalAlignment="Top"  FontSize="15" Foreground="Black" Background="White" FontFamily="Bahnschrift" Grid.Column="1" Width="144"/>
+            <ComboBox x:Name="cmbPaciente1"  HorizontalAlignment="Center" VerticalAlignment="Top" Width="274" RenderTransformOrigin="0.603,0.358" Text="{Binding SelectedItem.IdPacientes}" SelectionChanged="cmbPaciente1_SelectionChanged"   >
+                <ComboBox.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform/>
+                        <SkewTransform/>
+                        <RotateTransform Angle="0.171"/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </ComboBox.RenderTransform>
+            </ComboBox>
         </StackPanel>
 
     </Grid>
