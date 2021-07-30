@@ -206,14 +206,24 @@ namespace SistemaDental.MVCCV.Vista
 
             return true;
         }
-       
-        
-     
 
-        /// <summary>
-        /// Funcion para limpiar los textbox y combobox del formulario
-        /// </summary>
-        private void LimpiarFormulario()
+
+        private bool VerificarPass()
+        {
+            if (!validar.verificarpass(this))
+            {
+                MessageBox.Show("Por favor ingresa todos los valores que se le solicitan");
+
+                botoneshabilitados(false);
+                return false;
+            }
+            return true;
+        }
+
+            /// <summary>
+            /// Funcion para limpiar los textbox y combobox del formulario
+            /// </summary>
+            private void LimpiarFormulario()
         {
           
             txtAgregarContra.Password = string.Empty;
@@ -337,7 +347,7 @@ namespace SistemaDental.MVCCV.Vista
         #region Conexion a procedimientos
         private void IngresarEmpleado()
         {
-            if (VerificarValores() == true)
+            if (VerificarValores() == true && VerificarPass()==true)
             {
                 try
                 {
