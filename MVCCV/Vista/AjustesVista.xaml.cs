@@ -23,6 +23,9 @@ namespace SistemaDental.MVCCV.Vista
         
         private bool Admin;
         private String Nombree;
+        private VistaAgregarUsuario VistaManejarUsuario = new VistaAgregarUsuario();
+        public event EventHandler CambioDeVistaPrincipal;
+
         public AjustesVista()
         {
             InitializeComponent();
@@ -34,31 +37,15 @@ namespace SistemaDental.MVCCV.Vista
             Nombree = name;
             Admin = admin;
         }
-
-
-        private void btnEditarUsuario_Click(object sender, RoutedEventArgs e)
+        protected virtual void CambioDeVista(object o)
         {
-
-        }
-
-        private void btnRegresar_Click(object sender, RoutedEventArgs e)
-        {
-     
-        }
-
-        private void btnEditarUsuario_Click_1(object sender, RoutedEventArgs e)
-        {
-      
-        }
-
-        private void btnAgregarNuevoUsuario_Click(object sender, RoutedEventArgs e)
-        {
-
+            if (CambioDeVistaPrincipal != null)
+                CambioDeVistaPrincipal(o, null);
         }
 
         private void btnManejarUsuarios_Click(object sender, RoutedEventArgs e)
         {
-    
+            CambioDeVista(VistaManejarUsuario);
         }
     }
 }

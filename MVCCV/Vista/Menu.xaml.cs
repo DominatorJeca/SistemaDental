@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SistemaDental.MVCCV.Vista;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,23 +24,26 @@ namespace SistemaDental
        //Variables miembros
         private bool Admin;
         private String Nombree;
-      
+        private string usuario;
+
         private ClaseProcedimiento proced = new ClaseProcedimiento();
 
         public Turno turno = new Turno();
-
+        private CajaVista VistaCaja = new CajaVista();
+        private MenuInicioVista VistaMenuInicio = new MenuInicioVista();
+        private DatosDeUsuario VistaUsuarioIngresado;
+        private AjustesVista VistaAjuste = new AjustesVista();
+        private Usuario user = new Usuario();
         //Constructores
         public Menu()
         {
             InitializeComponent();
-   
-
-            turno.UsuarioID = 37;
-            turno.ComienzoTurno = DateTime.Now;
-            proced.AgregarTurno(turno);
+            ContenedorHijos.Content = VistaMenuInicio;
+            VistaMenuInicio.CambioDeVistaPrincipal += CambiarVista;
+            VistaAjuste.CambioDeVistaPrincipal += CambiarVista;
         }
 
-        public Menu(bool admin,string name,int id)
+        public Menu(bool admin,string name,int id, string nombreusuario)
         {
 
             InitializeComponent();
@@ -47,9 +51,20 @@ namespace SistemaDental
             PermisosAdministrador(admin);
             Nombree = name;
             Admin = admin;
+            usuario = nombreusuario;
             turno.UsuarioID = id;
+            user.Ide = id;
             turno.ComienzoTurno = DateTime.Now;
             proced.AgregarTurno(turno);
+            VistaMenuInicio.user = user;
+            VistaMenuInicio.CambioDeVistaPrincipal += CambiarVista;
+            VistaAjuste.CambioDeVistaPrincipal += CambiarVista;
+            ContenedorHijos.Content = VistaMenuInicio;
+            VistaUsuarioIngresado = new DatosDeUsuario(usuario);
+        }
+        private void CambiarVista(object o,EventArgs e)
+        {
+            ContenedorHijos.Content = o;
         }
 
         /// <summary>
@@ -189,6 +204,26 @@ namespace SistemaDental
         private void btnMin_Click(object sender, RoutedEventArgs e)
         {
             this.WindowState = WindowState.Minimized;
+        }
+
+        private void btnInicio_Click(object sender, RoutedEventArgs e)
+        {
+            CambiarVista(VistaMenuInicio,null);
+        }
+
+        private void btnCaja_Click_1(object sender, RoutedEventArgs e)
+        {
+            CambiarVista(VistaCaja, null);
+        }
+
+        private void btnPerfil_Click(object sender, RoutedEventArgs e)
+        {
+            CambiarVista(VistaUsuarioIngresado, null);
+        }
+
+        private void btnAjustes_Click_1(object sender, RoutedEventArgs e)
+        {
+            CambiarVista(VistaAjuste, null);
         }
     }
 }

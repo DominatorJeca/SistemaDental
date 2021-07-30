@@ -263,6 +263,9 @@
     <Compile Include="MVCCV\Vista\CompraVista.xaml.cs">
       <DependentUpon>CompraVista.xaml</DependentUpon>
     </Compile>
+    <Compile Include="MVCCV\Vista\ContenedorDeCitasVista.xaml.cs">
+      <DependentUpon>ContenedorDeCitasVista.xaml</DependentUpon>
+    </Compile>
     <Compile Include="MVCCV\Vista\DatosDeUsuario.xaml.cs">
       <DependentUpon>DatosDeUsuario.xaml</DependentUpon>
     </Compile>
@@ -325,6 +328,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Inventario.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MVCCV\Vista\ContenedorDeCitasVista.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -252,6 +252,7 @@ namespace SistemaDental
                         usuario.Apellido = Convert.ToString(reader["Apellido"]);
                         usuario.Administrador = Convert.ToBoolean(reader["administrador"]);
                         usuario.Ide = Convert.ToInt32(reader[0].ToString());
+                        usuario.usuario = Convert.ToString(reader["usuario"]);
                     }
                 }
 
@@ -528,7 +529,7 @@ namespace SistemaDental
             }
         }
 
-        public void InsertarDetalleCompra(int compraid,int inventarioId,int cantidad,float precio,DateTime fechavenc)
+        public void InsertarDetalleCompra(int compraid,int inventarioId,int cantidad,float precio,DateTime fechavenc,string nombre=null)
         {
             try
             {
@@ -540,6 +541,7 @@ namespace SistemaDental
                 command.Parameters.AddWithValue("@Cantidad", cantidad);
                 command.Parameters.AddWithValue("@PrecioCompra", precio);
                 command.Parameters.AddWithValue("@fechaVenc", fechavenc);
+                command.Parameters.AddWithValue("@nombre", nombre);
                 command.CommandType = CommandType.StoredProcedure;
                 command.ExecuteNonQuery();
 
@@ -1408,6 +1410,32 @@ namespace SistemaDental
                 command.Connection = con.Close();
             }
         }
+
+        public void EditarUsuarioSinPass(Usuario usuario)
+        {
+            try
+            {
+                command.Connection = con.Open();
+                command.CommandText = "EditarUsuarioSinPass";
+                command.CommandType = CommandType.StoredProcedure;
+                command.Parameters.AddWithValue("@usuario", usuario.usuario);
+                command.Parameters.AddWithValue("@nombre", usuario.Nombre);
+                command.Parameters.AddWithValue("@apellido", usuario.Apellido);
+                command.Parameters.AddWithValue("@correo", usuario.Correo);
+                command.Parameters.AddWithValue("@telefono", usuario.Telefono);
+                command.ExecuteNonQuery();
+
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+            finally
+            {
+                command.Parameters.Clear();
+                command.Connection = con.Close();
+            }
+        }
         #endregion
 
 
@@ -1543,7 +1571,7 @@ namespace SistemaDental
                     while (rdr.Read())
 
                         paciente.Add(new ClasePaciente { Id_paciente = Convert.ToInt32(rdr["PacienteID"].ToString()), NombrePaciente = rdr["Nombre"].ToString(), ApellidoPaciente = rdr["Apellido"].ToString(), FechaNac = ((DateTime)rdr["Fechanac"]), Telefono = rdr["Telefono"].ToString(), Genero = rdr["GeneroID"].ToString(), Identidad = rdr["Identidad"].ToString(), Estado = rdr["Estado"].ToString(), Correo = rdr["Correo"].ToString() });
-
+                        
                 }
 
                 return paciente;
@@ -1674,6 +1702,7 @@ namespace SistemaDental
                 command.CommandType = CommandType.StoredProcedure;
                 command.Parameters.AddWithValue("@CitaID", cita.IdCita);
                 command.Parameters.AddWithValue("@Estado", 1);
+                command.Parameters.AddWithValue("@observaciones", cita.Observaciones);
                 command.ExecuteNonQuery();
             }
             catch
@@ -2169,7 +2198,7 @@ namespace SistemaDental
                 sqlCommand.Parameters.AddWithValue("@Nombre", paciente.NombrePaciente);
                 sqlCommand.Parameters.AddWithValue("@Apellido", paciente.ApellidoPaciente);
                 sqlCommand.Parameters.AddWithValue("@Telefono", paciente.Telefono);
-                sqlCommand.Parameters.AddWithValue("@Identidad", paciente.Id_paciente);
+                sqlCommand.Parameters.AddWithValue("@Identidad", paciente.Identidad);
                 sqlCommand.Parameters.AddWithValue("@FechaNac", paciente.FechaNac);
                 sqlCommand.Parameters.AddWithValue("@GeneroID", paciente.Genero);
                 sqlCommand.Parameters.AddWithValue("@Estado", paciente.Estado);

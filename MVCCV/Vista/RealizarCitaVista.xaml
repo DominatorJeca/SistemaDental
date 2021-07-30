@@ -7,33 +7,48 @@
              xmlns:materialDesignMahApps="http://materialdesigninxaml.net/winfx/xaml/themes" x:Class="SistemaDental.MVCCV.Vista.RealizarCitaVista"
              mc:Ignorable="d" 
               d:DesignHeight="455" d:DesignWidth="1050" Background="WhiteSmoke" Loaded="UserControl_Loaded" >
-    <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="25"/>
-            <ColumnDefinition Width="1000"/>
-            <ColumnDefinition Width="25"/>
-        </Grid.ColumnDefinitions>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="25"/>
-            <RowDefinition Height="405"/>
-            <RowDefinition Height="25"/>
-        </Grid.RowDefinitions>
-        <DataGrid Grid.Row="1" Grid.Column="1" x:Name="dgvCitas" HorizontalAlignment="Left" Height="191" VerticalAlignment="Top" Width="591" Background="#FF056676" Foreground="#DDFFFFFF" RenderTransformOrigin="0.45,0.505" AutoGenerateColumns="False" IsReadOnly="True"  Margin="0,63,0,0" SelectionChanged="dgvCitas_SelectionChanged">
-            <DataGrid.Columns >
-                <DataGridTextColumn Header="Paciente" Binding="{Binding ApellidoPaciente}"/>
-                <DataGridTextColumn Header="Tratamientos" Binding="{Binding NombreTratamiento}" Width="120"/>
-                <DataGridTextColumn Header="Fecha" Binding="{Binding fechaCita}" Width="175"/>
-            </DataGrid.Columns>
-        </DataGrid>
+    <materialDesignMahApps:DrawerHost Name="MenuNavegacion" MouseDown="MenuNavegacion_MouseDown">
+        <materialDesignMahApps:DrawerHost.TopDrawerContent>
+            <StackPanel >
+                <Button x:Name="btnAgendarCita" Click="btnAgendarCita_Click" Style="{StaticResource MaterialDesignFlatButton}" Height="55" Content="Agendar cita" Background="#56A2BF" Foreground="White"/>
+                <Button x:Name="btnRealizarCita"  Style="{StaticResource MaterialDesignFlatButton}"  Height="55" Content="Realizar cita"  Background="#56A2BF" Foreground="White" Click="btnRealizarCita_Click" />
+                </StackPanel>
+        </materialDesignMahApps:DrawerHost.TopDrawerContent>
 
-        <TextBox  x:Name="txtObservaciones" Style="{StaticResource MaterialDesignOutlinedTextBox}" Text="{Binding SelectedItem.Observaciones, ElementName=dgvCitas}"  Margin="0,270,409,0" materialDesignMahApps:HintAssist.Hint="Descripcion de cita" Grid.Column="1" Grid.Row="1"/>
-        <Button x:Name = "btnRealizar" Content="Realizar Cita" HorizontalAlignment="Left" Margin="634,344,0,0" VerticalAlignment="Top" Width="342" Height="60" Background="#FF056676" BorderBrush="{x:Null}"  Grid.Column="1" Grid.Row="1" Click="btnRealizar_Click"/>
-        <TextBox x:Name="txtCantidadMaterial" Margin="634,78,24,263"  Text="{Binding SelectedItem.Cantidad,ElementName=cmbMaterial}" materialDesignMahApps:HintAssist.Hint="Cantidad del material" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontFamily="Bahnschrift" FontSize="18" Background="#7FFFFFFF" Foreground="Black" Grid.Column="1" Grid.Row="1"/>
-        <ComboBox x:Name="cmbPaciente" materialDesignMahApps:TextFieldAssist.HasClearButton="True" IsEditable="True" Margin="0,0,715,360" materialDesignMahApps:HintAssist.Hint="Paciente" Style="{StaticResource MaterialDesignFloatingHintComboBox}" FontFamily="Bahnschrift" FontSize="18" Background="#7FFFFFFF" Foreground="Black" Height="45"  Grid.Row="1" Grid.Column="1" SelectionChanged="cmbPaciente_SelectionChanged" />
-        <TextBox x:Name="txtTotal" Margin="634,251,24,90" Text="{Binding SelectedItem.Preciototal, ElementName=dgvCitas}" materialDesignMahApps:HintAssist.Hint="Total"  materialDesignMahApps:TextFieldAssist.SuffixText="lps." Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontFamily="Bahnschrift" FontSize="18" Background="#7FFFFFFF" Foreground="Black" Grid.Column="1" Grid.Row="1" IsEnabled="False" />
-        <ComboBox x:Name="cmbTratamientos" materialDesignMahApps:TextFieldAssist.HasClearButton="True" IsEditable="True" Margin="311,0,409,360" materialDesignMahApps:HintAssist.Hint="Tratamientos" Style="{StaticResource MaterialDesignFloatingHintComboBox}" FontFamily="Bahnschrift" FontSize="18" Background="#7FFFFFFF" Foreground="Black" Height="45"  Grid.Row="1" Grid.Column="1" SelectionChanged="cmbTratamientos_SelectionChanged" />
-        <ComboBox x:Name="cmbMaterial" materialDesignMahApps:TextFieldAssist.HasClearButton="True" IsEditable="True" Margin="634,0,24,360" materialDesignMahApps:HintAssist.Hint="Material" Style="{StaticResource MaterialDesignFloatingHintComboBox}" FontFamily="Bahnschrift" FontSize="18" Background="#7FFFFFFF" Foreground="Black" Height="45"  Grid.Row="1" Grid.Column="1" />
-        <TextBox x:Name="txtCantidadCobrada" Margin="634,167,24,174" Text="{Binding SelectedItem.precioTrat, ElementName=cmbTratamientos}" materialDesignMahApps:HintAssist.Hint="Cobrado por tratamiento"  materialDesignMahApps:TextFieldAssist.SuffixText="lps." Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontFamily="Bahnschrift" FontSize="18" Background="#7FFFFFFF" Foreground="Black" Grid.Column="1" Grid.Row="1" TextChanged="txtCantidadCobrada_TextChanged"/>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="25"/>
+                <ColumnDefinition Width="1000"/>
+                <ColumnDefinition Width="25"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="25"/>
+                <RowDefinition Height="405"/>
+                <RowDefinition Height="25"/>
+            </Grid.RowDefinitions>
 
-    </Grid>
+
+            <DataGrid Grid.Row="1" Grid.Column="1" x:Name="dgvCitas" HorizontalAlignment="Left" Height="191" VerticalAlignment="Top" Width="606" Background="#FF056676" Foreground="#DDFFFFFF" RenderTransformOrigin="0.45,0.505" AutoGenerateColumns="False" IsReadOnly="True"  Margin="0,63,0,0" SelectionChanged="dgvCitas_SelectionChanged">
+                <DataGrid.Columns >
+                    <DataGridTextColumn Header="Doctor" Binding="{Binding NombreDoctor}"/>
+                    <DataGridTextColumn Header="Paciente" Binding="{Binding ApellidoPaciente}"/>
+                    <DataGridTextColumn Header="Tratamientos" Binding="{Binding NombreTratamiento}" Width="120"/>
+                    <DataGridTextColumn Header="Fecha" Binding="{Binding fechaCita}" Width="175"/>
+                </DataGrid.Columns>
+            </DataGrid>
+            <Button x:Name="btnAbrirMenuNavegacion" Style="{StaticResource MaterialDesignIconButton}" Grid.Column="2" Width="25" Height="25" Click="Button_Click" VerticalAlignment="Top" HorizontalAlignment="Left">
+                <materialDesignMahApps:PackIcon
+    Kind="ChevronDown" />
+            </Button>
+            <TextBox  x:Name="txtObservaciones" Style="{StaticResource MaterialDesignOutlinedTextBox}" Text="{Binding SelectedItem.Observaciones, ElementName=dgvCitas}"  Margin="0,270,394,0" materialDesignMahApps:HintAssist.Hint="Descripcion de cita" Grid.Column="1" Grid.Row="1"/>
+            <Button x:Name = "btnRealizar" Content="Realizar Cita" HorizontalAlignment="Left" Margin="650,344,0,0" VerticalAlignment="Top" Width="350" Height="60" Background="#FF056676" BorderBrush="{x:Null}"  Grid.Column="1" Grid.Row="1" Click="btnRealizar_Click"/>
+            <TextBox x:Name="txtCantidadMaterial" PreviewTextInput="SoloNumeros" Margin="650,78,0,263"  Text="{Binding SelectedItem.Cantidad,ElementName=cmbMaterial}" materialDesignMahApps:HintAssist.Hint="Cantidad del material" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontFamily="Bahnschrift" FontSize="18" Background="#7FFFFFFF" Foreground="Black" Grid.Column="1" Grid.Row="1"/>
+            <ComboBox x:Name="cmbPaciente" materialDesignMahApps:TextFieldAssist.HasClearButton="True" IsEditable="True" Margin="0,0,708,360" materialDesignMahApps:HintAssist.Hint="Paciente" Style="{StaticResource MaterialDesignFloatingHintComboBox}" FontFamily="Bahnschrift" FontSize="18" Background="#7FFFFFFF" Foreground="Black" Height="45"  Grid.Row="1" Grid.Column="1" SelectionChanged="cmbPaciente_SelectionChanged" />
+            <TextBox x:Name="txtTotal" Margin="650,251,0,90" Text="{Binding SelectedItem.Preciototal, ElementName=dgvCitas}" materialDesignMahApps:HintAssist.Hint="Total"  materialDesignMahApps:TextFieldAssist.SuffixText="lps." Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontFamily="Bahnschrift" FontSize="18" Background="#7FFFFFFF" Foreground="Black" Grid.Column="1" Grid.Row="1" IsEnabled="False" />
+            <ComboBox x:Name="cmbTratamientos" materialDesignMahApps:TextFieldAssist.HasClearButton="True" IsEditable="True" Margin="319,0,394,360" materialDesignMahApps:HintAssist.Hint="Tratamientos" Style="{StaticResource MaterialDesignFloatingHintComboBox}" FontFamily="Bahnschrift" FontSize="18" Background="#7FFFFFFF" Foreground="Black" Height="45"  Grid.Row="1" Grid.Column="1" SelectionChanged="cmbTratamientos_SelectionChanged" />
+            <ComboBox x:Name="cmbMaterial" materialDesignMahApps:TextFieldAssist.HasClearButton="True" IsEditable="True" Margin="650,0,0,360" materialDesignMahApps:HintAssist.Hint="Material" Style="{StaticResource MaterialDesignFloatingHintComboBox}" FontFamily="Bahnschrift" FontSize="18" Background="#7FFFFFFF" Foreground="Black" Height="45"  Grid.Row="1" Grid.Column="1" />
+            <TextBox x:Name="txtCantidadCobrada" PreviewTextInput="SoloNumerosDec" Margin="650,167,0,174" Text="{Binding SelectedItem.precioTrat, ElementName=cmbTratamientos}" materialDesignMahApps:HintAssist.Hint="Cobrado por tratamiento"  materialDesignMahApps:TextFieldAssist.SuffixText="lps." Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontFamily="Bahnschrift" FontSize="18" Background="#7FFFFFFF" Foreground="Black" Grid.Column="1" Grid.Row="1" TextChanged="txtCantidadCobrada_TextChanged"/>
+
+        </Grid>
+    </materialDesignMahApps:DrawerHost>
 </UserControl>

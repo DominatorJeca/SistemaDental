@@ -25,6 +25,8 @@ namespace SistemaDental.MVCCV.Vista
         ClaseProcedimiento proc = new ClaseProcedimiento();
         List<ClaseTratamiento> tratamientos = new List<ClaseTratamiento>();
         float total=0;
+        public event EventHandler CambioDeVistaPrincipal;
+        Validaciones val = new Validaciones();
         public RealizarCitaVista()
         {
             InitializeComponent();
@@ -34,7 +36,13 @@ namespace SistemaDental.MVCCV.Vista
         {
             MostrarDatos();
         }
-
+        protected virtual void CambioDeVista(object o)
+        {
+            if (MenuNavegacion.IsTopDrawerOpen)
+                MenuNavegacion.IsTopDrawerOpen = false;
+            if (CambioDeVistaPrincipal != null)
+                CambioDeVistaPrincipal(o, null);
+        }
         private void MostrarDatos()
         {
             cmbTratamientos.ItemsSource = null;
@@ -44,11 +52,8 @@ namespace SistemaDental.MVCCV.Vista
             cmbPaciente.SelectedValuePath = "Id_paciente";
             cmbPaciente.DisplayMemberPath = "NombrePaciente";
             cmbPaciente.ItemsSource = proc.MostrarPacientesAct();
-            cmbMaterial.ItemsSource = null;
-            txtCantidadCobrada.Text = 0 + "";
-            txtCantidadMaterial.Text = 0 + "";
-          
-
+   
+            dgvCitas.SelectedIndex = 0;
 
         }
 
@@ -71,12 +76,13 @@ namespace SistemaDental.MVCCV.Vista
                 total += (total * (float)0.15);
                 cmbTratamientos.ItemsSource = tratamientos;
                 txtTotal.Text = total + "";
+                cmbTratamientos.SelectedIndex = 0;
+       
             }
             else
             {
                 cmbTratamientos.SelectedIndex = -1;
                 cmbTratamientos.ItemsSource = null;
-
                 tratamientos = null;
             }
         }
@@ -91,7 +97,7 @@ namespace SistemaDental.MVCCV.Vista
             else
             {
                 cmbMaterial.ItemsSource = ((ClaseTratamiento)cmbTratamientos.SelectedItem).Materiales;
-         
+                cmbMaterial.SelectedIndex = 0;
             }
          
          
@@ -123,13 +129,40 @@ namespace SistemaDental.MVCCV.Vista
                 total += trat.precioTrat;
                
             }
-
             total += total * (float)0.15;
             txtTotal.Text = total + "";
         }
 
         private void btnRealizar_Click(object sender, RoutedEventArgs e)
         {
+
+            if (!val.VerificarCampos(this))
+            {
+                MessageBox.Show("Porfavor llene todos los campos necesarios");
+                return;
+            }    
+            if (val.VerificarCantidad(Convert.ToDouble(txtCantidadCobrada.Text)) && !val.VerificarCantidad(Convert.ToDouble(txtCantidadMaterial.Text)))
+            {
+                MessageBox.Show("Porfavor ingrese cantidades mayores a 0");
+                return;
+            }
+
+            foreach (ClaseTratamiento trat in tratamientos)
+            {
+               if (!val.VerificarCantidad(trat.precioTrat))
+                {
+                    MessageBox.Show("El tratamiento "+trat.NombreTratamiento+" tiene como precio 0 porfavor corrija este error");
+                    cmbTratamientos.SelectedItem = trat;
+                    return;
+                }
+                foreach (ClaseInventario inv in trat.Materiales)
+                    if (!val.VerificarCantidad(inv.Cantidad))
+                    {
+                        MessageBox.Show("El Material " + inv.NombreMaterial+ " en el tratamiento"+ trat.NombreTratamiento+" tiene como cantidad 0 porfavor corrija este error");
+                        cmbTratamientos.SelectedItem = trat;
+                        return;
+                    }
+            }
             proc.FinalizarCita((ClaseCitas)dgvCitas.SelectedItem);
            foreach (ClaseTratamiento trat in tratamientos)
             {
@@ -138,6 +171,40 @@ namespace SistemaDental.MVCCV.Vista
                     proc.RestarMaterial(inv);
             }
             MostrarDatos();
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            MenuNavegacion.IsTopDrawerOpen = true;
+        }
+
+        private void MenuNavegacion_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            if (MenuNavegacion.IsTopDrawerOpen)
+                MenuNavegacion.IsTopDrawerOpen = false;
+        }
+
+        private void btnRealizarCita_Click(object sender, RoutedEventArgs e)
+        {
+            if (MenuNavegacion.IsTopDrawerOpen)
+                MenuNavegacion.IsTopDrawerOpen = false;
+        }
+
+        private void btnAgendarCita_Click(object sender, RoutedEventArgs e)
+        {
+        CitaVista VistaAgendarCita = new CitaVista();
+            VistaAgendarCita.CambioDeVistaPrincipal += CambioDeVistaPrincipal;
+        CambioDeVista(VistaAgendarCita);
+        }
+
+        private void SoloNumeros(object sender, TextCompositionEventArgs e)
+        {
+            val.SoloNumeros(e);
+        }
+
+        private void SoloNumerosDec(object sender, TextCompositionEventArgs e)
+        {
+            val.SoloNumerosDec(e);
         }
     }
     }

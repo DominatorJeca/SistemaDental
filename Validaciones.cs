@@ -37,6 +37,14 @@ namespace SistemaDental
             else
                 e.Handled = true;
         }
+        public void SoloNumerosDec(TextCompositionEventArgs e)
+        {
+            int character = Convert.ToInt32(Convert.ToChar(e.Text));
+            if ((character >= 48 && character <= 57 ) || e.Text==".")
+                e.Handled = false;
+            else
+                e.Handled = true;
+        }
 
         public bool ValidarEmail(string email)
         {
@@ -70,7 +78,7 @@ namespace SistemaDental
             bool band = true;
             foreach (var tb in FindVisualChildren<TextBox>(window))
             {
-                if (tb.Text.Replace(" ", "").Equals("") && tb.Name != "PART_EditableTextBox" && tb.Name != "PART_TextBox" && tb.Name!= "txtBuscarEmpleadoID" )
+                if (tb.Text.Replace(" ", "").Equals("") && tb.Name != "PART_EditableTextBox" && tb.Name != "PART_TextBox" && tb.IsEnabled  && tb.Name!= "txtBuscarEmpleadoID" )
                     band = false;
             }
 
@@ -86,16 +94,18 @@ namespace SistemaDental
                 if (tb.IsChecked == false)
                     band = false;
             }
-
-           /* foreach(var tb in FindVisualChildren<PasswordBox>(window))
+            return band;
+        }
+        public bool verificarpass(UserControl window)
+        {
+            bool band = true;
+            foreach (var tb in FindVisualChildren<PasswordBox>(window))
             {
                 if (tb.Password.Replace(" ", "").Equals("") && tb.Name != "PART_EditableTextBox" && tb.Name != "PART_TextBox")
                     band = false;
-            }*/
-
+            }
             return band;
         }
-
         public bool Verificardgv(UserControl window)
         {
             bool band = true;

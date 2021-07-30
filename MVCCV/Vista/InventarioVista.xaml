@@ -12,7 +12,7 @@
         </Grid.Background>
         <Label Content="Materiales:" HorizontalAlignment="Left" Margin="29,47,0,0" VerticalAlignment="Top" FontSize="20" Foreground="Black" Background="#7F056676" FontFamily="Bahnschrift"/>
         <Label Content="Tratamientos:" HorizontalAlignment="Left" Margin="29,243,0,0" VerticalAlignment="Top" FontSize="20" Foreground="Black" Background="#7F056676" FontFamily="Bahnschrift"/>
-        <DataGrid HorizontalAlignment="Left" Height="127" Margin="29,284,0,0" VerticalAlignment="Top" Width="450" Background="#FF056676" Name="dgv_Tratamiento" AutoGenerateColumns="False" HorizontalContentAlignment="Center">
+        <DataGrid IsReadOnly="True" HorizontalAlignment="Left" Height="127" Margin="29,284,0,0" VerticalAlignment="Top" Width="450" Background="#FF056676" Name="dgv_Tratamiento" AutoGenerateColumns="False" HorizontalContentAlignment="Center">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Nombre" Binding="{Binding NombreTratamiento}" Width="150*" IsReadOnly="True"/>
                 <DataGridTextColumn Header="Cantidad" Binding="{Binding CantidadUsada}" Width="150*" IsReadOnly="True"/>
@@ -20,7 +20,7 @@
         </DataGrid>
         <TextBox PreviewTextInput="PreviewTextInputLetters" IsEnabled="False" Text="{Binding ElementName=dgv_Materiales, Path=SelectedItem.NombreMaterial}" Name="txtMaterialInventario"   Margin="540,86,53,317" materialDesign:HintAssist.Hint="Material" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontFamily="Bahnschrift" FontSize="18" Background="#7FFFFFFF" />
         <TextBox IsEnabled="False" Text="{Binding ElementName=dgv_Materiales, Path=SelectedItem.Cantidad}" Name="txtCantidadInventario" Margin="540,154,53,263" materialDesign:HintAssist.Hint="Cantidad" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontFamily="Bahnschrift" FontSize="18" Background="#7FFFFFFF"/>
-        <DataGrid HorizontalAlignment="Left" Height="145" Margin="29,79,0,0" VerticalAlignment="Top" Width="450" Background="#FF056676" x:Name="dgv_Materiales" HorizontalContentAlignment="Center" SelectionChanged="dgv_Materiales_SelectionChanged_1" IsReadOnly="True" AutoGenerateColumns="False">
+        <DataGrid SelectionMode="Single" HorizontalAlignment="Left" Height="145" Margin="29,79,0,0" VerticalAlignment="Top" Width="450" Background="#FF056676" x:Name="dgv_Materiales" HorizontalContentAlignment="Center" SelectionChanged="dgv_Materiales_SelectionChanged_1" IsReadOnly="True" AutoGenerateColumns="False">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Código" Binding="{Binding IdMaterial}" Width="150"></DataGridTextColumn>
                 <DataGridTextColumn Header="Nombre" Binding="{Binding NombreMaterial}" Width="150"></DataGridTextColumn>
