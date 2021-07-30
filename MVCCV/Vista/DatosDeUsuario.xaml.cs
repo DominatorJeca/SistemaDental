@@ -21,6 +21,7 @@ namespace SistemaDental.MVCCV.Vista
     /// </summary>
     public partial class DatosDeUsuario : UserControl
     {
+        private string nombreusaurio;
         int edicion = 0;
         ClaseProcedimiento procedimiento = new ClaseProcedimiento();
         Usuario usuarios = new Usuario();
@@ -30,6 +31,14 @@ namespace SistemaDental.MVCCV.Vista
             InitializeComponent();
             LlenadoDeInformacion();
             dg_citasdia.ItemsSource = procedimiento.CitasUsuario("JCASTRO1");
+        }
+
+        public DatosDeUsuario(string usuario)
+        {
+            InitializeComponent();
+            LlenadoDeInformacion();
+            dg_citasdia.ItemsSource = procedimiento.CitasUsuario(usuario);
+            nombreusaurio = usuario;
         }
 
         private void btnActualizarUsuario_Click(object sender, RoutedEventArgs e)
@@ -59,7 +68,7 @@ namespace SistemaDental.MVCCV.Vista
 
         private void ObtenerValores()
         {
-            usuarios.usuario = "JCASTRO1";
+            usuarios.usuario = nombreusaurio;
             usuarios.Nombre = txtNombre.Text;
             usuarios.Apellido = txtApellido.Text;
             usuarios.Telefono = txtTelefono.Text;
@@ -71,7 +80,7 @@ namespace SistemaDental.MVCCV.Vista
         }
         private void btnguardar_Click(object sender, RoutedEventArgs e)
         {
-            Usuario elusuario = procedimiento.BuscarUsuario("JCASTRO1", txtContraseniaActual.Password);
+            Usuario elusuario = procedimiento.BuscarUsuario(nombreusaurio, txtContraseniaActual.Password);
             if (edicion == 0)
             {
                 if (validar.VerificarCampos(this) && validar.ValidarEmail(txtCorreo.Text) && validar.VerificarNumero(txtTelefono.Text) && elusuario!=null)
@@ -117,7 +126,7 @@ namespace SistemaDental.MVCCV.Vista
 
         private void LlenadoDeInformacion()
         {
-            var Usuario = procedimiento.DatosUsuarios("JCASTRO1");
+            var Usuario = procedimiento.DatosUsuarios(nombreusaurio);
             txtApellido.Text = Usuario.Apellido;
             txtNombre.Text = Usuario.Nombre;
             txtCorreo.Text = Usuario.Correo;

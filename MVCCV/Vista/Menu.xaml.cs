@@ -41,7 +41,7 @@ namespace SistemaDental
             VistaAjuste.CambioDeVistaPrincipal += CambiarVista;
         }
 
-        public Menu(bool admin,string name,int id)
+        public Menu(bool admin,string name,int id, string nombreusuario)
         {
 
             InitializeComponent();

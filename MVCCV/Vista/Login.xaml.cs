@@ -45,7 +45,7 @@ namespace SistemaDental
                 Usuario elUsuario = proc.BuscarUsuario(txtUsuario.Text,txtPassword.Password);
                 if (elUsuario != null)
                 {
-                    Menu men = new Menu(elUsuario.Administrador, elUsuario.Nombre,elUsuario.Ide);
+                    Menu men = new Menu(elUsuario.Administrador, elUsuario.Nombre,elUsuario.Ide, elUsuario.usuario);
                     men.Show();
                     this.Close();
                 }
