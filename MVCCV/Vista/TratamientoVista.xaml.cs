@@ -72,31 +72,39 @@ namespace SistemaDental.MVCCV.Vista
                 ObtenerTratamientos();
                 ObtenerMateriales();
             }
+            CleanerLista();
+        }
+
+        private void btnAgregar_Click(object sender, RoutedEventArgs e)
+        {
+            isUpdate = false;
+
+            CamposEstado(false);
+
+            btnAgregar.IsEnabled = false;
+            btnEditar.IsEnabled = false;
+            btnGuardar.IsEnabled = true;
+            btnCancelar.IsEnabled = true;
+
+            dg_materiales.IsEnabled = true;
         }
 
         private void btnEditar_Click(object sender, RoutedEventArgs e)
         {
-            if(dg_tratamientos.SelectedIndex != -1)
-            {
-                btnGuardar.Content = "Modificar";
-                btnGuardar.IsEnabled = true;
+            btnGuardar.Content = "Modificar";
+            btnGuardar.IsEnabled = true;
+            btnAgregar.IsEnabled = false;
 
-                dg_tratamientos.IsEnabled = false;
+            dg_tratamientos.IsEnabled = true;
 
-                isUpdate = true;
-                btnCancelar.IsEnabled = true;
-                btnEditar.IsEnabled = false;   
-                CamposEstado(false);
-            }
-            else
-            {
-                MessageBox.Show("Por favor, selecione el tratamiento a modificar en la lista de tratamientos.");
-            }
+            isUpdate = true;
+            btnCancelar.IsEnabled = true;
+            btnEditar.IsEnabled = false;   
+            CamposEstado(false);
         }
 
         private void btnCancelar_Click(object sender, RoutedEventArgs e)
         {
-            CamposEstado(false);
             btnGuardar.IsEnabled = true;
             btnEditar.IsEnabled = true;
             btnListaCancelar.IsEnabled = false;
@@ -140,6 +148,9 @@ namespace SistemaDental.MVCCV.Vista
                     dg_materiales.Items.Refresh();
                 }
 
+                btnListaAgregar.IsEnabled = false;
+                btnListaCancelar.IsEnabled = false;
+                btnListaEliminar.IsEnabled = false;
                 txtCantidad.Clear();
             }
         }
@@ -324,15 +335,13 @@ namespace SistemaDental.MVCCV.Vista
         /*Lista Tratamiento*/
         private void dg_tratamientos_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            CamposEstado(true);
-            btnGuardar.IsEnabled = false;
-            btnEditar.IsEnabled = true;
 
             DataRowView dataRow = (DataRowView)dg_tratamientos.SelectedItem;
             if (dataRow != null)
             {
                 gTratamientoID = int.Parse(dataRow[0].ToString());
-                dg_materiales.IsEnabled = false;
+
+                dg_materiales.IsEnabled = true;
                 
                 ObtenerTratamientoDatos();
                 ObtenerInventarioTratamientos(gTratamientoID);
@@ -390,23 +399,29 @@ namespace SistemaDental.MVCCV.Vista
             dg_tratamientos_materiales.Items.Refresh();
 
             dg_tratamientos.IsEnabled = true;
+            dg_materiales.IsEnabled = false;
 
             dg_tratamientos.SelectedIndex = -1;
             dg_tratamientos_materiales.SelectedIndex = -1;
             dg_materiales.SelectedIndex = -1;
 
             btnGuardar.Content = "Guardar";
-            btnGuardar.IsEnabled = true;
-            btnEditar.IsEnabled = false;
+            btnGuardar.IsEnabled = false;
+            btnCancelar.IsEnabled = false;
+            btnEditar.IsEnabled = true;
+            btnAgregar.IsEnabled = true;
 
             btnListaAgregar.Content = "Agregar material";
 
             btnListaEliminar.IsEnabled = false;
             btnListaAgregar.IsEnabled = false;
 
+            dg_tratamientos.IsEnabled = false;
+            dg_materiales.IsEnabled = false;
+
             listMateriales.Clear();
 
-            CamposEstado(false);
+            CamposEstado(true);
             
             isListaUpdate = false;
         }
