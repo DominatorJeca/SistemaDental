@@ -21,9 +21,9 @@ namespace SistemaDental.MVCCV.Vista
     public partial class InventarioVista : UserControl
     {
         ClaseInventario inventario = new ClaseInventario();
-        private bool Admin;
-        private String Nombree;
-
+        ClaseProcedimiento procedimiento = new ClaseProcedimiento();
+        Validaciones validaciones = new Validaciones();
+        
         public InventarioVista()
         {
             InitializeComponent();
@@ -31,18 +31,9 @@ namespace SistemaDental.MVCCV.Vista
 
         }
 
-        public InventarioVista(bool admin, string name)
-        {
-            InitializeComponent();
-            MostrarMaterial();
-            Nombree = name;
-            Admin = admin;
-
-        }
-
         public void MostrarMaterial()
         {
-            dgv_Materiales.ItemsSource = inventario.MostrarInventario();
+            dgv_Materiales.ItemsSource = procedimiento.MostrarInventario();
             dgv_Materiales.SelectedValuePath = "IdMaterial";
         }
 
@@ -52,109 +43,65 @@ namespace SistemaDental.MVCCV.Vista
         private void dgv_Materiales_SelectionChanged_1(object sender, SelectionChangedEventArgs e)
         {
 
-            dgv_Tratamiento.ItemsSource = inventario.mostrarUsoTratamiento(Convert.ToInt32(dgv_Materiales.SelectedValue)).DefaultView;
-
+            dgv_Tratamiento.ItemsSource = procedimiento.mostrarUsoTratamiento(Convert.ToInt32(dgv_Materiales.SelectedValue));
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void HabilitarEdicion(bool habilitar)
         {
-            if (dgv_Materiales.SelectedValue != null)
-            {
-                txtCantidadInventario.IsEnabled = true;
-                btnGuardar.IsEnabled = true;
-                btnEditar.IsEnabled = false;
-                OcultarMostrarBotones(Visibility.Visible);
-            }
-            else
+            txtMaterialInventario.IsEnabled = habilitar;
+            btnCancelar.IsEnabled = habilitar;
+            btnGuardar.IsEnabled = habilitar;
+        }
+
+        private void ObtenerValores()
+        {
+            inventario.IdMaterial = Convert.ToInt32(dgv_Materiales.SelectedValue);
+            inventario.NombreMaterial = txtMaterialInventario.Text;
+        }
+
+        private void btnActualizar_Click(object sender, RoutedEventArgs e)
+        {
+           if (validaciones.VerificarCampos(this) && dgv_Materiales.SelectedValue!=null)
+           {
+                HabilitarEdicion(true);
+                btnActualizar.IsEnabled = false;
+                txtMaterialInventario.IsEnabled = true;
+           }
+           else
             {
                 MessageBox.Show("Seleccione un material");
             }
         }
 
-        private void ObtenerValores()
+        private void btnGuardar_Click(object sender, RoutedEventArgs e)
         {
-            inventario.NombreMaterial = txtMaterialInventario.Text;
-            inventario.Cantidad = Convert.ToInt32(txtCantidadInventario.Text);
-            inventario.IdMaterial = Convert.ToInt32(dgv_Materiales.SelectedValue);
-        }
-
-        private void Button_Click_1(object sender, RoutedEventArgs e)
-        {
-
-            if (Convert.ToInt32(dgv_Materiales.SelectedValue) > 0)
+            ObtenerValores();
+            if (validaciones.VerificarCampos(this))
             {
-
-                try
-                {
-                    if (Convert.ToInt32(txtCantidadInventario.Text) >= 1)
-                    {
-                        ObtenerValores();
-                        inventario.actualizarCantidad(inventario);
-                    }
-                    else
-                    {
-                        MostrarMaterial();
-                        MessageBox.Show("No puede ingresar una cantidad menor que 1");
-                    }
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show("Asegurese de ingresar una cantidad mayor a 0...");
-
-                }
-                finally
-                {
-                    MostrarMaterial();
-                    btnEditar.IsEnabled = true;
-                    btnGuardar.IsEnabled = false;
-                    txtCantidadInventario.IsEnabled = false;
-                    OcultarMostrarBotones(Visibility.Hidden);
-                }
+                procedimiento.EditarNombreMaterial(inventario);
+                MostrarMaterial();
+                HabilitarEdicion(false);
+                btnActualizar.IsEnabled = true;
             }
             else
             {
-                MessageBox.Show("Para editar ocupa seleccionar una casilla");
+                MessageBox.Show("Asegurese de ingresar el nombre del material de manera correcta");
+                MostrarMaterial();
+                HabilitarEdicion(false);
+                btnActualizar.IsEnabled = true;
             }
         }
 
-        private void OcultarMostrarBotones(Visibility ocultar)
+        private void btnCancelar_Click(object sender, RoutedEventArgs e)
         {
-            btnCancelarCambios.Visibility = ocultar;
-        }
-
-        private void Button_Cancelar(object sender, RoutedEventArgs e)
-        {
-            txtCantidadInventario.IsEnabled = false;
-            txtMaterialInventario.IsEnabled = false;
-            btnGuardar.IsEnabled = false;
-            btnEditar.IsEnabled = true;
-            OcultarMostrarBotones(Visibility.Hidden);
             MostrarMaterial();
+            HabilitarEdicion(false);
+            btnActualizar.IsEnabled = true;
         }
 
-        /*
-        protected override void OnClosing(System.ComponentModel.CancelEventArgs e)
+        private void PreviewTextInputLetters(object sender, TextCompositionEventArgs e)
         {
-            this.Visibility = Visibility.Hidden;
-
-            string msg = "Close or not?";
-            MessageBoxResult result =
-              MessageBox.Show(
-                msg,
-                "Warning",
-                MessageBoxButton.YesNo,
-                MessageBoxImage.Warning);
-            if (result == MessageBoxResult.No)
-            {
-                // If user doesn't want to close, cancel closure
-                Inventario inventario = new Inventario();
-                inventario.Show();
-            }
-            else
-            {
-                Menu menu = new Menu();
-                menu.Show();
-            }
-        }*/
+            validaciones.SoloLetras(e);
+        }
     }
 }

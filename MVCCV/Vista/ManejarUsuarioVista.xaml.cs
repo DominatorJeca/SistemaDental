@@ -20,6 +20,7 @@ namespace SistemaDental.MVCCV.Vista
     /// </summary>
     public partial class ManejarUsuarioVista : UserControl
     {
+        Validaciones validaciones = new Validaciones();
         //variables miembro
         private Usuario usuario = new Usuario();
         private bool Admin;

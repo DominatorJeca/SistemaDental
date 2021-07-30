@@ -19,8 +19,9 @@ namespace SistemaDental
         //private SqlConnection sqlConnection = new SqlConnection(connectionString);
 
         //Propiedad para extraer todos los ID almacenados en la BD
-        public string Id_paciente { get; set; }
-
+        public int Id_paciente { get; set; }
+        public string correo { get; set; }
+        public string identificacionPaciente { get; set; }
         public string NombrePaciente { get; set; }
 
         public string ApellidoPaciente { get; set; }
@@ -34,10 +35,10 @@ namespace SistemaDental
 
         public string Identidad { get; set; }
 
-       
+
         public int IdHistorial { get; set; }
 
-       
+
         public string Correo { get; set; }
         public string Estado { get; set; }
         public string Paciente { get; set; }

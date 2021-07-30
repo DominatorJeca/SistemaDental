@@ -10,7 +10,7 @@ using System.Text.RegularExpressions;
 using System.Windows.Input;
 
 
-//using System.Windows.Forms;
+
 
 
 namespace SistemaDental
@@ -64,8 +64,8 @@ namespace SistemaDental
             }
         }
 
-        
-        public bool VerificarCampos(Window window)
+
+        public bool VerificarCampos(UserControl window)
         {
             bool band = true;
             foreach (var tb in FindVisualChildren<TextBox>(window))
@@ -76,22 +76,37 @@ namespace SistemaDental
 
             foreach(var tb in FindVisualChildren<ComboBox>(window))
             {
-                if (tb.SelectedValue.ToString().Replace(" ", "").Equals("") && tb.Name != "PART_EditableTextBox" && tb.Name != "PART_TextBox")
+                if (tb.SelectedValue == null)
                     band = false;
             }
 
-            foreach (var tb in FindVisualChildren<DataGrid>(window))
-            {
-                if (tb.SelectedValue==null)
-                    band = false;
-            }
 
             foreach (var tb in FindVisualChildren<RadioButton>(window))
             {
                 if (tb.IsChecked == false)
                     band = false;
             }
+            return band;
+        }
+        public bool verificarpass(UserControl window)
+        {
+            bool band = true;
+            foreach (var tb in FindVisualChildren<PasswordBox>(window))
+            {
+                if (tb.Password.Replace(" ", "").Equals("") && tb.Name != "PART_EditableTextBox" && tb.Name != "PART_TextBox")
+                    band = false;
+            }
+            return band;
+        }
+        public bool Verificardgv(UserControl window)
+        {
+            bool band = true;
 
+            foreach (var tb in FindVisualChildren<DataGrid>(window))
+            {
+                if (tb.SelectedValue == null)
+                    band = false;
+            }
             return band;
         }
 
@@ -102,7 +117,7 @@ namespace SistemaDental
             if (cantidad <= 0)
             {
                 var = false;
-               
+
             }
             return var;
         }
@@ -117,7 +132,7 @@ namespace SistemaDental
             return var;
 
         }
-       
+
         public bool VerificarNumero(string numero)
         {
             bool siono = false;
@@ -141,6 +156,6 @@ namespace SistemaDental
 
             return siono;
         }
-       
+
     }
 }

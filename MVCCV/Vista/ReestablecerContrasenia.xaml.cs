@@ -98,8 +98,8 @@ namespace SistemaDental.MVCCV.Vista
         private void btnSalir_Click(object sender, RoutedEventArgs e)
         {
             this.Close();
-            Login log = new Login();
-            log.Show();
+          /*  Login log = new Login();
+            log.Show();*/
         }
 
         private void btnMin_Click(object sender, RoutedEventArgs e)
@@ -136,7 +136,7 @@ namespace SistemaDental.MVCCV.Vista
                 if (user !=null)
                 {
                     MessageBox.Show("Su contraseña ha sido cambiada exitosamente");
-                    Menu menu = new Menu(user.Administrador, user.Nombre, user.Id);
+                    Menu menu = new Menu(user.Administrador, user.Nombre, user.Ide);
                     this.Close();
                     menu.Show();
 

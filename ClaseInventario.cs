@@ -10,7 +10,7 @@ using System.Data;
 
 namespace SistemaDental
 {
-    class ClaseInventario
+    public class ClaseInventario
     {
         private static string connectionString = @"server = .; Initial Catalog = clinicaDental; Integrated Security = True; MultipleActiveResultSets=true";
         private SqlConnection sqlConnection = new SqlConnection(connectionString);
@@ -25,69 +25,19 @@ namespace SistemaDental
         public int Cantidad { get; set; }
         public DateTime fechaVenc { get; set; }
         public float precio { get; set; }
+
+        public string NombreTratamiento { get; set; }
+
+        public int CantidadUsada { get; set; }
         public ClaseInventario()
         {
 
         }
 
-        public List<ClaseInventario> MostrarInventario()
-        {
-            sqlConnection.Open();
-
-            try
-            {
-
-                SqlCommand command = new SqlCommand("MostrarInventario", sqlConnection);
-                command.CommandType = CommandType.StoredProcedure;
-                SqlDataReader reader = command.ExecuteReader();
-
-                List<ClaseInventario> TestList = new List<ClaseInventario>();
-                ClaseInventario test = null;
-
-                while (reader.Read())
-                {
-                    test = new ClaseInventario();
-                    test.IdMaterial = int.Parse(reader["id_material"].ToString());
-                    test.NombreMaterial = reader["nombre"].ToString();
-                    test.Cantidad = int.Parse(reader["cantidad"].ToString());
-                    TestList.Add(test);
-                }
-
-                return TestList;
-            }
-            catch
-            {
-                throw;
-            }
-            finally
-            {
-                sqlConnection.Close();
-            }
-        }
+        
 
         
-        public DataTable mostrarUsoTratamiento(int idmaterial)
-        {
-            sqlConnection.Open();
-            try
-            {
-                DataTable tabla = new DataTable();
-                SqlCommand command = new SqlCommand("MostrarUso",sqlConnection);
-                command.CommandType = CommandType.StoredProcedure;
-                command.Parameters.AddWithValue("@id", idmaterial);
-                tabla.Load(command.ExecuteReader());
-                return tabla;
-            }
-            catch
-            {
-                throw;
-            }
-            finally
-            {
-                sqlConnection.Close();
-            }
-
-        }
+        
 
         public void actualizarCantidad(ClaseInventario inventario)
         {

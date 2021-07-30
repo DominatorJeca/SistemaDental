@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SistemaDental.MVCCV.Vista;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
@@ -44,7 +45,7 @@ namespace SistemaDental
                 Usuario elUsuario = proc.BuscarUsuario(txtUsuario.Text,txtPassword.Password);
                 if (elUsuario != null)
                 {
-                    Menu men = new Menu(elUsuario.Administrador, elUsuario.Nombre,elUsuario.Id);
+                    Menu men = new Menu(elUsuario.Administrador, elUsuario.Nombre,elUsuario.Ide);
                     men.Show();
                     this.Close();
                 }
@@ -52,7 +53,7 @@ namespace SistemaDental
                     MessageBox.Show("Usuario o contraseña incorrectos");
 
                 //Verificar si el usuario existe
-    
+
             }
             catch (Exception ex)
             {
@@ -121,6 +122,12 @@ namespace SistemaDental
         {
             if (e.ChangedButton == MouseButton.Left)
                 DragMove();
+        }
+
+        private void btnOlvidarPass_Click(object sender, RoutedEventArgs e)
+        {
+            ReestablecerContrasenia reestablecer = new ReestablecerContrasenia();
+                reestablecer.ShowDialog();
         }
 
         private void btnHelp_Click(object sender, RoutedEventArgs e)

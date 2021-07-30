@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -25,17 +26,20 @@ namespace SistemaDental.MVCCV.Vista
         private bool Admin;
         private String Nombree;
         private ClaseCaja caja = new ClaseCaja();
+        private ClaseProcedimiento proc = new ClaseProcedimiento();
+        ICollectionView ColeccionTransacciones;
+
 
         public CajaVista()
         {
             InitializeComponent();
-            MostrarCaja();
+            ObtenerValues();
         }
 
         public CajaVista(bool admin, string name)
         {
             InitializeComponent();
-            MostrarCaja();
+           
             Nombree = name;
             Admin = admin;
 
@@ -43,23 +47,18 @@ namespace SistemaDental.MVCCV.Vista
 
         public void MostrarCaja()
         {
-            dgvCaja.ItemsSource = caja.MostrarCaja();
-            dgvCaja.SelectedValuePath = "Id_transaccion";
-            dgvCaja.SelectedIndex = dgvCaja.Items.Count - 2;
+
+           /*dgvCaja.ItemsSource = proc.traerTransaccionesCitas();*/
+
         }
 
         private void ObtenerValues()
         {
-            caja.Cantidad = (float)Convert.ToDecimal(txtCantidadCaja.Text);
-
-
-
-
-
-
-
-
-
+            cmbPaciente.SelectedValuePath = "Id_paciente";
+            cmbPaciente.DisplayMemberPath = "NombrePaciente";
+            cmbPaciente.ItemsSource = proc.MostrarPacientesAct();
+         
+          
         }
 
 
@@ -67,38 +66,42 @@ namespace SistemaDental.MVCCV.Vista
         /// Verifica que todos los valores no esten vacios
         /// </summary>
 
-        
-
-
-      
-        private void SelectLast_Click(object sender, RoutedEventArgs e)
-        {
-            dgvCaja.SelectedIndex = dgvCaja.Items.Count - 1;
-        }
-
-        private void btnRegresar_Click(object sender, RoutedEventArgs e)
-        {
-            
-        }
 
         private void dgvCaja_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            dgvCaja.SelectedIndex = dgvCaja.Items.Count - 2;
+            if (dgvCaja.SelectedValuePath !="" && dgvCaja.SelectedValue!=null) 
+            MessageBox.Show(dgvCaja.SelectedValue.ToString());
         }
 
-        private void txtCantidadCaja_TextChanged(object sender, TextChangedEventArgs e)
-        {
-
-        }
-
-        private void frmcaja_Closed(object sender, EventArgs e)
-        {
-          
-        }
 
         private void btnRealizar_Click(object sender, RoutedEventArgs e)
         {
+            proc.InsertarTransaccion(37, float.Parse(txtDineroAbono.Text), txtObservaciones.Text, Convert.ToInt32(dgvCaja.SelectedValue));
+            cmbPaciente_SelectionChanged(null, null);
+        }
 
+        private void cmbPaciente_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            //dgvCaja.ItemsSource = proc.traerTransaccionesCitas()
+                /* MessageBox.Show("Hola");*/
+                ColeccionTransacciones = new CollectionViewSource() { Source = proc.traerTransaccionesCitas(Convert.ToInt32(cmbPaciente.SelectedValue)) }.View;
+            dgvCaja.ItemsSource = ColeccionTransacciones;
+            dgvCaja.SelectedValuePath = "cita.IdCita ";
+        }
+
+        private void dtpFechadeCita_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (dtpFechadeCita.SelectedDate.ToString() == "")
+            {
+                ColeccionTransacciones.Filter = null;
+                dgvCaja.ItemsSource = ColeccionTransacciones;
+            }
+            else
+            {
+                var filtro = new Predicate<object>(item => ((ClaseCaja)item).cita.fechaCita == dtpFechadeCita.SelectedDate);
+                ColeccionTransacciones.Filter = filtro;
+                dgvCaja.ItemsSource = ColeccionTransacciones;
+            }
         }
     }
 }

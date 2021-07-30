@@ -26,6 +26,7 @@
             <Button x:Name="btnreporte4" Content="Reporte de ventas segun año y mes" HorizontalAlignment="Stretch" VerticalAlignment="Top" Background="#FF056676" BorderBrush="{x:Null}" Click="btnreporte4_Click" />
             <Button x:Name="btnreporte5" Content="Reporte de ventas por año" HorizontalAlignment="Stretch"  VerticalAlignment="Top"  Background="#FF056676" BorderBrush="{x:Null}" Click="btnreporte5_Click" />
             <Button x:Name="btnreporte6" Content="Reporte de turnos por empleado" HorizontalAlignment="Stretch"  VerticalAlignment="Top"  Background="#FF056676" BorderBrush="{x:Null}" Click="btnreporte6_Click"  />
+            <Button x:Name="btnreporte7" Content="Reporte de citas por empleado" HorizontalAlignment="Stretch"  VerticalAlignment="Top"  Background="#FF056676" BorderBrush="{x:Null}" Click="btnreporte7_Click"/>
         </StackPanel>
         <WindowsFormsHost Grid.Column="1" Grid.Row="1">
             <rv:ReportViewer x:Name="reporte"/>
@@ -33,14 +34,35 @@
 
         <StackPanel Orientation="Horizontal" Grid.Column="1" Grid.Row="0"  x:Name="stpPanel">
             <Label x:Name="lblanio" Visibility="Collapsed">Año</Label>
-            <TextBox x:Name="txtanio" Visibility="Collapsed" Width="150"/>
+            <ComboBox x:Name="txtanio" Visibility="Collapsed" Width="150">
+                <ComboBoxItem Content="2019"/>
+                <ComboBoxItem Content="2020"/>
+                <ComboBoxItem Content="2021"/>
+                <ComboBoxItem Content="2022"/>
+                <ComboBoxItem Content="2023"/>
+                <ComboBoxItem Content="2024"/>
+            </ComboBox>
             <Label x:Name="lblmes" Visibility="Collapsed">Mes</Label>
-            <TextBox x:Name="Mes" Width="150"/>
+            <ComboBox x:Name="Mes" Width="150" Visibility="Collapsed">
+                <ComboBoxItem Content="Enero"/>
+                <ComboBoxItem Content="Febrero"/>
+                <ComboBoxItem Content="Marzo"/>
+                <ComboBoxItem Content="Abril"/>
+                <ComboBoxItem Content="Mayo"/>
+                <ComboBoxItem Content="Junio"/>
+                <ComboBoxItem Content="Julio"/>
+                <ComboBoxItem Content="Agosto"/>
+                <ComboBoxItem Content="Septiembre"/>
+                <ComboBoxItem Content="Octubre"/>
+                <ComboBoxItem Content="Noviembre"/>
+                <ComboBoxItem Content="Diciembre"/>
+                <ComboBoxItem Content="Todos"/>
+            </ComboBox>
             <Label x:Name="lbltratamiento" Visibility="Collapsed">Tratamiento</Label>
             <ComboBox x:Name="Tratamiento" Width="150" Visibility="Collapsed"/>
             <Label x:Name="lblempleado" Visibility="Collapsed">Empleados</Label>
             <ComboBox x:Name="cmbEmpleado" Width="150" Visibility="Collapsed"/>
-            <Button Style="{StaticResource MaterialDesignFlatButton}" Background="Beige" Width="150" Click="Button_Click" x:Name="btnMostrarReporte"/>
+            <Button Style="{StaticResource MaterialDesignFlatButton}" Background="Beige" Width="150" Click="Button_Click" x:Name="btnMostrarReporte" Margin="30,0,0,0"/>
         </StackPanel>
   
     </Grid>

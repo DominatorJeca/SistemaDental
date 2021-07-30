@@ -25,7 +25,7 @@ namespace SistemaDental
     /// </summary>
     public partial class AgregarPaciente : Window
     {
-
+        Validaciones validaciones = new Validaciones();
         bool Admin;
         String Nombree;
 
@@ -35,11 +35,11 @@ namespace SistemaDental
         //Constructores
         public AgregarPaciente()
         {
-            
+
             InitializeComponent();
 
         }
-
+        Validaciones validar = new Validaciones();
         public AgregarPaciente(bool admin, string name)
         {
 
@@ -54,23 +54,12 @@ namespace SistemaDental
         /// </summary>
         private void btnRegresar_Click(object sender, RoutedEventArgs e)
         {
-            
+
         }
 
         private void ObtenerValores()
         {
-            paciente.NombrePaciente = txtAgregarNombre.Text;
-            paciente.ApellidoPaciente = txtAgregarApellido.Text;
-            paciente.FechaNac = Convert.ToDateTime(datePicker1.Text);
-            paciente.Telefono = txtAgregarTelefono.Text;
-            paciente.Id_paciente = txtAgregarIdentidad.Text;
-            if (rbFemenino.IsChecked == true)
-            {
-                paciente.Genero = "Femenino";
-            }else if(rbMasculino.IsChecked == true)
-            {
-                paciente.Genero = "Masculino";
-            }
+           
         }
         /// <summary>
         /// Ingresa los valores a la base de datos al presionar el botón
@@ -90,7 +79,7 @@ namespace SistemaDental
                 try
                 {
                     ObtenerValores();
-                    paciente.AgregarPaciente(paciente);
+                   // paciente.AgregarPaciente(paciente);
                     MessageBox.Show("Datos ingresados correctamente.");
                     Limpiar();
 
@@ -100,7 +89,7 @@ namespace SistemaDental
                 {
                     MessageBox.Show("Ha ocurrido un error, revise sus datos e intente de nuevo");
                 }
-                
+
             }
 
         }
@@ -116,32 +105,28 @@ namespace SistemaDental
             rbMasculino.IsChecked = false;
         }
 
-        private void txtAgregarNombre_TextChanged(object sender, TextChangedEventArgs e)
+
+
+        private void PreviewTextInputOnlyLetters(object sender, TextCompositionEventArgs e)
         {
-            Regex reg = new Regex("[0-9]");
-            bool b = reg.IsMatch(txtAgregarNombre.Text);
-            if (b == true)
-            {
-                MessageBox.Show("Ingrese solamente caracteres");
-                txtAgregarNombre.Text = "";
-            }
+
+
+            validar.SoloLetras(e);
+
         }
 
-        private void txtAgregarApellido_TextChanged(object sender, TextChangedEventArgs e)
+
+        private void PreviewTextInputOnlyNumbers(object sender, TextCompositionEventArgs e)
         {
-            Regex reg = new Regex("[0-9]");
-            bool b = reg.IsMatch(txtAgregarApellido.Text);
-            if (b == true)
-            {
-                MessageBox.Show("Ingrese solamente caracteres");
-                txtAgregarApellido.Text = "";
-            }
+
+
+            validar.SoloNumeros(e);
         }
 
         private void AddPaciente_Closed(object sender, EventArgs e)
         {
-            
 
+            
         }
     }
 }
