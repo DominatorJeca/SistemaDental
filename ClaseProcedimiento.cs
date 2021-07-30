@@ -1700,6 +1700,7 @@ namespace SistemaDental
                 command.CommandType = CommandType.StoredProcedure;
                 command.Parameters.AddWithValue("@CitaID", cita.IdCita);
                 command.Parameters.AddWithValue("@Estado", 1);
+                command.Parameters.AddWithValue("@observaciones", cita.Observaciones);
                 command.ExecuteNonQuery();
             }
             catch
