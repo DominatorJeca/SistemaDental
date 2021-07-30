@@ -388,23 +388,8 @@ namespace SistemaDental.MVCCV.Vista
         private void btnCancelar_Click(object sender, RoutedEventArgs e)
         {
 
-
-            if (bton == 1)
-            {
-                encender();
-
-            }
-            else
-            {
                 encender();
                 limpiar();
-
-            }
-            
-            
-            
-           
-
         }
 
         private void encender()
