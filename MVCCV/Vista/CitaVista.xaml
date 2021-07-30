@@ -23,7 +23,7 @@
 
 
         <StackPanel Grid.Row="1" Grid.Column="1">
-            <Label Content="Citas" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="20" Foreground="Black" Background="#7F056676" FontFamily="Bahnschrift" RenderTransformOrigin="0.66,1.047" />
+            <Label Content="Citas" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="20" Foreground="Black" Background="#7F056676" FontFamily="Bahnschrift" RenderTransformOrigin="0.66,1.047" Height="32" Width="54" />
         </StackPanel>
 
 
@@ -44,11 +44,11 @@
 
             </StackPanel>
         </StackPanel>
-        <StackPanel Orientation="Horizontal" Grid.Column="1" Margin="73,326,0,47" Grid.Row="1">
-            <Button x:Name="btnGuardar" Content="Guardar" HorizontalAlignment="Left"  VerticalAlignment="Top" Width="202" Background="#FF056676" BorderBrush="{x:Null}" Click="btnGuardar_Click" IsEnabled="False"/>
-            <Button x:Name="btnCancelar" Content="Cancelar" HorizontalAlignment="Left" VerticalAlignment="Top" Width="202" RenderTransformOrigin="0.463,1.027" BorderBrush="{x:Null}" IsEnabled="False" Click="btnCancelar_Click" Grid.Column="1" Background="#FF056676"/>
+        <StackPanel Orientation="Horizontal" Grid.Column="1" Margin="73,352,0,21" Grid.Row="1">
+            <Button x:Name="btnGuardar" Content="Guardar" HorizontalAlignment="Left" Width="202" Background="#FF056676" BorderBrush="{x:Null}" Click="btnGuardar_Click" IsEnabled="False" Height="Auto"/>
+            <Button x:Name="btnCancelar" Content="Cancelar" HorizontalAlignment="Left" Width="202" RenderTransformOrigin="0.463,1.027" BorderBrush="{x:Null}" IsEnabled="False" Click="btnCancelar_Click" Grid.Column="1" Background="#FF056676" Height="Auto"/>
         </StackPanel>
-        <StackPanel Orientation="Horizontal" RenderTransformOrigin="0.5,0.5" VerticalAlignment="Bottom" Grid.Column="1" Margin="0,0,0,82" Grid.Row="1">
+        <StackPanel Orientation="Horizontal" RenderTransformOrigin="0.5,0.5" VerticalAlignment="Bottom" Grid.Column="1" Margin="0,0,0,58" Grid.Row="1">
             <Button x:Name="btnAgregar" Content="Agregar" HorizontalAlignment="Left"  VerticalAlignment="Top" Width="180" Background="#FF056676" BorderBrush="{x:Null}" Click="btnAgregar_Click"/>
             <Button x:Name="btnEditar" Content="Editar" HorizontalAlignment="Left" VerticalAlignment="Top" Width="180" Background="#FF056676" BorderBrush="{x:Null}" Grid.Column="1" Click="btnEditar_Click"/>
             <Button x:Name="btnelimtratamiento_cita_Copy" Content="Eliminar" HorizontalAlignment="Left" VerticalAlignment="Top" Width="185" RenderTransformOrigin="0.463,1.027" BorderBrush="{x:Null}"  Background="#FF056676" Click="btnelimtratamiento_cita_Copy_Click"  />
@@ -77,7 +77,7 @@
             </DataGrid.Columns>
         </DataGrid>
         <Button x:Name="btnelimtratamiento" Content="Eliminar" HorizontalAlignment="Left" VerticalAlignment="Top" Width="202" RenderTransformOrigin="0.463,1.027" BorderBrush="{x:Null}" IsEnabled="False"  Background="#FF056676" Grid.Column="3" Margin="218,365,0,0" Grid.Row="1" Click="btnelimtratamiento_Click_1"/>
-        <DataGrid x:Name="dtg_Citas" SelectionMode= "Single" HorizontalAlignment="Right" Height="226" VerticalAlignment="Top" Width="545" Background="#FF056676" Foreground="#DDFFFFFF" RenderTransformOrigin="0.45,0.505" AutoGenerateColumns="False" IsReadOnly="True" SelectionChanged="dtg_Citas_SelectionChanged" Margin="0,47,10,0" Grid.ColumnSpan="2" Grid.Row="1">
+        <DataGrid x:Name="dtg_Citas" SelectionMode= "Single" HorizontalAlignment="Right" Height="226" VerticalAlignment="Top" Width="545" Background="#FF056676" Foreground="#DDFFFFFF" RenderTransformOrigin="0.45,0.505" AutoGenerateColumns="False" IsReadOnly="True" SelectionChanged="dtg_Citas_SelectionChanged" Margin="0,84,10,0" Grid.ColumnSpan="2" Grid.Row="1">
             <DataGrid.Columns >
 
                 <DataGridTextColumn Header="Paciente">
@@ -98,7 +98,11 @@
         <StackPanel Orientation="Horizontal" VerticalAlignment="Bottom" HorizontalAlignment="Right" Height="33" Grid.Column="3" Margin="0,0,102,372" Width="318" Grid.Row="1">
             <Label Content="Paciente" HorizontalAlignment="Left"  VerticalAlignment="Top"  FontSize="15" Foreground="Black" Background="White" FontFamily="Bahnschrift" Grid.Column="1" Width="96"/>
 
-            <ComboBox x:Name="cmbPaciente" IsEnabled="False" HorizontalAlignment="Left" VerticalAlignment="Top" Width="210" RenderTransformOrigin="0.603,0.358" Grid.Column="1" Text="{Binding SelectedItem.IdPacientes, ElementName=dtg_Citas}"   />
+            <ComboBox x:Name="cmbPaciente" IsEnabled="False" HorizontalAlignment="Left" VerticalAlignment="Top" Width="210" RenderTransformOrigin="0.603,0.358" Grid.Column="1" Text="{Binding SelectedItem.IdPacientes}"   />
+        </StackPanel>
+        <StackPanel Orientation="Horizontal" VerticalAlignment="Bottom" HorizontalAlignment="Center" Height="33" Width="423" Margin="57,0,70,333" Grid.Column="1" Grid.Row="1">
+            <Label Content=" Busqueda Paciente" HorizontalAlignment="Center"  VerticalAlignment="Top"  FontSize="15" Foreground="Black" Background="White" FontFamily="Bahnschrift" Grid.Column="1" Width="118"/>
+            <ComboBox x:Name="cmbPaciente1"  HorizontalAlignment="Center" VerticalAlignment="Top" Width="302" RenderTransformOrigin="0.603,0.358" Text="{Binding SelectedItem.IdPacientes}" SelectionChanged="cmbPaciente1_SelectionChanged"   />
         </StackPanel>
 
     </Grid>

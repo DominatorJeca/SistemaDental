@@ -65,9 +65,12 @@ namespace SistemaDental.MVCCV.Vista
         }
         private void MostrarDatos()
         {
-            cmbPaciente.ItemsSource = citas.mostrarPacientes();
 
+            cmbPaciente1.ItemsSource = citas.mostrarPacientesconcitas();
+            cmbPaciente1.DisplayMemberPath = "Nombre_Id_paciente";
+            cmbPaciente1.SelectedValuePath = "IdPacientes";
 
+            cmbPaciente.ItemsSource = citas.mostrarPacientes();          
             cmbPaciente.DisplayMemberPath = "Nombre_Id_paciente";
             cmbPaciente.SelectedValuePath = "IdPacientes";
             cmbEmpleado.ItemsSource = citas.MostrarEmpleado();
@@ -109,8 +112,8 @@ namespace SistemaDental.MVCCV.Vista
         /// <param name="e"></param>
         private void btnAgregar_Click(object sender, RoutedEventArgs e)
         {
-
-
+            cmbPaciente1.SelectedValue = null;
+            cmbPaciente1.IsEnabled = false;
             btnGuardar.IsEnabled = true;
             btnEditar.IsEnabled = false;
             btnAgregar.IsEnabled = false;
@@ -197,7 +200,8 @@ namespace SistemaDental.MVCCV.Vista
                     btnelimtratamiento_cita_Copy.IsEnabled = false;
                     bton = 1;
                     encenderbotones();
-
+                    cmbPaciente1.SelectedValue = null;
+                    cmbPaciente1.IsEnabled = false;
                 }
                 else
                 {
@@ -294,9 +298,9 @@ namespace SistemaDental.MVCCV.Vista
             }
             finally
             {
-                
-             
-               
+
+
+                MostrarDatos();
             }
         }
 
@@ -313,14 +317,31 @@ namespace SistemaDental.MVCCV.Vista
         private void dtg_Citas_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             int val;
+         
             if (dtg_Citas.SelectedValue != null)
             {
-
+                DateTime date=DateTime.MinValue;
                 cmbEmpleado.SelectedValue = ((ClaseCitas)dtg_Citas.SelectedItem).IdEmpleado;
                 cmbPaciente.SelectedValue = ((ClaseCitas)dtg_Citas.SelectedItem).IdPacientes;
-                cdCitas.SelectedDate = ((ClaseCitas)dtg_Citas.SelectedItem).fechaCita;
+
+
+                date= ((ClaseCitas)dtg_Citas.SelectedItem).fechaCita;
+                if ( date.Date > DateTime.Today)
+                {
+                    date = ((ClaseCitas)dtg_Citas.SelectedItem).fechaCita;
+                    cdCitas.SelectedDate = date;
+
+                }
+                else
+                {
+
+                    cdCitas.SelectedDate = null;
+                }
+                
+
+               
                 ctTiempo.SelectedTime = ((ClaseCitas)dtg_Citas.SelectedItem).fechaCita;
-                ctTiempo.SelectedTime = ((ClaseCitas)dtg_Citas.SelectedItem).fechaCita;
+           
                 val = ((ClaseCitas)dtg_Citas.SelectedItem).IdCita;
 
                 dtg_Tratamientos.ItemsSource = citas.Mostrartratmientos(val);
@@ -366,25 +387,36 @@ namespace SistemaDental.MVCCV.Vista
 
         private void btnCancelar_Click(object sender, RoutedEventArgs e)
         {
-            dtg_Citas.IsEnabled = true;     
-            btnAgregar.IsEnabled = true;
-            btnEditar.IsEnabled = true;
-            btnGuardar.IsEnabled = false;
-            btnCancelar.IsEnabled = false;
-            btnelimtratamiento.IsEnabled = false;
-            btnelimtratamiento_cita_Copy.IsEnabled= true;
-            encenapagarbotones();
-            limpiar();
+
+
+            if (bton == 1)
+            {
+                encender();
+
+            }
+            else
+            {
+                encender();
+                limpiar();
+
+            }
+            
+            
             
            
 
         }
 
-        private void btnRegresar_Click(object sender, RoutedEventArgs e)
+        private void encender()
         {
-            /* Menu menu = new Menu(Admin, Nombree);
-             menu.Show();
-         */
+            dtg_Citas.IsEnabled = true;
+            btnAgregar.IsEnabled = true;
+            btnEditar.IsEnabled = true;
+            btnGuardar.IsEnabled = false;
+            btnCancelar.IsEnabled = false;
+            btnelimtratamiento.IsEnabled = false;
+            btnelimtratamiento_cita_Copy.IsEnabled = true;
+            encenapagarbotones();
         }
 
         private void ctTiempo_SelectedTimeChanged(object sender, RoutedPropertyChangedEventArgs<DateTime?> e)
@@ -432,6 +464,8 @@ namespace SistemaDental.MVCCV.Vista
             cdCitas.IsEnabled = false;
             cmbPaciente.IsEnabled = false;
             Agregar_Tratamientos.IsEnabled = false;
+            cmbPaciente1.IsEnabled = true;
+
         }
 
 
@@ -468,6 +502,7 @@ namespace SistemaDental.MVCCV.Vista
                         obtenerCita();
                         citas.eliminardetallecita(citas.IdCita);
                         citas.EliminarCita(citas.IdCita);
+                       
                     }
                 }
                 else
@@ -483,14 +518,26 @@ namespace SistemaDental.MVCCV.Vista
             {
                 limpiar();
                 mostrarCitas();
+                MostrarDatos();
             }
 
 
         }
 
-       
+        private void cmbPaciente1_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+           if (cmbPaciente1.SelectedValue !=null)
+            {
+                citas.IdPacientes = cmbPaciente1.SelectedValue.ToString();
+                dtg_Citas.ItemsSource = citas.mostrarPacientesxcitas(Convert.ToInt32(citas.IdPacientes));
+                dtg_Citas.SelectedValuePath = "IdCita";
 
-        
+            }
+                
+            
+         
+
+        }
     }
 
     

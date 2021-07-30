@@ -83,6 +83,24 @@ namespace SistemaDental
         {
             proc.EliminarCita(cita);
         }
+
+        public List<ClaseCitas> mostrarPacientesconcitas()
+        {
+
+            return proc.mostrarPacientesconcitas();
+
+
+        }
+
+        
+             public List<ClaseCitas> mostrarPacientesxcitas(int citas)
+        {
+
+            return proc.mostrarPacientesxcitas(citas);
+
+
+        }
+
         public List<ClaseCitas> mostrarPacientes()
         {
 
