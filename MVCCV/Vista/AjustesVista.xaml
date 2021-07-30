@@ -20,10 +20,8 @@
             <RowDefinition Height="50"/>
         </Grid.RowDefinitions>
         <StackPanel Grid.Row="1" Grid.Column="1" Orientation="Vertical">
-            <Button x:Name="btnEditarUsuario" Content="Editar Usuario"  HorizontalAlignment="Stretch"  VerticalAlignment="Top" Width="auto" Height="80" Background="#FF056676" BorderBrush="{x:Null}" Click="btnEditarUsuario_Click_1"/>
-            <Button x:Name="btnAgregarNuevoUsuario" Content="Agregar Nuevo Usuario"  HorizontalAlignment="Stretch" VerticalAlignment="Top" Width="auto" Height="80" Background="#FF056676" BorderBrush="{x:Null}" Click="btnAgregarNuevoUsuario_Click"/>
-            <Button x:Name="btnManejarUsuarios" Content="Manejar Usuarios" Command="{Binding Path= DataContext.UsuarioVistaComando, RelativeSource={RelativeSource AncestorType={x:Type otros:Menu}}}" HorizontalAlignment="Stretch"  VerticalAlignment="Top" Width="auto" Height="80" Background="#FF056676" BorderBrush="{x:Null}" Click="btnManejarUsuarios_Click"/>
-            <Button x:Name="btnRegresar" Content="Regresar" HorizontalAlignment="Stretch" VerticalAlignment="Top" Width="auto" Height="80" Background="#FF056676" BorderBrush="{x:Null}" Click="btnRegresar_Click"/>
+            <Button x:Name="btnManejarUsuarios" Content="Manejar Usuarios" HorizontalAlignment="Stretch"  VerticalAlignment="Top" Width="auto" Height="80" Background="#FF056676" BorderBrush="{x:Null}" Click="btnManejarUsuarios_Click"/>
+            <Button x:Name="btnInfoNuestra" Content="Regresar" HorizontalAlignment="Stretch" VerticalAlignment="Top" Width="auto" Height="80" Background="#FF056676" BorderBrush="{x:Null}" />
 
         </StackPanel>
        </Grid>

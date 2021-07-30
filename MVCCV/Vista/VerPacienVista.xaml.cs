@@ -155,13 +155,12 @@ namespace SistemaDental.MVCCV.Vista
         private void btnCancelar_Click(object sender, RoutedEventArgs e)
         {
 
-            dtpFechaNac.Visibility = Visibility.Hidden;
             try
             {
                 //llama la funcion para deshabilitar los textbox y botones
-                HabilitacionDeshabilitacion(true, false);
                 //llama la funcion para limpiar pantalla
                 LimpiarPantalla();
+                HabilitacionDeshabilitacion(true, false);
                 MessageBox.Show("Se han cancelado los cambios.");
                 btnEditarPaciente.IsEnabled = false;
                 btnGuardarPaciente.IsEnabled = false;
