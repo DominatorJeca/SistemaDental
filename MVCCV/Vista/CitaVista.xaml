@@ -36,7 +36,7 @@
             </StackPanel>
             <StackPanel Orientation="Horizontal" Height="40" HorizontalAlignment="Left" Width="322">
                 <Label Content="Fecha de cita" Grid.Column="1"  VerticalAlignment="Top"  FontSize="15" Foreground="Black" Background="White" FontFamily="Bahnschrift" Height="40" Width="98"/>
-                <DatePicker x:Name="cdCitas" IsEnabled="False" HorizontalAlignment="Left"  VerticalAlignment="Top" Height="25" Width="210" />
+                <DatePicker x:Name="cdCitas" IsEnabled="False" HorizontalAlignment="Left"  VerticalAlignment="Top" Height="25" Width="210"  />
             </StackPanel>
             <StackPanel Orientation="Horizontal" Height="40" HorizontalAlignment="Left" Width="308">
                 <Label Content="Hora de cita" VerticalAlignment="Top"  FontSize="15" Foreground="Black" Background="White" FontFamily="Bahnschrift" Height="40" Grid.Column="1" Width="98" />
@@ -70,14 +70,14 @@
                 </TransformGroup>
             </Label.RenderTransform>
         </Label>
-        <DataGrid x:Name="dtg_Tratamientos"  HorizontalAlignment="Left" Height="127" VerticalAlignment="Top" Width="415" Background="#FF056676" Foreground="#DDFFFFFF" AutoGenerateColumns="False" IsReadOnly="True" Grid.Column="3" Margin="5,233,0,0" Grid.Row="1" >
+        <DataGrid x:Name="dtg_Tratamientos" SelectionMode= "Single" HorizontalAlignment="Left" Height="127" VerticalAlignment="Top" Width="415" Background="#FF056676" Foreground="#DDFFFFFF" AutoGenerateColumns="False" IsReadOnly="True" Grid.Column="3" Margin="5,233,0,0" Grid.Row="1" >
             <DataGrid.Columns >
                 <DataGridTextColumn Header="Tratamiento" Binding="{Binding nombreTramientoindividual}" Width="120"/>
                 <DataGridTextColumn Header="Precio Sugerido" Binding="{Binding trtamientoprecio}"  />
             </DataGrid.Columns>
         </DataGrid>
         <Button x:Name="btnelimtratamiento" Content="Eliminar" HorizontalAlignment="Left" VerticalAlignment="Top" Width="202" RenderTransformOrigin="0.463,1.027" BorderBrush="{x:Null}" IsEnabled="False"  Background="#FF056676" Grid.Column="3" Margin="218,365,0,0" Grid.Row="1" Click="btnelimtratamiento_Click_1"/>
-        <DataGrid x:Name="dtg_Citas" HorizontalAlignment="Right" Height="226" VerticalAlignment="Top" Width="545" Background="#FF056676" Foreground="#DDFFFFFF" RenderTransformOrigin="0.45,0.505" AutoGenerateColumns="False" IsReadOnly="True" SelectionChanged="dtg_Citas_SelectionChanged" Margin="0,47,10,0" Grid.ColumnSpan="2" Grid.Row="1">
+        <DataGrid x:Name="dtg_Citas" SelectionMode= "Single" HorizontalAlignment="Right" Height="226" VerticalAlignment="Top" Width="545" Background="#FF056676" Foreground="#DDFFFFFF" RenderTransformOrigin="0.45,0.505" AutoGenerateColumns="False" IsReadOnly="True" SelectionChanged="dtg_Citas_SelectionChanged" Margin="0,47,10,0" Grid.ColumnSpan="2" Grid.Row="1">
             <DataGrid.Columns >
 
                 <DataGridTextColumn Header="Paciente">

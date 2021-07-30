@@ -1114,12 +1114,11 @@ namespace SistemaDental
                 command.Parameters.AddWithValue("@FechaCita", cita.fechaCita);
                 command.Parameters.AddWithValue("@Estado", 0);
                 command.Parameters.AddWithValue("@Descuento", 0);
-                command.ExecuteNonQuery();
-                SqlDataReader reader = command.ExecuteReader();
+                reader = command.ExecuteReader();
 
               reader.Read();
                cita.IdCita= Convert.ToInt32(reader[0]) ;
-                reader.Close();
+            
 
             }
             catch
