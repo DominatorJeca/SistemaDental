@@ -127,7 +127,7 @@ namespace SistemaDental.MVCCV.Vista
 
         private void LlenadoDeInformacion()
         {
-            var Usuario = procedimiento.DatosUsuarios("JCASTRO1");
+            var Usuario = procedimiento.DatosUsuarios(nombreusaurio);
             txtApellido.Text = Usuario.Apellido;
             txtNombre.Text = Usuario.Nombre;
             txtCorreo.Text = Usuario.Correo;
