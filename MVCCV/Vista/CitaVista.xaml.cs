@@ -33,6 +33,7 @@ namespace SistemaDental.MVCCV.Vista
             InitializeComponent();
             MostrarDatos();
             mostrarCitas();
+            inicializarfecchas();
 
         }
 
@@ -41,6 +42,7 @@ namespace SistemaDental.MVCCV.Vista
             InitializeComponent();
             MostrarDatos();
             mostrarCitas();
+            inicializarfecchas();
             Nombree = name;
             Admin = admin;
         }
@@ -144,11 +146,7 @@ namespace SistemaDental.MVCCV.Vista
                 MessageBox.Show("Selecione una fecha");
                 return false;
             }
-            if (RevisarFecha())
-            {
-                MessageBox.Show("Por favor, selecione una fecha validad");
-                return false;
-            }
+            
             if (ctTiempo.SelectedTime == null)
             {
                 MessageBox.Show("Por favor, selecione una hora");
@@ -163,27 +161,27 @@ namespace SistemaDental.MVCCV.Vista
             return true;
         }
 
-        private bool RevisarFecha()
+        private void inicializarfecchas()
         {
-            if (cdCitas.SelectedDate.Value.Date == DateTime.Now.Date)
-            {
-                return true;
-            }
-            if (cdCitas.SelectedDate.Value.Date < DateTime.Now.Date)
-            {
-                return true;
-            }
-
-            return false;
+            cdCitas.BlackoutDates.AddDatesInPast();
+            cdCitas.BlackoutDates.Add(new CalendarDateRange(DateTime.Today, DateTime.Today.AddDays(0)));
         }
 
-        /// <summary>
-        /// Con esta función del botón editar se bloquean o desbloquean objetos para editar una cita
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
 
-        private void btnEditar_Click(object sender, RoutedEventArgs e)
+      
+      
+             
+               
+            
+        
+          
+    /// <summary>
+    /// Con esta función del botón editar se bloquean o desbloquean objetos para editar una cita
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
+
+    private void btnEditar_Click(object sender, RoutedEventArgs e)
         {
             try
             {
