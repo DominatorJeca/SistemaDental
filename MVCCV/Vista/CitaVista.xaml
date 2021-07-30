@@ -9,8 +9,8 @@
              d:DesignHeight="455" d:DesignWidth="1050" >
     <Grid Background="White">
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="25"/>
-            <ColumnDefinition Width="550"/>
+            <ColumnDefinition Width="23"/>
+            <ColumnDefinition Width="552"/>
             <ColumnDefinition Width="25" />
             <ColumnDefinition Width="425"/>
             <ColumnDefinition Width="25"/>
@@ -27,7 +27,7 @@
         </StackPanel>
 
 
-        <StackPanel Grid.Row="1" Grid.Column="3" Width="415" Margin="5,10,5,0" VerticalAlignment="Top">
+        <StackPanel Grid.Row="1" Grid.Column="3" Margin="5,10,5,0" VerticalAlignment="Top" Height="148">
             <StackPanel Orientation="Horizontal" Height="28" Margin="0,0,56,0" Width="79" HorizontalAlignment="Right" VerticalAlignment="Center"/>
             <StackPanel Orientation="Horizontal" Height="40" HorizontalAlignment="Left" Width="322" VerticalAlignment="Center">
                 <Label Content="Doctor" HorizontalAlignment="Left" VerticalAlignment="Top"  FontSize="15" Foreground="Black" Background="White" FontFamily="Bahnschrift" RenderTransformOrigin="1.349,0.404" Height="40" Width="98"/>
@@ -44,14 +44,14 @@
 
             </StackPanel>
         </StackPanel>
-        <StackPanel Orientation="Horizontal" Grid.Column="1" Margin="73,352,0,21" Grid.Row="1">
+        <StackPanel Orientation="Horizontal" Grid.Column="1" Margin="69,352,0,21" Grid.Row="1">
             <Button x:Name="btnGuardar" Content="Guardar" HorizontalAlignment="Left" Width="202" Background="#FF056676" BorderBrush="{x:Null}" Click="btnGuardar_Click" IsEnabled="False" Height="Auto"/>
             <Button x:Name="btnCancelar" Content="Cancelar" HorizontalAlignment="Left" Width="202" RenderTransformOrigin="0.463,1.027" BorderBrush="{x:Null}" IsEnabled="False" Click="btnCancelar_Click" Grid.Column="1" Background="#FF056676" Height="Auto"/>
         </StackPanel>
-        <StackPanel Orientation="Horizontal" RenderTransformOrigin="0.5,0.5" VerticalAlignment="Bottom" Grid.Column="1" Margin="0,0,0,58" Grid.Row="1">
-            <Button x:Name="btnAgregar" Content="Agregar" HorizontalAlignment="Left"  VerticalAlignment="Top" Width="180" Background="#FF056676" BorderBrush="{x:Null}" Click="btnAgregar_Click"/>
+        <StackPanel Orientation="Horizontal" RenderTransformOrigin="0.5,0.5" VerticalAlignment="Bottom" Margin="0,0,5,58" Grid.Row="1" Grid.Column="1" Height="32">
+            <Button x:Name="btnAgregar" Content="Agregar" HorizontalAlignment="Left"  VerticalAlignment="Top" Width="177" Background="#FF056676" BorderBrush="{x:Null}" Click="btnAgregar_Click"/>
             <Button x:Name="btnEditar" Content="Editar" HorizontalAlignment="Left" VerticalAlignment="Top" Width="180" Background="#FF056676" BorderBrush="{x:Null}" Grid.Column="1" Click="btnEditar_Click"/>
-            <Button x:Name="btnelimtratamiento_cita_Copy" Content="Eliminar" HorizontalAlignment="Left" VerticalAlignment="Top" Width="185" RenderTransformOrigin="0.463,1.027" BorderBrush="{x:Null}"  Background="#FF056676" Click="btnelimtratamiento_cita_Copy_Click"  />
+            <Button x:Name="btnelimtratamiento_cita_Copy" Content="Eliminar" HorizontalAlignment="Left" VerticalAlignment="Top" Width="190" RenderTransformOrigin="0.463,1.027" BorderBrush="{x:Null}"  Background="#FF056676" Click="btnelimtratamiento_cita_Copy_Click"  />
 
         </StackPanel>
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="5,158,43,207" Width="377" Grid.Column="3" Grid.Row="1">
@@ -60,7 +60,7 @@
             <Label Content="" Width="10"/>
             <Button x:Name="Agregar_Tratamientos" IsEnabled="False" Content="+" Height="40" Width="42" Background="#FF056676" VerticalContentAlignment="Center" HorizontalContentAlignment="Stretch" RenderTransformOrigin="1.195,0.436" HorizontalAlignment="Center" VerticalAlignment="Top" Click="Agregar_Tratamientos_Click" />
         </StackPanel>
-        <Label Content="Lista de tratamientos" HorizontalAlignment="Left" VerticalAlignment="Top" Foreground="Black" Background="#7F056676" FontFamily="Bahnschrift" Grid.Column="3" Margin="5,203,0,0" Grid.Row="1" FontSize="14" RenderTransformOrigin="0.5,0.5" >
+        <Label Content="Lista de tratamientos" HorizontalAlignment="Left" VerticalAlignment="Top" Foreground="Black" Background="#7F056676" FontFamily="Bahnschrift" Grid.Column="3" Margin="5,203,0,0" Grid.Row="1" FontSize="14" RenderTransformOrigin="0.5,0.5" Height="25" Width="142" >
             <Label.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform ScaleY="1" ScaleX="1"/>
@@ -77,7 +77,7 @@
             </DataGrid.Columns>
         </DataGrid>
         <Button x:Name="btnelimtratamiento" Content="Eliminar" HorizontalAlignment="Left" VerticalAlignment="Top" Width="202" RenderTransformOrigin="0.463,1.027" BorderBrush="{x:Null}" IsEnabled="False"  Background="#FF056676" Grid.Column="3" Margin="218,365,0,0" Grid.Row="1" Click="btnelimtratamiento_Click_1"/>
-        <DataGrid x:Name="dtg_Citas" SelectionMode= "Single" HorizontalAlignment="Right" Height="226" VerticalAlignment="Top" Width="545" Background="#FF056676" Foreground="#DDFFFFFF" RenderTransformOrigin="0.45,0.505" AutoGenerateColumns="False" IsReadOnly="True" SelectionChanged="dtg_Citas_SelectionChanged" Margin="0,84,10,0" Grid.ColumnSpan="2" Grid.Row="1">
+        <DataGrid x:Name="dtg_Citas" SelectionMode= "Single" HorizontalAlignment="Right" Height="226" VerticalAlignment="Top" Width="545" Background="#FF056676" Foreground="#DDFFFFFF" RenderTransformOrigin="0.45,0.505" AutoGenerateColumns="False" IsReadOnly="True" SelectionChanged="dtg_Citas_SelectionChanged" Margin="0,77,5,0" Grid.Row="1" Grid.Column="1">
             <DataGrid.Columns >
 
                 <DataGridTextColumn Header="Paciente">
@@ -100,7 +100,7 @@
 
             <ComboBox x:Name="cmbPaciente" IsEnabled="False" HorizontalAlignment="Left" VerticalAlignment="Top" Width="210" RenderTransformOrigin="0.603,0.358" Grid.Column="1" Text="{Binding SelectedItem.IdPacientes}"   />
         </StackPanel>
-        <StackPanel Orientation="Horizontal" VerticalAlignment="Bottom" HorizontalAlignment="Center" Height="33" Width="423" Margin="57,0,70,333" Grid.Column="1" Grid.Row="1">
+        <StackPanel Orientation="Horizontal" VerticalAlignment="Bottom" HorizontalAlignment="Center" Height="33" Width="424" Margin="57,0,71,333" Grid.Column="1" Grid.Row="1">
             <Label Content=" Busqueda Paciente" HorizontalAlignment="Center"  VerticalAlignment="Top"  FontSize="15" Foreground="Black" Background="White" FontFamily="Bahnschrift" Grid.Column="1" Width="144"/>
             <ComboBox x:Name="cmbPaciente1"  HorizontalAlignment="Center" VerticalAlignment="Top" Width="274" RenderTransformOrigin="0.603,0.358" Text="{Binding SelectedItem.IdPacientes}" SelectionChanged="cmbPaciente1_SelectionChanged"   >
                 <ComboBox.RenderTransform>
