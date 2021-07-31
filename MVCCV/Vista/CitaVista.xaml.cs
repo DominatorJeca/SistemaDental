@@ -24,7 +24,8 @@ namespace SistemaDental.MVCCV.Vista
     {
         ObservableCollection<ClaseCitas> tratamientos = new ObservableCollection<ClaseCitas>();
         ClaseCitas citas = new ClaseCitas();
-     
+
+        int vand=0;
         int bton = 0;
         private bool Admin;
         private String Nombree;
@@ -34,6 +35,8 @@ namespace SistemaDental.MVCCV.Vista
             MostrarDatos();
             mostrarCitas();
             inicializarfecchas();
+
+           
 
         }
 
@@ -228,9 +231,9 @@ namespace SistemaDental.MVCCV.Vista
             try
             {
                 if (bton == 1)
-                  {
+                {
                     if (RevisarDatos() is true)
-                     {
+                    {
 
 
                         obtenerCita();
@@ -257,6 +260,7 @@ namespace SistemaDental.MVCCV.Vista
                         limpiar();
                         encenapagarbotones();
                         mostrarCitas();
+                        MostrarDatos();
 
                     }
                 }
@@ -264,33 +268,42 @@ namespace SistemaDental.MVCCV.Vista
 
                 else
                 {
+
                     if (RevisarDatos())
                     {
-                        ObtenerValores();
+                        revisardatosdehora();
 
 
-                        citas.AgendarCita(citas);
-                        foreach (ClaseCitas inv in tratamientos)
-                        {
 
-                            citas.InsertarDetalleCita(citas.IdCita, inv.IdTratamiento, float.Parse(inv.trtamientoprecio));
+                            if (vand == 0)
+                            {
+                                ObtenerValores();
+
+
+                                citas.AgendarCita(citas);
+                                foreach (ClaseCitas inv in tratamientos)
+                                {
+
+                                    citas.InsertarDetalleCita(citas.IdCita, inv.IdTratamiento, float.Parse(inv.trtamientoprecio));
+                                }
+                                MessageBox.Show("Cita agendada con éxito");
+                                btnGuardar.IsEnabled = false;
+                                btnEditar.IsEnabled = true;
+                                btnAgregar.IsEnabled = true;
+                                btnCancelar.IsEnabled = false;
+                                btnelimtratamiento.IsEnabled = false;
+                                dtg_Citas.IsEnabled = true;
+                                btnelimtratamiento_cita_Copy.IsEnabled = true;
+                                limpiar();
+                                encenapagarbotones();
+                                mostrarCitas();
+                            MostrarDatos();
                         }
-                        MessageBox.Show("Cita agendada con éxito");
-                        btnGuardar.IsEnabled = false;
-                        btnEditar.IsEnabled = true;
-                        btnAgregar.IsEnabled = true;
-                        btnCancelar.IsEnabled = false;
-                        btnelimtratamiento.IsEnabled = false;
-                        dtg_Citas.IsEnabled = true;
-                        btnelimtratamiento_cita_Copy.IsEnabled = true;
-                        limpiar();
-                        encenapagarbotones();
-                        mostrarCitas();
+
+                        
                     }
 
-
                 }
-
             }
             catch (Exception ex)
             {
@@ -300,7 +313,7 @@ namespace SistemaDental.MVCCV.Vista
             {
 
 
-                MostrarDatos();
+                
             }
         }
 
@@ -309,9 +322,109 @@ namespace SistemaDental.MVCCV.Vista
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void cdCitas_SelectedDatesChanged(object sender, SelectionChangedEventArgs e)
+        private void revisardatosdehora()
         {
+            int bandera1 = 0;
+            while (bandera1 == 0)
+            {
+                foreach (ClaseCitas citas in dtg_Citas.ItemsSource)
+                {
 
+
+                    if (citas.IdEmpleado == cmbEmpleado.SelectedValue.ToString() && citas.fechaCita.Date == cdCitas.SelectedDate)
+                    {
+                        DateTime hora;
+                        if (bandera1 == 0)
+                        {
+
+                            foreach (ClaseCitas citas1 in dtg_Citas.ItemsSource)
+                            {
+                                hora = Convert.ToDateTime(citas1.fechaCita.ToString("hh:mm:ss tt"));
+                                if (citas.IdEmpleado == cmbEmpleado.SelectedValue.ToString() && citas.fechaCita.Date == cdCitas.SelectedDate && hora == ctTiempo.SelectedTime && bandera1 != 1)
+                                {
+
+                                    MessageBox.Show("Este doctor tienen una cita ese mismo dia y misma Hora");
+                                    vand = 1;
+                                    bandera1 = 1;
+
+                                }
+                            }
+                            if (bandera1 != 1)
+                            {
+                                foreach (ClaseCitas citas1 in dtg_Citas.ItemsSource)
+                                {
+                                    hora = Convert.ToDateTime(citas1.fechaCita.ToString("hh:mm:ss tt"));
+
+                                    if (citas.IdEmpleado == cmbEmpleado.SelectedValue.ToString() && citas.fechaCita.Date == cdCitas.SelectedDate && ctTiempo.SelectedTime == hora.AddHours(1) && bandera1 != 2)
+                                    {
+                                        MessageBoxResult result = MessageBox.Show("Este Doctor tiene una cita una hora antes ese mismo dia, ¿Desea ingresar esta nueva cita?", "Citas", MessageBoxButton.YesNo);
+                                        switch (result)
+                                        {
+                                            case MessageBoxResult.Yes:
+                                                {
+                                                    vand = 0;
+                                                    bandera1 = 2;
+                                                    break;
+                                                }
+                                            case MessageBoxResult.No:
+                                                {
+                                                    vand = 1;
+                                                    bandera1 = 2;
+                                                    break;
+                                                }
+
+
+                                        }
+
+
+
+                                    }
+                                }
+
+                            }
+
+
+                            if (bandera1 != 1 && bandera1 != 2)
+                            {
+                                foreach (ClaseCitas citas1 in dtg_Citas.ItemsSource)
+                                {
+                                    hora = Convert.ToDateTime(citas1.fechaCita.ToString("hh:mm:ss tt"));
+                                    if (citas.IdEmpleado == cmbEmpleado.SelectedValue.ToString() && citas.fechaCita.Date == cdCitas.SelectedDate && ctTiempo.SelectedTime == hora.AddHours(-1) && bandera1 != 3)
+                                    {
+                                        MessageBoxResult result = MessageBox.Show("Este Doctor tiene una cita una hora despues ese mismo dia, ¿Desea ingresar esta nueva cita?", "Citas", MessageBoxButton.YesNo);
+                                        switch (result)
+                                        {
+                                            case MessageBoxResult.Yes:
+                                                {
+                                                    vand = 0;
+                                                    bandera1 = 3;
+                                                    break;
+                                                }
+                                            case MessageBoxResult.No:
+                                                {
+                                                    vand = 1;
+                                                    bandera1 = 3;
+                                                    break;
+                                                }
+                                        }
+                                        bandera1 = 1;
+
+                                    }
+
+                                }
+
+                            }
+
+                        }
+                    }
+
+                }
+                if (bandera1 == 0)
+                {
+                    bandera1 = 4;
+                    vand = 0;
+                }
+            }
         }
 
         private void dtg_Citas_SelectionChanged(object sender, SelectionChangedEventArgs e)
