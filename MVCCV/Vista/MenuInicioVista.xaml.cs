@@ -85,7 +85,9 @@ namespace SistemaDental.MVCCV.Vista
 
         private void btnReportes_Click(object sender, RoutedEventArgs e)
         {
+            
             CambioDeVista(VistaMenuReportes);
+            
         }
     }
 }

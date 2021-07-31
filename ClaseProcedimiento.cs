@@ -989,6 +989,32 @@ namespace SistemaDental
             }
         }
 
+        public DataTable MostrarLog()
+        {
+            try
+            {
+
+                DataTable dt = new DataTable();
+                command.Connection = con.Open();
+                command.CommandText = "MostrarLog";
+                command.Parameters.AddWithValue("@empleado", SqlDbType.VarChar).Value = NombreEmpleado;
+                command.CommandType = CommandType.StoredProcedure;
+                SqlDataAdapter adapter = new SqlDataAdapter(command);
+                adapter.Fill(dt);
+
+                return dt;
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+            finally
+            {
+                command.Connection = con.Close();
+                command.Parameters.Clear();
+            }
+        }
+
         public DataTable TurnosxEmpleado()
         {
             try
@@ -2271,6 +2297,7 @@ namespace SistemaDental
 
         }
 
+       
 
     }
 }
