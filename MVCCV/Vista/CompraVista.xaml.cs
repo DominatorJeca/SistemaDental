@@ -38,9 +38,12 @@ namespace SistemaDental.MVCCV.Vista
         private void btnComprar_Click(object sender, RoutedEventArgs e)
         {
             int compraId = proc.InsertarCompra(user.Ide);
+            proc.InsertarLog(user.Ide, "Se realizó una commpra");
             foreach ( ClaseInventario inv in productosCompra )
             {
-                proc.InsertarDetalleCompra(compraId, inv.IdMaterial, inv.Cantidad, inv.precio, inv.fechaVenc,inv.NombreMaterial);
+                proc.InsertarDetalleCompra(compraId, inv.IdMaterial, inv.Cantidad, inv.precio, inv.fechaVenc,inv.NombreMaterial,user);
+                proc.InsertarLog(user.Ide, "Se ingresó un detalle de compra");
+
             }
             Grid_Loaded(null, null);
             if (nuevoprod)
@@ -170,7 +173,7 @@ namespace SistemaDental.MVCCV.Vista
         private void btnNuevoProducto_Click(object sender, RoutedEventArgs e)
         {
             dgv_Compras.SelectedIndex = -1;
-            dgv_Compras.IsReadOnly = true;
+            dgv_Compras.IsEnabled = false;
             btnCancelar.IsEnabled = true;
             btnNuevoProducto.IsEnabled = false;
             nuevoprod = true;
@@ -184,6 +187,7 @@ namespace SistemaDental.MVCCV.Vista
             dgv_Compras.SelectedIndex = 0;
             txtNombreProd.IsEnabled = false;
             btnCancelar.IsEnabled = false;
+            dgv_Compras.IsEnabled = true;
         }
     }
 }

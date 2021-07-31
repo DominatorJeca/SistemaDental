@@ -77,8 +77,14 @@ namespace SistemaDental.MVCCV.Vista
         private void btnRealizar_Click(object sender, RoutedEventArgs e)
         {
             
-            if (!val.VerificarCantidad(Convert.ToDouble(txtDineroAbono.Text)) && dgvCaja.SelectedItem!=null )
-            proc.InsertarTransaccion(user.Ide, float.Parse(txtDineroAbono.Text), txtObservaciones.Text, Convert.ToInt32(dgvCaja.SelectedValue));
+            if (val.VerificarCantidad(Convert.ToDouble(txtDineroAbono.Text)) && dgvCaja.SelectedItem!=null )
+            {
+                proc.InsertarTransaccion(user.Ide, float.Parse(txtDineroAbono.Text), txtObservaciones.Text, Convert.ToInt32(dgvCaja.SelectedValue));
+
+                proc.InsertarLog(user.Ide, "Se realizó una transaccion");
+                MessageBox.Show("Transaccion realizada exitosamente");
+            }
+            
             cmbPaciente_SelectionChanged(null, null);
         }
 

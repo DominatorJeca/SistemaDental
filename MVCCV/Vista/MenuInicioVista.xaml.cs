@@ -64,6 +64,7 @@ namespace SistemaDental.MVCCV.Vista
         private void btnCitas_Click_1(object sender, RoutedEventArgs e)
         {
             VistaAgendarCita.CambioDeVistaPrincipal += CambioDeVistaPrincipal;
+            VistaAgendarCita.user = user;
             CambioDeVista(VistaAgendarCita);
         }
 

@@ -73,10 +73,10 @@ namespace SistemaDental
         }
         public void InsertarLog(int usuarioID, string accion)
         {
-            sqlConnection.Open();
+     
             try
             {
-                SqlCommand sqlCommand = new SqlCommand("LogInsert", sqlConnection);
+                SqlCommand sqlCommand = new SqlCommand("LogInsert", con.Open());
                 sqlCommand.CommandType = CommandType.StoredProcedure;
                 sqlCommand.Parameters.AddWithValue("@usuario", SqlDbType.Int).Value = usuarioID;
                 sqlCommand.Parameters.AddWithValue("@accion", SqlDbType.VarChar).Value = accion;
@@ -549,7 +549,7 @@ namespace SistemaDental
             }
         }
 
-        public void InsertarDetalleCompra(int compraid,int inventarioId,int cantidad,float precio,DateTime fechavenc,string nombre=null)
+        public void InsertarDetalleCompra(int compraid,int inventarioId,int cantidad,float precio,DateTime fechavenc,string nombre=null,Usuario user = null)
         {
             try
             {
@@ -562,6 +562,7 @@ namespace SistemaDental
                 command.Parameters.AddWithValue("@PrecioCompra", precio);
                 command.Parameters.AddWithValue("@fechaVenc", fechavenc);
                 command.Parameters.AddWithValue("@nombre", nombre);
+                command.Parameters.AddWithValue("@usuarioId", user.Ide);
                 command.CommandType = CommandType.StoredProcedure;
                 command.ExecuteNonQuery();
 

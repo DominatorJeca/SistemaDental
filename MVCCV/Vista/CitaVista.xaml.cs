@@ -22,6 +22,7 @@ namespace SistemaDental.MVCCV.Vista
     /// </summary>
     public partial class CitaVista : UserControl
     {
+        public Usuario user = new Usuario();
         ObservableCollection<ClaseCitas> tratamientos = new ObservableCollection<ClaseCitas>();
         ClaseCitas citas = new ClaseCitas();
         public event EventHandler CambioDeVistaPrincipal;
@@ -506,6 +507,7 @@ namespace SistemaDental.MVCCV.Vista
         {
             RealizarCitaVista VistaRealizarCita = new RealizarCitaVista();
             VistaRealizarCita.CambioDeVistaPrincipal += CambioDeVistaPrincipal;
+            VistaRealizarCita.user = user;
             CambioDeVista(VistaRealizarCita);
         }
     }
