@@ -32,10 +32,9 @@
         <Button x:Name="btnGuardarPaciente" Content="Guardar" HorizontalAlignment="Center" Margin="799,347,24,0" VerticalAlignment="Top" Width="227" Background="#FF056676" BorderBrush="{x:Null}" Click="btnGuardarPaciente_Click" IsEnabled="False"/>
         <Button x:Name="btnCancelar" Content="Cancelar" HorizontalAlignment="Center" Margin="799,395,24,0" VerticalAlignment="Top" Width="227" Background="#FF056676" BorderBrush="{x:Null}" Click="btnCancelar_Click"/>
         <ComboBox materialDesign:HintAssist.Hint="Paciente" x:Name="cmbPaciente" HorizontalAlignment="Left" Margin="42,35,0,0" VerticalAlignment="Top" Width="401" SelectionChanged="cmbPaciente_SelectionChanged" Height="40"/>
-        <ComboBox Name="cmbGenero" materialDesign:HintAssist.Hint="Género" HorizontalAlignment="Right" Margin="0,128,24,0" VerticalAlignment="Top" Width="395"  Text="{Binding ElementName=cmbPaciente,Path=SelectedItem.Genero}" Height="37">
-            <ComboBoxItem Content="Masculino"/>
-            <ComboBoxItem Content="Femenino"/>
+        <ComboBox x:Name="cmbGenero" materialDesign:HintAssist.Hint="Género" HorizontalAlignment="Right" Margin="0,128,24,0" VerticalAlignment="Top" Width="395"  Text="{Binding ElementName=cmbPaciente,Path=SelectedItem.GeneroNombre}" Height="37">
         </ComboBox>
+        
         <TextBox x:Name="txtcorreo" Margin="39,175,607,243" materialDesign:HintAssist.Hint="Correo" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontFamily="Bahnschrift" FontSize="12" Background="#7FFFFFFF" Text="{Binding SelectedItem.Correo, ElementName=cmbPaciente}" TextChanged="txtcorreo_TextChanged"/>
 
 

@@ -31,7 +31,8 @@ namespace SistemaDental
         public DateTime FechaNac { get; set; }
         public int Edad { get; set; }
 
-        public string Genero { get; set; }
+        public int Genero { get; set; }
+        public string GeneroNombre { get; set; }
 
         public string Identidad { get; set; }
 
@@ -40,7 +41,7 @@ namespace SistemaDental
 
 
         public string Correo { get; set; }
-        public string Estado { get; set; }
+        public bool Estado { get; set; }
         public string Paciente { get; set; }
         public string NombreTratamiento { get; set; }
         public string Doctor { get; set; }
