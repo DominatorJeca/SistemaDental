@@ -186,10 +186,11 @@ namespace SistemaDental.MVCCV.Vista
             btnEditarPaciente.IsEnabled = false;
             btnAgregarPaciente.IsEnabled = true;
 
-            try
+            if (VerificarCampos())
             {
-                if (VerificarCampos())
+                try
                 {
+
                     obtenerValores();
                     unPaciente.ActualizarDatosPaciente(unPaciente);
                     MessageBox.Show("Éxito al editar los datos");
@@ -197,13 +198,12 @@ namespace SistemaDental.MVCCV.Vista
                     MostrarPacientes();
                     HabilitacionDeshabilitacion(false, false);
                     btnAgregarPaciente.IsEnabled = false;
-                }
-                else throw new Exception();
 
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Ha ocurrido un error al guardar al paciente");
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Ha ocurrido un error al guardar al paciente");
+                }
             }
         }
 
@@ -212,16 +212,15 @@ namespace SistemaDental.MVCCV.Vista
             btnAgregarPaciente.IsEnabled = false;
             btnEditarPaciente.IsEnabled = true;
             HabilitacionDeshabilitacion(false, false);
+            dtgHistorial.IsEnabled = true;
             if (cmbPaciente.SelectedValue != null)
             {
-                unPaciente.Identidad = cmbPaciente.SelectedValue.ToString();
+                unPaciente.Id_paciente= int.Parse(cmbPaciente.SelectedValue.ToString());
                 dtgHistorial.ItemsSource = unPaciente.MostrarHistorial(unPaciente);
             }
          
          
         }
-
-
 
 
         private bool VerificarCampos()
@@ -266,44 +265,36 @@ namespace SistemaDental.MVCCV.Vista
 
         }
 
-        private void txtNombre_TextChanged(object sender, TextChangedEventArgs e)
+        private void PreviewTextInputOnlyNumbers(object sender, TextCompositionEventArgs e)
         {
-            Regex reg = new Regex("[0-9]");
-            bool b = reg.IsMatch(txtNombre.Text);
-            if (b == true)
-            {
-                MessageBox.Show("Ingrese solamente caracteres");
-                txtNombre.Text = "";
-            }
 
+
+            validar.SoloNumeros(e);
         }
 
-        private void AddPaciente_Loaded(object sender, RoutedEventArgs e)
+        private void PreviewTextInputOnlyLetters(object sender, TextCompositionEventArgs e)
         {
-            Regex reg = new Regex("[0-9]");
-            bool b = reg.IsMatch(txtNombre.Text);
-            if (b == false)
-            {
 
-            }
+
+            validar.SoloLetras(e);
+
         }
+   
+
 
         private void dtgHistorial_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
 
         }
 
-        private void txtcorreo_TextChanged(object sender, TextChangedEventArgs e)
-        {
-
-        }
-
+        
         private void btnAgregarPaciente_Click(object sender, RoutedEventArgs e)
         {
-            try
+            if (VerificarCampos())
             {
-                if (VerificarCampos())
+                try
                 {
+
                     obtenerValores();
                     unPaciente.AgregarPaciente(unPaciente);
                     MessageBox.Show("Éxito al agregar los datos");
@@ -311,13 +302,13 @@ namespace SistemaDental.MVCCV.Vista
                     MostrarPacientes();
                     HabilitacionDeshabilitacion(false, true);
 
-                }
-                else throw new Exception();
 
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Ha ocurrido un error al guardar al paciente");
+
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Ha ocurrido un error al guardar al paciente");
+                }
             }
         }
     }

@@ -2158,20 +2158,20 @@ namespace SistemaDental
         public List<ClasePaciente> MostrarHistorial(ClasePaciente paciente)
         {
 
-
             try
             {
                 sqlConnection.Open();
-                SqlCommand sqlCommand = new SqlCommand("MostrarHistorial", sqlConnection);
+                SqlCommand sqlCommand = new SqlCommand("sp_citas_por_pacientes", sqlConnection);
                 sqlCommand.CommandType = CommandType.StoredProcedure;
-                sqlCommand.Parameters.AddWithValue("@identidad", paciente.Id_paciente);
+                sqlCommand.Parameters.AddWithValue("@idpaciente", paciente.Id_paciente);
+                sqlCommand.Parameters.AddWithValue("@tipo", 0);
                 SqlDataReader reader = sqlCommand.ExecuteReader();
 
                 List<ClasePaciente> pacientes = new List<ClasePaciente>();
 
                 while (reader.Read())
                 {
-                    pacientes.Add(new ClasePaciente {Paciente = reader["Paciente"].ToString(), NombreTratamiento = reader["Nombre"].ToString(),Doctor = reader["Doctor"].ToString(), FechaCita = Convert.ToDateTime(reader["FechaCita"].ToString()) });
+                    pacientes.Add(new ClasePaciente { Paciente = reader["NombrePaciente"].ToString(), NombreTratamiento = reader["Tratamientos"].ToString(), Doctor = reader["NombreDoctor"].ToString(), FechaCita = Convert.ToDateTime(reader["FechaCita"].ToString()) });
                 }
 
                 return pacientes;

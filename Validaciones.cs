@@ -84,10 +84,15 @@ namespace SistemaDental
 
             foreach(var tb in FindVisualChildren<ComboBox>(window))
             {
-                if (tb.SelectedValue == null)
+                if (tb.SelectedValue == null && tb.Name!= "cmbPaciente")
                     band = false;
             }
 
+            foreach (var tb in FindVisualChildren<DatePicker>(window))
+            {
+                if (tb.SelectedDate==null)
+                    band = false;
+            }
 
             foreach (var tb in FindVisualChildren<RadioButton>(window))
             {
