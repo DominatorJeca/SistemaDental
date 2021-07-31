@@ -77,6 +77,10 @@ namespace SistemaDental
         {
             return proc.Mostrartratmientos(idcita);
         }
+        public List<ClaseCitas> MostracitaspoDoctor(ClaseCitas doctor)
+        {
+            return proc.MostracitaspoDoctor(doctor);
+        }
 
 
         public void EliminarCita(int cita)

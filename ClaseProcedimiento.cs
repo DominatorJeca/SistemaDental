@@ -1155,6 +1155,8 @@ namespace SistemaDental
             }
             finally
             {
+                
+                command.Parameters.Clear();
                 sqlConnection.Close();
             }
         }
@@ -1212,6 +1214,45 @@ namespace SistemaDental
                 command.Connection = con.Close();
             }
 
+        }
+
+
+
+        public List<ClaseCitas> MostracitaspoDoctor(ClaseCitas cita)
+        {
+
+            sqlConnection.Open();
+            try
+            {
+                SqlCommand command = new SqlCommand("sp_mostrar_citas_por_doctor", sqlConnection);
+                command.CommandType = CommandType.StoredProcedure;
+                List<ClaseCitas> citas = new List<ClaseCitas>();
+                command.Parameters.AddWithValue("@idempleado", cita.IdEmpleado);
+                command.Parameters.AddWithValue("@datetime", cita.fechaCita);
+                command.ExecuteNonQuery();
+                SqlDataReader reader = command.ExecuteReader();
+                while (reader.Read())
+                {
+                    citas.Add(new ClaseCitas
+                    {
+                        fechaCita = Convert.ToDateTime(reader["FechaCita"].ToString()),
+                        IdEmpleado = reader["EmpleadoID"].ToString(),
+                       
+                    }); 
+                }
+                reader.Close();
+                return citas;
+            }
+            catch
+            {
+                throw;
+            }
+            finally
+            {
+                reader.Close();
+                command.Parameters.Clear();
+                sqlConnection.Close();
+            }
         }
 
 
