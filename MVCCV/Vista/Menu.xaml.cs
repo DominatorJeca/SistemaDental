@@ -57,6 +57,8 @@ namespace SistemaDental
             turno.ComienzoTurno = DateTime.Now;
             proced.AgregarTurno(turno);
             VistaMenuInicio.user = user;
+            VistaCaja.user = user;
+            VistaMenuInicio.user = user;
             VistaMenuInicio.CambioDeVistaPrincipal += CambiarVista;
             VistaAjuste.CambioDeVistaPrincipal += CambiarVista;
             ContenedorHijos.Content = VistaMenuInicio;
@@ -213,6 +215,7 @@ namespace SistemaDental
 
         private void btnCaja_Click_1(object sender, RoutedEventArgs e)
         {
+            VistaCaja.user = user;
             CambiarVista(VistaCaja, null);
         }
 
