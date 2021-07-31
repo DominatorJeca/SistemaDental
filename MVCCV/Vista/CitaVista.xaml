@@ -40,8 +40,6 @@
             <StackPanel Orientation="Horizontal" Height="40" HorizontalAlignment="Left" Width="322">
                 <Label Content="Fecha de cita" Grid.Column="1"  VerticalAlignment="Top"  FontSize="15" Foreground="Black" Background="White" FontFamily="Bahnschrift" Height="40" Width="98"/>
                 <DatePicker x:Name="cdCitas" IsEnabled="False" HorizontalAlignment="Left"  VerticalAlignment="Top" Height="25" Width="210"/>
-                
-                    <syncfusion:TimeSpanEdit Height="30" TextWrapping="Wrap" Text="TimeSpanEdit" Width="150"/>
             </StackPanel>
             <StackPanel Orientation="Horizontal" Height="40" HorizontalAlignment="Left" Width="308">
                 <Label Content="Hora de cita" VerticalAlignment="Top"  FontSize="15" Foreground="Black" Background="White" FontFamily="Bahnschrift" Height="40" Grid.Column="1" Width="98" />
