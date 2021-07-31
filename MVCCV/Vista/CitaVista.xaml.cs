@@ -27,6 +27,7 @@ namespace SistemaDental.MVCCV.Vista
 
         int vand=0;
         int bton = 0;
+        int ff = 0;
         private bool Admin;
         private String Nombree;
         public CitaVista()
@@ -629,12 +630,53 @@ namespace SistemaDental.MVCCV.Vista
                 citas.IdPacientes = cmbPaciente1.SelectedValue.ToString();
                 dtg_Citas.ItemsSource = citas.mostrarPacientesxcitas(Convert.ToInt32(citas.IdPacientes));
                 dtg_Citas.SelectedValuePath = "IdCita";
+     
 
             }
                 
             
          
 
+        }
+
+        private void ctTiempo_SelectedTimeChanged_1(object sender, RoutedPropertyChangedEventArgs<DateTime?> e)
+        {
+
+         
+
+            if (ctTiempo.SelectedTime!=null)
+            {
+                if (ctTiempo.SelectedTime != null)
+                {
+                    var v = (DateTime)ctTiempo.SelectedTime;
+                    if (TimeSpan.Compare(v.TimeOfDay, new DateTime(v.Year, v.Month, v.Day,
+                                 17, 0, 0).TimeOfDay) == 1 || TimeSpan.Compare(v.TimeOfDay, new DateTime(v.Year, v.Month, v.Day,
+                                 7, 0, 0).TimeOfDay) == -1)
+                    {
+                        MessageBox.Show("La clinica está cerrada a esta hora");
+                        ctTiempo.SelectedTime = null;
+                        return;
+                    }
+
+
+
+
+
+                    if (TimeSpan.Compare(v.TimeOfDay, new DateTime(v.Year, v.Month, v.Day,
+                                 v.Hour, 0, 0).TimeOfDay) != 0)
+                    {
+                        ctTiempo.SelectedTime = new DateTime(v.Year, v.Month, v.Day, v.Hour, 00, 00);
+                        MessageBox.Show("solo se puede asiganar horas Exactas ggs");
+
+
+                    }
+                }
+
+            }
+
+
+
+           
         }
     }
 

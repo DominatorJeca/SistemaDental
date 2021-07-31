@@ -43,7 +43,7 @@
             </StackPanel>
             <StackPanel Orientation="Horizontal" Height="40" HorizontalAlignment="Left" Width="308">
                 <Label Content="Hora de cita" VerticalAlignment="Top"  FontSize="15" Foreground="Black" Background="White" FontFamily="Bahnschrift" Height="40" Grid.Column="1" Width="98" />
-                <materialDesign:TimePicker IsEnabled="False" SelectedTimeFormat="Short" x:Name="ctTiempo" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Top" Width="210" Height="25"  />
+                <materialDesign:TimePicker IsEnabled="False" SelectedTimeFormat="Short" x:Name="ctTiempo" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Top" Width="210" Height="25" SelectedTimeChanged="ctTiempo_SelectedTimeChanged_1"  Is24Hours="false"  />
 
             </StackPanel>
         </StackPanel>
