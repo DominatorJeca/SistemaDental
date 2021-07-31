@@ -100,7 +100,6 @@ namespace SistemaDental.MVCCV.Vista
             isUpdate = true;
             btnCancelar.IsEnabled = true;
             btnEditar.IsEnabled = false;   
-            CamposEstado(false);
         }
 
         private void btnCancelar_Click(object sender, RoutedEventArgs e)
@@ -346,6 +345,7 @@ namespace SistemaDental.MVCCV.Vista
                 ObtenerTratamientoDatos();
                 ObtenerInventarioTratamientos(gTratamientoID);
                 ObtenerMaterialFiltro();
+                CamposEstado(false);
             }
         }
 
