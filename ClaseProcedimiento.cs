@@ -71,7 +71,27 @@ namespace SistemaDental
 
 
         }
-
+        public void InsertarLog(int usuarioID, string accion)
+        {
+            sqlConnection.Open();
+            try
+            {
+                SqlCommand sqlCommand = new SqlCommand("LogInsert", sqlConnection);
+                sqlCommand.CommandType = CommandType.StoredProcedure;
+                sqlCommand.Parameters.AddWithValue("@usuario", SqlDbType.Int).Value = usuarioID;
+                sqlCommand.Parameters.AddWithValue("@accion", SqlDbType.VarChar).Value = accion;
+                sqlCommand.ExecuteNonQuery();
+            }
+            catch
+            {
+                throw;
+            }
+            finally
+            {
+                command.Parameters.Clear();
+                command.Connection = con.Close();
+            }
+        }
         public void AgregarTurno(Turno turno)
         {
 
