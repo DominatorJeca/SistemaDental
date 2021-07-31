@@ -105,7 +105,7 @@
         </StackPanel>
         <StackPanel Orientation="Horizontal" VerticalAlignment="Bottom" HorizontalAlignment="Center" Height="33" Width="424" Margin="57,0,71,333" Grid.Column="1" Grid.Row="1">
             <Label Content=" Busqueda Paciente" HorizontalAlignment="Center"  VerticalAlignment="Top"  FontSize="15" Foreground="Black" Background="White" FontFamily="Bahnschrift" Grid.Column="1" Width="144"/>
-            <ComboBox x:Name="cmbPaciente1"  HorizontalAlignment="Center" VerticalAlignment="Top" Width="274" RenderTransformOrigin="0.603,0.358" Text="{Binding SelectedItem.IdPacientes}" SelectionChanged="cmbPaciente1_SelectionChanged"   >
+            <ComboBox x:Name="cmbPaciente1"  HorizontalAlignment="Center" VerticalAlignment="Top" Width="274" RenderTransformOrigin="0.603,0.358" Text="{Binding SelectedItem.IdPacientes}" SelectionChanged="cmbPaciente1_SelectionChanged" IsEditable="true"   >
                 <ComboBox.RenderTransform>
                     <TransformGroup>
                         <ScaleTransform/>
