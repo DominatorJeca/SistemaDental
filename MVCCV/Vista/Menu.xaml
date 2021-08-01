@@ -9,10 +9,6 @@
         xmlns:local="clr-namespace:SistemaDental"
         mc:Ignorable="d"
         Title="Menu" Height="555" Width="1050" ResizeMode="NoResize" BorderBrush="#FF5EAAA8" WindowStyle="None" AllowsTransparency="False" MouseDown="Window_MouseDown">
-    <Window.Background>
-        <ImageBrush ImageSource="/imagenes/FondoMenuPrincipal.png"/>
-    </Window.Background>
-   
     <Grid>
 
         <Grid.RowDefinitions>
@@ -21,7 +17,7 @@
             <RowDefinition/>
 
         </Grid.RowDefinitions>
-        <Border Grid.Row="0"  CornerRadius="20.196 20.196 0 0" BorderThickness="1" Background="#427F97" Margin="-1,0,-2,437"/>
+        
 
 
         <StackPanel Grid.Row="0" Orientation="Horizontal" Margin="0 0 0 0" Background="#427F97" >
@@ -30,13 +26,13 @@
             <Button x:Name="btnInicio" Style="{StaticResource MaterialDesignIconButton}" ToolTip="Inicio"  Margin="375 0 0 0" Height="60" Width="60" BorderThickness="0" Command="{Binding CasaVistaComando}" Click="btnInicio_Click">
                 <materialDesign:PackIcon Kind="Home" Width="auto" Height="auto" Foreground="LightGray"/>
             </Button>
-            <Button x:Name="btnCaja" VerticalAlignment="Top" Height="60" Width="60" Margin="20 20  0 20" Style="{StaticResource MaterialDesignIconButton}" Foreground="LightGray" FontFamily="Bahnschrift" FontSize="20"   Command="{Binding CajaVistaComando}" Click="btnCaja_Click_1">
+            <Button x:Name="btnCaja" VerticalAlignment="Top" Height="60" Width="60" ToolTip="Caja" Margin="20 20  0 20" Style="{StaticResource MaterialDesignIconButton}" Foreground="LightGray" FontFamily="Bahnschrift" FontSize="20"    Click="btnCaja_Click_1">
                 <materialDesign:PackIcon Kind="CashRegister"  Width="auto" Height="auto" />
             </Button>
-            <Button x:Name="btnPerfil" Command="{Binding DatosDeUsuarioVistaComando}" Foreground="LightGray" Width="60" Height="60" VerticalAlignment="Top" Style="{StaticResource MaterialDesignIconButton}"  Margin="20 20  0 20" Background="{x:Null}" RenderTransformOrigin="0.496,2.246" FontFamily="Bahnschrift" FontSize="20" Click="btnPerfil_Click">
+            <Button x:Name="btnPerfil" ToolTip="Perfil" Foreground="LightGray" Width="60" Height="60" VerticalAlignment="Top" Style="{StaticResource MaterialDesignIconButton}"  Margin="20 20  0 20" Background="{x:Null}" RenderTransformOrigin="0.496,2.246" FontFamily="Bahnschrift" FontSize="20" Click="btnPerfil_Click">
                 <materialDesign:PackIcon Kind="User" Width="auto" Height="auto"/>
             </Button>
-            <Button x:Name="btnAjustes" Foreground="LightGray" Width="60" Height="60" VerticalAlignment="Top" Style="{StaticResource MaterialDesignIconButton}" Margin="20 20  0 20" Background="{x:Null}" RenderTransformOrigin="0.5,0.467" FontFamily="Bahnschrift" FontSize="20" Command="{Binding AjusteVistaComando}" Click="btnAjustes_Click_1">
+            <Button x:Name="btnAjustes"  ToolTip="Ajustes" Foreground="LightGray" Width="60" Height="60" VerticalAlignment="Top" Style="{StaticResource MaterialDesignIconButton}" Margin="20 20  0 20" Background="{x:Null}" RenderTransformOrigin="0.5,0.467" FontFamily="Bahnschrift" FontSize="20" Click="btnAjustes_Click_1">
                 <materialDesign:PackIcon Kind="Settings" Width="auto" Height="auto"/>
             </Button>
 

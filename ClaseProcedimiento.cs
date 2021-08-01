@@ -117,28 +117,7 @@ namespace SistemaDental
             }
         }
 
-        public void InsertarLog(int usuarioID, string accion)
-        {
-           // sqlConnection.Open();
-            try
-            {
-                SqlCommand sqlCommand = new SqlCommand("LogInsert", con.Open());
-                sqlCommand.CommandType = CommandType.StoredProcedure;
-                sqlCommand.Parameters.AddWithValue("@usuario", SqlDbType.Int).Value = usuarioID;
-                sqlCommand.Parameters.AddWithValue("@accion", SqlDbType.VarChar).Value = accion;
-                sqlCommand.ExecuteNonQuery();
-            }
-            catch
-            {
-                throw;
-            }
-            finally
-            {
-                command.Parameters.Clear();
-                command.Connection = con.Close();
-            }
-        }
-       
+      
 
 
         #region Compras
@@ -1874,7 +1853,7 @@ namespace SistemaDental
                 sqlCommand.Parameters.AddWithValue("@Nombre", paciente.NombrePaciente);
                 sqlCommand.Parameters.AddWithValue("@Apellido", paciente.ApellidoPaciente);
                 sqlCommand.Parameters.AddWithValue("@Telefono", paciente.Telefono);
-                sqlCommand.Parameters.AddWithValue("@Identidad", paciente.Id_paciente);
+                sqlCommand.Parameters.AddWithValue("@Identidad", paciente.Identidad);
                 sqlCommand.Parameters.AddWithValue("@FechaNac", paciente.FechaNac);
                 sqlCommand.Parameters.AddWithValue("@generoID", paciente.Genero);
                 sqlCommand.Parameters.AddWithValue("@Estado", paciente.Estado);

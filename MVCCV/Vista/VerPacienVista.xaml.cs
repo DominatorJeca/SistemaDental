@@ -170,6 +170,8 @@ namespace SistemaDental.MVCCV.Vista
                 btnEditarPaciente.IsEnabled = false;
                 btnGuardarPaciente.IsEnabled = false;
                 btnAgregarPaciente.IsEnabled = true;
+                btnRestablecerEstablecer.IsEnabled = false;
+                //btnEliminar.IsEnabled = false;
             }
 
             catch { MessageBox.Show("Ha ocurrido un error en el sistema."); }
@@ -211,14 +213,17 @@ namespace SistemaDental.MVCCV.Vista
 
         private void cmbPaciente_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            btnAgregarPaciente.IsEnabled = false;
-            btnEditarPaciente.IsEnabled = true;
-            HabilitacionDeshabilitacion(false, false);
-            dtgHistorial.IsEnabled = true;
             if (cmbPaciente.SelectedValue != null)
             {
-                unPaciente.Id_paciente= int.Parse(cmbPaciente.SelectedValue.ToString());
-                dtgHistorial.ItemsSource = unPaciente.MostrarHistorial(unPaciente);
+                btnAgregarPaciente.IsEnabled = false;
+            btnEditarPaciente.IsEnabled = true;
+            btnCancelar.IsEnabled = true;
+            btnRestablecerEstablecer.Content = ((ClasePaciente)cmbPaciente.SelectedItem).Estado ? "Eliminar" : "Reestablecer";
+                btnRestablecerEstablecer.IsEnabled = true;
+            HabilitacionDeshabilitacion(false, false);
+            dtgHistorial.IsEnabled = true;
+            unPaciente.Id_paciente= int.Parse(cmbPaciente.SelectedValue.ToString());
+            dtgHistorial.ItemsSource = unPaciente.MostrarHistorial(unPaciente);
             }
          
          
@@ -313,6 +318,37 @@ namespace SistemaDental.MVCCV.Vista
                 {
                     MessageBox.Show("Ha ocurrido un error al guardar al paciente");
                 }
+            }
+        }
+
+        private void btnEliminar_Click(object sender, RoutedEventArgs e)
+        {
+            if (cmbPaciente.SelectedItem!=null && MessageBox.Show("Está seguro de realizar esta accion?","Aviso",MessageBoxButton.YesNoCancel)== MessageBoxResult.Yes)
+            {
+                ClasePaciente paciente = (ClasePaciente)cmbPaciente.SelectedItem;
+                paciente.Estado = btnRestablecerEstablecer.Content.Equals("Reestablecer")? true:false;
+                paciente.ActualizarDatosPaciente(paciente);
+             
+                LimpiarPantalla();
+                MostrarPacientes();
+                HabilitacionDeshabilitacion(false, true);
+                if (paciente.Estado)
+                {
+                Proc.InsertarLog(usuar.Ide, "Se reestableció un paciente");
+                    MessageBox.Show("Se ha reestablecido el paciente exitozamente");
+                }
+
+                else
+                {
+
+                 Proc.InsertarLog(usuar.Ide, "Se eliminó un paciente");
+                 MessageBox.Show("Se ha eliminado el paciente exitosamente");
+                }
+                btnEditarPaciente.IsEnabled = false;
+                btnGuardarPaciente.IsEnabled = false;
+                btnAgregarPaciente.IsEnabled = true;
+                btnRestablecerEstablecer.IsEnabled = false;
+                btnCancelar.IsEnabled = false;
             }
         }
     }

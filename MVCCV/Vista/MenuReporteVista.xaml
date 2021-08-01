@@ -65,7 +65,7 @@
             <ComboBox x:Name="cmbEmpleado" Width="150" Visibility="Collapsed" IsEditable="True">
                 
             </ComboBox>
-            <Button Style="{StaticResource MaterialDesignFlatButton}" Background="Beige" Width="150" Click="Button_Click" x:Name="btnMostrarReporte" Margin="30,0,0,0"/>
+            <Button Style="{StaticResource MaterialDesignFlatButton}" Background="#FF056676" Content="Realizar reporte" Foreground="White" Width="150" Click="Button_Click" x:Name="btnMostrarReporte" Margin="30,0,0,0"/>
         </StackPanel>
   
     </Grid>
