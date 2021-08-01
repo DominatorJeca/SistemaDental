@@ -161,9 +161,7 @@ namespace SistemaDental
             {
                 siono = true;
             }
-
             return siono;
-        }
-
+ }
     }
 }
