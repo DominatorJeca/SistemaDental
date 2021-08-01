@@ -112,8 +112,12 @@ namespace SistemaDental.MVCCV.Vista
             citas.IdEmpleado = cmbEmpleado.SelectedValue.ToString();
             citas.IdPacientes = cmbPaciente.SelectedValue.ToString();
             citas.IdTratamiento = Convert.ToInt32(cmbTratamiento.SelectedValue.ToString());
-            DateTime cmb = cdCitas.SelectedDate.Value.Add(ctTiempo.SelectedTime.Value.TimeOfDay);
-            citas.fechaCita = cmb;
+            var fecha = (DateTime) cdCitas.SelectedDate.Value;
+            var hora = (DateTime)ctTiempo.SelectedTime.Value;
+
+            DateTime fechaHora = new DateTime(fecha.Year, fecha.Month, fecha.Day, hora.Hour, 0, 0);
+
+            citas.fechaCita = fechaHora;
         }
 
         private void obtenerCita()
@@ -351,13 +355,18 @@ namespace SistemaDental.MVCCV.Vista
         public void validarhora()
         {
             ClaseCitas prod = new ClaseCitas();
+            var fecha = (DateTime)cdCitas.SelectedDate.Value;
+            var hora = (DateTime)ctTiempo.SelectedTime.Value;
 
-            DateTime cmb = cdCitas.SelectedDate.Value.Add(ctTiempo.SelectedTime.Value.TimeOfDay);
-            prod.fechaCita = cmb;
+            DateTime fechaHora = new DateTime(fecha.Year, fecha.Month, fecha.Day, hora.Hour, 0, 0);
+           
+            prod.fechaCita = (DateTime)cdCitas.SelectedDate.Value;
             prod.IdEmpleado = cmbEmpleado.SelectedValue.ToString();
 
             List<ClaseCitas> rd = new List<ClaseCitas>();
             rd = citas.MostracitaspoDoctor(prod);
+
+            prod.fechaCita = fechaHora;
             int bandera1 = 0;
             if (rd.Count >= 1)
             {
