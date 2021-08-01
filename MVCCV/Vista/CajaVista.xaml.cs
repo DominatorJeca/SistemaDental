@@ -69,8 +69,7 @@ namespace SistemaDental.MVCCV.Vista
 
         private void dgvCaja_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if (dgvCaja.SelectedValuePath !="" && dgvCaja.SelectedValue!=null) 
-            MessageBox.Show(dgvCaja.SelectedValue.ToString());
+           
         }
 
 
