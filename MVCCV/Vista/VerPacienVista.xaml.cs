@@ -194,6 +194,7 @@ namespace SistemaDental.MVCCV.Vista
 
                     obtenerValores();
                     unPaciente.ActualizarDatosPaciente(unPaciente);
+                    Proc.InsertarLog(usuar.Ide, "Se ha editado un Paciente");
                     MessageBox.Show("Éxito al editar los datos");
                     LimpiarPantalla();
                     MostrarPacientes();
@@ -299,6 +300,7 @@ namespace SistemaDental.MVCCV.Vista
 
                     obtenerValores();
                     unPaciente.AgregarPaciente(unPaciente);
+                    Proc.InsertarLog(usuar.Ide, "Se agregó un nuevo Paciente");
                     MessageBox.Show("Éxito al agregar los datos");
                     LimpiarPantalla();
                     MostrarPacientes();

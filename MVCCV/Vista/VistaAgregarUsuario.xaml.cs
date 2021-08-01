@@ -360,6 +360,7 @@ namespace SistemaDental.MVCCV.Vista
                     // Insertar los datos del usuario
                     Proc.IngresarUsuario(usuar);
 
+                    Proc.InsertarLog(user.Ide, "Se ingresó un nuevo empleado");
                     // Mensaje de inserción exitosa
 
 
@@ -415,7 +416,7 @@ namespace SistemaDental.MVCCV.Vista
 
                     // Insertar los datos del usuario
                     Proc.EditarEmpleado(usuar);
-
+                    Proc.InsertarLog(user.Ide, "Se editó un empleado");
                     // Mensaje de inserción exitosa
                     MessageBox.Show("¡Datos editados correctamente!");
                     HabilitarInhabilitarTXT(false);
@@ -444,9 +445,9 @@ namespace SistemaDental.MVCCV.Vista
                     usuar.Estado = act;
                     // Insertar los datos del usuario
                     Proc.EditarEmpleado(usuar);
-
-                    // Mensaje de inserción exitosa
-                    MessageBox.Show("La operación se realizó con exito!");
+                Proc.InsertarLog(user.Ide, "Se cambio el estado de un empleado");
+                // Mensaje de inserción exitosa
+                MessageBox.Show("La operación se realizó con exito!");
 
                    
 

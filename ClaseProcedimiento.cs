@@ -99,10 +99,10 @@ namespace SistemaDental
 
         public void InsertarLog(int usuarioID, string accion)
         {
-            sqlConnection.Open();
+           // sqlConnection.Open();
             try
             {
-                SqlCommand sqlCommand = new SqlCommand("LogInsert", sqlConnection);
+                SqlCommand sqlCommand = new SqlCommand("LogInsert", con.Open());
                 sqlCommand.CommandType = CommandType.StoredProcedure;
                 sqlCommand.Parameters.AddWithValue("@usuario", SqlDbType.Int).Value = usuarioID;
                 sqlCommand.Parameters.AddWithValue("@accion", SqlDbType.VarChar).Value = accion;
