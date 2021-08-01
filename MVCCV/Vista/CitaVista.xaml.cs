@@ -25,7 +25,6 @@ namespace SistemaDental.MVCCV.Vista
         public Usuario user = new Usuario();
         ObservableCollection<ClaseCitas> tratamientos = new ObservableCollection<ClaseCitas>();
         ClaseCitas citas = new ClaseCitas();
-        ClaseProcedimiento proc = new ClaseProcedimiento();
         public event EventHandler CambioDeVistaPrincipal;
 
 
@@ -112,12 +111,8 @@ namespace SistemaDental.MVCCV.Vista
             citas.IdEmpleado = cmbEmpleado.SelectedValue.ToString();
             citas.IdPacientes = cmbPaciente.SelectedValue.ToString();
             citas.IdTratamiento = Convert.ToInt32(cmbTratamiento.SelectedValue.ToString());
-            var fecha = (DateTime) cdCitas.SelectedDate.Value;
-            var hora = (DateTime)ctTiempo.SelectedTime.Value;
-
-            DateTime fechaHora = new DateTime(fecha.Year, fecha.Month, fecha.Day, hora.Hour, 0, 0);
-
-            citas.fechaCita = fechaHora;
+            DateTime cmb = cdCitas.SelectedDate.Value.Add(ctTiempo.SelectedTime.Value.TimeOfDay);
+            citas.fechaCita = cmb;
         }
 
         private void obtenerCita()
@@ -275,7 +270,7 @@ namespace SistemaDental.MVCCV.Vista
                             btnelimtratamiento.IsEnabled = false;
                             dtg_Citas.IsEnabled = true;
                             btnelimtratamiento_cita_Copy.IsEnabled = true;
-                            proc.InsertarLog(user.Ide, "Se Edito una cita");
+
                             MessageBox.Show("Exito al editar");
                             limpiar();
                             encenapagarbotones();
@@ -306,14 +301,11 @@ namespace SistemaDental.MVCCV.Vista
 
 
                             citas.AgendarCita(citas);
-                            
                             foreach (ClaseCitas inv in tratamientos)
                             {
 
                                 citas.InsertarDetalleCita(citas.IdCita, inv.IdTratamiento, float.Parse(inv.trtamientoprecio));
                             }
-
-                            proc.InsertarLog(user.Ide, "Se agendo una nueva cita ");
                             MessageBox.Show("Cita agendada con éxito");
                             btnGuardar.IsEnabled = false;
                             btnEditar.IsEnabled = true;
@@ -355,18 +347,13 @@ namespace SistemaDental.MVCCV.Vista
         public void validarhora()
         {
             ClaseCitas prod = new ClaseCitas();
-            var fecha = (DateTime)cdCitas.SelectedDate.Value;
-            var hora = (DateTime)ctTiempo.SelectedTime.Value;
 
-            DateTime fechaHora = new DateTime(fecha.Year, fecha.Month, fecha.Day, hora.Hour, 0, 0);
-           
-            prod.fechaCita = (DateTime)cdCitas.SelectedDate.Value;
+            DateTime cmb = cdCitas.SelectedDate.Value.Add(ctTiempo.SelectedTime.Value.TimeOfDay);
+            prod.fechaCita = cmb;
             prod.IdEmpleado = cmbEmpleado.SelectedValue.ToString();
 
             List<ClaseCitas> rd = new List<ClaseCitas>();
             rd = citas.MostracitaspoDoctor(prod);
-
-            prod.fechaCita = fechaHora;
             int bandera1 = 0;
             if (rd.Count >= 1)
             {
@@ -655,7 +642,6 @@ namespace SistemaDental.MVCCV.Vista
                         obtenerCita();
                         citas.eliminardetallecita(citas.IdCita);
                         citas.EliminarCita(citas.IdCita);
-                        proc.InsertarLog(user.Ide, "Se Elimino una cita");
 
                     }
                 }
