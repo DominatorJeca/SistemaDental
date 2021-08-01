@@ -22,6 +22,7 @@ namespace SistemaDental.MVCCV.Vista
     public partial class DatosDeUsuario : UserControl
     {
         string nombreusaurio;
+        int iduser;
         int edicion = 0;
         ClaseProcedimiento procedimiento = new ClaseProcedimiento();
         Usuario usuarios = new Usuario();
@@ -33,10 +34,11 @@ namespace SistemaDental.MVCCV.Vista
             dg_citasdia.ItemsSource = procedimiento.CitasUsuario("JCASTRO1");
         }
 
-        public DatosDeUsuario(string usuario)
+        public DatosDeUsuario(string usuario, int idusuario)
         {
             InitializeComponent();
             nombreusaurio = usuario;
+            iduser = idusuario;
             LlenadoDeInformacion();
             dg_citasdia.ItemsSource = procedimiento.CitasUsuario(usuario);
             
@@ -88,6 +90,7 @@ namespace SistemaDental.MVCCV.Vista
                 {
                     ObtenerValores();
                     procedimiento.EditarUsuarioSinPass(usuarios);
+                    procedimiento.InsertarLog(iduser, "Se editó información acerca de su cuenta personal");
                     HabilitarBotones(false, Visibility.Collapsed);
                     btnActualizarUsuario.Visibility = Visibility.Visible;
                     LlenadoDeInformacion();
@@ -107,6 +110,7 @@ namespace SistemaDental.MVCCV.Vista
                 {
                     ObtenerValores();
                     procedimiento.EditarUsuario(usuarios);
+                    procedimiento.InsertarLog(iduser, "Se editó información acerca de su cuenta personal y su contraseña fue cambiada");
                     HabilitarBotones(false, Visibility.Collapsed);
                     btnActualizarUsuario.Visibility = Visibility.Visible;
                     LlenadoDeInformacion();

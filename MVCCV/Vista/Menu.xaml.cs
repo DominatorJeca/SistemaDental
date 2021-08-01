@@ -1,4 +1,5 @@
-﻿using SistemaDental.MVCCV.Vista;
+﻿using Microsoft.Reporting.WinForms;
+using SistemaDental.MVCCV.Vista;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -62,7 +63,7 @@ namespace SistemaDental
             VistaMenuInicio.CambioDeVistaPrincipal += CambiarVista;
             VistaAjuste.CambioDeVistaPrincipal += CambiarVista;
             ContenedorHijos.Content = VistaMenuInicio;
-            VistaUsuarioIngresado = new DatosDeUsuario(usuario);
+            VistaUsuarioIngresado = new DatosDeUsuario(usuario,id);
         }
         private void CambiarVista(object o,EventArgs e)
         {
@@ -210,7 +211,10 @@ namespace SistemaDental
 
         private void btnInicio_Click(object sender, RoutedEventArgs e)
         {
+            MenuReporteVista menu = new MenuReporteVista();
+            menu.ManejoReportes();
             CambiarVista(VistaMenuInicio,null);
+            
         }
 
         private void btnCaja_Click_1(object sender, RoutedEventArgs e)
