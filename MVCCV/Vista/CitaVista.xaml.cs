@@ -25,6 +25,7 @@ namespace SistemaDental.MVCCV.Vista
         public Usuario user = new Usuario();
         ObservableCollection<ClaseCitas> tratamientos = new ObservableCollection<ClaseCitas>();
         ClaseCitas citas = new ClaseCitas();
+        ClaseProcedimiento proc = new ClaseProcedimiento();
         public event EventHandler CambioDeVistaPrincipal;
 
 
@@ -270,7 +271,7 @@ namespace SistemaDental.MVCCV.Vista
                             btnelimtratamiento.IsEnabled = false;
                             dtg_Citas.IsEnabled = true;
                             btnelimtratamiento_cita_Copy.IsEnabled = true;
-
+                            proc.InsertarLog(user.Ide, "Se Edito una cita");
                             MessageBox.Show("Exito al editar");
                             limpiar();
                             encenapagarbotones();
@@ -301,11 +302,14 @@ namespace SistemaDental.MVCCV.Vista
 
 
                             citas.AgendarCita(citas);
+                            
                             foreach (ClaseCitas inv in tratamientos)
                             {
 
                                 citas.InsertarDetalleCita(citas.IdCita, inv.IdTratamiento, float.Parse(inv.trtamientoprecio));
                             }
+
+                            proc.InsertarLog(user.Ide, "Se agendo una nueva cita ");
                             MessageBox.Show("Cita agendada con éxito");
                             btnGuardar.IsEnabled = false;
                             btnEditar.IsEnabled = true;
@@ -642,6 +646,7 @@ namespace SistemaDental.MVCCV.Vista
                         obtenerCita();
                         citas.eliminardetallecita(citas.IdCita);
                         citas.EliminarCita(citas.IdCita);
+                        proc.InsertarLog(user.Ide, "Se Elimino una cita");
 
                     }
                 }
