@@ -33,6 +33,7 @@ namespace SistemaDental
         private CajaVista VistaCaja = new CajaVista();
         private MenuInicioVista VistaMenuInicio = new MenuInicioVista();
         private DatosDeUsuario VistaUsuarioIngresado;
+
         private AjustesVista VistaAjuste = new AjustesVista();
         private Usuario user = new Usuario();
         //Constructores
@@ -59,7 +60,7 @@ namespace SistemaDental
             proced.AgregarTurno(turno);
             VistaMenuInicio.user = user;
             VistaCaja.user = user;
-            VistaMenuInicio.user = user;
+            VistaAjuste.user = user;
             VistaMenuInicio.CambioDeVistaPrincipal += CambiarVista;
             VistaAjuste.CambioDeVistaPrincipal += CambiarVista;
             ContenedorHijos.Content = VistaMenuInicio;
@@ -117,8 +118,8 @@ namespace SistemaDental
         /// <param name="e"></param>
         private void btnCaja_Click(object sender, RoutedEventArgs e)
         {
-          
-          
+
+
         }
         /// <summary>
         /// Abre el Formulario de pacientes y cierra el actual
@@ -127,8 +128,8 @@ namespace SistemaDental
         /// <param name="e"></param>
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-           
-          
+
+
             this.Hide();
         }
 
@@ -156,8 +157,8 @@ namespace SistemaDental
         /// <param name="e"></param>
         private void btnCitas_Click(object sender, RoutedEventArgs e)
         {
-           
-           
+
+
             this.Hide();
         }
 
@@ -214,7 +215,7 @@ namespace SistemaDental
             MenuReporteVista menu = new MenuReporteVista();
             menu.ManejoReportes();
             CambiarVista(VistaMenuInicio,null);
-            
+
         }
 
         private void btnCaja_Click_1(object sender, RoutedEventArgs e)

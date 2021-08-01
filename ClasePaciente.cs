@@ -15,8 +15,7 @@ namespace SistemaDental
         //variable miembro
         BDConnexion con = new BDConnexion();
         ClaseProcedimiento procedimiento = new ClaseProcedimiento();
-        //private static string connectionString = @"server = .; Initial Catalog = clinicaDental; Integrated Security = True; MultipleActiveResultSets=true";
-        //private SqlConnection sqlConnection = new SqlConnection(connectionString);
+     
 
         //Propiedad para extraer todos los ID almacenados en la BD
         public int Id_paciente { get; set; }
@@ -31,7 +30,8 @@ namespace SistemaDental
         public DateTime FechaNac { get; set; }
         public int Edad { get; set; }
 
-        public string Genero { get; set; }
+        public int Genero { get; set; }
+        public string GeneroNombre { get; set; }
 
         public string Identidad { get; set; }
 
@@ -40,7 +40,7 @@ namespace SistemaDental
 
 
         public string Correo { get; set; }
-        public string Estado { get; set; }
+        public bool Estado { get; set; }
         public string Paciente { get; set; }
         public string NombreTratamiento { get; set; }
         public string Doctor { get; set; }
