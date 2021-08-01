@@ -58,6 +58,7 @@ namespace SistemaDental.MVCCV.Vista
         }
         private void btnTratamientos_Click_1(object sender, RoutedEventArgs e)
         {
+            VistaTratamiento.user = user;
             CambioDeVista(VistaTratamiento);
         }
 
