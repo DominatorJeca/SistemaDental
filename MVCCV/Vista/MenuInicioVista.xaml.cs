@@ -42,8 +42,8 @@ namespace SistemaDental.MVCCV.Vista
 
         private void btnHelp_Click(object sender, RoutedEventArgs e)
         {
-            string url = "http://localhost/ProjectoClinicaDental/vistas/";
-            Process.Start(new ProcessStartInfo("cmd", $"/c start {url}") { CreateNoWindow = true });
+            string url = "http://sistemadentalhn.epizy.com/ProjectoClinicaDental/vistas/index.php";
+            System.Diagnostics.Process.Start(url);
         }
 
         private void btnTratamientos_Click(object sender, RoutedEventArgs e)
