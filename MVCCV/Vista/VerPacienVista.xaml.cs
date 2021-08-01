@@ -183,6 +183,7 @@ namespace SistemaDental.MVCCV.Vista
         {
             // txtEdad.Visibility = Visibility;
             // dtpFechaNac.Visibility = Visibility.Hidden;
+          
             btnEditarPaciente.IsEnabled = false;
             btnAgregarPaciente.IsEnabled = true;
 
@@ -290,6 +291,7 @@ namespace SistemaDental.MVCCV.Vista
         
         private void btnAgregarPaciente_Click(object sender, RoutedEventArgs e)
         {
+           
             if (VerificarCampos())
             {
                 try
