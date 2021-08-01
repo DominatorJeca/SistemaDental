@@ -235,6 +235,7 @@
     <Compile Include="EditarUsuario.xaml.cs">
       <DependentUpon>EditarUsuario.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Genero.cs" />
     <Compile Include="Inventario.xaml.cs">
       <DependentUpon>Inventario.xaml</DependentUpon>
     </Compile>
