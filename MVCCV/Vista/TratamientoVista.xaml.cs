@@ -28,6 +28,7 @@ namespace SistemaDental.MVCCV.Vista
         Validaciones validar = new Validaciones();
         List<ClaseInventario> listMateriales = new List<ClaseInventario>();
         DataTable dtMaterial = new DataTable();
+        public Usuario user = new Usuario();
 
         public int gTratamientoID = 0;
         public bool isUpdate = false;
@@ -60,10 +61,12 @@ namespace SistemaDental.MVCCV.Vista
                 if (!isUpdate)
                 {
                     GuardarTratamiento();
+                    proc.InsertarLog(user.Ide, "Se ingreso el tratamiento [" + trat.TratamientoNombre + "]");
                 }
                 else
                 {
                     ActualizarTratamiento();
+                    proc.InsertarLog(user.Ide, "Se modifico el tratamiento [" + trat.TratamientoNombre + "]");
                 }
 
                 MessageBox.Show("Datos insertados con exito");
@@ -100,7 +103,6 @@ namespace SistemaDental.MVCCV.Vista
             isUpdate = true;
             btnCancelar.IsEnabled = true;
             btnEditar.IsEnabled = false;   
-            CamposEstado(false);
         }
 
         private void btnCancelar_Click(object sender, RoutedEventArgs e)
@@ -346,6 +348,7 @@ namespace SistemaDental.MVCCV.Vista
                 ObtenerTratamientoDatos();
                 ObtenerInventarioTratamientos(gTratamientoID);
                 ObtenerMaterialFiltro();
+                CamposEstado(false);
             }
         }
 
