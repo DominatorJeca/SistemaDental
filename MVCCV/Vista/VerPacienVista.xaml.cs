@@ -22,7 +22,7 @@ namespace SistemaDental.MVCCV.Vista
     public partial class VerPacienVista : UserControl
     {
 
-
+        public Usuario usuar= new Usuario();
         public ClasePaciente unPaciente = new ClasePaciente();
         private ClaseProcedimiento Proc = new ClaseProcedimiento();
         private bool Admin;

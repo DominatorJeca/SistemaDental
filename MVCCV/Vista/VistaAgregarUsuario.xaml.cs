@@ -24,7 +24,8 @@ namespace SistemaDental.MVCCV.Vista
     {
 
         //Variables miembro
-        private Usuario usuario = new Usuario();
+        private Usuario usuar = new Usuario();
+        public Usuario user = new Usuario();
         int opcion = 0;
         private bool Admin;
         private String Nombree;
@@ -41,6 +42,7 @@ namespace SistemaDental.MVCCV.Vista
             MostrarGenero();
             HabilitarInhabilitarTXT(false);
             botoneshabilitados(true);
+            
 
         }
 
@@ -54,6 +56,7 @@ namespace SistemaDental.MVCCV.Vista
             Nombree = name;
             Admin = admin;
             HabilitarInhabilitarTXT(false);
+          
         }
 
         #endregion
@@ -110,16 +113,16 @@ namespace SistemaDental.MVCCV.Vista
         public void ObtenerValores()
         {
 
-            usuario.Id = Convert.ToString(txtAgregarIdentidad.Text);
-            usuario.Nombre = Convert.ToString(txtAgregarNombre.Text);
-            usuario.Apellido = Convert.ToString(txtAgregarApellido.Text);
-            usuario.Telefono = Convert.ToString(txtAgregarTelefono.Text);
-            usuario.Correo = Convert.ToString(txtAgregarCorreo.Text);
-            usuario.Puesto = Convert.ToInt32(cmbPuesto.SelectedValue);
-            usuario.Genero = Convert.ToInt32(cmbSexo.SelectedValue); 
-            usuario.Contraseña = txtAgregarContra.Password;
-            usuario.Estado = true;
-            usuario.Ide = (Convert.ToInt32(dgvEmpleado.SelectedValue));
+            usuar.Id = Convert.ToString(txtAgregarIdentidad.Text);
+            usuar.Nombre = Convert.ToString(txtAgregarNombre.Text);
+            usuar.Apellido = Convert.ToString(txtAgregarApellido.Text);
+            usuar.Telefono = Convert.ToString(txtAgregarTelefono.Text);
+            usuar.Correo = Convert.ToString(txtAgregarCorreo.Text);
+            usuar.Puesto = Convert.ToInt32(cmbPuesto.SelectedValue);
+            usuar.Genero = Convert.ToInt32(cmbSexo.SelectedValue); 
+            usuar.Contraseña = txtAgregarContra.Password;
+            usuar.Estado = true;
+            usuar.Ide = (Convert.ToInt32(dgvEmpleado.SelectedValue));
            
 
         }
@@ -248,12 +251,12 @@ namespace SistemaDental.MVCCV.Vista
 
         private void chkAdmin_Checked(object sender, RoutedEventArgs e)
         {
-            usuario.Administrador = true;
+            usuar.Administrador = true;
         }
 
         private void chkAdmin_Unchecked(object sender, RoutedEventArgs e)
         {
-            usuario.Administrador = false;
+            usuar.Administrador = false;
         }
 
         #endregion
@@ -267,6 +270,7 @@ namespace SistemaDental.MVCCV.Vista
         /// <param name="e"></param>
         private void btnAgregarUsuario_Click_1(object sender, RoutedEventArgs e)
         {
+            MessageBox.Show(user.usuario.ToString());
             opcion = 1;
             botoneshabilitados(false);
             HabilitarInhabilitarTXT(true);
@@ -354,7 +358,7 @@ namespace SistemaDental.MVCCV.Vista
                     ObtenerValores();
 
                     // Insertar los datos del usuario
-                    Proc.IngresarUsuario(usuario);
+                    Proc.IngresarUsuario(usuar);
 
                     // Mensaje de inserción exitosa
 
@@ -386,7 +390,7 @@ namespace SistemaDental.MVCCV.Vista
 
                 string usu;
                 // Insertar los datos del usuario
-                usu = Proc.obtenerusuario(usuario.Id);
+                usu = Proc.obtenerusuario(usuar.Id);
 
                     // Mensaje de inserción exitosa
                     MessageBox.Show("El usuario para el empleado que ingresó es: "+ usu);
@@ -410,7 +414,7 @@ namespace SistemaDental.MVCCV.Vista
                     ObtenerValores();
 
                     // Insertar los datos del usuario
-                    Proc.EditarEmpleado(usuario);
+                    Proc.EditarEmpleado(usuar);
 
                     // Mensaje de inserción exitosa
                     MessageBox.Show("¡Datos editados correctamente!");
@@ -437,9 +441,9 @@ namespace SistemaDental.MVCCV.Vista
                 {
                     // Obtener los valores para el empleado
                     ObtenerValores();
-                    usuario.Estado = act;
+                    usuar.Estado = act;
                     // Insertar los datos del usuario
-                    Proc.EditarEmpleado(usuario);
+                    Proc.EditarEmpleado(usuar);
 
                     // Mensaje de inserción exitosa
                     MessageBox.Show("La operación se realizó con exito!");
