@@ -22,11 +22,16 @@ namespace SistemaDental.MVCCV.Vista
     /// </summary>
     public partial class CitaVista : UserControl
     {
+        public Usuario user = new Usuario();
         ObservableCollection<ClaseCitas> tratamientos = new ObservableCollection<ClaseCitas>();
         ClaseCitas citas = new ClaseCitas();
         public event EventHandler CambioDeVistaPrincipal;
-      
+
+
+        int vand = 0;
         int bton = 0;
+        int dtg = 0;
+
         private bool Admin;
         private String Nombree;
         public CitaVista()
@@ -34,6 +39,9 @@ namespace SistemaDental.MVCCV.Vista
             InitializeComponent();
             MostrarDatos();
             mostrarCitas();
+            inicializarfecchas();
+
+
 
         }
 
@@ -42,6 +50,7 @@ namespace SistemaDental.MVCCV.Vista
             InitializeComponent();
             MostrarDatos();
             mostrarCitas();
+            inicializarfecchas();
             Nombree = name;
             Admin = admin;
         }
@@ -71,9 +80,12 @@ namespace SistemaDental.MVCCV.Vista
         }
         private void MostrarDatos()
         {
+
+            cmbPaciente1.ItemsSource = citas.mostrarPacientesconcitas();
+            cmbPaciente1.DisplayMemberPath = "Nombre_Id_paciente";
+            cmbPaciente1.SelectedValuePath = "IdPacientes";
+
             cmbPaciente.ItemsSource = citas.mostrarPacientes();
-
-
             cmbPaciente.DisplayMemberPath = "Nombre_Id_paciente";
             cmbPaciente.SelectedValuePath = "IdPacientes";
             cmbEmpleado.ItemsSource = citas.MostrarEmpleado();
@@ -115,8 +127,8 @@ namespace SistemaDental.MVCCV.Vista
         /// <param name="e"></param>
         private void btnAgregar_Click(object sender, RoutedEventArgs e)
         {
-
-
+            cmbPaciente1.SelectedValue = null;
+            cmbPaciente1.IsEnabled = false;
             btnGuardar.IsEnabled = true;
             btnEditar.IsEnabled = false;
             btnAgregar.IsEnabled = false;
@@ -152,17 +164,13 @@ namespace SistemaDental.MVCCV.Vista
                 MessageBox.Show("Selecione una fecha");
                 return false;
             }
-            if (RevisarFecha())
-            {
-                MessageBox.Show("Por favor, selecione una fecha validad");
-                return false;
-            }
+
             if (ctTiempo.SelectedTime == null)
             {
                 MessageBox.Show("Por favor, selecione una hora");
                 return false;
             }
-            if(tratamientos.Count<1)
+            if (tratamientos.Count < 1)
             {
                 MessageBox.Show("Por favor, Ingrese tratamientos a la lista");
                 return false;
@@ -171,19 +179,19 @@ namespace SistemaDental.MVCCV.Vista
             return true;
         }
 
-        private bool RevisarFecha()
+        private void inicializarfecchas()
         {
-            if (cdCitas.SelectedDate.Value.Date == DateTime.Now.Date)
-            {
-                return true;
-            }
-            if (cdCitas.SelectedDate.Value.Date < DateTime.Now.Date)
-            {
-                return true;
-            }
-
-            return false;
+            cdCitas.BlackoutDates.AddDatesInPast();
+            cdCitas.BlackoutDates.Add(new CalendarDateRange(DateTime.Today, DateTime.Today.AddDays(0)));
         }
+
+
+
+
+
+
+
+
 
         /// <summary>
         /// Con esta función del botón editar se bloquean o desbloquean objetos para editar una cita
@@ -207,7 +215,8 @@ namespace SistemaDental.MVCCV.Vista
                     btnelimtratamiento_cita_Copy.IsEnabled = false;
                     bton = 1;
                     encenderbotones();
-
+                    cmbPaciente1.SelectedValue = null;
+                    cmbPaciente1.IsEnabled = false;
                 }
                 else
                 {
@@ -234,35 +243,43 @@ namespace SistemaDental.MVCCV.Vista
             try
             {
                 if (bton == 1)
-                  {
+                {
                     if (RevisarDatos() is true)
-                     {
+                    {
 
-
-                        obtenerCita();
-                        ObtenerValores();
-                        //Se valida que no haya una cita registrada con detalles iguales
-
-
-                        citas.EditarCita(citas);
-                        citas.eliminardetallecita(citas.IdCita);
-                        foreach (ClaseCitas inv in tratamientos)
+                        validarhora();
+                        if (vand == 0)
                         {
 
-                            citas.InsertarDetalleCita(citas.IdCita, inv.IdTratamiento, float.Parse(inv.trtamientoprecio));
-                        }
-                        btnGuardar.IsEnabled = false;
-                        btnEditar.IsEnabled = true;
-                        btnAgregar.IsEnabled = true;
-                        btnCancelar.IsEnabled = false;
-                        btnelimtratamiento.IsEnabled = false;
-                        dtg_Citas.IsEnabled = true;
-                        btnelimtratamiento_cita_Copy.IsEnabled = true;
+                            obtenerCita();
+                            ObtenerValores();
+                            //Se valida que no haya una cita registrada con detalles iguales
 
-                        MessageBox.Show("Exito al editar");
-                        limpiar();
-                        encenapagarbotones();
-                        mostrarCitas();
+
+                            citas.EditarCita(citas);
+                            citas.eliminardetallecita(citas.IdCita);
+                            foreach (ClaseCitas inv in tratamientos)
+                            {
+
+                                citas.InsertarDetalleCita(citas.IdCita, inv.IdTratamiento, float.Parse(inv.trtamientoprecio));
+                            }
+                            btnGuardar.IsEnabled = false;
+                            btnEditar.IsEnabled = true;
+                            btnAgregar.IsEnabled = true;
+                            btnCancelar.IsEnabled = false;
+                            btnelimtratamiento.IsEnabled = false;
+                            dtg_Citas.IsEnabled = true;
+                            btnelimtratamiento_cita_Copy.IsEnabled = true;
+
+                            MessageBox.Show("Exito al editar");
+                            limpiar();
+                            encenapagarbotones();
+                            mostrarCitas();
+                            MostrarDatos();
+                        }
+
+
+
 
                     }
                 }
@@ -270,33 +287,43 @@ namespace SistemaDental.MVCCV.Vista
 
                 else
                 {
+
                     if (RevisarDatos())
                     {
-                        ObtenerValores();
+                        validarhora();
 
 
-                        citas.AgendarCita(citas);
-                        foreach (ClaseCitas inv in tratamientos)
+
+
+                        if (vand == 0)
                         {
+                            ObtenerValores();
 
-                            citas.InsertarDetalleCita(citas.IdCita, inv.IdTratamiento, float.Parse(inv.trtamientoprecio));
+
+                            citas.AgendarCita(citas);
+                            foreach (ClaseCitas inv in tratamientos)
+                            {
+
+                                citas.InsertarDetalleCita(citas.IdCita, inv.IdTratamiento, float.Parse(inv.trtamientoprecio));
+                            }
+                            MessageBox.Show("Cita agendada con éxito");
+                            btnGuardar.IsEnabled = false;
+                            btnEditar.IsEnabled = true;
+                            btnAgregar.IsEnabled = true;
+                            btnCancelar.IsEnabled = false;
+                            btnelimtratamiento.IsEnabled = false;
+                            dtg_Citas.IsEnabled = true;
+                            btnelimtratamiento_cita_Copy.IsEnabled = true;
+                            limpiar();
+                            encenapagarbotones();
+                            mostrarCitas();
+                            MostrarDatos();
                         }
-                        MessageBox.Show("Cita agendada con éxito");
-                        btnGuardar.IsEnabled = false;
-                        btnEditar.IsEnabled = true;
-                        btnAgregar.IsEnabled = true;
-                        btnCancelar.IsEnabled = false;
-                        btnelimtratamiento.IsEnabled = false;
-                        dtg_Citas.IsEnabled = true;
-                        btnelimtratamiento_cita_Copy.IsEnabled = true;
-                        limpiar();
-                        encenapagarbotones();
-                        mostrarCitas();
+
+
                     }
 
-
                 }
-
             }
             catch (Exception ex)
             {
@@ -304,9 +331,9 @@ namespace SistemaDental.MVCCV.Vista
             }
             finally
             {
-                
-             
-               
+
+
+
             }
         }
 
@@ -315,19 +342,155 @@ namespace SistemaDental.MVCCV.Vista
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-    
+        ///
+
+        public void validarhora()
+        {
+            ClaseCitas prod = new ClaseCitas();
+
+            DateTime cmb = cdCitas.SelectedDate.Value.Add(ctTiempo.SelectedTime.Value.TimeOfDay);
+            prod.fechaCita = cmb;
+            prod.IdEmpleado = cmbEmpleado.SelectedValue.ToString();
+
+            List<ClaseCitas> rd = new List<ClaseCitas>();
+            rd = citas.MostracitaspoDoctor(prod);
+            int bandera1 = 0;
+            if (rd.Count >= 1)
+            {
+
+                if (bandera1 == 0)
+                {
+                    foreach (ClaseCitas inv in rd)
+                    {
+                        if (inv.fechaCita.TimeOfDay == prod.fechaCita.TimeOfDay && bandera1 != 1)
+                        {
+                            MessageBox.Show("Este doctor tienen una cita ese mismo dia y misma Hora");
+                            vand = 1;
+                            bandera1 = 1;
+                            return;
+
+                        }
+
+
+                    }
+
+
+                }
+                if (bandera1 != 1)
+                {
+                    var v1 = (DateTime)prod.fechaCita.AddHours(1);
+                    foreach (ClaseCitas inv in rd)
+                    {
+
+
+
+                        var v = (DateTime)inv.fechaCita;
+
+
+                        if (TimeSpan.Compare(v1.TimeOfDay, new DateTime(v.Year, v.Month, v.Day,
+                                 v.Hour, 0, 0).TimeOfDay) == 0 && bandera1 != 2)
+                        {
+
+                            MessageBoxResult result = MessageBox.Show("Este Doctor tiene una cita una hora antes ese mismo dia, ¿Desea ingresar esta nueva cita?", "Citas", MessageBoxButton.YesNo);
+                            switch (result)
+                            {
+                                case MessageBoxResult.Yes:
+                                    {
+                                        vand = 0;
+                                        bandera1 = 2;
+                                        break;
+                                    }
+                                case MessageBoxResult.No:
+                                    {
+                                        vand = 1;
+                                        bandera1 = 2;
+                                        break;
+                                    }
+
+
+                            }
+
+
+                        }
+                    }
+                }
+                if (bandera1 != 1 && bandera1 != 2)
+                {
+                    var v1 = (DateTime)prod.fechaCita.AddHours(-1);
+                    foreach (ClaseCitas inv in rd)
+                    {
+                        var v = (DateTime)inv.fechaCita;
+                        if (TimeSpan.Compare(v1.TimeOfDay, new DateTime(v.Year, v.Month, v.Day,
+                                 v.Hour, 0, 0).TimeOfDay) == 0 && bandera1 != 2 && bandera1 != 2)
+                        {
+
+                            MessageBoxResult result = MessageBox.Show("Este Doctor tiene una cita una hora antes ese mismo dia, ¿Desea ingresar esta nueva cita?", "Citas", MessageBoxButton.YesNo);
+                            switch (result)
+                            {
+                                case MessageBoxResult.Yes:
+                                    {
+                                        vand = 0;
+                                        bandera1 = 2;
+                                        break;
+                                    }
+                                case MessageBoxResult.No:
+                                    {
+                                        vand = 1;
+                                        bandera1 = 2;
+                                        break;
+                                    }
+                            }
+                        }
+                    }
+                }
+                if (bandera1 == 0)
+                {
+
+                    vand = 0;
+                }
+
+
+            }
+            else
+            {
+
+                vand = 0;
+            }
+        }
+
+
+
+
+
 
         private void dtg_Citas_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             int val;
+
             if (dtg_Citas.SelectedValue != null)
             {
-
+                DateTime date = DateTime.MinValue;
                 cmbEmpleado.SelectedValue = ((ClaseCitas)dtg_Citas.SelectedItem).IdEmpleado;
                 cmbPaciente.SelectedValue = ((ClaseCitas)dtg_Citas.SelectedItem).IdPacientes;
-                cdCitas.SelectedDate = ((ClaseCitas)dtg_Citas.SelectedItem).fechaCita;
+
+
+                date = ((ClaseCitas)dtg_Citas.SelectedItem).fechaCita;
+                if (date.Date > DateTime.Today)
+                {
+                    date = ((ClaseCitas)dtg_Citas.SelectedItem).fechaCita;
+                    cdCitas.SelectedDate = date;
+
+                }
+                else
+                {
+
+                    cdCitas.SelectedDate = null;
+                }
+
+
+
                 ctTiempo.SelectedTime = ((ClaseCitas)dtg_Citas.SelectedItem).fechaCita;
-                ctTiempo.SelectedTime = ((ClaseCitas)dtg_Citas.SelectedItem).fechaCita;
+
                 val = ((ClaseCitas)dtg_Citas.SelectedItem).IdCita;
 
                 dtg_Tratamientos.ItemsSource = citas.Mostrartratmientos(val);
@@ -353,7 +516,7 @@ namespace SistemaDental.MVCCV.Vista
                         c = 1;
                     }
                 }
-
+                dtg = 1;
             }
 
 
@@ -369,25 +532,42 @@ namespace SistemaDental.MVCCV.Vista
         /// <param name="sender"></param>
         /// <param name="e"></param>
 
-       
+
 
         private void btnCancelar_Click(object sender, RoutedEventArgs e)
         {
-            dtg_Citas.IsEnabled = true;     
+
+            encender();
+            limpiar();
+        }
+
+        private void encender()
+        {
+            dtg_Citas.IsEnabled = true;
             btnAgregar.IsEnabled = true;
             btnEditar.IsEnabled = true;
             btnGuardar.IsEnabled = false;
             btnCancelar.IsEnabled = false;
             btnelimtratamiento.IsEnabled = false;
-            btnelimtratamiento_cita_Copy.IsEnabled= true;
+            btnelimtratamiento_cita_Copy.IsEnabled = true;
             encenapagarbotones();
             limpiar();
-            
-           
+
+
 
         }
 
-       
+
+
+        private void ctTiempo_SelectedTimeChanged(object sender, RoutedPropertyChangedEventArgs<DateTime?> e)
+        {
+
+        }
+
+        private void dtg_Tratamientos_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
 
         private void btnelimtratamiento_Click_1(object sender, RoutedEventArgs e)
         {
@@ -396,7 +576,7 @@ namespace SistemaDental.MVCCV.Vista
                 tratamientos.RemoveAt(dtg_Tratamientos.SelectedIndex);
                 dtg_Tratamientos.ItemsSource = tratamientos;
                 dtg_Tratamientos.SelectedValuePath = "IdTratamiento";
-               
+
             }
             else
             {
@@ -424,19 +604,21 @@ namespace SistemaDental.MVCCV.Vista
             cdCitas.IsEnabled = false;
             cmbPaciente.IsEnabled = false;
             Agregar_Tratamientos.IsEnabled = false;
+            cmbPaciente1.IsEnabled = true;
+
         }
 
 
-        public void  limpiar()
+        public void limpiar()
 
-          {
+        {
             tratamientos.Clear();
-            
+
             cdCitas.SelectedDate = null;
             ctTiempo.SelectedTime = null;
             cmbEmpleado.SelectedValue = null;
             cmbPaciente.SelectedValue = null;
-            cmbTratamiento.SelectedValue= null;
+            cmbTratamiento.SelectedValue = null;
             dtg_Tratamientos.ItemsSource = tratamientos;
             dtg_Tratamientos.SelectedValuePath = "IdTratamiento";
             mostrarCitas();
@@ -444,9 +626,9 @@ namespace SistemaDental.MVCCV.Vista
 
         }
 
-       
 
-        
+
+
 
         private void btnelimtratamiento_cita_Copy_Click(object sender, RoutedEventArgs e)
         {
@@ -460,6 +642,7 @@ namespace SistemaDental.MVCCV.Vista
                         obtenerCita();
                         citas.eliminardetallecita(citas.IdCita);
                         citas.EliminarCita(citas.IdCita);
+
                     }
                 }
                 else
@@ -475,25 +658,24 @@ namespace SistemaDental.MVCCV.Vista
             {
                 limpiar();
                 mostrarCitas();
+                MostrarDatos();
             }
 
 
         }
-       
+
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             MenuNavegacion.IsTopDrawerOpen = true;
         }
-
         private void MenuNavegacion_MouseDown(object sender, MouseButtonEventArgs e)
         {
             if (MenuNavegacion.IsTopDrawerOpen)
                 MenuNavegacion.IsTopDrawerOpen = false;
         }
-
         private void Grid_MouseDown(object sender, MouseButtonEventArgs e)
         {
-          
+
         }
 
         private void btnAgendarCita_Click(object sender, RoutedEventArgs e)
@@ -506,9 +688,84 @@ namespace SistemaDental.MVCCV.Vista
         {
             RealizarCitaVista VistaRealizarCita = new RealizarCitaVista();
             VistaRealizarCita.CambioDeVistaPrincipal += CambioDeVistaPrincipal;
+            VistaRealizarCita.user = user;
             CambioDeVista(VistaRealizarCita);
         }
-    }
 
-    
+        private void cmbPaciente1_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+            if (dtg == 1)
+            {
+
+                limpiar();
+                dtg = 0;
+
+            }
+
+
+
+
+            if (cmbPaciente1.SelectedValue != null)
+            {
+                citas.IdPacientes = cmbPaciente1.SelectedValue.ToString();
+                dtg_Citas.ItemsSource = citas.mostrarPacientesxcitas(Convert.ToInt32(citas.IdPacientes));
+                dtg_Citas.SelectedValuePath = "IdCita";
+
+
+            }
+
+            if (cmbPaciente1.SelectedValue == null)
+            {
+                mostrarCitas();
+
+            }
+
+
+        }
+
+        private void ctTiempo_SelectedTimeChanged_1(object sender, RoutedPropertyChangedEventArgs<DateTime?> e)
+        {
+
+
+
+            if (ctTiempo.SelectedTime != null)
+            {
+                if (ctTiempo.SelectedTime != null)
+                {
+                    var v = (DateTime)ctTiempo.SelectedTime;
+                    if (TimeSpan.Compare(v.TimeOfDay, new DateTime(v.Year, v.Month, v.Day,
+                                 17, 0, 0).TimeOfDay) == 1 || TimeSpan.Compare(v.TimeOfDay, new DateTime(v.Year, v.Month, v.Day,
+                                 7, 0, 0).TimeOfDay) == -1)
+                    {
+                        MessageBox.Show("La clinica está cerrada a esta hora");
+                        ctTiempo.SelectedTime = null;
+                        return;
+                    }
+
+
+
+
+
+                    if (TimeSpan.Compare(v.TimeOfDay, new DateTime(v.Year, v.Month, v.Day,
+                                 v.Hour, 0, 0).TimeOfDay) != 0)
+                    {
+                        ctTiempo.SelectedTime = new DateTime(v.Year, v.Month, v.Day, v.Hour, 00, 00);
+                        MessageBox.Show("solo se puede asiganar horas Exactas");
+
+
+                    }
+                }
+
+            }
+
+
+
+
+        }
+
+
+
+
+    }
 }
