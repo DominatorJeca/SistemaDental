@@ -29,7 +29,7 @@ namespace SistemaDental.MVCCV.Vista
         public AjustesVista()
         {
             InitializeComponent();
-            VistaManejarUsuario.user = user;
+          
         }
 
         public AjustesVista(bool admin, string name)
@@ -37,7 +37,7 @@ namespace SistemaDental.MVCCV.Vista
             InitializeComponent();
             Nombree = name;
             Admin = admin;
-            VistaManejarUsuario.user = user;
+           
         }
         protected virtual void CambioDeVista(object o)
         {
@@ -47,7 +47,7 @@ namespace SistemaDental.MVCCV.Vista
 
         private void btnManejarUsuarios_Click(object sender, RoutedEventArgs e)
         {
-           
+            VistaManejarUsuario.user = user;
             CambioDeVista(VistaManejarUsuario);
         }
     }
