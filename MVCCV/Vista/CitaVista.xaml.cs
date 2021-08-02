@@ -79,7 +79,7 @@ namespace SistemaDental.MVCCV.Vista
             foreach (ClaseCitas inv in tratamientos)
                 if (inv.IdTratamiento == prod.IdTratamiento)
                 {
-                    MessageBox.Show("Este Tratamiento ya existe eliminelo e ingreselo nuevamente");
+                    MessageBox.Show("Este tratamiento ya existe eliminelo e ingreselo nuevamente");
                     return;
                 }
             tratamientos.Add(prod);
@@ -147,6 +147,8 @@ namespace SistemaDental.MVCCV.Vista
             bton = 0;
             encenderbotones();
             limpiar();
+            mostrarCitas();
+            MostrarDatos();
 
         }
 
@@ -225,6 +227,7 @@ namespace SistemaDental.MVCCV.Vista
                     encenderbotones();
                     cmbPaciente1.SelectedValue = null;
                     cmbPaciente1.IsEnabled = false;
+                  
                 }
                 else
                 {
