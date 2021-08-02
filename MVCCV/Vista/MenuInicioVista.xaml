@@ -66,7 +66,7 @@
                         </LinearGradientBrush>
                     </Button.Background>
                     <Grid Margin="0" Background="{x:Null}">
-                        <Image Source="/imagenes/shopping-cart.png" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,-32,-27" Height="137" Width="119"/>
+                        <Image Source="/imagenes/shopping-cart.png" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="22,0,-32,-27" Height="137" Width="119"/>
                         <TextBlock FontSize="20" FontFamily="Bahnschrift" Height="auto" Width="auto" Margin="-11,23,39,92" Background="{x:Null}">Compras</TextBlock>
                     </Grid>
                 </Button>
@@ -97,7 +97,7 @@
             </StackPanel>
         </StackPanel>
 
-      
+
 
 
     </Grid>
