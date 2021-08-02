@@ -532,7 +532,7 @@ namespace SistemaDental
                 command.Connection = con.Open();
                 //crear el comando SQL
                 command.CommandText = "sp_Compra_Insertar";
-                command.Parameters.AddWithValue("@EmpleadoID", empleadoId);
+                command.Parameters.AddWithValue("@UserId", empleadoId);
                 command.CommandType = CommandType.StoredProcedure;
                 reader = command.ExecuteReader();
                 reader.Read();
@@ -1575,7 +1575,7 @@ namespace SistemaDental
             }
         }
 
-        public void InsertarTransaccion (int usuarioID,float cantidad,string observaciones,int CitaID)
+        public void InsertarTransaccion (int usuarioID,float cantidad,string observaciones,int CitaID,bool estado)
         {
             try
             {
@@ -1586,6 +1586,10 @@ namespace SistemaDental
                 command.Parameters.AddWithValue("@Fecha ", DateTime.Now);
                 command.Parameters.AddWithValue("@Monto", cantidad);
                 command.Parameters.AddWithValue("@observaciones", observaciones);
+                if (estado)         
+                command.Parameters.AddWithValue("@Pagado", 1);
+                else
+                    command.Parameters.AddWithValue("@Pagado", 0);
                 command.CommandType = CommandType.StoredProcedure;
                 command.ExecuteNonQuery();
             }

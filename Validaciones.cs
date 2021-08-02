@@ -78,7 +78,7 @@ namespace SistemaDental
             bool band = true;
             foreach (var tb in FindVisualChildren<TextBox>(window))
             {
-                if (tb.Text.Replace(" ", "").Equals("") && tb.Name != "PART_EditableTextBox" && tb.Name != "PART_TextBox" && tb.IsEnabled  && tb.Name!= "txtBuscarEmpleadoID" )
+                if (tb.Text.Replace(" ", "").Equals("") && tb.Name != "PART_EditableTextBox" && tb.Name != "PART_TextBox" && tb.IsEnabled  && tb.Name!= "txtBuscarEmpleadoID" && tb.Name != "txtBuscarProducto" && tb.Name != "txtObservaciones")
                     band = false;
             }
 
@@ -90,7 +90,7 @@ namespace SistemaDental
 
             foreach (var tb in FindVisualChildren<DatePicker>(window))
             {
-                if (tb.SelectedDate==null)
+                if (tb.SelectedDate==null && tb.Name!= "dtpFechadeCita")
                     band = false;
             }
 
