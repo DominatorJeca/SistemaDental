@@ -37,6 +37,14 @@ namespace SistemaDental
             else
                 e.Handled = true;
         }
+        public void SoloNumerosDec(TextCompositionEventArgs e)
+        {
+            int character = Convert.ToInt32(Convert.ToChar(e.Text));
+            if ((character >= 48 && character <= 57 ) || e.Text==".")
+                e.Handled = false;
+            else
+                e.Handled = true;
+        }
 
         public bool ValidarEmail(string email)
         {
@@ -70,16 +78,21 @@ namespace SistemaDental
             bool band = true;
             foreach (var tb in FindVisualChildren<TextBox>(window))
             {
-                if (tb.Text.Replace(" ", "").Equals("") && tb.Name != "PART_EditableTextBox" && tb.Name != "PART_TextBox")
+                if (tb.Text.Replace(" ", "").Equals("") && tb.Name != "PART_EditableTextBox" && tb.Name != "PART_TextBox" && tb.IsEnabled  && tb.Name!= "txtBuscarEmpleadoID" )
                     band = false;
             }
 
             foreach(var tb in FindVisualChildren<ComboBox>(window))
             {
-                if (tb.SelectedValue == null)
+                if (tb.SelectedValue == null && tb.Name!= "cmbPaciente")
                     band = false;
             }
 
+            foreach (var tb in FindVisualChildren<DatePicker>(window))
+            {
+                if (tb.SelectedDate==null)
+                    band = false;
+            }
 
             foreach (var tb in FindVisualChildren<RadioButton>(window))
             {
@@ -153,9 +166,7 @@ namespace SistemaDental
             {
                 siono = true;
             }
-
             return siono;
-        }
-
+ }
     }
 }

@@ -27,6 +27,7 @@
             <Button x:Name="btnreporte5" Content="Reporte de ventas por año" HorizontalAlignment="Stretch"  VerticalAlignment="Top"  Background="#FF056676" BorderBrush="{x:Null}" Click="btnreporte5_Click" />
             <Button x:Name="btnreporte6" Content="Reporte de turnos por empleado" HorizontalAlignment="Stretch"  VerticalAlignment="Top"  Background="#FF056676" BorderBrush="{x:Null}" Click="btnreporte6_Click"  />
             <Button x:Name="btnreporte7" Content="Reporte de citas por empleado" HorizontalAlignment="Stretch"  VerticalAlignment="Top"  Background="#FF056676" BorderBrush="{x:Null}" Click="btnreporte7_Click"/>
+            <Button x:Name="btnreporte8" Content="Reporte de actividad" HorizontalAlignment="Stretch"  VerticalAlignment="Top"  Background="#FF056676" BorderBrush="{x:Null}" Click="btnreporte8_Click"/>
         </StackPanel>
         <WindowsFormsHost Grid.Column="1" Grid.Row="1">
             <rv:ReportViewer x:Name="reporte"/>
@@ -61,8 +62,10 @@
             <Label x:Name="lbltratamiento" Visibility="Collapsed">Tratamiento</Label>
             <ComboBox x:Name="Tratamiento" Width="150" Visibility="Collapsed"/>
             <Label x:Name="lblempleado" Visibility="Collapsed">Empleados</Label>
-            <ComboBox x:Name="cmbEmpleado" Width="150" Visibility="Collapsed"/>
-            <Button Style="{StaticResource MaterialDesignFlatButton}" Background="Beige" Width="150" Click="Button_Click" x:Name="btnMostrarReporte" Margin="30,0,0,0"/>
+            <ComboBox x:Name="cmbEmpleado" Width="150" Visibility="Collapsed" IsEditable="True">
+                
+            </ComboBox>
+            <Button Style="{StaticResource MaterialDesignFlatButton}" Background="#FF056676" Content="Realizar reporte" Foreground="White" Width="150" Click="Button_Click" x:Name="btnMostrarReporte" Margin="30,0,0,0"/>
         </StackPanel>
   
     </Grid>

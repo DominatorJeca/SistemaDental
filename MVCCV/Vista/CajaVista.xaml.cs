@@ -28,8 +28,8 @@ namespace SistemaDental.MVCCV.Vista
         private ClaseCaja caja = new ClaseCaja();
         private ClaseProcedimiento proc = new ClaseProcedimiento();
         ICollectionView ColeccionTransacciones;
-
-
+        public Usuario user = new Usuario();
+        Validaciones val = new Validaciones();
         public CajaVista()
         {
             InitializeComponent();
@@ -69,14 +69,21 @@ namespace SistemaDental.MVCCV.Vista
 
         private void dgvCaja_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if (dgvCaja.SelectedValuePath !="" && dgvCaja.SelectedValue!=null) 
-            MessageBox.Show(dgvCaja.SelectedValue.ToString());
+           
         }
 
 
         private void btnRealizar_Click(object sender, RoutedEventArgs e)
         {
-            proc.InsertarTransaccion(37, float.Parse(txtDineroAbono.Text), txtObservaciones.Text, Convert.ToInt32(dgvCaja.SelectedValue));
+            
+            if (val.VerificarCantidad(Convert.ToDouble(txtDineroAbono.Text)) && dgvCaja.SelectedItem!=null )
+            {
+                proc.InsertarTransaccion(user.Ide, float.Parse(txtDineroAbono.Text), txtObservaciones.Text, Convert.ToInt32(dgvCaja.SelectedValue));
+
+                proc.InsertarLog(user.Ide, "Se realizó una transaccion");
+                MessageBox.Show("Transaccion realizada exitosamente");
+            }
+            
             cmbPaciente_SelectionChanged(null, null);
         }
 

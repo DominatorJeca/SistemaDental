@@ -16,8 +16,8 @@
             <ImageBrush ImageSource="/imagenes/TeethPattern.jpg" Stretch="UniformToFill"/>
         </Grid.Background>
 
-        <Label Content="Lista de tratamientos" HorizontalAlignment="Left" Margin="10,33,0,0" VerticalAlignment="Top" FontSize="18" Foreground="Black" Background="#7F056676" FontFamily="Bahnschrift"/>
-        <DataGrid HorizontalAlignment="Left" Height="181" Margin="10,75,0,0" VerticalAlignment="Top" Width="396" Background="#FF056676" Foreground="#DDFFFFFF" FontFamily="Bahnschrift" x:Name="dg_tratamientos" AutoGenerateColumns="False" IsReadOnly="True" SelectionChanged="dg_tratamientos_SelectionChanged">
+        <Label Content="Lista de tratamientos" HorizontalAlignment="Left" Margin="317,209,0,0" VerticalAlignment="Top" FontSize="18" Foreground="Black" Background="#7F056676" FontFamily="Bahnschrift"/>
+        <DataGrid SelectionMode="Single" IsEnabled="False" HorizontalAlignment="Left" LostFocus="dg_tratamientos_LostFocus" Height="181" Margin="317,251,0,0" VerticalAlignment="Top" Width="396" Background="#FF056676" Foreground="#DDFFFFFF" FontFamily="Bahnschrift" x:Name="dg_tratamientos" AutoGenerateColumns="False" IsReadOnly="True" SelectionChanged="dg_tratamientos_SelectionChanged">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Nombre de tratamiento" Binding="{Binding Nombre}" Width="170"></DataGridTextColumn>
                 <DataGridTextColumn Header="Precio sugerido" Binding="{Binding PrecioSugerido}" Width="130"></DataGridTextColumn>
@@ -25,38 +25,42 @@
             </DataGrid.Columns>
         </DataGrid>
 
-        <Label Content="Lista de materiales" HorizontalAlignment="Left" Margin="10,261,0,0" VerticalAlignment="Top" FontSize="18" Foreground="Black" Background="#7F056676" FontFamily="Bahnschrift"/>
-        <DataGrid HorizontalAlignment="Left" Height="149" Margin="10,296,0,0" VerticalAlignment="Top" Width="396" Background="#FF056676" Foreground="#DDFFFFFF" FontFamily="Bahnschrift" x:Name="dg_materiales" AutoGenerateColumns="False" IsReadOnly="True" SelectionChanged="dg_materiales_SelectionChanged_1">
+
+        <DataGrid SelectionMode="Single" IsEnabled="False" HorizontalAlignment="Left" LostFocus="dg_materiales_LostFocus" Height="145" Margin="317,52,0,0" VerticalAlignment="Top" Width="396" Background="#FF056676" Foreground="#DDFFFFFF" FontFamily="Bahnschrift" x:Name="dg_materiales" AutoGenerateColumns="False" IsReadOnly="True" SelectionChanged="dg_materiales_SelectionChanged_1">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Nombre" Binding="{Binding Nombre}" Width="170"></DataGridTextColumn>
-                <DataGridTextColumn Header="Cantidad disponible" Binding="{Binding CantidadUsada}" Width="*"></DataGridTextColumn>
+                <DataGridTextColumn Header="Cantidad disponible" Binding="{Binding CantidadDisponible}" Width="*"></DataGridTextColumn>
             </DataGrid.Columns>
         </DataGrid>
 
-        <Label Content="Lista de materiales" HorizontalAlignment="Left" Margin="10,261,0,0" VerticalAlignment="Top" FontSize="18" Foreground="Black" Background="#7F056676" FontFamily="Bahnschrift"/>
-        <DataGrid HorizontalAlignment="Left" Height="272" Margin="432,75,0,0" VerticalAlignment="Top" Width="255" Background="#FF056676" Foreground="#DDFFFFFF" FontFamily="Bahnschrift" x:Name="dg_tratamientos_materiales" IsReadOnly="True" AutoGenerateColumns="False" SelectionChanged="dg_tratamientos_materiales_SelectionChanged">
+        <Label Content="Lista de materiales" HorizontalAlignment="Left" Margin="317,10,0,0" VerticalAlignment="Top" FontSize="18" Foreground="Black" Background="#7F056676" FontFamily="Bahnschrift"/>
+        <DataGrid SelectionMode="Single" HorizontalAlignment="Left" Height="222" Margin="725,52,0,0" VerticalAlignment="Top" Width="299" Background="#FF056676" Foreground="#DDFFFFFF" FontFamily="Bahnschrift" x:Name="dg_tratamientos_materiales" IsReadOnly="True" AutoGenerateColumns="False" SelectionChanged="dg_tratamientos_materiales_SelectionChanged">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Nombre" Binding="{Binding NombreMaterial}" Width="100"></DataGridTextColumn>
+                <DataGridTextColumn Header="Nombre del material" Binding="{Binding NombreMaterial}" Width="160"></DataGridTextColumn>
                 <DataGridTextColumn Header="Cantidad" Binding="{Binding Cantidad}" Width="*"></DataGridTextColumn>
             </DataGrid.Columns>
         </DataGrid>
 
-        <TextBox x:Name="txtCantidad" PreviewTextInput="PreviewTextInputSoloNumeros" materialDesign:HintAssist.Hint="Cantidad" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontFamily="Bahnschrift" FontSize="14" Background="#7FFFFFFF" Margin="432,360,363,57"/>
+        <TextBox x:Name="txtCantidad" IsEnabled="False" MaxLength="5" PreviewTextInput="PreviewTextInputSoloNumeros" materialDesign:HintAssist.Hint="Cantidad" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontFamily="Bahnschrift" FontSize="14" Background="#7FFFFFFF" Margin="725,307,26,112"/>
 
-        <Label Content="Materiales del tratamiento" HorizontalAlignment="Left" Margin="448,33,0,0" VerticalAlignment="Top" FontSize="18" Foreground="Black" Background="#7F056676" FontFamily="Bahnschrift"/>
+        <Label Content="Materiales del tratamiento" HorizontalAlignment="Left" Margin="725,10,0,0" VerticalAlignment="Top" FontSize="18" Foreground="Black" Background="#7F056676" FontFamily="Bahnschrift"/>
 
-        <Button x:Name="btnListaAgregar" Content="Agregar" HorizontalAlignment="Left"  VerticalAlignment="Top" Width="120" Background="#FF056676" FontFamily="Bahnschrift" BorderBrush="{x:Null}" Click="btnListaAgregar_Click" Margin="432,413,0,0"/>
-        <Button x:Name="btnListaEliminar" IsEnabled="false" Content="Eliminar" HorizontalAlignment="Left"  VerticalAlignment="Top" Width="120" Background="#FF056676" FontFamily="Bahnschrift" BorderBrush="{x:Null}" Click="btnListaEliminar_Click" Margin="567,413,0,0"/>
+        <Label Content="Informacion del material" Margin="725,277,0,0" HorizontalAlignment="Left"  VerticalAlignment="Top" FontSize="18" Foreground="Black" Background="#7F056676" FontFamily="Bahnschrift"/>
 
-        <Label Content="Tratamiento" HorizontalAlignment="Left" Margin="723,31,0,0" VerticalAlignment="Top" FontSize="20" Foreground="Black" Background="#7F056676" FontFamily="Bahnschrift"/>
-        <TextBox x:Name="txtTratamientoNombre" materialDesign:HintAssist.Hint="Nombre de tratamiento" PreviewTextInput="PreviewTextInputSoloLetras" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontFamily="Bahnschrift" FontSize="14" Background="#7FFFFFFF" Margin="723,75,9,342" TextChanged="txtTratamientoNombre_TextChanged"/>
-        <TextBox x:Name="txtPrecioSugerido" materialDesign:HintAssist.Hint="Precio sugerido" PreviewTextInput="PreviewTextInputSoloNumeros" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontFamily="Bahnschrift" FontSize="14" Background="#7FFFFFFF"  Margin="723,127,9,290"/>
-        <CheckBox Content="¿Mas uno?" x:Name="chkmasUno" Width="105" VerticalContentAlignment="Stretch" HorizontalAlignment="Center" VerticalAlignment="Center" Background="#FF056676" BorderBrush="#FF056676" IsChecked="False" FontSize="16" Height="28" Margin="723,181,222,246"/>
-        <CheckBox Content="Estado" Width="105" Name="chkestado" VerticalContentAlignment="Stretch" HorizontalAlignment="Center" VerticalAlignment="Center" Background="#FF056676" BorderBrush="#FF056676" IsChecked="True" FontSize="16" Height="28" Margin="723,214,222,213"/>
+        <Button x:Name="btnListaAgregar" IsEnabled="False" Content="Agregar material" HorizontalAlignment="Left"  VerticalAlignment="Top" Width="148" Background="#FF056676" FontFamily="Bahnschrift" BorderBrush="{x:Null}" Click="btnListaAgregar_Click" Margin="725,363,0,0"/>
+        <Button x:Name="btnListaEliminar" IsEnabled="false" Content="Eliminar material" HorizontalAlignment="Left"  VerticalAlignment="Top" Width="148" Background="#FF056676" FontFamily="Bahnschrift" BorderBrush="{x:Null}" Click="btnListaEliminar_Click" Margin="876,363,0,0" RenderTransformOrigin="0.685,0.594"/>
+        <Button x:Name="btnListaCancelar" IsEnabled="False" Content="Cancelar" HorizontalAlignment="Left"  VerticalAlignment="Top" Width="148" Background="#FF056676" FontFamily="Bahnschrift" BorderBrush="{x:Null}" Click="btnListaCancelar_Click" Margin="876,400,0,0" />
 
-        <Button x:Name="btnEditar" Content="Editar" HorizontalAlignment="Left" Margin="723,349,0,0" VerticalAlignment="Top" Width="120" Background="#FF056676" FontFamily="Bahnschrift" BorderBrush="{x:Null}" Click="btnEditar_Click"/>
-        <Button x:Name="btnCancelar" Content="Cancelar" HorizontalAlignment="Left" Margin="874,413,0,0" VerticalAlignment="Top" Width="120" Background="#FF056676" FontFamily="Bahnschrift" BorderBrush="{x:Null}" Click="btnCancelar_Click"/>
-        <Button x:Name="btnGuardar" Content="Guardar" HorizontalAlignment="Left" Margin="874,349,0,0" VerticalAlignment="Top" Width="120" RenderTransformOrigin="0.5,-2.204" Background="#FF056676" FontFamily="Bahnschrift" BorderBrush="{x:Null}" Click="btnGuardar_Click"/>
+        <Label Content="Tratamiento" HorizontalAlignment="Left" Margin="9,19,0,0" VerticalAlignment="Top" FontSize="20" Foreground="Black" Background="#7F056676" FontFamily="Bahnschrift"/>
+        <TextBox x:Name="txtTratamientoNombre" IsEnabled="False" materialDesign:HintAssist.Hint="Nombre de tratamiento" PreviewTextInput="PreviewTextInputSoloLetras" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontFamily="Bahnschrift" FontSize="14" Background="#7FFFFFFF" Margin="9,63,786,354" TextChanged="txtTratamientoNombre_TextChanged"/>
+        <TextBox x:Name="txtPrecioSugerido" IsEnabled="False" materialDesign:HintAssist.Hint="Precio sugerido" PreviewTextInput="PreviewTextInputSoloNumeros" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontFamily="Bahnschrift" FontSize="14" Background="#7FFFFFFF"  Margin="9,115,786,302"/>
+        <CheckBox Content="¿Mas uno?" IsEnabled="False" x:Name="chkmasUno" Width="105" VerticalContentAlignment="Stretch" HorizontalAlignment="Center" VerticalAlignment="Center" Background="#FF056676" BorderBrush="#FF056676" IsChecked="False" FontSize="16" Height="28" Margin="9,169,936,258"/>
+        <CheckBox Content="Estado" Width="105" IsEnabled="False" Name="chkestado" VerticalContentAlignment="Stretch" HorizontalAlignment="Center" VerticalAlignment="Center" Background="#FF056676" BorderBrush="#FF056676" IsChecked="True" FontSize="16" Height="28" Margin="9,202,936,225"/>
+
+        <Button x:Name="btnEditar" Content="Editar" HorizontalAlignment="Left" Margin="144,251,0,0" VerticalAlignment="Top" Width="120" Background="#FF056676" FontFamily="Bahnschrift" BorderBrush="{x:Null}" Click="btnEditar_Click"/>
+        <Button x:Name="btnCancelar" Content="Cancelar" IsEnabled="False" HorizontalAlignment="Left" Margin="144,297,0,0" VerticalAlignment="Top" Width="120" Background="#FF056676" FontFamily="Bahnschrift" BorderBrush="{x:Null}" Click="btnCancelar_Click"/>
+        <Button x:Name="btnGuardar" IsEnabled="False" Content="Guardar" HorizontalAlignment="Left" Margin="10,297,0,0" VerticalAlignment="Top" Width="120" RenderTransformOrigin="0.5,-2.204" Background="#FF056676" FontFamily="Bahnschrift" BorderBrush="{x:Null}" Click="btnGuardar_Click"/>
+        <Button x:Name="btnAgregar" Content="Agregar" HorizontalAlignment="Left" Margin="10,251,0,0" VerticalAlignment="Top" Width="120" RenderTransformOrigin="0.5,-2.204" Background="#FF056676" FontFamily="Bahnschrift" BorderBrush="{x:Null}" Click="btnAgregar_Click"/>
 
     </Grid>
 </UserControl>

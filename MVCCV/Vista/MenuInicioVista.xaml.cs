@@ -28,6 +28,7 @@ namespace SistemaDental.MVCCV.Vista
         private TratamientoVista VistaTratamiento = new TratamientoVista();
         private VerPacienVista VistaPacientes = new VerPacienVista();
         private MenuReporteVista VistaMenuReportes = new MenuReporteVista();
+        public Usuario user = new Usuario();
         public MenuInicioVista()
         {
             InitializeComponent();
@@ -41,8 +42,8 @@ namespace SistemaDental.MVCCV.Vista
 
         private void btnHelp_Click(object sender, RoutedEventArgs e)
         {
-            string url = "http://localhost/ProjectoClinicaDental/vistas/";
-            Process.Start(new ProcessStartInfo("cmd", $"/c start {url}") { CreateNoWindow = true });
+            string url = "http://sistemadentalhn.epizy.com/ProjectoClinicaDental/vistas/index.php";
+            System.Diagnostics.Process.Start(url);
         }
 
         private void btnTratamientos_Click(object sender, RoutedEventArgs e)
@@ -57,22 +58,26 @@ namespace SistemaDental.MVCCV.Vista
         }
         private void btnTratamientos_Click_1(object sender, RoutedEventArgs e)
         {
+            VistaTratamiento.user = user;
             CambioDeVista(VistaTratamiento);
         }
 
         private void btnCitas_Click_1(object sender, RoutedEventArgs e)
         {
             VistaAgendarCita.CambioDeVistaPrincipal += CambioDeVistaPrincipal;
+            VistaAgendarCita.user = user;
             CambioDeVista(VistaAgendarCita);
         }
 
         private void btnCompra_Click(object sender, RoutedEventArgs e)
         {
+            VistaCompras.user = user;
             CambioDeVista(VistaCompras);
         }
 
         private void btnPacientes_Click(object sender, RoutedEventArgs e)
         {
+            VistaPacientes.usuar = user;
             CambioDeVista(VistaPacientes);
         }
 
@@ -83,7 +88,9 @@ namespace SistemaDental.MVCCV.Vista
 
         private void btnReportes_Click(object sender, RoutedEventArgs e)
         {
+            
             CambioDeVista(VistaMenuReportes);
+            
         }
     }
 }

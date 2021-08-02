@@ -22,10 +22,12 @@ namespace SistemaDental.MVCCV.Vista
     public partial class VerPacienVista : UserControl
     {
 
+        public Usuario usuar= new Usuario();
         public ClasePaciente unPaciente = new ClasePaciente();
-
+        private ClaseProcedimiento Proc = new ClaseProcedimiento();
         private bool Admin;
         private String Nombree;
+        Validaciones validar = new Validaciones();
 
         /// <summary>
         /// Componentes que se inicializan junto al form
@@ -35,6 +37,7 @@ namespace SistemaDental.MVCCV.Vista
             InitializeComponent();
             MostrarPacientes();
             HabilitacionDeshabilitacion(true, true);
+            MostrarGenero();
             dtpFechaNac.BlackoutDates.Add(new CalendarDateRange(DateTime.Now.AddYears(-1), DateTime.MaxValue));
         }
 
@@ -44,6 +47,7 @@ namespace SistemaDental.MVCCV.Vista
             InitializeComponent();
             MostrarPacientes();
             HabilitacionDeshabilitacion(true, true);
+            MostrarGenero();
             Nombree = name;
             Admin = admin;
         }
@@ -59,11 +63,16 @@ namespace SistemaDental.MVCCV.Vista
         public void MostrarPacientes()
         {
             cmbPaciente.ItemsSource = unPaciente.MostrarPacientes();
-            cmbPaciente.SelectedValuePath = "Identidad";
+            cmbPaciente.SelectedValuePath = "Id_paciente";
             cmbPaciente.DisplayMemberPath = "Identidad";
         }
 
-
+        public void MostrarGenero()
+        {
+            cmbGenero.ItemsSource = Proc.MostrarGenero();
+            cmbGenero.SelectedValuePath = "Id";
+            cmbGenero.DisplayMemberPath = "NombreGenero";
+        }
 
         /// <summary>
         /// Funcion para habilitar o deshabilitar los botones, textbox y combobox del formulario
@@ -80,13 +89,7 @@ namespace SistemaDental.MVCCV.Vista
             txtcorreo.IsEnabled = habilitacionGrupoA;
             txtIdentidad.IsEnabled = habilitacionGrupoB;
             dtpFechaNac.IsEnabled = habilitacionGrupoA;
-            //cmbPaciente.IsEnabled = habilitacionGrupoA
-            /*Grupo de botontes
-            btnAgregarPaciente.IsEnabled = habilitacionGrupoB;
-            btnEditarPaciente.IsEnabled = habilitacionGrupoB;
-            btnGuardarPaciente.IsEnabled = habilitacionGrupoB;
-            btnCancelar.IsEnabled = habilitacionGrupoB;
-           */
+         
 
         }
 
@@ -101,6 +104,7 @@ namespace SistemaDental.MVCCV.Vista
             txtTelefono.Text = null;
             dtgHistorial.ItemsSource = null;
             cmbPaciente.SelectedValue = null;
+            cmbGenero.SelectedValue = null;
             dtpFechaNac.SelectedDate = null;
             txtcorreo.Text = null;
         }
@@ -110,10 +114,11 @@ namespace SistemaDental.MVCCV.Vista
             unPaciente.NombrePaciente = txtNombre.Text;
             unPaciente.ApellidoPaciente = txtApellido.Text;
             unPaciente.FechaNac = Convert.ToDateTime(dtpFechaNac.Text);
-            unPaciente.Genero = (cmbGenero.SelectedIndex + 1).ToString();
+     
             unPaciente.Telefono = txtTelefono.Text; 
             unPaciente.Identidad = txtIdentidad.Text;
             //unPaciente. = (DateTime)dtpFechaNac.SelectedDate;
+            unPaciente.Genero = Convert.ToInt32(cmbGenero.SelectedValue);
             unPaciente.Correo = txtcorreo.Text;
 
         }
@@ -165,6 +170,8 @@ namespace SistemaDental.MVCCV.Vista
                 btnEditarPaciente.IsEnabled = false;
                 btnGuardarPaciente.IsEnabled = false;
                 btnAgregarPaciente.IsEnabled = true;
+                btnRestablecerEstablecer.IsEnabled = false;
+                //btnEliminar.IsEnabled = false;
             }
 
             catch { MessageBox.Show("Ha ocurrido un error en el sistema."); }
@@ -178,110 +185,85 @@ namespace SistemaDental.MVCCV.Vista
         {
             // txtEdad.Visibility = Visibility;
             // dtpFechaNac.Visibility = Visibility.Hidden;
+          
             btnEditarPaciente.IsEnabled = false;
             btnAgregarPaciente.IsEnabled = true;
 
-            try
+            if (VerificarCampos())
             {
-                if (VerificarCampos())
+                try
                 {
+
                     obtenerValores();
                     unPaciente.ActualizarDatosPaciente(unPaciente);
+                    Proc.InsertarLog(usuar.Ide, "Se ha editado un Paciente");
                     MessageBox.Show("Éxito al editar los datos");
                     LimpiarPantalla();
                     MostrarPacientes();
                     HabilitacionDeshabilitacion(false, false);
                     btnAgregarPaciente.IsEnabled = false;
-                }
-                else throw new Exception();
 
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Ha ocurrido un error al guardar al paciente");
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Ha ocurrido un error al guardar al paciente");
+                }
             }
         }
 
         private void cmbPaciente_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            btnAgregarPaciente.IsEnabled = false;
-            btnEditarPaciente.IsEnabled = true;
-            HabilitacionDeshabilitacion(false, false);
             if (cmbPaciente.SelectedValue != null)
             {
-                unPaciente.Identidad = cmbPaciente.SelectedValue.ToString();
-                dtgHistorial.ItemsSource = unPaciente.MostrarHistorial(unPaciente);
+                btnAgregarPaciente.IsEnabled = false;
+            btnEditarPaciente.IsEnabled = true;
+            btnCancelar.IsEnabled = true;
+            btnRestablecerEstablecer.Content = ((ClasePaciente)cmbPaciente.SelectedItem).Estado ? "Eliminar" : "Reestablecer";
+                btnRestablecerEstablecer.IsEnabled = true;
+            HabilitacionDeshabilitacion(false, false);
+            dtgHistorial.IsEnabled = true;
+            unPaciente.Id_paciente= int.Parse(cmbPaciente.SelectedValue.ToString());
+            dtgHistorial.ItemsSource = unPaciente.MostrarHistorial(unPaciente);
             }
-
+         
+         
         }
-
-
 
 
         private bool VerificarCampos()
         {
-            bool band = true;
-            foreach (TextBox tb in FindVisualChildren<TextBox>(this))
+            if (!validar.VerificarCampos(this))
             {
-                switch (tb.Name)
-                {
-                    case "txtTelefono":
-                        {
-                            if (int.Parse(tb.Text) <= 100000000 && int.Parse(tb.Text) >= 99999999)
-                                band = false;
-                            break;
-                        }
+                MessageBox.Show("Por favor ingresa todos los valores que se le solicitan");
 
-                    /*    case "txtEdad":
-                            {
-                                if (int.Parse(tb.Text) <= 0 && int.Parse(tb.Text) >= 110)
-                                    band = false;
-                                break;
-                            }*/
-                    case "txtIdentidad":
-                        {
-                            if (tb.Text.CompareTo("0101192100000") < 0 && tb.Text.CompareTo("1811202199999") > 0)
-                                band = false;
-                            break;
-                        }
-                    case "PART_EditableTextBox":
-                        {
-                            break;
-                        }
-                    case "PART_TextBox":
-                        {
-                            break;
-                        }
-                    default:
-                        {
-                            if (tb.Text.Length == 0)
-                                band = false;
-                            break;
-                        }
-                }
-
-
+                
+                return false;
             }
-            return band;
-        }
-        public static IEnumerable<T> FindVisualChildren<T>(DependencyObject depObj) where T : DependencyObject
-        {
-            if (depObj != null)
+            if (!validar.VerificarIdentidad(txtIdentidad.Text))
             {
-                for (int i = 0; i < VisualTreeHelper.GetChildrenCount(depObj); i++)
-                {
-                    DependencyObject child = VisualTreeHelper.GetChild(depObj, i);
-                    if (child != null && child is T)
-                    {
-                        yield return (T)child;
-                    }
+                MessageBox.Show("El numero de identidad no tiene un formato correcto");
 
-                    foreach (T childOfChild in FindVisualChildren<T>(child))
-                    {
-                        yield return childOfChild;
-                    }
-                }
+               
+                return false;
             }
+            else if (!validar.VerificarNumero(txtTelefono.Text))
+            {
+                MessageBox.Show("El numero de telefono no tiene un formato correcto");
+
+             
+                return false;
+            }
+           
+            else if (!validar.ValidarEmail(txtcorreo.Text))
+            {
+
+                MessageBox.Show("Por favor, ingrese un correo valido");
+              
+                return false;
+            }
+
+            return true;
+
         }
 
         private void AddPaciente_Closed(object sender, EventArgs e)
@@ -290,58 +272,83 @@ namespace SistemaDental.MVCCV.Vista
 
         }
 
-        private void txtNombre_TextChanged(object sender, TextChangedEventArgs e)
+        private void PreviewTextInputOnlyNumbers(object sender, TextCompositionEventArgs e)
         {
-            Regex reg = new Regex("[0-9]");
-            bool b = reg.IsMatch(txtNombre.Text);
-            if (b == true)
-            {
-                MessageBox.Show("Ingrese solamente caracteres");
-                txtNombre.Text = "";
-            }
 
+
+            validar.SoloNumeros(e);
         }
 
-        private void AddPaciente_Loaded(object sender, RoutedEventArgs e)
+        private void PreviewTextInputOnlyLetters(object sender, TextCompositionEventArgs e)
         {
-            Regex reg = new Regex("[0-9]");
-            bool b = reg.IsMatch(txtNombre.Text);
-            if (b == false)
-            {
 
-            }
+
+            validar.SoloLetras(e);
+
         }
+   
+
 
         private void dtgHistorial_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
 
         }
 
-        private void txtcorreo_TextChanged(object sender, TextChangedEventArgs e)
-        {
-
-        }
-
+        
         private void btnAgregarPaciente_Click(object sender, RoutedEventArgs e)
         {
-            try
+           
+            if (VerificarCampos())
             {
-                if (VerificarCampos())
+                try
                 {
+
                     obtenerValores();
                     unPaciente.AgregarPaciente(unPaciente);
+                    Proc.InsertarLog(usuar.Ide, "Se agregó un nuevo Paciente");
                     MessageBox.Show("Éxito al agregar los datos");
                     LimpiarPantalla();
                     MostrarPacientes();
                     HabilitacionDeshabilitacion(false, true);
 
-                }
-                else throw new Exception();
 
+
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Ha ocurrido un error al guardar al paciente");
+                }
             }
-            catch (Exception ex)
+        }
+
+        private void btnEliminar_Click(object sender, RoutedEventArgs e)
+        {
+            if (cmbPaciente.SelectedItem!=null && MessageBox.Show("Está seguro de realizar esta accion?","Aviso",MessageBoxButton.YesNoCancel)== MessageBoxResult.Yes)
             {
-                MessageBox.Show("Ha ocurrido un error al guardar al paciente");
+                ClasePaciente paciente = (ClasePaciente)cmbPaciente.SelectedItem;
+                paciente.Estado = btnRestablecerEstablecer.Content.Equals("Reestablecer")? true:false;
+                paciente.ActualizarDatosPaciente(paciente);
+             
+                LimpiarPantalla();
+                MostrarPacientes();
+                HabilitacionDeshabilitacion(false, true);
+                if (paciente.Estado)
+                {
+                Proc.InsertarLog(usuar.Ide, "Se reestableció un paciente");
+                    MessageBox.Show("Se ha reestablecido el paciente exitozamente");
+                }
+
+                else
+                {
+
+                 Proc.InsertarLog(usuar.Ide, "Se eliminó un paciente");
+                 MessageBox.Show("Se ha eliminado el paciente exitosamente");
+                }
+                btnEditarPaciente.IsEnabled = false;
+                btnGuardarPaciente.IsEnabled = false;
+                btnAgregarPaciente.IsEnabled = true;
+                btnRestablecerEstablecer.IsEnabled = false;
+                btnCancelar.IsEnabled = false;
             }
         }
     }
