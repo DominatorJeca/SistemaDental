@@ -89,7 +89,7 @@ namespace SistemaDental.MVCCV.Vista
             cmbPaciente.DisplayMemberPath = "Nombre_Id_paciente";
             cmbPaciente.SelectedValuePath = "IdPacientes";
             cmbEmpleado.ItemsSource = citas.MostrarEmpleado();
-            cmbEmpleado.DisplayMemberPath = "NombreDoctor";
+            cmbEmpleado.DisplayMemberPath = "nombrecompoletoempleado";
             cmbEmpleado.SelectedValuePath = "IdEmpleado";
             cmbTratamiento.ItemsSource = citas.MostrarTratamiento();
             cmbTratamiento.DisplayMemberPath = "NombreTratamiento";
