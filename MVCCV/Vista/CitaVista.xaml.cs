@@ -79,7 +79,7 @@ namespace SistemaDental.MVCCV.Vista
             foreach (ClaseCitas inv in tratamientos)
                 if (inv.IdTratamiento == prod.IdTratamiento)
                 {
-                    MessageBox.Show("Este material ya existe eliminelo e ingreselo nuevamente");
+                    MessageBox.Show("Este Tratamiento ya existe eliminelo e ingreselo nuevamente");
                     return;
                 }
             tratamientos.Add(prod);

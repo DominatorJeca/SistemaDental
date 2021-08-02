@@ -1700,7 +1700,7 @@ namespace SistemaDental
 
             try
             {
-                SqlCommand command = new SqlCommand("sp_Empleados_Mostrar", sqlConnection);
+                SqlCommand command = new SqlCommand("sp_Empleados_Mostrar_activos1", sqlConnection);
                 command.CommandType = CommandType.StoredProcedure;
                 SqlDataReader reader = command.ExecuteReader();
 
@@ -2303,7 +2303,7 @@ namespace SistemaDental
             {
 
 
-                SqlCommand command = new SqlCommand("sp_Pacientes_Mostrar", sqlConnection);
+                SqlCommand command = new SqlCommand("sp_pacientes_mostrar_activos", sqlConnection);
                 command.CommandType = CommandType.StoredProcedure;
                 reader = command.ExecuteReader();
 
