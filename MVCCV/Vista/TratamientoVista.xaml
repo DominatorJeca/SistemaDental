@@ -17,7 +17,7 @@
         </Grid.Background>
 
         <Label Content="Lista de tratamientos" HorizontalAlignment="Left" Margin="317,209,0,0" VerticalAlignment="Top" FontSize="18" Foreground="Black" Background="#7F056676" FontFamily="Bahnschrift"/>
-        <DataGrid SelectionMode="Single" IsEnabled="False" HorizontalAlignment="Left" LostFocus="dg_tratamientos_LostFocus" Height="181" Margin="317,251,0,0" VerticalAlignment="Top" Width="396" Background="#FF056676" Foreground="#DDFFFFFF" FontFamily="Bahnschrift" x:Name="dg_tratamientos" AutoGenerateColumns="False" IsReadOnly="True" SelectionChanged="dg_tratamientos_SelectionChanged">
+        <DataGrid SelectionMode="Single" IsEnabled="True" HorizontalAlignment="Left" LostFocus="dg_tratamientos_LostFocus" Height="181" Margin="317,251,0,0" VerticalAlignment="Top" Width="396" Background="#FF056676" Foreground="#DDFFFFFF" FontFamily="Bahnschrift" x:Name="dg_tratamientos" AutoGenerateColumns="False" IsReadOnly="True" SelectionChanged="dg_tratamientos_SelectionChanged">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Nombre de tratamiento" Binding="{Binding Nombre}" Width="170"></DataGridTextColumn>
                 <DataGridTextColumn Header="Precio sugerido" Binding="{Binding PrecioSugerido}" Width="130"></DataGridTextColumn>
@@ -41,7 +41,7 @@
             </DataGrid.Columns>
         </DataGrid>
 
-        <TextBox x:Name="txtCantidad" IsEnabled="False" MaxLength="5" PreviewTextInput="PreviewTextInputSoloNumeros" materialDesign:HintAssist.Hint="Cantidad" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontFamily="Bahnschrift" FontSize="14" Background="#7FFFFFFF" Margin="725,307,26,112"/>
+        <TextBox x:Name="txtCantidad" IsEnabled="False" MaxLength="2" PreviewTextInput="PreviewTextInputSoloNumeros" materialDesign:HintAssist.Hint="Cantidad" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontFamily="Bahnschrift" FontSize="14" Background="#7FFFFFFF" Margin="725,307,26,112"/>
 
         <Label Content="Materiales del tratamiento" HorizontalAlignment="Left" Margin="725,10,0,0" VerticalAlignment="Top" FontSize="18" Foreground="Black" Background="#7F056676" FontFamily="Bahnschrift"/>
 
