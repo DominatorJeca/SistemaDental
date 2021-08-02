@@ -1706,7 +1706,7 @@ namespace SistemaDental
 
                 while (reader.Read())
                 {
-                    citas.Add(new ClaseCitas { IdEmpleado = reader["EmpleadoID"].ToString(), NombreDoctor = reader["nombre"].ToString() });
+                    citas.Add(new ClaseCitas { IdEmpleado = reader["EmpleadoID"].ToString(), NombreDoctor = reader["nombre"].ToString() , nombrecompoletoempleado = reader["nombre"].ToString() + " " + reader["Apellido"].ToString() });
                 }
                 return citas;
             }

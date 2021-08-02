@@ -53,12 +53,12 @@
                 </StackPanel>
                 <StackPanel Orientation="Horizontal" Height="40" HorizontalAlignment="Left" Width="405">
                     <Label Content="Fecha de cita" Grid.Column="1"  VerticalAlignment="Top"  FontSize="15" Foreground="Black" Background="White" FontFamily="Bahnschrift" Height="40" Width="98"/>
-                    <DatePicker x:Name="cdCitas" IsEnabled="False" HorizontalAlignment="Left"  VerticalAlignment="Top" Height="25" Width="307"/>
+                    <DatePicker x:Name="cdCitas" IsEnabled="False" HorizontalAlignment="Left"  VerticalAlignment="Top" Height="25" Width="306" />
                 </StackPanel>
             </StackPanel>
             <StackPanel Grid.Row="1" Grid.Column="3" Orientation="Horizontal" Height="40" HorizontalAlignment="Left" Width="410" Margin="5,118,0,247">
                 <Label Content="Hora de cita" VerticalAlignment="Top"  FontSize="15" Foreground="Black" Background="White" FontFamily="Bahnschrift" Height="40" Grid.Column="1" Width="98" />
-                <materialDesign:TimePicker IsEnabled="False" SelectedTimeFormat="Short" x:Name="ctTiempo" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Top" Width="312" Height="25" SelectedTimeChanged="ctTiempo_SelectedTimeChanged_1"  Is24Hours="true"  />
+                <materialDesign:TimePicker IsEnabled="False" SelectedTimeFormat="Short" x:Name="ctTiempo" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Top" Width="306" Height="25" SelectedTimeChanged="ctTiempo_SelectedTimeChanged_1"  Is24Hours="true"  />
 
             </StackPanel>
             <StackPanel Orientation="Horizontal" Grid.Column="1" Margin="69,352,0,21" Grid.Row="1">
@@ -73,7 +73,7 @@
             </StackPanel>
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="5,158,10,207" Width="410" Grid.Column="3" Grid.Row="1">
                 <Label Content="Tratamiento" HorizontalAlignment="Center"  VerticalAlignment="Center"  FontSize="15" Foreground="Black" Background="White" FontFamily="Bahnschrift" Width="98" Height="40" />
-                <ComboBox x:Name="cmbTratamiento" IsEnabled="False" HorizontalAlignment="Left" VerticalAlignment="Top" Width="313" Grid.Column="1" SelectedValue="{Binding SelectedItem.nombreTramientoindividual, ElementName=dtg_Citas}"/>
+                <ComboBox x:Name="cmbTratamiento" IsEnabled="False" HorizontalAlignment="Left" VerticalAlignment="Top" Width="306" Grid.Column="1" SelectedValue="{Binding SelectedItem.nombreTramientoindividual, ElementName=dtg_Citas}"/>
 
             </StackPanel>
             <Label Content="Lista de tratamientos" HorizontalAlignment="Left" VerticalAlignment="Top" Foreground="Black" Background="#7F056676" FontFamily="Bahnschrift" Grid.Column="3" Margin="5,211,0,0" Grid.Row="1" FontSize="14" RenderTransformOrigin="0.5,0.5" Height="25" Width="142" >
@@ -111,10 +111,10 @@
                     <DataGridTextColumn Binding="{Binding Preciototal}" ClipboardContentBinding="{x:Null}" Header="Precio" CanUserReorder="False"/>
                 </DataGrid.Columns>
             </DataGrid>
-            <StackPanel Orientation="Horizontal" VerticalAlignment="Bottom" HorizontalAlignment="Right" Height="33" Grid.Column="3" Margin="0,0,10,372" Width="410" Grid.Row="1">
+            <StackPanel Orientation="Horizontal" VerticalAlignment="Bottom" HorizontalAlignment="Right" Height="33" Grid.Column="3" Margin="0,0,10,372" Width="410" Grid.Row="1" >
                 <Label Content="Paciente" HorizontalAlignment="Left"  VerticalAlignment="Top"  FontSize="15" Foreground="Black" Background="White" FontFamily="Bahnschrift" Grid.Column="1" Width="96"/>
 
-                <ComboBox x:Name="cmbPaciente" IsEnabled="False" HorizontalAlignment="Left" VerticalAlignment="Top" Width="316" RenderTransformOrigin="0.603,0.358" Grid.Column="1" Text="{Binding SelectedItem.IdPacientes}"   />
+                <ComboBox x:Name="cmbPaciente" IsEnabled="False" HorizontalAlignment="Left" VerticalAlignment="Top" Width="307" RenderTransformOrigin="0.603,0.358" Grid.Column="1" Text="{Binding SelectedItem.IdPacientes}"   />
             </StackPanel>
             <StackPanel Orientation="Horizontal" VerticalAlignment="Bottom" HorizontalAlignment="Center" Height="33" Width="424" Margin="0,0,126,334" Grid.Column="1" Grid.Row="1">
                 <Label Content=" Busqueda Paciente" HorizontalAlignment="Center"  VerticalAlignment="Top"  FontSize="15" Foreground="Black" Background="White" FontFamily="Bahnschrift" Grid.Column="1" Width="144"/>
