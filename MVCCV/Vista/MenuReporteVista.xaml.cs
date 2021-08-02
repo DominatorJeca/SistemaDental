@@ -28,6 +28,7 @@ namespace SistemaDental.MVCCV.Vista
         int reporteseleccionado = 0;
         DataTable dt;
         ReportDataSource ds;
+        public Usuario user;
         public MenuReporteVista()
         {
             InitializeComponent();
@@ -267,6 +268,22 @@ namespace SistemaDental.MVCCV.Vista
             reporte.LocalReport.DataSources.Add(ds);
             reporte.LocalReport.ReportEmbeddedResource = "SistemaDental.ReportLogTodos.rdlc";
             reporte.RefreshReport();
+        }
+
+        private void UserControl_Loaded(object sender, RoutedEventArgs e)
+        {
+            permisos();
+        }
+
+        private void permisos()
+        {
+            if (!user.Administrador)
+            {
+                btnreporte7.IsEnabled = false;
+                btnreporte8.IsEnabled = false;
+                btnreporte6.IsEnabled = false;
+
+            }
         }
     }
 }

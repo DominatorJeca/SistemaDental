@@ -8,7 +8,7 @@
              xmlns:viewModel="clr-namespace:SistemaDental.MVCCV.VistaControlador"
              xmlns:otros="clr-namespace:SistemaDental"
              mc:Ignorable="d"
-             d:DesignHeight="455" d:DesignWidth="1050"  >
+             d:DesignHeight="455" d:DesignWidth="1050" Loaded="UserControl_Loaded" >
 
 
     <Grid>

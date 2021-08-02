@@ -274,6 +274,7 @@ namespace SistemaDental
                         usuario.Administrador = Convert.ToBoolean(reader["administrador"]);
                         usuario.Ide = Convert.ToInt32(reader[0].ToString());
                         usuario.usuario = Convert.ToString(reader["usuario"]);
+                        usuario.PuestoNombre = Convert.ToString(reader["NombrePuesto"]);
                     }
                 }
 
@@ -493,7 +494,8 @@ namespace SistemaDental
             }
             catch (Exception E)
             {
-                throw E;
+                MessageBox.Show("No hay materiales necesarios para realizar este tratamiento");
+
             }
             finally
             {

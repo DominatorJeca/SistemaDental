@@ -9,7 +9,7 @@
              xmlns:windowsUI="using:m"
 
     mc:Ignorable="d"
-             d:DesignHeight="455" d:DesignWidth="1050" >
+             d:DesignHeight="455" d:DesignWidth="1050" Loaded="UserControl_Loaded">
     <materialDesign:DrawerHost Name="MenuNavegacion" OpenMode="Model" ForceCursor="True" MouseDown="MenuNavegacion_MouseDown" >
         <materialDesign:DrawerHost.TopDrawerContent>
             <StackPanel >

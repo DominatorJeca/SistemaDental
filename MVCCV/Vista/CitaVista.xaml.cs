@@ -61,6 +61,14 @@ namespace SistemaDental.MVCCV.Vista
             if (CambioDeVistaPrincipal != null)
                 CambioDeVistaPrincipal(o, null);
         }
+
+       private void permisos()
+        {
+            if (user.PuestoNombre == "Secretario" && !user.Administrador)
+            {
+                btnRealizarCita.IsEnabled = false;
+            }
+        }
         private void Agregar_Tratamientos_Click(object sender, RoutedEventArgs e)
         {
             ClaseCitas prod = new ClaseCitas();
@@ -769,8 +777,9 @@ namespace SistemaDental.MVCCV.Vista
 
         }
 
-
-
-
+        private void UserControl_Loaded(object sender, RoutedEventArgs e)
+        {
+            permisos();
+        }
     }
 }

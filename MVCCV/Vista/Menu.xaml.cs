@@ -25,7 +25,7 @@ namespace SistemaDental
        //Variables miembros
         private bool Admin;
         private String Nombree;
-        private string usuario;
+      
         private Button btnActivo=null;
         private ClaseProcedimiento proced = new ClaseProcedimiento();
 
@@ -45,17 +45,17 @@ namespace SistemaDental
             VistaAjuste.CambioDeVistaPrincipal += CambiarVista;
         }
        
-        public Menu(bool admin,string name,int id, string nombreusuario)
+        public Menu(Usuario user)
         {
 
             InitializeComponent();
             //lblUsuario.Content = name;
-            PermisosAdministrador(admin);
-            Nombree = name;
-            Admin = admin;
-            usuario = nombreusuario;
-            turno.UsuarioID = id;
-            user.Ide = id;
+            this.user = user;
+            PermisosAdministrador(this.user.Administrador);
+            Nombree = this.user.Nombre;
+            Admin = this.user.Administrador;
+           
+            turno.UsuarioID = this.user.Ide;
             turno.ComienzoTurno = DateTime.Now;
             proced.AgregarTurno(turno);
             VistaMenuInicio.user = user;
@@ -64,13 +64,21 @@ namespace SistemaDental
             VistaMenuInicio.CambioDeVistaPrincipal += CambiarVista;
             VistaAjuste.CambioDeVistaPrincipal += CambiarVista;
             ContenedorHijos.Content = VistaMenuInicio;
-            VistaUsuarioIngresado = new DatosDeUsuario(usuario,id);
-
+            VistaUsuarioIngresado = new DatosDeUsuario(this.user.usuario, this.user.Ide);
+            permisosPuesto();
             CambiarBtnActivo(btnInicio);
         }
         private void CambiarVista(object o,EventArgs e)
         {
             ContenedorHijos.Content = o;
+        }
+        private void permisosPuesto()
+        {
+            if (user.PuestoNombre== "Asistente" && !user.Administrador)
+            {
+                btnCaja.IsEnabled = false;
+            }
+
         }
 
         /// <summary>
