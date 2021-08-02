@@ -21,8 +21,8 @@ namespace SistemaDental.MVCCV.Vista
     /// </summary>
     public partial class VerPacienVista : UserControl
     {
-
-        public Usuario usuar= new Usuario();
+        public bool guardaropc;
+        public Usuario usuar = new Usuario();
         public ClasePaciente unPaciente = new ClasePaciente();
         private ClaseProcedimiento Proc = new ClaseProcedimiento();
         private bool Admin;
@@ -36,7 +36,7 @@ namespace SistemaDental.MVCCV.Vista
         {
             InitializeComponent();
             MostrarPacientes();
-            HabilitacionDeshabilitacion(true, true);
+            HabilitacionDeshabilitacion(false, false);
             MostrarGenero();
             dtpFechaNac.BlackoutDates.Add(new CalendarDateRange(DateTime.Now.AddYears(-1), DateTime.MaxValue));
         }
@@ -46,7 +46,7 @@ namespace SistemaDental.MVCCV.Vista
 
             InitializeComponent();
             MostrarPacientes();
-            HabilitacionDeshabilitacion(true, true);
+            HabilitacionDeshabilitacion(false, false);
             MostrarGenero();
             Nombree = name;
             Admin = admin;
@@ -81,15 +81,15 @@ namespace SistemaDental.MVCCV.Vista
 
         public void HabilitacionDeshabilitacion(bool habilitacionGrupoA, bool habilitacionGrupoB)
         {
-           //Grupo de datos
+            //Grupo de datos
             txtNombre.IsEnabled = habilitacionGrupoA;
             txtApellido.IsEnabled = habilitacionGrupoA;
             txtTelefono.IsEnabled = habilitacionGrupoA;
             cmbGenero.IsEnabled = habilitacionGrupoA;
             txtcorreo.IsEnabled = habilitacionGrupoA;
             txtIdentidad.IsEnabled = habilitacionGrupoB;
-            dtpFechaNac.IsEnabled = habilitacionGrupoA;
-         
+            dtpFechaNac.IsEnabled = habilitacionGrupoB;
+
 
         }
 
@@ -114,8 +114,8 @@ namespace SistemaDental.MVCCV.Vista
             unPaciente.NombrePaciente = txtNombre.Text;
             unPaciente.ApellidoPaciente = txtApellido.Text;
             unPaciente.FechaNac = Convert.ToDateTime(dtpFechaNac.Text);
-     
-            unPaciente.Telefono = txtTelefono.Text; 
+
+            unPaciente.Telefono = txtTelefono.Text;
             unPaciente.Identidad = txtIdentidad.Text;
             //unPaciente. = (DateTime)dtpFechaNac.SelectedDate;
             unPaciente.Genero = Convert.ToInt32(cmbGenero.SelectedValue);
@@ -130,8 +130,7 @@ namespace SistemaDental.MVCCV.Vista
         {
             // txtEdad.Visibility = Visibility.Hidden;
             //dtpFechaNac.Visibility = Visibility;
-            btnGuardarPaciente.IsEnabled = true;
-
+         
             try
             {
                 //Mensaje de advertencia si no selecciona ningun elemento
@@ -143,12 +142,15 @@ namespace SistemaDental.MVCCV.Vista
                 {
                     //Deshabilita el combobox paciente, el boton editar y ver
                     //Habilita los demás botones y textbox para poder editar los datos
-                    HabilitacionDeshabilitacion(true, false);
+                    guardaropc = false;
+                    btnAgregarPaciente.IsEnabled = false;
+                    btnRestablecerEstablecer.IsEnabled = false;
+                    btnGuardarPaciente.IsEnabled = false;
+                    btnCancelar.IsEnabled = true;
                     btnEditarPaciente.IsEnabled = false;
-
-
+                    
+                    HabilitacionDeshabilitacion(true, false);
                 }
-
             }
             catch
             { MessageBox.Show("Ha ocurrido un error en el sistema."); }
@@ -165,12 +167,13 @@ namespace SistemaDental.MVCCV.Vista
                 //llama la funcion para deshabilitar los textbox y botones
                 //llama la funcion para limpiar pantalla
                 LimpiarPantalla();
-                HabilitacionDeshabilitacion(true, true);
+                HabilitacionDeshabilitacion(false, false);
                 MessageBox.Show("Se han cancelado los cambios.");
                 btnEditarPaciente.IsEnabled = false;
                 btnGuardarPaciente.IsEnabled = false;
                 btnAgregarPaciente.IsEnabled = true;
                 btnRestablecerEstablecer.IsEnabled = false;
+                cmbPaciente.IsEnabled = true;
                 //btnEliminar.IsEnabled = false;
             }
 
@@ -185,48 +188,79 @@ namespace SistemaDental.MVCCV.Vista
         {
             // txtEdad.Visibility = Visibility;
             // dtpFechaNac.Visibility = Visibility.Hidden;
-          
-            btnEditarPaciente.IsEnabled = false;
-            btnAgregarPaciente.IsEnabled = true;
 
-            if (VerificarCampos())
+
+            if (guardaropc == false)
             {
-                try
+
+                if (VerificarCampos())
                 {
+                    try
+                    {
 
-                    obtenerValores();
-                    unPaciente.ActualizarDatosPaciente(unPaciente);
-                    Proc.InsertarLog(usuar.Ide, "Se ha editado un Paciente");
-                    MessageBox.Show("Éxito al editar los datos");
-                    LimpiarPantalla();
-                    MostrarPacientes();
-                    HabilitacionDeshabilitacion(false, false);
-                    btnAgregarPaciente.IsEnabled = false;
+                        // obtenerValores();
+                        // unPaciente.ActualizarDatosPaciente(unPaciente);
+                        // Proc.InsertarLog(usuar.Ide, "Se ha editado un Paciente");
+                        MessageBox.Show("Éxito al editar los datos");
+                        LimpiarPantalla();
+                        MostrarPacientes();
+                        HabilitacionDeshabilitacion(false, false);
+                        btnAgregarPaciente.IsEnabled = false;
+                        btnEditarPaciente.IsEnabled = false;
+                        btnAgregarPaciente.IsEnabled = true;
 
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show("Ha ocurrido un error al guardar al paciente");
+                    }
                 }
-                catch (Exception ex)
+            }
+            else
+            {
+                if (VerificarCampos())
                 {
-                    MessageBox.Show("Ha ocurrido un error al guardar al paciente");
+                    try
+                    {
+
+                        obtenerValores();
+                        unPaciente.AgregarPaciente(unPaciente);
+                        Proc.InsertarLog(usuar.Ide, "Se agregó un nuevo Paciente");
+                        MessageBox.Show("Éxito al agregar los datos");
+                        LimpiarPantalla();
+                        MostrarPacientes();
+                        HabilitacionDeshabilitacion(false, true);
+                        btnAgregarPaciente.IsEnabled = false;
+                        btnEditarPaciente.IsEnabled = false;
+                        btnAgregarPaciente.IsEnabled = true;
+
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show("Ha ocurrido un error al guardar al paciente");
+                    }
                 }
             }
         }
+    
+
 
         private void cmbPaciente_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if (cmbPaciente.SelectedValue != null)
             {
                 btnAgregarPaciente.IsEnabled = false;
-            btnEditarPaciente.IsEnabled = true;
-            btnCancelar.IsEnabled = true;
-            btnRestablecerEstablecer.Content = ((ClasePaciente)cmbPaciente.SelectedItem).Estado ? "Eliminar" : "Reestablecer";
+                btnEditarPaciente.IsEnabled = true;
+                btnCancelar.IsEnabled = true;
+                btnRestablecerEstablecer.Content = ((ClasePaciente)cmbPaciente.SelectedItem).Estado ? "Eliminar" : "Reestablecer";
                 btnRestablecerEstablecer.IsEnabled = true;
-            HabilitacionDeshabilitacion(false, false);
-            dtgHistorial.IsEnabled = true;
-            unPaciente.Id_paciente= int.Parse(cmbPaciente.SelectedValue.ToString());
-            dtgHistorial.ItemsSource = unPaciente.MostrarHistorial(unPaciente);
+                HabilitacionDeshabilitacion(false, false);
+                dtgHistorial.IsEnabled = true;
+                unPaciente.Id_paciente = int.Parse(cmbPaciente.SelectedValue.ToString());
+                dtgHistorial.ItemsSource = unPaciente.MostrarHistorial(unPaciente);
             }
-         
-         
+
+
         }
 
 
@@ -236,29 +270,29 @@ namespace SistemaDental.MVCCV.Vista
             {
                 MessageBox.Show("Por favor ingresa todos los valores que se le solicitan");
 
-                
+
                 return false;
             }
             if (!validar.VerificarIdentidad(txtIdentidad.Text))
             {
                 MessageBox.Show("El numero de identidad no tiene un formato correcto");
 
-               
+
                 return false;
             }
             else if (!validar.VerificarNumero(txtTelefono.Text))
             {
                 MessageBox.Show("El numero de telefono no tiene un formato correcto");
 
-             
+
                 return false;
             }
-           
+
             else if (!validar.ValidarEmail(txtcorreo.Text))
             {
 
                 MessageBox.Show("Por favor, ingrese un correo valido");
-              
+
                 return false;
             }
 
@@ -286,7 +320,7 @@ namespace SistemaDental.MVCCV.Vista
             validar.SoloLetras(e);
 
         }
-   
+
 
 
         private void dtgHistorial_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -294,32 +328,34 @@ namespace SistemaDental.MVCCV.Vista
 
         }
 
-        
+
         private void btnAgregarPaciente_Click(object sender, RoutedEventArgs e)
         {
-           
-            if (VerificarCampos())
+        
+            if (cmbPaciente.SelectedItem != null)
             {
-                try
-                {
-
-                    obtenerValores();
-                    unPaciente.AgregarPaciente(unPaciente);
-                    Proc.InsertarLog(usuar.Ide, "Se agregó un nuevo Paciente");
-                    MessageBox.Show("Éxito al agregar los datos");
-                    LimpiarPantalla();
-                    MostrarPacientes();
-                    HabilitacionDeshabilitacion(false, true);
-
-
-
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show("Ha ocurrido un error al guardar al paciente");
-                }
+                MessageBox.Show("Por favor presione el boton cancelar");
             }
-        }
+            else
+            {
+                guardaropc = true;
+                btnAgregarPaciente.IsEnabled = false;
+                HabilitacionDeshabilitacion(true, true);
+                cmbPaciente.IsEnabled = false;
+                dtpFechaNac.IsEnabled = true;
+                btnEditarPaciente.IsEnabled = false;
+                btnGuardarPaciente.IsEnabled = true;
+                btnCancelar.IsEnabled = true;
+                btnRestablecerEstablecer.IsEnabled = false;
+            }
+
+    }
+
+
+
+
+
+        //    
 
         private void btnEliminar_Click(object sender, RoutedEventArgs e)
         {
@@ -331,7 +367,7 @@ namespace SistemaDental.MVCCV.Vista
              
                 LimpiarPantalla();
                 MostrarPacientes();
-                HabilitacionDeshabilitacion(false, true);
+                HabilitacionDeshabilitacion(false, false);
                 if (paciente.Estado)
                 {
                 Proc.InsertarLog(usuar.Ide, "Se reestableció un paciente");
@@ -348,7 +384,8 @@ namespace SistemaDental.MVCCV.Vista
                 btnGuardarPaciente.IsEnabled = false;
                 btnAgregarPaciente.IsEnabled = true;
                 btnRestablecerEstablecer.IsEnabled = false;
-                btnCancelar.IsEnabled = false;
+                btnCancelar.IsEnabled = true;
+                cmbPaciente.IsEnabled = true;
             }
         }
     }
