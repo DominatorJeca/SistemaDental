@@ -114,15 +114,23 @@ namespace SistemaDental.MVCCV.Vista
                 }
                 else
                 {
-                    ActualizarTratamiento();
-                    proc.InsertarLog(user.Ide, "Se modifico el tratamiento [" + trat.TratamientoNombre + "]");
-                    MessageBox.Show("Datos modificados con exito");
+                    if (VerificarNombreTratamiento())
+                    {
+                        ActualizarTratamiento();
+                        proc.InsertarLog(user.Ide, "Se modifico el tratamiento [" + trat.TratamientoNombre + "]");
+                        MessageBox.Show("Datos modificados con exito");
 
-                    CleanerLista();
-                    Cleaner();
-                    ObtenerTratamientos();
-                    ObtenerMateriales();
-                }          
+                        CleanerLista();
+                        Cleaner();
+                        ObtenerTratamientos();
+                        ObtenerMateriales();
+                    }
+                    else
+                    {
+                        MessageBox.Show("El nombre del tratamiento ya existe en el sistema. Por favor, ingrese otro nombre para el tratamiento.");
+
+                    }
+                    }          
             }
         }
 
