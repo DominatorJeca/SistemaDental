@@ -6,7 +6,7 @@
              xmlns:local="clr-namespace:SistemaDental.MVCCV.Vista"
              mc:Ignorable="d" 
               xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" Height="471" Width="893">
-    <Grid>
+    <Grid Loaded="Grid_Loaded_1">
         <Grid.Background>
             <ImageBrush ImageSource="/imagenes/TeethPattern.jpg" Stretch="UniformToFill"/>
         </Grid.Background>

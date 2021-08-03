@@ -136,7 +136,7 @@ namespace SistemaDental.MVCCV.Vista
                 if (user !=null)
                 {
                     MessageBox.Show("Su contraseña ha sido cambiada exitosamente");
-                    Menu menu = new Menu(user.Administrador, user.Nombre, user.Ide, user.usuario);
+                    Menu menu = new Menu(user);
                     this.Close();
                     menu.Show();
 

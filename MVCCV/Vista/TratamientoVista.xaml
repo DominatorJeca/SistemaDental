@@ -17,7 +17,7 @@
         </Grid.Background>
 
         <Label Content="Lista de tratamientos" HorizontalAlignment="Left" Margin="317,209,0,0" VerticalAlignment="Top" FontSize="18" Foreground="Black" Background="#7F056676" FontFamily="Bahnschrift"/>
-        <DataGrid SelectionMode="Single" IsEnabled="False" HorizontalAlignment="Left" LostFocus="dg_tratamientos_LostFocus" Height="181" Margin="317,251,0,0" VerticalAlignment="Top" Width="396" Background="#FF056676" Foreground="#DDFFFFFF" FontFamily="Bahnschrift" x:Name="dg_tratamientos" AutoGenerateColumns="False" IsReadOnly="True" SelectionChanged="dg_tratamientos_SelectionChanged">
+        <DataGrid SelectionMode="Single" IsEnabled="True" HorizontalAlignment="Left" LostFocus="dg_tratamientos_LostFocus" Height="181" Margin="317,251,0,0" VerticalAlignment="Top" Width="396" Background="#FF056676" Foreground="#DDFFFFFF" FontFamily="Bahnschrift" x:Name="dg_tratamientos" AutoGenerateColumns="False" IsReadOnly="True" SelectionChanged="dg_tratamientos_SelectionChanged">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Nombre de tratamiento" Binding="{Binding Nombre}" Width="170"></DataGridTextColumn>
                 <DataGridTextColumn Header="Precio sugerido" Binding="{Binding PrecioSugerido}" Width="130"></DataGridTextColumn>
@@ -41,7 +41,7 @@
             </DataGrid.Columns>
         </DataGrid>
 
-        <TextBox x:Name="txtCantidad" IsEnabled="False" MaxLength="5" PreviewTextInput="PreviewTextInputSoloNumeros" materialDesign:HintAssist.Hint="Cantidad" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontFamily="Bahnschrift" FontSize="14" Background="#7FFFFFFF" Margin="725,307,26,112"/>
+        <TextBox x:Name="txtCantidad" IsEnabled="False" MaxLength="2" PreviewTextInput="PreviewTextInputSoloNumeros" materialDesign:HintAssist.Hint="Cantidad" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontFamily="Bahnschrift" FontSize="14" Background="#7FFFFFFF" Margin="725,307,26,112"/>
 
         <Label Content="Materiales del tratamiento" HorizontalAlignment="Left" Margin="725,10,0,0" VerticalAlignment="Top" FontSize="18" Foreground="Black" Background="#7F056676" FontFamily="Bahnschrift"/>
 
@@ -53,7 +53,7 @@
 
         <Label Content="Tratamiento" HorizontalAlignment="Left" Margin="9,19,0,0" VerticalAlignment="Top" FontSize="20" Foreground="Black" Background="#7F056676" FontFamily="Bahnschrift"/>
         <TextBox x:Name="txtTratamientoNombre" IsEnabled="False" materialDesign:HintAssist.Hint="Nombre de tratamiento" PreviewTextInput="PreviewTextInputSoloLetras" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontFamily="Bahnschrift" FontSize="14" Background="#7FFFFFFF" Margin="9,63,786,354" TextChanged="txtTratamientoNombre_TextChanged"/>
-        <TextBox x:Name="txtPrecioSugerido" MaxLength="5" IsEnabled="False" materialDesign:HintAssist.Hint="Precio sugerido" PreviewTextInput="PreviewTextInputSoloNumeros" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontFamily="Bahnschrift" FontSize="14" Background="#7FFFFFFF"  Margin="9,115,786,302"/>
+        <TextBox x:Name="txtPrecioSugerido" IsEnabled="False" materialDesign:HintAssist.Hint="Precio sugerido" PreviewTextInput="PreviewTextInputSoloNumeros" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontFamily="Bahnschrift" FontSize="14" Background="#7FFFFFFF"  Margin="9,115,786,302"/>
         <CheckBox Content="¿Mas uno?" IsEnabled="False" x:Name="chkmasUno" Width="105" VerticalContentAlignment="Stretch" HorizontalAlignment="Center" VerticalAlignment="Center" Background="#FF056676" BorderBrush="#FF056676" IsChecked="False" FontSize="16" Height="28" Margin="9,169,936,258"/>
         <CheckBox Content="Estado" Width="105" IsEnabled="False" Name="chkestado" VerticalContentAlignment="Stretch" HorizontalAlignment="Center" VerticalAlignment="Center" Background="#FF056676" BorderBrush="#FF056676" IsChecked="True" FontSize="16" Height="28" Margin="9,202,936,225"/>
 

@@ -35,7 +35,7 @@ namespace SistemaDental
 
         private void btnLogin_Click(object sender, RoutedEventArgs e)
         {
-            if (txtPassword.Visibility == Visibility.Hidden)
+            if (txtPassword.Visibility == Visibility.Collapsed)
             {
                 txtPassword.Password = txtpas.Text;
             }
@@ -45,7 +45,7 @@ namespace SistemaDental
                 Usuario elUsuario = proc.BuscarUsuario(txtUsuario.Text,txtPassword.Password);
                 if (elUsuario != null)
                 {
-                    Menu men = new Menu(elUsuario.Administrador, elUsuario.Nombre,elUsuario.Ide, elUsuario.usuario);
+                    Menu men = new Menu(elUsuario);
                     men.Show();
                     this.Close();
                 }
@@ -132,8 +132,8 @@ namespace SistemaDental
 
         private void btnHelp_Click(object sender, RoutedEventArgs e)
         {
-            string url = "http://localhost/ProjectoClinicaDental/vistas/";
-            Process.Start(new ProcessStartInfo("cmd", $"/c start {url}") { CreateNoWindow = true });
+            string url = "http://sistemadentalhn.epizy.com/ProjectoClinicaDental/vistas/index.php";
+            System.Diagnostics.Process.Start(url);
         }
     }
 }

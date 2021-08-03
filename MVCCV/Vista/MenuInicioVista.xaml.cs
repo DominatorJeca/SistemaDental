@@ -42,8 +42,8 @@ namespace SistemaDental.MVCCV.Vista
 
         private void btnHelp_Click(object sender, RoutedEventArgs e)
         {
-            string url = "http://localhost/ProjectoClinicaDental/vistas/";
-            Process.Start(new ProcessStartInfo("cmd", $"/c start {url}") { CreateNoWindow = true });
+            string url = "http://sistemadentalhn.epizy.com/ProjectoClinicaDental/vistas/index.php";
+            System.Diagnostics.Process.Start(url);
         }
 
         private void btnTratamientos_Click(object sender, RoutedEventArgs e)
@@ -58,12 +58,14 @@ namespace SistemaDental.MVCCV.Vista
         }
         private void btnTratamientos_Click_1(object sender, RoutedEventArgs e)
         {
+            VistaTratamiento.user = user;
             CambioDeVista(VistaTratamiento);
         }
 
         private void btnCitas_Click_1(object sender, RoutedEventArgs e)
         {
             VistaAgendarCita.CambioDeVistaPrincipal += CambioDeVistaPrincipal;
+            VistaAgendarCita.user = user;
             CambioDeVista(VistaAgendarCita);
         }
 
@@ -86,7 +88,27 @@ namespace SistemaDental.MVCCV.Vista
 
         private void btnReportes_Click(object sender, RoutedEventArgs e)
         {
+            VistaMenuReportes.user = user; 
             CambioDeVista(VistaMenuReportes);
+            
+        }
+
+        private void UserControl_Loaded(object sender, RoutedEventArgs e)
+        {
+            permisosPuesto();
+        }
+        private void permisosPuesto()
+        {
+            if (user.PuestoNombre == "Asistente" && !user.Administrador)
+            {
+                btnTratamientos.IsEnabled = false;
+                btnInventario.IsEnabled = false;
+                btnCompra.IsEnabled = false;
+            }
+            if (user.PuestoNombre == "Secretario" && !user.Administrador)
+            {
+                btnTratamientos.IsEnabled = false;
+            }
         }
     }
 }

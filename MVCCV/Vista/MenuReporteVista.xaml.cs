@@ -28,16 +28,18 @@ namespace SistemaDental.MVCCV.Vista
         int reporteseleccionado = 0;
         DataTable dt;
         ReportDataSource ds;
+        public Usuario user;
         public MenuReporteVista()
         {
             InitializeComponent();
+            ManejoReportes();
             cmbEmpleado.ItemsSource = procedimiento.NombreEmpleados();
             cmbEmpleado.SelectedValuePath = "Empleado";
             cmbEmpleado.DisplayMemberPath = "Empleado";
         }
 
         
-        private void ManejoReportes()
+        public void ManejoReportes()
         {
             txtanio.SelectedValue = "";
             Mes.SelectedValue = "";
@@ -198,6 +200,15 @@ namespace SistemaDental.MVCCV.Vista
                     reporte.LocalReport.ReportEmbeddedResource = "SistemaDental.ReportCitasxEmpleado.rdlc";
                     reporte.RefreshReport();
                     break;
+                case 8:
+                    procedimiento.NombreEmpleado = Convert.ToString(cmbEmpleado.SelectedValue);
+                    reporte.Reset();
+                    dt = procedimiento.MostrarLog();
+                    ds = new ReportDataSource("DataSetLog", dt);
+                    reporte.LocalReport.DataSources.Add(ds);
+                    reporte.LocalReport.ReportEmbeddedResource = "SistemaDental.ReportLog.rdlc";
+                    reporte.RefreshReport();
+                    break;
             }
         }
 
@@ -230,7 +241,7 @@ namespace SistemaDental.MVCCV.Vista
                 lbltratamiento.Visibility = Visibility.Visible;
                 Tratamiento.Visibility = Visibility.Visible;
             }
-            if (reporteseleccionado == 6 || reporteseleccionado==7)
+            if (reporteseleccionado == 6 || reporteseleccionado==7|| reporteseleccionado==8)
             {
                 lblempleado.Visibility = Visibility.Visible;
                 cmbEmpleado.Visibility = Visibility.Visible;
@@ -243,6 +254,36 @@ namespace SistemaDental.MVCCV.Vista
             ManejoReportes();
             ManejoVisibilidad();
 
+        }
+
+        private void btnreporte8_Click(object sender, RoutedEventArgs e)
+        {
+            reporteseleccionado = 8;
+            ManejoReportes();
+            ManejoVisibilidad();
+            procedimiento.NombreEmpleado = "";
+            reporte.Reset();
+            dt = procedimiento.MostrarLog();
+            ds = new ReportDataSource("DataSetLogTodos", dt);
+            reporte.LocalReport.DataSources.Add(ds);
+            reporte.LocalReport.ReportEmbeddedResource = "SistemaDental.ReportLogTodos.rdlc";
+            reporte.RefreshReport();
+        }
+
+        private void UserControl_Loaded(object sender, RoutedEventArgs e)
+        {
+            permisos();
+        }
+
+        private void permisos()
+        {
+            if (!user.Administrador)
+            {
+                btnreporte7.IsEnabled = false;
+                btnreporte8.IsEnabled = false;
+                btnreporte6.IsEnabled = false;
+
+            }
         }
     }
 }

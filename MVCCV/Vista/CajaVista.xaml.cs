@@ -28,8 +28,8 @@ namespace SistemaDental.MVCCV.Vista
         private ClaseCaja caja = new ClaseCaja();
         private ClaseProcedimiento proc = new ClaseProcedimiento();
         ICollectionView ColeccionTransacciones;
-
-
+        public Usuario user = new Usuario();
+        Validaciones val = new Validaciones();
         public CajaVista()
         {
             InitializeComponent();
@@ -69,15 +69,36 @@ namespace SistemaDental.MVCCV.Vista
 
         private void dgvCaja_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if (dgvCaja.SelectedValuePath !="" && dgvCaja.SelectedValue!=null) 
-            MessageBox.Show(dgvCaja.SelectedValue.ToString());
+           
         }
 
 
         private void btnRealizar_Click(object sender, RoutedEventArgs e)
         {
-            proc.InsertarTransaccion(37, float.Parse(txtDineroAbono.Text), txtObservaciones.Text, Convert.ToInt32(dgvCaja.SelectedValue));
-            cmbPaciente_SelectionChanged(null, null);
+            if (dgvCaja.SelectedItem != null && val.VerificarCampos(this))
+                if (val.VerificarCantidad(Convert.ToDouble(txtDineroAbono.Text)))
+                {
+                    var DineroAbono = float.Parse(txtDineroAbono.Text)+ float.Parse(txtCantidadAbonada.Text);
+           
+                    var cobrado = float.Parse(txtTratamientoCobro.Text);
+                    if (DineroAbono > cobrado)
+                    {
+                        MessageBox.Show("No puede pagar de mas a la cantidad cobrada porfavor trate de vuelta");
+                        return;
+                    }
+                    proc.InsertarTransaccion(user.Ide, float.Parse(txtDineroAbono.Text), txtObservaciones.Text, Convert.ToInt32(dgvCaja.SelectedValue),(DineroAbono==cobrado));
+
+                    proc.InsertarLog(user.Ide, "Se realizó una transaccion");
+                    MessageBox.Show("Transaccion realizada exitosamente");
+                    cmbPaciente_SelectionChanged(null, null);
+                    txtDineroAbono.Text = "0";
+                }
+                else
+                {
+                    MessageBox.Show("Porfavor ingrese una cantidad válida");
+                }
+            else
+                MessageBox.Show("Seleccione una cita a pagar y/o no deje campos vacios");
         }
 
         private void cmbPaciente_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -87,6 +108,8 @@ namespace SistemaDental.MVCCV.Vista
                 ColeccionTransacciones = new CollectionViewSource() { Source = proc.traerTransaccionesCitas(Convert.ToInt32(cmbPaciente.SelectedValue)) }.View;
             dgvCaja.ItemsSource = ColeccionTransacciones;
             dgvCaja.SelectedValuePath = "cita.IdCita ";
+            dtpFechadeCita.SelectedDate = null;
+            dgvCaja.SelectedIndex = 0;
         }
 
         private void dtpFechadeCita_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
@@ -98,7 +121,7 @@ namespace SistemaDental.MVCCV.Vista
             }
             else
             {
-                var filtro = new Predicate<object>(item => ((ClaseCaja)item).cita.fechaCita == dtpFechadeCita.SelectedDate);
+                var filtro = new Predicate<object>(item => ((ClaseCaja)item).cita.fechaCita.Date == dtpFechadeCita.SelectedDate.Value.Date);
                 ColeccionTransacciones.Filter = filtro;
                 dgvCaja.ItemsSource = ColeccionTransacciones;
             }

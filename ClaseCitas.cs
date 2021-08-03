@@ -32,6 +32,7 @@ namespace SistemaDental
         public string NombreTratamiento { get; set; }
         
         public string NombrePaciente { get; set; }
+        public string nombrecompoletoempleado { get; set; }
         public string ApellidoPaciente { get; set; }
         public string Observaciones { get; set; }
         public DateTime fechaCita { get; set; }
@@ -77,12 +78,34 @@ namespace SistemaDental
         {
             return proc.Mostrartratmientos(idcita);
         }
+        public List<ClaseCitas> MostracitaspoDoctor(ClaseCitas doctor)
+        {
+            return proc.MostracitaspoDoctor(doctor);
+        }
 
 
         public void EliminarCita(int cita)
         {
             proc.EliminarCita(cita);
         }
+
+        public List<ClaseCitas> mostrarPacientesconcitas()
+        {
+
+            return proc.mostrarPacientesconcitas();
+
+
+        }
+
+        
+             public List<ClaseCitas> mostrarPacientesxcitas(int citas)
+        {
+
+            return proc.mostrarPacientesxcitas(citas);
+
+
+        }
+
         public List<ClaseCitas> mostrarPacientes()
         {
 

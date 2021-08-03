@@ -27,6 +27,7 @@ namespace SistemaDental.MVCCV.Vista
         float total=0;
         public event EventHandler CambioDeVistaPrincipal;
         Validaciones val = new Validaciones();
+        public Usuario user = new Usuario();
         public RealizarCitaVista()
         {
             InitializeComponent();
@@ -170,7 +171,9 @@ namespace SistemaDental.MVCCV.Vista
                 foreach (ClaseInventario inv in trat.Materiales)
                     proc.RestarMaterial(inv);
             }
+            proc.InsertarLog(user.Ide, "Finalizó una cita");
             MostrarDatos();
+            MessageBox.Show("Cita realizada con exito");
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -24,7 +25,7 @@ namespace SistemaDental.MVCCV.Vista
         Validaciones val = new Validaciones();
         public Usuario user = new Usuario();
         ObservableCollection<ClaseInventario> productosCompra = new ObservableCollection<ClaseInventario>();
-        private ObservableCollection<ClaseInventario> DatosDataGrid = new ObservableCollection<ClaseInventario>();
+        private ICollectionView DatosDataGrid;
         ClaseProcedimiento proc = new ClaseProcedimiento();
         bool nuevoprod = false;
 
@@ -38,9 +39,12 @@ namespace SistemaDental.MVCCV.Vista
         private void btnComprar_Click(object sender, RoutedEventArgs e)
         {
             int compraId = proc.InsertarCompra(user.Ide);
+            proc.InsertarLog(user.Ide, "Se realizó una commpra");
             foreach ( ClaseInventario inv in productosCompra )
             {
-                proc.InsertarDetalleCompra(compraId, inv.IdMaterial, inv.Cantidad, inv.precio, inv.fechaVenc,inv.NombreMaterial);
+                proc.InsertarDetalleCompra(compraId, inv.IdMaterial, inv.Cantidad, inv.precio, inv.fechaVenc,inv.NombreMaterial,user);
+                proc.InsertarLog(user.Ide, "Se ingresó un detalle de compra");
+
             }
             Grid_Loaded(null, null);
             if (nuevoprod)
@@ -66,6 +70,19 @@ namespace SistemaDental.MVCCV.Vista
                 prod.precio = Convert.ToInt32(txtprecio.Text);
                 prod.fechaVenc = (DateTime)fchVencimiento.SelectedDate;
                 prod.Cantidad = Convert.ToInt32(txtCantidad.Text);
+
+                if (prod.Cantidad>1000 || prod.Cantidad <=0 )
+                {
+                    MessageBox.Show("Porfavor ingrese una cantidad valida");
+                    return;
+                }
+              
+                if (prod.precio>10000 || prod.precio <=0 )
+                {
+                    MessageBox.Show("Por favor ingrese un precio fijo");
+                    return;
+                }
+                
                 foreach(ClaseInventario inventario in DatosDataGrid)
                 {
                     if (nuevoprod && inventario.NombreMaterial.ToLower().Contains(prod.NombreMaterial.ToLower()))
@@ -127,7 +144,7 @@ namespace SistemaDental.MVCCV.Vista
 
         private void Grid_Loaded(object sender, RoutedEventArgs e)
         {
-            DatosDataGrid = new ObservableCollection<ClaseInventario>(proc.MostrarInventario());
+            DatosDataGrid = new CollectionViewSource() { Source = proc.MostrarInventario() }.View ;
             dgv_Compras.ItemsSource = DatosDataGrid;
             dgv_Compras.SelectedValuePath = "IdMaterial";
 
@@ -170,7 +187,7 @@ namespace SistemaDental.MVCCV.Vista
         private void btnNuevoProducto_Click(object sender, RoutedEventArgs e)
         {
             dgv_Compras.SelectedIndex = -1;
-            dgv_Compras.IsReadOnly = true;
+            dgv_Compras.IsEnabled = false;
             btnCancelar.IsEnabled = true;
             btnNuevoProducto.IsEnabled = false;
             nuevoprod = true;
@@ -184,6 +201,22 @@ namespace SistemaDental.MVCCV.Vista
             dgv_Compras.SelectedIndex = 0;
             txtNombreProd.IsEnabled = false;
             btnCancelar.IsEnabled = false;
+            dgv_Compras.IsEnabled = true;
+        }
+
+        private void txtBuscarProducto_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (txtBuscarProducto.Text == "")
+            {
+                DatosDataGrid.Filter = null;
+                dgv_Compras.ItemsSource = DatosDataGrid;
+            }
+            else
+            {
+                var filtro = new Predicate<object>(item => (((ClaseInventario)item).NombreMaterial.ToLower()).Contains(txtBuscarProducto.Text.ToLower()));
+                DatosDataGrid.Filter = filtro;
+                dgv_Compras.ItemsSource = DatosDataGrid;
+            }
         }
     }
 }

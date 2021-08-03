@@ -1,4 +1,5 @@
-﻿using SistemaDental.MVCCV.Vista;
+﻿using Microsoft.Reporting.WinForms;
+using SistemaDental.MVCCV.Vista;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -24,15 +25,15 @@ namespace SistemaDental
        //Variables miembros
         private bool Admin;
         private String Nombree;
-        private string usuario;
-
+      
+        private Button btnActivo=null;
         private ClaseProcedimiento proced = new ClaseProcedimiento();
 
         public Turno turno = new Turno();
         private CajaVista VistaCaja = new CajaVista();
         private MenuInicioVista VistaMenuInicio = new MenuInicioVista();
         private DatosDeUsuario VistaUsuarioIngresado;
-        
+
         private AjustesVista VistaAjuste = new AjustesVista();
         private Usuario user = new Usuario();
         //Constructores
@@ -43,30 +44,41 @@ namespace SistemaDental
             VistaMenuInicio.CambioDeVistaPrincipal += CambiarVista;
             VistaAjuste.CambioDeVistaPrincipal += CambiarVista;
         }
-
-        public Menu(bool admin,string name,int id, string nombreusuario)
+       
+        public Menu(Usuario user)
         {
 
             InitializeComponent();
             //lblUsuario.Content = name;
-            PermisosAdministrador(admin);
-            Nombree = name;
-            Admin = admin;
-            usuario = nombreusuario;
-            turno.UsuarioID = id;
-            user.Ide = id;
+            this.user = user;
+            PermisosAdministrador(this.user.Administrador);
+            Nombree = this.user.Nombre;
+            Admin = this.user.Administrador;
+           
+            turno.UsuarioID = this.user.Ide;
             turno.ComienzoTurno = DateTime.Now;
             proced.AgregarTurno(turno);
             VistaMenuInicio.user = user;
+            VistaCaja.user = user;
             VistaAjuste.user = user;
             VistaMenuInicio.CambioDeVistaPrincipal += CambiarVista;
             VistaAjuste.CambioDeVistaPrincipal += CambiarVista;
             ContenedorHijos.Content = VistaMenuInicio;
-            VistaUsuarioIngresado = new DatosDeUsuario(usuario);
+            VistaUsuarioIngresado = new DatosDeUsuario(this.user.usuario, this.user.Ide);
+            permisosPuesto();
+            CambiarBtnActivo(btnInicio);
         }
         private void CambiarVista(object o,EventArgs e)
         {
             ContenedorHijos.Content = o;
+        }
+        private void permisosPuesto()
+        {
+            if (user.PuestoNombre== "Asistente" && !user.Administrador)
+            {
+                btnCaja.IsEnabled = false;
+            }
+
         }
 
         /// <summary>
@@ -116,8 +128,8 @@ namespace SistemaDental
         /// <param name="e"></param>
         private void btnCaja_Click(object sender, RoutedEventArgs e)
         {
-          
-          
+
+
         }
         /// <summary>
         /// Abre el Formulario de pacientes y cierra el actual
@@ -126,8 +138,8 @@ namespace SistemaDental
         /// <param name="e"></param>
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-           
-          
+
+
             this.Hide();
         }
 
@@ -155,8 +167,8 @@ namespace SistemaDental
         /// <param name="e"></param>
         private void btnCitas_Click(object sender, RoutedEventArgs e)
         {
-           
-           
+
+
             this.Hide();
         }
 
@@ -210,22 +222,42 @@ namespace SistemaDental
 
         private void btnInicio_Click(object sender, RoutedEventArgs e)
         {
+            CambiarBtnActivo(sender);
+            MenuReporteVista menu = new MenuReporteVista();
+            menu.ManejoReportes();
             CambiarVista(VistaMenuInicio,null);
+
         }
 
         private void btnCaja_Click_1(object sender, RoutedEventArgs e)
         {
+            CambiarBtnActivo(sender);
+            VistaCaja.user = user;
             CambiarVista(VistaCaja, null);
         }
 
         private void btnPerfil_Click(object sender, RoutedEventArgs e)
         {
+            CambiarBtnActivo(sender);
             CambiarVista(VistaUsuarioIngresado, null);
         }
 
         private void btnAjustes_Click_1(object sender, RoutedEventArgs e)
         {
+            CambiarBtnActivo(sender);
             CambiarVista(VistaAjuste, null);
+        }
+        private void CambiarBtnActivo(object o =null )
+        {
+            if (btnActivo != null)
+            {
+                btnActivo.Foreground = Brushes.LightGray;
+                btnActivo.Background = Brushes.Transparent;
+            }
+            btnActivo =(Button)o;
+        
+            btnActivo.Background = new SolidColorBrush(Color.FromRgb(59, 115, 135));
+
         }
     }
 }
