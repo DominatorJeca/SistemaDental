@@ -25,6 +25,7 @@ namespace SistemaDental.MVCCV.Vista
     public partial class MenuReporteVista : UserControl
     {
         ClaseProcedimiento procedimiento = new ClaseProcedimiento();
+        Validaciones validaciones = new Validaciones();
         int reporteseleccionado = 0;
         DataTable dt;
         ReportDataSource ds;
@@ -88,10 +89,19 @@ namespace SistemaDental.MVCCV.Vista
 
         private void ObtenerValores()
         {
-            procedimiento.anio = Convert.ToInt32(txtanio.Text);
-            procedimiento.mes = mes();
-            procedimiento.tratamiento = Convert.ToString(Tratamiento.SelectedValue);
-            procedimiento.NombreEmpleado = Convert.ToString(cmbEmpleado.SelectedValue);
+            procedimiento.anio = 0;
+            procedimiento.mes = 0;
+            if (txtanio.Text != "" && Mes.Text != "")
+            {
+                procedimiento.anio = Convert.ToInt32(txtanio.Text);
+                procedimiento.mes = mes();
+                procedimiento.tratamiento = Convert.ToString(Tratamiento.SelectedValue);
+                procedimiento.NombreEmpleado = Convert.ToString(cmbEmpleado.SelectedValue);
+            }
+            else
+            {
+                MessageBox.Show("Ingrese valores correctos");
+            }
         }
 
         private void btnreporte1_Click(object sender, RoutedEventArgs e)
@@ -139,12 +149,12 @@ namespace SistemaDental.MVCCV.Vista
             {
                 case 1:
                     ObtenerValores();
-                    reporte.Reset();
-                    dt = procedimiento.FechaVenc();
-                    ds = new ReportDataSource("DataSet1", dt);
-                    reporte.LocalReport.DataSources.Add(ds);
-                    reporte.LocalReport.ReportEmbeddedResource = "SistemaDental.Report1.rdlc";
-                    reporte.RefreshReport();
+                        reporte.Reset();
+                        dt = procedimiento.FechaVenc();
+                        ds = new ReportDataSource("DataSet1", dt);
+                        reporte.LocalReport.DataSources.Add(ds);
+                        reporte.LocalReport.ReportEmbeddedResource = "SistemaDental.Report1.rdlc";
+                        reporte.RefreshReport();
                     break;
                 case 2:
                     ObtenerValores();
@@ -174,40 +184,68 @@ namespace SistemaDental.MVCCV.Vista
                     reporte.RefreshReport();
                     break;
                 case 5:
-                    procedimiento.anio = Convert.ToInt32(txtanio.Text);
-                    reporte.Reset();
-                    dt = procedimiento.AnioGanancias();
-                    ds = new ReportDataSource("DataSetAG", dt);
-                    reporte.LocalReport.DataSources.Add(ds);
-                    reporte.LocalReport.ReportEmbeddedResource = "SistemaDental.ReportAnioGanancias.rdlc";
-                    reporte.RefreshReport();
+                    if (txtanio.Text != "")
+                    {
+                        procedimiento.anio = Convert.ToInt32(txtanio.Text);
+                        reporte.Reset();
+                        dt = procedimiento.AnioGanancias();
+                        ds = new ReportDataSource("DataSetAG", dt);
+                        reporte.LocalReport.DataSources.Add(ds);
+                        reporte.LocalReport.ReportEmbeddedResource = "SistemaDental.ReportAnioGanancias.rdlc";
+                        reporte.RefreshReport();
+                    }
+                    else
+                    {
+                        MessageBox.Show("Ingrese valores correctos");
+                    }
                     break;
                 case 6:
-                    procedimiento.NombreEmpleado = Convert.ToString(cmbEmpleado.SelectedValue);
-                    reporte.Reset();
-                    dt = procedimiento.TurnosxEmpleado();
-                    ds = new ReportDataSource("DataSetTE", dt);
-                    reporte.LocalReport.DataSources.Add(ds);
-                    reporte.LocalReport.ReportEmbeddedResource = "SistemaDental.ReportTurnosxEmpleado.rdlc";
-                    reporte.RefreshReport();
+                    if (cmbEmpleado.SelectedValue != null)
+                    {
+                        procedimiento.NombreEmpleado = Convert.ToString(cmbEmpleado.SelectedValue);
+                        reporte.Reset();
+                        dt = procedimiento.TurnosxEmpleado();
+                        ds = new ReportDataSource("DataSetTE", dt);
+                        reporte.LocalReport.DataSources.Add(ds);
+                        reporte.LocalReport.ReportEmbeddedResource = "SistemaDental.ReportTurnosxEmpleado.rdlc";
+                        reporte.RefreshReport();
+                    }
+                    else
+                    {
+                        MessageBox.Show("Ingrese valores correctos");
+                    }
                     break;
                 case 7:
-                    procedimiento.NombreEmpleado = Convert.ToString(cmbEmpleado.SelectedValue);
-                    reporte.Reset();
-                    dt = procedimiento.Citasporempleado();
-                    ds = new ReportDataSource("DataSetCitasEmpleado", dt);
-                    reporte.LocalReport.DataSources.Add(ds);
-                    reporte.LocalReport.ReportEmbeddedResource = "SistemaDental.ReportCitasxEmpleado.rdlc";
-                    reporte.RefreshReport();
+                    if (cmbEmpleado.SelectedValue != null)
+                    {
+                        procedimiento.NombreEmpleado = Convert.ToString(cmbEmpleado.SelectedValue);
+                        reporte.Reset();
+                        dt = procedimiento.Citasporempleado();
+                        ds = new ReportDataSource("DataSetCitasEmpleado", dt);
+                        reporte.LocalReport.DataSources.Add(ds);
+                        reporte.LocalReport.ReportEmbeddedResource = "SistemaDental.ReportCitasxEmpleado.rdlc";
+                        reporte.RefreshReport();
+                    }
+                    else
+                    {
+                        MessageBox.Show("Ingrese valores correctos");
+                    }
                     break;
                 case 8:
-                    procedimiento.NombreEmpleado = Convert.ToString(cmbEmpleado.SelectedValue);
-                    reporte.Reset();
-                    dt = procedimiento.MostrarLog();
-                    ds = new ReportDataSource("DataSetLog", dt);
-                    reporte.LocalReport.DataSources.Add(ds);
-                    reporte.LocalReport.ReportEmbeddedResource = "SistemaDental.ReportLog.rdlc";
-                    reporte.RefreshReport();
+                    if (cmbEmpleado.SelectedValue != null)
+                    {
+                        procedimiento.NombreEmpleado = Convert.ToString(cmbEmpleado.SelectedValue);
+                        reporte.Reset();
+                        dt = procedimiento.MostrarLog();
+                        ds = new ReportDataSource("DataSetLog", dt);
+                        reporte.LocalReport.DataSources.Add(ds);
+                        reporte.LocalReport.ReportEmbeddedResource = "SistemaDental.ReportLog.rdlc";
+                        reporte.RefreshReport();
+                    }
+                    else
+                    {
+                        MessageBox.Show("Ingrese valores correctos");
+                    }
                     break;
             }
         }

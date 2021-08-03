@@ -8,10 +8,7 @@ using System.Windows.Controls;
 using System.Windows.Media;
 using System.Text.RegularExpressions;
 using System.Windows.Input;
-
-
-
-
+using Microsoft.ReportingServices.ReportProcessing.ReportObjectModel;
 
 namespace SistemaDental
 {
@@ -82,11 +79,7 @@ namespace SistemaDental
                     band = false;
             }
 
-            foreach(var tb in FindVisualChildren<ComboBox>(window))
-            {
-                if (tb.SelectedValue == null && tb.Name!= "cmbPaciente")
-                    band = false;
-            }
+           
 
             foreach (var tb in FindVisualChildren<DatePicker>(window))
             {
@@ -123,6 +116,17 @@ namespace SistemaDental
             return band;
         }
 
+        public bool VerificarCombobox(UserControl window)
+        {
+            bool band = true;
+            foreach (var tb in FindVisualChildren<ComboBox>(window))
+            {
+                if (tb.SelectedValue == null && tb.Name != "cmbPaciente")
+                    band = false;
+            }
+
+            return true;
+        }
         public bool VerificarCantidad(double cantidad)
         {
             bool var = true;
