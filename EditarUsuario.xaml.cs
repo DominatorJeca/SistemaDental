@@ -1,17 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
-using System.Text.RegularExpressions;
 
 namespace SistemaDental
 {
@@ -25,9 +17,7 @@ namespace SistemaDental
         private Puesto puesto = new Puesto();
         private bool Admin;
         private String Nombree;
-      
-
-        Validaciones validar = new Validaciones();
+        private Validaciones validar = new Validaciones();
 
         //constructores
         public EditarUsuario()
@@ -37,7 +27,7 @@ namespace SistemaDental
             MostrarPuesto();
 
         }
-      
+
         public EditarUsuario(bool admin, string name)
         {
             InitializeComponent();
@@ -88,7 +78,7 @@ namespace SistemaDental
             usuario.Administrador = false;
         }
 
-      
+
 
         /// <summary>
         /// Verifica que los valores de los textbox y combobox no esten vacios
@@ -96,7 +86,7 @@ namespace SistemaDental
         /// <returns>Verificacion de valores</returns>
         private bool VerificarValores()
         {
-            
+
             if (txtEditarApellido.Text == string.Empty || txtEditarNombre.Text == string.Empty || txtEditarCorreo.Text == string.Empty
                  || txtEditarTelefono.Text == string.Empty || txtNuevaContra.Text == string.Empty)
             {
@@ -108,7 +98,7 @@ namespace SistemaDental
                 MessageBox.Show("Por favor selecciona el Sexo del empleado");
                 return false;
             }
-            else if (!validar.ValidarEmail(txtEditarCorreo.Text) )
+            else if (!validar.ValidarEmail(txtEditarCorreo.Text))
             {
                 MessageBox.Show("Por favor, ingrese un correo valido");
                 return false;
@@ -138,21 +128,22 @@ namespace SistemaDental
                                 band = false;
                                 MessageBox.Show("El numero de telefono no es valido");
                             }
-                               
+
                             break;
                         }
 
-                  
+
                     default:
                         {
-                            if (tb.Text.Replace(" ", "").Equals("") && tb.Name != "PART_EditableTextBox" && tb.Name != "PART_TextBox") { 
+                            if (tb.Text.Replace(" ", "").Equals("") && tb.Name != "PART_EditableTextBox" && tb.Name != "PART_TextBox")
+                            {
                                 band = false;
-                            MessageBox.Show("Un campo no contiene el formato correcto");
+                                MessageBox.Show("Un campo no contiene el formato correcto");
                             }
                             break;
                         }
                 }
-                
+
 
             }
 
@@ -179,10 +170,10 @@ namespace SistemaDental
             }
         }
 
-            /// <summary>
-            /// Funcion para limpiar los textbox y combobox del formulario
-            /// </summary>
-            private void LimpiarFormulario()
+        /// <summary>
+        /// Funcion para limpiar los textbox y combobox del formulario
+        /// </summary>
+        private void LimpiarFormulario()
         {
             txtEditarApellido.Text = string.Empty;
             txtEditarNombre.Text = string.Empty;
@@ -257,7 +248,7 @@ namespace SistemaDental
 
         private void PreviewTextInputOnlyLetters(object sender, TextCompositionEventArgs e)
         {
-            
+
 
             validar.SoloLetras(e);
 
@@ -266,7 +257,7 @@ namespace SistemaDental
 
         private void PreviewTextInputOnlyNumbers(object sender, TextCompositionEventArgs e)
         {
-           
+
 
             validar.SoloNumeros(e);
         }
@@ -278,6 +269,6 @@ namespace SistemaDental
             ajustes.Show();
         }
 
-      
+
     }
 }

@@ -1,14 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Media;
-using System.Text.RegularExpressions;
 using System.Windows.Input;
-using Microsoft.ReportingServices.ReportProcessing.ReportObjectModel;
+using System.Windows.Media;
 
 namespace SistemaDental
 {
@@ -21,26 +17,38 @@ namespace SistemaDental
         {
             int character = Convert.ToInt32(Convert.ToChar(e.Text));
             if ((character >= 65 && character <= 90) || (character >= 97 && character <= 122))
+            {
                 e.Handled = false;
+            }
             else
+            {
                 e.Handled = true;
+            }
         }
 
         public void SoloNumeros(TextCompositionEventArgs e)
         {
             int character = Convert.ToInt32(Convert.ToChar(e.Text));
             if (character >= 48 && character <= 57)
+            {
                 e.Handled = false;
+            }
             else
+            {
                 e.Handled = true;
+            }
         }
         public void SoloNumerosDec(TextCompositionEventArgs e)
         {
             int character = Convert.ToInt32(Convert.ToChar(e.Text));
-            if ((character >= 48 && character <= 57 ) || e.Text==".")
+            if ((character >= 48 && character <= 57) || e.Text == ".")
+            {
                 e.Handled = false;
+            }
             else
+            {
                 e.Handled = true;
+            }
         }
 
         public bool ValidarEmail(string email)
@@ -75,22 +83,28 @@ namespace SistemaDental
             bool band = true;
             foreach (var tb in FindVisualChildren<TextBox>(window))
             {
-                if (tb.Text.Replace(" ", "").Equals("") && tb.Name != "PART_EditableTextBox" && tb.Name != "PART_TextBox" && tb.IsEnabled  && tb.Name!= "txtBuscarEmpleadoID" && tb.Name != "txtBuscarProducto" && tb.Name != "txtObservaciones")
+                if (tb.Text.Replace(" ", "").Equals("") && tb.Name != "PART_EditableTextBox" && tb.Name != "PART_TextBox" && tb.IsEnabled && tb.Name != "txtBuscarEmpleadoID" && tb.Name != "txtBuscarProducto" && tb.Name != "txtObservaciones")
+                {
                     band = false;
+                }
             }
 
-           
+
 
             foreach (var tb in FindVisualChildren<DatePicker>(window))
             {
-                if (tb.SelectedDate==null && tb.Name!= "dtpFechadeCita")
+                if (tb.SelectedDate == null && tb.Name != "dtpFechadeCita")
+                {
                     band = false;
+                }
             }
 
             foreach (var tb in FindVisualChildren<RadioButton>(window))
             {
                 if (tb.IsChecked == false)
+                {
                     band = false;
+                }
             }
             return band;
         }
@@ -100,7 +114,9 @@ namespace SistemaDental
             foreach (var tb in FindVisualChildren<PasswordBox>(window))
             {
                 if (tb.Password.Replace(" ", "").Equals("") && tb.Name != "PART_EditableTextBox" && tb.Name != "PART_TextBox")
+                {
                     band = false;
+                }
             }
             return band;
         }
@@ -111,18 +127,20 @@ namespace SistemaDental
             foreach (var tb in FindVisualChildren<DataGrid>(window))
             {
                 if (tb.SelectedValue == null)
+                {
                     band = false;
+                }
             }
             return band;
         }
 
         public bool VerificarCombobox(UserControl window)
         {
-            bool band = true;
             foreach (var tb in FindVisualChildren<ComboBox>(window))
             {
                 if (tb.SelectedValue == null && tb.Name != "cmbPaciente")
-                    band = false;
+                {
+                }
             }
 
             return true;
@@ -139,27 +157,31 @@ namespace SistemaDental
             return var;
         }
 
-        public bool VerificarIdentidad(string identidad,DateTime date)
+        public bool VerificarIdentidad(string identidad, DateTime date)
         {
             bool var = true;
-            string PrimeraParte="";
-            string AnioParte="";
+            string PrimeraParte = "";
+            string AnioParte = "";
 
             if (identidad.Length != 13)
-                var = false;
-
-            for (int i=0;i<4;i++)
             {
-                PrimeraParte+= identidad[i];
+                var = false;
+            }
+
+            for (int i = 0; i < 4; i++)
+            {
+                PrimeraParte += identidad[i];
                 AnioParte += identidad[i + 4];
             }
-            
-            if (PrimeraParte.CompareTo("0101")==-1 || PrimeraParte.CompareTo("1804")==1)
+
+            if (PrimeraParte.CompareTo("0101") == -1 || PrimeraParte.CompareTo("1804") == 1)
             {
-                var= false;
+                var = false;
             }
             if (AnioParte.CompareTo(date.Year.ToString()) == -1 || AnioParte.CompareTo(DateTime.Now.Year.ToString()) == 1)
+            {
                 var = false;
+            }
 
             return var;
 
@@ -168,7 +190,7 @@ namespace SistemaDental
         public bool VerificarNumero(string numero)
         {
             bool siono = false;
-            if(numero.Length == 8)
+            if (numero.Length == 8)
             {
                 siono = true;
             }
@@ -186,6 +208,6 @@ namespace SistemaDental
                 siono = true;
             }
             return siono;
- }
+        }
     }
 }

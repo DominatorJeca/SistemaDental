@@ -1,19 +1,10 @@
-﻿using Microsoft.Reporting.WinForms;
-using SistemaDental.MVCCV.Vista;
+﻿using SistemaDental.MVCCV.Vista;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace SistemaDental
 {
@@ -22,11 +13,11 @@ namespace SistemaDental
     /// </summary>
     public partial class Menu : Window
     {
-       //Variables miembros
+        //Variables miembros
         private bool Admin;
         private String Nombree;
-      
-        private Button btnActivo=null;
+
+        private Button btnActivo = null;
         private ClaseProcedimiento proced = new ClaseProcedimiento();
 
         public Turno turno = new Turno();
@@ -44,7 +35,7 @@ namespace SistemaDental
             VistaMenuInicio.CambioDeVistaPrincipal += CambiarVista;
             VistaAjuste.CambioDeVistaPrincipal += CambiarVista;
         }
-       
+
         public Menu(Usuario user)
         {
 
@@ -54,7 +45,7 @@ namespace SistemaDental
             PermisosAdministrador(this.user.Administrador);
             Nombree = this.user.Nombre;
             Admin = this.user.Administrador;
-           
+
             turno.UsuarioID = this.user.Ide;
             turno.ComienzoTurno = DateTime.Now;
             proced.AgregarTurno(turno);
@@ -68,13 +59,13 @@ namespace SistemaDental
             permisosPuesto();
             CambiarBtnActivo(btnInicio);
         }
-        private void CambiarVista(object o,EventArgs e)
+        private void CambiarVista(object o, EventArgs e)
         {
             ContenedorHijos.Content = o;
         }
         private void permisosPuesto()
         {
-            if (user.PuestoNombre== "Asistente" && !user.Administrador)
+            if (user.PuestoNombre == "Asistente" && !user.Administrador)
             {
                 btnCaja.IsEnabled = false;
             }
@@ -105,7 +96,7 @@ namespace SistemaDental
         /// <param name="e"></param>
         public void btnInventario_Click(object sender, RoutedEventArgs e)
         {
-            Inventario inventario = new Inventario(Admin,Nombree);
+            Inventario inventario = new Inventario(Admin, Nombree);
             inventario.Show();
             this.Hide();
         }
@@ -181,7 +172,9 @@ namespace SistemaDental
         private void Window_MouseDown(object sender, MouseButtonEventArgs e)
         {
             if (e.ChangedButton == MouseButton.Left)
+            {
                 DragMove();
+            }
         }
 
         private void btnSalir_Click(object sender, RoutedEventArgs e)
@@ -203,7 +196,7 @@ namespace SistemaDental
                 case MessageBoxResult.No:
                     {
                         Login log = new Login();
-                            log.Show();
+                        log.Show();
                         this.Close();
                         break;
                     }
@@ -225,7 +218,7 @@ namespace SistemaDental
             CambiarBtnActivo(sender);
             MenuReporteVista menu = new MenuReporteVista();
             menu.ManejoReportes();
-            CambiarVista(VistaMenuInicio,null);
+            CambiarVista(VistaMenuInicio, null);
 
         }
 
@@ -247,15 +240,15 @@ namespace SistemaDental
             CambiarBtnActivo(sender);
             CambiarVista(VistaAjuste, null);
         }
-        private void CambiarBtnActivo(object o =null )
+        private void CambiarBtnActivo(object o = null)
         {
             if (btnActivo != null)
             {
                 btnActivo.Foreground = Brushes.LightGray;
                 btnActivo.Background = Brushes.Transparent;
             }
-            btnActivo =(Button)o;
-        
+            btnActivo = (Button)o;
+
             btnActivo.Background = new SolidColorBrush(Color.FromRgb(59, 115, 135));
 
         }

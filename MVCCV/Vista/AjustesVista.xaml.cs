@@ -1,17 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace SistemaDental.MVCCV.Vista
 {
@@ -29,7 +18,7 @@ namespace SistemaDental.MVCCV.Vista
         public AjustesVista()
         {
             InitializeComponent();
-          
+
         }
 
         public AjustesVista(bool admin, string name)
@@ -37,12 +26,14 @@ namespace SistemaDental.MVCCV.Vista
             InitializeComponent();
             Nombree = name;
             Admin = admin;
-           
+
         }
         protected virtual void CambioDeVista(object o)
         {
             if (CambioDeVistaPrincipal != null)
+            {
                 CambioDeVistaPrincipal(o, null);
+            }
         }
 
         private void btnManejarUsuarios_Click(object sender, RoutedEventArgs e)

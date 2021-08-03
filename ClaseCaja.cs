@@ -1,13 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 // Agregar los namespaces necesarios para conectarse a SQL
-using System.Data;
-using System.Data.SqlClient;
-using System.Configuration;
 
 namespace SistemaDental
 {
@@ -27,7 +20,7 @@ namespace SistemaDental
         public float Dinero_disponible { get; set; }
 
         public ClaseCitas cita { get; set; }
-        public string  tratamientos { get; set; }
+        public string tratamientos { get; set; }
         public ClasePaciente paciente { get; set; }
         public Usuario Usuario { get; set; }
 

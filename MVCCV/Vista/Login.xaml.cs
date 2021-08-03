@@ -1,18 +1,8 @@
 ﻿using SistemaDental.MVCCV.Vista;
 using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace SistemaDental
 {
@@ -22,7 +12,7 @@ namespace SistemaDental
     public partial class Login : Window
     {
         private Usuario usuario = new Usuario();
-        ClaseProcedimiento proc = new ClaseProcedimiento();
+        private ClaseProcedimiento proc = new ClaseProcedimiento();
         public Login()
         {
             InitializeComponent();
@@ -42,7 +32,7 @@ namespace SistemaDental
             try
             {
                 //buscar usuario
-                Usuario elUsuario = proc.BuscarUsuario(txtUsuario.Text,txtPassword.Password);
+                Usuario elUsuario = proc.BuscarUsuario(txtUsuario.Text, txtPassword.Password);
                 if (elUsuario != null)
                 {
                     Menu men = new Menu(elUsuario);
@@ -50,7 +40,9 @@ namespace SistemaDental
                     this.Close();
                 }
                 else
+                {
                     MessageBox.Show("Usuario o contraseña incorrectos");
+                }
 
                 //Verificar si el usuario existe
 
@@ -108,9 +100,9 @@ namespace SistemaDental
 
             txtPassword.Visibility = Visibility.Visible;
             txtpas.Visibility = Visibility.Hidden;
-            txtPassword.Password = txtpas.Text ;
+            txtPassword.Password = txtpas.Text;
             btnview.Visibility = Visibility.Visible;
-           // btnview2.Visibility = Visibility.Hidden;
+            // btnview2.Visibility = Visibility.Hidden;
         }
 
         private void Window_Closed(object sender, EventArgs e)
@@ -121,7 +113,9 @@ namespace SistemaDental
         private void Window_MouseDown(object sender, MouseButtonEventArgs e)
         {
             if (e.ChangedButton == MouseButton.Left)
+            {
                 DragMove();
+            }
         }
 
         private void btnOlvidarPass_Click(object sender, RoutedEventArgs e)

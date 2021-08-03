@@ -1,20 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using Microsoft.Reporting.WinForms;
+using System;
 using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
-using ControlzEx.Standard;
-using Microsoft.Reporting.WinForms;
 
 
 namespace SistemaDental.MVCCV.Vista
@@ -24,11 +12,11 @@ namespace SistemaDental.MVCCV.Vista
     /// </summary>
     public partial class MenuReporteVista : UserControl
     {
-        ClaseProcedimiento procedimiento = new ClaseProcedimiento();
-        Validaciones validaciones = new Validaciones();
-        int reporteseleccionado = 0;
-        DataTable dt;
-        ReportDataSource ds;
+        private ClaseProcedimiento procedimiento = new ClaseProcedimiento();
+        private Validaciones validaciones = new Validaciones();
+        private int reporteseleccionado = 0;
+        private DataTable dt;
+        private ReportDataSource ds;
         public Usuario user;
         public MenuReporteVista()
         {
@@ -39,18 +27,18 @@ namespace SistemaDental.MVCCV.Vista
             cmbEmpleado.DisplayMemberPath = "Empleado";
         }
 
-        
+
         public void ManejoReportes()
         {
             txtanio.SelectedValue = "";
             Mes.SelectedValue = "";
             reporte.Clear();
-            foreach(Control control in stpPanel.Children)
+            foreach (Control control in stpPanel.Children)
             {
                 control.Visibility = Visibility.Collapsed;
             }
 
-           
+
         }
 
         private int mes()
@@ -149,12 +137,12 @@ namespace SistemaDental.MVCCV.Vista
             {
                 case 1:
                     ObtenerValores();
-                        reporte.Reset();
-                        dt = procedimiento.FechaVenc();
-                        ds = new ReportDataSource("DataSet1", dt);
-                        reporte.LocalReport.DataSources.Add(ds);
-                        reporte.LocalReport.ReportEmbeddedResource = "SistemaDental.Report1.rdlc";
-                        reporte.RefreshReport();
+                    reporte.Reset();
+                    dt = procedimiento.FechaVenc();
+                    ds = new ReportDataSource("DataSet1", dt);
+                    reporte.LocalReport.DataSources.Add(ds);
+                    reporte.LocalReport.ReportEmbeddedResource = "SistemaDental.Report1.rdlc";
+                    reporte.RefreshReport();
                     break;
                 case 2:
                     ObtenerValores();
@@ -255,19 +243,19 @@ namespace SistemaDental.MVCCV.Vista
             reporteseleccionado = 6;
             ManejoReportes();
             ManejoVisibilidad();
-            
+
         }
 
 
         private void ManejoVisibilidad()
         {
             btnMostrarReporte.Visibility = Visibility.Visible;
-            if(reporteseleccionado==1 || reporteseleccionado == 2 || reporteseleccionado == 3 || reporteseleccionado == 4)
+            if (reporteseleccionado == 1 || reporteseleccionado == 2 || reporteseleccionado == 3 || reporteseleccionado == 4)
             {
                 lblanio.Visibility = Visibility.Visible;
                 txtanio.Visibility = Visibility.Visible;
-                lblmes.Visibility= Visibility.Visible;
-                Mes.Visibility= Visibility.Visible;
+                lblmes.Visibility = Visibility.Visible;
+                Mes.Visibility = Visibility.Visible;
             }
             if (reporteseleccionado == 5)
             {
@@ -279,7 +267,7 @@ namespace SistemaDental.MVCCV.Vista
                 lbltratamiento.Visibility = Visibility.Visible;
                 Tratamiento.Visibility = Visibility.Visible;
             }
-            if (reporteseleccionado == 6 || reporteseleccionado==7|| reporteseleccionado==8)
+            if (reporteseleccionado == 6 || reporteseleccionado == 7 || reporteseleccionado == 8)
             {
                 lblempleado.Visibility = Visibility.Visible;
                 cmbEmpleado.Visibility = Visibility.Visible;

@@ -1,18 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace SistemaDental.MVCCV.Vista
 {
@@ -21,13 +13,14 @@ namespace SistemaDental.MVCCV.Vista
     /// </summary>
     public partial class RealizarCitaVista : UserControl
     {
-        ICollectionView Citas;
-        ClaseProcedimiento proc = new ClaseProcedimiento();
-        List<ClaseTratamiento> tratamientos = new List<ClaseTratamiento>();
-        List<ClaseInventario> materiales = new List<ClaseInventario>();
-        float total=0;
+        private ICollectionView Citas;
+        private ClaseProcedimiento proc = new ClaseProcedimiento();
+        private List<ClaseTratamiento> tratamientos = new List<ClaseTratamiento>();
+        private List<ClaseInventario> materiales = new List<ClaseInventario>();
+        private float total = 0;
         public event EventHandler CambioDeVistaPrincipal;
-        Validaciones val = new Validaciones();
+
+        private Validaciones val = new Validaciones();
         public Usuario user = new Usuario();
         public RealizarCitaVista()
         {
@@ -41,9 +34,14 @@ namespace SistemaDental.MVCCV.Vista
         protected virtual void CambioDeVista(object o)
         {
             if (MenuNavegacion.IsTopDrawerOpen)
+            {
                 MenuNavegacion.IsTopDrawerOpen = false;
+            }
+
             if (CambioDeVistaPrincipal != null)
+            {
                 CambioDeVistaPrincipal(o, null);
+            }
         }
         private void MostrarDatos()
         {
@@ -68,8 +66,8 @@ namespace SistemaDental.MVCCV.Vista
                 cmbTratamientos.DisplayMemberPath = "NombreTratamiento";
                 cmbMaterial.SelectedValuePath = "IdMaterial";
                 cmbMaterial.DisplayMemberPath = "NombreMaterial";
-               
-                foreach (ClaseTratamiento trat in tratamientos )
+
+                foreach (ClaseTratamiento trat in tratamientos)
                 {
                     trat.Materiales = proc.MostrarInventarioxTratamiento(trat.IdTratamiento);
                     total += trat.precioTrat;
@@ -78,7 +76,7 @@ namespace SistemaDental.MVCCV.Vista
                 cmbTratamientos.ItemsSource = tratamientos;
                 txtTotal.Text = total + "";
                 cmbTratamientos.SelectedIndex = 0;
-       
+
             }
             else
             {
@@ -100,13 +98,13 @@ namespace SistemaDental.MVCCV.Vista
                 cmbMaterial.ItemsSource = ((ClaseTratamiento)cmbTratamientos.SelectedItem).Materiales;
                 cmbMaterial.SelectedIndex = 0;
             }
-         
-         
+
+
         }
 
         private void cmbPaciente_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if (cmbPaciente.SelectedIndex>=0)
+            if (cmbPaciente.SelectedIndex >= 0)
             {
                 var filtro = new Predicate<object>(item => ((ClaseCitas)item).IdPacientes.ToString() == cmbPaciente.SelectedValue.ToString());
                 Citas.Filter = filtro;
@@ -114,7 +112,7 @@ namespace SistemaDental.MVCCV.Vista
             }
             else
             {
-         
+
                 Citas.Filter = null;
                 dgvCitas.ItemsSource = Citas;
             }
@@ -131,7 +129,7 @@ namespace SistemaDental.MVCCV.Vista
                     total += trat.precioTrat;
 
                 }
-               
+
                 txtTotal.Text = total + "";
             }
         }
@@ -145,7 +143,7 @@ namespace SistemaDental.MVCCV.Vista
             {
                 MessageBox.Show("Porfavor llene todos los campos necesarios");
                 return;
-            }    
+            }
             if (val.VerificarCantidad(Convert.ToDouble(txtCantidadCobrada.Text)) && !val.VerificarCantidad(Convert.ToDouble(txtCantidadMaterial.Text)))
             {
                 MessageBox.Show("Porfavor ingrese cantidades mayores a 0");
@@ -154,9 +152,9 @@ namespace SistemaDental.MVCCV.Vista
 
             foreach (ClaseTratamiento trat in tratamientos)
             {
-               if (!val.VerificarCantidad(trat.precioTrat))
+                if (!val.VerificarCantidad(trat.precioTrat))
                 {
-                    MessageBox.Show("El tratamiento "+trat.NombreTratamiento+" tiene como precio 0 porfavor corrija este error");
+                    MessageBox.Show("El tratamiento " + trat.NombreTratamiento + " tiene como precio 0 porfavor corrija este error");
                     cmbTratamientos.SelectedItem = trat;
                     return;
                 }
@@ -169,17 +167,17 @@ namespace SistemaDental.MVCCV.Vista
                         return;
                     }
                     int ind = materiales.FindIndex(x => x.IdMaterial == inv.IdMaterial);
-                   
+
                     materiales[ind].Cantidad -= inv.Cantidad;
-                    if (materiales[ind].Cantidad <=30 && !listaindicesCerca.Contains(ind))
+                    if (materiales[ind].Cantidad <= 30 && !listaindicesCerca.Contains(ind))
                     {
                         MessageBox.Show("Se esta quedando sin el material " + inv.NombreMaterial);
                         listaindicesCerca.Add(ind);
                         proc.InsertarLog(user.Ide, "Se le avisó falta de material");
                     }
-                    if (materiales[ind].Cantidad<=0 && !listaIndicesAgotado.Contains(ind))
+                    if (materiales[ind].Cantidad <= 0 && !listaIndicesAgotado.Contains(ind))
                     {
-                        MessageBox.Show("El material "+inv.NombreMaterial+ " ya está agotado, esto pudo haber ocurrido por una falta al comprar mas producto y registrarlo. La cita siempre se realizará","Un error inesperado a ocurrido",MessageBoxButton.OK);
+                        MessageBox.Show("El material " + inv.NombreMaterial + " ya está agotado, esto pudo haber ocurrido por una falta al comprar mas producto y registrarlo. La cita siempre se realizará", "Un error inesperado a ocurrido", MessageBoxButton.OK);
                         listaIndicesAgotado.Add(ind);
                         proc.InsertarLog(user.Ide, "Ocurrio un error de inventario. Se realizó una cita con materiales insuficientes");
                     }
@@ -189,11 +187,13 @@ namespace SistemaDental.MVCCV.Vista
 
 
             proc.FinalizarCita((ClaseCitas)dgvCitas.SelectedItem);
-           foreach (ClaseTratamiento trat in tratamientos)
+            foreach (ClaseTratamiento trat in tratamientos)
             {
                 proc.ActualizarDetallesCita(trat);
                 foreach (ClaseInventario inv in trat.Materiales)
+                {
                     proc.RestarMaterial(inv);
+                }
             }
             proc.InsertarLog(user.Ide, "Finalizó una cita");
             MostrarDatos();
@@ -208,20 +208,24 @@ namespace SistemaDental.MVCCV.Vista
         private void MenuNavegacion_MouseDown(object sender, MouseButtonEventArgs e)
         {
             if (MenuNavegacion.IsTopDrawerOpen)
+            {
                 MenuNavegacion.IsTopDrawerOpen = false;
+            }
         }
 
         private void btnRealizarCita_Click(object sender, RoutedEventArgs e)
         {
             if (MenuNavegacion.IsTopDrawerOpen)
+            {
                 MenuNavegacion.IsTopDrawerOpen = false;
+            }
         }
 
         private void btnAgendarCita_Click(object sender, RoutedEventArgs e)
         {
-        CitaVista VistaAgendarCita = new CitaVista();
+            CitaVista VistaAgendarCita = new CitaVista();
             VistaAgendarCita.CambioDeVistaPrincipal += CambioDeVistaPrincipal;
-        CambioDeVista(VistaAgendarCita);
+            CambioDeVista(VistaAgendarCita);
         }
 
         private void SoloNumeros(object sender, TextCompositionEventArgs e)
@@ -234,5 +238,5 @@ namespace SistemaDental.MVCCV.Vista
             val.SoloNumerosDec(e);
         }
     }
-    }
+}
 

@@ -1,11 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Data;
 using System.Data.SqlClient;
-using System.Configuration;
 
 namespace SistemaDental
 {
@@ -27,21 +23,21 @@ namespace SistemaDental
 
         public string Apellido { get; set; }
 
-        public string Telefono{ get; set; }
+        public string Telefono { get; set; }
 
-        public string Correo{get; set;}
+        public string Correo { get; set; }
 
         public int Puesto { get; set; }
 
         public string PuestoNombre { get; set; }
 
-        public int Genero{ get; set; }
+        public int Genero { get; set; }
         public string GeneroNombre { get; set; }
         public string Contraseña { get; set; }
         public string Contrasenianueva { get; set; }
         public bool Estado { get; set; }
 
-        public bool Administrador{ get; set; }
+        public bool Administrador { get; set; }
 
         public string usuario { get; set; }
 
@@ -49,7 +45,7 @@ namespace SistemaDental
 
         public Usuario() { }
 
-        public Usuario(string id,int ide, string nombre, string usuar,string apellido, string telefono, string correo,int puesto,string generonombre,int genero, string contraseña, bool estado, bool administrador)
+        public Usuario(string id, int ide, string nombre, string usuar, string apellido, string telefono, string correo, int puesto, string generonombre, int genero, string contraseña, bool estado, bool administrador)
         {
             Id = id;
             Nombre = nombre;
@@ -129,7 +125,7 @@ namespace SistemaDental
                 SqlCommand sqlCommand = new SqlCommand("IngresoEmpleados", sqlConnection);
                 sqlCommand.CommandType = CommandType.StoredProcedure;
                 //Establecer los valores de parametros
-                sqlCommand.Parameters.AddWithValue("@id",usuario.Id);
+                sqlCommand.Parameters.AddWithValue("@id", usuario.Id);
                 sqlCommand.Parameters.AddWithValue("@nombre", usuario.Nombre);
                 sqlCommand.Parameters.AddWithValue("@apellido", usuario.Apellido);
                 sqlCommand.Parameters.AddWithValue("@telefono", usuario.Telefono);
@@ -302,9 +298,22 @@ namespace SistemaDental
                 using (SqlDataReader rdr = sqlCommand.ExecuteReader())
                 {
                     while (rdr.Read())
-                        usuarios.Add(new Usuario { Id = Convert.ToString(rdr["id_empleado"]), Nombre= rdr["nombre"].ToString(), Apellido = rdr["apellido"].ToString(),
-                            Telefono = rdr["telefono"].ToString(),Correo = rdr["correo"].ToString(),Puesto= Convert.ToInt32(rdr["idpuesto"]),PuestoNombre=puesto.MostrarPuesto(Convert.ToInt32(rdr["idpuesto"])),GeneroNombre= rdr["genero"].ToString(),
-                            Contraseña = rdr["contraseña"].ToString(),Estado=Convert.ToBoolean(rdr["estado"]),Administrador= Convert.ToBoolean(rdr["administrador"])});
+                    {
+                        usuarios.Add(new Usuario
+                        {
+                            Id = Convert.ToString(rdr["id_empleado"]),
+                            Nombre = rdr["nombre"].ToString(),
+                            Apellido = rdr["apellido"].ToString(),
+                            Telefono = rdr["telefono"].ToString(),
+                            Correo = rdr["correo"].ToString(),
+                            Puesto = Convert.ToInt32(rdr["idpuesto"]),
+                            PuestoNombre = puesto.MostrarPuesto(Convert.ToInt32(rdr["idpuesto"])),
+                            GeneroNombre = rdr["genero"].ToString(),
+                            Contraseña = rdr["contraseña"].ToString(),
+                            Estado = Convert.ToBoolean(rdr["estado"]),
+                            Administrador = Convert.ToBoolean(rdr["administrador"])
+                        });
+                    }
                 }
 
                 return usuarios;
@@ -346,6 +355,7 @@ namespace SistemaDental
                 using (SqlDataReader rdr = sqlCommand.ExecuteReader())
                 {
                     while (rdr.Read())
+                    {
                         usuarios.Add(new Usuario
                         {
                             Id = Convert.ToString(rdr["id_empleado"]),
@@ -360,6 +370,7 @@ namespace SistemaDental
                             Estado = Convert.ToBoolean(rdr["estado"]),
                             Administrador = Convert.ToBoolean(rdr["administrador"])
                         });
+                    }
                 }
 
                 return usuarios;

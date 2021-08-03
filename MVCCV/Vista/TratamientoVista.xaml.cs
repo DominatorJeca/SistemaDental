@@ -2,17 +2,9 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace SistemaDental.MVCCV.Vista
 {
@@ -21,15 +13,12 @@ namespace SistemaDental.MVCCV.Vista
     /// </summary>
     public partial class TratamientoVista : UserControl
     {
-
-
-        ClaseProcedimiento proc = new ClaseProcedimiento();
-        ClaseTratamiento trat = new ClaseTratamiento();
-        Validaciones validar = new Validaciones();
-        List<ClaseInventario> listMateriales = new List<ClaseInventario>();
-
-        DataTable dtMaterial = new DataTable();
-        DataTable dtTratamiento = new DataTable();
+        private ClaseProcedimiento proc = new ClaseProcedimiento();
+        private ClaseTratamiento trat = new ClaseTratamiento();
+        private Validaciones validar = new Validaciones();
+        private List<ClaseInventario> listMateriales = new List<ClaseInventario>();
+        private DataTable dtMaterial = new DataTable();
+        private DataTable dtTratamiento = new DataTable();
 
         public Usuario user = new Usuario();
 
@@ -56,7 +45,7 @@ namespace SistemaDental.MVCCV.Vista
 
         //START: Botones
 
-            /*Tratamiento*/
+        /*Tratamiento*/
         private void btnGuardar_Click(object sender, RoutedEventArgs e)
         {
             GuardarDatos();
@@ -95,7 +84,7 @@ namespace SistemaDental.MVCCV.Vista
             {
                 if (!isUpdate)
                 {
-                    if(VerificarNombreTratamiento())
+                    if (VerificarNombreTratamiento())
                     {
                         GuardarTratamiento();
                         proc.InsertarLog(user.Ide, "Se ingreso el tratamiento [" + trat.TratamientoNombre + "]");
@@ -130,7 +119,7 @@ namespace SistemaDental.MVCCV.Vista
                         MessageBox.Show("El nombre del tratamiento ya existe en el sistema. Por favor, ingrese otro nombre para el tratamiento.");
 
                     }
-                    }          
+                }
             }
         }
 
@@ -175,10 +164,10 @@ namespace SistemaDental.MVCCV.Vista
             Cleaner();
             isUpdate = false;
         }
-            /*Lista de materiales de tratamiento*/
+        /*Lista de materiales de tratamiento*/
         private void btnListaAgregar_Click(object sender, RoutedEventArgs e)
         {
-            if(ValidarListaDatos())
+            if (ValidarListaDatos())
             {
                 ClaseInventario mat = new ClaseInventario();
 
@@ -250,7 +239,7 @@ namespace SistemaDental.MVCCV.Vista
                 gTratamientoID = int.Parse(dataRow[0].ToString());
 
                 dt = proc.BuscarTratamiento(gTratamientoID);
-                foreach(DataRow row in dt.Rows)
+                foreach (DataRow row in dt.Rows)
                 {
                     gTratamientoID = int.Parse(row["TratamientoID"].ToString());
                     txtTratamientoNombre.Text = row["Nombre"].ToString();
@@ -262,7 +251,7 @@ namespace SistemaDental.MVCCV.Vista
         }
 
         private void ObtenerInventarioTratamientos(int id)
-        { 
+        {
             DataTable dt = new DataTable();
 
             listMateriales.Clear();
@@ -274,7 +263,7 @@ namespace SistemaDental.MVCCV.Vista
                 mat.IdMaterial = int.Parse(row["InventarioID"].ToString());
                 mat.NombreMaterial = row["Nombre"].ToString();
                 mat.Cantidad = int.Parse(row["CantidadUsada"].ToString());
- 
+
                 listMateriales.Add(mat);
             }
 
@@ -313,7 +302,7 @@ namespace SistemaDental.MVCCV.Vista
 
         private void GuardarTratamientoInventario(int tratID)
         {
-            foreach(var item in listMateriales)
+            foreach (var item in listMateriales)
             {
                 proc.InsertarTratamientoDetalle(tratID, item.IdMaterial, item.Cantidad);
             }
@@ -321,7 +310,7 @@ namespace SistemaDental.MVCCV.Vista
 
         private int ObtenerCheck(CheckBox chk)
         {
-            if(chk.IsChecked.ToString() == "True")
+            if (chk.IsChecked.ToString() == "True")
             {
                 return 1;
             }
@@ -333,7 +322,7 @@ namespace SistemaDental.MVCCV.Vista
 
         private void txtCantidad_TextChanged(object sender, TextChangedEventArgs e)
         {
-            
+
         }
 
         private void TratamientoWindow_Closed(object sender, EventArgs e)
@@ -365,9 +354,9 @@ namespace SistemaDental.MVCCV.Vista
 
             dt = dtMaterial;
 
-            for(int index = 0; index < listMateriales.Count; index++)
+            for (int index = 0; index < listMateriales.Count; index++)
             {
-                if(index == 0)
+                if (index == 0)
                 {
                     filtro = listMateriales[index].IdMaterial.ToString();
                 }
@@ -377,7 +366,7 @@ namespace SistemaDental.MVCCV.Vista
                 }
             }
 
-            string where = "InventarioID NOT IN ("+ filtro +")";
+            string where = "InventarioID NOT IN (" + filtro + ")";
             string order = "Nombre ASC";
             dt = dt.Select(where, order).CopyToDataTable();
 
@@ -397,14 +386,14 @@ namespace SistemaDental.MVCCV.Vista
         /*Lista Tratamiento*/
         private void dg_tratamientos_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if(isUpdate)
+            if (isUpdate)
             {
                 DataRowView dataRow = (DataRowView)dg_tratamientos.SelectedItem;
                 if (dataRow != null)
                 {
                     gTratamientoID = int.Parse(dataRow[0].ToString());
 
-                    dg_materiales.IsEnabled = true;  
+                    dg_materiales.IsEnabled = true;
 
                     ObtenerTratamientoDatos();
                     ObtenerInventarioTratamientos(gTratamientoID);
@@ -414,10 +403,10 @@ namespace SistemaDental.MVCCV.Vista
             }
         }
 
-            /*Lista Materiales*/
+        /*Lista Materiales*/
         private void dg_materiales_SelectionChanged_1(object sender, SelectionChangedEventArgs e)
         {
-            if(dg_materiales.SelectedIndex != -1)
+            if (dg_materiales.SelectedIndex != -1)
             {
                 dg_tratamientos_materiales.SelectedIndex = -1;
                 dg_tratamientos_materiales.Items.Refresh();
@@ -433,7 +422,7 @@ namespace SistemaDental.MVCCV.Vista
 
         private void dg_tratamientos_materiales_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if(dg_tratamientos_materiales.SelectedIndex != -1)
+            if (dg_tratamientos_materiales.SelectedIndex != -1)
             {
                 dg_materiales.SelectedIndex = -1;
                 btnListaEliminar.IsEnabled = true;
@@ -535,7 +524,7 @@ namespace SistemaDental.MVCCV.Vista
             }
             else
             {
-                if(float.Parse(txtPrecioSugerido.Text) <= 0 || float.Parse(txtPrecioSugerido.Text) > 50000)
+                if (float.Parse(txtPrecioSugerido.Text) <= 0 || float.Parse(txtPrecioSugerido.Text) > 50000)
                 {
                     MessageBox.Show("Por favor, ingrese un precio valido para el tratamiento. Los precios validos estan entre los rangos de '1' a '50,000'.");
                     return false;
@@ -566,7 +555,7 @@ namespace SistemaDental.MVCCV.Vista
             }
             else
             {
-                if(int.Parse(txtCantidad.Text) <= 0)
+                if (int.Parse(txtCantidad.Text) <= 0)
                 {
                     MessageBox.Show("Por favor, ingrese una cantidad valida.");
                     return false;
@@ -598,7 +587,7 @@ namespace SistemaDental.MVCCV.Vista
 
         private void dg_materiales_LostFocus(object sender, RoutedEventArgs e)
         {
-            
+
         }
 
         private void dg_tratamientos_LostFocus(object sender, RoutedEventArgs e)

@@ -1,19 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace SistemaDental.MVCCV.Vista
 {
@@ -22,12 +13,12 @@ namespace SistemaDental.MVCCV.Vista
     /// </summary>
     public partial class CompraVista : UserControl
     {
-        Validaciones val = new Validaciones();
+        private Validaciones val = new Validaciones();
         public Usuario user = new Usuario();
-        ObservableCollection<ClaseInventario> productosCompra = new ObservableCollection<ClaseInventario>();
+        private ObservableCollection<ClaseInventario> productosCompra = new ObservableCollection<ClaseInventario>();
         private ICollectionView DatosDataGrid;
-        ClaseProcedimiento proc = new ClaseProcedimiento();
-        bool nuevoprod = false;
+        private ClaseProcedimiento proc = new ClaseProcedimiento();
+        private bool nuevoprod = false;
 
         public CompraVista()
         {
@@ -35,14 +26,14 @@ namespace SistemaDental.MVCCV.Vista
             fchVencimiento.BlackoutDates.AddDatesInPast();
             fchVencimiento.BlackoutDates.Add(new CalendarDateRange(DateTime.Today, DateTime.Today));
         }
-       
+
         private void btnComprar_Click(object sender, RoutedEventArgs e)
         {
             int compraId = proc.InsertarCompra(user.Ide);
             proc.InsertarLog(user.Ide, "Se realizó una commpra");
-            foreach ( ClaseInventario inv in productosCompra )
+            foreach (ClaseInventario inv in productosCompra)
             {
-                proc.InsertarDetalleCompra(compraId, inv.IdMaterial, inv.Cantidad, inv.precio, inv.fechaVenc,inv.NombreMaterial,user);
+                proc.InsertarDetalleCompra(compraId, inv.IdMaterial, inv.Cantidad, inv.precio, inv.fechaVenc, inv.NombreMaterial, user);
                 proc.InsertarLog(user.Ide, "Se ingresó un detalle de compra");
 
             }
@@ -59,10 +50,10 @@ namespace SistemaDental.MVCCV.Vista
             btnComprar.IsEnabled = false;
             calculos();
         }
-        
+
         private void btnagregar_Click(object sender, RoutedEventArgs e)
         {
-            if (val.VerificarCampos(this) && (dgv_Compras.SelectedItem!=null||nuevoprod))
+            if (val.VerificarCampos(this) && (dgv_Compras.SelectedItem != null || nuevoprod))
             {
                 ClaseInventario prod = new ClaseInventario();
                 prod.IdMaterial = nuevoprod ? 0 : Convert.ToInt32(dgv_Compras.SelectedValue.ToString());  //Mopd
@@ -71,19 +62,19 @@ namespace SistemaDental.MVCCV.Vista
                 prod.fechaVenc = (DateTime)fchVencimiento.SelectedDate;
                 prod.Cantidad = Convert.ToInt32(txtCantidad.Text);
 
-                if (prod.Cantidad>1000 || prod.Cantidad <=0 )
+                if (prod.Cantidad > 1000 || prod.Cantidad <= 0)
                 {
                     MessageBox.Show("Porfavor ingrese una cantidad valida");
                     return;
                 }
-              
-                if (prod.precio>10000 || prod.precio <=0 )
+
+                if (prod.precio > 10000 || prod.precio <= 0)
                 {
                     MessageBox.Show("Por favor ingrese un precio fijo");
                     return;
                 }
-                
-                foreach(ClaseInventario inventario in DatosDataGrid)
+
+                foreach (ClaseInventario inventario in DatosDataGrid)
                 {
                     if (nuevoprod && inventario.NombreMaterial.ToLower().Contains(prod.NombreMaterial.ToLower()))
                     {
@@ -93,12 +84,14 @@ namespace SistemaDental.MVCCV.Vista
                 }
 
                 foreach (ClaseInventario inv in productosCompra)
-
-                    if ((inv.IdMaterial == prod.IdMaterial && !nuevoprod)||(nuevoprod && inv.NombreMaterial.ToLower()==prod.NombreMaterial.ToLower()))
+                {
+                    if ((inv.IdMaterial == prod.IdMaterial && !nuevoprod) || (nuevoprod && inv.NombreMaterial.ToLower() == prod.NombreMaterial.ToLower()))
                     {
                         MessageBox.Show("Este material ya existe eliminelo e ingreselo nuevamente");
                         return;
                     }
+                }
+
                 productosCompra.Add(prod);
                 dgv_Carrito.ItemsSource = productosCompra;
                 dgv_Carrito.SelectedValuePath = "IdMaterial";
@@ -120,20 +113,21 @@ namespace SistemaDental.MVCCV.Vista
 
             }
             else
+            {
                 MessageBox.Show("Por favor verifique todos los datos antes de ingresar un nuevo producto");
-           
+            }
         }
-      
 
-        public void calculos ()
+
+        public void calculos()
         {
-            double totales=0;
-            int cantidad=0;
-            double subtotal=0;
+            double totales = 0;
+            int cantidad = 0;
+            double subtotal = 0;
             foreach (ClaseInventario prod in productosCompra)
             {
                 cantidad += prod.Cantidad;
-                subtotal += (prod.precio*prod.Cantidad);
+                subtotal += (prod.precio * prod.Cantidad);
             }
             totales = subtotal + ((subtotal) * 0.15);
 
@@ -144,7 +138,7 @@ namespace SistemaDental.MVCCV.Vista
 
         private void Grid_Loaded(object sender, RoutedEventArgs e)
         {
-            DatosDataGrid = new CollectionViewSource() { Source = proc.MostrarInventario() }.View ;
+            DatosDataGrid = new CollectionViewSource() { Source = proc.MostrarInventario() }.View;
             dgv_Compras.SelectedValuePath = "IdMaterial";
             dgv_Compras.ItemsSource = DatosDataGrid;
 
@@ -153,10 +147,15 @@ namespace SistemaDental.MVCCV.Vista
         private void btnQuitar_Click(object sender, RoutedEventArgs e)
         {
             if (dgv_Carrito.SelectedValue != null)
+            {
                 productosCompra.RemoveAt(dgv_Carrito.SelectedIndex);
+            }
             else
+            {
                 MessageBox.Show("Por favor seleccione un producto a eliminar");
-            if(productosCompra.Count==0)
+            }
+
+            if (productosCompra.Count == 0)
             {
                 btnQuitar.IsEnabled = false;
                 btnComprar.IsEnabled = false;
@@ -181,7 +180,7 @@ namespace SistemaDental.MVCCV.Vista
         {
             val.SoloLetras(e);
         }
-        private void PreviewTextInputOnlyDecNumbers(object sender,TextCompositionEventArgs e)
+        private void PreviewTextInputOnlyDecNumbers(object sender, TextCompositionEventArgs e)
         {
             val.SoloNumerosDec(e);
         }

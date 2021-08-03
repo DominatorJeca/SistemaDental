@@ -1,19 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace SistemaDental.MVCCV.Vista
 {
@@ -23,17 +13,16 @@ namespace SistemaDental.MVCCV.Vista
     public partial class CitaVista : UserControl
     {
         public Usuario user = new Usuario();
-        ObservableCollection<ClaseCitas> tratamientos = new ObservableCollection<ClaseCitas>();
-        ClaseCitas citas = new ClaseCitas();
+        private ObservableCollection<ClaseCitas> tratamientos = new ObservableCollection<ClaseCitas>();
+        private ClaseCitas citas = new ClaseCitas();
         public event EventHandler CambioDeVistaPrincipal;
-        List<ClaseCitas> ListaTratamientos= new List<ClaseCitas>();
+
+        private List<ClaseCitas> ListaTratamientos = new List<ClaseCitas>();
         public ClaseProcedimiento proc = new ClaseProcedimiento();
-        List<ClaseInventario> Materiales = new List<ClaseInventario>();
-
-
-        int vand = 0;
-        int bton = 0;
-        int dtg = 0;
+        private List<ClaseInventario> Materiales = new List<ClaseInventario>();
+        private int vand = 0;
+        private int bton = 0;
+        private int dtg = 0;
 
         private bool Admin;
         private String Nombree;
@@ -60,12 +49,17 @@ namespace SistemaDental.MVCCV.Vista
         protected virtual void CambioDeVista(object o)
         {
             if (MenuNavegacion.IsTopDrawerOpen)
+            {
                 MenuNavegacion.IsTopDrawerOpen = false;
+            }
+
             if (CambioDeVistaPrincipal != null)
+            {
                 CambioDeVistaPrincipal(o, null);
+            }
         }
 
-       private void permisos()
+        private void permisos()
         {
             if (user.PuestoNombre == "Secretario" && !user.Administrador)
             {
@@ -113,7 +107,9 @@ namespace SistemaDental.MVCCV.Vista
                 dtg_Tratamientos.SelectedValuePath = "IdTratamiento";
             }
             else
+            {
                 MessageBox.Show("Solo se permite realizar 3 tratamientos por cita. Recuerde que tiene un espacio de 1 Hora para cada cita");
+            }
         }
         private void MostrarDatos()
         {
@@ -261,7 +257,7 @@ namespace SistemaDental.MVCCV.Vista
                     encenderbotones();
                     cmbPaciente1.SelectedValue = null;
                     cmbPaciente1.IsEnabled = false;
-                  
+
                 }
                 else
                 {
@@ -407,7 +403,7 @@ namespace SistemaDental.MVCCV.Vista
                 {
                     foreach (ClaseCitas inv in rd)
                     {
-                        if ((inv.IdPacientes==prod.IdPacientes|| inv.IdEmpleado==prod.IdEmpleado)&&inv.fechaCita.TimeOfDay == prod.fechaCita.TimeOfDay && bandera1 != 1)
+                        if ((inv.IdPacientes == prod.IdPacientes || inv.IdEmpleado == prod.IdEmpleado) && inv.fechaCita.TimeOfDay == prod.fechaCita.TimeOfDay && bandera1 != 1)
                         {
                             MessageBox.Show("Este Doctor/Paciente tienen una cita ese mismo dia y misma Hora");
                             vand = 1;
@@ -423,16 +419,16 @@ namespace SistemaDental.MVCCV.Vista
                 }
                 if (bandera1 != 1)
                 {
-                    var v1 = (DateTime)prod.fechaCita.AddHours(1);
+                    var v1 = prod.fechaCita.AddHours(1);
                     foreach (ClaseCitas inv in rd)
                     {
 
 
 
-                        var v = (DateTime)inv.fechaCita;
+                        var v = inv.fechaCita;
 
 
-                        if ((inv.IdPacientes == prod.IdPacientes || inv.IdEmpleado == prod.IdEmpleado)&&TimeSpan.Compare(v1.TimeOfDay, new DateTime(v.Year, v.Month, v.Day,
+                        if ((inv.IdPacientes == prod.IdPacientes || inv.IdEmpleado == prod.IdEmpleado) && TimeSpan.Compare(v1.TimeOfDay, new DateTime(v.Year, v.Month, v.Day,
                                  v.Hour, 0, 0).TimeOfDay) == 0 && bandera1 != 2)
                         {
 
@@ -461,10 +457,10 @@ namespace SistemaDental.MVCCV.Vista
                 }
                 if (bandera1 != 1 && bandera1 != 2)
                 {
-                    var v1 = (DateTime)prod.fechaCita.AddHours(-1);
+                    var v1 = prod.fechaCita.AddHours(-1);
                     foreach (ClaseCitas inv in rd)
                     {
-                        var v = (DateTime)inv.fechaCita;
+                        var v = inv.fechaCita;
                         if ((inv.IdPacientes == prod.IdPacientes || inv.IdEmpleado == prod.IdEmpleado) && TimeSpan.Compare(v1.TimeOfDay, new DateTime(v.Year, v.Month, v.Day,
                                  v.Hour, 0, 0).TimeOfDay) == 0 && bandera1 != 2 && bandera1 != 2)
                         {
@@ -557,7 +553,7 @@ namespace SistemaDental.MVCCV.Vista
                     });
                     if (c == 0)
                     {
-                        cmbTratamiento.SelectedValue = ((ClaseCitas)tr).IdTratamiento;
+                        cmbTratamiento.SelectedValue = tr.IdTratamiento;
                         c = 1;
                     }
                 }
@@ -716,7 +712,9 @@ namespace SistemaDental.MVCCV.Vista
         private void MenuNavegacion_MouseDown(object sender, MouseButtonEventArgs e)
         {
             if (MenuNavegacion.IsTopDrawerOpen)
+            {
                 MenuNavegacion.IsTopDrawerOpen = false;
+            }
         }
         private void Grid_MouseDown(object sender, MouseButtonEventArgs e)
         {
@@ -726,7 +724,10 @@ namespace SistemaDental.MVCCV.Vista
         private void btnAgendarCita_Click(object sender, RoutedEventArgs e)
         {
             if (MenuNavegacion.IsTopDrawerOpen)
+            {
                 MenuNavegacion.IsTopDrawerOpen = false;
+            }
+
             mostrarCitas();
             MostrarDatos();
         }

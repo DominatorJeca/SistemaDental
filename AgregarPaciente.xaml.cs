@@ -1,22 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 // Agregar los namespaces necesarios para conectarse a SQL Server
-using System.Data;
-using System.Data.SqlClient;
-using System.Configuration;
-using System.Text.RegularExpressions;
 
 namespace SistemaDental
 {
@@ -25,12 +11,12 @@ namespace SistemaDental
     /// </summary>
     public partial class AgregarPaciente : Window
     {
-        Validaciones validaciones = new Validaciones();
-        bool Admin;
-        String Nombree;
+        private Validaciones validaciones = new Validaciones();
+        private bool Admin;
+        private String Nombree;
 
         //Variable para definir el genero seleccionado por el radio boton
-        ClasePaciente paciente = new ClasePaciente();
+        private ClasePaciente paciente = new ClasePaciente();
 
         //Constructores
         public AgregarPaciente()
@@ -39,7 +25,8 @@ namespace SistemaDental
             InitializeComponent();
 
         }
-        Validaciones validar = new Validaciones();
+
+        private Validaciones validar = new Validaciones();
         public AgregarPaciente(bool admin, string name)
         {
 
@@ -59,7 +46,7 @@ namespace SistemaDental
 
         private void ObtenerValores()
         {
-           
+
         }
         /// <summary>
         /// Ingresa los valores a la base de datos al presionar el botón
@@ -68,7 +55,7 @@ namespace SistemaDental
         {
 
             //Comprueba que todos los campos estén llenos
-            if (txtAgregarApellido.Text == String.Empty || txtAgregarNombre.Text == String.Empty || txtAgregarIdentidad.Text == String.Empty || txtAgregarTelefono.Text == String.Empty || datePicker1.Text == String.Empty ||rbMasculino.IsChecked==false && rbFemenino.IsChecked==false)
+            if (txtAgregarApellido.Text == String.Empty || txtAgregarNombre.Text == String.Empty || txtAgregarIdentidad.Text == String.Empty || txtAgregarTelefono.Text == String.Empty || datePicker1.Text == String.Empty || rbMasculino.IsChecked == false && rbFemenino.IsChecked == false)
             {
                 MessageBox.Show("¡Por favor llena todos los campos!");
                 txtAgregarNombre.Focus();
@@ -79,13 +66,13 @@ namespace SistemaDental
                 try
                 {
                     ObtenerValores();
-                   // paciente.AgregarPaciente(paciente);
+                    // paciente.AgregarPaciente(paciente);
                     MessageBox.Show("Datos ingresados correctamente.");
                     Limpiar();
 
                 }
                 //Lanza una excepcion si ocurre un fallo
-                catch(Exception)
+                catch (Exception)
                 {
                     MessageBox.Show("Ha ocurrido un error, revise sus datos e intente de nuevo");
                 }
@@ -126,7 +113,7 @@ namespace SistemaDental
         private void AddPaciente_Closed(object sender, EventArgs e)
         {
 
-            
+
         }
     }
 }
