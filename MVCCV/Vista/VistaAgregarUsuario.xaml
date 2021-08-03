@@ -36,7 +36,7 @@
         <PasswordBox x:Name="txtConfirmarContra" Visibility="Hidden" IsEnabled="False" Margin="694,125,72.6,293.2" materialDesign:HintAssist.Hint="Confirmar Contraseña" Style="{StaticResource MaterialDesignFloatingHintPasswordBox}" FontFamily="Bahnschrift" FontSize="12" Background="#7FFFFFFF"
                      MaxLength="20"/>
         <Button x:Name="btnAgregarUsuario" Content="Agregar" HorizontalAlignment="Right"  VerticalAlignment="Bottom" Margin="0,0,72.6,179.2" Width="236" Height="43" Background="#48C9B0 " BorderBrush="{x:Null}" Click="btnAgregarUsuario_Click_1"/>
-        <DataGrid x:Name="dgvEmpleado" HorizontalAlignment="Left"  Height="186" SelectionMode="Single" Margin="70,233,0,0" VerticalAlignment="Top" Width="642" Background="#FF056676" Foreground="#DDFFFFFF" AutoGenerateColumns="False" IsReadOnly="True" SelectionChanged="dgvEmpleado_SelectionChanged">
+        <DataGrid x:Name="dgvEmpleado" Loaded="dgvEmpleado_Loaded" HorizontalAlignment="Left"  Height="186" SelectionMode="Single" Margin="70,233,0,0" VerticalAlignment="Top" Width="642" Background="#FF056676" Foreground="#DDFFFFFF" AutoGenerateColumns="False" IsReadOnly="True" SelectionChanged="dgvEmpleado_SelectionChanged">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Identidad" Binding="{Binding Id}" Width="200"/>
                 <DataGridTextColumn Header="Nombre" Binding="{Binding Nombre}" Width="200"/>

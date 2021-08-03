@@ -479,10 +479,11 @@ namespace SistemaDental.MVCCV.Vista
 
         }
 
-     
-  
-
-
-
+        private void dgvEmpleado_Loaded(object sender, RoutedEventArgs e)
+        {
+            ColectionEmpleados = new CollectionViewSource() { Source = Proc.MostrarEmpleados(true) }.View;
+            dgvEmpleado.ItemsSource = ColectionEmpleados;
+            dgvEmpleado.SelectedValuePath = "Ide";
+        }
     }
 }
