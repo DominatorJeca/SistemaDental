@@ -15,7 +15,7 @@
         <DatePicker Name="fchVencimiento" materialDesign:HintAssist.Hint="Fecha de Vencimiento" Margin="24,71,626,351" VerticalAlignment="Stretch" />
         <TextBox x:Name="txtNombreProd" IsEnabled="false" Style="{StaticResource MaterialDesignFloatingHintTextBox}"  PreviewTextInput="PreviewTextInputOnlyLetters" Text="{Binding ElementName=dgv_Compras,Path=SelectedItem.NombreMaterial}" materialDesign:HintAssist.Hint="Nombre del producto" FontFamily="Bahnschrift" FontSize="12" Margin="24,28,626,389"/>
         <TextBox x:Name="txtprecio" PreviewTextInput="PreviewTextInputOnlyDecNumbers" Margin="444,33,401,0" materialDesign:HintAssist.Hint="Precio" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontFamily="Bahnschrift" FontSize="12" Background="#7FFFFFFF" Height="33" VerticalAlignment="Top"/>
-        <DataGrid Margin="0,165,403,65"  Background="#FF056676" x:Name="dgv_Compras" HorizontalContentAlignment="Center" IsReadOnly="True" AutoGenerateColumns="False" HorizontalAlignment="Right" Width="623"  SelectionMode="Single" SelectionChanged="dgv_Compras_SelectionChanged">
+        <DataGrid Margin="0,165,401,65"  Background="#FF056676" x:Name="dgv_Compras" HorizontalContentAlignment="Center" IsReadOnly="True" AutoGenerateColumns="False" HorizontalAlignment="Right" Width="625"  SelectionMode="Single" SelectionChanged="dgv_Compras_SelectionChanged">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Producto"  Width="150*" Binding="{Binding NombreMaterial}"/>
                 <DataGridTextColumn Header="Cantidad Actual" Width="150* " Binding="{Binding Cantidad}"/>
@@ -38,8 +38,9 @@
         <TextBox x:Name="txtSubtotal" IsEnabled="False" Margin="24,400,839,0" materialDesign:HintAssist.Hint="Subtotal" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontFamily="Bahnschrift" FontSize="12" Background="#7FFFFFFF" Height="33" VerticalAlignment="Top"/>
         <TextBox x:Name="txtCantidadTotal"  IsEnabled="False"  Margin="234,400,626,0" materialDesign:HintAssist.Hint="Cantidad" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontFamily="Bahnschrift" FontSize="12" Background="#7FFFFFFF" Height="33" VerticalAlignment="Top"/>
         <TextBox x:Name="txtTotal"  IsEnabled="False" Margin="444,400,403,0" materialDesign:HintAssist.Hint="Total" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontFamily="Bahnschrift" FontSize="12" Background="#7FFFFFFF" Height="33" VerticalAlignment="Top"/>
-        <Button x:Name="btnNuevoProducto" Content="Nuevo Producto" Margin="24,119,825,304" FontFamily="Bahnschrift" FontSize="16" Background="#48C9B0 " BorderBrush="{x:Null}" Height="Auto" RenderTransformOrigin="0.491,0.744" Click="btnNuevoProducto_Click" />
-        <Button x:Name="btnCancelar" Content="Cancelar" IsEnabled="False" Margin="234,119,615,304" FontFamily="Bahnschrift" FontSize="16" Background="#48C9B0 " BorderBrush="{x:Null}" Height="Auto" RenderTransformOrigin="0.491,0.744" Click="btnCancelar_Click" />
+        <Button x:Name="btnNuevoProducto" Content="Nuevo Producto" Margin="24,119,856,304" FontFamily="Bahnschrift" FontSize="16" Background="#48C9B0 " BorderBrush="{x:Null}" Height="Auto" RenderTransformOrigin="0.491,0.744" Click="btnNuevoProducto_Click" />
+        <Button x:Name="btnCancelar" Content="Cancelar" IsEnabled="False" Margin="199,119,693,304" FontFamily="Bahnschrift" FontSize="16" Background="#48C9B0 " BorderBrush="{x:Null}" Height="Auto" RenderTransformOrigin="0.491,0.744" Click="btnCancelar_Click" />
+        <TextBox  x:Name="txtBuscarProducto" Margin="369,119,401,304"  materialDesign:HintAssist.Hint="Buscar" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontFamily="Bahnschrift" FontSize="12" Background="#7FFFFFFF" TextChanged="txtBuscarProducto_TextChanged"  />
 
 
 

@@ -61,6 +61,14 @@ namespace SistemaDental.MVCCV.Vista
             if (CambioDeVistaPrincipal != null)
                 CambioDeVistaPrincipal(o, null);
         }
+
+       private void permisos()
+        {
+            if (user.PuestoNombre == "Secretario" && !user.Administrador)
+            {
+                btnRealizarCita.IsEnabled = false;
+            }
+        }
         private void Agregar_Tratamientos_Click(object sender, RoutedEventArgs e)
         {
             ClaseCitas prod = new ClaseCitas();
@@ -89,7 +97,7 @@ namespace SistemaDental.MVCCV.Vista
             cmbPaciente.DisplayMemberPath = "Nombre_Id_paciente";
             cmbPaciente.SelectedValuePath = "IdPacientes";
             cmbEmpleado.ItemsSource = citas.MostrarEmpleado();
-            cmbEmpleado.DisplayMemberPath = "NombreDoctor";
+            cmbEmpleado.DisplayMemberPath = "nombrecompoletoempleado";
             cmbEmpleado.SelectedValuePath = "IdEmpleado";
             cmbTratamiento.ItemsSource = citas.MostrarTratamiento();
             cmbTratamiento.DisplayMemberPath = "NombreTratamiento";
@@ -682,6 +690,8 @@ namespace SistemaDental.MVCCV.Vista
         {
             if (MenuNavegacion.IsTopDrawerOpen)
                 MenuNavegacion.IsTopDrawerOpen = false;
+            mostrarCitas();
+            MostrarDatos();
         }
 
         private void btnRealizarCita_Click(object sender, RoutedEventArgs e)
@@ -689,7 +699,10 @@ namespace SistemaDental.MVCCV.Vista
             RealizarCitaVista VistaRealizarCita = new RealizarCitaVista();
             VistaRealizarCita.CambioDeVistaPrincipal += CambioDeVistaPrincipal;
             VistaRealizarCita.user = user;
+
             CambioDeVista(VistaRealizarCita);
+            mostrarCitas();
+            MostrarDatos();
         }
 
         private void cmbPaciente1_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -764,8 +777,9 @@ namespace SistemaDental.MVCCV.Vista
 
         }
 
-
-
-
+        private void UserControl_Loaded(object sender, RoutedEventArgs e)
+        {
+            permisos();
+        }
     }
 }

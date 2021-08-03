@@ -90,6 +90,7 @@ namespace SistemaDental.MVCCV.Vista
             btnCancelar.IsEnabled = true;
 
             dg_materiales.IsEnabled = true;
+            dg_tratamientos.IsEnabled = false;
         }
 
         private void btnEditar_Click(object sender, RoutedEventArgs e)
@@ -99,10 +100,13 @@ namespace SistemaDental.MVCCV.Vista
             btnAgregar.IsEnabled = false;
 
             dg_tratamientos.IsEnabled = true;
+            dg_tratamientos.SelectedIndex = -1;
 
             isUpdate = true;
             btnCancelar.IsEnabled = true;
-            btnEditar.IsEnabled = false;   
+            btnEditar.IsEnabled = false;
+            btnListaAgregar.IsEnabled = true;
+            btnListaCancelar.IsEnabled = true;
         }
 
         private void btnCancelar_Click(object sender, RoutedEventArgs e)
@@ -149,12 +153,9 @@ namespace SistemaDental.MVCCV.Vista
                     dg_tratamientos_materiales.Items.Refresh();
                     dg_materiales.Items.Refresh();
                 }
-
-                btnListaAgregar.IsEnabled = false;
-                btnListaCancelar.IsEnabled = false;
-                btnListaEliminar.IsEnabled = false;
-                txtCantidad.Clear();
             }
+            btnListaEliminar.IsEnabled = false;
+            txtCantidad.Clear();
         }
 
         private void btnListaEliminar_Click(object sender, RoutedEventArgs e)
@@ -337,18 +338,20 @@ namespace SistemaDental.MVCCV.Vista
         /*Lista Tratamiento*/
         private void dg_tratamientos_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-
-            DataRowView dataRow = (DataRowView)dg_tratamientos.SelectedItem;
-            if (dataRow != null)
+            if(isUpdate)
             {
-                gTratamientoID = int.Parse(dataRow[0].ToString());
+                DataRowView dataRow = (DataRowView)dg_tratamientos.SelectedItem;
+                if (dataRow != null)
+                {
+                    gTratamientoID = int.Parse(dataRow[0].ToString());
 
-                dg_materiales.IsEnabled = true;
-                
-                ObtenerTratamientoDatos();
-                ObtenerInventarioTratamientos(gTratamientoID);
-                ObtenerMaterialFiltro();
-                CamposEstado(false);
+                    dg_materiales.IsEnabled = true;  
+
+                    ObtenerTratamientoDatos();
+                    ObtenerInventarioTratamientos(gTratamientoID);
+                    ObtenerMaterialFiltro();
+                    CamposEstado(false);
+                }
             }
         }
 
@@ -419,7 +422,7 @@ namespace SistemaDental.MVCCV.Vista
             btnListaEliminar.IsEnabled = false;
             btnListaAgregar.IsEnabled = false;
 
-            dg_tratamientos.IsEnabled = false;
+            dg_tratamientos.IsEnabled = true;
             dg_materiales.IsEnabled = false;
 
             listMateriales.Clear();
@@ -436,7 +439,7 @@ namespace SistemaDental.MVCCV.Vista
 
             txtCantidad.Clear();
             btnListaAgregar.Content = "Agregar material";
-            btnListaAgregar.IsEnabled = false;
+            btnListaAgregar.IsEnabled = true;
             btnListaEliminar.IsEnabled = false;
             btnListaCancelar.IsEnabled = false;
 
@@ -464,35 +467,44 @@ namespace SistemaDental.MVCCV.Vista
                 MessageBox.Show("Por favor, ingrese un precio valido para el tratamiento.");
                 return false;
             }
+            else
+            {
+                if(float.Parse(txtPrecioSugerido.Text) <= 0)
+                {
+                    MessageBox.Show("Por favor, ingrese un precio valido para el tratamiento.");
+                    return false;
+                }
+            }
 
             if (!listMateriales.Any())
             {
                 MessageBox.Show("Por favor, ingrese los materiales que el tratamiento requiere.");
                 return false;
             }
-
             return true;
         }
 
         private bool ValidarListaDatos()
         {
-            if (VerificarDatos(txtTratamientoNombre))
+            if (dg_materiales.SelectedIndex == -1 && !isListaUpdate)
             {
-                MessageBox.Show("Por favor, ingrese un nombre al tratamiento.");
+                MessageBox.Show("Por favor, selecione un material para añadir.");
                 return false;
             }
 
-            if (VerificarDatos(txtPrecioSugerido) && validar.VerificarCantidad(double.Parse(txtPrecioSugerido.Text)))
-            {
-                MessageBox.Show("Por favor, ingrese un precio valido para el tratamiento.");
-                return false;
-            }
-
-            if(VerificarDatos(txtCantidad))
+            if (VerificarDatos(txtCantidad))
             {
                 MessageBox.Show("Por favor, ingrese la cantidad del material que usaria el tratamiento.");
+                return false;
             }
-
+            else
+            {
+                if(int.Parse(txtCantidad.Text) <= 0)
+                {
+                    MessageBox.Show("Por favor, ingrese una cantidad valida.");
+                    return false;
+                }
+            }
             return true;
         }
 

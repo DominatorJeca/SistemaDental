@@ -208,6 +208,7 @@ namespace SistemaDental.MVCCV.Vista
                         btnAgregarPaciente.IsEnabled = false;
                         btnEditarPaciente.IsEnabled = false;
                         btnAgregarPaciente.IsEnabled = true;
+                        btnGuardarPaciente.IsEnabled = false;
 
                     }
                     catch (Exception ex)
@@ -233,6 +234,7 @@ namespace SistemaDental.MVCCV.Vista
                         btnAgregarPaciente.IsEnabled = false;
                         btnEditarPaciente.IsEnabled = false;
                         btnAgregarPaciente.IsEnabled = true;
+                        btnGuardarPaciente.IsEnabled = false;
 
                     }
                     catch (Exception ex)

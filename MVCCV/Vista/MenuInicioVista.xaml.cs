@@ -88,9 +88,27 @@ namespace SistemaDental.MVCCV.Vista
 
         private void btnReportes_Click(object sender, RoutedEventArgs e)
         {
-            
+            VistaMenuReportes.user = user; 
             CambioDeVista(VistaMenuReportes);
             
+        }
+
+        private void UserControl_Loaded(object sender, RoutedEventArgs e)
+        {
+            permisosPuesto();
+        }
+        private void permisosPuesto()
+        {
+            if (user.PuestoNombre == "Asistente" && !user.Administrador)
+            {
+                btnTratamientos.IsEnabled = false;
+                btnInventario.IsEnabled = false;
+                btnCompra.IsEnabled = false;
+            }
+            if (user.PuestoNombre == "Secretario" && !user.Administrador)
+            {
+                btnTratamientos.IsEnabled = false;
+            }
         }
     }
 }

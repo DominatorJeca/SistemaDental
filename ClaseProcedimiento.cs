@@ -274,6 +274,7 @@ namespace SistemaDental
                         usuario.Administrador = Convert.ToBoolean(reader["administrador"]);
                         usuario.Ide = Convert.ToInt32(reader[0].ToString());
                         usuario.usuario = Convert.ToString(reader["usuario"]);
+                        usuario.PuestoNombre = Convert.ToString(reader["NombrePuesto"]);
                     }
                 }
 
@@ -493,7 +494,8 @@ namespace SistemaDental
             }
             catch (Exception E)
             {
-                throw E;
+                MessageBox.Show("No hay materiales necesarios para realizar este tratamiento");
+
             }
             finally
             {
@@ -532,7 +534,7 @@ namespace SistemaDental
                 command.Connection = con.Open();
                 //crear el comando SQL
                 command.CommandText = "sp_Compra_Insertar";
-                command.Parameters.AddWithValue("@EmpleadoID", empleadoId);
+                command.Parameters.AddWithValue("@UserId", empleadoId);
                 command.CommandType = CommandType.StoredProcedure;
                 reader = command.ExecuteReader();
                 reader.Read();
@@ -1575,7 +1577,7 @@ namespace SistemaDental
             }
         }
 
-        public void InsertarTransaccion (int usuarioID,float cantidad,string observaciones,int CitaID)
+        public void InsertarTransaccion (int usuarioID,float cantidad,string observaciones,int CitaID,bool estado)
         {
             try
             {
@@ -1586,6 +1588,10 @@ namespace SistemaDental
                 command.Parameters.AddWithValue("@Fecha ", DateTime.Now);
                 command.Parameters.AddWithValue("@Monto", cantidad);
                 command.Parameters.AddWithValue("@observaciones", observaciones);
+                if (estado)         
+                command.Parameters.AddWithValue("@Pagado", 1);
+                else
+                    command.Parameters.AddWithValue("@Pagado", 0);
                 command.CommandType = CommandType.StoredProcedure;
                 command.ExecuteNonQuery();
             }
@@ -1702,7 +1708,7 @@ namespace SistemaDental
 
                 while (reader.Read())
                 {
-                    citas.Add(new ClaseCitas { IdEmpleado = reader["EmpleadoID"].ToString(), NombreDoctor = reader["nombre"].ToString() });
+                    citas.Add(new ClaseCitas { IdEmpleado = reader["EmpleadoID"].ToString(), NombreDoctor = reader["nombre"].ToString() , nombrecompoletoempleado = reader["nombre"].ToString() + " " + reader["Apellido"].ToString() });
                 }
                 return citas;
             }

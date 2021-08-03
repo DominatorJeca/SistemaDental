@@ -32,6 +32,7 @@ namespace SistemaDental
         public string NombreTratamiento { get; set; }
         
         public string NombrePaciente { get; set; }
+        public string nombrecompoletoempleado { get; set; }
         public string ApellidoPaciente { get; set; }
         public string Observaciones { get; set; }
         public DateTime fechaCita { get; set; }

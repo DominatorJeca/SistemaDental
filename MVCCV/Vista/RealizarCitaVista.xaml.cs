@@ -173,6 +173,7 @@ namespace SistemaDental.MVCCV.Vista
             }
             proc.InsertarLog(user.Ide, "Finalizó una cita");
             MostrarDatos();
+            MessageBox.Show("Cita realizada con exito");
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)

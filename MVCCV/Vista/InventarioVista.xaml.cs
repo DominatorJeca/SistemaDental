@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -23,22 +24,13 @@ namespace SistemaDental.MVCCV.Vista
         ClaseInventario inventario = new ClaseInventario();
         ClaseProcedimiento procedimiento = new ClaseProcedimiento();
         Validaciones validaciones = new Validaciones();
-        
+        private ObservableCollection<ClaseInventario> DatosDataGrid = new ObservableCollection<ClaseInventario>();
         public InventarioVista()
         {
             InitializeComponent();
-            MostrarMaterial();
-
         }
 
-        public void MostrarMaterial()
-        {
-            dgv_Materiales.ItemsSource = procedimiento.MostrarInventario();
-            dgv_Materiales.SelectedValuePath = "IdMaterial";
-        }
-
-
-
+      
 
         private void dgv_Materiales_SelectionChanged_1(object sender, SelectionChangedEventArgs e)
         {
@@ -79,14 +71,14 @@ namespace SistemaDental.MVCCV.Vista
             if (validaciones.VerificarCampos(this))
             {
                 procedimiento.EditarNombreMaterial(inventario);
-                MostrarMaterial();
+                Grid_Loaded_1(null,null);
                 HabilitarEdicion(false);
                 btnActualizar.IsEnabled = true;
             }
             else
             {
                 MessageBox.Show("Asegurese de ingresar el nombre del material de manera correcta");
-                MostrarMaterial();
+                Grid_Loaded_1(null, null);
                 HabilitarEdicion(false);
                 btnActualizar.IsEnabled = true;
             }
@@ -94,7 +86,7 @@ namespace SistemaDental.MVCCV.Vista
 
         private void btnCancelar_Click(object sender, RoutedEventArgs e)
         {
-            MostrarMaterial();
+            Grid_Loaded_1(null, null);
             HabilitarEdicion(false);
             btnActualizar.IsEnabled = true;
         }
@@ -102,6 +94,13 @@ namespace SistemaDental.MVCCV.Vista
         private void PreviewTextInputLetters(object sender, TextCompositionEventArgs e)
         {
             validaciones.SoloLetras(e);
+        }
+
+        private void Grid_Loaded_1(object sender, RoutedEventArgs e)
+        {
+            DatosDataGrid = new ObservableCollection<ClaseInventario>(procedimiento.MostrarInventario());
+            dgv_Materiales.ItemsSource = DatosDataGrid;
+            dgv_Materiales.SelectedValuePath = "IdMaterial";
         }
     }
 }
