@@ -95,16 +95,29 @@ namespace SistemaDental.MVCCV.Vista
 
 
         }
-        private bool VerificarIDRepetida(string identidad)
+        private bool VerificarIDRepetida(string identidad,bool edit)
         {
-
-            if (identidad == Proc.BuscarPaciente(identidad) && ((ClasePaciente)cmbPaciente.SelectedItem).Identidad != identidad)
+            if (edit)
             {
-                MessageBox.Show("El numero de identidad ya pertenece a un paciente ingresado");
-                return true;
+                if (identidad == Proc.BuscarPaciente(identidad) && ((ClasePaciente)cmbPaciente.SelectedItem).Identidad != identidad)
+                {
+                    MessageBox.Show("El numero de identidad ya pertenece a un paciente ingresado");
+                    return true;
+                }
+                else
+                    return false;
             }
             else
-                return false;
+            {
+                if (identidad == Proc.BuscarPaciente(identidad))
+                {
+                    MessageBox.Show("El numero de identidad ya pertenece a un paciente ingresado");
+                    return true;
+                }
+                else
+                    return false;
+            }
+            
         }
 
 
@@ -209,7 +222,7 @@ namespace SistemaDental.MVCCV.Vista
             if (guardaropc == false)
             {
 
-                if (VerificarCampos() && VerificarIDRepetida(txtIdentidad.Text)==false)
+                if (VerificarCampos() && VerificarIDRepetida(txtIdentidad.Text,true)==false)
                 {
                     try
                     {
@@ -237,7 +250,7 @@ namespace SistemaDental.MVCCV.Vista
             }
             else
             {
-                if (VerificarCampos() && VerificarIDRepetida(txtIdentidad.Text) == false)
+                if (VerificarCampos() && VerificarIDRepetida(txtIdentidad.Text,false) == false)
                 {
                     try
                     {
