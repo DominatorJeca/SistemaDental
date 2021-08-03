@@ -1947,6 +1947,7 @@ namespace SistemaDental
                 sqlCommand.CommandType = CommandType.StoredProcedure;
 
                 //Definir las variables del procedimiento mediante los parametros obtenidos
+                sqlCommand.Parameters.AddWithValue("@ID", paciente.Id_paciente);
                 sqlCommand.Parameters.AddWithValue("@Nombre", paciente.NombrePaciente);
                 sqlCommand.Parameters.AddWithValue("@Apellido", paciente.ApellidoPaciente);
                 sqlCommand.Parameters.AddWithValue("@Telefono", paciente.Telefono);

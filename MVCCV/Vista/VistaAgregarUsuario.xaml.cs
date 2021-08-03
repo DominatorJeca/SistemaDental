@@ -177,7 +177,7 @@ namespace SistemaDental.MVCCV.Vista
                 botoneshabilitados(false);
                 return false;
             }
-            if (!validar.VerificarIdentidad(txtAgregarIdentidad.Text,new DateTime(1955,1,1)))
+            if (!validar.VerificarIdentidad(txtAgregarIdentidad.Text,new DateTime(1950,1,1)))
             {
                 MessageBox.Show("El numero de identidad no tiene un formato correcto");
 
