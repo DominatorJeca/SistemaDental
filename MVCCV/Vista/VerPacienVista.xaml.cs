@@ -89,8 +89,8 @@ namespace SistemaDental.MVCCV.Vista
             txtTelefono.IsEnabled = habilitacionGrupoA;
             cmbGenero.IsEnabled = habilitacionGrupoA;
             txtcorreo.IsEnabled = habilitacionGrupoA;
-            txtIdentidad.IsEnabled = habilitacionGrupoB;
-            dtpFechaNac.IsEnabled = habilitacionGrupoB;
+            txtIdentidad.IsEnabled = habilitacionGrupoA;
+            dtpFechaNac.IsEnabled = habilitacionGrupoA;
             cmbPaciente.IsEnabled = habilitacionGrupoB;
 
 
@@ -139,6 +139,7 @@ namespace SistemaDental.MVCCV.Vista
 
         public void obtenerValores()
         {
+            unPaciente.Id_paciente = (Convert.ToInt32(cmbPaciente.SelectedValue));
             unPaciente.NombrePaciente = txtNombre.Text;
             unPaciente.ApellidoPaciente = txtApellido.Text;
             unPaciente.FechaNac = Convert.ToDateTime(dtpFechaNac.Text);
