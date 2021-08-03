@@ -358,6 +358,7 @@ namespace SistemaDental.MVCCV.Vista
             DateTime cmb = cdCitas.SelectedDate.Value.Add(ctTiempo.SelectedTime.Value.TimeOfDay);
             prod.fechaCita = cmb;
             prod.IdEmpleado = cmbEmpleado.SelectedValue.ToString();
+            prod.IdPacientes = cmbPaciente.SelectedValue.ToString();
 
             List<ClaseCitas> rd = new List<ClaseCitas>();
             rd = citas.MostracitaspoDoctor(prod);
@@ -369,9 +370,9 @@ namespace SistemaDental.MVCCV.Vista
                 {
                     foreach (ClaseCitas inv in rd)
                     {
-                        if (inv.fechaCita.TimeOfDay == prod.fechaCita.TimeOfDay && bandera1 != 1)
+                        if ((inv.IdPacientes==prod.IdPacientes|| inv.IdEmpleado==prod.IdEmpleado)&&inv.fechaCita.TimeOfDay == prod.fechaCita.TimeOfDay && bandera1 != 1)
                         {
-                            MessageBox.Show("Este doctor tienen una cita ese mismo dia y misma Hora");
+                            MessageBox.Show("Este Doctor/Paciente tienen una cita ese mismo dia y misma Hora");
                             vand = 1;
                             bandera1 = 1;
                             return;
@@ -394,11 +395,11 @@ namespace SistemaDental.MVCCV.Vista
                         var v = (DateTime)inv.fechaCita;
 
 
-                        if (TimeSpan.Compare(v1.TimeOfDay, new DateTime(v.Year, v.Month, v.Day,
+                        if ((inv.IdPacientes == prod.IdPacientes || inv.IdEmpleado == prod.IdEmpleado)&&TimeSpan.Compare(v1.TimeOfDay, new DateTime(v.Year, v.Month, v.Day,
                                  v.Hour, 0, 0).TimeOfDay) == 0 && bandera1 != 2)
                         {
 
-                            MessageBoxResult result = MessageBox.Show("Este Doctor tiene una cita una hora antes ese mismo dia, ¿Desea ingresar esta nueva cita?", "Citas", MessageBoxButton.YesNo);
+                            MessageBoxResult result = MessageBox.Show("Este  Doctor/Paciente tiene una cita una hora despues ese mismo dia, ¿Desea ingresar esta nueva cita?", "Citas", MessageBoxButton.YesNo);
                             switch (result)
                             {
                                 case MessageBoxResult.Yes:
@@ -427,11 +428,11 @@ namespace SistemaDental.MVCCV.Vista
                     foreach (ClaseCitas inv in rd)
                     {
                         var v = (DateTime)inv.fechaCita;
-                        if (TimeSpan.Compare(v1.TimeOfDay, new DateTime(v.Year, v.Month, v.Day,
+                        if ((inv.IdPacientes == prod.IdPacientes || inv.IdEmpleado == prod.IdEmpleado) && TimeSpan.Compare(v1.TimeOfDay, new DateTime(v.Year, v.Month, v.Day,
                                  v.Hour, 0, 0).TimeOfDay) == 0 && bandera1 != 2 && bandera1 != 2)
                         {
 
-                            MessageBoxResult result = MessageBox.Show("Este Doctor tiene una cita una hora antes ese mismo dia, ¿Desea ingresar esta nueva cita?", "Citas", MessageBoxButton.YesNo);
+                            MessageBoxResult result = MessageBox.Show("Este Doctor/Paciente tiene una cita una hora antes ese mismo dia, ¿Desea ingresar esta nueva cita?", "Citas", MessageBoxButton.YesNo);
                             switch (result)
                             {
                                 case MessageBoxResult.Yes:

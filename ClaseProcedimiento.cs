@@ -1282,7 +1282,7 @@ namespace SistemaDental
                 SqlCommand command = new SqlCommand("sp_mostrar_citas_por_doctor", sqlConnection);
                 command.CommandType = CommandType.StoredProcedure;
                 List<ClaseCitas> citas = new List<ClaseCitas>();
-                command.Parameters.AddWithValue("@idempleado", cita.IdEmpleado);
+                ;
                 command.Parameters.AddWithValue("@datetime", cita.fechaCita);
                 command.ExecuteNonQuery();
                 SqlDataReader reader = command.ExecuteReader();
@@ -1291,8 +1291,8 @@ namespace SistemaDental
                     citas.Add(new ClaseCitas
                     {
                         fechaCita = Convert.ToDateTime(reader["FechaCita"].ToString()),
-                        IdEmpleado = reader["EmpleadoID"].ToString(),
-                       
+                        IdEmpleado = reader["EmpleadoID"].ToString(),IdPacientes = reader["PacienteID"].ToString()
+
                     }); 
                 }
                 reader.Close();
