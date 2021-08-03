@@ -2278,7 +2278,7 @@ namespace SistemaDental
 
                     pacientes.Add(new ClaseCitas { IdPacientes = reader["PacienteID"].ToString(),
                         NombrePaciente = reader["Nombre"].ToString(),
-                        Nombre_Id_paciente = reader["PacienteID"].ToString() + ": " + reader["Nombre"].ToString() + " " + reader["Apellido"].ToString() });
+                        Nombre_Id_paciente =  reader["Nombre"].ToString() + " " + reader["Apellido"].ToString() });
                 }
 
                 return pacientes;
@@ -2313,7 +2313,7 @@ namespace SistemaDental
                 while (reader.Read())
                 {
 
-                    pacientes.Add(new ClaseCitas { IdPacientes = reader["PacienteID"].ToString(), NombrePaciente = reader["Nombre"].ToString(), Nombre_Id_paciente = reader["PacienteID"].ToString() +": "+ reader["Nombre"].ToString()+" "+reader["Apellido"].ToString()});
+                    pacientes.Add(new ClaseCitas { IdPacientes = reader["PacienteID"].ToString(), NombrePaciente = reader["Nombre"].ToString(), Nombre_Id_paciente = reader["Nombre"].ToString()+" "+reader["Apellido"].ToString()});
                     }
 
                 return pacientes;
