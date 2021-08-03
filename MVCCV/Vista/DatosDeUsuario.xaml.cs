@@ -58,7 +58,7 @@ namespace SistemaDental.MVCCV.Vista
             txtNombre.IsEnabled =mostrar;
             txtCorreo.IsEnabled = mostrar;
             txtTelefono.IsEnabled = mostrar;
-
+            btnActualizarContraseña.IsEnabled = mostrar;
 
 
             btnActualizarContraseña.Visibility = visibility;
@@ -106,12 +106,12 @@ namespace SistemaDental.MVCCV.Vista
             }
             else
             {
-                if (validar.VerificarCampos(this) && validar.ValidarEmail(txtCorreo.Text) && validar.VerificarNumero(txtTelefono.Text) && validar.verificarpass(this) && elusuario != null & txtNuevaContra.Password == txtNuevaContra_Copy.Password)
+                if (validar.VerificarCampos(this) && validar.ValidarEmail(txtCorreo.Text) && validar.VerificarNumero(txtTelefono.Text) && verificarPass() && elusuario != null )
                 {
                     ObtenerValores();
                     procedimiento.EditarUsuario(usuarios);
                     procedimiento.InsertarLog(iduser, "Se editó información acerca de su cuenta personal y su contraseña fue cambiada");
-                    HabilitarBotones(false, Visibility.Collapsed);
+                    HabilitarBotones(false, Visibility.Collapsed); 
                     btnActualizarUsuario.Visibility = Visibility.Visible;
                     LlenadoDeInformacion();
                     LimpiarPass();
@@ -122,8 +122,7 @@ namespace SistemaDental.MVCCV.Vista
                     MessageBox.Show("El correo que intenta ingresar no es válido");
                 else if (!validar.VerificarNumero(txtTelefono.Text))
                     MessageBox.Show("Su número telefónico no es correcto");
-                else if (!validar.verificarpass(this) || txtNuevaContra.Password == txtNuevaContra_Copy.Password)
-                    MessageBox.Show("Corrobore la información acerca de sus contraseñas");
+               
                 else
                     MessageBox.Show("Asegurese de verificar la integridad de sus datos");
             }
@@ -139,6 +138,20 @@ namespace SistemaDental.MVCCV.Vista
             txtpuesto.Text = Usuario.PuestoNombre;
         }
 
+        private bool verificarPass()
+        {
+           if (!validar.verificarpass(this))
+            {
+                MessageBox.Show("Por favor ingrese los valores necesarios");
+                return false;
+            }
+           else if (txtContraseniaActual.Password.Length<8 || (txtNuevaContra.Password.Length<8 && edicion==1))
+            {
+                MessageBox.Show("La longitud de la contraseña debe de ser como mínimo de 8 caracteres");
+                return false;
+            }
+            return true;
+        }
         private void LimpiarPass()
         {
             txtNuevaContra.Password = "";

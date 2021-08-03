@@ -127,7 +127,8 @@ namespace SistemaDental
         private void btnOlvidarPass_Click(object sender, RoutedEventArgs e)
         {
             ReestablecerContrasenia reestablecer = new ReestablecerContrasenia();
-                reestablecer.ShowDialog();
+            reestablecer.Show();
+            this.Close();
         }
 
         private void btnHelp_Click(object sender, RoutedEventArgs e)

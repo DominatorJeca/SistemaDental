@@ -294,6 +294,11 @@ namespace SistemaDental.MVCCV.Vista
                 dtgHistorial.IsEnabled = true;
                 unPaciente.Id_paciente = int.Parse(cmbPaciente.SelectedValue.ToString());
                 dtgHistorial.ItemsSource = unPaciente.MostrarHistorial(unPaciente);
+                if (btnRestablecerEstablecer.Content.ToString().Contains("Reestablecer"))
+                {
+                    MessageBox.Show("Este paciente no está activo");
+                    btnEditarPaciente.IsEnabled = false;
+                }
             }
 
 
@@ -424,5 +429,7 @@ namespace SistemaDental.MVCCV.Vista
                 cmbPaciente.IsEnabled = true;
             }
         }
+
+      
     }
 }

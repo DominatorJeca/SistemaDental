@@ -352,9 +352,10 @@ namespace SistemaDental
                 reader = command.ExecuteReader();
                 if (reader.Read())
                 {
-                    user.Id =Convert.ToString( reader[0]);
+                    user.Ide =Convert.ToInt32( reader[0]);
                     user.Nombre = Convert.ToString(reader[1]);
                     user.Administrador = Convert.ToBoolean(reader[2]);
+                    user.usuario = Convert.ToString(reader[3]);
                 }
                 return user;
 

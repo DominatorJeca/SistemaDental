@@ -81,9 +81,9 @@ namespace SistemaDental.MVCCV.Vista
             else
             {
                 btnview4.Content = FindResource("Nover");
-                pswNuevaContra.Visibility = Visibility.Visible;
-                txtNuevaContra.Visibility = Visibility.Collapsed;
-                pswNuevaContra.Password = txtNuevaContra.Text;
+                pswConfNuevaContra.Visibility = Visibility.Visible;
+                txtConfNuevaContra.Visibility = Visibility.Collapsed;
+                pswConfNuevaContra.Password = txtConfNuevaContra.Text;
                 btns[1] = true;
 
             }
@@ -97,9 +97,10 @@ namespace SistemaDental.MVCCV.Vista
 
         private void btnSalir_Click(object sender, RoutedEventArgs e)
         {
+           
+          Login log = new Login();
+            log.Show();
             this.Close();
-          /*  Login log = new Login();
-            log.Show();*/
         }
 
         private void btnMin_Click(object sender, RoutedEventArgs e)
@@ -131,18 +132,21 @@ namespace SistemaDental.MVCCV.Vista
             }
             if (txt[0] == txt[1])
             {
+                    if (txt[0].Length >= 8)
+                    {
+                        user = proc.ModificarUsuario(contra: txt[0], contraCambio: txt[0], correo: txtCorreo.Text);
+                        if (user != null)
+                        {
+                            MessageBox.Show("Su contraseña ha sido cambiada exitosamente");
+                            Menu menu = new Menu(user);
+                            this.Close();
+                            menu.Show();
 
-                user = proc.ModificarUsuario(contra: txt[0], contraCambio: txt[0], correo: txtCorreo.Text);
-                if (user !=null)
-                {
-                    MessageBox.Show("Su contraseña ha sido cambiada exitosamente");
-                    Menu menu = new Menu(user);
-                    this.Close();
-                    menu.Show();
-
+                        }
+                    }
+                    else
+                        MessageBox.Show("La contraseña es muy corta, intente de vuelta");
                 }
-          
-            }
             else
             {
                 MessageBox.Show("Las contraseñas no coinciden verifique de vuelta");
