@@ -222,6 +222,18 @@ namespace SistemaDental.MVCCV.Vista
             return true;
         }
 
+        private bool VerificarIDRepetida(string identidad)
+        {
+
+            if (identidad == Proc.BuscarEmpleado(identidad))
+            {
+                MessageBox.Show("El numero de identidad ya pertenece a un empleado ingresado");
+                return true;
+            }
+            else
+                return false;
+        }
+
             /// <summary>
             /// Funcion para limpiar los textbox y combobox del formulario
             /// </summary>
@@ -350,7 +362,7 @@ namespace SistemaDental.MVCCV.Vista
         #region Conexion a procedimientos
         private void IngresarEmpleado()
         {
-            if (VerificarValores() == true && VerificarPass()==true)
+            if (VerificarValores() == true && VerificarPass()==true && VerificarIDRepetida(txtAgregarIdentidad.Text) ==false)
             {
                 try
                 {
@@ -407,7 +419,7 @@ namespace SistemaDental.MVCCV.Vista
 
         private void EditarEmpleado()
         {
-            if (VerificarValores() == true)
+            if (VerificarValores() == true && VerificarIDRepetida(txtAgregarIdentidad.Text) == false)
             {
                 try
                 {

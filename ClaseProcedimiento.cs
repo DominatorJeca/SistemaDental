@@ -738,6 +738,47 @@ namespace SistemaDental
 
         }
         #region Empleados
+         
+        public string BuscarEmpleado(string identidad)
+        {
+            try
+            {//Abrir la conexion sql
+
+                string usu = "";
+                command.Connection = con.Open();
+                //crear el comando SQL
+                command.CommandText = "BuscarEmpleado";
+                command.CommandType = CommandType.StoredProcedure;
+                command.Parameters.AddWithValue("@Identidad", identidad);
+                //Definir las variables del procedimiento mediante los parametros obtenidos
+                reader = command.ExecuteReader();
+
+                while (reader.Read())
+                {
+                    usu = Convert.ToString(reader["Identidad"]);
+                }
+
+                return usu;
+            }
+
+            catch (Exception e)
+            {
+                throw e;
+            }
+
+            finally
+            {
+                command.Parameters.Clear();
+                reader.Close();
+                command.Connection = con.Close();
+
+            }
+
+
+
+        }
+
+    
         public List<Usuario> MostrarEmpleados(bool act)
 
 
