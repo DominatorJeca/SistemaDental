@@ -527,9 +527,9 @@ namespace SistemaDental.MVCCV.Vista
             }
             else
             {
-                if(float.Parse(txtPrecioSugerido.Text) <= 0)
+                if(float.Parse(txtPrecioSugerido.Text) <= 0 || float.Parse(txtPrecioSugerido.Text) > 50000)
                 {
-                    MessageBox.Show("Por favor, ingrese un precio valido para el tratamiento.");
+                    MessageBox.Show("Por favor, ingrese un precio valido para el tratamiento. Los precios validos estan entre los rangos de '1' a '50,000'.");
                     return false;
                 }
             }
