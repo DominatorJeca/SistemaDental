@@ -1106,6 +1106,45 @@ namespace SistemaDental
 
 
 
+        public string BuscarPaciente(string identidad)
+        {
+            try
+            {//Abrir la conexion sql
+
+                string emp = "";
+                command.Connection = con.Open();
+                //crear el comando SQL
+                command.CommandText = "BuscarPaciente";
+                command.CommandType = CommandType.StoredProcedure;
+                command.Parameters.AddWithValue("@Identidad", identidad);
+                //Definir las variables del procedimiento mediante los parametros obtenidos
+                reader = command.ExecuteReader();
+
+                while (reader.Read())
+                {
+                    emp = Convert.ToString(reader["Identidad"]);
+                }
+
+                return emp;
+            }
+
+            catch (Exception e)
+            {
+                throw e;
+            }
+
+            finally
+            {
+                command.Parameters.Clear();
+                reader.Close();
+                command.Connection = con.Close();
+
+            }
+
+
+
+        }
+
 
 
 
