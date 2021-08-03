@@ -205,6 +205,7 @@ namespace SistemaDental.MVCCV.Vista
                 botoneshabilitados(false);
                 return false;
             }
+           
 
             return true;
         }
@@ -219,13 +220,20 @@ namespace SistemaDental.MVCCV.Vista
                 botoneshabilitados(false);
                 return false;
             }
+            else if (txtAgregarContra.Password.Length < 8)
+            {
+
+                MessageBox.Show("La contraseña debe tener un minimo de 8 caracteres");
+                botoneshabilitados(false);
+                return false;
+            }
             return true;
         }
 
         private bool VerificarIDRepetida(string identidad)
         {
 
-            if (identidad == Proc.BuscarEmpleado(identidad))
+            if (identidad == Proc.BuscarEmpleado(identidad) && ((Usuario)dgvEmpleado.SelectedItem).Id != identidad)
             {
                 MessageBox.Show("El numero de identidad ya pertenece a un empleado ingresado");
                 return true;
