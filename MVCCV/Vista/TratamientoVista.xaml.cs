@@ -597,5 +597,15 @@ namespace SistemaDental.MVCCV.Vista
         {
 
         }
+
+        private void dg_tratamientos_Loaded(object sender, RoutedEventArgs e)
+        {
+            ObtenerTratamientos();
+        }
+
+        private void dg_materiales_Loaded(object sender, RoutedEventArgs e)
+        {
+            ObtenerMateriales();
+        }
     }
 }
