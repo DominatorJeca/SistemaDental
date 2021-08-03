@@ -37,6 +37,7 @@ namespace SistemaDental.MVCCV.Vista
             InitializeComponent();
             MostrarPacientes();
             HabilitacionDeshabilitacion(false, false);
+            cmbPaciente.IsEnabled = true;
             MostrarGenero();
             dtpFechaNac.BlackoutDates.Add(new CalendarDateRange(DateTime.Now.AddYears(-1), DateTime.MaxValue));
         }
@@ -47,6 +48,7 @@ namespace SistemaDental.MVCCV.Vista
             InitializeComponent();
             MostrarPacientes();
             HabilitacionDeshabilitacion(false, false);
+            cmbPaciente.IsEnabled = true;
             MostrarGenero();
             Nombree = name;
             Admin = admin;
@@ -89,9 +91,22 @@ namespace SistemaDental.MVCCV.Vista
             txtcorreo.IsEnabled = habilitacionGrupoA;
             txtIdentidad.IsEnabled = habilitacionGrupoB;
             dtpFechaNac.IsEnabled = habilitacionGrupoB;
+            cmbPaciente.IsEnabled = habilitacionGrupoB;
 
 
         }
+        private bool VerificarIDRepetida(string identidad)
+        {
+
+            if (identidad == Proc.BuscarPaciente(identidad) )
+            {
+                MessageBox.Show("El numero de identidad ya pertenece a un paciente ingresado");
+                return true;
+            }
+            else
+                return false;
+        }
+
 
         /// <summary>
         /// Funcion para limpiar el contenido del Form
@@ -194,7 +209,7 @@ namespace SistemaDental.MVCCV.Vista
             if (guardaropc == false)
             {
 
-                if (VerificarCampos())
+                if (VerificarCampos() && VerificarIDRepetida(txtIdentidad.Text)==false)
                 {
                     try
                     {
@@ -221,7 +236,7 @@ namespace SistemaDental.MVCCV.Vista
             }
             else
             {
-                if (VerificarCampos())
+                if (VerificarCampos() && VerificarIDRepetida(txtIdentidad.Text) == false)
                 {
                     try
                     {
@@ -233,7 +248,8 @@ namespace SistemaDental.MVCCV.Vista
                         LimpiarPantalla();
                         MostrarPacientes();
                         HabilitacionDeshabilitacion(false, true);
-                        btnAgregarPaciente.IsEnabled = false;
+                     
+                       
                         btnEditarPaciente.IsEnabled = false;
                         btnAgregarPaciente.IsEnabled = true;
                         btnGuardarPaciente.IsEnabled = false;
