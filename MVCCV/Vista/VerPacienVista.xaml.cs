@@ -98,7 +98,7 @@ namespace SistemaDental.MVCCV.Vista
         private bool VerificarIDRepetida(string identidad)
         {
 
-            if (identidad == Proc.BuscarPaciente(identidad) )
+            if (identidad == Proc.BuscarPaciente(identidad) && ((ClasePaciente)cmbPaciente.SelectedItem).Identidad != identidad)
             {
                 MessageBox.Show("El numero de identidad ya pertenece a un paciente ingresado");
                 return true;
@@ -221,6 +221,7 @@ namespace SistemaDental.MVCCV.Vista
                         LimpiarPantalla();
                         MostrarPacientes();
                         HabilitacionDeshabilitacion(false, false);
+                        cmbPaciente.IsEnabled = true;
                         btnAgregarPaciente.IsEnabled = false;
                         btnEditarPaciente.IsEnabled = false;
                         btnAgregarPaciente.IsEnabled = true;
