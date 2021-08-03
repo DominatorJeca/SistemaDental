@@ -145,7 +145,7 @@ namespace SistemaDental.MVCCV.Vista
                     guardaropc = false;
                     btnAgregarPaciente.IsEnabled = false;
                     btnRestablecerEstablecer.IsEnabled = false;
-                    btnGuardarPaciente.IsEnabled = false;
+                    btnGuardarPaciente.IsEnabled = true;
                     btnCancelar.IsEnabled = true;
                     btnEditarPaciente.IsEnabled = false;
                     
@@ -174,6 +174,7 @@ namespace SistemaDental.MVCCV.Vista
                 btnAgregarPaciente.IsEnabled = true;
                 btnRestablecerEstablecer.IsEnabled = false;
                 cmbPaciente.IsEnabled = true;
+                btnCancelar.IsEnabled = false;
                 //btnEliminar.IsEnabled = false;
             }
 
@@ -198,9 +199,9 @@ namespace SistemaDental.MVCCV.Vista
                     try
                     {
 
-                        // obtenerValores();
-                        // unPaciente.ActualizarDatosPaciente(unPaciente);
-                        // Proc.InsertarLog(usuar.Ide, "Se ha editado un Paciente");
+                        obtenerValores();
+                        unPaciente.ActualizarDatosPaciente(unPaciente);
+                        Proc.InsertarLog(usuar.Ide, "Se ha editado un Paciente");
                         MessageBox.Show("Éxito al editar los datos");
                         LimpiarPantalla();
                         MostrarPacientes();
@@ -209,6 +210,7 @@ namespace SistemaDental.MVCCV.Vista
                         btnEditarPaciente.IsEnabled = false;
                         btnAgregarPaciente.IsEnabled = true;
                         btnGuardarPaciente.IsEnabled = false;
+                        btnCancelar.IsEnabled = false;
 
                     }
                     catch (Exception ex)
@@ -235,6 +237,7 @@ namespace SistemaDental.MVCCV.Vista
                         btnEditarPaciente.IsEnabled = false;
                         btnAgregarPaciente.IsEnabled = true;
                         btnGuardarPaciente.IsEnabled = false;
+                        btnCancelar.IsEnabled = false;
 
                     }
                     catch (Exception ex)
@@ -386,7 +389,7 @@ namespace SistemaDental.MVCCV.Vista
                 btnGuardarPaciente.IsEnabled = false;
                 btnAgregarPaciente.IsEnabled = true;
                 btnRestablecerEstablecer.IsEnabled = false;
-                btnCancelar.IsEnabled = true;
+                btnCancelar.IsEnabled = false;
                 cmbPaciente.IsEnabled = true;
             }
         }
