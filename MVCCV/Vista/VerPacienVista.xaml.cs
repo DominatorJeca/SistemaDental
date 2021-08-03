@@ -405,6 +405,12 @@ namespace SistemaDental.MVCCV.Vista
             {
                 ClasePaciente paciente = (ClasePaciente)cmbPaciente.SelectedItem;
                 paciente.Estado = btnRestablecerEstablecer.Content.Equals("Reestablecer")? true:false;
+                if (!paciente.Estado)
+                {
+                   if(MessageBox.Show("Esta seguro de eliminar este paciente? Se eliminaran todas las citas que aun no se haya hecho pero esten agendadas","Aviso",MessageBoxButton.YesNo)==MessageBoxResult.No)
+                            return;
+
+                }
                 paciente.ActualizarDatosPaciente(paciente);
              
                 LimpiarPantalla();

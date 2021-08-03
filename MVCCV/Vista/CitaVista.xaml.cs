@@ -74,13 +74,13 @@ namespace SistemaDental.MVCCV.Vista
         }
         private void Agregar_Tratamientos_Click(object sender, RoutedEventArgs e)
         {
-            if (cmbTratamiento.SelectedItem!=null)
+            if (cmbTratamiento.SelectedItem != null && tratamientos.Count <= 3)
             {
-                ClaseCitas prod = (ClaseCitas) cmbTratamiento.SelectedItem;
-               /* prod.IdTratamiento = Convert.ToInt32(cmbTratamiento.SelectedValue.ToString());
-                citas.mostraridtrtamientos(citas, prod.IdTratamiento);
-                prod.nombreTramientoindividual = citas.nombreTramientoindividual;
-                prod.trtamientoprecio = citas.trtamientoprecio;*/
+                ClaseCitas prod = (ClaseCitas)cmbTratamiento.SelectedItem;
+                /* prod.IdTratamiento = Convert.ToInt32(cmbTratamiento.SelectedValue.ToString());
+                 citas.mostraridtrtamientos(citas, prod.IdTratamiento);
+                 prod.nombreTramientoindividual = citas.nombreTramientoindividual;
+                 prod.trtamientoprecio = citas.trtamientoprecio;*/
                 foreach (ClaseCitas inv in tratamientos)
                 {
                     if (inv.IdTratamiento == prod.IdTratamiento)
@@ -112,6 +112,8 @@ namespace SistemaDental.MVCCV.Vista
                 dtg_Tratamientos.ItemsSource = tratamientos;
                 dtg_Tratamientos.SelectedValuePath = "IdTratamiento";
             }
+            else
+                MessageBox.Show("Solo se permite realizar 3 tratamientos por cita. Recuerde que tiene un espacio de 1 Hora para cada cita");
         }
         private void MostrarDatos()
         {
@@ -815,6 +817,9 @@ namespace SistemaDental.MVCCV.Vista
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
         {
             permisos();
+            MostrarDatos();
+            mostrarCitas();
+            inicializarfecchas();
         }
     }
 }
