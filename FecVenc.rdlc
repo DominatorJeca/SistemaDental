@@ -8,7 +8,6 @@
         <DataProvider>SQL</DataProvider>
         <ConnectString>Data Source=sistemassps.database.windows.net;Initial Catalog=SistemaDental;Encrypt=True;TrustServerCertificate=False</ConnectString>
       </ConnectionProperties>
-      <rd:SecurityType>DataBase</rd:SecurityType>
       <rd:DataSourceID>f88c4ee9-71d9-419f-8b89-bb041a52232c</rd:DataSourceID>
     </DataSource>
   </DataSources>
@@ -196,7 +195,7 @@
                                 <TextRun>
                                   <Value>=Fields!FechaVencimiento.Value</Value>
                                   <Style>
-                                    <Format>D</Format>
+                                    <Format>dddd dd 'de' MMMM 'de' yyyy</Format>
                                   </Style>
                                 </TextRun>
                               </TextRuns>

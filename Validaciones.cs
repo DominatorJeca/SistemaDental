@@ -135,11 +135,26 @@ namespace SistemaDental
             return var;
         }
 
-        public bool VerificarIdentidad(string identidad)
+        public bool VerificarIdentidad(string identidad,DateTime date)
         {
             bool var = true;
+            string PrimeraParte="";
+            string AnioParte="";
 
             if (identidad.Length != 13)
+                var = false;
+
+            for (int i=0;i<4;i++)
+            {
+                PrimeraParte+= identidad[i];
+                AnioParte += identidad[i + 4];
+            }
+            
+            if (PrimeraParte.CompareTo("0101")==-1 || PrimeraParte.CompareTo("1804")==1)
+            {
+                var= false;
+            }
+            if (AnioParte.CompareTo(date.Year.ToString()) == -1 || AnioParte.CompareTo(DateTime.Now.Year.ToString()) == 1)
                 var = false;
 
             return var;

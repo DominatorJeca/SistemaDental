@@ -303,13 +303,9 @@ namespace SistemaDental.MVCCV.Vista
                     {
                         validarhora();
 
-
-
-
                         if (vand == 0)
                         {
                             ObtenerValores();
-
 
                             citas.AgendarCita(citas);
                             foreach (ClaseCitas inv in tratamientos)
@@ -338,7 +334,7 @@ namespace SistemaDental.MVCCV.Vista
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message);
+                throw ex;
             }
             finally
             {

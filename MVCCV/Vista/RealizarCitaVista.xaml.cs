@@ -24,6 +24,7 @@ namespace SistemaDental.MVCCV.Vista
         ICollectionView Citas;
         ClaseProcedimiento proc = new ClaseProcedimiento();
         List<ClaseTratamiento> tratamientos = new List<ClaseTratamiento>();
+        List<ClaseInventario> materiales = new List<ClaseInventario>();
         float total=0;
         public event EventHandler CambioDeVistaPrincipal;
         Validaciones val = new Validaciones();
@@ -53,9 +54,8 @@ namespace SistemaDental.MVCCV.Vista
             cmbPaciente.SelectedValuePath = "Id_paciente";
             cmbPaciente.DisplayMemberPath = "NombrePaciente";
             cmbPaciente.ItemsSource = proc.MostrarPacientesAct();
-   
             dgvCitas.SelectedIndex = 0;
-
+            materiales = proc.MostrarInventario();
         }
 
         private void dgvCitas_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -123,20 +123,24 @@ namespace SistemaDental.MVCCV.Vista
         private void txtCantidadCobrada_TextChanged(object sender, TextChangedEventArgs e)
         {
             if (cmbTratamientos.SelectedItem != null && txtCantidadCobrada.Text != "")
-            ((ClaseTratamiento)cmbTratamientos.SelectedItem).precioTrat = float.Parse(txtCantidadCobrada.Text);
-            total = 0;
-            foreach (ClaseTratamiento trat in tratamientos)
             {
-                total += trat.precioTrat;
+                ((ClaseTratamiento)cmbTratamientos.SelectedItem).precioTrat = float.Parse(txtCantidadCobrada.Text);
+                total = 0;
+                foreach (ClaseTratamiento trat in tratamientos)
+                {
+                    total += trat.precioTrat;
+
+                }
                
+                txtTotal.Text = total + "";
             }
-            total += total * (float)0.15;
-            txtTotal.Text = total + "";
         }
 
         private void btnRealizar_Click(object sender, RoutedEventArgs e)
         {
 
+            List<int> listaindicesCerca = new List<int>();
+            List<int> listaIndicesAgotado = new List<int>();
             if (!val.VerificarCampos(this))
             {
                 MessageBox.Show("Porfavor llene todos los campos necesarios");
@@ -157,13 +161,33 @@ namespace SistemaDental.MVCCV.Vista
                     return;
                 }
                 foreach (ClaseInventario inv in trat.Materiales)
+                {
                     if (!val.VerificarCantidad(inv.Cantidad))
                     {
-                        MessageBox.Show("El Material " + inv.NombreMaterial+ " en el tratamiento"+ trat.NombreTratamiento+" tiene como cantidad 0 porfavor corrija este error");
+                        MessageBox.Show("El Material " + inv.NombreMaterial + " en el tratamiento" + trat.NombreTratamiento + " tiene como cantidad 0 porfavor corrija este error");
                         cmbTratamientos.SelectedItem = trat;
                         return;
                     }
+                    int ind = materiales.FindIndex(x => x.IdMaterial == inv.IdMaterial);
+                   
+                    materiales[ind].Cantidad -= inv.Cantidad;
+                    if (materiales[ind].Cantidad <=30 && !listaindicesCerca.Contains(ind))
+                    {
+                        MessageBox.Show("Se esta quedando sin el material " + inv.NombreMaterial);
+                        listaindicesCerca.Add(ind);
+                        proc.InsertarLog(user.Ide, "Se le avisó falta de material");
+                    }
+                    if (materiales[ind].Cantidad<=0 && !listaIndicesAgotado.Contains(ind))
+                    {
+                        MessageBox.Show("El material "+inv.NombreMaterial+ " ya está agotado, esto pudo haber ocurrido por una falta al comprar mas producto y registrarlo. La cita siempre se realizará","Un error inesperado a ocurrido",MessageBoxButton.OK);
+                        listaIndicesAgotado.Add(ind);
+                        proc.InsertarLog(user.Ide, "Ocurrio un error de inventario. Se realizó una cita con materiales insuficientes");
+                    }
+
+                }
             }
+
+
             proc.FinalizarCita((ClaseCitas)dgvCitas.SelectedItem);
            foreach (ClaseTratamiento trat in tratamientos)
             {

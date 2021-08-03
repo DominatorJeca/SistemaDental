@@ -67,7 +67,7 @@ namespace SistemaDental.MVCCV.Vista
                 ClaseInventario prod = new ClaseInventario();
                 prod.IdMaterial = nuevoprod ? 0 : Convert.ToInt32(dgv_Compras.SelectedValue.ToString());  //Mopd
                 prod.NombreMaterial = txtNombreProd.Text;
-                prod.precio = Convert.ToInt32(txtprecio.Text);
+                prod.precio = float.Parse(txtprecio.Text);
                 prod.fechaVenc = (DateTime)fchVencimiento.SelectedDate;
                 prod.Cantidad = Convert.ToInt32(txtCantidad.Text);
 
@@ -145,8 +145,8 @@ namespace SistemaDental.MVCCV.Vista
         private void Grid_Loaded(object sender, RoutedEventArgs e)
         {
             DatosDataGrid = new CollectionViewSource() { Source = proc.MostrarInventario() }.View ;
-            dgv_Compras.ItemsSource = DatosDataGrid;
             dgv_Compras.SelectedValuePath = "IdMaterial";
+            dgv_Compras.ItemsSource = DatosDataGrid;
 
         }
 
@@ -166,9 +166,15 @@ namespace SistemaDental.MVCCV.Vista
 
         private void dgv_Compras_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            txtCantidad.Text = "";
-            txtprecio.Text = "";
-            fchVencimiento.SelectedDate = null; 
+            if (dgv_Compras.SelectedIndex != -1)
+            {
+                txtCantidad.Text = "";
+                txtprecio.Text = "";
+                fchVencimiento.SelectedDate = null;
+                txtCantidad.IsEnabled = true;
+                txtprecio.IsEnabled = true;
+                fchVencimiento.IsEnabled = true;
+            }
         }
 
         private void PreviewTextInputOnlyLetters(object sender, TextCompositionEventArgs e)
@@ -192,6 +198,9 @@ namespace SistemaDental.MVCCV.Vista
             btnNuevoProducto.IsEnabled = false;
             nuevoprod = true;
             txtNombreProd.IsEnabled = true;
+            txtCantidad.IsEnabled = true;
+            txtprecio.IsEnabled = true;
+            fchVencimiento.IsEnabled = true;
         }
 
         private void btnCancelar_Click(object sender, RoutedEventArgs e)

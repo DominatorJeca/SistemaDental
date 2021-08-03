@@ -145,7 +145,7 @@ namespace SistemaDental.MVCCV.Vista
                     guardaropc = false;
                     btnAgregarPaciente.IsEnabled = false;
                     btnRestablecerEstablecer.IsEnabled = false;
-                    btnGuardarPaciente.IsEnabled = false;
+                    btnGuardarPaciente.IsEnabled = true;
                     btnCancelar.IsEnabled = true;
                     btnEditarPaciente.IsEnabled = false;
                     
@@ -198,9 +198,9 @@ namespace SistemaDental.MVCCV.Vista
                     try
                     {
 
-                        // obtenerValores();
-                        // unPaciente.ActualizarDatosPaciente(unPaciente);
-                        // Proc.InsertarLog(usuar.Ide, "Se ha editado un Paciente");
+                        obtenerValores();
+                        unPaciente.ActualizarDatosPaciente(unPaciente);
+                        Proc.InsertarLog(usuar.Ide, "Se ha editado un Paciente");
                         MessageBox.Show("Éxito al editar los datos");
                         LimpiarPantalla();
                         MostrarPacientes();
@@ -243,6 +243,7 @@ namespace SistemaDental.MVCCV.Vista
                     }
                 }
             }
+            cmbPaciente.IsEnabled = true;
         }
     
 
@@ -275,7 +276,7 @@ namespace SistemaDental.MVCCV.Vista
 
                 return false;
             }
-            if (!validar.VerificarIdentidad(txtIdentidad.Text))
+            if (!validar.VerificarIdentidad(txtIdentidad.Text,dtpFechaNac.SelectedDate.Value))
             {
                 MessageBox.Show("El numero de identidad no tiene un formato correcto");
 

@@ -911,6 +911,7 @@ namespace SistemaDental
             }
             finally
             {
+                command.Parameters.Clear();
                 command.Connection = con.Close();
             }
         }
@@ -1098,6 +1099,7 @@ namespace SistemaDental
             {
                 reader.Close();
                 command.Connection = con.Close();
+                command.Parameters.Clear();
             }
         }
 
@@ -1144,7 +1146,7 @@ namespace SistemaDental
             {
                 reader.Close();
                 sqlConnection.Close();
-
+                command.Parameters.Clear();
 
             }
 
@@ -1174,9 +1176,9 @@ namespace SistemaDental
             
 
             }
-            catch
+            catch (Exception E)
             {
-                throw;
+                throw E;
             }
             finally
             {
@@ -1364,6 +1366,7 @@ namespace SistemaDental
             }
             finally
             {
+                command.Parameters.Clear();
                 sqlConnection.Close();
             }
         }
@@ -1639,7 +1642,7 @@ namespace SistemaDental
               {
                 reader.Close();
                 command.Connection = con.Close();
-
+                command.Parameters.Clear();
             }
         }
         #endregion
@@ -1676,7 +1679,8 @@ namespace SistemaDental
             }
             finally
             {
-              sqlConnection.Close();
+                command.Parameters.Clear();
+                sqlConnection.Close();
             }
           
         }
@@ -1718,6 +1722,7 @@ namespace SistemaDental
             }
             finally
             {
+                command.Parameters.Clear();
                 sqlConnection.Close();
             }
         }
@@ -1744,6 +1749,7 @@ namespace SistemaDental
             }
             finally
             {
+                command.Parameters.Clear();
                 sqlConnection.Close();
             }
         }
@@ -1777,6 +1783,7 @@ namespace SistemaDental
             }
             finally
             {
+                command.Parameters.Clear();
                 command.Connection = con.Close();
                 command.Parameters.Clear();
             }
@@ -1805,6 +1812,7 @@ namespace SistemaDental
             }
             finally
             {
+                command.Parameters.Clear();
                 command.Parameters.Clear();
                 command.Connection = con.Close();
             }
@@ -1841,6 +1849,8 @@ namespace SistemaDental
             }
             finally
             {
+                command.Parameters.Clear();
+                command.Parameters.Clear();
                 sqlConnection.Close();
             }
           }
@@ -1874,6 +1884,7 @@ namespace SistemaDental
 
             finally
             {
+                command.Parameters.Clear();
                 sqlConnection.Close();
             }
           }
@@ -1935,6 +1946,7 @@ namespace SistemaDental
             }
             finally
             {
+                command.Parameters.Clear();
                 sqlConnection.Close();
             }
         }
@@ -2252,7 +2264,7 @@ namespace SistemaDental
             finally
             {
                 sqlConnection.Close();
-
+                command.Parameters.Clear();
 
             }
 
@@ -2290,7 +2302,7 @@ namespace SistemaDental
             finally
             {
                 sqlConnection.Close();
-
+                command.Parameters.Clear();
 
             }
 
@@ -2325,9 +2337,9 @@ namespace SistemaDental
               finally
               {
                   sqlConnection.Close();
+                command.Parameters.Clear();
 
-
-              }
+            }
 
           }
 
@@ -2361,6 +2373,7 @@ namespace SistemaDental
             }
             finally
             {
+                command.Parameters.Clear();
                 sqlConnection.Close();
             }
         }
@@ -2388,7 +2401,7 @@ namespace SistemaDental
             finally
             {
                 sqlConnection.Close();
-
+                command.Parameters.Clear();
             }
 
         }
