@@ -27,7 +27,10 @@ namespace SistemaDental.MVCCV.Vista
         ClaseTratamiento trat = new ClaseTratamiento();
         Validaciones validar = new Validaciones();
         List<ClaseInventario> listMateriales = new List<ClaseInventario>();
+
         DataTable dtMaterial = new DataTable();
+        DataTable dtTratamiento = new DataTable();
+
         public Usuario user = new Usuario();
 
         public int gTratamientoID = 0;
@@ -56,26 +59,71 @@ namespace SistemaDental.MVCCV.Vista
             /*Tratamiento*/
         private void btnGuardar_Click(object sender, RoutedEventArgs e)
         {
+            GuardarDatos();
+        }
+
+        private bool VerificarNombreTratamiento()
+        {
+            DataTable dt = new DataTable();
+            dt = dtTratamiento;
+
+            if (dt != null)
+            {
+
+                string busqueda = "Nombre = '" + txtTratamientoNombre.Text + "'";
+
+                DataRow[] row = dt.Select(busqueda);
+
+                if (row.Length > 0)
+                {
+                    return false;
+                }
+                else
+                {
+                    return true;
+                }
+            }
+            else
+            {
+                return true;
+            }
+        }
+
+        private void GuardarDatos()
+        {
             if (ValidarDatos())
             {
                 if (!isUpdate)
                 {
-                    GuardarTratamiento();
-                    proc.InsertarLog(user.Ide, "Se ingreso el tratamiento [" + trat.TratamientoNombre + "]");
+                    if(VerificarNombreTratamiento())
+                    {
+                        GuardarTratamiento();
+                        proc.InsertarLog(user.Ide, "Se ingreso el tratamiento [" + trat.TratamientoNombre + "]");
+                        MessageBox.Show("Datos insertados con exito");
+
+                        CleanerLista();
+                        Cleaner();
+                        ObtenerTratamientos();
+                        ObtenerMateriales();
+                    }
+                    else
+                    {
+                        MessageBox.Show("El nombre del tratamiento ya existe en el sistema. Por favor, ingrese otro nombre para el tratamiento.");
+
+                    }
                 }
                 else
                 {
                     ActualizarTratamiento();
                     proc.InsertarLog(user.Ide, "Se modifico el tratamiento [" + trat.TratamientoNombre + "]");
-                }
+                    MessageBox.Show("Datos modificados con exito");
 
-                MessageBox.Show("Datos insertados con exito");
-
-                Cleaner();
-                ObtenerTratamientos();
-                ObtenerMateriales();
+                    CleanerLista();
+                    Cleaner();
+                    ObtenerTratamientos();
+                    ObtenerMateriales();
+                }          
             }
-            CleanerLista();
         }
 
         private void btnAgregar_Click(object sender, RoutedEventArgs e)
@@ -90,7 +138,9 @@ namespace SistemaDental.MVCCV.Vista
             btnCancelar.IsEnabled = true;
 
             dg_materiales.IsEnabled = true;
+            dg_tratamientos.SelectedIndex = -1;
             dg_tratamientos.IsEnabled = false;
+
         }
 
         private void btnEditar_Click(object sender, RoutedEventArgs e)
@@ -286,7 +336,8 @@ namespace SistemaDental.MVCCV.Vista
 
         private void ObtenerTratamientos()
         {
-            dg_tratamientos.ItemsSource = proc.ObtenerTratamientosDatos().DefaultView;
+            dtTratamiento = proc.ObtenerTratamientosDatos();
+            dg_tratamientos.ItemsSource = dtTratamiento.DefaultView;
             dg_tratamientos.SelectedValuePath = "TratamientoID";
         }
 
@@ -428,7 +479,8 @@ namespace SistemaDental.MVCCV.Vista
             listMateriales.Clear();
 
             CamposEstado(true);
-            
+
+            isUpdate = false;
             isListaUpdate = false;
         }
 
@@ -456,6 +508,12 @@ namespace SistemaDental.MVCCV.Vista
 
         private bool ValidarDatos()
         {
+            if (dg_tratamientos.SelectedIndex == -1 && isUpdate)
+            {
+                MessageBox.Show("Por favor, selecione un tratamiento a modificar.");
+                return false;
+            }
+
             if (VerificarDatos(txtTratamientoNombre))
             {
                 MessageBox.Show("Por favor, ingrese un nombre al tratamiento.");
@@ -481,6 +539,7 @@ namespace SistemaDental.MVCCV.Vista
                 MessageBox.Show("Por favor, ingrese los materiales que el tratamiento requiere.");
                 return false;
             }
+
             return true;
         }
 
