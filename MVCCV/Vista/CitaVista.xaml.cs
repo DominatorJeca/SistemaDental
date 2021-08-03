@@ -26,6 +26,9 @@ namespace SistemaDental.MVCCV.Vista
         ObservableCollection<ClaseCitas> tratamientos = new ObservableCollection<ClaseCitas>();
         ClaseCitas citas = new ClaseCitas();
         public event EventHandler CambioDeVistaPrincipal;
+        List<ClaseCitas> ListaTratamientos= new List<ClaseCitas>();
+        public ClaseProcedimiento proc = new ClaseProcedimiento();
+        List<ClaseInventario> Materiales = new List<ClaseInventario>();
 
 
         int vand = 0;
@@ -71,20 +74,44 @@ namespace SistemaDental.MVCCV.Vista
         }
         private void Agregar_Tratamientos_Click(object sender, RoutedEventArgs e)
         {
-            ClaseCitas prod = new ClaseCitas();
-            prod.IdTratamiento = Convert.ToInt32(cmbTratamiento.SelectedValue.ToString());
-            citas.mostraridtrtamientos(citas, prod.IdTratamiento);
-            prod.nombreTramientoindividual = citas.nombreTramientoindividual;
-            prod.trtamientoprecio = citas.trtamientoprecio;
-            foreach (ClaseCitas inv in tratamientos)
-                if (inv.IdTratamiento == prod.IdTratamiento)
+            if (cmbTratamiento.SelectedItem!=null)
+            {
+                ClaseCitas prod = (ClaseCitas) cmbTratamiento.SelectedItem;
+               /* prod.IdTratamiento = Convert.ToInt32(cmbTratamiento.SelectedValue.ToString());
+                citas.mostraridtrtamientos(citas, prod.IdTratamiento);
+                prod.nombreTramientoindividual = citas.nombreTramientoindividual;
+                prod.trtamientoprecio = citas.trtamientoprecio;*/
+                foreach (ClaseCitas inv in tratamientos)
                 {
-                    MessageBox.Show("Este tratamiento ya existe eliminelo e ingreselo nuevamente");
-                    return;
+                    if (inv.IdTratamiento == prod.IdTratamiento)
+                    {
+                        MessageBox.Show("Este tratamiento ya existe eliminelo e ingreselo nuevamente");
+                        return;
+                    }
                 }
-            tratamientos.Add(prod);
-            dtg_Tratamientos.ItemsSource = tratamientos;
-            dtg_Tratamientos.SelectedValuePath = "IdTratamiento";
+
+                foreach (ClaseInventario inv in prod.Materiales)
+                {
+                    int ind = Materiales.FindIndex(x => x.IdMaterial == inv.IdMaterial);
+                    if (ind >= 0)
+                    {
+                        Materiales[ind].Cantidad -= inv.Cantidad;
+                        if (Materiales[ind].Cantidad <= 30)
+                        {
+                            MessageBox.Show("Se esta quedando sin " + inv.NombreMaterial + " . Asegurese de comprar mas");
+                            proc.InsertarLog(user.Ide, "Se le aviso falta de material");
+                        }
+                        if (Materiales[ind].Cantidad <= 0)
+                        {
+                            MessageBox.Show("Si agenda está cita no habra suficiente " + inv.NombreMaterial + " para realizarla (De acuerdo a la cantidad sugerida), Siempre podra agendar la cita. Asegurese de comprar mas y registrarla en el sistema");
+                            Materiales.RemoveAt(ind);
+                        }
+                    }
+                }
+                tratamientos.Add(prod);
+                dtg_Tratamientos.ItemsSource = tratamientos;
+                dtg_Tratamientos.SelectedValuePath = "IdTratamiento";
+            }
         }
         private void MostrarDatos()
         {
@@ -99,10 +126,15 @@ namespace SistemaDental.MVCCV.Vista
             cmbEmpleado.ItemsSource = citas.MostrarEmpleado();
             cmbEmpleado.DisplayMemberPath = "nombrecompoletoempleado";
             cmbEmpleado.SelectedValuePath = "IdEmpleado";
-            cmbTratamiento.ItemsSource = citas.MostrarTratamiento();
+            ListaTratamientos = citas.MostrarTratamiento();
+            foreach (ClaseCitas tratamientos in ListaTratamientos)
+            {
+                tratamientos.Materiales = proc.MostrarInventarioxTratamiento(tratamientos.IdTratamiento);
+            }
+            cmbTratamiento.ItemsSource = ListaTratamientos;
             cmbTratamiento.DisplayMemberPath = "NombreTratamiento";
             cmbTratamiento.SelectedValuePath = "IdTratamiento";
-
+            Materiales = proc.MostrarInventario();
         }
 
         private void mostrarCitas()
@@ -268,6 +300,7 @@ namespace SistemaDental.MVCCV.Vista
 
 
                             citas.EditarCita(citas);
+                            proc.InsertarLog(user.Ide, "Edito una cita");
                             citas.eliminardetallecita(citas.IdCita);
                             foreach (ClaseCitas inv in tratamientos)
                             {
@@ -308,10 +341,12 @@ namespace SistemaDental.MVCCV.Vista
                             ObtenerValores();
 
                             citas.AgendarCita(citas);
+                            proc.InsertarLog(user.Ide, "Agendo Cita");
                             foreach (ClaseCitas inv in tratamientos)
                             {
 
                                 citas.InsertarDetalleCita(citas.IdCita, inv.IdTratamiento, float.Parse(inv.trtamientoprecio));
+                                proc.InsertarLog(user.Ide, "Inserto detalle de cita");
                             }
                             MessageBox.Show("Cita agendada con éxito");
                             btnGuardar.IsEnabled = false;
@@ -511,7 +546,7 @@ namespace SistemaDental.MVCCV.Vista
                     tratamientos.Add(new ClaseCitas
                     {
                         IdTratamiento = tr.IdTratamiento,
-                        nombreTramientoindividual = tr.nombreTramientoindividual.ToString(),
+                        NombreTratamiento = tr.NombreTratamiento.ToString(),
                         trtamientoprecio = tr.trtamientoprecio.ToString(),
                         detalleCita = tr.detalleCita,
                         IdCita = val

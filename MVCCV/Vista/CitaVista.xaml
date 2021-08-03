@@ -88,7 +88,7 @@
             </Label>
             <DataGrid x:Name="dtg_Tratamientos" SelectionMode= "Single" HorizontalAlignment="Left" Height="127" VerticalAlignment="Top" Width="425" Background="#FF056676" Foreground="#DDFFFFFF" AutoGenerateColumns="False" IsReadOnly="True" Grid.Column="3" Margin="0,241,0,0" Grid.Row="1" >
                 <DataGrid.Columns >
-                    <DataGridTextColumn Header="Tratamiento" Binding="{Binding nombreTramientoindividual}" Width="120"/>
+                    <DataGridTextColumn Header="Tratamiento" Binding="{Binding NombreTratamiento}" Width="120"/>
                     <DataGridTextColumn Header="Precio Sugerido" Binding="{Binding trtamientoprecio}"  />
                 </DataGrid.Columns>
             </DataGrid>

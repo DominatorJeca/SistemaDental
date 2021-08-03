@@ -1328,7 +1328,7 @@ namespace SistemaDental
                     citas.Add(new ClaseCitas
                     {
                         IdTratamiento = Convert.ToInt32(reader["TratamientoID"]),
-                        nombreTramientoindividual = reader["Nombre"].ToString(),
+                        NombreTratamiento = reader["Nombre"].ToString(),
                         trtamientoprecio = reader["PrecioCobrado"].ToString(),
                         detalleCita = Convert.ToInt32(reader["DetalleCitaID"].ToString())
                     });
@@ -1738,7 +1738,7 @@ namespace SistemaDental
                 List<ClaseCitas> citas = new List<ClaseCitas>();
                 while (reader.Read())
                 {
-                    citas.Add(new ClaseCitas { IdTratamiento = Convert.ToInt32(reader["TratamientoID"].ToString()), NombreTratamiento = reader["nombre"].ToString() });
+                    citas.Add(new ClaseCitas { IdTratamiento = Convert.ToInt32(reader["TratamientoID"].ToString()), NombreTratamiento = reader["nombre"].ToString(),trtamientoprecio=Convert.ToString(reader["PrecioSugerido"]) });
                 }
 
                 return citas;

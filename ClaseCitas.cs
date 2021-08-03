@@ -36,6 +36,7 @@ namespace SistemaDental
         public string ApellidoPaciente { get; set; }
         public string Observaciones { get; set; }
         public DateTime fechaCita { get; set; }
+        public List<ClaseInventario>Materiales { get; set; }
 
 
         public void InsertarDetalleCita(int cita, int IdTratamiento, float trtamientoprecio)
