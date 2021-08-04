@@ -1,18 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace SistemaDental.MVCCV.Vista
 {
@@ -47,7 +39,7 @@ namespace SistemaDental.MVCCV.Vista
         }
 
         //Abre el formulario ajustes y cierra el actual
-      
+
         //Asigna la lista de puestos al combobox de puestos
         public void MostrarPuesto()
         {
@@ -246,7 +238,7 @@ namespace SistemaDental.MVCCV.Vista
         /// <param name="e"></param>
         private void btnRegresar_Click_1(object sender, RoutedEventArgs e)
         {
-       
+
             Ajustes ajustes = new Ajustes(Admin, Nombree);
             ajustes.Show();
         }
@@ -256,10 +248,13 @@ namespace SistemaDental.MVCCV.Vista
         {
             int character = Convert.ToInt32(Convert.ToChar(e.Text));
             if ((character >= 65 && character <= 90) || (character >= 97 && character <= 122))
+            {
                 e.Handled = false;
+            }
             else
+            {
                 e.Handled = true;
-
+            }
         }
 
 
@@ -267,18 +262,22 @@ namespace SistemaDental.MVCCV.Vista
         {
             int character = Convert.ToInt32(Convert.ToChar(e.Text));
             if (character >= 48 && character <= 57)
+            {
                 e.Handled = false;
+            }
             else
+            {
                 e.Handled = true;
+            }
         }
 
         private void Window_Closed(object sender, EventArgs e)
         {
-         
+
             Ajustes ajustes = new Ajustes(Admin, Nombree);
             ajustes.Show();
         }
 
-       
+
     }
 }

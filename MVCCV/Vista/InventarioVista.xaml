@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:SistemaDental.MVCCV.Vista"
              mc:Ignorable="d" 
-              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" Height="471" Width="893">
+              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" Height="455" Width="1050">
     <Grid Loaded="Grid_Loaded_1">
         <Grid.Background>
             <ImageBrush ImageSource="/imagenes/TeethPattern.jpg" Stretch="UniformToFill"/>
@@ -19,7 +19,7 @@
             </DataGrid.Columns>
         </DataGrid>
         <TextBox PreviewTextInput="PreviewTextInputLetters" IsEnabled="False" Text="{Binding ElementName=dgv_Materiales, Path=SelectedItem.NombreMaterial}" Name="txtMaterialInventario"   Margin="540,86,53,317" materialDesign:HintAssist.Hint="Material" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontFamily="Bahnschrift" FontSize="18" Background="#7FFFFFFF" />
-        <TextBox IsEnabled="False" Text="{Binding ElementName=dgv_Materiales, Path=SelectedItem.Cantidad}" Name="txtCantidadInventario" Margin="540,154,53,263" materialDesign:HintAssist.Hint="Cantidad" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontFamily="Bahnschrift" FontSize="18" Background="#7FFFFFFF"/>
+        <TextBox IsEnabled="False" Text="{Binding ElementName=dgv_Materiales, Path=SelectedItem.Cantidad}" Name="txtCantidadInventario" Margin="540,154,52.6,256.2" materialDesign:HintAssist.Hint="Cantidad" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontFamily="Bahnschrift" FontSize="18" Background="#7FFFFFFF"/>
         <DataGrid SelectionMode="Single" HorizontalAlignment="Left" Height="145" Margin="29,79,0,0" VerticalAlignment="Top" Width="450" Background="#FF056676" x:Name="dgv_Materiales" HorizontalContentAlignment="Center" SelectionChanged="dgv_Materiales_SelectionChanged_1" IsReadOnly="True" AutoGenerateColumns="False">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Código" Binding="{Binding IdMaterial}" Width="150"></DataGridTextColumn>

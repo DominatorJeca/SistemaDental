@@ -48,7 +48,7 @@
                 <StackPanel Orientation="Horizontal" Height="28" Margin="0,0,56,0" Width="79" HorizontalAlignment="Right" VerticalAlignment="Center"/>
                 <StackPanel Orientation="Horizontal" Height="40" HorizontalAlignment="Left" Width="405" VerticalAlignment="Center">
                     <Label Content="Doctor" HorizontalAlignment="Left" VerticalAlignment="Top"  FontSize="15" Foreground="Black" Background="White" FontFamily="Bahnschrift" RenderTransformOrigin="1.349,0.404" Height="40" Width="98"/>
-                    <ComboBox x:Name="cmbEmpleado" IsEnabled="False" VerticalAlignment="Top" Width="306" RenderTransformOrigin="0.603,0.358" SelectedValue="{Binding SelectedItem.IdEmpleado, ElementName=dtg_Citas}"/>
+                    <ComboBox x:Name="cmbEmpleado" IsEditable="true"  IsEnabled="False" VerticalAlignment="Top" Width="306" RenderTransformOrigin="0.603,0.358" SelectedValue="{Binding SelectedItem.IdEmpleado, ElementName=dtg_Citas}"/>
 
                 </StackPanel>
                 <StackPanel Orientation="Horizontal" Height="40" HorizontalAlignment="Left" Width="405">
@@ -73,7 +73,7 @@
             </StackPanel>
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="5,158,10,207" Width="410" Grid.Column="3" Grid.Row="1">
                 <Label Content="Tratamiento" HorizontalAlignment="Center"  VerticalAlignment="Center"  FontSize="15" Foreground="Black" Background="White" FontFamily="Bahnschrift" Width="98" Height="40" />
-                <ComboBox x:Name="cmbTratamiento" IsEnabled="False" HorizontalAlignment="Left" VerticalAlignment="Top" Width="306" Grid.Column="1" SelectedValue="{Binding SelectedItem.nombreTramientoindividual, ElementName=dtg_Citas}"/>
+                <ComboBox x:Name="cmbTratamiento" IsEditable="true"  IsEnabled="False" HorizontalAlignment="Left" VerticalAlignment="Top" Width="306" Grid.Column="1" SelectedValue="{Binding SelectedItem.nombreTramientoindividual, ElementName=dtg_Citas}"/>
 
             </StackPanel>
             <Label Content="Lista de tratamientos" HorizontalAlignment="Left" VerticalAlignment="Top" Foreground="Black" Background="#7F056676" FontFamily="Bahnschrift" Grid.Column="3" Margin="5,211,0,0" Grid.Row="1" FontSize="14" RenderTransformOrigin="0.5,0.5" Height="25" Width="142" >
@@ -88,7 +88,7 @@
             </Label>
             <DataGrid x:Name="dtg_Tratamientos" SelectionMode= "Single" HorizontalAlignment="Left" Height="127" VerticalAlignment="Top" Width="425" Background="#FF056676" Foreground="#DDFFFFFF" AutoGenerateColumns="False" IsReadOnly="True" Grid.Column="3" Margin="0,241,0,0" Grid.Row="1" >
                 <DataGrid.Columns >
-                    <DataGridTextColumn Header="Tratamiento" Binding="{Binding nombreTramientoindividual}" Width="120"/>
+                    <DataGridTextColumn Header="Tratamiento" Binding="{Binding NombreTratamiento}" Width="120"/>
                     <DataGridTextColumn Header="Precio Sugerido" Binding="{Binding trtamientoprecio}"  />
                 </DataGrid.Columns>
             </DataGrid>
@@ -114,7 +114,7 @@
             <StackPanel Orientation="Horizontal" VerticalAlignment="Bottom" HorizontalAlignment="Right" Height="33" Grid.Column="3" Margin="0,0,10,372" Width="410" Grid.Row="1" >
                 <Label Content="Paciente" HorizontalAlignment="Left"  VerticalAlignment="Top"  FontSize="15" Foreground="Black" Background="White" FontFamily="Bahnschrift" Grid.Column="1" Width="96"/>
 
-                <ComboBox x:Name="cmbPaciente" IsEnabled="False" HorizontalAlignment="Left" VerticalAlignment="Top" Width="307" RenderTransformOrigin="0.603,0.358" Grid.Column="1" Text="{Binding SelectedItem.IdPacientes}"   />
+                <ComboBox x:Name="cmbPaciente" IsEditable="true"  IsEnabled="False" HorizontalAlignment="Left" VerticalAlignment="Top" Width="307" RenderTransformOrigin="0.603,0.358" Grid.Column="1" Text="{Binding SelectedItem.IdPacientes}"   />
             </StackPanel>
             <StackPanel Orientation="Horizontal" VerticalAlignment="Bottom" HorizontalAlignment="Center" Height="33" Width="424" Margin="0,0,126,334" Grid.Column="1" Grid.Row="1">
                 <Label Content=" Busqueda Paciente" HorizontalAlignment="Center"  VerticalAlignment="Top"  FontSize="15" Foreground="Black" Background="White" FontFamily="Bahnschrift" Grid.Column="1" Width="144"/>

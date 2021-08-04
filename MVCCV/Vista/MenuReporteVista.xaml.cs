@@ -1,20 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using Microsoft.Reporting.WinForms;
+using System;
 using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
-using ControlzEx.Standard;
-using Microsoft.Reporting.WinForms;
 
 
 namespace SistemaDental.MVCCV.Vista
@@ -24,10 +12,11 @@ namespace SistemaDental.MVCCV.Vista
     /// </summary>
     public partial class MenuReporteVista : UserControl
     {
-        ClaseProcedimiento procedimiento = new ClaseProcedimiento();
-        int reporteseleccionado = 0;
-        DataTable dt;
-        ReportDataSource ds;
+        private ClaseProcedimiento procedimiento = new ClaseProcedimiento();
+        private Validaciones validaciones = new Validaciones();
+        private int reporteseleccionado = 0;
+        private DataTable dt;
+        private ReportDataSource ds;
         public Usuario user;
         public MenuReporteVista()
         {
@@ -38,18 +27,18 @@ namespace SistemaDental.MVCCV.Vista
             cmbEmpleado.DisplayMemberPath = "Empleado";
         }
 
-        
+
         public void ManejoReportes()
         {
             txtanio.SelectedValue = "";
             Mes.SelectedValue = "";
             reporte.Clear();
-            foreach(Control control in stpPanel.Children)
+            foreach (Control control in stpPanel.Children)
             {
                 control.Visibility = Visibility.Collapsed;
             }
 
-           
+
         }
 
         private int mes()
@@ -88,10 +77,19 @@ namespace SistemaDental.MVCCV.Vista
 
         private void ObtenerValores()
         {
-            procedimiento.anio = Convert.ToInt32(txtanio.Text);
-            procedimiento.mes = mes();
-            procedimiento.tratamiento = Convert.ToString(Tratamiento.SelectedValue);
-            procedimiento.NombreEmpleado = Convert.ToString(cmbEmpleado.SelectedValue);
+            procedimiento.anio = 0;
+            procedimiento.mes = 0;
+            if (txtanio.Text != "" && Mes.Text != "")
+            {
+                procedimiento.anio = Convert.ToInt32(txtanio.Text);
+                procedimiento.mes = mes();
+                procedimiento.tratamiento = Convert.ToString(Tratamiento.SelectedValue);
+                procedimiento.NombreEmpleado = Convert.ToString(cmbEmpleado.SelectedValue);
+            }
+            else
+            {
+                MessageBox.Show("Ingrese valores correctos");
+            }
         }
 
         private void btnreporte1_Click(object sender, RoutedEventArgs e)
@@ -174,40 +172,68 @@ namespace SistemaDental.MVCCV.Vista
                     reporte.RefreshReport();
                     break;
                 case 5:
-                    procedimiento.anio = Convert.ToInt32(txtanio.Text);
-                    reporte.Reset();
-                    dt = procedimiento.AnioGanancias();
-                    ds = new ReportDataSource("DataSetAG", dt);
-                    reporte.LocalReport.DataSources.Add(ds);
-                    reporte.LocalReport.ReportEmbeddedResource = "SistemaDental.ReportAnioGanancias.rdlc";
-                    reporte.RefreshReport();
+                    if (txtanio.Text != "")
+                    {
+                        procedimiento.anio = Convert.ToInt32(txtanio.Text);
+                        reporte.Reset();
+                        dt = procedimiento.AnioGanancias();
+                        ds = new ReportDataSource("DataSetAG", dt);
+                        reporte.LocalReport.DataSources.Add(ds);
+                        reporte.LocalReport.ReportEmbeddedResource = "SistemaDental.ReportAnioGanancias.rdlc";
+                        reporte.RefreshReport();
+                    }
+                    else
+                    {
+                        MessageBox.Show("Ingrese valores correctos");
+                    }
                     break;
                 case 6:
-                    procedimiento.NombreEmpleado = Convert.ToString(cmbEmpleado.SelectedValue);
-                    reporte.Reset();
-                    dt = procedimiento.TurnosxEmpleado();
-                    ds = new ReportDataSource("DataSetTE", dt);
-                    reporte.LocalReport.DataSources.Add(ds);
-                    reporte.LocalReport.ReportEmbeddedResource = "SistemaDental.ReportTurnosxEmpleado.rdlc";
-                    reporte.RefreshReport();
+                    if (cmbEmpleado.SelectedValue != null)
+                    {
+                        procedimiento.NombreEmpleado = Convert.ToString(cmbEmpleado.SelectedValue);
+                        reporte.Reset();
+                        dt = procedimiento.TurnosxEmpleado();
+                        ds = new ReportDataSource("DataSetTE", dt);
+                        reporte.LocalReport.DataSources.Add(ds);
+                        reporte.LocalReport.ReportEmbeddedResource = "SistemaDental.ReportTurnosxEmpleado.rdlc";
+                        reporte.RefreshReport();
+                    }
+                    else
+                    {
+                        MessageBox.Show("Ingrese valores correctos");
+                    }
                     break;
                 case 7:
-                    procedimiento.NombreEmpleado = Convert.ToString(cmbEmpleado.SelectedValue);
-                    reporte.Reset();
-                    dt = procedimiento.Citasporempleado();
-                    ds = new ReportDataSource("DataSetCitasEmpleado", dt);
-                    reporte.LocalReport.DataSources.Add(ds);
-                    reporte.LocalReport.ReportEmbeddedResource = "SistemaDental.ReportCitasxEmpleado.rdlc";
-                    reporte.RefreshReport();
+                    if (cmbEmpleado.SelectedValue != null)
+                    {
+                        procedimiento.NombreEmpleado = Convert.ToString(cmbEmpleado.SelectedValue);
+                        reporte.Reset();
+                        dt = procedimiento.Citasporempleado();
+                        ds = new ReportDataSource("DataSetCitasEmpleado", dt);
+                        reporte.LocalReport.DataSources.Add(ds);
+                        reporte.LocalReport.ReportEmbeddedResource = "SistemaDental.ReportCitasxEmpleado.rdlc";
+                        reporte.RefreshReport();
+                    }
+                    else
+                    {
+                        MessageBox.Show("Ingrese valores correctos");
+                    }
                     break;
                 case 8:
-                    procedimiento.NombreEmpleado = Convert.ToString(cmbEmpleado.SelectedValue);
-                    reporte.Reset();
-                    dt = procedimiento.MostrarLog();
-                    ds = new ReportDataSource("DataSetLog", dt);
-                    reporte.LocalReport.DataSources.Add(ds);
-                    reporte.LocalReport.ReportEmbeddedResource = "SistemaDental.ReportLog.rdlc";
-                    reporte.RefreshReport();
+                    if (cmbEmpleado.SelectedValue != null)
+                    {
+                        procedimiento.NombreEmpleado = Convert.ToString(cmbEmpleado.SelectedValue);
+                        reporte.Reset();
+                        dt = procedimiento.MostrarLog();
+                        ds = new ReportDataSource("DataSetLog", dt);
+                        reporte.LocalReport.DataSources.Add(ds);
+                        reporte.LocalReport.ReportEmbeddedResource = "SistemaDental.ReportLog.rdlc";
+                        reporte.RefreshReport();
+                    }
+                    else
+                    {
+                        MessageBox.Show("Ingrese valores correctos");
+                    }
                     break;
             }
         }
@@ -217,19 +243,19 @@ namespace SistemaDental.MVCCV.Vista
             reporteseleccionado = 6;
             ManejoReportes();
             ManejoVisibilidad();
-            
+
         }
 
 
         private void ManejoVisibilidad()
         {
             btnMostrarReporte.Visibility = Visibility.Visible;
-            if(reporteseleccionado==1 || reporteseleccionado == 2 || reporteseleccionado == 3 || reporteseleccionado == 4)
+            if (reporteseleccionado == 1 || reporteseleccionado == 2 || reporteseleccionado == 3 || reporteseleccionado == 4)
             {
                 lblanio.Visibility = Visibility.Visible;
                 txtanio.Visibility = Visibility.Visible;
-                lblmes.Visibility= Visibility.Visible;
-                Mes.Visibility= Visibility.Visible;
+                lblmes.Visibility = Visibility.Visible;
+                Mes.Visibility = Visibility.Visible;
             }
             if (reporteseleccionado == 5)
             {
@@ -241,7 +267,7 @@ namespace SistemaDental.MVCCV.Vista
                 lbltratamiento.Visibility = Visibility.Visible;
                 Tratamiento.Visibility = Visibility.Visible;
             }
-            if (reporteseleccionado == 6 || reporteseleccionado==7|| reporteseleccionado==8)
+            if (reporteseleccionado == 6 || reporteseleccionado == 7 || reporteseleccionado == 8)
             {
                 lblempleado.Visibility = Visibility.Visible;
                 cmbEmpleado.Visibility = Visibility.Visible;

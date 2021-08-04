@@ -1,24 +1,17 @@
-﻿using Microsoft.Xaml.Behaviors.Core;
-using SistemaDental.Base;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Input;
+﻿using SistemaDental.Base;
 
 namespace SistemaDental.MVCCV.VistaControlador
 {
-    class MenuPrincipalVistaControlador: ObservableObject
+    internal class MenuPrincipalVistaControlador : ObservableObject
     {
         public DatosDeUsuarioVistaControlador DatosDeUsuarioVista { get; set; }
         public CasaVistaControlador CasaVista { get; set; }
         public CajaVistaControlador CajaVista { get; set; }
         public UsuariosVistaControlador UsuarioVista { get; set; }
-      public Pacientesvistacontrolador PacientesVista { get; set; }
+        public Pacientesvistacontrolador PacientesVista { get; set; }
         public TratamientosvistaControlador tratamientosvista { get; set; }
         public EdditarUsuariovistaControlador edditarUsuariovista { get; set; }
-        public InventarioVistaControlador  inventarioVista { get; set; }
+        public InventarioVistaControlador inventarioVista { get; set; }
         public ManejarusuariovistaControlador manejarusuariovista { get; set; }
 
         public CitaVistaControlador CitaVista { get; set; }
@@ -47,7 +40,9 @@ namespace SistemaDental.MVCCV.VistaControlador
         public object vistaActual
         {
             get { return _vistaActual; }
-            set { _vistaActual = value;
+            set
+            {
+                _vistaActual = value;
                 OnPropertyChanged();
             }
         }
@@ -67,7 +62,7 @@ namespace SistemaDental.MVCCV.VistaControlador
             CompraVista = new CompraVistaControlador();
             DatosDeUsuarioVista = new DatosDeUsuarioVistaControlador();
             vistaActual = CasaVista;
-           
+
             CasaVistaComando = new RelayCommand(o =>
             {
                 vistaActual = CasaVista;

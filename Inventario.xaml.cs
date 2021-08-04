@@ -1,26 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
-using System.Data.SqlClient;
-using System.Configuration;
-using System.Data;
-using System.Data.Sql;
-using System.Media;
-using System.Drawing;
-using System.Windows.Forms;
-using System.CodeDom.Compiler;
-using MessageBox = System.Windows.MessageBox;
-using DataGridCell = System.Windows.Forms.DataGridCell;
 
 namespace SistemaDental
 {
@@ -29,12 +10,11 @@ namespace SistemaDental
     /// </summary>
     public partial class Inventario : Window
     {
-        ClaseInventario inventario = new ClaseInventario();
+        private ClaseInventario inventario = new ClaseInventario();
 
         private bool Admin;
         private String Nombree;
-
-        Validaciones validar = new Validaciones();
+        private Validaciones validar = new Validaciones();
         public Inventario()
         {
             InitializeComponent();
@@ -63,7 +43,7 @@ namespace SistemaDental
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-         
+
         }
 
         private void ObtenerValores()
@@ -74,7 +54,7 @@ namespace SistemaDental
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
 
-          
+
         }
 
         private void OcultarMostrarBotones(Visibility ocultar)

@@ -1,8 +1,6 @@
 ﻿namespace SistemaDental
 {
-
-
-    partial class DataSetfecven
+    public partial class DataSetfecven
     {
     }
 }

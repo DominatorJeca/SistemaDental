@@ -1,11 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Data;
-using System.Data.SqlClient;
-using System.Configuration;
 
 namespace SistemaDental
 {
@@ -13,9 +7,9 @@ namespace SistemaDental
     {
 
         //variable miembro
-        BDConnexion con = new BDConnexion();
-        ClaseProcedimiento procedimiento = new ClaseProcedimiento();
-     
+        private BDConnexion con = new BDConnexion();
+        private ClaseProcedimiento procedimiento = new ClaseProcedimiento();
+
 
         //Propiedad para extraer todos los ID almacenados en la BD
         public int Id_paciente { get; set; }
@@ -88,5 +82,5 @@ namespace SistemaDental
             procedimiento.ActualizarDatosPaciente(paciente);
         }
 
-        }
+    }
 }

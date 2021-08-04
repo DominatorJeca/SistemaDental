@@ -1,17 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace SistemaDental.MVCCV.Vista
 {
@@ -20,7 +9,7 @@ namespace SistemaDental.MVCCV.Vista
     /// </summary>
     public partial class ManejarUsuarioVista : UserControl
     {
-        Validaciones validaciones = new Validaciones();
+        private Validaciones validaciones = new Validaciones();
         //variables miembro
         private Usuario usuario = new Usuario();
         private bool Admin;
@@ -31,7 +20,7 @@ namespace SistemaDental.MVCCV.Vista
         {
             InitializeComponent();
             MostrarUsuario();
-            
+
         }
 
         public ManejarUsuarioVista(bool admin, string name)
@@ -48,7 +37,7 @@ namespace SistemaDental.MVCCV.Vista
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-       
+
 
         /// <summary>
         /// Asigna la lista de usuarios al combobox
@@ -78,7 +67,9 @@ namespace SistemaDental.MVCCV.Vista
             try
             {
                 if (cmbUsuario.SelectedValue == null)
+                {
                     MessageBox.Show("Por favor selecciona un empleado");
+                }
                 else
                 {
                     // Mostrar un mensaje de confirmación
@@ -154,7 +145,9 @@ namespace SistemaDental.MVCCV.Vista
             try
             {
                 if (cmbUsuario.SelectedValue == null)
+                {
                     MessageBox.Show("Por favor selecciona un empleado");
+                }
                 else
                 {
                     // Mostrar un mensaje de confirmación
@@ -209,7 +202,7 @@ namespace SistemaDental.MVCCV.Vista
 
         private void Window_Closed(object sender, EventArgs e)
         {
-         
+
             Ajustes ajustes = new Ajustes(Admin, Nombree);
             ajustes.Show();
         }

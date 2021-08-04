@@ -1,19 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Text.RegularExpressions;
-using System.Threading.Tasks;
+using System.ComponentModel;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
-using System.ComponentModel;
 
 namespace SistemaDental.MVCCV.Vista
 {
@@ -26,11 +16,11 @@ namespace SistemaDental.MVCCV.Vista
         //Variables miembro
         private Usuario usuar = new Usuario();
         public Usuario user = new Usuario();
-        int opcion = 0;
+        private int opcion = 0;
         private bool Admin;
         private String Nombree;
         private ClaseProcedimiento Proc = new ClaseProcedimiento();
-        Validaciones validar = new Validaciones();
+        private Validaciones validar = new Validaciones();
 
         #region Constructores
         //Contructores
@@ -42,7 +32,7 @@ namespace SistemaDental.MVCCV.Vista
             MostrarGenero();
             HabilitarInhabilitarTXT(false);
             botoneshabilitados(true);
-            
+
 
         }
 
@@ -56,7 +46,7 @@ namespace SistemaDental.MVCCV.Vista
             Nombree = name;
             Admin = admin;
             HabilitarInhabilitarTXT(false);
-          
+
         }
 
         #endregion
@@ -76,10 +66,10 @@ namespace SistemaDental.MVCCV.Vista
         {
             cmbSexo.ItemsSource = Proc.MostrarGenero();
             cmbSexo.SelectedValuePath = "Id";
-             cmbSexo.DisplayMemberPath = "NombreGenero";
+            cmbSexo.DisplayMemberPath = "NombreGenero";
         }
 
-        ICollectionView ColectionEmpleados;
+        private ICollectionView ColectionEmpleados;
         public void MostrarEmpleados(bool act)
         {
             ColectionEmpleados = new CollectionViewSource() { Source = Proc.MostrarEmpleados(act) }.View;
@@ -119,11 +109,11 @@ namespace SistemaDental.MVCCV.Vista
             usuar.Telefono = Convert.ToString(txtAgregarTelefono.Text);
             usuar.Correo = Convert.ToString(txtAgregarCorreo.Text);
             usuar.Puesto = Convert.ToInt32(cmbPuesto.SelectedValue);
-            usuar.Genero = Convert.ToInt32(cmbSexo.SelectedValue); 
+            usuar.Genero = Convert.ToInt32(cmbSexo.SelectedValue);
             usuar.Contraseña = txtAgregarContra.Password;
             usuar.Estado = true;
             usuar.Ide = (Convert.ToInt32(dgvEmpleado.SelectedValue));
-           
+
 
         }
 
@@ -170,41 +160,42 @@ namespace SistemaDental.MVCCV.Vista
         /// <returns>Verificacion de valores</returns>
         private bool VerificarValores()
         {
-           if (!validar.VerificarCampos(this))
+            if (!validar.VerificarCampos(this))
             {
                 MessageBox.Show("Por favor ingresa todos los valores que se le solicitan");
-            
+
                 botoneshabilitados(false);
                 return false;
             }
-            if (!validar.VerificarIdentidad(txtAgregarIdentidad.Text))
+            if (!validar.VerificarIdentidad(txtAgregarIdentidad.Text, new DateTime(1950, 1, 1)))
             {
                 MessageBox.Show("El numero de identidad no tiene un formato correcto");
-              
+
                 botoneshabilitados(false);
                 return false;
             }
             else if (!validar.VerificarNumero(txtAgregarTelefono.Text))
             {
                 MessageBox.Show("El numero de telefono no tiene un formato correcto");
-            
+
                 botoneshabilitados(false);
                 return false;
             }
             else if (txtConfirmarContra.Password != txtAgregarContra.Password)
             {
                 MessageBox.Show("La confirmación de contraseña no coincide");
-               
+
                 botoneshabilitados(false);
                 return false;
             }
             else if (!validar.ValidarEmail(txtAgregarCorreo.Text))
             {
-               
+
                 MessageBox.Show("Por favor, ingrese un correo valido");
                 botoneshabilitados(false);
                 return false;
             }
+
 
             return true;
         }
@@ -219,15 +210,53 @@ namespace SistemaDental.MVCCV.Vista
                 botoneshabilitados(false);
                 return false;
             }
+            else if (txtAgregarContra.Password.Length < 8)
+            {
+
+                MessageBox.Show("La contraseña debe tener un minimo de 8 caracteres");
+                botoneshabilitados(false);
+                return false;
+            }
             return true;
         }
 
-            /// <summary>
-            /// Funcion para limpiar los textbox y combobox del formulario
-            /// </summary>
-            private void LimpiarFormulario()
+        private bool VerificarIDRepetida(string identidad, bool edit)
         {
-          
+            if (edit)
+            {
+                if (identidad == Proc.BuscarEmpleado(identidad) && (((Usuario)dgvEmpleado.SelectedItem).Id != identidad))
+                {
+                    MessageBox.Show("El numero de identidad ya pertenece a un empleado ingresado");
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            else
+            {
+                if (identidad == Proc.BuscarEmpleado(identidad))
+                {
+                    MessageBox.Show("El numero de identidad ya pertenece a un empleado ingresado");
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+
+
+
+        }
+
+        /// <summary>
+        /// Funcion para limpiar los textbox y combobox del formulario
+        /// </summary>
+        private void LimpiarFormulario()
+        {
+
             txtAgregarContra.Password = string.Empty;
             txtConfirmarContra.Password = string.Empty;
 
@@ -270,7 +299,7 @@ namespace SistemaDental.MVCCV.Vista
         /// <param name="e"></param>
         private void btnAgregarUsuario_Click_1(object sender, RoutedEventArgs e)
         {
-           
+
             opcion = 1;
             botoneshabilitados(false);
             HabilitarInhabilitarTXT(true);
@@ -321,7 +350,7 @@ namespace SistemaDental.MVCCV.Vista
                 case 4:
                     EliminarRestablecerEmpleado(true);
                     break;
-            }   
+            }
 
         }
 
@@ -350,7 +379,7 @@ namespace SistemaDental.MVCCV.Vista
         #region Conexion a procedimientos
         private void IngresarEmpleado()
         {
-            if (VerificarValores() == true && VerificarPass()==true)
+            if (VerificarValores() == true && VerificarPass() == true && VerificarIDRepetida(txtAgregarIdentidad.Text, false) == false)
             {
                 try
                 {
@@ -374,7 +403,7 @@ namespace SistemaDental.MVCCV.Vista
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show("Ha ocurrido un error al momento de insertar el empleado..."+ ex.Message);
+                    MessageBox.Show("Ha ocurrido un error al momento de insertar el empleado..." + ex.Message);
                     Console.WriteLine(ex.Message);
                 }
 
@@ -386,28 +415,28 @@ namespace SistemaDental.MVCCV.Vista
         private void obtenerUsuario()
         {
 
-                try
-                {
+            try
+            {
 
                 string usu;
                 // Insertar los datos del usuario
                 usu = Proc.obtenerusuario(usuar.Id);
 
-                    // Mensaje de inserción exitosa
-                    MessageBox.Show("El usuario para el empleado que ingresó es: "+ usu);
+                // Mensaje de inserción exitosa
+                MessageBox.Show("El usuario para el empleado que ingresó es: " + usu);
                 dgvEmpleado.SelectedItem = null;
                 LimpiarFormulario();
             }
-                catch (Exception ex)
-                {
-                    MessageBox.Show("Ha ocurrido un error al momento de obtener el usuario..." + ex.Message);
-                    Console.WriteLine(ex.Message);
-                }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Ha ocurrido un error al momento de obtener el usuario..." + ex.Message);
+                Console.WriteLine(ex.Message);
             }
+        }
 
         private void EditarEmpleado()
         {
-            if (VerificarValores() == true)
+            if (VerificarValores() == true && VerificarIDRepetida(txtAgregarIdentidad.Text, true) == false)
             {
                 try
                 {
@@ -420,7 +449,7 @@ namespace SistemaDental.MVCCV.Vista
                     // Mensaje de inserción exitosa
                     MessageBox.Show("¡Datos editados correctamente!");
                     HabilitarInhabilitarTXT(false);
-                
+
 
                     botoneshabilitados(true);
                 }
@@ -438,27 +467,27 @@ namespace SistemaDental.MVCCV.Vista
         {
 
 
-                try
-                {
-                    // Obtener los valores para el empleado
-                    ObtenerValores();
-                    usuar.Estado = act;
-                    // Insertar los datos del usuario
-                    Proc.EditarEmpleado(usuar);
+            try
+            {
+                // Obtener los valores para el empleado
+                ObtenerValores();
+                usuar.Estado = act;
+                // Insertar los datos del usuario
+                Proc.EditarEmpleado(usuar);
                 Proc.InsertarLog(user.Ide, "Se cambio el estado de un empleado");
                 // Mensaje de inserción exitosa
                 MessageBox.Show("La operación se realizó con exito!");
 
-                   
+
 
                 botoneshabilitados(true);
 
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show("Ha ocurrido un error al momento de eliminar el empleado..." + ex.Message);
-                    Console.WriteLine(ex.Message);
-                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Ha ocurrido un error al momento de eliminar el empleado..." + ex.Message);
+                Console.WriteLine(ex.Message);
+            }
             MostrarEmpleados(true);
         }
         #endregion
@@ -467,10 +496,11 @@ namespace SistemaDental.MVCCV.Vista
 
         }
 
-     
-  
-
-
-
+        private void dgvEmpleado_Loaded(object sender, RoutedEventArgs e)
+        {
+            ColectionEmpleados = new CollectionViewSource() { Source = Proc.MostrarEmpleados(true) }.View;
+            dgvEmpleado.ItemsSource = ColectionEmpleados;
+            dgvEmpleado.SelectedValuePath = "Ide";
+        }
     }
 }

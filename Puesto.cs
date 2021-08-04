@@ -1,11 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Data;
 using System.Data.SqlClient;
-using System.Configuration;
 
 namespace SistemaDental
 {
@@ -23,7 +19,8 @@ namespace SistemaDental
 
         public Puesto() { }
 
-        public Puesto(int id,string nombrePuesto) {
+        public Puesto(int id, string nombrePuesto)
+        {
             Id = id;
             NombrePuesto = nombrePuesto;
         }
@@ -36,7 +33,7 @@ namespace SistemaDental
         {
             // Inicializar una lista vacía de puestos
             List<Puesto> puestos = new List<Puesto>();
-           
+
 
             try
             {
@@ -50,7 +47,9 @@ namespace SistemaDental
                 using (SqlDataReader rdr = sqlCommand.ExecuteReader())
                 {
                     while (rdr.Read())
-                        puestos.Add(new Puesto { Id = Convert.ToInt32(rdr["id_puesto"]), NombrePuesto = rdr["nombrePuesto"].ToString()});
+                    {
+                        puestos.Add(new Puesto { Id = Convert.ToInt32(rdr["id_puesto"]), NombrePuesto = rdr["nombrePuesto"].ToString() });
+                    }
                 }
 
                 return puestos;
@@ -86,7 +85,7 @@ namespace SistemaDental
                 using (SqlDataReader rdr = sqlCommand.ExecuteReader())
                 {
                     rdr.Read();
-                      
+
                     puesto = rdr["nombrePuesto"].ToString();
                 }
 

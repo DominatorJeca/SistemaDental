@@ -1,18 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace SistemaDental.MVCCV.Vista
 {
@@ -21,16 +11,16 @@ namespace SistemaDental.MVCCV.Vista
     /// </summary>
     public partial class InventarioVista : UserControl
     {
-        ClaseInventario inventario = new ClaseInventario();
-        ClaseProcedimiento procedimiento = new ClaseProcedimiento();
-        Validaciones validaciones = new Validaciones();
+        private ClaseInventario inventario = new ClaseInventario();
+        private ClaseProcedimiento procedimiento = new ClaseProcedimiento();
+        private Validaciones validaciones = new Validaciones();
         private ObservableCollection<ClaseInventario> DatosDataGrid = new ObservableCollection<ClaseInventario>();
         public InventarioVista()
         {
             InitializeComponent();
         }
 
-      
+
 
         private void dgv_Materiales_SelectionChanged_1(object sender, SelectionChangedEventArgs e)
         {
@@ -53,13 +43,13 @@ namespace SistemaDental.MVCCV.Vista
 
         private void btnActualizar_Click(object sender, RoutedEventArgs e)
         {
-           if (validaciones.VerificarCampos(this) && dgv_Materiales.SelectedValue!=null)
-           {
+            if (validaciones.VerificarCampos(this) && dgv_Materiales.SelectedValue != null)
+            {
                 HabilitarEdicion(true);
                 btnActualizar.IsEnabled = false;
                 txtMaterialInventario.IsEnabled = true;
-           }
-           else
+            }
+            else
             {
                 MessageBox.Show("Seleccione un material");
             }
@@ -71,7 +61,7 @@ namespace SistemaDental.MVCCV.Vista
             if (validaciones.VerificarCampos(this))
             {
                 procedimiento.EditarNombreMaterial(inventario);
-                Grid_Loaded_1(null,null);
+                Grid_Loaded_1(null, null);
                 HabilitarEdicion(false);
                 btnActualizar.IsEnabled = true;
             }

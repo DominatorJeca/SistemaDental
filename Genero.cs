@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace SistemaDental
+﻿namespace SistemaDental
 {
-   public  class Genero
+    public class Genero
     {
         public int Id { get; set; }
 
@@ -17,7 +11,7 @@ namespace SistemaDental
         public Genero(int id, string nombreGenero)
         {
             Id = id;
-            NombreGenero= nombreGenero;
+            NombreGenero = nombreGenero;
         }
 
 
